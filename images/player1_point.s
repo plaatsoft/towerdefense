@@ -1,10 +1,10 @@
 .rodata
 .balign 32
-.globl pic4length
-.globl pic4data
+.globl pic200length
+.globl pic200data
 
-pic4length:	.long	picdataend - pic4data
-pic4data:
+pic200length:	.long	picdataend - pic200data
+pic200data:
 .incbin "../images/player1_point.png"
 picdataend:
 
