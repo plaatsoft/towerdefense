@@ -12,9 +12,6 @@ export	LIBPNG_LIB	:=	$(DEVKITPRO)/libpng/lib
 export	LIBXML_INC	:=	$(DEVKITPRO)/libmxml/include
 export	LIBXML_LIB	:=	$(DEVKITPRO)/libmxml/lib
 
-export	LIBSONG_INC	:=	$(DEVKITPRO)/libsong/include
-export	LIBSONG_LIB	:=	$(DEVKITPRO)/libsong/lib
-
 export  FREETYPE_INC :=	$(DEVKITPRO)/freetype/include
 export	FREETYPE_LIB :=	$(DEVKITPRO)/freetype/lib/wii
 
@@ -55,7 +52,7 @@ LDFLAGS	=	-g $(MACHDEP) -mrvl -Wl,-Map,$(notdir $@).map
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS	:=  -lfreetype -lpng -lz -lmodplay -lfat -lmxml -lwiiuse -lbte -logc -lwiiuse -ljpeg -lsong -lmad -lm
+LIBS	:=  -lfreetype -lpng -lz -lmodplay -lfat -lmxml -lwiiuse -lbte -lasnd -logc -lwiiuse -ljpeg -lm
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
@@ -119,7 +116,6 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES), -iquote $(CURDIR)/$(dir)) \
 					-I$(LIBJPEG_INC) \
 					-I$(LIBPNG_INC) \
 					-I$(LIBXML_INC) \
-					-I$(LIBSONG_INC) \
 					-I$(FREETYPE_INC)
 
 #---------------------------------------------------------------------------------
@@ -130,7 +126,6 @@ export LIBPATHS	:=	$(foreach dir,$(LIBDIRS), -L$(dir)/lib) \
 					-L$(LIBJPEG_LIB) \
 					-L$(LIBPNG_LIB) \
 					-L$(LIBXML_LIB) \
-					-L$(LIBSONG_LIB) \
 					-L$(FREETYPE_LIB)
 
 export OUTPUT	:=	$(CURDIR)/$(TARGET)

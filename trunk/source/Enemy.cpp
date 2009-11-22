@@ -1,4 +1,8 @@
-#include <iostream.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "GRRLIB.h"
 #include "Enemy.h"
 
 // ------------------------------
@@ -28,13 +32,13 @@ Enemy::Enemy()
    alfa=255;
    angle=0;
    targetAngle=0;
-   image=NULL;
+   //image=NULL;
    height=0;
    width=0;
    step=0;
 }
 
-Enemy::Enemy(int x1,int y1, int height1, int width1, float size1, int angle1, int alfa1,  char *image1 )
+Enemy::Enemy(int x1,int y1, int height1, int width1, float size1, int angle1, int alfa1, GRRLIB_texImg image1 )
 {
    xDirection=true;
    yDirection=true;
@@ -48,12 +52,12 @@ Enemy::Enemy(int x1,int y1, int height1, int width1, float size1, int angle1, in
    size=size1;
    alfa=alfa1;
    angle=angle1;
-   image=GRRLIB_LoadTexture((unsigned char*) image1);
+   image=image1;
 }
 
 Enemy::~Enemy()
 {
-   cout << "Destructor";
+  
 }
 
 // ------------------------------
@@ -158,7 +162,7 @@ int Enemy::getAngle(void)
    return angle;
 }
 
-u8 * Enemy::getImage(void)
+GRRLIB_texImg  Enemy::getImage(void)
 {
    return image;
 }
@@ -214,10 +218,8 @@ void Enemy::properties(void)
 void Enemy::draw(void)
 {
    // Draw wiimote ir pointer
-   if (image!=NULL)
-   {
-     GRRLIB_DrawImg( x, y, width, height, image, angle, size, size, alfa );			 			
-   }
+   GRRLIB_DrawImg( x, y, image, angle, size, size, 0xffffff );		
+//inline void GRRLIB_DrawImg(f32 xpos, f32 ypos, GRRLIB_texImg tex, float degrees, float scaleX, f32 scaleY, u32 color );	 			
 }
 
 void Enemy::move(void)

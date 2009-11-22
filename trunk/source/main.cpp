@@ -1,3 +1,39 @@
+/* 
+**  TowerDefense for Wii - Created by wplaat (www.plaatsoft.nl)
+**
+**  
+**  Copyright (C) 2009
+**  ==================
+**
+**  This program is free software; you can redistribute it and/or modify
+**  it under the terms of the GNU General Public License as published by
+**  the Free Software Foundation, version 2.
+**
+**  This program is distributed in the hope that it will be useful,
+**  but WITHOUT ANY WARRANTY; without even the implied warranty of
+**  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**  GNU General Public License for more details.
+**
+**  You should have received a copy of the GNU General Public License
+**  along with this program; if not, write to the Free Software
+**  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+**
+**  Release Notes:
+**  ==============
+**
+**  22/11/2009 Version 0.20
+**  - Added trace library functionality
+**  - Added network thread
+**  - Use libfat 1.0.6 as disk access engine
+**  - Use libmxml 2.6 library as xml engine
+**  - Use libogc 1.8.0 library as Wii interface engine
+**  - Build game with devkitPPC r19 compiler.
+**
+**  22/03/2009 Version 0.10
+**  - Started programming.
+**
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,15 +43,18 @@
 #include <gccore.h>
 #include <gcmodplay.h> 
 #include <wiiuse/wpad.h>
-#include <jpeg/jpgogc.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <time.h> 
-#include <snd.h>
+#include <asndlib.h>
 #include <fat.h>
 #include <mxml.h>
 #include <sys/dir.h>
+#include <mp3player.h>
+#include <ogc/lwp_watchdog.h>	
 
+#include "http.h"
+#include "trace.h"
 #include "GRRLIB.h"
 #include "Enemy.h"
 
@@ -23,32 +62,39 @@
 // DEFINES
 // -----------------------------------------------------------
 
-#define PROGRAM_NAME	    "TowerDefense"
-#define PROGRAM_VERSION     "0.10"
-#define RELEASE_DATE        "25-02-2009" 
+#define PROGRAM_NAME	   		"TowerDefense"
+#define PROGRAM_VERSION     	"0.20"
+#define RELEASE_DATE        	"22-11-2009" 
 
 // Check latest available version 
-#define URL1                "http://www.plaatsoft.nl/service/releasenotes5.html"
-#define ID1			        "UA-6887062-1"
+#define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
+#define ID1			        	"UA-6887062-1"
 
 // Fetch Release notes
-#define URL2                "http://www.plaatsoft.nl/service/releasenotes5.html"
-#define ID2				    "UA-6887062-1"
+#define URL2                	"http://www.plaatsoft.nl/service/releasenotes5.html"
+#define ID2				   	 	"UA-6887062-1"
 
-// Set Score and get global Highscore
-#define URL3                "http://www.plaatsoft.nl/service/score_set.php"
-#define ID3				    "UA-6887062-1"
+// Set Get Today HighScore
+#define URL3                	"http://www.plaatsoft.nl/service/score_set_today.php"
+#define ID3				    	"UA-6887062-1"
 
-#define URL_TOKEN           " Version "
-#define HIGHSCORE_FILENAME  "sd:/apps/TowerDefense/highscore.xml"
-#define SETTING_FILENAME    "sd:/apps/TowerDefense/setting.xml"
+// Set Get Global HighScore
+#define URL4                	"http://www.plaatsoft.nl/service/score_set_global.php"
+#define ID4				    	"UA-6887062-1"
 
-#define WSP_POINTER_X       200
-#define WSP_POINTER_Y       250
+#define URL_TOKEN           	" Version "
+#define HIGHSCORE_FILENAME  	"sd:/apps/TowerDefense/highscore.xml"
+#define SETTING_FILENAME    	"sd:/apps/TowerDefense/setting.xml"
+#define TRACE_FILENAME      	"sd:/apps/TowerDefense/spacebubble.trc"
+#define GAME_DIRECTORY      	"sd:/apps/TowerDefense/"
 
-#define COLOR_WHITESMOKE    0xFFFFFF
-#define COLOR_LIGHTRED      0x3333FF
-#define COLOR_DARKBLACK     0x000000
+#define WSP_POINTER_X       	200
+#define WSP_POINTER_Y       	250
+
+#define COLOR_WHITESMOKE    	0xFFFFFF
+#define COLOR_LIGHTRED      	0x3333FF
+#define COLOR_DARKBLACK     	0x000000
+#define IMAGE_COLOR         	0xFFFFFFFF
 
 #define MAX_BUTTONS         10
 #define MAX_RUMBLE			4
@@ -94,38 +140,41 @@
 #define BUTTON_RIGHT        (WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT)
 
 // -----------------------------------------------------------
-// PROTOTYPES
+// TYPEDEF
 // -----------------------------------------------------------
+
+typedef struct 
+{
+  // png + jpg Image index     
+  GRRLIB_texImg pointer1;
+
+  GRRLIB_texImg monster1;
+} 
+image;
+
+image images;
 
 // -----------------------------------------------------------
 // VARIABLES
 // -----------------------------------------------------------
 
-
-// Intro1 Image
-extern char     pic1data[];
-extern int      pic1length;
-
-// Intro2 Image
-extern char     pic2data[];
-extern int      pic2length;
-
-// Intro3 Image
-extern char     pic3data[];
-extern int      pic3length;
+// Monster1 Image
+extern const unsigned char     pic100data[];
+extern int      pic100length;
 
 // Pointer1 Image
-extern char     pic4data[];
-extern int      pic4length;
+extern const unsigned char     pic200data[];
+extern int      pic200length;
 
-// Enemy1 Image
-extern char     pic5data[];
-extern int      pic5length;
 
-u32    *frameBuffer[1] = {NULL};
-GXRModeObj *rmode2 = NULL;
+u32     *frameBuffer[1] = {NULL};
+GXRModeObj *rmode = NULL;
 Mtx     GXmodelView2D;
-static u32 *xfb;
+//static  MODPlay snd1;
+char    appl_user3[MAX_LEN];
+
+int     yOffset           = 0;
+int     yjpegOffset       = 0;
 
 // -----------------------------------
 // TYPEDEFS
@@ -140,7 +189,7 @@ typedef struct
   int     yOffset;
   int     angle;
   int     rumble;
-  u8      *image;
+  GRRLIB_texImg image;
 }
 pointer;
 
@@ -150,54 +199,19 @@ pointer pointers[MAX_POINTER];
 // Game logic
 // -----------------------------------
 
-
-/*void drawIntroScreen(int nr)
+void initImages(void)
 {
-   boolean flag = true;
+   char *s_fn="initImages";
+   traceEvent(s_fn,0,"enter");
+     
+   images.monster1=GRRLIB_LoadTexture( pic100data );
+    
+   images.pointer1=GRRLIB_LoadTexture( pic200data); 
+   pointers[0].image=images.pointer1;
    
-   switch (nr)
-   {
-      case 0: drawJpegImage(pic1data, pic1length, 0, 0 );
-	          break;
-			  
-	  case 1: drawJpegImage(pic2data, pic2length, 0, 0 );
-	          break;
-			  
-	  case 2: drawJpegImage(pic3data, pic3length, 0, 0 );
-	          break;
-   }
-		   	
-   // Handle buttons events
-   while ( flag )
-   {
-		WPAD_ScanPads(); 
-		if (WPAD_ButtonsDown(WPAD_CHAN_0) & BUTTON_A) flag=false; 	
-		if (WPAD_ButtonsDown(WPAD_CHAN_1) & BUTTON_A) flag=false; 	
-		if (WPAD_ButtonsDown(WPAD_CHAN_2) & BUTTON_A) flag=false; 	
-		if (WPAD_ButtonsDown(WPAD_CHAN_3) & BUTTON_A) flag=false; 			
-		VIDEO_SetNextFramebuffer(frameBuffer[0]); 
-		VIDEO_Flush();
-		VIDEO_WaitVSync();
-   }
-}*/
-
-void Initialise() 
-{
-    VIDEO_Init();
-    WPAD_Init();
- 
-    rmode2 = VIDEO_GetPreferredMode(NULL);
- 
-    xfb = (u32*) MEM_K0_TO_K1(SYS_AllocateFramebuffer(rmode2));
-    console_init(xfb,20,20,rmode2->fbWidth,rmode2->xfbHeight,rmode2->fbWidth*VI_DISPLAY_PIX_SZ);
- 
-    VIDEO_Configure(rmode2);
-    VIDEO_SetNextFramebuffer(xfb);
-    VIDEO_SetBlack(FALSE);
-    VIDEO_Flush();
-    VIDEO_WaitVSync();
-    if(rmode2->viTVMode&VI_NON_INTERLACE) VIDEO_WaitVSync();
+   traceEvent(s_fn,0,"leave [void]");
 }
+
 
 // -----------------------------------
 // main
@@ -205,32 +219,48 @@ void Initialise()
 
 int main()
 {
-	int i;
-	Initialise();	
-
-	//drawIntroScreen(1);		
-	//drawIntroScreen(2);	
-	//drawIntroScreen(3);	
-  		
-    // Init wiimote layer
+    char *s_fn="main";
+    int i;
+	
+	 // Init video layer
+    VIDEO_Init();
+	
+	// Init wiimote layer
     WPAD_Init();
     WPAD_SetIdleTimeout(60); // Wiimote is shutdown after 60 seconds of innactivity.
+	//WPAD_SetDataFormat(WPAD_CHAN_0, WPAD_FMT_BTNS_ACC_IR);	// enable accelerometers and IR
     WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
-
-    // Init FreeType font engine
-	GRRLIB_InitFreetype();
-
-    // Init GRRLib graphics library
-    GRRLIB_InitVideo();
-    GRRLIB_Start();
-    
-	// Make screen black
-	GRRLIB_FillScreen(0xFFFFFF);
-    GRRLIB_Render();
+  
+    // Obtain the preferred video mode from the system
+	// This will correspond to the settings in the Wii menu
+	rmode = VIDEO_GetPreferredMode(NULL);
+		
+	// Set up the video registers with the chosen mode
+	VIDEO_Configure(rmode);
 	
-    pointers[0].image=GRRLIB_LoadTexture((unsigned char*) pic4data); 
+	if (rmode->xfbHeight==528)
+	{
+	    // TV mode PAL 50Hz
+	    yOffset = 25;  
+		yjpegOffset = 25;
+	}
+	else
+	{      
+	    // TV mode PAL 60Hz
+	    yOffset = 25;
+		yjpegOffset = 0;
+	}
+
+    // Init Fat
+    fatInitDefault();
+
+	// Open trace module
+	traceOpen(TRACE_FILENAME);
+	traceEvent(s_fn, 0,"%s %s Started", PROGRAM_NAME, PROGRAM_VERSION);
+	
+	initImages();
    
-	Enemy enemy(100,100,32,32,1,45,255,pic5data);
+	Enemy enemy(100,100,32,32,1,45,255,images.monster1);
 	
 	// Repeat forever
     while( true )
@@ -244,7 +274,7 @@ int main()
         enemy.properties();
 		
         // Draw text layer on top of gameboard 
-        GRRLIB_DrawImg(0, 0, 640, 480, (u8 *) GRRLIB_GetTexture(), 0, 1.0, 1.0, 255);
+        GRRLIB_DrawImg2(0, 0, (u8*) GRRLIB_GetTexture(), 0, 1.0, 1.0, 255);
 
 		 // Scan for button events
 		WPAD_SetVRes(0, 640, 480);
@@ -278,10 +308,11 @@ int main()
 		  }
 			
        	  // Draw wiimote ir pointer
-          GRRLIB_DrawImg( pointers[i].x, pointers[i].y, 96, 96, pointers[i].image, pointers[i].angle, 1, 1, 255 );			 
+           GRRLIB_DrawImg( pointers[i].x, pointers[i].y, pointers[i].image, pointers[i].angle, 1, 1, IMAGE_COLOR );			 
 		}
 		
 		GRRLIB_Render();
 	}
 	return 0; 
 }
+

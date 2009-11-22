@@ -12,7 +12,7 @@ class Enemy
 	float size;
 	int angle;
 	int targetAngle;
-	u8* image;
+	GRRLIB_texImg image;
 	int height;
 	int width;
 	bool xDirection;
@@ -21,7 +21,7 @@ class Enemy
 	
   public:
   	Enemy();
-	Enemy(int x,int y, int height, int width, float size, int angle, int alfa, char *image );
+	Enemy(int x,int y, int height, int width, float size, int angle, int alfa, GRRLIB_texImg image );
  	~Enemy();
 	
 	void setX(int x);
@@ -39,7 +39,7 @@ class Enemy
 	int getAlfa(void);
 	float getSize(void);
 	int getAngle(void);
-	u8* getImage(void);
+	GRRLIB_texImg getImage(void);
 	int getWidth(void);
 	int getHeight(void);
 	int getStep(void);
