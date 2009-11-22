@@ -36,12 +36,22 @@
 #define MAX_BUFFER_SIZE		    8192
 
 // Enable / Disable trace file functionality
-bool traceOn = false;
+bool traceOn = true;
 
-FILE *fp = NULL;
 
-// Create trace file
-int traceOpen(char *filename)
+Trace::Trace()
+{
+	fp=NULL;
+}
+
+
+Trace::~Trace()
+{
+  
+}
+
+
+int Trace::open(char *filename)
 {
    int returnValue=0;
    
@@ -58,7 +68,7 @@ int traceOpen(char *filename)
 
 
 // Close trace file
-int traceClose()
+int Trace::close()
 {
    int returnValue=0;
    
@@ -71,7 +81,7 @@ int traceClose()
 
 
 // Create trace timestamp
-char *getDate()
+char * Trace::getDate()
 {
   struct tm *now = NULL;
   time_t time_value = 0;
@@ -95,7 +105,7 @@ char *getDate()
 }
 
 // Save trace event in trace file
-int traceEvent( char *functionName, int threadNr, char *event, ...)
+int Trace::event( char *functionName, int threadNr, char *event, ...)
 {
    int returnValue=0;
    
@@ -126,7 +136,7 @@ int traceEvent( char *functionName, int threadNr, char *event, ...)
 
 
 // Save trace event in trace file
-int traceEventRaw( char character)
+int Trace::eventRaw( char character)
 {
    int returnValue=0;
    

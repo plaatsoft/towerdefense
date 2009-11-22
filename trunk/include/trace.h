@@ -18,7 +18,23 @@
 **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-int traceOpen(char *filename);
-int traceEvent( char *functionName, int threadNr, char *event, ...);
-int traceEventRaw( char character);
-int traceClose();
+#ifndef TRACE_H
+#define TRACE_H
+
+class Trace
+{
+  private:
+	FILE * fp;
+	char * getDate();
+
+  public:
+  	Trace();
+ 	~Trace();
+	
+	int open(char *filename);
+	int event( char *functionName, int threadNr, char *event, ...);
+	int eventRaw( char character);
+	int close();
+};
+
+#endif
