@@ -1,10 +1,10 @@
 .rodata
 .balign 32
-.globl pic100length
-.globl pic100data
+.globl pic101length
+.globl pic101data
 
-pic100length:	.long	picdataend - pic100data
-pic100data:
+pic101length:	.long	picdataend - pic101data
+pic101data:
 .incbin "../images/monster1.png"
 picdataend:
 

@@ -29,7 +29,6 @@ class Enemy
 	void setAlfa(int alfa);
 	void setSize(float size);
 	void setAngle(int angle);
-	void setImage(char *image);
     void setWidth(int width);
 	void setHeight(int height);
 	void setStep(int step);
@@ -39,7 +38,6 @@ class Enemy
 	int getAlfa(void);
 	float getSize(void);
 	int getAngle(void);
-	GRRLIB_texImg getImage(void);
 	int getWidth(void);
 	int getHeight(void);
 	int getStep(void);

@@ -85,7 +85,7 @@
 #define URL_TOKEN           	" Version "
 #define HIGHSCORE_FILENAME  	"sd:/apps/TowerDefense/highscore.xml"
 #define SETTING_FILENAME    	"sd:/apps/TowerDefense/setting.xml"
-#define TRACE_FILENAME      	"sd:/apps/TowerDefense/spacebubble.trc"
+#define TRACE_FILENAME      	"sd:/apps/TowerDefense/towerdefense.trc"
 #define GAME_DIRECTORY      	"sd:/apps/TowerDefense/"
 
 #define WSP_POINTER_X       	200
@@ -149,6 +149,10 @@ typedef struct
   GRRLIB_texImg pointer1;
 
   GRRLIB_texImg monster1;
+  GRRLIB_texImg monster2;
+  GRRLIB_texImg monster3;
+  GRRLIB_texImg monster4;
+  
 } 
 image;
 
@@ -159,8 +163,21 @@ image images;
 // -----------------------------------------------------------
 
 // Monster1 Image
-extern const unsigned char     pic100data[];
-extern int      pic100length;
+extern const unsigned char     pic101data[];
+extern int      pic101length;
+
+// Monster2 Image
+extern const unsigned char     pic102data[];
+extern int      pic102length;
+
+// Monster3 Image
+extern const unsigned char     pic103data[];
+extern int      pic103length;
+
+// Monster4 Image
+extern const unsigned char     pic104data[];
+extern int      pic104length;
+
 
 // Pointer1 Image
 extern const unsigned char     pic200data[];
@@ -175,6 +192,8 @@ char    appl_user3[MAX_LEN];
 
 int     yOffset           = 0;
 int     yjpegOffset       = 0;
+
+Trace trace;
 
 // -----------------------------------
 // TYPEDEFS
@@ -202,14 +221,17 @@ pointer pointers[MAX_POINTER];
 void initImages(void)
 {
    char *s_fn="initImages";
-   traceEvent(s_fn,0,"enter");
+   trace.event(s_fn,0,"enter");
      
-   images.monster1=GRRLIB_LoadTexture( pic100data );
+   images.monster1=GRRLIB_LoadTexture( pic101data );
+   images.monster2=GRRLIB_LoadTexture( pic102data );
+   images.monster3=GRRLIB_LoadTexture( pic103data );
+   images.monster4=GRRLIB_LoadTexture( pic104data );
     
    images.pointer1=GRRLIB_LoadTexture( pic200data); 
    pointers[0].image=images.pointer1;
    
-   traceEvent(s_fn,0,"leave [void]");
+   trace.event(s_fn,0,"leave [void]");
 }
 
 
@@ -255,23 +277,31 @@ int main()
     fatInitDefault();
 
 	// Open trace module
-	traceOpen(TRACE_FILENAME);
-	traceEvent(s_fn, 0,"%s %s Started", PROGRAM_NAME, PROGRAM_VERSION);
+	trace.open(TRACE_FILENAME);
+	trace.event(s_fn, 0,"%s %s Started", PROGRAM_NAME, PROGRAM_VERSION);
 	
 	initImages();
    
-	Enemy enemy(100,100,32,32,1,45,255,images.monster1);
+	Enemy enemy1(100,100,32,32,1,45,255,images.monster1);
+	Enemy enemy2(150,150,32,32,1,45,255,images.monster2);
+	Enemy enemy3(200,200,32,32,1,45,255,images.monster3);
+	Enemy enemy4(250,250,32,32,1,45,255,images.monster4);
+	
 	
 	// Repeat forever
     while( true )
 	{				
-		enemy.draw();
-		enemy.move();
+		enemy1.draw();
+		enemy2.draw();		
+		enemy3.draw();
+		enemy4.draw();
+		
+		enemy1.move();
 		
         // Init text layer	  
         GRRLIB_initTexture();
 
-        enemy.properties();
+        enemy1.properties();
 		
         // Draw text layer on top of gameboard 
         GRRLIB_DrawImg2(0, 0, (u8*) GRRLIB_GetTexture(), 0, 1.0, 1.0, 255);
@@ -293,18 +323,22 @@ int main()
 		  pointers[i].angle=pointers[i].ir.angle;
 				
 		  // Scan for button events
-		  if (wpaddown & WPAD_BUTTON_HOME) exit(0);
+		  if (wpaddown & WPAD_BUTTON_HOME) 
+		  {
+			  trace.event(s_fn, 0,"%s %s Stopped", PROGRAM_NAME, PROGRAM_VERSION);
+		      exit(0);
+		  }
 				
 		  if (wpaddown & WPAD_BUTTON_PLUS) 
 		  {
-		     int value=enemy.getStep();
-		     enemy.setStep(++value);
+		     int value=enemy1.getStep();
+		     enemy1.setStep(++value);
 		  }
        				
      	  if (wpaddown & WPAD_BUTTON_MINUS) 
 		  {
-		     int value=enemy.getStep();
-		     enemy.setStep(--value);
+		     int value=enemy1.getStep();
+		     enemy1.setStep(--value);
 		  }
 			
        	  // Draw wiimote ir pointer

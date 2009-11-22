@@ -128,11 +128,6 @@ void Enemy::setStep(int step1)
    } 
 }
 
-void Enemy::setImage(char *image1)
-{
-    image=GRRLIB_LoadTexture((unsigned char*) image1);
-} 
-	
 // ------------------------------
 // Getters
 // ------------------------------
@@ -160,11 +155,6 @@ float Enemy::getSize(void)
 int Enemy::getAngle(void)
 {
    return angle;
-}
-
-GRRLIB_texImg  Enemy::getImage(void)
-{
-   return image;
 }
 
 int Enemy::getWidth(void)
