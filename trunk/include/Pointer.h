@@ -18,41 +18,29 @@
 **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#ifndef BUTTON_H
-#define BUTTON_H
+#ifndef POINTER_H
+#define POINTER_H
 
 #include "GRRLIB.h"
 
-class Button
+class Pointer
 {
   private:
 	int x;
 	int y;	
 	GRRLIB_texImg imageNormal;
-	GRRLIB_texImg imageFocus;
+	GRRLIB_texImg imageSelected;
 	int height;
 	int width;
 	
   public:
-	// Constructor & Destructor
   	Button();
-	Button(int x,int y, GRRLIB_texImg imageNormal, GRRLIB_texImg imageFocus );
+	Button(int x,int y, GRRLIB_texImg imageNormal, GRRLIB_texImg imageSelected  );
  	~Button();
 
-	// Other
 	void draw(void);
-    void mouse(int x, int y);	
+      void mouse(int x, int y);	
 	boolean onClick(void);
-	
-	// Setters
-	void setX(int x);
-	void setY(int y);
-	void setImageNormal(GRRLIB_texImg imageNormal);
-	void setImageSelect(GRRLIB_texImg imageFocus);
-	
-	// Getters
-	int getX(void);
-	int getY(void);
 };
 
 #endif
