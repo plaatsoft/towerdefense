@@ -110,7 +110,7 @@ void Monster::properties(void)
 void Monster::draw(void)
 {
    // Draw Monster on screen
-   GRRLIB_DrawImg( x, y, image, angle, size, size, 0xffffff );		
+   GRRLIB_DrawImg( x, y, image, angle, size, size, IMAGE_COLOR );		
 }
 
 void Monster::move(void)
@@ -264,6 +264,13 @@ int Monster::getStep(void)
 {
    return step;
 }
+
+void Monster::setImage(GRRLIB_texImg image1)
+{
+   image = image1;
+}
+
+ 
 
 // ------------------------------
 // The end

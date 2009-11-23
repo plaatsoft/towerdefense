@@ -1,10 +1,10 @@
 .rodata
 .balign 32
-.globl pic49length
-.globl pic49data
+.globl pic9length
+.globl pic9data
 
-pic49length:	.long	picdataend - pic49data
-pic49data:
+pic9length:	.long	picdataend - pic9data
+pic9data:
 .incbin "../images/logo6.jpg"
 picdataend:
 

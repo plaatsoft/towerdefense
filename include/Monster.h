@@ -52,6 +52,7 @@ class Monster
 	void setWidth(int width);
 	void setHeight(int height);
 	void setStep(int step);
+	void setImage(GRRLIB_texImg image1);
 	
 	int getX(void);
 	int getY(void);
