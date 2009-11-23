@@ -1,7 +1,7 @@
 /* 
-**  Created by wplaat
+**  Created by wplaat (www.plaatsoft.nl)
 **
-**  Copyright (C) 2008 
+**  Copyright (C) 2009
 **  ==================
 **
 **  This program is free software; you can redistribute it and/or modify
