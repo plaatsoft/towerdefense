@@ -151,3 +151,8 @@ int Trace::eventRaw( char character)
    
    return returnValue;
 }
+
+
+// ------------------------------
+// The end
+// ------------------------------
