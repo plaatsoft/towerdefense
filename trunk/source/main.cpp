@@ -65,36 +65,13 @@
 #include "Weapon.h"
 #include "Button.h"
 #include "Base.h"
+#include "Pointer.h"
 
 // -----------------------------------------------------------
 // DEFINES
 // -----------------------------------------------------------
 
-#define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.20"
-#define RELEASE_DATE        	"22-11-2009" 
 
-// Check latest available version 
-#define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
-#define ID1			        	"UA-6887062-1"
-
-// Fetch Release notes
-#define URL2                	"http://www.plaatsoft.nl/service/releasenotes5.html"
-#define ID2				   	 	"UA-6887062-1"
-
-// Set Get Today HighScore
-#define URL3                	"http://www.plaatsoft.nl/service/score_set_today.php"
-#define ID3				    	"UA-6887062-1"
-
-// Set Get Global HighScore
-#define URL4                	"http://www.plaatsoft.nl/service/score_set_global.php"
-#define ID4				    	"UA-6887062-1"
-
-#define URL_TOKEN           	" Version "
-#define HIGHSCORE_FILENAME  	"sd:/apps/TowerDefense/highscore.xml"
-#define SETTING_FILENAME    	"sd:/apps/TowerDefense/setting.xml"
-#define TRACE_FILENAME      	"sd:/apps/TowerDefense/td.trc"
-#define GAME_DIRECTORY      	"sd:/apps/TowerDefense/"
 
 // -----------------------------------------------------------
 // TYPEDEF
@@ -360,30 +337,13 @@ int         yjpegOffset       = 0;
 
 Trace trace;
 
-Monster monsters[100];
-Base bases[8];
+Monster monster[100];
+Base base[8];
+Pointer pointer[1];
 
+int maxPointer = 1;
 int maxMonster = 25;
-int maxBase = 6;
-
-// -----------------------------------
-// TYPEDEFS
-// -----------------------------------
-
-typedef struct 
-{
-  ir_t    ir;
-  int     x;
-  int     xOffset;
-  int     y;
-  int     yOffset;
-  int     angle;
-  int     rumble;
-  GRRLIB_texImg image;
-}
-pointer;
-
-pointer pointers[MAX_POINTER];
+int maxBase    = 6;
 
 // -----------------------------------
 // Game logic
@@ -434,7 +394,6 @@ void initImages(void)
    images.monster25=GRRLIB_LoadTexture( pic125data );		
 
    images.pointer1=GRRLIB_LoadTexture( pic200data); 
-   pointers[0].image=images.pointer1;
    
    images.base1=GRRLIB_LoadTexture( pic301data );	
    images.base2=GRRLIB_LoadTexture( pic302data );	
@@ -451,145 +410,183 @@ void initImages(void)
    trace.event(s_fn,0,"leave [void]");
 }
 
-// Init Monsters
+// Init monster
 void initMonsters(void)
 {
+   char *s_fn="initMonsters";
+   trace.event(s_fn,0,"enter");
+   
    for( int i = 0; i < maxMonster-1; i++ ) 
    {
 	  int x = (int) rand() % 400;
 	  int y = (int) rand() % 400;
 	 
-      monsters[i].setX(x);
-	  monsters[i].setY(y);
+      monster[i].setX(x);
+	  monster[i].setY(y);
+	  monster[i].setSize(1);
+	  monster[i].setAngle(0);
+	  monster[i].setWidth(32);
+	  monster[i].setHeight(32);
+	  monster[i].setStep(2);
+	  
+	  trace.event(s_fn,0,"Init monster [%d|x=%d|y=%d]",i,x,y);
 	  
 	  switch (i+1)
 	  {
-	     case 1: monsters[i].setImage(images.monster1);
+	     case 1: monster[i].setImage(images.monster1);
 				 break;
 				 
-	     case 2: monsters[i].setImage(images.monster2);
+	     case 2: monster[i].setImage(images.monster2);
 				 break;
 
-	     case 3: monsters[i].setImage(images.monster3);
+	     case 3: monster[i].setImage(images.monster3);
 				 break;				 
 
-	     case 4: monsters[i].setImage(images.monster4);
+	     case 4: monster[i].setImage(images.monster4);
 				 break;
 				 
-		 case 5: monsters[i].setImage(images.monster5);
+		 case 5: monster[i].setImage(images.monster5);
 				 break;
 
-		 case 6: monsters[i].setImage(images.monster6);
+		 case 6: monster[i].setImage(images.monster6);
 				 break;
 
-		 case 7: monsters[i].setImage(images.monster7);
+		 case 7: monster[i].setImage(images.monster7);
 				 break;
 
-		 case 8: monsters[i].setImage(images.monster8);
+		 case 8: monster[i].setImage(images.monster8);
 				 break;
 
-		 case 9: monsters[i].setImage(images.monster9);
+		 case 9: monster[i].setImage(images.monster9);
 				 break;
 
-		 case 10: monsters[i].setImage(images.monster10);
+		 case 10: monster[i].setImage(images.monster10);
 				 break;
 
-		 case 11: monsters[i].setImage(images.monster11);
+		 case 11: monster[i].setImage(images.monster11);
 				 break;
 
-		 case 12: monsters[i].setImage(images.monster12);
+		 case 12: monster[i].setImage(images.monster12);
 				 break;
 
-		 case 13: monsters[i].setImage(images.monster13);
+		 case 13: monster[i].setImage(images.monster13);
 				 break;
 
-		 case 14: monsters[i].setImage(images.monster14);
+		 case 14: monster[i].setImage(images.monster14);
 				 break;
 
-		 case 15: monsters[i].setImage(images.monster15);
+		 case 15: monster[i].setImage(images.monster15);
 				 break;
 
-		 case 16: monsters[i].setImage(images.monster16);
+		 case 16: monster[i].setImage(images.monster16);
 				 break;
 				 
-		 case 17: monsters[i].setImage(images.monster17);
+		 case 17: monster[i].setImage(images.monster17);
 				 break;
 				 
-		 case 18: monsters[i].setImage(images.monster18);
+		 case 18: monster[i].setImage(images.monster18);
 				 break;
 
-		 case 19: monsters[i].setImage(images.monster19);
+		 case 19: monster[i].setImage(images.monster19);
 				 break;
 				 
-		 case 20: monsters[i].setImage(images.monster20);
+		 case 20: monster[i].setImage(images.monster20);
 				 break;
 				 
-		 case 21: monsters[i].setImage(images.monster21);
+		 case 21: monster[i].setImage(images.monster21);
 				 break;
 
-		 case 22: monsters[i].setImage(images.monster22);
+		 case 22: monster[i].setImage(images.monster22);
 				 break;
 				 
-		 case 23: monsters[i].setImage(images.monster23);
+		 case 23: monster[i].setImage(images.monster23);
 				 break;
 
-		 case 24: monsters[i].setImage(images.monster24);
+		 case 24: monster[i].setImage(images.monster24);
 				 break;
 				 
-		 case 25: monsters[i].setImage(images.monster25);
+		 case 25: monster[i].setImage(images.monster25);
 				 break;
 	  }
-	  monsters[i].setSize(1);
-	  monsters[i].setAngle(0);
-	  monsters[i].setWidth(32);
-	  monsters[i].setHeight(32);
-	  monsters[i].setStep(2);
    }
+   trace.event(s_fn,0,"leave [void]");
 }
 
-// Init Monsters
-void initBase(void)
+// Init bases
+void initBases(void)
 {
-    bases[0].setX(500);
-	bases[0].setY(10);
-	bases[0].setImage(images.base1);
+    char *s_fn="initBases";
+    trace.event(s_fn,0,"enter");
+   
+    base[0].setX(500);
+	base[0].setY(10);
+	base[0].setImage(images.base1);
 
-    bases[1].setX(500);
-	bases[1].setY(80);
-	bases[1].setImage(images.base2);
+    base[1].setX(500);
+	base[1].setY(80);
+	base[1].setImage(images.base2);
 
-    bases[2].setX(500);
-	bases[2].setY(170);
-	bases[2].setImage(images.base3);
+    base[2].setX(500);
+	base[2].setY(170);
+	base[2].setImage(images.base3);
 
-    bases[3].setX(500);
-	bases[3].setY(240);
-	bases[3].setImage(images.base4);
+    base[3].setX(500);
+	base[3].setY(240);
+	base[3].setImage(images.base4);
 
-    bases[4].setX(500);
-	bases[4].setY(310);
-	bases[4].setImage(images.base5);
+    base[4].setX(500);
+	base[4].setY(310);
+	base[4].setImage(images.base5);
 	
-    bases[5].setX(500);
-	bases[5].setY(370);
-	bases[5].setImage(images.base6);
+    base[5].setX(500);
+	base[5].setY(370);
+	base[5].setImage(images.base6);
+	
+	trace.event(s_fn,0,"leave [void]");
 }
 
+// Init monster
+void initPointers(void)
+{
+   char *s_fn="initPointers";
+   trace.event(s_fn,0,"enter");
+   
+   pointer[0].setX(0);
+   pointer[0].setY(0);
+   pointer[0].setAngle(0);
+   pointer[0].setImage(images.pointer1);
+	
+   trace.event(s_fn,0,"leave [void]");
+}
+	  
 
+// Draw monster on screen
 void drawMonsters(void)
 {
-   for( int i = 0; i < maxMonster; i++ ) 
+   int i;
+   for( i=0; i<maxMonster; i++ ) 
    {
-	 monsters[i].draw();
+	 monster[i].draw();
    }
 }
 
-
+// Draw base on screen
 void drawBases(void)
 {
-   for( int i = 0; i < maxBase; i++ ) 
+   int i;
+   for( i=0; i<maxBase; i++ ) 
    {
-	 bases[i].draw();
+	 base[i].draw();
+   }
+}
+
+// Draw base on screen
+void drawPointers(void)
+{
+   int i;
+   for( i=0; i<maxPointer; i++ ) 
+   {
+	 pointer[i].draw();
    }
 }
 
@@ -600,7 +597,6 @@ void drawBases(void)
 int main()
 {
     char *s_fn="main";
-    int i;
 	
 	 // Init video layer
     VIDEO_Init();
@@ -638,11 +634,17 @@ int main()
 	trace.open(TRACE_FILENAME);
 	trace.event(s_fn, 0,"%s %s Started", PROGRAM_NAME, PROGRAM_VERSION);
 	
+	// Init Images
 	initImages();
    
+    // Init pointers
+    initPointers();
+	
+    // Init monster
     initMonsters();
 	
-	initBase();
+	// Init base
+	initBases();
 		
 	// Init FreeType font engine
 	GRRLIB_InitFreetype();
@@ -665,40 +667,13 @@ int main()
 	
         // Init text layer	  
         GRRLIB_initTexture();
-
-        //monster1.properties();
-   
 		GRRLIB_Printf2(10, 10, "Hello", 14, COLOR_DARKBLACK); 
-   
-        // Draw text layer on top of gameboard 
         GRRLIB_DrawImg2(0, 0, (u8*) GRRLIB_GetTexture(), 0, 1.0, 1.0, 255);
 
-		 // Scan for button events
-		WPAD_SetVRes(0, 640, 480);
-        WPAD_ScanPads();
+		// Draw Wii Motion Pointers
+		drawPointers();
 			
-		for (i=0; i<MAX_POINTER; i++)
-		{
-		  u32 wpaddown = WPAD_ButtonsDown(i);
-		
-          // Scan for ir events 
-		  WPAD_IR(i, &pointers[i].ir); 
-		  pointers[i].x=pointers[i].ir.sx-WSP_POINTER_X;
-		  pointers[i].xOffset=pointers[i].x+IR_X_OFFSET;
-		  pointers[i].y=pointers[i].ir.sy-WSP_POINTER_Y;
-		  pointers[i].yOffset=pointers[i].y+IR_Y_OFFSET;
-		  pointers[i].angle=pointers[i].ir.angle;
-				
-		  // Scan for button events
-		  if (wpaddown & WPAD_BUTTON_HOME) 
-		  {
-			  trace.event(s_fn, 0,"%s %s Stopped", PROGRAM_NAME, PROGRAM_VERSION);
-		      exit(0);
-		  }
-				
-       	  // Draw wiimote ir pointer
-           GRRLIB_DrawImg( pointers[i].x, pointers[i].y, pointers[i].image, pointers[i].angle, 1, 1, IMAGE_COLOR );			 
-		}	
+		// Render screen
 		GRRLIB_Render();
 	}
 	GRRLIB_Exit();

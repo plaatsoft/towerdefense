@@ -21,6 +21,25 @@
 #ifndef POINTER_H
 #define POINTER_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <malloc.h>
+#include <math.h>
+#include <ogcsys.h>
+#include <gccore.h>
+#include <gcmodplay.h> 
+#include <wiiuse/wpad.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <time.h> 
+#include <asndlib.h>
+#include <fat.h>
+#include <mxml.h>
+#include <sys/dir.h>
+#include <mp3player.h>
+#include <ogc/lwp_watchdog.h>
+
 #include "GRRLIB.h"
 
 class Pointer
@@ -28,19 +47,26 @@ class Pointer
   private:
 	int x;
 	int y;	
-	GRRLIB_texImg imageNormal;
-	GRRLIB_texImg imageSelected;
-	int height;
-	int width;
+	int angle;
+	GRRLIB_texImg image;
 	
+	ir_t ir;
+	int xOffset;
+	int yOffset;
+	int rumble;
+  
   public:
-  	Button();
-	Button(int x,int y, GRRLIB_texImg imageNormal, GRRLIB_texImg imageSelected  );
- 	~Button();
+  	Pointer();
+ 	~Pointer();
 
 	void draw(void);
-      void mouse(int x, int y);	
+    void mouse(int x, int y);	
 	boolean onClick(void);
+	
+	void setX(int x);
+	void setY(int y);
+	void setAngle(int angle);
+	void setImage(GRRLIB_texImg image);
 };
 
 #endif
