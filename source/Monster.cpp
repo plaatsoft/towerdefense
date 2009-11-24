@@ -25,7 +25,7 @@
 #include "General.h"
 #include "GRRLIB.h"
 #include "Monster.h"
-
+  
 // ------------------------------
 // Constructor 
 // ------------------------------
@@ -45,23 +45,6 @@ Monster::Monster()
    height=0;
    width=0;
    step=0;
-}
-
-Monster::Monster(int x1,int y1, int height1, int width1, float size1, int angle1, int alfa1, GRRLIB_texImg image1 )
-{
-   xDirection=true;
-   yDirection=true;
-   step=1;
-   targetAngle=angle1;
-   
-   x = x1;
-   y = y1;
-   height=height1;
-   width=width1;
-   size=size1;
-   alfa=alfa1;
-   angle=angle1;
-   image=image1;
 }
 
 // ------------------------------

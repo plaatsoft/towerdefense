@@ -18,8 +18,8 @@
 **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#ifndef ENEMY_H
-#define ENEMY_H
+#ifndef MONSTER_H
+#define MONSTER_H
 
 #include "GRRLIB.h"
 
@@ -41,7 +41,6 @@ class Monster
 	
   public:
   	Monster();
-	Monster(int x,int y, int height, int width, float size, int angle, int alfa, GRRLIB_texImg image );
  	~Monster();
 	
 	void setX(int x);
