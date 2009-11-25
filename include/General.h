@@ -51,6 +51,8 @@
 #define TRACE_FILENAME      	"sd:/apps/TowerDefense/td.trc"
 #define GAME_DIRECTORY      	"sd:/apps/TowerDefense/"
 
+#define MAP1_FILENAME    	  	"sd:/apps/TowerDefense/maps/map1.xml"
+
 #define WSP_POINTER_X      	200
 #define WSP_POINTER_Y      	250
 
@@ -69,7 +71,7 @@
 #define MAX_HIGHSCORES 		50
 #define MAX_SETTINGS		10
 #define MAX_BEST	 		50
-#define MAX_LEVEL    	    7
+#define MAX_LEVEL    	    6
 #define MAX_LEN			    256
 #define MAX_ANGLE			360
 #define MIN_ALFA			127
