@@ -75,7 +75,7 @@ void Pointer::draw(void)
 	}
 				
     // Draw Pointer on screen
-    GRRLIB_DrawImg( x, y, image, angle, image.w, image.h, IMAGE_COLOR );		
+    GRRLIB_DrawImg( x, y, image, angle, image->w, image->h, IMAGE_COLOR );		
 }
 
 void Pointer::mouse(int x, int y)
@@ -117,7 +117,7 @@ void Pointer::setAngle(int angle1)
    }
 } 
 
-void Pointer::setImage(GRRLIB_texImg image1)
+void Pointer::setImage(GRRLIB_texImg *image1)
 {
    image = image1;
 }

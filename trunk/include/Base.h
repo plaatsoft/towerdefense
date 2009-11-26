@@ -21,14 +21,14 @@
 #ifndef BASE_H
 #define BASE_H
 
-#include "GRRLIB.h"
+#include "grrlib.h"
 
 class Base
 {
   private:
 	int x;
 	int y;	
-	GRRLIB_texImg image;
+	GRRLIB_texImg *image;
 	int height;
 	int width;
 	
@@ -43,7 +43,7 @@ class Base
 	// Setters
 	void setX(int x);
 	void setY(int y);
-	void setImage(GRRLIB_texImg image);
+	void setImage(GRRLIB_texImg *image);
 	
 	// Getters
 	int getX(void);

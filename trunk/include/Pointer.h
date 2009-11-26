@@ -48,7 +48,7 @@ class Pointer
 	int x;
 	int y;	
 	int angle;
-	GRRLIB_texImg image;
+	GRRLIB_texImg *image;
 	
 	ir_t ir;
 	int xOffset;
@@ -66,7 +66,7 @@ class Pointer
 	void setX(int x);
 	void setY(int y);
 	void setAngle(int angle);
-	void setImage(GRRLIB_texImg image);
+	void setImage(GRRLIB_texImg *image);
 };
 
 #endif

@@ -32,7 +32,7 @@ class Monster
 	float size;
 	int angle;
 	int targetAngle;
-	GRRLIB_texImg image;
+	GRRLIB_texImg *image;
 	int height;
 	int width;
 	bool xDirection;
@@ -51,7 +51,7 @@ class Monster
 	void setWidth(int width);
 	void setHeight(int height);
 	void setStep(int step);
-	void setImage(GRRLIB_texImg image1);
+	void setImage(GRRLIB_texImg *image1);
 	
 	int getX(void);
 	int getY(void);
