@@ -1,7 +1,6 @@
 /* 
 **  TowerDefense for Wii - Created by wplaat (www.plaatsoft.nl)
 **
-**  Copyright (C) 2009
 **  ==================
 **
 **  This program is free software; you can redistribute it and/or modify
@@ -78,58 +77,58 @@
 typedef struct 
 {
   // png + jpg Image index     
-  GRRLIB_texImg intro1;
-  GRRLIB_texImg intro2;
-  GRRLIB_texImg intro3;
+  GRRLIB_texImg *intro1;
+  GRRLIB_texImg *intro2;
+  GRRLIB_texImg *intro3;
   
-  GRRLIB_texImg logo1;
-  GRRLIB_texImg logo2;
-  GRRLIB_texImg logo3;
-  GRRLIB_texImg logo4;
-  GRRLIB_texImg logo5;
-  GRRLIB_texImg logo6;
+  GRRLIB_texImg *logo1;
+  GRRLIB_texImg *logo2;
+  GRRLIB_texImg *logo3;
+  GRRLIB_texImg *logo4;
+  GRRLIB_texImg *logo5;
+  GRRLIB_texImg *logo6;
   
-  GRRLIB_texImg background1;
+  GRRLIB_texImg *background1;
   
-  GRRLIB_texImg pointer1;
+  GRRLIB_texImg *pointer1;
 
-  GRRLIB_texImg monster1;
-  GRRLIB_texImg monster2;
-  GRRLIB_texImg monster3;
-  GRRLIB_texImg monster4;
-  GRRLIB_texImg monster5;  
-  GRRLIB_texImg monster6;
-  GRRLIB_texImg monster7;
-  GRRLIB_texImg monster8;
-  GRRLIB_texImg monster9;
-  GRRLIB_texImg monster10;
-  GRRLIB_texImg monster11;
-  GRRLIB_texImg monster12;
-  GRRLIB_texImg monster13;
-  GRRLIB_texImg monster14;
-  GRRLIB_texImg monster15;
-  GRRLIB_texImg monster16;
-  GRRLIB_texImg monster17;
-  GRRLIB_texImg monster18;
-  GRRLIB_texImg monster19;
-  GRRLIB_texImg monster20;
-  GRRLIB_texImg monster21;
-  GRRLIB_texImg monster22;
-  GRRLIB_texImg monster23;
-  GRRLIB_texImg monster24;
-  GRRLIB_texImg monster25;
+  GRRLIB_texImg *monster1;
+  GRRLIB_texImg *monster2;
+  GRRLIB_texImg *monster3;
+  GRRLIB_texImg *monster4;
+  GRRLIB_texImg *monster5;  
+  GRRLIB_texImg *monster6;
+  GRRLIB_texImg *monster7;
+  GRRLIB_texImg *monster8;
+  GRRLIB_texImg *monster9;
+  GRRLIB_texImg *monster10;
+  GRRLIB_texImg *monster11;
+  GRRLIB_texImg *monster12;
+  GRRLIB_texImg *monster13;
+  GRRLIB_texImg *monster14;
+  GRRLIB_texImg *monster15;
+  GRRLIB_texImg *monster16;
+  GRRLIB_texImg *monster17;
+  GRRLIB_texImg *monster18;
+  GRRLIB_texImg *monster19;
+  GRRLIB_texImg *monster20;
+  GRRLIB_texImg *monster21;
+  GRRLIB_texImg *monster22;
+  GRRLIB_texImg *monster23;
+  GRRLIB_texImg *monster24;
+  GRRLIB_texImg *monster25;
   
-  GRRLIB_texImg base1;
-  GRRLIB_texImg base2;
-  GRRLIB_texImg base3;
-  GRRLIB_texImg base4;
-  GRRLIB_texImg base5;
-  GRRLIB_texImg base6;
+  GRRLIB_texImg *base1;
+  GRRLIB_texImg *base2;
+  GRRLIB_texImg *base3;
+  GRRLIB_texImg *base4;
+  GRRLIB_texImg *base5;
+  GRRLIB_texImg *base6;
   
-  GRRLIB_texImg road1;
-  GRRLIB_texImg road2;
-  GRRLIB_texImg road3;
-  GRRLIB_texImg road4;
+  GRRLIB_texImg *road1;
+  GRRLIB_texImg *road2;
+  GRRLIB_texImg *road3;
+  GRRLIB_texImg *road4;
 } 
 image;
 
@@ -645,7 +644,7 @@ int main()
 	initBases();
 		
 	// Init FreeType font engine
-	GRRLIB_InitFreetype();
+	//GRRLIB_InitFreetype();
 	  			
     // Init GRRLib graphics library
     GRRLIB_Init();
@@ -664,9 +663,9 @@ int main()
 		drawBases();
 	
         // Init text layer	  
-        GRRLIB_initTexture();
-		GRRLIB_Printf2(10, 10, "Hello", 14, COLOR_DARKBLACK); 
-        GRRLIB_DrawImg2(0, 0, (u8*) GRRLIB_GetTexture(), 0, 1.0, 1.0, 255);
+        //GRRLIB_initTexture();
+		//GRRLIB_Printf2(10, 10, "Hello", 14, COLOR_DARKBLACK); 
+        //GRRLIB_DrawImg2(0, 0, (u8*) GRRLIB_GetTexture(), 0, 1.0, 1.0, 255);
 
 		// Draw Wii Motion Pointers
 		drawPointers();

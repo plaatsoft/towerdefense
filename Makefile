@@ -3,17 +3,19 @@
 # Template makefile
 #---------------------------------------------------------------------------------
 
-export	LIBJPEG_INC	:=	$(DEVKITPRO)/libjpeg/include
-export	LIBJPEG_LIB	:=	$(DEVKITPRO)/libjpeg/lib/wii
+export	LIBJPEG_INC	:=	../lib/jpeg/include
+export	LIBJPEG_LIB	:=	../lib/jpeg/lib/wii
 
-export	LIBPNG_INC	:=	$(DEVKITPRO)/libpng/include
-export	LIBPNG_LIB	:=	$(DEVKITPRO)/libpng/lib
+export	LIBPNG_INC	:=	../lib/png/include
+export	LIBPNG_LIB	:=	../lib/png/lib/wii
 
-export	LIBXML_INC	:=	$(DEVKITPRO)/libmxml/include
-export	LIBXML_LIB	:=	$(DEVKITPRO)/libmxml/lib
+export	LIBXML_INC	:=	../lib/mxml/include
+export	LIBXML_LIB	:=	../lib/mxml/lib
 
-export  FREETYPE_INC :=	$(DEVKITPRO)/freetype/include
-export	FREETYPE_LIB :=	$(DEVKITPRO)/freetype/lib/wii
+export  FREETYPE_INC :=	../lib/freetype/include
+export	FREETYPE_LIB := ../lib/freetype/lib/wii
+
+export  GRRLIB_INC :=	../include
 
 .SUFFIXES:
 #---------------------------------------------------------------------------------
@@ -31,12 +33,12 @@ include $(DEVKITPPC)/wii_rules
 #---------------------------------------------------------------------------------
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
-SOURCES		:=	source
+SOURCES		:=	source source/grrlib
 IMAGES		:=	images
 DATA		:=	snd
 FONT		:=	font
 XML  		:=	xml
-INCLUDES	:=  include
+INCLUDES	:=  include 
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -116,7 +118,8 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES), -iquote $(CURDIR)/$(dir)) \
 					-I$(LIBJPEG_INC) \
 					-I$(LIBPNG_INC) \
 					-I$(LIBXML_INC) \
-					-I$(FREETYPE_INC)
+					-I$(FREETYPE_INC) \
+					-I$(GRRLIB_INC)
 
 #---------------------------------------------------------------------------------
 # build a list of library paths

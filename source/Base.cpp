@@ -23,7 +23,7 @@
 #include <string.h>
 
 #include "General.h"
-#include "GRRLIB.h"
+#include "grrlib.h"
 #include "Base.h"
 
 // ------------------------------
@@ -61,7 +61,7 @@ void Base::draw(void)
 // Getters and Setters
 // ------------------------------
 
-void Base::setImage(GRRLIB_texImg image1)
+void Base::setImage(GRRLIB_texImg *image1)
 {
    image=image1;
 }

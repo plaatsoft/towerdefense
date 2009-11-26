@@ -67,27 +67,27 @@ void Monster::properties(void)
    int yoffset=10;
    int size=14;
    
-   GRRLIB_Printf2(10, yoffset, "Characteristics of this Monster", size, COLOR_WHITESMOKE); 
+   //GRRLIB_Printf2(10, yoffset, "Characteristics of this Monster", size, COLOR_WHITESMOKE); 
 
    yoffset+=size;
    sprintf(tmp, "x=%d", getX());
-   GRRLIB_Printf2(10, yoffset, tmp, size, COLOR_WHITESMOKE); 
+   //GRRLIB_Printf2(10, yoffset, tmp, size, COLOR_WHITESMOKE); 
 
    yoffset+=size;
    sprintf(tmp, "y=%d", getY());
-   GRRLIB_Printf2(10, yoffset, tmp, size, COLOR_WHITESMOKE);
+   //GRRLIB_Printf2(10, yoffset, tmp, size, COLOR_WHITESMOKE);
    
    yoffset+=size;
    sprintf(tmp, "angle=%d", getAngle());
-   GRRLIB_Printf2(10, yoffset, tmp, size, COLOR_WHITESMOKE);
+   //GRRLIB_Printf2(10, yoffset, tmp, size, COLOR_WHITESMOKE);
    
    yoffset+=size;
    sprintf(tmp, "targetAngle=%d", targetAngle);
-   GRRLIB_Printf2(10, yoffset, tmp, size, COLOR_WHITESMOKE);
+   //GRRLIB_Printf2(10, yoffset, tmp, size, COLOR_WHITESMOKE);
    
    yoffset+=size;
    sprintf(tmp, "step=%d", step);
-   GRRLIB_Printf2(10, yoffset, tmp, size, COLOR_WHITESMOKE);
+   //GRRLIB_Printf2(10, yoffset, tmp, size, COLOR_WHITESMOKE);
 }
 
 void Monster::draw(void)
@@ -248,7 +248,7 @@ int Monster::getStep(void)
    return step;
 }
 
-void Monster::setImage(GRRLIB_texImg image1)
+void Monster::setImage(GRRLIB_texImg *image1)
 {
    image = image1;
 }
