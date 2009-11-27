@@ -27,11 +27,10 @@
 #include "Trace.h"
 #include "Map.h"
 
-//Trace trace;
-
 int maxLine;
 char data[15][20];
 
+extern Trace trace;
 // ------------------------------
 // Constructor
 // ------------------------------
@@ -54,13 +53,13 @@ Map::~Map()
 // Others
 // ------------------------------
 
-void initMap(char* filename)
+void initMap(const char* filename)
 {
-   char *s_fn="initMap";
-   //trace.event(s_fn,0,"enter");
+   const char *s_fn="initMap";
+   trace.event(s_fn,0,"enter");
    
    FILE *fp;
-   mxml_node_t *tree;
+   mxml_node_t *tree =NULL;
    mxml_node_t *group;   
    const char  *pointer;
 
@@ -90,7 +89,7 @@ void initMap(char* filename)
    
    mxmlDelete(group);
    mxmlDelete(tree);
-   //trace.event(s_fn,0,"leave [void]");
+   trace.event(s_fn,0,"leave [void]");
 }
 
 void Map::draw(void)
@@ -101,6 +100,7 @@ void Map::draw(void)
 boolean Map::onLoad(void)
 {
 	initMap(MAP1_FILENAME);
+	return true;
 }
 			
 // ------------------------------

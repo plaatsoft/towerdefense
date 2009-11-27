@@ -31,6 +31,8 @@
 #include <stdarg.h>
 #include <time.h>
 
+#include <string>
+
 #include "trace.h"
 
 #define MAX_BUFFER_SIZE		    8192
@@ -51,7 +53,7 @@ Trace::~Trace()
 }
 
 
-int Trace::open(char *filename)
+int Trace::open(const char *filename)
 {
    int returnValue=0;
    
@@ -105,7 +107,7 @@ char * Trace::getDate()
 }
 
 // Save trace event in trace file
-int Trace::event( char *functionName, int threadNr, char *event, ...)
+int Trace::event( const char *functionName, int threadNr, const char *event, ...)
 {
    int returnValue=0;
    
