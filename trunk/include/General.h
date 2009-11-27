@@ -109,4 +109,47 @@
 #define BUTTON_LEFT         (WPAD_BUTTON_LEFT  | WPAD_CLASSIC_BUTTON_LEFT)
 #define BUTTON_RIGHT        (WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT)
 
+// -----------------------------------------------------------
+// ENUMS
+// -----------------------------------------------------------
+ 
+enum
+{
+   stateIntro1=0,   
+   stateIntro2=1, 
+   stateIntro3=2, 
+   stateMenu=3,
+   stateGame=4,
+   stateLevelCleared=5,
+   stateGameOver=6,
+   stateQuit=7,
+   stateLocalHighScore=8,
+   stateTodayHighScore=9,
+   stateGlobalHighScore=10,
+   stateHelp=11,
+   stateCredits=12,
+   stateSound=13,
+   stateReleaseNotes=14,
+   stateSettings=15,  
+   stateNone=16
+};
+
+enum
+{
+   fontTitle=0,
+   fontSubTitle=1,
+   fontSubTitle2=2,
+   fontParagraph=3,
+   fontNormal=4,
+   fontSpecial=5,
+   fontNew=6,
+   fontButton=7,
+   fontWelcome=8
+};
+
 #endif
+
+// -----------------------------------------------------------
+// The End
+// -----------------------------------------------------------
+ 

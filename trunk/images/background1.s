@@ -5,7 +5,7 @@
 
 pic10length:	.long	picdataend - pic10data
 pic10data:
-.incbin "../images/background1.png"
+.incbin "../images/background1.jpg"
 picdataend:
 
 

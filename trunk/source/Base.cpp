@@ -18,13 +18,12 @@
 **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include "General.h"
 #include "grrlib.h"
 #include "Base.h"
+#include "Trace.h"
+
+extern Trace trace;
 
 // ------------------------------
 // Constructor
@@ -32,10 +31,15 @@
 
 Base::Base()
 {
+   const char *s_fn="Base::Base";
+   trace.event(s_fn,0,"enter");
+
    x=0;
    y=0;	
    height=0;
    width=0;
+      
+   trace.event(s_fn,0,"leave");
 }
 	
 // ------------------------------
@@ -44,7 +48,11 @@ Base::Base()
 
 Base::~Base()
 {
-  
+   const char *s_fn="Base::~Base";
+   trace.event(s_fn,0,"enter");
+ 
+   
+   trace.event(s_fn,0,"leave"); 
 }
 	
 // ------------------------------
@@ -52,7 +60,7 @@ Base::~Base()
 // ------------------------------
 
 void Base::draw(void)
-{
+{   
    // Draw Base on screen
    GRRLIB_DrawImg( x, y, image, 0, 1, 1, IMAGE_COLOR );		
 }
@@ -63,15 +71,25 @@ void Base::draw(void)
 
 void Base::setImage(GRRLIB_texImg *image1)
 {
+   const char *s_fn="Base::setImage";
+   trace.event(s_fn,0,"enter");
+   
    image=image1;
+   
+   trace.event(s_fn,0,"leave");
 }
 		
 void Base::setX(int x1)
 {
+   const char *s_fn="Base::setX";
+   trace.event(s_fn,0,"enter");
+   
    if ((x1>=0) && (x1<=MAX_HORZ_PIXELS))
    {
       x = x1;
    }
+      
+   trace.event(s_fn,0,"leave");
 }
 
 int Base::getX()
@@ -81,10 +99,15 @@ int Base::getX()
 
 void Base::setY(int y1)
 {
+   const char *s_fn="Base::setY";
+   trace.event(s_fn,0,"enter");
+   
    if ((y1>=0) && (y1<=MAX_VERT_PIXELS))
    {
       y = y1;
    }
+      
+   trace.event(s_fn,0,"leave");
 }
 
 int Base::getY()
@@ -92,5 +115,6 @@ int Base::getY()
     return y;
 }
 
-
-	
+// ------------------------------
+// The end
+// ------------------------------

@@ -133,4 +133,6 @@ INLINE  void            GRRLIB_FreeTexture        (GRRLIB_texImg *tex) ;
 #include <grrlib/GRRLIB_settings.h>   // GRRLIB Settings
 #include <grrlib/GRRLIB_texSetup.h>   // Setup for textures
 
+#include <grrlib/GRRLIB_freetype_print.h>   // Customer Plaatsoft part
+
 #endif // __GRRLIB_FNINLINE_H__

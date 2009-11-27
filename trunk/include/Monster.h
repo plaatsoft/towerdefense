@@ -30,8 +30,6 @@ class Monster
 	int y;	
 	int alfa;
 	float size;
-	int angle;
-	int targetAngle;
 	GRRLIB_texImg *image;
 	int height;
 	int width;
@@ -47,9 +45,6 @@ class Monster
 	void setY(int y);
 	void setAlfa(int alfa);
 	void setSize(float size);
-	void setAngle(int angle);
-	void setWidth(int width);
-	void setHeight(int height);
 	void setStep(int step);
 	void setImage(GRRLIB_texImg *image1);
 	
@@ -57,9 +52,6 @@ class Monster
 	int getY(void);
 	int getAlfa(void);
 	float getSize(void);
-	int getAngle(void);
-	int getWidth(void);
-	int getHeight(void);
 	int getStep(void);
 	
 	void properties(void);

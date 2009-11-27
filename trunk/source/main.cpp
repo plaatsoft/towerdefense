@@ -21,6 +21,7 @@
 **
 **  27/11/2009 Version 0.21
 **  - Added GRRLib 4.1.1 
+**  - Added customer GRRLIB part to have FreeType access
 **  - Refactor Waepon, Monster, Button classes
 **
 **  22/11/2009 Version 0.20
@@ -54,19 +55,15 @@
 #include <mp3player.h>
 #include <ogc/lwp_watchdog.h>	
 
+#include "GRRLIB.h"
 #include "General.h"
 #include "http.h"
 #include "Trace.h"
-#include "GRRLIB.h"
 #include "Monster.h"
 #include "Weapon.h"
 #include "Button.h"
 #include "Base.h"
 #include "Pointer.h"
-
-// -----------------------------------------------------------
-// DEFINES
-// -----------------------------------------------------------
 
 // -----------------------------------------------------------
 // TYPEDEF
@@ -85,9 +82,11 @@ typedef struct
   GRRLIB_texImg *logo4;
   GRRLIB_texImg *logo5;
   GRRLIB_texImg *logo6;
+  GRRLIB_texImg *logo;
   
   GRRLIB_texImg *background1;
-  
+  GRRLIB_texImg *background2;
+    
   GRRLIB_texImg *pointer1;
 
   GRRLIB_texImg *monster1;
@@ -137,20 +136,20 @@ image images;
 // -----------------------------------------------------------
 
 // intro1 Image
-extern const unsigned char     pic1data[];
-extern int      pic1length;
+//extern const unsigned char     pic1data[];
+//extern int      pic1length;
 
 // intro2 Image
-extern const unsigned char     pic2data[];
-extern int      pic2length;
+//extern const unsigned char     pic2data[];
+//extern int      pic2length;
 
 // intro3 Image
-extern const unsigned char     pic3data[];
-extern int      pic3length;
+//extern const unsigned char     pic3data[];
+//extern int      pic3length;
 
 // logo1 Image
-extern const unsigned char     pic4data[];
-extern int      pic4length;
+//extern const unsigned char     pic4data[];
+//extern int      pic4length;
 
 // logo2 Image
 extern const unsigned char     pic5data[];
@@ -175,6 +174,10 @@ extern int      pic9length;
 // Background1 Image
 extern const unsigned char     pic10data[];
 extern int      pic10length;
+
+// Background2 Image
+extern const unsigned char     pic11data[];
+extern int      pic11length;
 
 // Monster1 Image
 extern const unsigned char     pic101data[];
@@ -340,20 +343,41 @@ int maxPointer = 1;
 int maxMonster = 25;
 int maxBase    = 6;
 
+int stateMachine=stateIntro1;
+
+float   wave1             = 0;
+float   wave2             = 0;
+
 // -----------------------------------
 // Game logic
 // -----------------------------------
+
+static u8 CalculateFrameRate() 
+{
+    static u8 frameCount = 0;
+    static u32 lastTime;
+    static u8 FPS = 0;
+    u32 currentTime = ticks_to_millisecs(gettime());
+
+    frameCount++;
+    if(currentTime - lastTime > 1000) {
+        lastTime = currentTime;
+        FPS = frameCount;
+        frameCount = 0;
+    }
+    return FPS;
+}
 
 void initImages(void)
 {
    const char *s_fn="initImages";
    trace.event(s_fn,0,"enter");
      
-   images.intro1=GRRLIB_LoadTexture( pic1data );
-   images.intro2=GRRLIB_LoadTexture( pic2data );
-   images.intro2=GRRLIB_LoadTexture( pic3data );
+   //images.intro1=GRRLIB_LoadTexture( pic1data );
+   //images.intro2=GRRLIB_LoadTexture( pic2data );
+   //images.intro2=GRRLIB_LoadTexture( pic3data );
 
-   images.logo1=GRRLIB_LoadTexture( pic4data );
+   //images.logo1=GRRLIB_LoadTexture( pic4data );
    images.logo2=GRRLIB_LoadTexture( pic5data );
    images.logo3=GRRLIB_LoadTexture( pic6data );
    images.logo4=GRRLIB_LoadTexture( pic7data );
@@ -361,6 +385,7 @@ void initImages(void)
    images.logo6=GRRLIB_LoadTexture( pic9data );
    
    images.background1=GRRLIB_LoadTexture( pic10data );
+   images.background2=GRRLIB_LoadTexture( pic11data );
 	 
    images.monster1=GRRLIB_LoadTexture( pic101data );
    images.monster2=GRRLIB_LoadTexture( pic102data );
@@ -402,6 +427,9 @@ void initImages(void)
    images.road3=GRRLIB_LoadTexture( pic403data );	
    images.road4=GRRLIB_LoadTexture( pic404data );	
 
+   images.logo=GRRLIB_LoadTexture( pic5data );
+   GRRLIB_InitTileSet(images.logo, images.logo->w, 1, 0);
+   
    trace.event(s_fn,0,"leave [void]");
 }
 
@@ -411,18 +439,15 @@ void initMonsters(void)
    const char *s_fn="initMonsters";
    trace.event(s_fn,0,"enter");
    
-   for( int i = 0; i < maxMonster-1; i++ ) 
+   for( int i = 0; i < maxMonster; i++ ) 
    {
-	  int x = (int) rand() % 400;
-	  int y = (int) rand() % 400;
+	  int x = (int) rand() % 640;
+	  int y = (int) rand() % 480;
 	 
       monster[i].setX(x);
 	  monster[i].setY(y);
 	  monster[i].setSize(1);
-	  monster[i].setAngle(0);
-	  monster[i].setWidth(32);
-	  monster[i].setHeight(32);
-	  monster[i].setStep(2);
+	  monster[i].setStep(1);
 	  
 	  trace.event(s_fn,0,"Init monster [%d|x=%d|y=%d]",i,x,y);
 	  
@@ -546,8 +571,8 @@ void initPointers(void)
    const char *s_fn="initPointers";
    trace.event(s_fn,0,"enter");
    
-   pointer[0].setX(0);
-   pointer[0].setY(0);
+   pointer[0].setX(320);
+   pointer[0].setY(240);
    pointer[0].setAngle(0);
    pointer[0].setImage(images.pointer1);
 	
@@ -561,7 +586,8 @@ void drawMonsters(void)
    int i;
    for( i=0; i<maxMonster; i++ ) 
    {
-	 monster[i].draw();
+	  monster[i].move();
+	  monster[i].draw();
    }
 }
 
@@ -585,6 +611,195 @@ void drawPointers(void)
    }
 }
 
+void drawText(int x, int y, int type, const char *text)
+{
+   char tmp[MAX_LEN];
+   memset(tmp,0x00,sizeof(tmp));
+   
+   if (text!=NULL)
+   {    		
+     strcpy(tmp, text);
+	 
+     switch (type)
+     {	   	   	 
+       case fontTitle: 
+	   {
+	      if (x==0) x=320-((strlen(tmp)*34)/2);  
+		  GRRLIB_Printf2(x, y, tmp, 72, COLOR_WHITESMOKE); 
+	   }
+	   break;
+  
+       case fontWelcome: 
+	   {
+		  GRRLIB_Printf2(x, y, tmp, 40, COLOR_WHITESMOKE); 
+	   }
+	   break;
+	   
+	   case fontSubTitle:
+	   {
+	      if (x==0) x=320-((strlen(tmp)*20)/2);
+		  GRRLIB_Printf2(x, y, tmp, 30, COLOR_WHITESMOKE);          
+	   }
+	   break;
+	   
+	   case fontSubTitle2:
+	   {
+	      if (x==0) x=320-((strlen(tmp)*20)/2);
+		  GRRLIB_Printf2(x, y, tmp, 30, COLOR_LIGHTRED);          
+	   }
+	   break;
+	   	   
+	   case fontParagraph:
+	   {
+	       if (x==0) x=320-((strlen(tmp)*10)/2);	   
+		   GRRLIB_Printf2(x, y, tmp, 24, COLOR_WHITESMOKE);            
+	   }
+	   break;
+	   	   
+	   case fontNormal:
+	   {
+	       if (x==0) x=320-((strlen(tmp)*7)/2);
+		   GRRLIB_Printf2(x, y, tmp, 18, COLOR_WHITESMOKE);            
+	   }
+	   break;
+	         
+	   case fontNew:
+	   {
+	       if (x==0) x=320-((strlen(tmp)*8)/2);	   
+		   GRRLIB_Printf2(x, y, tmp, 22, COLOR_WHITESMOKE);            
+	   }
+	   break;
+	   
+	   case fontSpecial:
+	   {
+	       if (x==0) x=320-((strlen(tmp)*10)/2);
+		   GRRLIB_Printf2(x, y, tmp, 10, COLOR_WHITESMOKE);            
+	   }
+	   break;
+	   
+	   case fontButton:
+	   {
+	       if (strlen(tmp)==1)
+		   {
+		      GRRLIB_Printf2(x+35, y, tmp, 24, COLOR_WHITESMOKE);            
+		   }
+		   else
+		   {
+		      GRRLIB_Printf2(x+20, y, tmp, 24, COLOR_WHITESMOKE);    
+		   }		   
+	   }
+	   break;
+	 }
+   }
+}
+
+
+void drawScreen(void)
+{ 	   
+    //int i=0;
+	//char tmp[MAX_LEN];
+				  
+    switch( stateMachine )	
+	{	
+
+	   case stateIntro1:
+	   {
+	      //int  ypos=yOffset;
+		  
+	      // Draw background
+		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR );
+		  
+		  // Draw background
+		  //GRRLIB_DrawImg(((640-images.logo1->w)/2) , ((480-images.logo1->h)/2)-20, images.logo1, 0, size, size, IMAGE_COLOR );
+		  
+		  // Init text layer	  
+          //GRRLIB_initTexture();	
+		  
+		  //drawText(0, ypos, fontParagraph,  "Created by wplaat"  );
+		  //ypos+=20;
+		  //drawText(0, ypos, fontParagraph,  "http://www.plaatsoft.nl"  );
+		  //ypos+=340;
+		  //drawText(40, ypos, fontNormal,  "This software is open source and may be copied, distributed or modified"  );
+		  //ypos+=20;
+		  //drawText(60, ypos, fontNormal,  "under the terms of the GNU General Public License (GPL) version 2" );
+		  
+		  //sprintf(tmp,"%d fps", CalculateFrameRate());
+		  //drawText(20, 460, fontSpecial, tmp);
+		  
+		  // Draw text layer on top of background 
+          //GRRLIB_DrawImg2(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, 255);
+	   }	   
+	   break;
+	   
+	   case stateIntro2:
+	   {
+	      //int  ypos=yOffset+320;
+		  int  j;
+		  
+	      // Draw background
+		  GRRLIB_DrawImg(0,0, images.background2, 0, 1, 1, IMAGE_COLOR );
+
+		  // Draw Plaatsoft logo		 
+   	      for(j=0;j<images.logo->h;j++)
+		  {
+             GRRLIB_DrawTile(((640-images.logo2->w)/2)+sin(wave1)*50, (((480-images.logo2->h)/2)-50)+j, images.logo, 0, 1, 1, IMAGE_COLOR,j );
+             wave1+=0.02;
+          }
+		  wave2+=0.02;
+          wave1=wave2;
+		  
+		  // Init text layer	  
+          //GRRLIB_initTexture();	
+		  
+		  //drawText(0, ypos, fontParagraph,  "Please visit my website for more information."  );
+		  //ypos+=40;
+		  //drawText(0, ypos, fontParagraph,  "http://www.plaatsoft.nl"  );
+			  
+		  //sprintf(tmp,"%d fps", CalculateFrameRate());
+		  //drawText(20, 460, fontSpecial, tmp);
+		  
+		  // Draw text layer on top of background 
+          //GRRLIB_DrawImg2(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, 255);
+	   }	   
+	   break;
+	   	   
+	   case stateIntro3:
+	   {
+	      //int  ypos=yOffset+390;
+
+		  // Draw background
+		  GRRLIB_DrawImg(0,0, images.logo3, 0, 0.95, 0.98, IMAGE_COLOR );
+		  GRRLIB_DrawImg(310,0, images.logo4, 0, 0.95, 0.98, IMAGE_COLOR );
+		  GRRLIB_DrawImg(0,240, images.logo5, 0, 0.95, 0.98, IMAGE_COLOR );
+		  GRRLIB_DrawImg(310,240, images.logo6, 0, 0.95, 0.98, IMAGE_COLOR );
+		  
+          GRRLIB_DrawImg(350, 240, images.logo2, 0, 0.5, 0.5, IMAGE_COLOR );
+
+		  // Init text layer	  
+          //GRRLIB_initTexture();	
+		  
+		  //drawText(350, ypos, fontNormal,  "Some more Wii games developed"  );
+		  //ypos+=20;
+		  //drawText(400, ypos, fontNormal,  "by www.plaatsoft.nl"  );
+			 
+		  //sprintf(tmp,"%d fps", CalculateFrameRate()); 
+		  //drawText(580, 460, fontSpecial, tmp); 
+ 
+		  // Draw text layer on top of background 
+          //GRRLIB_DrawImg2(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, 255);
+	   }	   
+	   break;
+	 
+	 case stateMenu:
+		{
+	 	  drawMonsters();
+		  drawBases();
+		}
+		break;
+		
+	}
+}
+
 // -----------------------------------
 // main
 // -----------------------------------
@@ -598,8 +813,9 @@ int main()
 	
 	// Init wiimote layer
     WPAD_Init();
-    WPAD_SetIdleTimeout(60); // Wiimote is shutdown after 60 seconds of innactivity.
-	//WPAD_SetDataFormat(WPAD_CHAN_0, WPAD_FMT_BTNS_ACC_IR);	// enable accelerometers and IR
+	
+	// Wiimote is shutdown after 60 seconds of innactivity.
+    WPAD_SetIdleTimeout(60); 
     WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
   
     // Obtain the preferred video mode from the system
@@ -653,17 +869,9 @@ int main()
 	
 	// Repeat forever
     while( true )
-	{				
-		// Draw background1 image
-        GRRLIB_DrawImg(0, 0, images.background1, 0, 1.0, 1.0, IMAGE_COLOR);
-		
-		drawMonsters();
-		drawBases();
-	
-        // Init text layer	  
-        //GRRLIB_initTexture();
-		//GRRLIB_Printf2(10, 10, "Hello", 14, COLOR_DARKBLACK); 
-        //GRRLIB_DrawImg2(0, 0, (u8*) GRRLIB_GetTexture(), 0, 1.0, 1.0, 255);
+	{			
+		// draw Screen
+		drawScreen();
 
 		// Draw Wii Motion Pointers
 		drawPointers();
@@ -675,3 +883,7 @@ int main()
 	
 	return 0; 
 }
+
+// ------------------------------
+// The end
+// ------------------------------

@@ -28,31 +28,27 @@ class Button
   private:
 	int x;
 	int y;	
-	GRRLIB_texImg imageNormal;
-	GRRLIB_texImg imageFocus;
+	GRRLIB_texImg *imageNormal;
+	GRRLIB_texImg *imageFocus;
 	int height;
 	int width;
+	int rumble;
 	
   public:
 	// Constructor & Destructor
   	Button();
-	Button(int x,int y, GRRLIB_texImg imageNormal, GRRLIB_texImg imageFocus );
+	Button(int x,int y, GRRLIB_texImg *imageNormal, GRRLIB_texImg *imageFocus );
  	~Button();
 
 	// Other
-	void draw(void);
-    void mouse(int x, int y);	
-	boolean onClick(void);
+	void draw(int pointerX, int pointerY);
+	boolean onClick(int pointerX, int pointerY);
 	
 	// Setters
 	void setX(int x);
 	void setY(int y);
-	void setImageNormal(GRRLIB_texImg imageNormal);
-	void setImageSelect(GRRLIB_texImg imageFocus);
-	
-	// Getters
-	int getX(void);
-	int getY(void);
+	void setImageNormal(GRRLIB_texImg *imageNormal);
+	void setImageSelect(GRRLIB_texImg *imageFocus);
 };
 
 #endif
