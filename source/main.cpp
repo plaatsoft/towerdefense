@@ -19,7 +19,8 @@
 **  Release Notes:
 **  ==============
 **
-**  23/11/2009 Version 0.21
+**  27/11/2009 Version 0.21
+**  - Added GRRLib 4.1.1 
 **  - Refactor Waepon, Monster, Button classes
 **
 **  22/11/2009 Version 0.20
@@ -52,9 +53,6 @@
 #include <sys/dir.h>
 #include <mp3player.h>
 #include <ogc/lwp_watchdog.h>	
-
-#include <iostream>
-#include <list>
 
 #include "General.h"
 #include "http.h"
@@ -348,7 +346,7 @@ int maxBase    = 6;
 
 void initImages(void)
 {
-   char *s_fn="initImages";
+   const char *s_fn="initImages";
    trace.event(s_fn,0,"enter");
      
    images.intro1=GRRLIB_LoadTexture( pic1data );
@@ -410,7 +408,7 @@ void initImages(void)
 // Init monster
 void initMonsters(void)
 {
-   char *s_fn="initMonsters";
+   const char *s_fn="initMonsters";
    trace.event(s_fn,0,"enter");
    
    for( int i = 0; i < maxMonster-1; i++ ) 
@@ -512,7 +510,7 @@ void initMonsters(void)
 // Init bases
 void initBases(void)
 {
-    char *s_fn="initBases";
+    const char *s_fn="initBases";
     trace.event(s_fn,0,"enter");
    
     base[0].setX(500);
@@ -545,7 +543,7 @@ void initBases(void)
 // Init monster
 void initPointers(void)
 {
-   char *s_fn="initPointers";
+   const char *s_fn="initPointers";
    trace.event(s_fn,0,"enter");
    
    pointer[0].setX(0);
@@ -593,7 +591,7 @@ void drawPointers(void)
 
 int main()
 {
-    char *s_fn="main";
+    const char *s_fn="main";
 	
 	 // Init video layer
     VIDEO_Init();
