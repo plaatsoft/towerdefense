@@ -40,19 +40,29 @@
 // Enable / Disable trace file functionality
 bool traceOn = true;
 
+// ------------------------------
+// Constructor
+// ------------------------------
 
 Trace::Trace()
 {
 	fp=NULL;
 }
 
+// ------------------------------
+// Destructor
+// ------------------------------
 
 Trace::~Trace()
 {
   
 }
 
+// ------------------------------
+// Methods
+// ------------------------------
 
+// Open trace file
 int Trace::open(const char *filename)
 {
    int returnValue=0;

@@ -36,13 +36,30 @@ enum
 	TCP_END=10
 };
 
-extern int tcp_start_thread(char *name, char *version, char *id1, char *url1, char*id2, char *url2, char *id3, char *url3, char *token, char *userData2, char *userData3);
+extern int tcp_start_thread(char *name, 
+							char *version, 
+							char *id1, 
+							char *url1, 
+							char*id2, 
+							char *url2, 
+							char *id3, 
+							char *url3, 
+							char *token, 
+							char *userData2, 
+							char *userData3);
+							
 extern int tcp_stop_thread(void);
+
 extern char *tcp_get_state(void);
+
 extern int tcp_get_state_nr(void);
+
 int tcp_set_state(int state, char *userData3);
+
 extern char *tcp_get_version(void);
+
 extern char *tcp_get_releasenote(void);
+
 extern char *tcp_get_highscore(void);
 
 #endif

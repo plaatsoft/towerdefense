@@ -31,13 +31,17 @@ int maxLine;
 char data[15][20];
 
 extern Trace trace;
+
 // ------------------------------
 // Constructor
 // ------------------------------
 
 Map::Map()
 {
-
+	const char *s_fn="Map::Map";
+	trace.event(s_fn,0,"enter");
+   
+	trace.event(s_fn,0,"leave [void]");  
 }
 	
 // ------------------------------
@@ -46,7 +50,10 @@ Map::Map()
 
 Map::~Map()
 {
-  
+	const char *s_fn="Map::~Map";
+	trace.event(s_fn,0,"enter");
+
+	trace.event(s_fn,0,"leave [void]");  
 }
 
 // ------------------------------
@@ -55,7 +62,7 @@ Map::~Map()
 
 void initMap(const char* filename)
 {
-   const char *s_fn="initMap";
+   const char *s_fn="Map::initMap";
    trace.event(s_fn,0,"enter");
    
    FILE *fp;
@@ -99,7 +106,12 @@ void Map::draw(void)
 
 boolean Map::onLoad(void)
 {
+	const char *s_fn="Map::onLoad";
+	trace.event(s_fn,0,"enter");
+	
 	initMap(MAP1_FILENAME);
+	
+	trace.event(s_fn,0,"leave [true]");  
 	return true;
 }
 			
@@ -109,10 +121,15 @@ boolean Map::onLoad(void)
 
 void Map::setLevel(int level1)
 {
+	const char *s_fn="Map::setLevel";
+	trace.event(s_fn,0,"enter");
+	
    if ((level>=0) && (level<=MAX_LEVEL))
    {
       level = level1;
    }
+   
+   trace.event(s_fn,0,"leave [void]");  
 }
 
 // ------------------------------
