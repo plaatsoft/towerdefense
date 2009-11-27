@@ -21,6 +21,8 @@
 #ifndef TRACE_H
 #define TRACE_H
 
+#include <string>
+
 class Trace
 {
   private:
@@ -31,8 +33,8 @@ class Trace
   	Trace();
  	~Trace();
 	
-	int open(char *filename);
-	int event( char *functionName, int threadNr, char *event, ...);
+	int open(const char *filename);
+	int event( const char *functionName, int threadNr, const char *event, ...);
 	int eventRaw( char character);
 	int close();
 };
