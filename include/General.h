@@ -26,8 +26,8 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.20"
-#define RELEASE_DATE        	"22-11-2009" 
+#define PROGRAM_VERSION     	"0.22"
+#define RELEASE_DATE        	"29-11-2009" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -48,7 +48,7 @@
 #define URL_TOKEN           	" Version "
 #define HIGHSCORE_FILENAME  	"sd:/apps/TowerDefense/highscore.xml"
 #define SETTING_FILENAME    	"sd:/apps/TowerDefense/setting.xml"
-#define TRACE_FILENAME      	"sd:/apps/TowerDefense/td.trc"
+#define TRACE_FILENAME      	"sd:/apps/TowerDefense/TowerDefense.trc"
 #define GAME_DIRECTORY      	"sd:/apps/TowerDefense/"
 
 #define MAP1_FILENAME    	  	"sd:/apps/TowerDefense/maps/map1.xml"

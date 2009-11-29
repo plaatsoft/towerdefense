@@ -61,8 +61,6 @@ class Pointer
  	~Pointer();
 
 	void draw(void);
-    void mouse(int x, int y);	
-	boolean onClick(void);
 	
 	void setIndex(int index);
 	void setX(int x);

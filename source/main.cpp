@@ -24,9 +24,8 @@
 **  - Added four WiiMote controllers support
 **
 **  27/11/2009 Version 0.21
-**  - Added GRRLib 4.1.1 
-**  - Added customer GRRLIB part to have FreeType access
-**  - Refactor Waepon, Monster, Button classes
+**  - Added GRRLib 4.1.1 library
+**  - Refactor Weapon, Monster, Button class
 **
 **  22/11/2009 Version 0.20
 **  - Added trace library functionality
@@ -370,23 +369,18 @@ float   wave2             = 0;
 boolean stopApplication = false;
 
 // -----------------------------------
-// Game logic
+// INIT and DESTOY METHODES
 // -----------------------------------
 
-static u8 CalculateFrameRate() 
+void initGame(void)
 {
-    static u8 frameCount = 0;
-    static u32 lastTime;
-    static u8 FPS = 0;
-    u32 currentTime = ticks_to_millisecs(gettime());
-
-    frameCount++;
-    if(currentTime - lastTime > 1000) {
-        lastTime = currentTime;
-        FPS = frameCount;
-        frameCount = 0;
-    }
-    return FPS;
+   const char *s_fn="initGame";
+   trace.event(s_fn,0,"enter");
+   
+   trace.event(s_fn,0,"stateMachine=stateIntro1");
+   stateMachine=stateIntro1;
+   
+   trace.event(s_fn,0,"leave");
 }
 
 void initImages(void)
@@ -513,6 +507,8 @@ void destroyImages(void)
    GRRLIB_FreeTexture(images.road2);
    GRRLIB_FreeTexture(images.road3);
    GRRLIB_FreeTexture(images.road4);
+   
+   trace.event(s_fn,0,"leave");
 }
 
 // Init monster
@@ -525,11 +521,12 @@ void initMonsters(void)
    {
 	  int x = (int) rand() % 640;
 	  int y = (int) rand() % 480;
+	  int step = (int) (rand() % 3)+1;
 	 
       monster[i].setX(x);
 	  monster[i].setY(y);
 	  monster[i].setSize(1);
-	  monster[i].setStep(1);
+	  monster[i].setStep(step);
 	  
 	  trace.event(s_fn,0,"Init monster [%d|x=%d|y=%d]",i,x,y);
 	  
@@ -679,7 +676,26 @@ void initPointers(void)
    
    trace.event(s_fn,0,"leave [void]");
 }
-	  
+
+// -----------------------------------
+// DRAW METHODES
+// -----------------------------------
+
+static u8 CalculateFrameRate() 
+{
+    static u8 frameCount = 0;
+    static u32 lastTime;
+    static u8 FPS = 0;
+    u32 currentTime = ticks_to_millisecs(gettime());
+
+    frameCount++;
+    if(currentTime - lastTime > 1000) {
+        lastTime = currentTime;
+        FPS = frameCount;
+        frameCount = 0;
+    }
+    return FPS;
+}	  
 
 // Draw monster on screen
 void drawMonsters(void)
@@ -796,7 +812,7 @@ void drawText(int x, int y, int type, const char *text)
 
 
 void drawScreen(void)
-{ 	   
+{ 	   	
     //int i=0;
 	char tmp[MAX_LEN];
 				  
@@ -953,6 +969,9 @@ int main()
 	// Open trace module
 	trace.open(TRACE_FILENAME);
 	trace.event(s_fn, 0,"%s %s Started", PROGRAM_NAME, PROGRAM_VERSION);
+	
+	// Init Game parameters
+	initGame();
 	
 	// Init Images
 	initImages();

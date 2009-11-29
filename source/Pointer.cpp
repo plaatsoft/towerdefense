@@ -64,6 +64,8 @@ Pointer::~Pointer()
 
 void buttonA(int x, int y)
 {
+  const char *s_fn="Pointer::buttonA";
+
   if (selectedA) return;
   selectedA=true;
 	  
@@ -71,27 +73,31 @@ void buttonA(int x, int y)
   {
      case stateIntro1:
 	 {
+	   trace.event(s_fn,0,"stateMachine=stateIntro2");
 	   stateMachine=stateIntro2;
 	 }
 	 break;
 
 	 case stateIntro2:
 	 {
+	   trace.event(s_fn,0,"stateMachine=stateIntro3");
 	   stateMachine=stateIntro3;
 	 }
 	 break;
 	 
 	 case stateIntro3:
 	 {
+	   trace.event(s_fn,0,"stateMachine=stateMenu");
 	   stateMachine=stateMenu;
 	 }
 	 break;
    }
 }
 
-
 void Pointer::draw(void)
 {   
+    const char *s_fn="Pointer::draw";
+
 	// Scan for button events
 	WPAD_SetVRes(index, 640, 480);
 	WPAD_ScanPads();
@@ -113,16 +119,12 @@ void Pointer::draw(void)
 	// Scan for button events
 	if (wpaddown & WPAD_BUTTON_HOME) 
 	{
+	  trace.event(s_fn,0,"Home button pressed");
 	  stopApplication = true;
 	}
 				
     // Draw Pointer on screen
     GRRLIB_DrawImg( x, y, image, angle, 1.0, 1.0, IMAGE_COLOR );		
-}
-
-boolean Pointer::onClick(void)
-{   
-   return false;
 }
 
 // ------------------------------
