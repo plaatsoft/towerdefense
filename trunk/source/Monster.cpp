@@ -26,12 +26,14 @@
 #include "GRRLIB.h"
 #include "Monster.h"
 #include "Trace.h"  
+#include "Grid.h"  
 
 // ------------------------------
 // Variables
 // ------------------------------
 
 extern Trace trace;
+extern Grid grid;
 extern GXRModeObj  *rmode;
 
 // ------------------------------
@@ -47,13 +49,16 @@ Monster::Monster()
    yDirection=true;
    
    x=0;
+   targetX=0;
    y=0;
+   targetY=0;
    size=1;
    alfa=255;
 
    height=0;
    width=0;
    step=0;
+   pos=0;
    
    trace.event(s_fn,0,"leave");
 }
@@ -93,103 +98,79 @@ void Monster::properties(void)
 void Monster::draw(void)
 {
 	// Draw Monster on screen
-	GRRLIB_DrawImg( x, y, image, 0, size, size, IMAGE_COLOR );		
+	
+	if (visible)
+	{
+		GRRLIB_DrawImg( x, y, image, 0, size, size, IMAGE_COLOR );		
+	}
 }
 
 void Monster::move(void)
 {  
-	if (xDirection)
-    {
-      if (x<(MAX_HORZ_PIXELS-width-step)) x+=step; else xDirection=false;
-    }
-    else
-    {
-      if (x>step) x-=step; else xDirection=true;
-    }
- 
-    if (yDirection)
-    {
-      if (y<(rmode->xfbHeight-height-step)) y+=step; else yDirection=false;
-    }
-    else
-    {
-       if (y>step) y-=step; else yDirection=true;
-    }
+    if (!visible) return;
+	
+	if (delay>0)
+	{
+		delay--;
+	}
+	else
+	{
+		if ((x==targetX) && (y==targetY))
+		{
+			targetX=grid.getLocationX(pos);
+			targetY=grid.getLocationY(pos);
+			pos++;
+			if (pos>=grid.getMaxLocations())	
+			{
+				// Monster has reach the base.
+				visible=false;
+			}
+		}
+		else if (x<targetX)
+		{
+			x=x+step;
+		}
+		else if (x>targetX)
+		{
+			x=x-step;	
+		}
+			
+		if (y<targetY)
+		{
+			y=y+step;
+		}
+		else if (y>targetY)
+		{
+			y=y-step;	
+		}
+	}
 }
 
 // ------------------------------
 // Setters and getters 
 // ------------------------------
 
-void Monster::setX(int x1)
+void Monster::setImage(GRRLIB_texImg *image1)
 {
-	const char *s_fn="Monster::setX";
-	trace.event(s_fn,0,"enter [x=%d]",x1);
+   const char *s_fn="Monster::setImage";
+   trace.event(s_fn,0,"enter");
    
-	if ((x1>=0) && (x1<=MAX_HORZ_PIXELS))
-	{
-		x = x1;
-	}
-	trace.event(s_fn,0,"leave [void]");
-}
+   image = image1;
+   
+   height=image->h;
+   width=image->w;
 
-int Monster::getX()
-{
-	return x;
-}
-
-void Monster::setY(int y1)
-{
-   const char *s_fn="Monster::setY";
-   trace.event(s_fn,0,"enter [y=%d]",y1);
+   pos = 0;
    
-   if ((y1>=0) && (y1<=rmode->xfbHeight))
-   {
-      y = y1;
-   }
+   x=grid.getLocationX(pos);
+   targetX=x;
+			
+   targetY=grid.getLocationY(pos);
+   targetY=y;
    
-   trace.event(s_fn,0,"leave [void]");
-}
-
-int Monster::getY()
-{
-	return y;
-}
-
-void Monster::setAlfa(int alfa1)
-{
-   const char *s_fn="Monster::setAlfa";
-   trace.event(s_fn,0,"enter [alfa=%d]",alfa1);
-   
-   if ((alfa1>=0) && (alfa1<=MAX_ALFA))
-   {
-      alfa=alfa1;
-   }
-   
-    trace.event(s_fn,0,"leave");
-}
-		
-int Monster::getAlfa(void)
-{
-   return alfa;
-}
-
-void Monster::setSize(float size1)
-{
-   const char *s_fn="Monster::setSize";
-   trace.event(s_fn,0,"enter [size=%d]",size);
-   
-   if ((size>=0) && (size1<=MAX_SIZE))
-   {
-     size=size1;
-   }
+   pos++;
    
    trace.event(s_fn,0,"leave");
-}
-
-float Monster::getSize(void)
-{
-   return size;
 }
 
 void Monster::setStep(int step1)
@@ -205,23 +186,32 @@ void Monster::setStep(int step1)
    trace.event(s_fn,0,"leave");
 }
 
+void Monster::setDelay(int delay1)
+{
+	delay=delay1;
+}
+
+int Monster::getX()
+{
+	return x;
+}
+
+int Monster::getY()
+{
+	return y;
+}
+		
+int Monster::getAlfa(void)
+{
+   return alfa;
+}
+
 int Monster::getStep(void)
 {
    return step;
 }
 
-void Monster::setImage(GRRLIB_texImg *image1)
-{
-   const char *s_fn="Monster::setImage";
-   trace.event(s_fn,0,"enter");
-   
-   image = image1;
-   
-   height=image->h;
-   width=image->w;
-   
-   trace.event(s_fn,0,"leave");
-}
+
 
 // ------------------------------
 // The end

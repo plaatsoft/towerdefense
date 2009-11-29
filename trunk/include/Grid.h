@@ -49,6 +49,11 @@ class Grid
 	void setImage4(GRRLIB_texImg *image);
 	void setImage5(GRRLIB_texImg *image);
 	void setLevel(int level);
+	
+	// Getters
+	int getLocationX(int pos);
+	int getLocationY(int pos);
+	int getMaxLocations(void);
 };
 
 #endif

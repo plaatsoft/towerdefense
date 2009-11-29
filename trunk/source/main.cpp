@@ -354,11 +354,13 @@ Pointer pointer[4];
 Grid grid[1];
 Weapon weapon[1];
 
-int maxPointer = 4;
-int maxMonster = 25;
-int maxBase    = 6;
-int maxMap	   = 1;
-int maxWeapon  = 1;
+int maxPointer  = 4;
+int maxMonster  = 25;
+int maxBase     = 6;
+int maxMap	    = 1;
+int maxWeapon   = 1;
+
+int day=0;
 
 int stateMachine=stateIntro1;
 
@@ -508,19 +510,11 @@ void initMonsters(void)
    const char *s_fn="initMonsters";
    trace.event(s_fn,0,"enter");
    
+   int delay=0;
    for( int i = 0; i < maxMonster; i++ ) 
    {
-	  int x = (int) rand() % 640;
-	  int y = (int) rand() % 480;
-	  int step = (int) (rand() % 3)+1;
-	 
-      monster[i].setX(x);
-	  monster[i].setY(y);
-	  monster[i].setSize(1);
-	  monster[i].setStep(step);
-	  
-	  trace.event(s_fn,0,"Init monster [%d|x=%d|y=%d]",i,x,y);
-	  
+   	  trace.event(s_fn,0,"Init monster [%d]",i);
+	 	  
 	  switch (i+1)
 	  {
 	     case 1: monster[i].setImage(images.monster1);
@@ -598,6 +592,14 @@ void initMonsters(void)
 		 case 25: monster[i].setImage(images.monster25);
 				 break;
 	  }
+	  	 
+	  //int step = (int) (rand() % 3)+1;
+ 
+	  monster[i].setStep(1);
+	  monster[i].setDelay(delay);
+	  
+	  // Wait +/- two seconds before new monster is lanched.
+	  delay+=100;
    }
    trace.event(s_fn,0,"leave [void]");
 }
