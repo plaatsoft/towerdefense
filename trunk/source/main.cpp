@@ -67,6 +67,7 @@
 #include "Button.h"
 #include "Base.h"
 #include "Pointer.h"
+#include "Grid.h"
 
 // -----------------------------------------------------------
 // TYPEDEF
@@ -89,7 +90,9 @@ typedef struct
   
   GRRLIB_texImg *background1;
   GRRLIB_texImg *background2;
-    
+  
+  GRRLIB_texImg *amon1;
+  
   GRRLIB_texImg *pointer1;
   GRRLIB_texImg *pointer2;
   GRRLIB_texImg *pointer3; 
@@ -132,6 +135,7 @@ typedef struct
   GRRLIB_texImg *road2;
   GRRLIB_texImg *road3;
   GRRLIB_texImg *road4;
+  GRRLIB_texImg *road5;
 } 
 image;
 
@@ -341,6 +345,13 @@ extern int      pic403length;
 extern const unsigned char     pic404data[];
 extern int      pic404length;
 
+// Road5 Image
+extern const unsigned char     pic405data[];
+extern int      pic405length;
+
+// Rocket Image
+extern const unsigned char     pic500data[];
+extern int      pic500length;
 
 u32         *frameBuffer[1] = {NULL};
 GXRModeObj  *rmode = NULL;
@@ -356,10 +367,12 @@ Trace trace;
 Monster monster[100];
 Base base[8];
 Pointer pointer[4];
+Grid grid[1];
 
 int maxPointer = 4;
 int maxMonster = 25;
 int maxBase    = 6;
+int maxMap	   = 1;
 
 int stateMachine=stateIntro1;
 
@@ -443,8 +456,9 @@ void initImages(void)
    images.road1=GRRLIB_LoadTexture( pic401data );	
    images.road2=GRRLIB_LoadTexture( pic402data );	
    images.road3=GRRLIB_LoadTexture( pic403data );	
-   images.road4=GRRLIB_LoadTexture( pic404data );	
-
+   images.road4=GRRLIB_LoadTexture( pic404data );	 
+   images.road5=GRRLIB_LoadTexture( pic405data );	
+   
    images.logo=GRRLIB_LoadTexture( pic5data );
    GRRLIB_InitTileSet(images.logo, images.logo->w, 1, 0);
    
@@ -507,9 +521,11 @@ void destroyImages(void)
    GRRLIB_FreeTexture(images.road2);
    GRRLIB_FreeTexture(images.road3);
    GRRLIB_FreeTexture(images.road4);
+   GRRLIB_FreeTexture(images.road5);
    
    trace.event(s_fn,0,"leave");
 }
+
 
 // Init monster
 void initMonsters(void)
@@ -677,6 +693,23 @@ void initPointers(void)
    trace.event(s_fn,0,"leave [void]");
 }
 
+// Init Grid
+void initGrid(int level)
+{
+    const char *s_fn="initGrid";
+    trace.event(s_fn,0,"enter");
+   
+	grid[0].setImage1(images.road1);
+	grid[0].setImage2(images.road2);
+	grid[0].setImage3(images.road3);
+	grid[0].setImage4(images.road4);
+	grid[0].setImage5(images.road5);
+	
+	grid[0].render();
+	
+	trace.event(s_fn,0,"leave [void]");
+}
+	
 // -----------------------------------
 // DRAW METHODES
 // -----------------------------------
@@ -706,6 +739,12 @@ void drawMonsters(void)
 	  monster[i].move();
 	  monster[i].draw();
    }
+}
+
+// Draw monster on screen
+void drawGrid(void)
+{
+   grid[0].draw();
 }
 
 // Draw base on screen
@@ -909,7 +948,8 @@ void drawScreen(void)
 	 
 	 case stateMenu:
 		{
-	 	  drawMonsters();
+	 	  drawGrid();
+		  drawMonsters();
 		  drawBases();
 		  
 		  // Init text layer	  
@@ -979,12 +1019,15 @@ int main()
     // Init pointers
     initPointers();
 	
+	// Init Map
+	initGrid(0);
+	
     // Init monster
     initMonsters();
 	
 	// Init base
 	initBases();
-
+	
 	// Init FreeType font engine
 	GRRLIB_InitFreetype();
 			  			
