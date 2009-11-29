@@ -27,8 +27,19 @@
 #include "Trace.h"
 #include "Grid.h"
 
-int maxLine;
+int maxLines;
+int maxLocations;
+
 char gridData[16][20];
+
+typedef struct 
+{
+	int x;
+	int y;
+}
+location;
+
+location locationList[320];
 
 extern Trace trace;
 
@@ -60,6 +71,85 @@ Grid::~Grid()
 // Others
 // ------------------------------
 
+void parseGrid(void)
+{
+	const char *s_fn="Grid::parseGrid";
+	trace.event(s_fn,0,"enter");
+   
+	int x,y;
+	char temp[16][20];
+	boolean ready=false;
+	maxLocations=0;
+   
+	// Make copy of grid data
+	for (y=0;y<16;y++)
+	{
+		for (x=0;x<20;x++)
+		{
+			temp[y][x]=gridData[y][x];
+		}
+	}
+   
+	// Find start position
+	for (y=0;y<16;y++)
+	{
+		for (x=0;x<20;x++)
+		{
+			if (temp[y][x]=='*')
+			{
+				locationList[maxLocations].x=x;
+				locationList[maxLocations].y=y;
+				maxLocations++;
+				temp[y][x]='0';
+				break;
+			}
+		}
+	}
+	
+	// Find all other positions
+	while (!ready)
+	{
+		ready=true;
+		x=locationList[maxLocations-1].x;
+		y=locationList[maxLocations-1].y;
+		
+		if (temp[y-1][x]!='0')
+		{
+			locationList[maxLocations].x=x;
+			locationList[maxLocations].y=y;
+			maxLocations++;
+			temp[y][x]='0';
+			ready=false;
+		}
+		else if (temp[y+1][x]!='0')
+		{
+			locationList[maxLocations].x=x;
+			locationList[maxLocations].y=y;
+			maxLocations++;
+			temp[y][x]='0';
+			ready=false;
+		}
+		else if (temp[y][x+1]!='0')
+		{
+			locationList[maxLocations].x=x;
+			locationList[maxLocations].y=y;
+			maxLocations++;
+			temp[y][x]='0';
+			ready=false;
+		}
+		else if (temp[y][x-1]!='0')
+		{
+			locationList[maxLocations].x=x;
+			locationList[maxLocations].y=y;
+			maxLocations++;
+			temp[y][x]='0';
+			ready=false;
+		}
+	}
+	
+	trace.event(s_fn,0,"leave [maxLocations=%d]",maxLocations);
+}
+
 void initGrid(const char* filename)
 {
    const char *s_fn="Grid::initGrid";
@@ -70,7 +160,7 @@ void initGrid(const char* filename)
    mxml_node_t *group;   
    const char  *pointer;
 
-   maxLine=0;
+   maxLines=0;
    
    /*Load our xml file! */
    fp = fopen(filename, "r");
@@ -86,9 +176,9 @@ void initGrid(const char* filename)
         group = mxmlFindElement(group, tree, "line", NULL, NULL, MXML_DESCEND))
    {		 	  	  
       pointer=mxmlElementGetAttr(group,"data");
-      if (pointer!=NULL) strcpy(gridData[maxLine],pointer);  
+      if (pointer!=NULL) strcpy(gridData[maxLines],pointer);  
 	  
-	  maxLine++;
+	  maxLines++;
    }
    
    mxmlDelete(group);
@@ -137,6 +227,7 @@ void Grid::render(void)
 	trace.event(s_fn,0,"enter");
    
     initGrid(GRID1_FILENAME);
+	parseGrid();
 	
 	trace.event(s_fn,0,"leave [void]");  
 }
@@ -207,6 +298,30 @@ void Grid::setLevel(int level1)
    }
    
    trace.event(s_fn,0,"leave [void]");  
+}
+
+int Grid::getLocationX(int pos)
+{
+    if (pos<maxLocations)
+	{
+		return (locationList[pos].x*32);
+	}
+	return -1;
+}
+
+int Grid::getLocationY(int pos)
+{
+    if (pos<maxLocations)
+	{
+		return (locationList[pos].y*32);
+	}
+	return -1;
+}
+
+
+int Grid::getMaxLocations(void)
+{
+   return maxLocations;
 }
 
 // ------------------------------

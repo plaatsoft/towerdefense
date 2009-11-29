@@ -27,7 +27,9 @@ class Monster
 {
   private:
 	int x;
+	int targetX;
 	int y;	
+	int targetY;
 	int alfa;
 	float size;
 	GRRLIB_texImg *image;
@@ -36,17 +38,17 @@ class Monster
 	bool xDirection;
 	bool yDirection;
 	int step;
+	int delay;
+	int pos;
+	boolean visible;
 	
   public:
   	Monster();
  	~Monster();
-	
-	void setX(int x);
-	void setY(int y);
-	void setAlfa(int alfa);
-	void setSize(float size);
+
+	void setImage(GRRLIB_texImg *image);	
 	void setStep(int step);
-	void setImage(GRRLIB_texImg *image1);
+	void setDelay(int delay);
 	
 	int getX(void);
 	int getY(void);
