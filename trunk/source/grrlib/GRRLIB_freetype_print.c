@@ -40,6 +40,7 @@ static FT_Face ftFace;
 
 void *fontTempLayer=NULL;
 void *fontTexture=NULL;
+GRRLIB_texImg image;
 
 extern  Mtx                  GXmodelView2D;
 
@@ -186,7 +187,7 @@ bool BlitGlyph(FT_Bitmap *bitmap, int offset, int top, int color)
 }
 
 /* Render the text string to a 4x4RGBA texture, return a pointer to this texture */
-void* GRRLIB_GetTexture(void) 
+GRRLIB_texImg* GRRLIB_GetTexture(void) 
 {
 	/* Create a new buffer, this time to hold the final texture 
 	 * in a format suitable for the Wii */
@@ -198,8 +199,11 @@ void* GRRLIB_GetTexture(void)
 
 	/* The temp buffer is no longer required */
 	free(fontTempLayer);
-
-	return fontTexture;
+	image.data=fontTexture;
+	image.w=640;
+	image.h=480;
+	
+	return &image;
 }
 
 void BitmapTo4x4RGBA(const unsigned char *src, void *dst, const unsigned int width, const unsigned int height)
@@ -234,55 +238,5 @@ void BitmapTo4x4RGBA(const unsigned char *src, void *dst, const unsigned int wid
 			}
 		} /* i */
 	} /* block */
-}
-
-void GRRLIB_DrawImg2(f32 xpos, f32 ypos, u8 data[], float degrees, float scaleX, f32 scaleY, u8 alpha )
-{
-   GXTexObj texObj;
-   u16 width=640;
-   u16 height=480;
-	
-	GX_InitTexObj(&texObj, data, width, height, GX_TF_RGBA8,GX_CLAMP, GX_CLAMP,GX_FALSE);
-	//GX_InitTexObjLOD(&texObj, GX_NEAR, GX_NEAR, 0.0f, 0.0f, 0.0f, 0, 0, GX_ANISO_1);
-	GX_LoadTexObj(&texObj, GX_TEXMAP0);
-
-	GX_SetTevOp (GX_TEVSTAGE0, GX_MODULATE);
-  	GX_SetVtxDesc (GX_VA_TEX0, GX_DIRECT);
-
-	Mtx m,m1,m2, mv;
-	width *=.5;
-	height*=.5;
-	guMtxIdentity (m1);
-	guMtxScaleApply(m1,m1,scaleX,scaleY,1.0);
-	guVector axis =(guVector) {0 , 0, 1 };
-	guMtxRotAxisDeg (m2, &axis, degrees);
-	guMtxConcat(m2,m1,m);
-
-	guMtxTransApply(m,m, xpos+width,ypos+height,0);
-	guMtxConcat (GXmodelView2D, m, mv);
-	GX_LoadPosMtxImm (mv, GX_PNMTX0);
-	
-	GX_Begin(GX_QUADS, GX_VTXFMT0,4);
-  	GX_Position3f32(-width, -height,  0);
-  	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
-  	GX_TexCoord2f32(0, 0);
-  
-  	GX_Position3f32(width, -height,  0);
- 	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
-  	GX_TexCoord2f32(1, 0);
-  
-  	GX_Position3f32(width, height,  0);
-	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
-  	GX_TexCoord2f32(1, 1);
-  
-  	GX_Position3f32(-width, height,  0);
-	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
-  	GX_TexCoord2f32(0, 1);
-	GX_End();
-	GX_LoadPosMtxImm (GXmodelView2D, GX_PNMTX0);
-
-	GX_SetTevOp (GX_TEVSTAGE0, GX_PASSCLR);
-  	GX_SetVtxDesc (GX_VA_TEX0, GX_NONE);
-
 }
 
