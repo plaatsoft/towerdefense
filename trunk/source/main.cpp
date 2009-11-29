@@ -91,7 +91,7 @@ typedef struct
   GRRLIB_texImg *background1;
   GRRLIB_texImg *background2;
   
-  GRRLIB_texImg *amon1;
+  GRRLIB_texImg *weapon1;
   
   GRRLIB_texImg *pointer1;
   GRRLIB_texImg *pointer2;
@@ -144,22 +144,6 @@ image images;
 // -----------------------------------------------------------
 // VARIABLES
 // -----------------------------------------------------------
-
-// intro1 Image
-//extern const unsigned char     pic1data[];
-//extern int      pic1length;
-
-// intro2 Image
-//extern const unsigned char     pic2data[];
-//extern int      pic2length;
-
-// intro3 Image
-//extern const unsigned char     pic3data[];
-//extern int      pic3length;
-
-// logo1 Image
-//extern const unsigned char     pic4data[];
-//extern int      pic4length;
 
 // logo2 Image
 extern const unsigned char     pic5data[];
@@ -368,16 +352,18 @@ Monster monster[100];
 Base base[8];
 Pointer pointer[4];
 Grid grid[1];
+Weapon weapon[1];
 
 int maxPointer = 4;
 int maxMonster = 25;
 int maxBase    = 6;
 int maxMap	   = 1;
+int maxWeapon  = 1;
 
 int stateMachine=stateIntro1;
 
-float   wave1             = 0;
-float   wave2             = 0;
+float   wave1 = 0;
+float   wave2 = 0;
 
 boolean stopApplication = false;
 
@@ -385,27 +371,11 @@ boolean stopApplication = false;
 // INIT and DESTOY METHODES
 // -----------------------------------
 
-void initGame(void)
-{
-   const char *s_fn="initGame";
-   trace.event(s_fn,0,"enter");
-   
-   trace.event(s_fn,0,"stateMachine=stateIntro1");
-   stateMachine=stateIntro1;
-   
-   trace.event(s_fn,0,"leave");
-}
-
 void initImages(void)
 {
    const char *s_fn="initImages";
    trace.event(s_fn,0,"enter");
-     
-   //images.intro1=GRRLIB_LoadTexture( pic1data );
-   //images.intro2=GRRLIB_LoadTexture( pic2data );
-   //images.intro2=GRRLIB_LoadTexture( pic3data );
 
-   //images.logo1=GRRLIB_LoadTexture( pic4data );
    images.logo2=GRRLIB_LoadTexture( pic5data );
    images.logo3=GRRLIB_LoadTexture( pic6data );
    images.logo4=GRRLIB_LoadTexture( pic7data );
@@ -458,9 +428,12 @@ void initImages(void)
    images.road3=GRRLIB_LoadTexture( pic403data );	
    images.road4=GRRLIB_LoadTexture( pic404data );	 
    images.road5=GRRLIB_LoadTexture( pic405data );	
+
+   images.weapon1=GRRLIB_LoadTexture( pic500data );
    
    images.logo=GRRLIB_LoadTexture( pic5data );
    GRRLIB_InitTileSet(images.logo, images.logo->w, 1, 0);
+
    
    trace.event(s_fn,0,"leave [void]");
 }
@@ -523,6 +496,8 @@ void destroyImages(void)
    GRRLIB_FreeTexture(images.road4);
    GRRLIB_FreeTexture(images.road5);
    
+   GRRLIB_FreeTexture(images.weapon1);
+	
    trace.event(s_fn,0,"leave");
 }
 
@@ -697,7 +672,7 @@ void initPointers(void)
 void initGrid(int level)
 {
     const char *s_fn="initGrid";
-    trace.event(s_fn,0,"enter");
+    trace.event(s_fn,0,"enter [level=%d]",level);
    
 	grid[0].setImage1(images.road1);
 	grid[0].setImage2(images.road2);
@@ -708,6 +683,50 @@ void initGrid(int level)
 	grid[0].render();
 	
 	trace.event(s_fn,0,"leave [void]");
+}
+
+// Init Weapons
+void initWeapons(void)
+{
+    const char *s_fn="initWeapons";
+    trace.event(s_fn,0,"enter");
+   
+	weapon[0].setImage(images.weapon1);
+	weapon[0].setX(100);
+	weapon[0].setY(100);
+	weapon[0].setAngle(0);
+	weapon[0].setStep(2);
+	
+	trace.event(s_fn,0,"leave [void]");
+}
+
+void initGame(void)
+{
+	const char *s_fn="initGame";
+	trace.event(s_fn,0,"enter");
+   
+	trace.event(s_fn,0,"stateMachine=stateIntro1");
+	stateMachine=stateIntro1;
+   
+   	// Init Images
+	initImages();
+   
+    // Init pointers
+    initPointers();
+	
+	// Init Map
+	initGrid(0);
+	
+    // Init monster
+    initMonsters();
+	
+	// Init bases
+	initBases();
+	
+	// Init Weapons
+	initWeapons();
+	
+	trace.event(s_fn,0,"leave");
 }
 	
 // -----------------------------------
@@ -730,16 +749,6 @@ static u8 CalculateFrameRate()
     return FPS;
 }	  
 
-// Draw monster on screen
-void drawMonsters(void)
-{
-   int i;
-   for( i=0; i<maxMonster; i++ ) 
-   {
-	  monster[i].move();
-	  monster[i].draw();
-   }
-}
 
 // Draw monster on screen
 void drawGrid(void)
@@ -764,6 +773,30 @@ void drawPointers(void)
    for( i=0; i<maxPointer; i++ ) 
    {
 	 pointer[i].draw();
+   }
+}
+
+// Draw monster on screen
+void drawMonsters(void)
+{
+   int i;
+   for( i=0; i<maxMonster; i++ ) 
+   {
+	  monster[i].move();
+	  monster[i].draw();
+	  //monster[i].properties();
+   }
+}
+
+// Draw base on screen
+void drawWeapons(void)
+{
+   int i;
+   for( i=0; i<maxWeapon; i++ ) 
+   {
+     weapon[i].move();
+	 weapon[i].draw();
+	 weapon[i].properties();
    }
 }
 
@@ -880,7 +913,7 @@ void drawScreen(void)
 		  drawText(60, ypos, fontNormal,  "under the terms of the GNU General Public License (GPL) version 2" );
 		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
-		  drawText(20, 460, fontSpecial, tmp);
+		  drawText(20, rmode->xfbHeight-50, fontSpecial, tmp);
 		  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -912,7 +945,7 @@ void drawScreen(void)
 		  drawText(0, ypos, fontParagraph,  "http://www.plaatsoft.nl"  );
 			  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
-		  drawText(20, 460, fontSpecial, tmp);
+		  drawText(20, rmode->xfbHeight-50, fontSpecial, tmp);
 		  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -923,7 +956,7 @@ void drawScreen(void)
 	   {
 	      int  ypos=yOffset+390;
 
-		  // Draw background
+		  // Draw backg
 		  GRRLIB_DrawImg(0,0, images.logo3, 0, 0.95, 0.98, IMAGE_COLOR );
 		  GRRLIB_DrawImg(310,0, images.logo4, 0, 0.95, 0.98, IMAGE_COLOR );
 		  GRRLIB_DrawImg(0,240, images.logo5, 0, 0.95, 0.98, IMAGE_COLOR );
@@ -939,7 +972,7 @@ void drawScreen(void)
 		  drawText(400, ypos, fontNormal,  "by www.plaatsoft.nl"  );
 			 
 		  sprintf(tmp,"%d fps", CalculateFrameRate()); 
-		  drawText(580, 460, fontSpecial, tmp); 
+		  drawText(590, rmode->xfbHeight-50, fontSpecial, tmp); 
  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -948,15 +981,16 @@ void drawScreen(void)
 	 
 	 case stateMenu:
 		{
+		  // Init text layer	  
+          GRRLIB_initTexture();
+		  
 	 	  drawGrid();
 		  drawMonsters();
 		  drawBases();
-		  
-		  // Init text layer	  
-          GRRLIB_initTexture();	
-			 
+		  drawWeapons();
+		  			 
 		  sprintf(tmp,"%d fps", CalculateFrameRate()); 
-		  drawText(580, 460, fontSpecial, tmp); 
+		  GRRLIB_Printf2(20, 460, tmp, 10, COLOR_DARKBLACK);
  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -1012,22 +1046,7 @@ int main()
 	
 	// Init Game parameters
 	initGame();
-	
-	// Init Images
-	initImages();
-   
-    // Init pointers
-    initPointers();
-	
-	// Init Map
-	initGrid(0);
-	
-    // Init monster
-    initMonsters();
-	
-	// Init base
-	initBases();
-	
+		
 	// Init FreeType font engine
 	GRRLIB_InitFreetype();
 			  			

@@ -5,7 +5,7 @@
 
 pic500length:	.long	picdataend - pic500data
 pic500data:
-.incbin "../images/road5.png"
+.incbin "../images/rocket.png"
 picdataend:
 
 

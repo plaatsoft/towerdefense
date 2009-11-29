@@ -32,37 +32,27 @@ class Weapon
 	float size;
 	int angle;
 	int targetAngle;
-	GRRLIB_texImg image;
+	GRRLIB_texImg *image;
 	int height;
 	int width;
-	bool xDirection;
-	bool yDirection;
 	int step;
 	
   public:
   	Weapon();
-	Weapon(int x,int y, int height, int width, float size, int angle, int alfa, GRRLIB_texImg image );
  	~Weapon();
+
+	void draw(void);	
+	void properties(void);
+	void move(void);
 	
 	void setX(int x);
 	void setY(int y);
 	void setAlfa(int alfa);
-	void setSize(float size);
 	void setAngle(int angle);
-	void setWidth(int width);
-	void setHeight(int height);
+	void setImage(GRRLIB_texImg *image);
 	void setStep(int step);
-	
-	int getX(void);
-	int getY(void);
-	int getAlfa(void);
-	float getSize(void);
-	int getAngle(void);
-	int getWidth(void);
-	int getHeight(void);
-	int getStep(void);
 
-	void draw(void);
+
 };
 
 #endif

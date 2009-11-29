@@ -76,29 +76,18 @@ Monster::~Monster()
 // ------------------------------
 	
 void Monster::properties(void)
-{
-   const char *s_fn="Monster::properties";
-   trace.event(s_fn,0,"enter");
+{  
+	char tmp[50];
+	int size=12;
    
-   char tmp[50];
-   int yoffset=10;
-   int size=14;
-   
-	GRRLIB_Printf2(10, yoffset, "Characteristics of this Monster", size, COLOR_WHITESMOKE); 
+	sprintf(tmp, "x=%d", x);
+	GRRLIB_Printf2(x, y-30, tmp, size, COLOR_DARKBLACK); 
 
-	yoffset+=size;
-	sprintf(tmp, "x=%d", getX());
-	GRRLIB_Printf2(10, yoffset, tmp, size, COLOR_WHITESMOKE); 
-
-	yoffset+=size;
-	sprintf(tmp, "y=%d", getY());
-	GRRLIB_Printf2(10, yoffset, tmp, size, COLOR_WHITESMOKE);
-      
-	yoffset+=size;
+	sprintf(tmp, "y=%d", y);
+	GRRLIB_Printf2(x, y-20, tmp, size, COLOR_DARKBLACK);
+     
 	sprintf(tmp, "step=%d", step);
-	GRRLIB_Printf2(10, yoffset, tmp, size, COLOR_WHITESMOKE);
-   
-    trace.event(s_fn,0,"leave");
+	GRRLIB_Printf2(x, y-10, tmp, size, COLOR_DARKBLACK);
 }
 
 void Monster::draw(void)
@@ -154,7 +143,7 @@ void Monster::setY(int y1)
    const char *s_fn="Monster::setY";
    trace.event(s_fn,0,"enter [y=%d]",y1);
    
-   if ((y1>=0) && (y1<=MAX_VERT_PIXELS))
+   if ((y1>=0) && (y1<=rmode->xfbHeight))
    {
       y = y1;
    }
