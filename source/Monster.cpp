@@ -233,7 +233,6 @@ void Monster::setImage(GRRLIB_texImg *image1)
    trace.event(s_fn,0,"leave");
 }
 
- 
 // ------------------------------
 // The end
 // ------------------------------

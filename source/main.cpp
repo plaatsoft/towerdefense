@@ -19,6 +19,10 @@
 **  Release Notes:
 **  ==============
 **
+**  29/11/2009 Version 0.22
+**  - FreeType is working again with GRRLIB 4.1.1
+**  - Added four WiiMote controllers support
+**
 **  27/11/2009 Version 0.21
 **  - Added GRRLib 4.1.1 
 **  - Added customer GRRLIB part to have FreeType access
@@ -88,6 +92,9 @@ typedef struct
   GRRLIB_texImg *background2;
     
   GRRLIB_texImg *pointer1;
+  GRRLIB_texImg *pointer2;
+  GRRLIB_texImg *pointer3; 
+  GRRLIB_texImg *pointer4;
 
   GRRLIB_texImg *monster1;
   GRRLIB_texImg *monster2;
@@ -283,6 +290,18 @@ extern int      pic125length;
 extern const unsigned char     pic200data[];
 extern int      pic200length;
 
+// Pointer2 Image
+extern const unsigned char     pic201data[];
+extern int      pic201length;
+
+// Pointer3 Image
+extern const unsigned char     pic202data[];
+extern int      pic202length;
+
+// Pointer4 Image
+extern const unsigned char     pic203data[];
+extern int      pic203length;
+
 // Base1 Image
 extern const unsigned char     pic301data[];
 extern int      pic301length;
@@ -337,9 +356,9 @@ Trace trace;
 
 Monster monster[100];
 Base base[8];
-Pointer pointer[1];
+Pointer pointer[4];
 
-int maxPointer = 1;
+int maxPointer = 4;
 int maxMonster = 25;
 int maxBase    = 6;
 
@@ -347,6 +366,8 @@ int stateMachine=stateIntro1;
 
 float   wave1             = 0;
 float   wave2             = 0;
+
+boolean stopApplication = false;
 
 // -----------------------------------
 // Game logic
@@ -414,6 +435,9 @@ void initImages(void)
    images.monster25=GRRLIB_LoadTexture( pic125data );		
 
    images.pointer1=GRRLIB_LoadTexture( pic200data); 
+   images.pointer2=GRRLIB_LoadTexture( pic201data);
+   images.pointer3=GRRLIB_LoadTexture( pic202data);
+   images.pointer4=GRRLIB_LoadTexture( pic203data);
    
    images.base1=GRRLIB_LoadTexture( pic301data );	
    images.base2=GRRLIB_LoadTexture( pic302data );	
@@ -431,6 +455,64 @@ void initImages(void)
    GRRLIB_InitTileSet(images.logo, images.logo->w, 1, 0);
    
    trace.event(s_fn,0,"leave [void]");
+}
+
+void destroyImages(void)
+{
+   const char *s_fn="destroyImages";
+   trace.event(s_fn,0,"enter");
+   
+   GRRLIB_FreeTexture(images.logo2);
+   GRRLIB_FreeTexture(images.logo3);
+   GRRLIB_FreeTexture(images.logo4);
+   GRRLIB_FreeTexture(images.logo5);
+   GRRLIB_FreeTexture(images.logo6);
+   
+   GRRLIB_FreeTexture(images.background1);
+   GRRLIB_FreeTexture(images.background2);
+   
+   GRRLIB_FreeTexture(images.monster1);
+   GRRLIB_FreeTexture(images.monster2);
+   GRRLIB_FreeTexture(images.monster3);
+   GRRLIB_FreeTexture(images.monster4);
+   GRRLIB_FreeTexture(images.monster5);
+   GRRLIB_FreeTexture(images.monster6);
+   GRRLIB_FreeTexture(images.monster7);
+   GRRLIB_FreeTexture(images.monster8);
+   GRRLIB_FreeTexture(images.monster9);
+   GRRLIB_FreeTexture(images.monster10);
+   GRRLIB_FreeTexture(images.monster11);
+   GRRLIB_FreeTexture(images.monster12);
+   GRRLIB_FreeTexture(images.monster13);
+   GRRLIB_FreeTexture(images.monster14);
+   GRRLIB_FreeTexture(images.monster15);
+   GRRLIB_FreeTexture(images.monster16);
+   GRRLIB_FreeTexture(images.monster17);
+   GRRLIB_FreeTexture(images.monster18);
+   GRRLIB_FreeTexture(images.monster19);
+   GRRLIB_FreeTexture(images.monster20);
+   GRRLIB_FreeTexture(images.monster21);
+   GRRLIB_FreeTexture(images.monster22);
+   GRRLIB_FreeTexture(images.monster23);
+   GRRLIB_FreeTexture(images.monster24);
+   GRRLIB_FreeTexture(images.monster25);
+   
+   GRRLIB_FreeTexture(images.pointer1);
+   GRRLIB_FreeTexture(images.pointer2);
+   GRRLIB_FreeTexture(images.pointer3);
+   GRRLIB_FreeTexture(images.pointer4);
+   
+   GRRLIB_FreeTexture(images.base1);
+   GRRLIB_FreeTexture(images.base2);
+   GRRLIB_FreeTexture(images.base3);
+   GRRLIB_FreeTexture(images.base4);
+   GRRLIB_FreeTexture(images.base5);
+   GRRLIB_FreeTexture(images.base6);
+   
+   GRRLIB_FreeTexture(images.road1);
+   GRRLIB_FreeTexture(images.road2);
+   GRRLIB_FreeTexture(images.road3);
+   GRRLIB_FreeTexture(images.road4);
 }
 
 // Init monster
@@ -571,11 +653,30 @@ void initPointers(void)
    const char *s_fn="initPointers";
    trace.event(s_fn,0,"enter");
    
+   pointer[0].setIndex(0);
    pointer[0].setX(320);
    pointer[0].setY(240);
    pointer[0].setAngle(0);
    pointer[0].setImage(images.pointer1);
-	
+
+   pointer[1].setIndex(1);
+   pointer[1].setX(320);
+   pointer[1].setY(240);
+   pointer[1].setAngle(0);
+   pointer[1].setImage(images.pointer2);
+
+   pointer[2].setIndex(2);
+   pointer[2].setX(320);
+   pointer[2].setY(240);
+   pointer[2].setAngle(0);
+   pointer[2].setImage(images.pointer3);
+
+   pointer[3].setIndex(3);
+   pointer[3].setX(320);
+   pointer[3].setY(240);
+   pointer[3].setAngle(0);
+   pointer[3].setImage(images.pointer4);	
+   
    trace.event(s_fn,0,"leave [void]");
 }
 	  
@@ -697,15 +798,15 @@ void drawText(int x, int y, int type, const char *text)
 void drawScreen(void)
 { 	   
     //int i=0;
-	//char tmp[MAX_LEN];
+	char tmp[MAX_LEN];
 				  
     switch( stateMachine )	
 	{	
 
 	   case stateIntro1:
 	   {
-	      //int  ypos=yOffset;
-		  
+	      int  ypos=yOffset;
+		
 	      // Draw background
 		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR );
 		  
@@ -713,28 +814,28 @@ void drawScreen(void)
 		  //GRRLIB_DrawImg(((640-images.logo1->w)/2) , ((480-images.logo1->h)/2)-20, images.logo1, 0, size, size, IMAGE_COLOR );
 		  
 		  // Init text layer	  
-          //GRRLIB_initTexture();	
+          GRRLIB_initTexture();	
 		  
-		  //drawText(0, ypos, fontParagraph,  "Created by wplaat"  );
-		  //ypos+=20;
-		  //drawText(0, ypos, fontParagraph,  "http://www.plaatsoft.nl"  );
-		  //ypos+=340;
-		  //drawText(40, ypos, fontNormal,  "This software is open source and may be copied, distributed or modified"  );
-		  //ypos+=20;
-		  //drawText(60, ypos, fontNormal,  "under the terms of the GNU General Public License (GPL) version 2" );
+		  drawText(0, ypos, fontParagraph,  "Created by wplaat"  );
+		  ypos+=20;
+		  drawText(0, ypos, fontParagraph,  "http://www.plaatsoft.nl"  );
+		  ypos+=340;
+		  drawText(40, ypos, fontNormal,  "This software is open source and may be copied, distributed or modified"  );
+		  ypos+=20;
+		  drawText(60, ypos, fontNormal,  "under the terms of the GNU General Public License (GPL) version 2" );
 		  
-		  //sprintf(tmp,"%d fps", CalculateFrameRate());
-		  //drawText(20, 460, fontSpecial, tmp);
+		  sprintf(tmp,"%d fps", CalculateFrameRate());
+		  drawText(20, 460, fontSpecial, tmp);
 		  
 		  // Draw text layer on top of background 
-          //GRRLIB_DrawImg2(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, 255);
+          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }	   
 	   break;
 	   
 	   case stateIntro2:
 	   {
-	      //int  ypos=yOffset+320;
-		  int  j;
+	      int  ypos=yOffset+320;
+		  unsigned int  j;
 		  
 	      // Draw background
 		  GRRLIB_DrawImg(0,0, images.background2, 0, 1, 1, IMAGE_COLOR );
@@ -749,23 +850,23 @@ void drawScreen(void)
           wave1=wave2;
 		  
 		  // Init text layer	  
-          //GRRLIB_initTexture();	
+          GRRLIB_initTexture();	
 		  
-		  //drawText(0, ypos, fontParagraph,  "Please visit my website for more information."  );
-		  //ypos+=40;
-		  //drawText(0, ypos, fontParagraph,  "http://www.plaatsoft.nl"  );
+		  drawText(0, ypos, fontParagraph,  "Please visit my website for more information."  );
+		  ypos+=40;
+		  drawText(0, ypos, fontParagraph,  "http://www.plaatsoft.nl"  );
 			  
-		  //sprintf(tmp,"%d fps", CalculateFrameRate());
-		  //drawText(20, 460, fontSpecial, tmp);
+		  sprintf(tmp,"%d fps", CalculateFrameRate());
+		  drawText(20, 460, fontSpecial, tmp);
 		  
 		  // Draw text layer on top of background 
-          //GRRLIB_DrawImg2(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, 255);
+          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }	   
 	   break;
 	   	   
 	   case stateIntro3:
 	   {
-	      //int  ypos=yOffset+390;
+	      int  ypos=yOffset+390;
 
 		  // Draw background
 		  GRRLIB_DrawImg(0,0, images.logo3, 0, 0.95, 0.98, IMAGE_COLOR );
@@ -776,17 +877,17 @@ void drawScreen(void)
           GRRLIB_DrawImg(350, 240, images.logo2, 0, 0.5, 0.5, IMAGE_COLOR );
 
 		  // Init text layer	  
-          //GRRLIB_initTexture();	
+          GRRLIB_initTexture();	
 		  
-		  //drawText(350, ypos, fontNormal,  "Some more Wii games developed"  );
-		  //ypos+=20;
-		  //drawText(400, ypos, fontNormal,  "by www.plaatsoft.nl"  );
+		  drawText(350, ypos, fontNormal,  "Some more Wii games developed"  );
+		  ypos+=20;
+		  drawText(400, ypos, fontNormal,  "by www.plaatsoft.nl"  );
 			 
-		  //sprintf(tmp,"%d fps", CalculateFrameRate()); 
-		  //drawText(580, 460, fontSpecial, tmp); 
+		  sprintf(tmp,"%d fps", CalculateFrameRate()); 
+		  drawText(580, 460, fontSpecial, tmp); 
  
 		  // Draw text layer on top of background 
-          //GRRLIB_DrawImg2(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, 255);
+          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }	   
 	   break;
 	 
@@ -794,9 +895,17 @@ void drawScreen(void)
 		{
 	 	  drawMonsters();
 		  drawBases();
+		  
+		  // Init text layer	  
+          GRRLIB_initTexture();	
+			 
+		  sprintf(tmp,"%d fps", CalculateFrameRate()); 
+		  drawText(580, 460, fontSpecial, tmp); 
+ 
+		  // Draw text layer on top of background 
+          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
-		
 	}
 }
 
@@ -856,19 +965,19 @@ int main()
 	
 	// Init base
 	initBases();
-		
+
 	// Init FreeType font engine
-	//GRRLIB_InitFreetype();
-	  			
+	GRRLIB_InitFreetype();
+			  			
     // Init GRRLib graphics library
     GRRLIB_Init();
-        
+        	
 	// Make screen black
 	GRRLIB_FillScreen(0xFFFFFF);
     GRRLIB_Render();
 	
 	// Repeat forever
-    while( true )
+    while( !stopApplication )
 	{			
 		// draw Screen
 		drawScreen();
@@ -879,8 +988,15 @@ int main()
 		// Render screen
 		GRRLIB_Render();
 	}
+		  
 	GRRLIB_Exit();
 	
+	destroyImages();
+	
+	trace.event(s_fn, 0,"%s %s Leaving", PROGRAM_NAME, PROGRAM_VERSION);
+	trace.close();
+	
+	exit(0);
 	return 0; 
 }
 

@@ -31,14 +31,4 @@ void GRRLIB_Printf2(int x,
 					unsigned int fontSize, 
 					int color); 
 
-void* GRRLIB_GetTexture(void);
-
-void GRRLIB_DrawImg2(	f32 xpos, 
-						f32 ypos, 
-						u8 data[], 
-						float degrees, 
-						float scaleX, 
-						f32 scaleY, 
-						u8 alpha );
-
-/**** WVDP: FREETYPE END ****/
+GRRLIB_texImg* GRRLIB_GetTexture(void);

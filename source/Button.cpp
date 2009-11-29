@@ -133,7 +133,7 @@ void Button::setImageSelect(GRRLIB_texImg *imageFocus1)
 void Button::setX(int x1)
 {
 	const char *s_fn="Button::setX";
-	trace.event(s_fn,0,"enter");
+	trace.event(s_fn,0,"enter [x=%d]",x1);
 	
 	if ((x1>=0) && (x1<=MAX_HORZ_PIXELS))
 	{
@@ -146,7 +146,7 @@ void Button::setX(int x1)
 void Button::setY(int y1)
 {
 	const char *s_fn="Button::setY";
-	trace.event(s_fn,0,"enter");
+	trace.event(s_fn,0,"enter [y=%d]",y1);
 	
 	if ((y1>=0) && (y1<=MAX_VERT_PIXELS))
 	{

@@ -49,6 +49,7 @@ class Pointer
 	int y;	
 	int angle;
 	GRRLIB_texImg *image;
+	int index;
 	
 	ir_t ir;
 	int xOffset;
@@ -63,6 +64,7 @@ class Pointer
     void mouse(int x, int y);	
 	boolean onClick(void);
 	
+	void setIndex(int index);
 	void setX(int x);
 	void setY(int y);
 	void setAngle(int angle);

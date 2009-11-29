@@ -26,6 +26,7 @@
 extern Trace trace;
 
 extern int stateMachine;
+extern boolean stopApplication;
 
 boolean selectedA=false;
 
@@ -91,23 +92,20 @@ void buttonA(int x, int y)
 
 void Pointer::draw(void)
 {   
-	const char *s_fn="Pointer::draw";
-  
 	// Scan for button events
-	WPAD_SetVRes(0, 640, 480);
+	WPAD_SetVRes(index, 640, 480);
 	WPAD_ScanPads();
 			
-	u32 wpaddown = WPAD_ButtonsDown(0);
-	u32 wpadup   = WPAD_ButtonsUp(0);
+	u32 wpaddown = WPAD_ButtonsDown(index);
+	u32 wpadup   = WPAD_ButtonsUp(index);
 		
 	// Scan for ir events 
-	WPAD_IR(0, &ir); 
+	WPAD_IR(index, &ir); 
 	x=ir.sx-WSP_POINTER_X;
 	xOffset=x+IR_X_OFFSET;
 	y=ir.sy-WSP_POINTER_Y;
 	yOffset=y+IR_Y_OFFSET;
 	angle=ir.angle;
-	//trace.event(s_fn, 0,"x=%d y=%d angle=%d",x,y,angle); 
 	
 	if (wpaddown & BUTTON_A) buttonA(xOffset,yOffset); 
 	if (wpadup & BUTTON_A) selectedA=false;
@@ -115,9 +113,7 @@ void Pointer::draw(void)
 	// Scan for button events
 	if (wpaddown & WPAD_BUTTON_HOME) 
 	{
-	  trace.event(s_fn, 0,"%s %s Leaving", PROGRAM_NAME, PROGRAM_VERSION);
-	  trace.close();
-	  exit(0);
+	  stopApplication = true;
 	}
 				
     // Draw Pointer on screen
@@ -133,10 +129,20 @@ boolean Pointer::onClick(void)
 // Setters and getters 
 // ------------------------------
 
+void Pointer::setIndex(int index1)
+{
+   const char *s_fn="Pointer::setIndex";
+   trace.event(s_fn,0,"enter [index=%d]",index1);
+  
+   index = index1;
+   
+   trace.event(s_fn,0,"leave [void]");
+}
+
 void Pointer::setX(int x1)
 {
    const char *s_fn="Pointer::setX";
-   trace.event(s_fn,0,"enter");
+   trace.event(s_fn,0,"enter [x=%d]",x1);
    
    if ((x1>=0) && (x1<=MAX_HORZ_PIXELS))
    {
@@ -149,7 +155,7 @@ void Pointer::setX(int x1)
 void Pointer::setY(int y1)
 {
    const char *s_fn="Pointer::setY";
-   trace.event(s_fn,0,"enter");
+   trace.event(s_fn,0,"enter [y=%d]",y1);
    
    if ((y1>=0) && (y1<=MAX_VERT_PIXELS))
    {
@@ -162,7 +168,7 @@ void Pointer::setY(int y1)
 void Pointer::setAngle(int angle1)
 {
    const char *s_fn="Pointer::setAngle";
-   trace.event(s_fn,0,"enter");
+   trace.event(s_fn,0,"enter [angle=%d]",angle1);
    
    if ((angle1>=0) && (angle1<=MAX_ANGLE))
    {

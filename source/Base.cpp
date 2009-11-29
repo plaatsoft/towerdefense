@@ -82,7 +82,7 @@ void Base::setImage(GRRLIB_texImg *image1)
 void Base::setX(int x1)
 {
    const char *s_fn="Base::setX";
-   trace.event(s_fn,0,"enter");
+   trace.event(s_fn,0,"enter [x=%d]",x1);
    
    if ((x1>=0) && (x1<=MAX_HORZ_PIXELS))
    {
@@ -100,7 +100,7 @@ int Base::getX()
 void Base::setY(int y1)
 {
    const char *s_fn="Base::setY";
-   trace.event(s_fn,0,"enter");
+   trace.event(s_fn,0,"enter [y=%d]",y1);
    
    if ((y1>=0) && (y1<=MAX_VERT_PIXELS))
    {
