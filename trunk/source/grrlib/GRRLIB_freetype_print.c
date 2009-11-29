@@ -240,3 +240,6 @@ void BitmapTo4x4RGBA(const unsigned char *src, void *dst, const unsigned int wid
 	} /* block */
 }
 
+// -----------------------------------------------------------
+// The End
+// -----------------------------------------------------------

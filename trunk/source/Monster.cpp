@@ -32,6 +32,7 @@
 // ------------------------------
 
 extern Trace trace;
+extern GXRModeObj  *rmode;
 
 // ------------------------------
 // Constructor 
@@ -119,7 +120,7 @@ void Monster::move(void)
  
     if (yDirection)
     {
-      if (y<(MAX_VERT_PIXELS-height-step)) y+=step; else yDirection=false;
+      if (y<(rmode->xfbHeight-height-step)) y+=step; else yDirection=false;
     }
     else
     {
