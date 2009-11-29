@@ -25,10 +25,10 @@
 #include "General.h"
 #include "GRRLIB.h"
 #include "Trace.h"
-#include "Map.h"
+#include "Grid.h"
 
 int maxLine;
-char data[15][20];
+char gridData[16][20];
 
 extern Trace trace;
 
@@ -36,11 +36,11 @@ extern Trace trace;
 // Constructor
 // ------------------------------
 
-Map::Map()
+Grid::Grid()
 {
-	const char *s_fn="Map::Map";
+	const char *s_fn="Grid::Grid";
 	trace.event(s_fn,0,"enter");
-   
+  
 	trace.event(s_fn,0,"leave [void]");  
 }
 	
@@ -48,9 +48,9 @@ Map::Map()
 // Destructor
 // ------------------------------
 
-Map::~Map()
+Grid::~Grid()
 {
-	const char *s_fn="Map::~Map";
+	const char *s_fn="Grid::~Grid";
 	trace.event(s_fn,0,"enter");
 
 	trace.event(s_fn,0,"leave [void]");  
@@ -60,9 +60,9 @@ Map::~Map()
 // Others
 // ------------------------------
 
-void initMap(const char* filename)
+void initGrid(const char* filename)
 {
-   const char *s_fn="Map::initMap";
+   const char *s_fn="Grid::initGrid";
    trace.event(s_fn,0,"enter");
    
    FILE *fp;
@@ -80,16 +80,13 @@ void initMap(const char* filename)
       fclose(fp);
    }
     
-   // Read Map Lines
+   // Read Grid Lines
    for (group = mxmlFindElement(tree, tree, "line", NULL, NULL, MXML_DESCEND);
         group != NULL;
         group = mxmlFindElement(group, tree, "line", NULL, NULL, MXML_DESCEND))
-   {		  
-      pointer=mxmlElementGetAttr(group,"id");
-	  if (pointer!=NULL) strcpy(data[maxLine],pointer); 
-	  	  
+   {		 	  	  
       pointer=mxmlElementGetAttr(group,"data");
-      if (pointer!=NULL) strcpy(data[maxLine],pointer);  
+      if (pointer!=NULL) strcpy(gridData[maxLine],pointer);  
 	  
 	  maxLine++;
    }
@@ -99,29 +96,109 @@ void initMap(const char* filename)
    trace.event(s_fn,0,"leave [void]");
 }
 
-void Map::draw(void)
+void Grid::draw(void)
 {
-
+   int x;
+   int y;
+   
+   for (y=0; y<16; y++)
+   {	
+		for (x=0; x<20; x++)
+		{
+			switch (gridData[y][x])
+			{
+				case '0': 
+					GRRLIB_DrawImg( x*32, y*32, image5, 0, 1.0, 1.0, IMAGE_COLOR );
+					break;
+	
+				case '1':
+					GRRLIB_DrawImg( x*32, y*32, image1, 0, 1.0, 1.0, IMAGE_COLOR );
+					break;				
+					
+				case '2':
+					GRRLIB_DrawImg( x*32, y*32, image2, 0, 1.0, 1.0, IMAGE_COLOR );
+					break;	
+					
+				case '3':
+					GRRLIB_DrawImg( x*32, y*32, image3, 0, 1.0, 1.0, IMAGE_COLOR );
+					break;	
+					
+				case '4':
+					GRRLIB_DrawImg( x*32, y*32, image4, 0, 1.0, 1.0, IMAGE_COLOR );
+					break;	
+			}
+		}
+	}
 }
 
-boolean Map::onLoad(void)
+void Grid::render(void)
 {
-	const char *s_fn="Map::onLoad";
+	const char *s_fn="Grid::render";
 	trace.event(s_fn,0,"enter");
+   
+    initGrid(GRID1_FILENAME);
 	
-	initMap(MAP1_FILENAME);
-	
-	trace.event(s_fn,0,"leave [true]");  
-	return true;
+	trace.event(s_fn,0,"leave [void]");  
 }
 			
 // ------------------------------
 // Getters and Setters
 // ------------------------------
 
-void Map::setLevel(int level1)
+
+void Grid::setImage1(GRRLIB_texImg *image)
 {
-	const char *s_fn="Map::setLevel";
+   const char *s_fn="Pointer::setImage1";
+   trace.event(s_fn,0,"enter");
+   
+   image1 = image;
+   
+   trace.event(s_fn,0,"leave [void]");
+}
+
+void Grid::setImage2(GRRLIB_texImg *image)
+{
+   const char *s_fn="Pointer::setImage1";
+   trace.event(s_fn,0,"enter");
+   
+   image2 = image;
+   
+   trace.event(s_fn,0,"leave [void]");
+}
+
+void Grid::setImage3(GRRLIB_texImg *image)
+{
+   const char *s_fn="Pointer::setImage1";
+   trace.event(s_fn,0,"enter");
+   
+   image3 = image;
+   
+   trace.event(s_fn,0,"leave [void]");
+}
+
+void Grid::setImage4(GRRLIB_texImg *image)
+{
+   const char *s_fn="Pointer::setImage4";
+   trace.event(s_fn,0,"enter");
+   
+   image4 = image;
+   
+   trace.event(s_fn,0,"leave [void]");
+}
+
+void Grid::setImage5(GRRLIB_texImg *image)
+{
+   const char *s_fn="Pointer::setImage5";
+   trace.event(s_fn,0,"enter");
+   
+   image5 = image;
+   
+   trace.event(s_fn,0,"leave [void]");
+}
+
+void Grid::setLevel(int level1)
+{
+	const char *s_fn="Grid::setLevel";
 	trace.event(s_fn,0,"enter [level=%d]",level1);
 	
    if ((level>=0) && (level<=MAX_LEVEL))

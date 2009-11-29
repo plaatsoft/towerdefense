@@ -51,7 +51,7 @@
 #define TRACE_FILENAME      	"sd:/apps/TowerDefense/TowerDefense.trc"
 #define GAME_DIRECTORY      	"sd:/apps/TowerDefense/"
 
-#define MAP1_FILENAME    	  	"sd:/apps/TowerDefense/maps/map1.xml"
+#define GRID1_FILENAME    	  	"sd:/apps/TowerDefense/maps/map1.xml"
 
 #define WSP_POINTER_X      	200
 #define WSP_POINTER_Y      	250

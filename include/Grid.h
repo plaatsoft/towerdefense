@@ -18,27 +18,36 @@
 **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#ifndef BUTTON_H
-#define BUTTON_H
+#ifndef GRID_H
+#define GRID_H
 
 #include "GRRLIB.h"
 
-class Map
+class Grid
 {
   private:
     int level;
-	GRRLIB_texImg image;
+	GRRLIB_texImg *image1;
+	GRRLIB_texImg *image2;
+	GRRLIB_texImg *image3;
+	GRRLIB_texImg *image4;
+	GRRLIB_texImg *image5;
 	
   public:
 	// Constructor & Destructor
-  	Map();
- 	~Map();
+  	Grid();
+ 	~Grid();
 
 	// Other
 	void draw(void);
-	boolean onLoad(void);
+	void render(void);
 	
 	// Setters
+	void setImage1(GRRLIB_texImg *image);
+	void setImage2(GRRLIB_texImg *image);
+	void setImage3(GRRLIB_texImg *image);
+	void setImage4(GRRLIB_texImg *image);
+	void setImage5(GRRLIB_texImg *image);
 	void setLevel(int level);
 };
 
