@@ -31,6 +31,7 @@ class Monster
 	int y;	
 	int targetY;
 	int alfa;
+	int energy;
 	float size;
 	GRRLIB_texImg *image;
 	int height;
@@ -49,6 +50,7 @@ class Monster
 	void setImage(GRRLIB_texImg *image);	
 	void setStep(int step);
 	void setDelay(int delay);
+	void setEnergy(int energy);
 	
 	int getX(void);
 	int getY(void);

@@ -113,23 +113,7 @@ void parseGrid(void)
 		x=locationList[maxLocations-1].x;
 		y=locationList[maxLocations-1].y;
 		
-		if (temp[y-1][x]!='0')
-		{
-			locationList[maxLocations].x=x;
-			locationList[maxLocations].y=y;
-			maxLocations++;
-			temp[y][x]='0';
-			ready=false;
-		}
-		else if (temp[y+1][x]!='0')
-		{
-			locationList[maxLocations].x=x;
-			locationList[maxLocations].y=y;
-			maxLocations++;
-			temp[y][x]='0';
-			ready=false;
-		}
-		else if (temp[y][x+1]!='0')
+		if (temp[y][x+1]!='0')
 		{
 			locationList[maxLocations].x=x;
 			locationList[maxLocations].y=y;
@@ -145,6 +129,23 @@ void parseGrid(void)
 			temp[y][x]='0';
 			ready=false;
 		}
+		else if (temp[y-1][x]!='0')
+		{
+			locationList[maxLocations].x=x;
+			locationList[maxLocations].y=y;
+			maxLocations++;
+			temp[y][x]='0';
+			ready=false;
+		}
+		else if (temp[y+1][x]!='0')
+		{
+			locationList[maxLocations].x=x;
+			locationList[maxLocations].y=y;
+			maxLocations++;
+			temp[y][x]='0';
+			ready=false;
+		}
+		
 	}
 	
 	trace.event(s_fn,0,"leave [maxLocations=%d]",maxLocations);
@@ -196,26 +197,45 @@ void Grid::draw(void)
 		for (x=0; x<20; x++)
 		{
 			switch (gridData[y][x])
-			{
+			{				
 				case '0': 
+					// Sand image
 					GRRLIB_DrawImg( x*32, y*32, image5, 0, 1.0, 1.0, IMAGE_COLOR );
 					break;
 	
 				case '1':
-					GRRLIB_DrawImg( x*32, y*32, image1, 0, 1.0, 1.0, IMAGE_COLOR );
-					break;				
-					
+					// Basic road
+					GRRLIB_DrawImg( x*32, y*32, image4, 0, 1.0, 1.0, IMAGE_COLOR );
+					break;	
+
 				case '2':
-					GRRLIB_DrawImg( x*32, y*32, image2, 0, 1.0, 1.0, IMAGE_COLOR );
+					// Basic road
+					GRRLIB_DrawImg( x*32, y*32, image4, 90, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 					
 				case '3':
+					// Angle road
 					GRRLIB_DrawImg( x*32, y*32, image3, 0, 1.0, 1.0, IMAGE_COLOR );
 					break;	
-					
+
 				case '4':
-					GRRLIB_DrawImg( x*32, y*32, image4, 0, 1.0, 1.0, IMAGE_COLOR );
+					// Angle road
+					GRRLIB_DrawImg( x*32, y*32, image3, 90, 1.0, 1.0, IMAGE_COLOR );
 					break;	
+					
+				case '5':
+					// Angle road
+					GRRLIB_DrawImg( x*32, y*32, image3, 180, 1.0, 1.0, IMAGE_COLOR );
+					break;	
+					
+				case '6':
+					// Angle road
+					GRRLIB_DrawImg( x*32, y*32, image3, 270, 1.0, 1.0, IMAGE_COLOR );
+					break;	
+					
+				case '#':
+					GRRLIB_DrawImg( x*32, y*32, imageBase, 0, 1.0, 1.0, IMAGE_COLOR );
+					break;
 			}
 		}
 	}
@@ -235,7 +255,6 @@ void Grid::render(void)
 // ------------------------------
 // Getters and Setters
 // ------------------------------
-
 
 void Grid::setImage1(GRRLIB_texImg *image)
 {
@@ -283,6 +302,16 @@ void Grid::setImage5(GRRLIB_texImg *image)
    trace.event(s_fn,0,"enter");
    
    image5 = image;
+   
+   trace.event(s_fn,0,"leave [void]");
+}
+
+void Grid::setImageBase(GRRLIB_texImg *image)
+{
+   const char *s_fn="Pointer::setImageBase";
+   trace.event(s_fn,0,"enter");
+   
+   imageBase = image;
    
    trace.event(s_fn,0,"leave [void]");
 }

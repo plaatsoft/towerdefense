@@ -11,10 +11,10 @@
    <line data="02000511111111160000" />
    <line data="02000200000000020000" />
    <line data="02000200000000020000" />
-   <line data="02000200000000020000" />
-   <line data="02000200000000020000" />
-   <line data="02000200000000020000" />
-   <line data="051113000000000#0000" />
+   <line data="05111711111111130000" />
+   <line data="00000200000000000000" />
+   <line data="00000200000000000000" />
+   <line data="000004111111111#0000" />
    <line data="00000000000000000000" />
    <line data="00000000000000000000" />
 
@@ -26,6 +26,10 @@
    <manual id="4" image="road3" angle="90" example = "|_" />
    <manual id="5" image="road3" angle="180" example = "|-" />
    <manual id="6" image="road3" angle="270" example = "-|"  />
+   <manual id="7" image="road2" angle="0" example = "+"  />
+   <manual id="8" image="road1" angle="0" example = "-"  />
+   <manual id="9" image="road1" angle="90" example = "|"  />
+
    <manual id="#" image="base" />
 
 </TowerDefense> 
