@@ -52,6 +52,8 @@
 #define GAME_DIRECTORY      	"sd:/apps/TowerDefense/"
 
 #define GRID1_FILENAME    	  	"sd:/apps/TowerDefense/maps/map1.xml"
+#define GRID2_FILENAME    	  	"sd:/apps/TowerDefense/maps/map2.xml"
+#define GRID3_FILENAME    	  	"sd:/apps/TowerDefense/maps/map3.xml"
 
 #define WSP_POINTER_X      	200
 #define WSP_POINTER_Y      	250

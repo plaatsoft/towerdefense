@@ -40,9 +40,9 @@ class Grid
  	~Grid();
 
 	// Other
+	void create(const char* filename);
 	void draw(void);
-	void render(void);
-	
+
 	// Setters
 	void setImage1(GRRLIB_texImg *image);
 	void setImage2(GRRLIB_texImg *image);
