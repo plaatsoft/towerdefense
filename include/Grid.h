@@ -32,6 +32,7 @@ class Grid
 	GRRLIB_texImg *image3;
 	GRRLIB_texImg *image4;
 	GRRLIB_texImg *image5;
+	GRRLIB_texImg *imageBase;
 	
   public:
 	// Constructor & Destructor
@@ -48,6 +49,7 @@ class Grid
 	void setImage3(GRRLIB_texImg *image);
 	void setImage4(GRRLIB_texImg *image);
 	void setImage5(GRRLIB_texImg *image);
+	void setImageBase(GRRLIB_texImg *image);	
 	void setLevel(int level);
 	
 	// Getters

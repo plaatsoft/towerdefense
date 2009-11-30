@@ -47,6 +47,7 @@ Monster::Monster()
    
    xDirection=true;
    yDirection=true;
+   visible=true;
    
    x=0;
    targetX=0;
@@ -54,7 +55,7 @@ Monster::Monster()
    targetY=0;
    size=1;
    alfa=255;
-
+   energy=0;
    height=0;
    width=0;
    step=0;
@@ -85,24 +86,19 @@ void Monster::properties(void)
 	char tmp[50];
 	int size=12;
    
-	sprintf(tmp, "x=%d", x);
-	GRRLIB_Printf2(x, y-30, tmp, size, COLOR_DARKBLACK); 
-
-	sprintf(tmp, "y=%d", y);
-	GRRLIB_Printf2(x, y-20, tmp, size, COLOR_DARKBLACK);
-     
-	sprintf(tmp, "step=%d", step);
-	GRRLIB_Printf2(x, y-10, tmp, size, COLOR_DARKBLACK);
+   if (!visible) return;
+   
+	sprintf(tmp, "%d", energy);
+	GRRLIB_Printf2(x, y-10, tmp, size, COLOR_DARKBLACK); 
 }
 
 void Monster::draw(void)
 {
 	// Draw Monster on screen
 	
-	if (visible)
-	{
-		GRRLIB_DrawImg( x, y, image, 0, size, size, IMAGE_COLOR );		
-	}
+	if (!visible) return;
+	
+	GRRLIB_DrawImg( x, y, image, 0, size, size, IMAGE_COLOR );	
 }
 
 void Monster::move(void)
@@ -117,12 +113,13 @@ void Monster::move(void)
 	{
 		if ((x==targetX) && (y==targetY))
 		{
+			// Target Postion reached. Get new target position
 			targetX=grid.getLocationX(pos);
 			targetY=grid.getLocationY(pos);
 			pos++;
 			if (pos>=grid.getMaxLocations())	
 			{
-				// Monster has reach the base.
+				// Monster has reach the final destination (Base)
 				visible=false;
 			}
 		}
@@ -191,6 +188,11 @@ void Monster::setDelay(int delay1)
 	delay=delay1;
 }
 
+void Monster::setEnergy(int energy1)
+{
+	energy=energy1;
+}
+
 int Monster::getX()
 {
 	return x;
@@ -210,8 +212,6 @@ int Monster::getStep(void)
 {
    return step;
 }
-
-
 
 // ------------------------------
 // The end

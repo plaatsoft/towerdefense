@@ -19,9 +19,14 @@
 **  Release Notes:
 **  ==============
 **
+**  30/11/2009 Version 0.23
+**  - Use libogc 1.8.1 library as Wii interface engine
+**  - Improve grid 
+**
 **  29/11/2009 Version 0.22
 **  - FreeType is working again with GRRLIB 4.1.1
 **  - Added four WiiMote controllers support
+**  - Parsing map grid from file.
 **
 **  27/11/2009 Version 0.21
 **  - Added GRRLib 4.1.1 library
@@ -504,6 +509,21 @@ void destroyImages(void)
 }
 
 
+// Init Weapons
+void initWeapons(void)
+{
+    const char *s_fn="initWeapons";
+    trace.event(s_fn,0,"enter");
+   
+	weapon[0].setImage(images.weapon1);
+	weapon[0].setX(100);
+	weapon[0].setY(100);
+	weapon[0].setAngle(0);
+	weapon[0].setStep(2);
+	
+	trace.event(s_fn,0,"leave [void]");
+}
+
 // Init monster
 void initMonsters(void)
 {
@@ -597,44 +617,12 @@ void initMonsters(void)
  
 	  monster[i].setStep(1);
 	  monster[i].setDelay(delay);
+	  monster[i].setEnergy(10);
 	  
 	  // Wait +/- two seconds before new monster is lanched.
 	  delay+=100;
    }
    trace.event(s_fn,0,"leave [void]");
-}
-
-// Init bases
-void initBases(void)
-{
-    const char *s_fn="initBases";
-    trace.event(s_fn,0,"enter");
-   
-    base[0].setX(500);
-	base[0].setY(10);
-	base[0].setImage(images.base1);
-
-    base[1].setX(500);
-	base[1].setY(80);
-	base[1].setImage(images.base2);
-
-    base[2].setX(500);
-	base[2].setY(170);
-	base[2].setImage(images.base3);
-
-    base[3].setX(500);
-	base[3].setY(240);
-	base[3].setImage(images.base4);
-
-    base[4].setX(500);
-	base[4].setY(310);
-	base[4].setImage(images.base5);
-	
-    base[5].setX(500);
-	base[5].setY(370);
-	base[5].setImage(images.base6);
-	
-	trace.event(s_fn,0,"leave [void]");
 }
 
 // Init monster
@@ -681,23 +669,9 @@ void initGrid(int level)
 	grid[0].setImage3(images.road3);
 	grid[0].setImage4(images.road4);
 	grid[0].setImage5(images.road5);
+	grid[0].setImageBase(images.base1);
 	
 	grid[0].render();
-	
-	trace.event(s_fn,0,"leave [void]");
-}
-
-// Init Weapons
-void initWeapons(void)
-{
-    const char *s_fn="initWeapons";
-    trace.event(s_fn,0,"enter");
-   
-	weapon[0].setImage(images.weapon1);
-	weapon[0].setX(100);
-	weapon[0].setY(100);
-	weapon[0].setAngle(0);
-	weapon[0].setStep(2);
 	
 	trace.event(s_fn,0,"leave [void]");
 }
@@ -721,9 +695,6 @@ void initGame(void)
 	
     // Init monster
     initMonsters();
-	
-	// Init bases
-	initBases();
 	
 	// Init Weapons
 	initWeapons();
@@ -786,7 +757,7 @@ void drawMonsters(void)
    {
 	  monster[i].move();
 	  monster[i].draw();
-	  //monster[i].properties();
+	  monster[i].properties();
    }
 }
 
@@ -884,7 +855,6 @@ void drawText(int x, int y, int type, const char *text)
    }
 }
 
-
 void drawScreen(void)
 { 	   	
     //int i=0;
@@ -915,7 +885,7 @@ void drawScreen(void)
 		  drawText(60, ypos, fontNormal,  "under the terms of the GNU General Public License (GPL) version 2" );
 		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
-		  drawText(20, rmode->xfbHeight-50, fontSpecial, tmp);
+		  drawText(20, 460, fontSpecial, tmp);
 		  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -947,7 +917,7 @@ void drawScreen(void)
 		  drawText(0, ypos, fontParagraph,  "http://www.plaatsoft.nl"  );
 			  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
-		  drawText(20, rmode->xfbHeight-50, fontSpecial, tmp);
+		  drawText(20, 460, fontSpecial, tmp);
 		  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -974,7 +944,7 @@ void drawScreen(void)
 		  drawText(400, ypos, fontNormal,  "by www.plaatsoft.nl"  );
 			 
 		  sprintf(tmp,"%d fps", CalculateFrameRate()); 
-		  drawText(590, rmode->xfbHeight-50, fontSpecial, tmp); 
+		  drawText(590, 460, fontSpecial, tmp); 
  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
