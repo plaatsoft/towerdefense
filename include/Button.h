@@ -33,6 +33,7 @@ class Button
 	int height;
 	int width;
 	int rumble;
+	char label[100];
 	
   public:
 	// Constructor & Destructor
@@ -42,13 +43,14 @@ class Button
 
 	// Other
 	void draw(int pointerX, int pointerY);
-	boolean onClick(int pointerX, int pointerY);
+	boolean onSelect(int pointerX, int pointerY);
 	
 	// Setters
+	void setLabel(const char *label);
 	void setX(int x);
 	void setY(int y);
 	void setImageNormal(GRRLIB_texImg *imageNormal);
-	void setImageSelect(GRRLIB_texImg *imageFocus);
+	void setImageFocus(GRRLIB_texImg *imageFocus);
 };
 
 #endif

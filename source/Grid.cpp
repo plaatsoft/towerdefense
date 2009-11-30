@@ -115,37 +115,36 @@ void parseGrid(void)
 		
 		if (temp[y][x+1]!='0')
 		{
-			locationList[maxLocations].x=x;
+			locationList[maxLocations].x=(x+1);
 			locationList[maxLocations].y=y;
 			maxLocations++;
-			temp[y][x]='0';
-			ready=false;
+			if (temp[y][x+1]!='#') ready=false; else ready=true;
+			temp[y][x+1]='0';
 		}
 		else if (temp[y][x-1]!='0')
 		{
-			locationList[maxLocations].x=x;
+			locationList[maxLocations].x=(x-1);
 			locationList[maxLocations].y=y;
 			maxLocations++;
-			temp[y][x]='0';
-			ready=false;
-		}
-		else if (temp[y-1][x]!='0')
-		{
-			locationList[maxLocations].x=x;
-			locationList[maxLocations].y=y;
-			maxLocations++;
-			temp[y][x]='0';
-			ready=false;
+			if (temp[y][x-1]!='#') ready=false; else ready=true;
+			temp[y][x-1]='0';
 		}
 		else if (temp[y+1][x]!='0')
 		{
 			locationList[maxLocations].x=x;
-			locationList[maxLocations].y=y;
+			locationList[maxLocations].y=(y+1);
 			maxLocations++;
-			temp[y][x]='0';
-			ready=false;
+			if (temp[y+1][x]!='#') ready=false; else ready=true;
+			temp[y+1][x]='0';
 		}
-		
+		else if (temp[y-1][x]!='0')
+		{
+			locationList[maxLocations].x=x;
+			locationList[maxLocations].y=(y-1);
+			maxLocations++;
+			if (temp[y-1][x]!='#') ready=false; else ready=true;
+			temp[y-1][x]='0';
+		}
 	}
 	
 	trace.event(s_fn,0,"leave [maxLocations=%d]",maxLocations);
@@ -191,6 +190,8 @@ void Grid::draw(void)
 {
    int x;
    int y;
+   int baseX=0;
+   int baseY=0;
    
    for (y=0; y<16; y++)
    {	
@@ -198,6 +199,7 @@ void Grid::draw(void)
 		{
 			switch (gridData[y][x])
 			{				
+				case '*': 
 				case '0': 
 					// Sand image
 					GRRLIB_DrawImg( x*32, y*32, image5, 0, 1.0, 1.0, IMAGE_COLOR );
@@ -205,12 +207,12 @@ void Grid::draw(void)
 	
 				case '1':
 					// Basic road
-					GRRLIB_DrawImg( x*32, y*32, image4, 0, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( (x*32)+32, y*32, image4, 90, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 
 				case '2':
 					// Basic road
-					GRRLIB_DrawImg( x*32, y*32, image4, 90, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( x*32, y*32, image4, 0, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 					
 				case '3':
@@ -220,33 +222,51 @@ void Grid::draw(void)
 
 				case '4':
 					// Angle road
-					GRRLIB_DrawImg( x*32, y*32, image3, 90, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( (x*32)+32, y*32, image3, 90, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 					
 				case '5':
 					// Angle road
-					GRRLIB_DrawImg( x*32, y*32, image3, 180, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( (x*32)+32, (y*32)+32, image3, 180, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 					
 				case '6':
 					// Angle road
-					GRRLIB_DrawImg( x*32, y*32, image3, 270, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( x*32, (y*32)+32, image3, 270, 1.0, 1.0, IMAGE_COLOR );
 					break;	
-					
+			
+				case '7':
+					// cross road
+					GRRLIB_DrawImg( x*32, y*32, image2, 0, 1.0, 1.0, IMAGE_COLOR );
+					break;	
+			
+				case '8':
+					// tee road
+					GRRLIB_DrawImg( x*32, y*32, image1, 0, 1.0, 1.0, IMAGE_COLOR );
+					break;	
+
+				case '9':
+					// tee road
+					GRRLIB_DrawImg( x*32, y*32, image1, 90, 1.0, 1.0, IMAGE_COLOR );
+					break;
+		
 				case '#':
-					GRRLIB_DrawImg( x*32, y*32, imageBase, 0, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( x*32, y*32, image5, 0, 1.0, 1.0, IMAGE_COLOR );
+					baseX=x-32;
+					baseY=y+5;
 					break;
 			}
 		}
 	}
+	GRRLIB_DrawImg( baseX*32, baseY*32, imageBase, 0, 1.0, 1.0, IMAGE_COLOR );
 }
 
-void Grid::render(void)
+void Grid::create(const char* filename)
 {
 	const char *s_fn="Grid::render";
 	trace.event(s_fn,0,"enter");
    
-    initGrid(GRID1_FILENAME);
+    initGrid(filename);
 	parseGrid();
 	
 	trace.event(s_fn,0,"leave [void]");  

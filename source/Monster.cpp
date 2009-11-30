@@ -89,7 +89,7 @@ void Monster::properties(void)
    if (!visible) return;
    
 	sprintf(tmp, "%d", energy);
-	GRRLIB_Printf2(x, y-10, tmp, size, COLOR_DARKBLACK); 
+	GRRLIB_Printf2(x+8, y-14, tmp, size, COLOR_DARKBLACK); 
 }
 
 void Monster::draw(void)

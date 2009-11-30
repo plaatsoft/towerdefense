@@ -21,7 +21,9 @@
 **
 **  30/11/2009 Version 0.23
 **  - Use libogc 1.8.1 library as Wii interface engine
-**  - Improve grid 
+**  - Very basic Game menu page.
+**  - Improve grid.
+**  - Align monster movement on grid.
 **
 **  29/11/2009 Version 0.22
 **  - FreeType is working again with GRRLIB 4.1.1
@@ -95,13 +97,6 @@ typedef struct
   
   GRRLIB_texImg *background1;
   GRRLIB_texImg *background2;
-  
-  GRRLIB_texImg *weapon1;
-  
-  GRRLIB_texImg *pointer1;
-  GRRLIB_texImg *pointer2;
-  GRRLIB_texImg *pointer3; 
-  GRRLIB_texImg *pointer4;
 
   GRRLIB_texImg *monster1;
   GRRLIB_texImg *monster2;
@@ -141,6 +136,17 @@ typedef struct
   GRRLIB_texImg *road3;
   GRRLIB_texImg *road4;
   GRRLIB_texImg *road5;
+
+  GRRLIB_texImg *weapon1;
+  
+  GRRLIB_texImg *button1;
+  GRRLIB_texImg *buttonFocus1;
+    
+  GRRLIB_texImg *pointer1;
+  GRRLIB_texImg *pointer2;
+  GRRLIB_texImg *pointer3; 
+  GRRLIB_texImg *pointer4;
+  
 } 
 image;
 
@@ -342,6 +348,15 @@ extern int      pic405length;
 extern const unsigned char     pic500data[];
 extern int      pic500length;
 
+// Button1 Image
+extern const unsigned char     pic600data[];
+extern int      pic600length;
+
+// Button1Focus Image
+extern const unsigned char     pic601data[];
+extern int      pic601length;
+
+
 u32         *frameBuffer[1] = {NULL};
 GXRModeObj  *rmode = NULL;
 Mtx         GXmodelView2D;
@@ -356,18 +371,22 @@ Trace trace;
 Monster monster[100];
 Base base[8];
 Pointer pointer[4];
-Grid grid[1];
+Grid grid;
 Weapon weapon[1];
+Button button[10];
 
 int maxPointer  = 4;
 int maxMonster  = 25;
 int maxBase     = 6;
 int maxMap	    = 1;
 int maxWeapon   = 1;
+int maxButton   = 0;
 
 int day=0;
 
 int stateMachine=stateIntro1;
+int selectedMap = 0; 
+int prevSelectedMap = 0; 
 
 float   wave1 = 0;
 float   wave2 = 0;
@@ -388,6 +407,9 @@ void initImages(void)
    images.logo4=GRRLIB_LoadTexture( pic7data );
    images.logo5=GRRLIB_LoadTexture( pic8data );
    images.logo6=GRRLIB_LoadTexture( pic9data );
+   
+   images.logo=GRRLIB_LoadTexture( pic5data );
+   GRRLIB_InitTileSet(images.logo, images.logo->w, 1, 0);
    
    images.background1=GRRLIB_LoadTexture( pic10data );
    images.background2=GRRLIB_LoadTexture( pic11data );
@@ -437,11 +459,10 @@ void initImages(void)
    images.road5=GRRLIB_LoadTexture( pic405data );	
 
    images.weapon1=GRRLIB_LoadTexture( pic500data );
-   
-   images.logo=GRRLIB_LoadTexture( pic5data );
-   GRRLIB_InitTileSet(images.logo, images.logo->w, 1, 0);
 
-   
+   images.button1=GRRLIB_LoadTexture( pic600data );
+   images.buttonFocus1=GRRLIB_LoadTexture( pic601data );
+      
    trace.event(s_fn,0,"leave [void]");
 }
 
@@ -504,6 +525,9 @@ void destroyImages(void)
    GRRLIB_FreeTexture(images.road5);
    
    GRRLIB_FreeTexture(images.weapon1);
+	
+   GRRLIB_FreeTexture(images.button1);
+   GRRLIB_FreeTexture(images.buttonFocus1);
 	
    trace.event(s_fn,0,"leave");
 }
@@ -625,7 +649,7 @@ void initMonsters(void)
    trace.event(s_fn,0,"leave [void]");
 }
 
-// Init monster
+// Init Pointes
 void initPointers(void)
 {
    const char *s_fn="initPointers";
@@ -664,16 +688,61 @@ void initGrid(int level)
     const char *s_fn="initGrid";
     trace.event(s_fn,0,"enter [level=%d]",level);
    
-	grid[0].setImage1(images.road1);
-	grid[0].setImage2(images.road2);
-	grid[0].setImage3(images.road3);
-	grid[0].setImage4(images.road4);
-	grid[0].setImage5(images.road5);
-	grid[0].setImageBase(images.base1);
+	grid.setImage1(images.road1);
+	grid.setImage2(images.road2);
+	grid.setImage3(images.road3);
+	grid.setImage4(images.road4);
+	grid.setImage5(images.road5);
 	
-	grid[0].render();
-	
+	switch( level )
+	{
+		case 1: grid.setImageBase(images.base1);
+				grid.create(GRID1_FILENAME );
+				break;
+			
+		case 2: grid.setImageBase(images.base2);
+				grid.create(GRID2_FILENAME );
+				break;
+				
+		case 3: grid.setImageBase(images.base3);
+				grid.create(GRID3_FILENAME );
+				break;
+	}
+
 	trace.event(s_fn,0,"leave [void]");
+}
+
+void initButtons(void)
+{
+	//switch( stateMachine )	
+	{	
+		//case stateMenu:
+			{
+				// Button (Play Map1)
+				button[0].setX(100);
+				button[0].setY(100);
+				button[0].setImageNormal(images.button1);
+				button[0].setImageFocus(images.buttonFocus1);
+				button[0].setLabel("Map1");
+				
+				// Button (Play Map2)
+				button[1].setX(100);
+				button[1].setY(200);
+				button[1].setImageNormal(images.button1);
+				button[1].setImageFocus(images.buttonFocus1);
+				button[1].setLabel("Map2");
+				
+				// Button (Play Map2)
+				button[2].setX(100);
+				button[2].setY(300);
+				button[2].setImageNormal(images.button1);
+				button[2].setImageFocus(images.buttonFocus1);
+				button[2].setLabel("Map3");
+				
+				maxButton=3;
+			}
+			//break;
+	}
 }
 
 void initGame(void)
@@ -689,15 +758,9 @@ void initGame(void)
    
     // Init pointers
     initPointers();
-	
-	// Init Map
-	initGrid(0);
-	
-    // Init monster
-    initMonsters();
-	
-	// Init Weapons
-	initWeapons();
+		
+	// Init Buttons
+	initButtons();
 	
 	trace.event(s_fn,0,"leave");
 }
@@ -722,11 +785,10 @@ static u8 CalculateFrameRate()
     return FPS;
 }	  
 
-
 // Draw monster on screen
 void drawGrid(void)
 {
-   grid[0].draw();
+   grid.draw();
 }
 
 // Draw base on screen
@@ -770,6 +832,16 @@ void drawWeapons(void)
      weapon[i].move();
 	 weapon[i].draw();
 	 weapon[i].properties();
+   }
+}
+
+// Draw buttons on screen
+void drawButtons(void)
+{
+   int i;
+   for( i=0; i<maxButton; i++ ) 
+   {
+	 button[i].draw(pointer[0].getX(), pointer[0].getY());
    }
 }
 
@@ -862,7 +934,7 @@ void drawScreen(void)
 				  
     switch( stateMachine )	
 	{	
-
+	
 	   case stateIntro1:
 	   {
 	      int  ypos=yOffset;
@@ -953,6 +1025,19 @@ void drawScreen(void)
 	 
 	 case stateMenu:
 		{
+			 // Init text layer	  
+          GRRLIB_initTexture();
+	
+		  pointer[0].properties();	  
+		  drawButtons();
+		  
+		  // Draw text layer on top of background 
+          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
+		}
+		break;
+	
+	 case stateGame:
+		{
 		  // Init text layer	  
           GRRLIB_initTexture();
 		  
@@ -1037,6 +1122,20 @@ int main()
 
 		// Draw Wii Motion Pointers
 		drawPointers();
+		
+		if (selectedMap!=prevSelectedMap)
+		{
+		    // Init Map
+		   initGrid(selectedMap);
+	
+		   // Init monster
+		   initMonsters();
+	
+		   // Init Weapons
+		   initWeapons();
+		   
+		   prevSelectedMap=selectedMap;
+		}
 			
 		// Render screen
 		GRRLIB_Render();

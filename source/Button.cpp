@@ -46,7 +46,7 @@ Button::Button()
    y=0;	
    height=0;
    width=0;
-   rumble=RUMBLE;
+   rumble=0;
    
    trace.event(s_fn,0,"leave [void]");
 }
@@ -74,7 +74,6 @@ Button::Button(	int x1,
 
 Button::~Button()
 {
-
    const char *s_fn="Button::~Button";
    trace.event(s_fn,0,"enter");
 
@@ -87,23 +86,38 @@ Button::~Button()
 
 void Button::draw(int pointerX, int pointerY)
 {
-    if ((pointerX>x) && (pointerX<x+width) 
-		&& (pointerY>y) && (pointerY<y+height))
+    if ((pointerX>=x) && (pointerX<=(x+width)) 
+		&& (pointerY>=y) && (pointerY<=(y+height)))
 	{
-		GRRLIB_DrawImg( x, y, imageNormal, 0, width, height, IMAGE_COLOR );		
-	}
-	else
-	{
-		GRRLIB_DrawImg( x, y, imageFocus, 0, width, height, IMAGE_COLOR );	
+		GRRLIB_DrawImg( x, y, imageFocus, 0, 1, 1, IMAGE_COLOR );		
 		if (rumble==0)
 		{
 			rumble=RUMBLE;
 		}
 	}
+	else
+	{
+		GRRLIB_DrawImg( x, y, imageNormal, 0, 1, 1, IMAGE_COLOR );	
+	}
 	
-	if (--rumble>0)  WPAD_Rumble(0,1); else WPAD_Rumble(0,0);
+	// Draw Button label
+    GRRLIB_Printf2((200-((strlen(label)*7)/2)), y+5, label, 18, COLOR_WHITESMOKE);  
+		 
+	if (--rumble>0) WPAD_Rumble(0,1); else WPAD_Rumble(0,0);
 }
 
+
+boolean Button::onSelect(int x1, int y1)
+{
+   boolean selected=false;
+   if ( (x1>=x) && (x1<=(x+width)) && (y1>=y) && (y1<=(y+height)) )
+   {
+      //SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 0, (char *) effect3_pcm, effect3_pcm_size, effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
+	  selected=true;
+   }
+   return selected;
+}	   
+	   
 // ------------------------------
 // Getter and Setters
 // ------------------------------
@@ -114,13 +128,13 @@ void Button::setImageNormal(GRRLIB_texImg *imageNormal1)
 	trace.event(s_fn,0,"enter");
 
 	imageNormal=imageNormal1;
-	height=imageNormal->w;
-	width=imageNormal->h;
+	height=imageNormal->h;
+	width=imageNormal->w;
 	
 	trace.event(s_fn,0,"leave [void]");
 }
 
-void Button::setImageSelect(GRRLIB_texImg *imageFocus1)
+void Button::setImageFocus(GRRLIB_texImg *imageFocus1)
 {
 	const char *s_fn="Button::setImageSelect";
 	trace.event(s_fn,0,"enter");
@@ -153,6 +167,16 @@ void Button::setY(int y1)
 		y = y1;
 	}
    
+	trace.event(s_fn,0,"leave [void]");
+}
+
+void Button::setLabel(const char *label1)
+{
+	const char *s_fn="Button::setLabel";
+	trace.event(s_fn,0,"enter [label=%s]",label1);
+	
+    strcpy(label,label1);
+	
 	trace.event(s_fn,0,"leave [void]");
 }
 

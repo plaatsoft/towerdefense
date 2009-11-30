@@ -18,15 +18,19 @@
 **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+#include <wiiuse/wpad.h>
+
 #include "General.h"
 #include "GRRLIB.h"
 #include "Pointer.h"
 #include "Trace.h"
+#include "Button.h"
   
 extern Trace trace;
-
 extern int stateMachine;
 extern boolean stopApplication;
+extern Button button[10];
+extern int selectedMap;
 
 boolean selectedA=false;
 
@@ -40,7 +44,9 @@ Pointer::Pointer()
    trace.event(s_fn,0,"enter");
    
    x=0;
+   xOffset=0;
    y=0;
+   yOffset=0;
    angle=0;
    
    trace.event(s_fn,0,"leave [void]");
@@ -61,6 +67,18 @@ Pointer::~Pointer()
 // ------------------------------
 // Others
 // ------------------------------
+
+void Pointer::properties(void)
+{  
+	char tmp[50];
+	int size=12;
+ 
+	sprintf(tmp, "x=%d", x);
+	GRRLIB_Printf2(10, 10, tmp, size, COLOR_WHITESMOKE); 
+	
+	sprintf(tmp, "y=%d", y);
+	GRRLIB_Printf2(10, 20, tmp, size, COLOR_WHITESMOKE);
+}
 
 void buttonA(int x, int y)
 {
@@ -91,6 +109,37 @@ void buttonA(int x, int y)
 	   stateMachine=stateMenu;
 	 }
 	 break;
+	 
+	 case stateMenu:
+	 {
+	    if (button[0].onSelect(x,y))
+		{
+          // Map1 button	      
+		  
+		  trace.event(s_fn,0,"stateMachine=stateGame [MAP1]");
+		  stateMachine=stateGame;
+		  selectedMap=1;
+		}
+		
+		if (button[1].onSelect(x,y))
+		{
+          // Map2 button	      
+		  
+		  trace.event(s_fn,0,"stateMachine=stateGame [MAP2]");
+		  stateMachine=stateGame;
+		  selectedMap=2;
+		}
+		
+		if (button[3].onSelect(x,y))
+		{
+          // Map3 button	      
+		  
+		  trace.event(s_fn,0,"stateMachine=stateGame [MAP3]");
+		  stateMachine=stateGame;
+		  selectedMap=3;
+		}
+	 }
+	 break;
    }
 }
 
@@ -119,8 +168,15 @@ void Pointer::draw(void)
 	// Scan for button events
 	if (wpaddown & WPAD_BUTTON_HOME) 
 	{
-	  trace.event(s_fn,0,"Home button pressed");
-	  stopApplication = true;
+	  if (stateMachine==stateMenu)
+	  {
+		trace.event(s_fn,0,"Home button pressed");
+		stopApplication = true;
+	  }
+	  else
+	  {
+		stateMachine=stateMenu;
+	  }
 	}
 				
     // Draw Pointer on screen
@@ -190,6 +246,17 @@ void Pointer::setImage(GRRLIB_texImg *image1)
    trace.event(s_fn,0,"leave [void]");
 }
 
+
+int Pointer::getX()
+{
+	return xOffset;
+}
+
+int Pointer::getY()
+{
+	return yOffset;
+}
+	
 // ------------------------------
 // The End
 // ------------------------------
