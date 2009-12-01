@@ -36,6 +36,7 @@ class Pointer
 	int xOffset;
 	int yOffset;
 	int rumble;
+	boolean rumbleGo;
   
   public:
   	Pointer();
@@ -49,6 +50,7 @@ class Pointer
 	void setY(int y);
 	void setAngle(int angle);
 	void setImage(GRRLIB_texImg *image);
+	void setRumble(int rumble);
 		
 	int getX();
 	int getY();

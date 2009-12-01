@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<TowerDefense>
+
+   <line data="00000000000000000000" />
+   <line data="051116000000000000*0" />
+   <line data="02000200000000000020" />
+   <line data="02000200000000000020" />
+   <line data="0200020000000000002" />
+   <line data="02000200000000000020" />
+   <line data="02000200000000000020" />
+   <line data="02000411111111111130" />
+   <line data="02000000000000000000" />
+   <line data="02000000000000000000" />
+   <line data="05111111111111160000" />
+   <line data="00000000000000020000" />
+   <line data="00000000000000020000" />
+   <line data="00000000000000020000" />
+   <line data="000000000000000#0000" />
+   <line data="00000000000000000000" />
+
+   <manual id="*" image="start" />
+   <manual id="0" image="road5" angle="0" />
+   <manual id="1" image="road4" angle="0" example="" />  
+   <manual id="2" image="road4" angle="90" example="!" />
+   <manual id="3" image="road3" angle="0" example = "_|" />
+   <manual id="4" image="road3" angle="90" example = "|_" />
+   <manual id="5" image="road3" angle="180" example = "|-" />
+   <manual id="6" image="road3" angle="270" example = "-|"  />
+   <manual id="7" image="road2" angle="0" example = "+"  />
+   <manual id="8" image="road1" angle="0" example = "-"  />
+   <manual id="9" image="road1" angle="90" example = "|"  />
+
+   <manual id="#" image="base" />
+
+</TowerDefense> 

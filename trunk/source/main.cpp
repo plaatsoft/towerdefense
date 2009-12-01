@@ -370,12 +370,11 @@ Trace trace;
 
 Monster monster[100];
 Base base[8];
-Pointer pointer[4];
+Pointer pointer[MAX_POINTERS];
 Grid grid;
 Weapon weapon[1];
 Button button[10];
 
-int maxPointer  = 4;
 int maxMonster  = 25;
 int maxBase     = 6;
 int maxMap	    = 1;
@@ -385,8 +384,8 @@ int maxButton   = 0;
 int day=0;
 
 int stateMachine=stateIntro1;
+int prevStateMachine=stateNone;
 int selectedMap = 0; 
-int prevSelectedMap = 0; 
 
 float   wave1 = 0;
 float   wave2 = 0;
@@ -750,8 +749,8 @@ void initGame(void)
 	const char *s_fn="initGame";
 	trace.event(s_fn,0,"enter");
    
-	trace.event(s_fn,0,"stateMachine=stateIntro1");
 	stateMachine=stateIntro1;
+	prevStateMachine=stateNone;
    
    	// Init Images
 	initImages();
@@ -805,7 +804,7 @@ void drawBases(void)
 void drawPointers(void)
 {
    int i;
-   for( i=0; i<maxPointer; i++ ) 
+   for( i=0; i<MAX_POINTERS; i++ ) 
    {
 	 pointer[i].draw();
    }
@@ -841,7 +840,7 @@ void drawButtons(void)
    int i;
    for( i=0; i<maxButton; i++ ) 
    {
-	 button[i].draw(pointer[0].getX(), pointer[0].getY());
+	 button[i].draw();
    }
 }
 
@@ -1028,7 +1027,7 @@ void drawScreen(void)
 			 // Init text layer	  
           GRRLIB_initTexture();
 	
-		  pointer[0].properties();	  
+		  //pointer[0].properties();	  
 		  drawButtons();
 		  
 		  // Draw text layer on top of background 
@@ -1056,6 +1055,57 @@ void drawScreen(void)
 	}
 }
 
+void processStateMachine()
+{
+  const char *s_fn="processStateMachine";
+	
+  if (prevStateMachine==stateMachine) 
+  {
+	return;
+  }
+  
+  switch (stateMachine)
+  {
+     case stateIntro1:
+	 {
+	   trace.event(s_fn,0,"stateMachine=stateIntro1");
+	 }
+	 break;
+
+	 case stateIntro2:
+	 {
+	   trace.event(s_fn,0,"stateMachine=stateIntro2");
+	 }
+	 break;
+	 
+	 case stateIntro3:
+	 {
+	   trace.event(s_fn,0,"stateMachine=stateIntro3");
+	 }
+	 break;
+	 
+	 case stateMenu:
+	 {
+		trace.event(s_fn,0,"stateMachine=stateMenu");
+	 }
+	 break;
+	 
+	 case stateGame:
+	 {
+		// Init Map
+		initGrid(selectedMap);
+	
+		// Init monster
+		initMonsters();
+	
+		// Init Weapons
+		initWeapons();
+	 }
+	 break;
+   }
+   prevStateMachine=stateMachine;
+}
+   
 // -----------------------------------
 // main
 // -----------------------------------
@@ -1117,25 +1167,13 @@ int main()
 	// Repeat forever
     while( !stopApplication )
 	{			
+		processStateMachine();
+		
 		// draw Screen
 		drawScreen();
 
 		// Draw Wii Motion Pointers
 		drawPointers();
-		
-		if (selectedMap!=prevSelectedMap)
-		{
-		    // Init Map
-		   initGrid(selectedMap);
-	
-		   // Init monster
-		   initMonsters();
-	
-		   // Init Weapons
-		   initWeapons();
-		   
-		   prevSelectedMap=selectedMap;
-		}
 			
 		// Render screen
 		GRRLIB_Render();

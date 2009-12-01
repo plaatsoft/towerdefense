@@ -158,6 +158,7 @@ void Monster::setImage(GRRLIB_texImg *image1)
    width=image->w;
 
    pos = 0;
+   visible=true;
    
    x=grid.getLocationX(pos);
    targetX=x;

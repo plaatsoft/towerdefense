@@ -19,7 +19,6 @@
 **
 **  History:
 **   24-11-2009  Create
-**   27-11-2009  Add draw method with rumble support
 */
 
 #include <wiiuse/wpad.h>
@@ -27,11 +26,11 @@
 #include "General.h"
 #include "GRRLIB.h"
 #include "Button.h"
+#include "Pointer.h"
 #include "Trace.h"
 
-#define RUMBLE 25
-
 extern Trace trace;
+extern Pointer pointer[MAX_POINTERS];
 
 // ------------------------------
 // Constructor
@@ -46,24 +45,6 @@ Button::Button()
    y=0;	
    height=0;
    width=0;
-   rumble=0;
-   
-   trace.event(s_fn,0,"leave [void]");
-}
-
-
-Button::Button(	int x1,
-				int y1, 
-				GRRLIB_texImg *imageNormal1, 
-				GRRLIB_texImg *imageFocus1 )
-{
-   const char *s_fn="Button::Button";
-   trace.event(s_fn,0,"enter");
-
-   x = x1;
-   y = y1;
-   imageNormal=imageNormal1;
-   imageFocus=imageFocus1;
    
    trace.event(s_fn,0,"leave [void]");
 }
@@ -84,26 +65,27 @@ Button::~Button()
 // Others
 // ------------------------------
 
-void Button::draw(int pointerX, int pointerY)
+void Button::draw()
 {
-    if ((pointerX>=x) && (pointerX<=(x+width)) 
-		&& (pointerY>=y) && (pointerY<=(y+height)))
+	boolean focus=false;
+	for (int i=0; i<MAX_POINTERS; i++)
 	{
-		GRRLIB_DrawImg( x, y, imageFocus, 0, 1, 1, IMAGE_COLOR );		
-		if (rumble==0)
+		if ((pointer[i].getX()>=x) && (pointer[i].getX()<=(x+width)) 
+			&& (pointer[i].getY()>=y) && (pointer[i].getY()<=(y+height)))
 		{
-			rumble=RUMBLE;
+			GRRLIB_DrawImg( x, y, imageFocus, 0, 1, 1, IMAGE_COLOR );	
+		    focus=true;
+			pointer[i].setRumble(MAX_RUMBLE);
+			break;
 		}
 	}
-	else
+	if (!focus)
 	{
-		GRRLIB_DrawImg( x, y, imageNormal, 0, 1, 1, IMAGE_COLOR );	
+		GRRLIB_DrawImg( x, y, imageNormal, 0, 1, 1, IMAGE_COLOR );		
 	}
 	
 	// Draw Button label
     GRRLIB_Printf2((200-((strlen(label)*7)/2)), y+5, label, 18, COLOR_WHITESMOKE);  
-		 
-	if (--rumble>0) WPAD_Rumble(0,1); else WPAD_Rumble(0,0);
 }
 
 

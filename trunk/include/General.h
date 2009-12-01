@@ -26,8 +26,8 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.23"
-#define RELEASE_DATE        	"30-11-2009" 
+#define PROGRAM_VERSION     	"0.24"
+#define RELEASE_DATE        	"01-12-2009" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -55,51 +55,51 @@
 #define GRID2_FILENAME    	  	"sd:/apps/TowerDefense/maps/map2.xml"
 #define GRID3_FILENAME    	  	"sd:/apps/TowerDefense/maps/map3.xml"
 
-#define WSP_POINTER_X      	200
-#define WSP_POINTER_Y      	250
+#define WSP_POINTER_X      		200
+#define WSP_POINTER_Y      		250
 
-#define COLOR_WHITESMOKE   	0xFFFFFF
-#define COLOR_LIGHTRED     	0x3333FF
-#define COLOR_DARKBLACK    	0x000000
+#define COLOR_WHITESMOKE   		0xFFFFFF
+#define COLOR_LIGHTRED     		0x3333FF
+#define COLOR_DARKBLACK    		0x000000
 
-#define IMAGE_COLOR        	0xFFFFFFFF
+#define IMAGE_COLOR        		0xFFFFFFFF
 
-#define MAX_BUTTONS         10
-#define MAX_RUMBLE			4
-#define MAX_BOARDSIZE 		14
-#define MAX_BUBBLES   		(MAX_BOARDSIZE*MAX_BOARDSIZE)
-#define MAX_HORZ_PIXELS		640
-#define MAX_VERT_PIXELS		480
-#define MAX_HIGHSCORES 		50
-#define MAX_SETTINGS		10
-#define MAX_BEST	 		50
-#define MAX_LEVEL    	    6
-#define MAX_LEN			    256
-#define MAX_ANGLE			360
-#define MIN_ALFA			127
-#define MAX_ALFA			255
-#define MIN_SIZE			1.0
-#define MAX_SIZE			1.2
-#define MAX_SOUND_VOLUME	10
-#define MAX_MUSIC_TRACK     16
-#define MAX_LINES		    200
-#define MAX_BUFFER_SIZE		8192
-#define MAX_IDLE_TIME	    10
-#define MAX_POINTER         1
-#define MAX_STEP		    25
+#define MAX_BUTTONS         	10
+#define MAX_RUMBLE				25
+#define MAX_BOARDSIZE 			14
+#define MAX_BUBBLES   			(MAX_BOARDSIZE*MAX_BOARDSIZE)
+#define MAX_HORZ_PIXELS			640
+#define MAX_VERT_PIXELS			480
+#define MAX_HIGHSCORES 			50
+#define MAX_SETTINGS			10
+#define MAX_BEST	 			50
+#define MAX_LEVEL    	    	6
+#define MAX_LEN			    	256
+#define MAX_ANGLE				360
+#define MIN_ALFA				127
+#define MAX_ALFA				255
+#define MIN_SIZE				1.0
+#define MAX_SIZE				1.2
+#define MAX_SOUND_VOLUME		10
+#define MAX_MUSIC_TRACK     	16
+#define MAX_LINES		    	200
+#define MAX_BUFFER_SIZE			8192
+#define MAX_IDLE_TIME	    	10
+#define MAX_POINTERS         	4
+#define MAX_STEP		    	25
 
-#define EXPLODE_STEP	    4
-#define OUT_OF_TIME		    15
+#define EXPLODE_STEP	    	4
+#define OUT_OF_TIME		    	15
 
-#define IR_X_OFFSET         40
-#define IR_Y_OFFSET         40
+#define IR_X_OFFSET         	40
+#define IR_Y_OFFSET         	40
 
-#define SCROLLBAR_x         600
-#define SCROLLBAR_Y_MIN     150
-#define SCROLLBAR_Y_MAX     310
+#define SCROLLBAR_x         	600
+#define SCROLLBAR_Y_MIN			150
+#define SCROLLBAR_Y_MAX     	310
 
-#define MUSIC_MULTIPLER		5
-#define EFFECT_MULTIPLER	20
+#define MUSIC_MULTIPLER			5
+#define EFFECT_MULTIPLER		20
 
 #define BUTTON_A            (WPAD_BUTTON_A     | WPAD_CLASSIC_BUTTON_A)
 #define BUTTON_HOME         (WPAD_BUTTON_HOME  | WPAD_CLASSIC_BUTTON_HOME)

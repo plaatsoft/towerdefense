@@ -48,6 +48,8 @@ Pointer::Pointer()
    y=0;
    yOffset=0;
    angle=0;
+   rumble=0;
+   rumbleGo=false;
    
    trace.event(s_fn,0,"leave [void]");
 }
@@ -82,7 +84,7 @@ void Pointer::properties(void)
 
 void buttonA(int x, int y)
 {
-  const char *s_fn="Pointer::buttonA";
+  //const char *s_fn="Pointer::buttonA";
 
   if (selectedA) return;
   selectedA=true;
@@ -91,21 +93,18 @@ void buttonA(int x, int y)
   {
      case stateIntro1:
 	 {
-	   trace.event(s_fn,0,"stateMachine=stateIntro2");
 	   stateMachine=stateIntro2;
 	 }
 	 break;
 
 	 case stateIntro2:
 	 {
-	   trace.event(s_fn,0,"stateMachine=stateIntro3");
 	   stateMachine=stateIntro3;
 	 }
 	 break;
 	 
 	 case stateIntro3:
 	 {
-	   trace.event(s_fn,0,"stateMachine=stateMenu");
 	   stateMachine=stateMenu;
 	 }
 	 break;
@@ -115,8 +114,6 @@ void buttonA(int x, int y)
 	    if (button[0].onSelect(x,y))
 		{
           // Map1 button	      
-		  
-		  trace.event(s_fn,0,"stateMachine=stateGame [MAP1]");
 		  stateMachine=stateGame;
 		  selectedMap=1;
 		}
@@ -124,8 +121,6 @@ void buttonA(int x, int y)
 		if (button[1].onSelect(x,y))
 		{
           // Map2 button	      
-		  
-		  trace.event(s_fn,0,"stateMachine=stateGame [MAP2]");
 		  stateMachine=stateGame;
 		  selectedMap=2;
 		}
@@ -133,8 +128,6 @@ void buttonA(int x, int y)
 		if (button[3].onSelect(x,y))
 		{
           // Map3 button	      
-		  
-		  trace.event(s_fn,0,"stateMachine=stateGame [MAP3]");
 		  stateMachine=stateGame;
 		  selectedMap=3;
 		}
@@ -177,6 +170,16 @@ void Pointer::draw(void)
 	  {
 		stateMachine=stateMenu;
 	  }
+	}
+	
+	if (rumble>0) 
+	{
+		rumble--;
+		WPAD_Rumble(0,1); 
+	}
+	else 
+	{
+		WPAD_Rumble(0,0);
 	}
 				
     // Draw Pointer on screen
@@ -246,6 +249,15 @@ void Pointer::setImage(GRRLIB_texImg *image1)
    trace.event(s_fn,0,"leave [void]");
 }
 
+void Pointer::setRumble(int rumble1)
+{
+   const char *s_fn="Pointer::setRumble";
+   trace.event(s_fn,0,"enter [rumble=%d]",rumble1);
+   
+   rumble=rumble1;
+
+   trace.event(s_fn,0,"leave [void]");
+}
 
 int Pointer::getX()
 {

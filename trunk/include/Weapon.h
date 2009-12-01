@@ -18,8 +18,8 @@
 **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#ifndef ENEMY_H
-#define ENEMY_H
+#ifndef WEAPON_H
+#define WEAPON_H
 
 #include "GRRLIB.h"
 
@@ -51,8 +51,6 @@ class Weapon
 	void setAngle(int angle);
 	void setImage(GRRLIB_texImg *image);
 	void setStep(int step);
-
-
 };
 
 #endif
