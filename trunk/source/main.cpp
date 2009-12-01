@@ -146,7 +146,9 @@ typedef struct
   GRRLIB_texImg *road3;
   GRRLIB_texImg *road4;
   GRRLIB_texImg *road5;
-
+  GRRLIB_texImg *water1;
+  GRRLIB_texImg *bridge1;
+  
   GRRLIB_texImg *weapon1;
   
   GRRLIB_texImg *button1;
@@ -354,6 +356,14 @@ extern int      pic404length;
 extern const unsigned char     pic405data[];
 extern int      pic405length;
 
+// Water1 Image
+extern const unsigned char     pic406data[];
+extern int      pic406length;
+
+// Bridge1 Image
+extern const unsigned char     pic407data[];
+extern int      pic407length;
+
 // Rocket Image
 extern const unsigned char     pic500data[];
 extern int      pic500length;
@@ -465,6 +475,8 @@ void initImages(void)
    images.road3=GRRLIB_LoadTexture( pic403data );	
    images.road4=GRRLIB_LoadTexture( pic404data );	 
    images.road5=GRRLIB_LoadTexture( pic405data );	
+   images.water1=GRRLIB_LoadTexture( pic406data );	
+   images.bridge1=GRRLIB_LoadTexture( pic407data );	
 
    images.weapon1=GRRLIB_LoadTexture( pic500data );
 
@@ -632,11 +644,13 @@ void initGrid(int level)
     const char *s_fn="initGrid";
     trace.event(s_fn,0,"enter [level=%d]",level);
    
-	grid.setImage1(images.road1);
-	grid.setImage2(images.road2);
-	grid.setImage3(images.road3);
-	grid.setImage4(images.road4);
-	grid.setImage5(images.road5);
+	grid.setImageRoad1(images.road1);
+	grid.setImageRoad2(images.road2);
+	grid.setImageRoad3(images.road3);
+	grid.setImageRoad4(images.road4);
+	grid.setImageRoad5(images.road5);
+	grid.setImageWater(images.water1);
+	grid.setImageBridge(images.bridge1);
 	
 	switch( level )
 	{
@@ -1034,6 +1048,8 @@ void destroyImages(void)
    GRRLIB_FreeTexture(images.road3);
    GRRLIB_FreeTexture(images.road4);
    GRRLIB_FreeTexture(images.road5);
+   GRRLIB_FreeTexture(images.water1);
+   GRRLIB_FreeTexture(images.bridge1);
    
    GRRLIB_FreeTexture(images.weapon1);
 	
