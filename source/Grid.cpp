@@ -15,7 +15,7 @@
 **
 **  You should have received a copy of the GNU General Public License
 **  along with this program; if not, write to the Free Software
-**  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+**  Foundation, Inc., 5 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 #include <stdio.h>
@@ -86,7 +86,15 @@ void Grid::parseGrid(void)
 	{
 		for (x=0;x<20;x++)
 		{
-			temp[y][x]=gridData[y][x];
+			if (gridData[y][x]=='~') 
+			{
+				// Remove water from grid
+				temp[y][x]='0';
+			}
+			else 
+			{
+				temp[y][x]=gridData[y][x];
+			}
 		}
 	}
    
@@ -150,7 +158,7 @@ void Grid::parseGrid(void)
 	trace.event(s_fn,0,"leave [maxLocations=%d]",maxLocations);
 }
 
-void  Grid::initGrid(const char* filename)
+void Grid::initGrid(const char* filename)
 {
    const char *s_fn="Grid::initGrid";
    trace.event(s_fn,0,"enter");
@@ -251,6 +259,21 @@ void Grid::draw(void)
 					GRRLIB_DrawImg( (x*32), (y*32), image1, 90, 1.0, 1.0, IMAGE_COLOR );
 					break;
 		
+				case '~':
+					// water 
+					GRRLIB_DrawImg( (x*32), (y*32), imageWater, 0, 1.0, 1.0, IMAGE_COLOR );
+					break;
+
+				case '=':
+					// bridge 
+					GRRLIB_DrawImg( (x*32), (y*32), imageBridge, 0, 1.0, 1.0, IMAGE_COLOR );
+					break;
+
+				case 'H':
+					// bridge 
+					GRRLIB_DrawImg( (x*32)+32, (y*32), imageBridge, 90, 1.0, 1.0, IMAGE_COLOR );
+					break;
+					
 				case '#':
 					GRRLIB_DrawImg( (x*32), (y*32), image5, 0, 1.0, 1.0, IMAGE_COLOR );
 					baseX=x;
@@ -280,9 +303,9 @@ void Grid::create(const char* filename)
 // Getters and Setters
 // ------------------------------
 
-void Grid::setImage1(GRRLIB_texImg *image)
+void Grid::setImageRoad1(GRRLIB_texImg *image)
 {
-   const char *s_fn="Pointer::setImage1";
+   const char *s_fn="Pointer::setImageRoad1";
    trace.event(s_fn,0,"enter");
    
    image1 = image;
@@ -290,9 +313,9 @@ void Grid::setImage1(GRRLIB_texImg *image)
    trace.event(s_fn,0,"leave [void]");
 }
 
-void Grid::setImage2(GRRLIB_texImg *image)
+void Grid::setImageRoad2(GRRLIB_texImg *image)
 {
-   const char *s_fn="Pointer::setImage1";
+   const char *s_fn="Pointer::setImageRoad2";
    trace.event(s_fn,0,"enter");
    
    image2 = image;
@@ -300,9 +323,9 @@ void Grid::setImage2(GRRLIB_texImg *image)
    trace.event(s_fn,0,"leave [void]");
 }
 
-void Grid::setImage3(GRRLIB_texImg *image)
+void Grid::setImageRoad3(GRRLIB_texImg *image)
 {
-   const char *s_fn="Pointer::setImage1";
+   const char *s_fn="Pointer::setImageRoad3";
    trace.event(s_fn,0,"enter");
    
    image3 = image;
@@ -310,9 +333,9 @@ void Grid::setImage3(GRRLIB_texImg *image)
    trace.event(s_fn,0,"leave [void]");
 }
 
-void Grid::setImage4(GRRLIB_texImg *image)
+void Grid::setImageRoad4(GRRLIB_texImg *image)
 {
-   const char *s_fn="Pointer::setImage4";
+   const char *s_fn="Pointer::setImageRoad4";
    trace.event(s_fn,0,"enter");
    
    image4 = image;
@@ -320,9 +343,9 @@ void Grid::setImage4(GRRLIB_texImg *image)
    trace.event(s_fn,0,"leave [void]");
 }
 
-void Grid::setImage5(GRRLIB_texImg *image)
+void Grid::setImageRoad5(GRRLIB_texImg *image)
 {
-   const char *s_fn="Pointer::setImage5";
+   const char *s_fn="Pointer::setImageRoad5";
    trace.event(s_fn,0,"enter");
    
    image5 = image;
@@ -333,6 +356,26 @@ void Grid::setImage5(GRRLIB_texImg *image)
 void Grid::setImageBase(GRRLIB_texImg *image)
 {
    const char *s_fn="Pointer::setImageBase";
+   trace.event(s_fn,0,"enter");
+   
+   imageBase = image;
+   
+   trace.event(s_fn,0,"leave [void]");
+}
+
+void Grid::setImageWater(GRRLIB_texImg *image)
+{
+   const char *s_fn="Pointer::setImageWater";
+   trace.event(s_fn,0,"enter");
+   
+   imageBase = image;
+   
+   trace.event(s_fn,0,"leave [void]");
+}
+
+void Grid::setImageBridge(GRRLIB_texImg *image)
+{
+   const char *s_fn="Pointer::setImageBrige";
    trace.event(s_fn,0,"enter");
    
    imageBase = image;

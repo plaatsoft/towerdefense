@@ -33,6 +33,8 @@ class Grid
 	GRRLIB_texImg *image4;
 	GRRLIB_texImg *image5;
 	GRRLIB_texImg *imageBase;
+	GRRLIB_texImg *imageWater;
+	GRRLIB_texImg *imageBridge;
 	
 	void parseGrid(void);
 	void initGrid(const char* filename);
@@ -47,12 +49,14 @@ class Grid
 	void create(const char* filename);
 
 	// Setters
-	void setImage1(GRRLIB_texImg *image);
-	void setImage2(GRRLIB_texImg *image);
-	void setImage3(GRRLIB_texImg *image);
-	void setImage4(GRRLIB_texImg *image);
-	void setImage5(GRRLIB_texImg *image);
+	void setImageRoad1(GRRLIB_texImg *image);
+	void setImageRoad2(GRRLIB_texImg *image);
+	void setImageRoad3(GRRLIB_texImg *image);
+	void setImageRoad4(GRRLIB_texImg *image);
+	void setImageRoad5(GRRLIB_texImg *image);
 	void setImageBase(GRRLIB_texImg *image);	
+	void setImageWater(GRRLIB_texImg *image);
+	void setImageBridge(GRRLIB_texImg *image);
 	void setLevel(int level);
 	
 	// Getters
