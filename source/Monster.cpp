@@ -76,7 +76,6 @@ Monster::~Monster()
    trace.event(s_fn,0,"leave");
 }
 
-
 // ------------------------------
 // Others
 // ------------------------------
@@ -194,6 +193,12 @@ void Monster::setEnergy(int energy1)
 	energy=energy1;
 }
 
+void Monster::setHit(int hit)
+{
+	energy-=hit;
+	if (energy<=0) visible=false;
+}
+
 int Monster::getX()
 {
 	return x;
@@ -212,6 +217,11 @@ int Monster::getAlfa(void)
 int Monster::getStep(void)
 {
    return step;
+}
+
+bool Monster::getAlive(void)
+{
+	return visible;
 }
 
 // ------------------------------

@@ -36,6 +36,9 @@ class Weapon
 	int height;
 	int width;
 	int step;
+	int delay;
+	int range;
+	int power;
 	
   public:
   	Weapon();
@@ -44,13 +47,17 @@ class Weapon
 	void draw(void);	
 	void properties(void);
 	void move(void);
+	void fire(void);
 	
 	void setX(int x);
+	void setDelay(int delay);
 	void setY(int y);
+	void setRange(int range);
 	void setAlfa(int alfa);
 	void setAngle(int angle);
 	void setImage(GRRLIB_texImg *image);
 	void setStep(int step);
+	void setPower(int power);
 };
 
 #endif

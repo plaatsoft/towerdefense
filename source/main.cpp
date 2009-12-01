@@ -19,6 +19,11 @@
 **  Release Notes:
 **  ==============
 **
+**  01/12/2009 Version 0.24
+**  - Bugfix: Game initials
+**  - Added state machine
+**  - Cleanup code
+**
 **  30/11/2009 Version 0.23
 **  - Use libogc 1.8.1 library as Wii interface engine
 **  - Very basic Game menu page.
@@ -72,9 +77,14 @@
 #include "Monster.h"
 #include "Weapon.h"
 #include "Button.h"
-#include "Base.h"
 #include "Pointer.h"
 #include "Grid.h"
+
+// -----------------------------------------------------------
+// PROTOTYPES
+// -----------------------------------------------------------
+
+static u8 CalculateFrameRate();
 
 // -----------------------------------------------------------
 // TYPEDEF
@@ -369,7 +379,6 @@ int         yjpegOffset       = 0;
 Trace trace;
 
 Monster monster[100];
-Base base[8];
 Pointer pointer[MAX_POINTERS];
 Grid grid;
 Weapon weapon[1];
@@ -465,73 +474,6 @@ void initImages(void)
    trace.event(s_fn,0,"leave [void]");
 }
 
-void destroyImages(void)
-{
-   const char *s_fn="destroyImages";
-   trace.event(s_fn,0,"enter");
-   
-   GRRLIB_FreeTexture(images.logo2);
-   GRRLIB_FreeTexture(images.logo3);
-   GRRLIB_FreeTexture(images.logo4);
-   GRRLIB_FreeTexture(images.logo5);
-   GRRLIB_FreeTexture(images.logo6);
-   
-   GRRLIB_FreeTexture(images.background1);
-   GRRLIB_FreeTexture(images.background2);
-   
-   GRRLIB_FreeTexture(images.monster1);
-   GRRLIB_FreeTexture(images.monster2);
-   GRRLIB_FreeTexture(images.monster3);
-   GRRLIB_FreeTexture(images.monster4);
-   GRRLIB_FreeTexture(images.monster5);
-   GRRLIB_FreeTexture(images.monster6);
-   GRRLIB_FreeTexture(images.monster7);
-   GRRLIB_FreeTexture(images.monster8);
-   GRRLIB_FreeTexture(images.monster9);
-   GRRLIB_FreeTexture(images.monster10);
-   GRRLIB_FreeTexture(images.monster11);
-   GRRLIB_FreeTexture(images.monster12);
-   GRRLIB_FreeTexture(images.monster13);
-   GRRLIB_FreeTexture(images.monster14);
-   GRRLIB_FreeTexture(images.monster15);
-   GRRLIB_FreeTexture(images.monster16);
-   GRRLIB_FreeTexture(images.monster17);
-   GRRLIB_FreeTexture(images.monster18);
-   GRRLIB_FreeTexture(images.monster19);
-   GRRLIB_FreeTexture(images.monster20);
-   GRRLIB_FreeTexture(images.monster21);
-   GRRLIB_FreeTexture(images.monster22);
-   GRRLIB_FreeTexture(images.monster23);
-   GRRLIB_FreeTexture(images.monster24);
-   GRRLIB_FreeTexture(images.monster25);
-   
-   GRRLIB_FreeTexture(images.pointer1);
-   GRRLIB_FreeTexture(images.pointer2);
-   GRRLIB_FreeTexture(images.pointer3);
-   GRRLIB_FreeTexture(images.pointer4);
-   
-   GRRLIB_FreeTexture(images.base1);
-   GRRLIB_FreeTexture(images.base2);
-   GRRLIB_FreeTexture(images.base3);
-   GRRLIB_FreeTexture(images.base4);
-   GRRLIB_FreeTexture(images.base5);
-   GRRLIB_FreeTexture(images.base6);
-   
-   GRRLIB_FreeTexture(images.road1);
-   GRRLIB_FreeTexture(images.road2);
-   GRRLIB_FreeTexture(images.road3);
-   GRRLIB_FreeTexture(images.road4);
-   GRRLIB_FreeTexture(images.road5);
-   
-   GRRLIB_FreeTexture(images.weapon1);
-	
-   GRRLIB_FreeTexture(images.button1);
-   GRRLIB_FreeTexture(images.buttonFocus1);
-	
-   trace.event(s_fn,0,"leave");
-}
-
-
 // Init Weapons
 void initWeapons(void)
 {
@@ -543,6 +485,9 @@ void initWeapons(void)
 	weapon[0].setY(100);
 	weapon[0].setAngle(0);
 	weapon[0].setStep(2);
+	weapon[0].setDelay(100);
+	weapon[0].setRange(60);
+	weapon[0].setPower(2);
 	
 	trace.event(s_fn,0,"leave [void]");
 }
@@ -554,7 +499,7 @@ void initMonsters(void)
    trace.event(s_fn,0,"enter");
    
    int delay=0;
-   for( int i = 0; i < maxMonster; i++ ) 
+   for( int i=0; i<maxMonster; i++ ) 
    {
    	  trace.event(s_fn,0,"Init monster [%d]",i);
 	 	  
@@ -768,36 +713,10 @@ void initGame(void)
 // DRAW METHODES
 // -----------------------------------
 
-static u8 CalculateFrameRate() 
-{
-    static u8 frameCount = 0;
-    static u32 lastTime;
-    static u8 FPS = 0;
-    u32 currentTime = ticks_to_millisecs(gettime());
-
-    frameCount++;
-    if(currentTime - lastTime > 1000) {
-        lastTime = currentTime;
-        FPS = frameCount;
-        frameCount = 0;
-    }
-    return FPS;
-}	  
-
 // Draw monster on screen
 void drawGrid(void)
 {
    grid.draw();
-}
-
-// Draw base on screen
-void drawBases(void)
-{
-   int i;
-   for( i=0; i<maxBase; i++ ) 
-   {
-	 base[i].draw();
-   }
 }
 
 // Draw base on screen
@@ -1042,7 +961,6 @@ void drawScreen(void)
 		  
 	 	  drawGrid();
 		  drawMonsters();
-		  drawBases();
 		  drawWeapons();
 		  			 
 		  sprintf(tmp,"%d fps", CalculateFrameRate()); 
@@ -1054,6 +972,92 @@ void drawScreen(void)
 		break;
 	}
 }
+
+// -----------------------------------
+// SUPPORT METHODES
+// -----------------------------------
+
+void destroyImages(void)
+{
+   const char *s_fn="destroyImages";
+   trace.event(s_fn,0,"enter");
+   
+   GRRLIB_FreeTexture(images.logo2);
+   GRRLIB_FreeTexture(images.logo3);
+   GRRLIB_FreeTexture(images.logo4);
+   GRRLIB_FreeTexture(images.logo5);
+   GRRLIB_FreeTexture(images.logo6);
+   
+   GRRLIB_FreeTexture(images.background1);
+   GRRLIB_FreeTexture(images.background2);
+   
+   GRRLIB_FreeTexture(images.monster1);
+   GRRLIB_FreeTexture(images.monster2);
+   GRRLIB_FreeTexture(images.monster3);
+   GRRLIB_FreeTexture(images.monster4);
+   GRRLIB_FreeTexture(images.monster5);
+   GRRLIB_FreeTexture(images.monster6);
+   GRRLIB_FreeTexture(images.monster7);
+   GRRLIB_FreeTexture(images.monster8);
+   GRRLIB_FreeTexture(images.monster9);
+   GRRLIB_FreeTexture(images.monster10);
+   GRRLIB_FreeTexture(images.monster11);
+   GRRLIB_FreeTexture(images.monster12);
+   GRRLIB_FreeTexture(images.monster13);
+   GRRLIB_FreeTexture(images.monster14);
+   GRRLIB_FreeTexture(images.monster15);
+   GRRLIB_FreeTexture(images.monster16);
+   GRRLIB_FreeTexture(images.monster17);
+   GRRLIB_FreeTexture(images.monster18);
+   GRRLIB_FreeTexture(images.monster19);
+   GRRLIB_FreeTexture(images.monster20);
+   GRRLIB_FreeTexture(images.monster21);
+   GRRLIB_FreeTexture(images.monster22);
+   GRRLIB_FreeTexture(images.monster23);
+   GRRLIB_FreeTexture(images.monster24);
+   GRRLIB_FreeTexture(images.monster25);
+   
+   GRRLIB_FreeTexture(images.pointer1);
+   GRRLIB_FreeTexture(images.pointer2);
+   GRRLIB_FreeTexture(images.pointer3);
+   GRRLIB_FreeTexture(images.pointer4);
+   
+   GRRLIB_FreeTexture(images.base1);
+   GRRLIB_FreeTexture(images.base2);
+   GRRLIB_FreeTexture(images.base3);
+   GRRLIB_FreeTexture(images.base4);
+   GRRLIB_FreeTexture(images.base5);
+   GRRLIB_FreeTexture(images.base6);
+   
+   GRRLIB_FreeTexture(images.road1);
+   GRRLIB_FreeTexture(images.road2);
+   GRRLIB_FreeTexture(images.road3);
+   GRRLIB_FreeTexture(images.road4);
+   GRRLIB_FreeTexture(images.road5);
+   
+   GRRLIB_FreeTexture(images.weapon1);
+	
+   GRRLIB_FreeTexture(images.button1);
+   GRRLIB_FreeTexture(images.buttonFocus1);
+	
+   trace.event(s_fn,0,"leave");
+}
+
+static u8 CalculateFrameRate() 
+{
+    static u8 frameCount = 0;
+    static u32 lastTime;
+    static u8 FPS = 0;
+    u32 currentTime = ticks_to_millisecs(gettime());
+
+    frameCount++;
+    if(currentTime - lastTime > 1000) {
+        lastTime = currentTime;
+        FPS = frameCount;
+        frameCount = 0;
+    }
+    return FPS;
+}	
 
 void processStateMachine()
 {
@@ -1092,6 +1096,8 @@ void processStateMachine()
 	 
 	 case stateGame:
 	 {
+		trace.event(s_fn,0,"stateMachine=stateGame");
+	 
 		// Init Map
 		initGrid(selectedMap);
 	
@@ -1167,6 +1173,7 @@ int main()
 	// Repeat forever
     while( !stopApplication )
 	{			
+		// Process Statemachine events
 		processStateMachine();
 		
 		// draw Screen

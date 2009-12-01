@@ -51,12 +51,14 @@ class Monster
 	void setStep(int step);
 	void setDelay(int delay);
 	void setEnergy(int energy);
+	void setHit(int hit);
 	
 	int getX(void);
 	int getY(void);
 	int getAlfa(void);
 	float getSize(void);
 	int getStep(void);
+	bool getAlive(void);
 	
 	void properties(void);
 	void draw(void);

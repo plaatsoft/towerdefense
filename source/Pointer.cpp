@@ -125,7 +125,7 @@ void buttonA(int x, int y)
 		  selectedMap=2;
 		}
 		
-		if (button[3].onSelect(x,y))
+		if (button[2].onSelect(x,y))
 		{
           // Map3 button	      
 		  stateMachine=stateGame;
