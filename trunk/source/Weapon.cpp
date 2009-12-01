@@ -21,10 +21,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #include "General.h"
 #include "GRRLIB.h"
 #include "Weapon.h"
+#include "Monster.h"
 #include "Trace.h"  
 
 // ------------------------------
@@ -33,6 +35,8 @@
 
 extern Trace trace;
 extern GXRModeObj  *rmode;
+extern Monster monster[100];
+extern int maxMonster;
 
 // ------------------------------
 // Constructor 
@@ -51,6 +55,7 @@ Weapon::Weapon()
    height=0;
    width=0;
    step=0;
+   range=0;
    
    trace.event(s_fn,0,"leave");
 }
@@ -97,6 +102,34 @@ void Weapon::move(void)
 {  
 	angle=angle+step;
 	if (angle>359) angle=0;
+}
+
+
+void Weapon::fire(void)
+{
+	if (delay>0) 
+	{
+		delay--;
+	}
+	else
+	{
+		// fire
+		for (int i=0; i<maxMonster; i++)
+		{
+			float distance = 10;
+			
+			//  pow( (monster[i].getX()+x)*(monster[i].getX()+x)) + 
+			//	  ((monster[i].getY()+y)*(monster[i].getY()+y) );
+			
+			if (monster[i].getAlive() && (distance<range))
+			{
+				monster[i].setHit(2);
+				delay=100;
+				break;
+			}
+		}
+		
+	}
 }
 
 // ------------------------------
@@ -176,6 +209,36 @@ void Weapon::setImage(GRRLIB_texImg *image1)
    
    height=image->h;
    width=image->w;
+   
+   trace.event(s_fn,0,"leave");
+}
+
+void Weapon::setDelay(int delay1)
+{
+   const char *s_fn="Weapon::setDelay";
+   trace.event(s_fn,0,"enter [delay=%d]",delay1);
+   
+   delay=delay1;
+   
+   trace.event(s_fn,0,"leave");
+}
+
+void Weapon::setRange(int range1)
+{
+   const char *s_fn="Weapon::setRange";
+   trace.event(s_fn,0,"enter [range=%d]",range1);
+   
+   range=range1;
+   
+   trace.event(s_fn,0,"leave");
+}
+
+void Weapon::setPower(int power1)
+{
+   const char *s_fn="Weapon::setPower";
+   trace.event(s_fn,0,"enter [power=%d]",power1);
+   
+   power=power1;
    
    trace.event(s_fn,0,"leave");
 }

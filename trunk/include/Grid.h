@@ -34,14 +34,17 @@ class Grid
 	GRRLIB_texImg *image5;
 	GRRLIB_texImg *imageBase;
 	
+	void parseGrid(void);
+	void initGrid(const char* filename);
+	
   public:
 	// Constructor & Destructor
   	Grid();
  	~Grid();
 
 	// Other
-	void create(const char* filename);
 	void draw(void);
+	void create(const char* filename);
 
 	// Setters
 	void setImage1(GRRLIB_texImg *image);

@@ -16,9 +16,6 @@
 **  You should have received a copy of the GNU General Public License
 **  along with this program; if not, write to the Free Software
 **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**
-**  History:
-**   24-11-2009  Create
 */
 
 #include <wiiuse/wpad.h>
@@ -91,9 +88,15 @@ void Button::draw()
 
 boolean Button::onSelect(int x1, int y1)
 {
+   const char *s_fn="Button::onSelect";
+
    boolean selected=false;
    if ( (x1>=x) && (x1<=(x+width)) && (y1>=y) && (y1<=(y+height)) )
    {
+      trace.event(s_fn,0,"enter [x=%|y=%d]",x,y);
+	  trace.event(s_fn,0,"Button selected");
+	  trace.event(s_fn,0,"leave");
+	  
       //SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 0, (char *) effect3_pcm, effect3_pcm_size, effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
 	  selected=true;
    }

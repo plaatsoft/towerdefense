@@ -1,85 +1,1219 @@
-30-11-2009 18:50:40 [thread0-main] TowerDefense 0.23 Started
-30-11-2009 18:50:40 [thread0-initGame] enter
-30-11-2009 18:50:40 [thread0-initGame] stateMachine=stateIntro1
-30-11-2009 18:50:40 [thread0-initImages] enter
-30-11-2009 18:50:40 [thread0-initImages] leave [void]
-30-11-2009 18:50:40 [thread0-initPointers] enter
-30-11-2009 18:50:40 [thread0-Pointer::setIndex] enter [index=0]
-30-11-2009 18:50:40 [thread0-Pointer::setIndex] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setX] enter [x=320]
-30-11-2009 18:50:40 [thread0-Pointer::setX] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setY] enter [y=240]
-30-11-2009 18:50:40 [thread0-Pointer::setY] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setAngle] enter [angle=0]
-30-11-2009 18:50:40 [thread0-Pointer::setAngle] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setImage] enter
-30-11-2009 18:50:40 [thread0-Pointer::setImage] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setIndex] enter [index=1]
-30-11-2009 18:50:40 [thread0-Pointer::setIndex] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setX] enter [x=320]
-30-11-2009 18:50:40 [thread0-Pointer::setX] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setY] enter [y=240]
-30-11-2009 18:50:40 [thread0-Pointer::setY] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setAngle] enter [angle=0]
-30-11-2009 18:50:40 [thread0-Pointer::setAngle] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setImage] enter
-30-11-2009 18:50:40 [thread0-Pointer::setImage] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setIndex] enter [index=2]
-30-11-2009 18:50:40 [thread0-Pointer::setIndex] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setX] enter [x=320]
-30-11-2009 18:50:40 [thread0-Pointer::setX] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setY] enter [y=240]
-30-11-2009 18:50:40 [thread0-Pointer::setY] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setAngle] enter [angle=0]
-30-11-2009 18:50:40 [thread0-Pointer::setAngle] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setImage] enter
-30-11-2009 18:50:40 [thread0-Pointer::setImage] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setIndex] enter [index=3]
-30-11-2009 18:50:40 [thread0-Pointer::setIndex] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setX] enter [x=320]
-30-11-2009 18:50:40 [thread0-Pointer::setX] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setY] enter [y=240]
-30-11-2009 18:50:40 [thread0-Pointer::setY] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setAngle] enter [angle=0]
-30-11-2009 18:50:40 [thread0-Pointer::setAngle] leave [void]
-30-11-2009 18:50:40 [thread0-Pointer::setImage] enter
-30-11-2009 18:50:40 [thread0-Pointer::setImage] leave [void]
-30-11-2009 18:50:40 [thread0-initPointers] leave [void]
-30-11-2009 18:50:40 [thread0-Button::setX] enter [x=100]
-30-11-2009 18:50:40 [thread0-Button::setX] leave [void]
-30-11-2009 18:50:40 [thread0-Button::setY] enter [y=100]
-30-11-2009 18:50:40 [thread0-Button::setY] leave [void]
-30-11-2009 18:50:40 [thread0-Button::setImageNormal] enter
-30-11-2009 18:50:40 [thread0-Button::setImageNormal] leave [void]
-30-11-2009 18:50:40 [thread0-Button::setImageSelect] enter
-30-11-2009 18:50:40 [thread0-Button::setImageSelect] leave [void]
-30-11-2009 18:50:40 [thread0-Button::setLabel] enter [label=Map1]
-30-11-2009 18:50:40 [thread0-Button::setLabel] leave [void]
-30-11-2009 18:50:40 [thread0-Button::setX] enter [x=300]
-30-11-2009 18:50:40 [thread0-Button::setX] leave [void]
-30-11-2009 18:50:40 [thread0-Button::setY] enter [y=100]
-30-11-2009 18:50:40 [thread0-Button::setY] leave [void]
-30-11-2009 18:50:40 [thread0-Button::setImageNormal] enter
-30-11-2009 18:50:40 [thread0-Button::setImageNormal] leave [void]
-30-11-2009 18:50:40 [thread0-Button::setImageSelect] enter
-30-11-2009 18:50:40 [thread0-Button::setImageSelect] leave [void]
-30-11-2009 18:50:40 [thread0-Button::setLabel] enter [label=Map2]
-30-11-2009 18:50:40 [thread0-Button::setLabel] leave [void]
-30-11-2009 18:50:40 [thread0-Button::setX] enter [x=500]
-30-11-2009 18:50:40 [thread0-Button::setX] leave [void]
-30-11-2009 18:50:40 [thread0-Button::setY] enter [y=100]
-30-11-2009 18:50:40 [thread0-Button::setY] leave [void]
-30-11-2009 18:50:40 [thread0-Button::setImageNormal] enter
-30-11-2009 18:50:40 [thread0-Button::setImageNormal] leave [void]
-30-11-2009 18:50:40 [thread0-Button::setImageSelect] enter
-30-11-2009 18:50:40 [thread0-Button::setImageSelect] leave [void]
-30-11-2009 18:50:40 [thread0-Button::setLabel] enter [label=Map3]
-30-11-2009 18:50:40 [thread0-Button::setLabel] leave [void]
-30-11-2009 18:50:40 [thread0-initGame] leave
-30-11-2009 18:50:42 [thread0-Pointer::buttonA] stateMachine=stateIntro2
-30-11-2009 18:50:42 [thread0-Pointer::buttonA] stateMachine=stateIntro3
-30-11-2009 18:50:43 [thread0-Pointer::buttonA] stateMachine=stateMenu
-30-11-2009 18:50:54 [thread0-Pointer::draw] Home button pressed
-30-11-2009 18:50:54 [thread0-destroyImages] enter
-30-11-2009 18:50:54 [thread0-destroyImages] leave
-30-11-2009 18:50:54 [thread0-main] TowerDefense 0.23 Leaving
+01-12-2009 16:59:21 [thread0-main] TowerDefense 0.24 Started
+01-12-2009 16:59:21 [thread0-initGame] enter
+01-12-2009 16:59:21 [thread0-initImages] enter
+01-12-2009 16:59:21 [thread0-initImages] leave [void]
+01-12-2009 16:59:21 [thread0-initPointers] enter
+01-12-2009 16:59:21 [thread0-Pointer::setIndex] enter [index=0]
+01-12-2009 16:59:21 [thread0-Pointer::setIndex] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setX] enter [x=320]
+01-12-2009 16:59:21 [thread0-Pointer::setX] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setY] enter [y=240]
+01-12-2009 16:59:21 [thread0-Pointer::setY] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setAngle] enter [angle=0]
+01-12-2009 16:59:21 [thread0-Pointer::setAngle] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setImage] enter
+01-12-2009 16:59:21 [thread0-Pointer::setImage] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setIndex] enter [index=1]
+01-12-2009 16:59:21 [thread0-Pointer::setIndex] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setX] enter [x=320]
+01-12-2009 16:59:21 [thread0-Pointer::setX] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setY] enter [y=240]
+01-12-2009 16:59:21 [thread0-Pointer::setY] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setAngle] enter [angle=0]
+01-12-2009 16:59:21 [thread0-Pointer::setAngle] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setImage] enter
+01-12-2009 16:59:21 [thread0-Pointer::setImage] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setIndex] enter [index=2]
+01-12-2009 16:59:21 [thread0-Pointer::setIndex] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setX] enter [x=320]
+01-12-2009 16:59:21 [thread0-Pointer::setX] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setY] enter [y=240]
+01-12-2009 16:59:21 [thread0-Pointer::setY] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setAngle] enter [angle=0]
+01-12-2009 16:59:21 [thread0-Pointer::setAngle] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setImage] enter
+01-12-2009 16:59:21 [thread0-Pointer::setImage] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setIndex] enter [index=3]
+01-12-2009 16:59:21 [thread0-Pointer::setIndex] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setX] enter [x=320]
+01-12-2009 16:59:21 [thread0-Pointer::setX] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setY] enter [y=240]
+01-12-2009 16:59:21 [thread0-Pointer::setY] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setAngle] enter [angle=0]
+01-12-2009 16:59:21 [thread0-Pointer::setAngle] leave [void]
+01-12-2009 16:59:21 [thread0-Pointer::setImage] enter
+01-12-2009 16:59:21 [thread0-Pointer::setImage] leave [void]
+01-12-2009 16:59:21 [thread0-initPointers] leave [void]
+01-12-2009 16:59:21 [thread0-Button::setX] enter [x=100]
+01-12-2009 16:59:21 [thread0-Button::setX] leave [void]
+01-12-2009 16:59:21 [thread0-Button::setY] enter [y=100]
+01-12-2009 16:59:21 [thread0-Button::setY] leave [void]
+01-12-2009 16:59:21 [thread0-Button::setImageNormal] enter
+01-12-2009 16:59:21 [thread0-Button::setImageNormal] leave [void]
+01-12-2009 16:59:21 [thread0-Button::setImageSelect] enter
+01-12-2009 16:59:21 [thread0-Button::setImageSelect] leave [void]
+01-12-2009 16:59:21 [thread0-Button::setLabel] enter [label=Map1]
+01-12-2009 16:59:21 [thread0-Button::setLabel] leave [void]
+01-12-2009 16:59:21 [thread0-Button::setX] enter [x=100]
+01-12-2009 16:59:21 [thread0-Button::setX] leave [void]
+01-12-2009 16:59:21 [thread0-Button::setY] enter [y=200]
+01-12-2009 16:59:21 [thread0-Button::setY] leave [void]
+01-12-2009 16:59:21 [thread0-Button::setImageNormal] enter
+01-12-2009 16:59:21 [thread0-Button::setImageNormal] leave [void]
+01-12-2009 16:59:21 [thread0-Button::setImageSelect] enter
+01-12-2009 16:59:21 [thread0-Button::setImageSelect] leave [void]
+01-12-2009 16:59:21 [thread0-Button::setLabel] enter [label=Map2]
+01-12-2009 16:59:21 [thread0-Button::setLabel] leave [void]
+01-12-2009 16:59:21 [thread0-Button::setX] enter [x=100]
+01-12-2009 16:59:21 [thread0-Button::setX] leave [void]
+01-12-2009 16:59:21 [thread0-Button::setY] enter [y=300]
+01-12-2009 16:59:21 [thread0-Button::setY] leave [void]
+01-12-2009 16:59:21 [thread0-Button::setImageNormal] enter
+01-12-2009 16:59:21 [thread0-Button::setImageNormal] leave [void]
+01-12-2009 16:59:21 [thread0-Button::setImageSelect] enter
+01-12-2009 16:59:21 [thread0-Button::setImageSelect] leave [void]
+01-12-2009 16:59:21 [thread0-Button::setLabel] enter [label=Map3]
+01-12-2009 16:59:21 [thread0-Button::setLabel] leave [void]
+01-12-2009 16:59:21 [thread0-initGame] leave
+01-12-2009 16:59:21 [thread0-processStateMachine] stateMachine=stateIntro1
+01-12-2009 16:59:24 [thread0-processStateMachine] stateMachine=stateIntro2
+01-12-2009 16:59:24 [thread0-processStateMachine] stateMachine=stateIntro3
+01-12-2009 16:59:25 [thread0-processStateMachine] stateMachine=stateMenu
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:26 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:27 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:27 [thread0-Button::onSelect] enter [x=|y=100]
+01-12-2009 16:59:27 [thread0-Button::onSelect] Button selected
+01-12-2009 16:59:27 [thread0-Button::onSelect] leave
+01-12-2009 16:59:27 [thread0-processStateMachine] stateMachine=stateGame
+01-12-2009 16:59:27 [thread0-initGrid] enter [level=1]
+01-12-2009 16:59:27 [thread0-Pointer::setImage1] enter
+01-12-2009 16:59:27 [thread0-Pointer::setImage1] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setImage1] enter
+01-12-2009 16:59:27 [thread0-Pointer::setImage1] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setImage1] enter
+01-12-2009 16:59:27 [thread0-Pointer::setImage1] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setImage4] enter
+01-12-2009 16:59:27 [thread0-Pointer::setImage4] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setImage5] enter
+01-12-2009 16:59:27 [thread0-Pointer::setImage5] leave [void]
+01-12-2009 16:59:27 [thread0-Pointer::setImageBase] enter
+01-12-2009 16:59:27 [thread0-Pointer::setImageBase] leave [void]
+01-12-2009 16:59:27 [thread0-Grid::render] enter
+01-12-2009 16:59:27 [thread0-Grid::initGrid] enter
+01-12-2009 16:59:27 [thread0-Grid::initGrid] leave [void]
+01-12-2009 16:59:27 [thread0-Grid::parseGrid] enter
+01-12-2009 16:59:27 [thread0-Grid::parseGrid] leave [maxLocations=73]
+01-12-2009 16:59:27 [thread0-Grid::render] leave [void]
+01-12-2009 16:59:27 [thread0-initGrid] leave [void]
+01-12-2009 16:59:27 [thread0-initMonsters] enter
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [0]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [1]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [2]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [3]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [4]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [5]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [6]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [7]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [8]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [9]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [10]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [11]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [12]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [13]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [14]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [15]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [16]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [17]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [18]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [19]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [20]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [21]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [22]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [23]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] Init monster [24]
+01-12-2009 16:59:27 [thread0-Monster::setImage] enter
+01-12-2009 16:59:27 [thread0-Monster::setImage] leave
+01-12-2009 16:59:27 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:27 [thread0-Monster::setStep] leave
+01-12-2009 16:59:27 [thread0-initMonsters] leave [void]
+01-12-2009 16:59:27 [thread0-initWeapons] enter
+01-12-2009 16:59:27 [thread0-Weapon::setImage] enter
+01-12-2009 16:59:27 [thread0-Weapon::setImage] leave
+01-12-2009 16:59:27 [thread0-Weapon::setX] enter [x=100]
+01-12-2009 16:59:27 [thread0-Weapon::setX] leave [void]
+01-12-2009 16:59:27 [thread0-Weapon::setY] enter [y=100]
+01-12-2009 16:59:27 [thread0-Weapon::setY] leave [void]
+01-12-2009 16:59:27 [thread0-Weapon::setAngle] enter [angle=0]
+01-12-2009 16:59:27 [thread0-Weapon::setAngle] leave
+01-12-2009 16:59:27 [thread0-Weapon::setStep] enter [step=2]
+01-12-2009 16:59:27 [thread0-Weapon::setStep] leave
+01-12-2009 16:59:27 [thread0-Weapon::setDelay] enter [delay=100]
+01-12-2009 16:59:27 [thread0-Weapon::setDelay] leave
+01-12-2009 16:59:27 [thread0-Weapon::setRange] enter [range=60]
+01-12-2009 16:59:27 [thread0-Weapon::setRange] leave
+01-12-2009 16:59:27 [thread0-Weapon::setPower] enter [power=2]
+01-12-2009 16:59:27 [thread0-Weapon::setPower] leave
+01-12-2009 16:59:27 [thread0-initWeapons] leave [void]
+01-12-2009 16:59:30 [thread0-processStateMachine] stateMachine=stateMenu
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:30 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 16:59:31 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 16:59:31 [thread0-Button::onSelect] enter [x=|y=100]
+01-12-2009 16:59:31 [thread0-Button::onSelect] Button selected
+01-12-2009 16:59:31 [thread0-Button::onSelect] leave
+01-12-2009 16:59:31 [thread0-processStateMachine] stateMachine=stateGame
+01-12-2009 16:59:31 [thread0-initGrid] enter [level=3]
+01-12-2009 16:59:31 [thread0-Pointer::setImage1] enter
+01-12-2009 16:59:31 [thread0-Pointer::setImage1] leave [void]
+01-12-2009 16:59:31 [thread0-Pointer::setImage1] enter
+01-12-2009 16:59:31 [thread0-Pointer::setImage1] leave [void]
+01-12-2009 16:59:31 [thread0-Pointer::setImage1] enter
+01-12-2009 16:59:31 [thread0-Pointer::setImage1] leave [void]
+01-12-2009 16:59:31 [thread0-Pointer::setImage4] enter
+01-12-2009 16:59:31 [thread0-Pointer::setImage4] leave [void]
+01-12-2009 16:59:31 [thread0-Pointer::setImage5] enter
+01-12-2009 16:59:31 [thread0-Pointer::setImage5] leave [void]
+01-12-2009 16:59:31 [thread0-Pointer::setImageBase] enter
+01-12-2009 16:59:31 [thread0-Pointer::setImageBase] leave [void]
+01-12-2009 16:59:31 [thread0-Grid::render] enter
+01-12-2009 16:59:31 [thread0-Grid::initGrid] enter
+01-12-2009 16:59:31 [thread0-Grid::initGrid] leave [void]
+01-12-2009 16:59:31 [thread0-Grid::parseGrid] enter
+01-12-2009 16:59:31 [thread0-Grid::parseGrid] leave [maxLocations=5]
+01-12-2009 16:59:31 [thread0-Grid::render] leave [void]
+01-12-2009 16:59:31 [thread0-initGrid] leave [void]
+01-12-2009 16:59:31 [thread0-initMonsters] enter
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [0]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [1]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [2]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [3]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [4]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [5]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [6]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [7]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [8]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [9]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [10]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [11]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [12]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [13]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [14]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [15]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [16]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [17]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [18]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [19]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [20]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [21]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [22]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [23]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] Init monster [24]
+01-12-2009 16:59:31 [thread0-Monster::setImage] enter
+01-12-2009 16:59:31 [thread0-Monster::setImage] leave
+01-12-2009 16:59:31 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 16:59:31 [thread0-Monster::setStep] leave
+01-12-2009 16:59:31 [thread0-initMonsters] leave [void]
+01-12-2009 16:59:31 [thread0-initWeapons] enter
+01-12-2009 16:59:31 [thread0-Weapon::setImage] enter
+01-12-2009 16:59:31 [thread0-Weapon::setImage] leave
+01-12-2009 16:59:31 [thread0-Weapon::setX] enter [x=100]
+01-12-2009 16:59:31 [thread0-Weapon::setX] leave [void]
+01-12-2009 16:59:31 [thread0-Weapon::setY] enter [y=100]
+01-12-2009 16:59:31 [thread0-Weapon::setY] leave [void]
+01-12-2009 16:59:31 [thread0-Weapon::setAngle] enter [angle=0]
+01-12-2009 16:59:31 [thread0-Weapon::setAngle] leave
+01-12-2009 16:59:31 [thread0-Weapon::setStep] enter [step=2]
+01-12-2009 16:59:31 [thread0-Weapon::setStep] leave
+01-12-2009 16:59:31 [thread0-Weapon::setDelay] enter [delay=100]
+01-12-2009 16:59:31 [thread0-Weapon::setDelay] leave
+01-12-2009 16:59:31 [thread0-Weapon::setRange] enter [range=60]
+01-12-2009 16:59:31 [thread0-Weapon::setRange] leave
+01-12-2009 16:59:31 [thread0-Weapon::setPower] enter [power=2]
+01-12-2009 16:59:31 [thread0-Weapon::setPower] leave
+01-12-2009 16:59:31 [thread0-initWeapons] leave [void]
+01-12-2009 17:00:18 [thread0-processStateMachine] stateMachine=stateMenu
+01-12-2009 17:00:18 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:18 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:19 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:19 [thread0-Button::onSelect] enter [x=|y=100]
+01-12-2009 17:00:19 [thread0-Button::onSelect] Button selected
+01-12-2009 17:00:19 [thread0-Button::onSelect] leave
+01-12-2009 17:00:19 [thread0-processStateMachine] stateMachine=stateGame
+01-12-2009 17:00:19 [thread0-initGrid] enter [level=2]
+01-12-2009 17:00:19 [thread0-Pointer::setImage1] enter
+01-12-2009 17:00:19 [thread0-Pointer::setImage1] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setImage1] enter
+01-12-2009 17:00:19 [thread0-Pointer::setImage1] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setImage1] enter
+01-12-2009 17:00:19 [thread0-Pointer::setImage1] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setImage4] enter
+01-12-2009 17:00:19 [thread0-Pointer::setImage4] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setImage5] enter
+01-12-2009 17:00:19 [thread0-Pointer::setImage5] leave [void]
+01-12-2009 17:00:19 [thread0-Pointer::setImageBase] enter
+01-12-2009 17:00:19 [thread0-Pointer::setImageBase] leave [void]
+01-12-2009 17:00:19 [thread0-Grid::render] enter
+01-12-2009 17:00:19 [thread0-Grid::initGrid] enter
+01-12-2009 17:00:19 [thread0-Grid::initGrid] leave [void]
+01-12-2009 17:00:19 [thread0-Grid::parseGrid] enter
+01-12-2009 17:00:19 [thread0-Grid::parseGrid] leave [maxLocations=73]
+01-12-2009 17:00:19 [thread0-Grid::render] leave [void]
+01-12-2009 17:00:19 [thread0-initGrid] leave [void]
+01-12-2009 17:00:19 [thread0-initMonsters] enter
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [0]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [1]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [2]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [3]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [4]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [5]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [6]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [7]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [8]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [9]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [10]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [11]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [12]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [13]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [14]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [15]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [16]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [17]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [18]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [19]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [20]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [21]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [22]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [23]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] Init monster [24]
+01-12-2009 17:00:19 [thread0-Monster::setImage] enter
+01-12-2009 17:00:19 [thread0-Monster::setImage] leave
+01-12-2009 17:00:19 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:19 [thread0-Monster::setStep] leave
+01-12-2009 17:00:19 [thread0-initMonsters] leave [void]
+01-12-2009 17:00:19 [thread0-initWeapons] enter
+01-12-2009 17:00:19 [thread0-Weapon::setImage] enter
+01-12-2009 17:00:19 [thread0-Weapon::setImage] leave
+01-12-2009 17:00:19 [thread0-Weapon::setX] enter [x=100]
+01-12-2009 17:00:19 [thread0-Weapon::setX] leave [void]
+01-12-2009 17:00:19 [thread0-Weapon::setY] enter [y=100]
+01-12-2009 17:00:19 [thread0-Weapon::setY] leave [void]
+01-12-2009 17:00:19 [thread0-Weapon::setAngle] enter [angle=0]
+01-12-2009 17:00:19 [thread0-Weapon::setAngle] leave
+01-12-2009 17:00:19 [thread0-Weapon::setStep] enter [step=2]
+01-12-2009 17:00:19 [thread0-Weapon::setStep] leave
+01-12-2009 17:00:19 [thread0-Weapon::setDelay] enter [delay=100]
+01-12-2009 17:00:19 [thread0-Weapon::setDelay] leave
+01-12-2009 17:00:19 [thread0-Weapon::setRange] enter [range=60]
+01-12-2009 17:00:19 [thread0-Weapon::setRange] leave
+01-12-2009 17:00:19 [thread0-Weapon::setPower] enter [power=2]
+01-12-2009 17:00:19 [thread0-Weapon::setPower] leave
+01-12-2009 17:00:19 [thread0-initWeapons] leave [void]
+01-12-2009 17:00:20 [thread0-processStateMachine] stateMachine=stateMenu
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:20 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:20 [thread0-Button::onSelect] enter [x=|y=100]
+01-12-2009 17:00:20 [thread0-Button::onSelect] Button selected
+01-12-2009 17:00:20 [thread0-Button::onSelect] leave
+01-12-2009 17:00:20 [thread0-processStateMachine] stateMachine=stateGame
+01-12-2009 17:00:20 [thread0-initGrid] enter [level=1]
+01-12-2009 17:00:20 [thread0-Pointer::setImage1] enter
+01-12-2009 17:00:20 [thread0-Pointer::setImage1] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setImage1] enter
+01-12-2009 17:00:20 [thread0-Pointer::setImage1] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setImage1] enter
+01-12-2009 17:00:20 [thread0-Pointer::setImage1] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setImage4] enter
+01-12-2009 17:00:20 [thread0-Pointer::setImage4] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setImage5] enter
+01-12-2009 17:00:20 [thread0-Pointer::setImage5] leave [void]
+01-12-2009 17:00:20 [thread0-Pointer::setImageBase] enter
+01-12-2009 17:00:20 [thread0-Pointer::setImageBase] leave [void]
+01-12-2009 17:00:20 [thread0-Grid::render] enter
+01-12-2009 17:00:20 [thread0-Grid::initGrid] enter
+01-12-2009 17:00:20 [thread0-Grid::initGrid] leave [void]
+01-12-2009 17:00:20 [thread0-Grid::parseGrid] enter
+01-12-2009 17:00:20 [thread0-Grid::parseGrid] leave [maxLocations=73]
+01-12-2009 17:00:20 [thread0-Grid::render] leave [void]
+01-12-2009 17:00:20 [thread0-initGrid] leave [void]
+01-12-2009 17:00:20 [thread0-initMonsters] enter
+01-12-2009 17:00:20 [thread0-initMonsters] Init monster [0]
+01-12-2009 17:00:20 [thread0-Monster::setImage] enter
+01-12-2009 17:00:20 [thread0-Monster::setImage] leave
+01-12-2009 17:00:20 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:20 [thread0-Monster::setStep] leave
+01-12-2009 17:00:20 [thread0-initMonsters] Init monster [1]
+01-12-2009 17:00:20 [thread0-Monster::setImage] enter
+01-12-2009 17:00:20 [thread0-Monster::setImage] leave
+01-12-2009 17:00:20 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:20 [thread0-Monster::setStep] leave
+01-12-2009 17:00:20 [thread0-initMonsters] Init monster [2]
+01-12-2009 17:00:20 [thread0-Monster::setImage] enter
+01-12-2009 17:00:20 [thread0-Monster::setImage] leave
+01-12-2009 17:00:20 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:20 [thread0-Monster::setStep] leave
+01-12-2009 17:00:20 [thread0-initMonsters] Init monster [3]
+01-12-2009 17:00:20 [thread0-Monster::setImage] enter
+01-12-2009 17:00:20 [thread0-Monster::setImage] leave
+01-12-2009 17:00:20 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:20 [thread0-Monster::setStep] leave
+01-12-2009 17:00:20 [thread0-initMonsters] Init monster [4]
+01-12-2009 17:00:20 [thread0-Monster::setImage] enter
+01-12-2009 17:00:20 [thread0-Monster::setImage] leave
+01-12-2009 17:00:20 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:20 [thread0-Monster::setStep] leave
+01-12-2009 17:00:20 [thread0-initMonsters] Init monster [5]
+01-12-2009 17:00:20 [thread0-Monster::setImage] enter
+01-12-2009 17:00:20 [thread0-Monster::setImage] leave
+01-12-2009 17:00:20 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:20 [thread0-Monster::setStep] leave
+01-12-2009 17:00:20 [thread0-initMonsters] Init monster [6]
+01-12-2009 17:00:20 [thread0-Monster::setImage] enter
+01-12-2009 17:00:20 [thread0-Monster::setImage] leave
+01-12-2009 17:00:20 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:20 [thread0-Monster::setStep] leave
+01-12-2009 17:00:20 [thread0-initMonsters] Init monster [7]
+01-12-2009 17:00:20 [thread0-Monster::setImage] enter
+01-12-2009 17:00:20 [thread0-Monster::setImage] leave
+01-12-2009 17:00:20 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:20 [thread0-Monster::setStep] leave
+01-12-2009 17:00:20 [thread0-initMonsters] Init monster [8]
+01-12-2009 17:00:20 [thread0-Monster::setImage] enter
+01-12-2009 17:00:20 [thread0-Monster::setImage] leave
+01-12-2009 17:00:20 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:20 [thread0-Monster::setStep] leave
+01-12-2009 17:00:20 [thread0-initMonsters] Init monster [9]
+01-12-2009 17:00:20 [thread0-Monster::setImage] enter
+01-12-2009 17:00:20 [thread0-Monster::setImage] leave
+01-12-2009 17:00:20 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:20 [thread0-Monster::setStep] leave
+01-12-2009 17:00:20 [thread0-initMonsters] Init monster [10]
+01-12-2009 17:00:21 [thread0-Monster::setImage] enter
+01-12-2009 17:00:21 [thread0-Monster::setImage] leave
+01-12-2009 17:00:21 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:21 [thread0-Monster::setStep] leave
+01-12-2009 17:00:21 [thread0-initMonsters] Init monster [11]
+01-12-2009 17:00:21 [thread0-Monster::setImage] enter
+01-12-2009 17:00:21 [thread0-Monster::setImage] leave
+01-12-2009 17:00:21 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:21 [thread0-Monster::setStep] leave
+01-12-2009 17:00:21 [thread0-initMonsters] Init monster [12]
+01-12-2009 17:00:21 [thread0-Monster::setImage] enter
+01-12-2009 17:00:21 [thread0-Monster::setImage] leave
+01-12-2009 17:00:21 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:21 [thread0-Monster::setStep] leave
+01-12-2009 17:00:21 [thread0-initMonsters] Init monster [13]
+01-12-2009 17:00:21 [thread0-Monster::setImage] enter
+01-12-2009 17:00:21 [thread0-Monster::setImage] leave
+01-12-2009 17:00:21 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:21 [thread0-Monster::setStep] leave
+01-12-2009 17:00:21 [thread0-initMonsters] Init monster [14]
+01-12-2009 17:00:21 [thread0-Monster::setImage] enter
+01-12-2009 17:00:21 [thread0-Monster::setImage] leave
+01-12-2009 17:00:21 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:21 [thread0-Monster::setStep] leave
+01-12-2009 17:00:21 [thread0-initMonsters] Init monster [15]
+01-12-2009 17:00:21 [thread0-Monster::setImage] enter
+01-12-2009 17:00:21 [thread0-Monster::setImage] leave
+01-12-2009 17:00:21 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:21 [thread0-Monster::setStep] leave
+01-12-2009 17:00:21 [thread0-initMonsters] Init monster [16]
+01-12-2009 17:00:21 [thread0-Monster::setImage] enter
+01-12-2009 17:00:21 [thread0-Monster::setImage] leave
+01-12-2009 17:00:21 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:21 [thread0-Monster::setStep] leave
+01-12-2009 17:00:21 [thread0-initMonsters] Init monster [17]
+01-12-2009 17:00:21 [thread0-Monster::setImage] enter
+01-12-2009 17:00:21 [thread0-Monster::setImage] leave
+01-12-2009 17:00:21 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:21 [thread0-Monster::setStep] leave
+01-12-2009 17:00:21 [thread0-initMonsters] Init monster [18]
+01-12-2009 17:00:21 [thread0-Monster::setImage] enter
+01-12-2009 17:00:21 [thread0-Monster::setImage] leave
+01-12-2009 17:00:21 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:21 [thread0-Monster::setStep] leave
+01-12-2009 17:00:21 [thread0-initMonsters] Init monster [19]
+01-12-2009 17:00:21 [thread0-Monster::setImage] enter
+01-12-2009 17:00:21 [thread0-Monster::setImage] leave
+01-12-2009 17:00:21 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:21 [thread0-Monster::setStep] leave
+01-12-2009 17:00:21 [thread0-initMonsters] Init monster [20]
+01-12-2009 17:00:21 [thread0-Monster::setImage] enter
+01-12-2009 17:00:21 [thread0-Monster::setImage] leave
+01-12-2009 17:00:21 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:21 [thread0-Monster::setStep] leave
+01-12-2009 17:00:21 [thread0-initMonsters] Init monster [21]
+01-12-2009 17:00:21 [thread0-Monster::setImage] enter
+01-12-2009 17:00:21 [thread0-Monster::setImage] leave
+01-12-2009 17:00:21 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:21 [thread0-Monster::setStep] leave
+01-12-2009 17:00:21 [thread0-initMonsters] Init monster [22]
+01-12-2009 17:00:21 [thread0-Monster::setImage] enter
+01-12-2009 17:00:21 [thread0-Monster::setImage] leave
+01-12-2009 17:00:21 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:21 [thread0-Monster::setStep] leave
+01-12-2009 17:00:21 [thread0-initMonsters] Init monster [23]
+01-12-2009 17:00:21 [thread0-Monster::setImage] enter
+01-12-2009 17:00:21 [thread0-Monster::setImage] leave
+01-12-2009 17:00:21 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:21 [thread0-Monster::setStep] leave
+01-12-2009 17:00:21 [thread0-initMonsters] Init monster [24]
+01-12-2009 17:00:21 [thread0-Monster::setImage] enter
+01-12-2009 17:00:21 [thread0-Monster::setImage] leave
+01-12-2009 17:00:21 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:21 [thread0-Monster::setStep] leave
+01-12-2009 17:00:21 [thread0-initMonsters] leave [void]
+01-12-2009 17:00:21 [thread0-initWeapons] enter
+01-12-2009 17:00:21 [thread0-Weapon::setImage] enter
+01-12-2009 17:00:21 [thread0-Weapon::setImage] leave
+01-12-2009 17:00:21 [thread0-Weapon::setX] enter [x=100]
+01-12-2009 17:00:21 [thread0-Weapon::setX] leave [void]
+01-12-2009 17:00:21 [thread0-Weapon::setY] enter [y=100]
+01-12-2009 17:00:21 [thread0-Weapon::setY] leave [void]
+01-12-2009 17:00:21 [thread0-Weapon::setAngle] enter [angle=0]
+01-12-2009 17:00:21 [thread0-Weapon::setAngle] leave
+01-12-2009 17:00:21 [thread0-Weapon::setStep] enter [step=2]
+01-12-2009 17:00:21 [thread0-Weapon::setStep] leave
+01-12-2009 17:00:21 [thread0-Weapon::setDelay] enter [delay=100]
+01-12-2009 17:00:21 [thread0-Weapon::setDelay] leave
+01-12-2009 17:00:21 [thread0-Weapon::setRange] enter [range=60]
+01-12-2009 17:00:21 [thread0-Weapon::setRange] leave
+01-12-2009 17:00:21 [thread0-Weapon::setPower] enter [power=2]
+01-12-2009 17:00:21 [thread0-Weapon::setPower] leave
+01-12-2009 17:00:21 [thread0-initWeapons] leave [void]
+01-12-2009 17:00:24 [thread0-processStateMachine] stateMachine=stateMenu
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:00:25 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:00:25 [thread0-Button::onSelect] enter [x=|y=100]
+01-12-2009 17:00:25 [thread0-Button::onSelect] Button selected
+01-12-2009 17:00:25 [thread0-Button::onSelect] leave
+01-12-2009 17:00:25 [thread0-processStateMachine] stateMachine=stateGame
+01-12-2009 17:00:25 [thread0-initGrid] enter [level=2]
+01-12-2009 17:00:25 [thread0-Pointer::setImage1] enter
+01-12-2009 17:00:25 [thread0-Pointer::setImage1] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setImage1] enter
+01-12-2009 17:00:25 [thread0-Pointer::setImage1] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setImage1] enter
+01-12-2009 17:00:25 [thread0-Pointer::setImage1] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setImage4] enter
+01-12-2009 17:00:25 [thread0-Pointer::setImage4] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setImage5] enter
+01-12-2009 17:00:25 [thread0-Pointer::setImage5] leave [void]
+01-12-2009 17:00:25 [thread0-Pointer::setImageBase] enter
+01-12-2009 17:00:25 [thread0-Pointer::setImageBase] leave [void]
+01-12-2009 17:00:25 [thread0-Grid::render] enter
+01-12-2009 17:00:25 [thread0-Grid::initGrid] enter
+01-12-2009 17:00:25 [thread0-Grid::initGrid] leave [void]
+01-12-2009 17:00:25 [thread0-Grid::parseGrid] enter
+01-12-2009 17:00:25 [thread0-Grid::parseGrid] leave [maxLocations=73]
+01-12-2009 17:00:25 [thread0-Grid::render] leave [void]
+01-12-2009 17:00:25 [thread0-initGrid] leave [void]
+01-12-2009 17:00:25 [thread0-initMonsters] enter
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [0]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [1]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [2]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [3]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [4]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [5]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [6]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [7]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [8]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [9]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [10]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [11]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [12]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [13]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [14]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [15]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [16]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [17]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [18]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [19]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [20]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [21]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [22]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [23]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] Init monster [24]
+01-12-2009 17:00:25 [thread0-Monster::setImage] enter
+01-12-2009 17:00:25 [thread0-Monster::setImage] leave
+01-12-2009 17:00:25 [thread0-Monster::setStep] enter [step=1]
+01-12-2009 17:00:25 [thread0-Monster::setStep] leave
+01-12-2009 17:00:25 [thread0-initMonsters] leave [void]
+01-12-2009 17:00:25 [thread0-initWeapons] enter
+01-12-2009 17:00:25 [thread0-Weapon::setImage] enter
+01-12-2009 17:00:25 [thread0-Weapon::setImage] leave
+01-12-2009 17:00:25 [thread0-Weapon::setX] enter [x=100]
+01-12-2009 17:00:25 [thread0-Weapon::setX] leave [void]
+01-12-2009 17:00:25 [thread0-Weapon::setY] enter [y=100]
+01-12-2009 17:00:25 [thread0-Weapon::setY] leave [void]
+01-12-2009 17:00:25 [thread0-Weapon::setAngle] enter [angle=0]
+01-12-2009 17:00:25 [thread0-Weapon::setAngle] leave
+01-12-2009 17:00:25 [thread0-Weapon::setStep] enter [step=2]
+01-12-2009 17:00:25 [thread0-Weapon::setStep] leave
+01-12-2009 17:00:25 [thread0-Weapon::setDelay] enter [delay=100]
+01-12-2009 17:00:25 [thread0-Weapon::setDelay] leave
+01-12-2009 17:00:25 [thread0-Weapon::setRange] enter [range=60]
+01-12-2009 17:00:25 [thread0-Weapon::setRange] leave
+01-12-2009 17:00:25 [thread0-Weapon::setPower] enter [power=2]
+01-12-2009 17:00:25 [thread0-Weapon::setPower] leave
+01-12-2009 17:00:25 [thread0-initWeapons] leave [void]
+01-12-2009 17:01:49 [thread0-processStateMachine] stateMachine=stateMenu
+01-12-2009 17:01:49 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:49 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:49 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:49 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:49 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:49 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] enter [rumble=25]
+01-12-2009 17:01:50 [thread0-Pointer::setRumble] leave [void]
+01-12-2009 17:01:50 [thread0-Pointer::draw] Home button pressed
+01-12-2009 17:01:50 [thread0-destroyImages] enter
+01-12-2009 17:01:50 [thread0-destroyImages] leave
+01-12-2009 17:01:50 [thread0-main] TowerDefense 0.24 Leaving
