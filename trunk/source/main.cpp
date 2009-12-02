@@ -397,15 +397,14 @@ int         yOffset           = 0;
 int         yjpegOffset       = 0;
 
 Trace trace;
+Grid    *grid;
+Monster *monsters[MAX_MONSTERS];
+Pointer *pointers[MAX_POINTERS];
+Weapon  *weapons[MAX_WEAPONS];
+Button  *buttons[MAX_BUTTONS];
 
-Monster monsters[MAX_MONSTERS];
-Pointer pointers[MAX_POINTERS];
-Weapon  weapons[MAX_WEAPONS];
-Button  buttons[MAX_BUTTONS];
-Grid    grid;
-
-int maxMonsters  = 25;
-int maxWeapons   = 1;
+int maxMonsters  = 0;
+int maxWeapons   = 0;
 int maxButtons   = 0;
 int maxPointers  = 0; 
 
@@ -501,33 +500,36 @@ void initWeapons(void)
 {
     const char *s_fn="initWeapons";
     trace.event(s_fn,0,"enter");
-   
-	weapons[0].setImage(images.weapon1);
-	weapons[0].setX(100);
-	weapons[0].setY(100);
-	weapons[0].setAngle(0);
-	weapons[0].setStep(2);
-	weapons[0].setDelay(100);
-	weapons[0].setRange(100);
-	weapons[0].setPower(2);
+    
+	weapons[0]= new Weapon();
+	weapons[0]->setImage(images.weapon1);
+	weapons[0]->setX(100);
+	weapons[0]->setY(100);
+	weapons[0]->setAngle(0);
+	weapons[0]->setStep(2);
+	weapons[0]->setDelay(100);
+	weapons[0]->setRange(100);
+	weapons[0]->setPower(2);
 	
-	weapons[1].setImage(images.weapon1);
-	weapons[1].setX(200);
-	weapons[1].setY(200);
-	weapons[1].setAngle(0);
-	weapons[1].setStep(2);
-	weapons[1].setDelay(100);
-	weapons[1].setRange(100);
-	weapons[1].setPower(2);
+	weapons[1]= new Weapon();
+	weapons[1]->setImage(images.weapon1);
+	weapons[1]->setX(200);
+	weapons[1]->setY(200);
+	weapons[1]->setAngle(0);
+	weapons[1]->setStep(2);
+	weapons[1]->setDelay(100);
+	weapons[1]->setRange(100);
+	weapons[1]->setPower(2);
 	
-	weapons[2].setImage(images.weapon1);
-	weapons[2].setX(300);
-	weapons[2].setY(300);
-	weapons[2].setAngle(0);
-	weapons[2].setStep(2);
-	weapons[2].setDelay(100);
-	weapons[2].setRange(100);
-	weapons[2].setPower(2);
+	weapons[2]= new Weapon();
+	weapons[2]->setImage(images.weapon1);
+	weapons[2]->setX(300);
+	weapons[2]->setY(300);
+	weapons[2]->setAngle(0);
+	weapons[2]->setStep(2);
+	weapons[2]->setDelay(100);
+	weapons[2]->setRange(100);
+	weapons[2]->setPower(2);
 
 	maxWeapons = 3;
 	
@@ -546,91 +548,92 @@ void initMonsters(void)
    for( int i=0; i<maxMonsters; i++ ) 
    {
    	  trace.event(s_fn,0,"Init monster [%d]",i);
+
+	  monsters[i]=new Monster();
+	  monsters[i]->setStep(1);
+	  monsters[i]->setStartDelay(delay);
+	  monsters[i]->setEnergy(10);
 	 	  
 	  switch (i+1)
 	  {
-	     case 1: monsters[i].setImage(images.monster1);
+	     case 1: monsters[i]->setImage(images.monster1);
 				 break;
 				 
-	     case 2: monsters[i].setImage(images.monster2);
+	     case 2: monsters[i]->setImage(images.monster2);
 				 break;
 
-	     case 3: monsters[i].setImage(images.monster3);
+	     case 3: monsters[i]->setImage(images.monster3);
 				 break;				 
 
-	     case 4: monsters[i].setImage(images.monster4);
+	     case 4: monsters[i]->setImage(images.monster4);
 				 break;
 				 
-		 case 5: monsters[i].setImage(images.monster5);
+		 case 5: monsters[i]->setImage(images.monster5);
 				 break;
 
-		 case 6: monsters[i].setImage(images.monster6);
+		 case 6: monsters[i]->setImage(images.monster6);
 				 break;
 
-		 case 7: monsters[i].setImage(images.monster7);
+		 case 7: monsters[i]->setImage(images.monster7);
 				 break;
 
-		 case 8: monsters[i].setImage(images.monster8);
+		 case 8: monsters[i]->setImage(images.monster8);
 				 break;
 
-		 case 9: monsters[i].setImage(images.monster9);
+		 case 9: monsters[i]->setImage(images.monster9);
 				 break;
 
-		 case 10: monsters[i].setImage(images.monster10);
+		 case 10: monsters[i]->setImage(images.monster10);
 				 break;
 
-		 case 11: monsters[i].setImage(images.monster11);
+		 case 11: monsters[i]->setImage(images.monster11);
 				 break;
 
-		 case 12: monsters[i].setImage(images.monster12);
+		 case 12: monsters[i]->setImage(images.monster12);
 				 break;
 
-		 case 13: monsters[i].setImage(images.monster13);
+		 case 13: monsters[i]->setImage(images.monster13);
 				 break;
 
-		 case 14: monsters[i].setImage(images.monster14);
+		 case 14: monsters[i]->setImage(images.monster14);
 				 break;
 
-		 case 15: monsters[i].setImage(images.monster15);
+		 case 15: monsters[i]->setImage(images.monster15);
 				 break;
 
-		 case 16: monsters[i].setImage(images.monster16);
+		 case 16: monsters[i]->setImage(images.monster16);
 				 break;
 				 
-		 case 17: monsters[i].setImage(images.monster17);
+		 case 17: monsters[i]->setImage(images.monster17);
 				 break;
 				 
-		 case 18: monsters[i].setImage(images.monster18);
+		 case 18: monsters[i]->setImage(images.monster18);
 				 break;
 
-		 case 19: monsters[i].setImage(images.monster19);
+		 case 19: monsters[i]->setImage(images.monster19);
 				 break;
 				 
-		 case 20: monsters[i].setImage(images.monster20);
+		 case 20: monsters[i]->setImage(images.monster20);
 				 break;
 				 
-		 case 21: monsters[i].setImage(images.monster21);
+		 case 21: monsters[i]->setImage(images.monster21);
 				 break;
 
-		 case 22: monsters[i].setImage(images.monster22);
+		 case 22: monsters[i]->setImage(images.monster22);
 				 break;
 				 
-		 case 23: monsters[i].setImage(images.monster23);
+		 case 23: monsters[i]->setImage(images.monster23);
 				 break;
 
-		 case 24: monsters[i].setImage(images.monster24);
+		 case 24: monsters[i]->setImage(images.monster24);
 				 break;
 				 
-		 case 25: monsters[i].setImage(images.monster25);
+		 case 25: monsters[i]->setImage(images.monster25);
 				 break;
 	  }
 	  	 
 	  //int step = (int) (rand() % 3)+1;
- 
-	  monsters[i].setStep(1);
-	  monsters[i].setStartDelay(delay);
-	  monsters[i].setEnergy(10);
-	  
+ 	  
 	  // Wait +/- two seconds before new monster is lanched.
 	  delay+=100;
    }
@@ -642,30 +645,34 @@ void initPointers(void)
 {
    const char *s_fn="initPointers";
    trace.event(s_fn,0,"enter");
-   
-   pointers[0].setIndex(0);
-   pointers[0].setX(320);
-   pointers[0].setY(240);
-   pointers[0].setAngle(0);
-   pointers[0].setImage(images.pointer1);
 
-   pointers[1].setIndex(1);
-   pointers[1].setX(320);
-   pointers[1].setY(240);
-   pointers[1].setAngle(0);
-   pointers[1].setImage(images.pointer2);
+   pointers[0] = new Pointer();   
+   pointers[0]->setIndex(0);
+   pointers[0]->setX(320);
+   pointers[0]->setY(240);
+   pointers[0]->setAngle(0);
+   pointers[0]->setImage(images.pointer1);
 
-   pointers[2].setIndex(2);
-   pointers[2].setX(320);
-   pointers[2].setY(240);
-   pointers[2].setAngle(0);
-   pointers[2].setImage(images.pointer3);
+   pointers[1] = new Pointer(); 
+   pointers[1]->setIndex(1);
+   pointers[1]->setX(320);
+   pointers[1]->setY(240);
+   pointers[1]->setAngle(0);
+   pointers[1]->setImage(images.pointer2);
 
-   pointers[3].setIndex(3);
-   pointers[3].setX(320);
-   pointers[3].setY(240);
-   pointers[3].setAngle(0);
-   pointers[3].setImage(images.pointer4);	
+   pointers[2] = new Pointer(); 
+   pointers[2]->setIndex(2);
+   pointers[2]->setX(320);
+   pointers[2]->setY(240);
+   pointers[2]->setAngle(0);
+   pointers[2]->setImage(images.pointer3);
+
+   pointers[3] = new Pointer(); 
+   pointers[3]->setIndex(3);
+   pointers[3]->setX(320);
+   pointers[3]->setY(240);
+   pointers[3]->setAngle(0);
+   pointers[3]->setImage(images.pointer4);	
    
    maxPointers=4;
    
@@ -678,26 +685,27 @@ void initGrid(int level)
     const char *s_fn="initGrid";
     trace.event(s_fn,0,"enter [level=%d]",level);
    
-	grid.setImageRoad1(images.road1);
-	grid.setImageRoad2(images.road2);
-	grid.setImageRoad3(images.road3);
-	grid.setImageRoad4(images.road4);
-	grid.setImageRoad5(images.road5);
-	grid.setImageWater(images.water1);
-	grid.setImageBridge(images.bridge1);
+    grid = new Grid();
+	grid->setImageRoad1(images.road1);
+	grid->setImageRoad2(images.road2);
+	grid->setImageRoad3(images.road3);
+	grid->setImageRoad4(images.road4);
+	grid->setImageRoad5(images.road5);
+	grid->setImageWater(images.water1);
+	grid->setImageBridge(images.bridge1);
 	
 	switch( level )
 	{
-		case 1: grid.setImageBase(images.base1);
-				grid.create(GRID1_FILENAME );
+		case 1: grid->setImageBase(images.base1);
+				grid->create(GRID1_FILENAME );
 				break;
 			
-		case 2: grid.setImageBase(images.base2);
-				grid.create(GRID2_FILENAME );
+		case 2: grid->setImageBase(images.base2);
+				grid->create(GRID2_FILENAME );
 				break;
 				
-		case 3: grid.setImageBase(images.base3);
-				grid.create(GRID3_FILENAME );
+		case 3: grid->setImageBase(images.base3);
+				grid->create(GRID3_FILENAME );
 				break;
 	}
 
@@ -711,25 +719,28 @@ void initButtons(void)
 		//case stateMenu:
 			{
 				// Button (Play Map1)
-				buttons[0].setX(100);
-				buttons[0].setY(100);
-				buttons[0].setImageNormal(images.button1);
-				buttons[0].setImageFocus(images.buttonFocus1);
-				buttons[0].setLabel("Map1");
+				buttons[0]=new Button();
+				buttons[0]->setX(100);
+				buttons[0]->setY(100);
+				buttons[0]->setImageNormal(images.button1);
+				buttons[0]->setImageFocus(images.buttonFocus1);
+				buttons[0]->setLabel("Map1");
 				
 				// Button (Play Map2)
-				buttons[1].setX(100);
-				buttons[1].setY(200);
-				buttons[1].setImageNormal(images.button1);
-				buttons[1].setImageFocus(images.buttonFocus1);
-				buttons[1].setLabel("Map2");
+				buttons[1]=new Button();
+				buttons[1]->setX(100);
+				buttons[1]->setY(200);
+				buttons[1]->setImageNormal(images.button1);
+				buttons[1]->setImageFocus(images.buttonFocus1);
+				buttons[1]->setLabel("Map2");
 				
 				// Button (Play Map2)
-				buttons[2].setX(100);
-				buttons[2].setY(300);
-				buttons[2].setImageNormal(images.button1);
-				buttons[2].setImageFocus(images.buttonFocus1);
-				buttons[2].setLabel("Map3");
+				buttons[2]=new Button();
+				buttons[2]->setX(100);
+				buttons[2]->setY(300);
+				buttons[2]->setImageNormal(images.button1);
+				buttons[2]->setImageFocus(images.buttonFocus1);
+				buttons[2]->setLabel("Map3");
 				
 				maxButtons=3;
 			}
@@ -764,16 +775,16 @@ void initGame(void)
 // Draw monster on screen
 void drawGrid(void)
 {
-   grid.draw();
+   grid->draw();
 }
 
 // Draw base on screen
 void drawPointers(void)
 {
    int i;
-   for( i=0; i<MAX_POINTERS; i++ ) 
+   for( i=0; i<maxPointers; i++ ) 
    {
-	 pointers[i].draw();
+	 pointers[i]->draw();
    }
 }
 
@@ -783,8 +794,8 @@ void drawMonsters(void)
    int i;
    for( i=0; i<maxMonsters; i++ ) 
    {
-	  monsters[i].move();
-	  monsters[i].draw();
+	  monsters[i]->move();
+	  monsters[i]->draw();
    }
 }
 
@@ -794,8 +805,8 @@ void drawWeapons(void)
    int i;
    for( i=0; i<maxWeapons; i++ ) 
    {
-     weapons[i].move();
-	 weapons[i].draw();
+     weapons[i]->move();
+	 weapons[i]->draw();
    }
 }
 
@@ -805,7 +816,7 @@ void drawButtons(void)
    int i;
    for( i=0; i<maxButtons; i++ ) 
    {
-	 buttons[i].draw();
+	 buttons[i]->draw();
    }
 }
 
