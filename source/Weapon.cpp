@@ -33,10 +33,12 @@
 // Variables
 // ------------------------------
 
-extern Trace trace;
 extern GXRModeObj  *rmode;
-extern Monster monster[100];
-extern int maxMonster;
+
+extern Trace trace;
+extern Monster monsters[100];
+
+extern int maxMonsters;
 
 // ------------------------------
 // Constructor 
@@ -87,7 +89,7 @@ void Weapon::draw(void)
 	GRRLIB_DrawImg( x, y, image, angle, 1, 1, IMAGE_COLOR );		
 
 	sprintf(tmp, "%d", delay);
-	GRRLIB_Printf2(x+16, y+40, tmp, size, COLOR_DARKBLACK); 	
+	GRRLIB_Printf2(x, y, tmp, size, COLOR_DARKBLACK); 		
 }
 
 void Weapon::fire(void)
@@ -99,18 +101,17 @@ void Weapon::fire(void)
 	else
 	{
 		// fire
-		for (int i=0; i<maxMonster; i++)
+		for (int i=0; i<maxMonsters; i++)
 		{			
-			if ( monster[i].getVisible() )
+			if ( monsters[i].getVisible() )
 			{
-				float distance = 10;
-			
-				//  pow( (monster[i].getX()+x)*(monster[i].getX()+x)) + 
-				//	  ((monster[i].getY()+y)*(monster[i].getY()+y) );&& (distance<range))
-				
+				float distance= 
+					sqrt( ( (monsters[i].getX()-x) * (monsters[i].getX()-x) ) + 
+				 	  	  ( (monsters[i].getY()-y) * (monsters[i].getY()-y) ) );
+						  				
 				if (distance<range)
 				{
-					monster[i].setHit(power);
+					monsters[i].setHit(power);
 					delay=100;
 					break;
 				}

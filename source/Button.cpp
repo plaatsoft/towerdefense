@@ -27,7 +27,8 @@
 #include "Trace.h"
 
 extern Trace trace;
-extern Pointer pointer[MAX_POINTERS];
+extern Pointer pointers[MAX_POINTERS];
+extern int maxPointers;
 
 // ------------------------------
 // Constructor
@@ -65,14 +66,14 @@ Button::~Button()
 void Button::draw()
 {
 	boolean focus=false;
-	for (int i=0; i<MAX_POINTERS; i++)
+	for (int i=0; i<maxPointers; i++)
 	{
-		if ((pointer[i].getX()>=x) && (pointer[i].getX()<=(x+width)) 
-			&& (pointer[i].getY()>=y) && (pointer[i].getY()<=(y+height)))
+		if ((pointers[i].getX()>=x) && (pointers[i].getX()<=(x+width)) 
+			&& (pointers[i].getY()>=y) && (pointers[i].getY()<=(y+height)))
 		{
 			GRRLIB_DrawImg( x, y, imageFocus, 0, 1, 1, IMAGE_COLOR );	
 		    focus=true;
-			pointer[i].setRumble(MAX_RUMBLE);
+			//pointers[i].setRumble(MAX_RUMBLE);
 			break;
 		}
 	}

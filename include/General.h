@@ -64,10 +64,10 @@
 
 #define IMAGE_COLOR        		0xFFFFFFFF
 
+#define MAX_WEAPONS				3
+#define MAX_MONSTERS			100
 #define MAX_BUTTONS         	10
 #define MAX_RUMBLE				25
-#define MAX_BOARDSIZE 			14
-#define MAX_BUBBLES   			(MAX_BOARDSIZE*MAX_BOARDSIZE)
 #define MAX_HORZ_PIXELS			640
 #define MAX_VERT_PIXELS			480
 #define MAX_HIGHSCORES 			50
