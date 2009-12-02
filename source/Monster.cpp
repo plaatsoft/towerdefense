@@ -33,8 +33,10 @@
 // ------------------------------
 
 extern Trace trace;
-extern Grid grid;
-extern GXRModeObj  *rmode;
+
+extern Grid *grid;
+
+extern GXRModeObj *rmode;
 
 // ------------------------------
 // Constructor 
@@ -106,10 +108,10 @@ void Monster::move(void)
 		if ((x==targetX) && (y==targetY))
 		{
 			// Get new target postion 
-			targetX=grid.getLocationX(pos);
-			targetY=grid.getLocationY(pos);
+			targetX=grid->getLocationX(pos);
+			targetY=grid->getLocationY(pos);
 			pos++;
-			if (pos>=grid.getMaxLocations())	
+			if (pos>=grid->getMaxLocations())	
 			{
 				// Monster has reach the final destination. Disable it!
 				visible=false;
@@ -151,10 +153,10 @@ void Monster::setImage(GRRLIB_texImg *image1)
 
    pos = 0;
    
-   x=grid.getLocationX(pos);
+   x=grid->getLocationX(pos);
    targetX=x;
 			
-   y=grid.getLocationY(pos);
+   y=grid->getLocationY(pos);
    targetY=y;
 
    visible=false;

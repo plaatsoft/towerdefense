@@ -36,7 +36,7 @@
 extern GXRModeObj  *rmode;
 
 extern Trace trace;
-extern Monster monsters[100];
+extern Monster *monsters[100];
 
 extern int maxMonsters;
 
@@ -103,15 +103,15 @@ void Weapon::fire(void)
 		// fire
 		for (int i=0; i<maxMonsters; i++)
 		{			
-			if ( monsters[i].getVisible() )
+			if ( monsters[i]->getVisible() )
 			{
 				float distance= 
-					sqrt( ( (monsters[i].getX()-x) * (monsters[i].getX()-x) ) + 
-				 	  	  ( (monsters[i].getY()-y) * (monsters[i].getY()-y) ) );
+					sqrt( ( (monsters[i]->getX()-x) * (monsters[i]->getX()-x) ) + 
+				 	  	  ( (monsters[i]->getY()-y) * (monsters[i]->getY()-y) ) );
 						  				
 				if (distance<range)
 				{
-					monsters[i].setHit(power);
+					monsters[i]->setHit(power);
 					delay=100;
 					break;
 				}

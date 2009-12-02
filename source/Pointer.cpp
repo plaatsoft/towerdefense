@@ -27,7 +27,7 @@
 #include "Button.h"
   
 extern Trace trace;
-extern Button buttons[MAX_BUTTONS];
+extern Button *buttons[MAX_BUTTONS];
 
 extern int stateMachine;
 extern boolean stopApplication;
@@ -112,21 +112,21 @@ void buttonA(int x, int y)
 	 
 	 case stateMenu:
 	 {
-	    if (buttons[0].onSelect(x,y))
+	    if (buttons[0]->onSelect(x,y))
 		{
           // Map1 button	      
 		  stateMachine=stateGame;
 		  selectedMap=1;
 		}
 		
-		if (buttons[1].onSelect(x,y))
+		if (buttons[1]->onSelect(x,y))
 		{
           // Map2 button	      
 		  stateMachine=stateGame;
 		  selectedMap=2;
 		}
 		
-		if (buttons[2].onSelect(x,y))
+		if (buttons[2]->onSelect(x,y))
 		{
           // Map3 button	      
 		  stateMachine=stateGame;
