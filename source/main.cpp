@@ -19,13 +19,19 @@
 **  Release Notes:
 **  ==============
 **
+**  02/12/2009 Version 0.25
+**  - Bugfix: Monster is now correct initialised
+**  - Improve weapon fire methode.
+**  - Added source code information
+**
 **  01/12/2009 Version 0.24
-**  - Bugfix: Game initials
-**  - Added state machine
-**  - Cleanup code
+**  - Bugfix: Game variables are now correct initialised
+**  - Added state machine functionality
+**  - Added Grid 3
+**  - Added water and bridge graphic.
 **
 **  30/11/2009 Version 0.23
-**  - Use libogc 1.8.1 library as Wii interface engine
+**  - Use libogc 1.8.1 library as Wii interface engine.
 **  - Very basic Game menu page.
 **  - Improve grid.
 **  - Align monster movement on grid.
@@ -498,7 +504,7 @@ void initWeapons(void)
 	weapon[0].setAngle(0);
 	weapon[0].setStep(2);
 	weapon[0].setDelay(100);
-	weapon[0].setRange(60);
+	weapon[0].setRange(20);
 	weapon[0].setPower(2);
 	
 	trace.event(s_fn,0,"leave [void]");
@@ -596,7 +602,7 @@ void initMonsters(void)
 	  //int step = (int) (rand() % 3)+1;
  
 	  monster[i].setStep(1);
-	  monster[i].setDelay(delay);
+	  monster[i].setStartDelay(delay);
 	  monster[i].setEnergy(10);
 	  
 	  // Wait +/- two seconds before new monster is lanched.
@@ -751,7 +757,6 @@ void drawMonsters(void)
    {
 	  monster[i].move();
 	  monster[i].draw();
-	  monster[i].properties();
    }
 }
 
@@ -763,7 +768,6 @@ void drawWeapons(void)
    {
      weapon[i].move();
 	 weapon[i].draw();
-	 weapon[i].properties();
    }
 }
 
@@ -866,7 +870,6 @@ void drawScreen(void)
 				  
     switch( stateMachine )	
 	{	
-	
 	   case stateIntro1:
 	   {
 	      int  ypos=yOffset;

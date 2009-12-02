@@ -56,6 +56,8 @@ Weapon::Weapon()
    width=0;
    step=0;
    range=0;
+   power=0;
+   delay=0;
    
    trace.event(s_fn,0,"leave");
 }
@@ -72,38 +74,21 @@ Weapon::~Weapon()
    trace.event(s_fn,0,"leave");
 }
 
-
 // ------------------------------
 // Others
 // ------------------------------
 	
-void Weapon::properties(void)
-{  
-	char tmp[50];
-	int size=12;
-   
-	sprintf(tmp, "x=%d", x);
-	GRRLIB_Printf2(x, y-30, tmp, size, COLOR_DARKBLACK); 
-
-	sprintf(tmp, "y=%d", y);
-	GRRLIB_Printf2(x, y-20, tmp, size, COLOR_DARKBLACK);
-     
-	sprintf(tmp, "angle=%d", angle);
-	GRRLIB_Printf2(x, y-10, tmp, size, COLOR_DARKBLACK);
-}
-
 void Weapon::draw(void)
 {
+	char tmp[50];
+	int size=12;
+	
 	// Draw Weapon on screen
 	GRRLIB_DrawImg( x, y, image, angle, 1, 1, IMAGE_COLOR );		
-}
 
-void Weapon::move(void)
-{  
-	angle=angle+step;
-	if (angle>359) angle=0;
+	sprintf(tmp, "%d", delay);
+	GRRLIB_Printf2(x+16, y+40, tmp, size, COLOR_DARKBLACK); 	
 }
-
 
 void Weapon::fire(void)
 {
@@ -115,25 +100,34 @@ void Weapon::fire(void)
 	{
 		// fire
 		for (int i=0; i<maxMonster; i++)
-		{
-			float distance = 10;
-			
-			//  pow( (monster[i].getX()+x)*(monster[i].getX()+x)) + 
-			//	  ((monster[i].getY()+y)*(monster[i].getY()+y) );
-			
-			if (monster[i].getAlive() && (distance<range))
+		{			
+			if ( monster[i].getVisible() )
 			{
-				monster[i].setHit(2);
-				delay=100;
-				break;
+				float distance = 10;
+			
+				//  pow( (monster[i].getX()+x)*(monster[i].getX()+x)) + 
+				//	  ((monster[i].getY()+y)*(monster[i].getY()+y) );&& (distance<range))
+				
+				if (distance<range)
+				{
+					monster[i].setHit(power);
+					delay=100;
+					break;
+				}
 			}
 		}
-		
 	}
 }
 
+void Weapon::move(void)
+{  
+	angle=angle+step;
+	if (angle>MAX_ANGLE) angle=0;
+	fire();
+}
+
 // ------------------------------
-// Setters and getters 
+// Setters 
 // ------------------------------
 
 void Weapon::setX(int x1)

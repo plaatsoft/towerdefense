@@ -26,43 +26,72 @@
 class Monster
 {
   private:
+ 
+	// Current x position
 	int x;
+	
+	// Target x position
 	int targetX;
+	
+	// Current x position
 	int y;	
+	
+	// Target x position
 	int targetY;
+	
+	// Alfa image color
 	int alfa;
+	
+	// Monster energy label
 	int energy;
+	
+	// Monster siz
 	float size;
+	
+	// Monster Sprite
 	GRRLIB_texImg *image;
+	
+	// Monster height (default 32)
 	int height;
+	
+	// Monster width (default 32)
 	int width;
-	bool xDirection;
-	bool yDirection;
+	
+	// Monster step (pixels per movement)
 	int step;
-	int delay;
+	
+	// Monster start delay (how much cycles to wait before entering the grid)
+	int startDelay;
+	
+	// Monster grid position
 	int pos;
+	
+	// Monster is visible on grid
 	boolean visible;
 	
   public:
+	// Constructor & Destructor
   	Monster();
  	~Monster();
 
+	// Methodes
+	void draw(void);
+	void move(void);
+	
+	// Setters
 	void setImage(GRRLIB_texImg *image);	
 	void setStep(int step);
-	void setDelay(int delay);
+	void setStartDelay(int delay);
 	void setEnergy(int energy);
 	void setHit(int hit);
 	
+	// Getters
 	int getX(void);
 	int getY(void);
 	int getAlfa(void);
 	float getSize(void);
 	int getStep(void);
-	bool getAlive(void);
-	
-	void properties(void);
-	void draw(void);
-	void move(void);
+	bool getVisible(void);
 };
 
 #endif

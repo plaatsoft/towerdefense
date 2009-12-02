@@ -39,16 +39,19 @@ class Weapon
 	int delay;
 	int range;
 	int power;
+
+	// Methodes
+	void fire(void);
 	
   public:
   	Weapon();
  	~Weapon();
 
+	// Methodes
 	void draw(void);	
-	void properties(void);
 	void move(void);
-	void fire(void);
 	
+	// Setters
 	void setX(int x);
 	void setDelay(int delay);
 	void setY(int y);

@@ -45,10 +45,6 @@ Monster::Monster()
    const char *s_fn="Monster::Monster";
    trace.event(s_fn,0,"enter");
    
-   xDirection=true;
-   yDirection=true;
-   visible=true;
-   
    x=0;
    targetX=0;
    y=0;
@@ -60,6 +56,7 @@ Monster::Monster()
    width=0;
    step=0;
    pos=0;
+   visible=true;
    
    trace.event(s_fn,0,"leave");
 }
@@ -80,45 +77,42 @@ Monster::~Monster()
 // Others
 // ------------------------------
 	
-void Monster::properties(void)
-{  
-	char tmp[50];
-	int size=12;
-   
-   if (!visible) return;
-   
-	sprintf(tmp, "%d", energy);
-	GRRLIB_Printf2(x+8, y-14, tmp, size, COLOR_DARKBLACK); 
-}
-
+// Draw Monster on screen
 void Monster::draw(void)
 {
-	// Draw Monster on screen
+    char tmp[50];
+	int size=12;
 	
 	if (!visible) return;
 	
 	GRRLIB_DrawImg( x, y, image, 0, size, size, IMAGE_COLOR );	
+	
+	sprintf(tmp, "%d", energy);
+	GRRLIB_Printf2(x+8, y-14, tmp, size, COLOR_DARKBLACK); 
 }
 
 void Monster::move(void)
 {  
-    if (!visible) return;
-	
-	if (delay>0)
+	if (startDelay>0)
 	{
-		delay--;
+		startDelay--;
+		if (startDelay==0)
+		{
+			// First movement on screen. Make monster visible!
+			visible=true;
+		}
 	}
 	else
 	{
 		if ((x==targetX) && (y==targetY))
 		{
-			// Target Postion reached. Get new target position
+			// Get new target postion 
 			targetX=grid.getLocationX(pos);
 			targetY=grid.getLocationY(pos);
 			pos++;
 			if (pos>=grid.getMaxLocations())	
 			{
-				// Monster has reach the final destination (Base)
+				// Monster has reach the final destination. Disable it!
 				visible=false;
 			}
 		}
@@ -143,7 +137,7 @@ void Monster::move(void)
 }
 
 // ------------------------------
-// Setters and getters 
+// Setters 
 // ------------------------------
 
 void Monster::setImage(GRRLIB_texImg *image1)
@@ -157,13 +151,14 @@ void Monster::setImage(GRRLIB_texImg *image1)
    width=image->w;
 
    pos = 0;
-   visible=true;
    
    x=grid.getLocationX(pos);
    targetX=x;
 			
-   targetY=grid.getLocationY(pos);
+   y=grid.getLocationY(pos);
    targetY=y;
+
+   visible=false;
    
    pos++;
    
@@ -183,9 +178,9 @@ void Monster::setStep(int step1)
    trace.event(s_fn,0,"leave");
 }
 
-void Monster::setDelay(int delay1)
+void Monster::setStartDelay(int startDelay1)
 {
-	delay=delay1;
+	startDelay=startDelay1;
 }
 
 void Monster::setEnergy(int energy1)
@@ -198,6 +193,10 @@ void Monster::setHit(int hit)
 	energy-=hit;
 	if (energy<=0) visible=false;
 }
+
+// ------------------------------
+// Getters 
+// ------------------------------
 
 int Monster::getX()
 {
@@ -219,7 +218,7 @@ int Monster::getStep(void)
    return step;
 }
 
-bool Monster::getAlive(void)
+bool Monster::getVisible(void)
 {
 	return visible;
 }
