@@ -24,6 +24,7 @@
 **  - Improve weapon fire methode.
 **  - Add background to menu page.
 **  - Added source code information.
+**  - Improve memory use (Create dynamic classes)
 **
 **  01/12/2009 Version 0.24
 **  - Bugfix: Game variables are now correct initialised

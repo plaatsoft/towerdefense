@@ -69,6 +69,9 @@ class Monster
 	// Monster is visible on grid
 	boolean visible;
 	
+	// Monster is dead
+	boolean dead;
+	
   public:
 	// Constructor & Destructor
   	Monster();
@@ -91,7 +94,7 @@ class Monster
 	int getAlfa(void);
 	float getSize(void);
 	int getStep(void);
-	bool getVisible(void);
+	bool getDead(void);
 };
 
 #endif

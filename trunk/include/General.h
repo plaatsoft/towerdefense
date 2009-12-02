@@ -88,7 +88,7 @@
 #define MAX_POINTERS         	4
 #define MAX_STEP		    	25
 #define MAX_GRID_X 				20
-#define MAX_GRID_Y 				16
+#define MAX_GRID_Y 				17
 
 #define EXPLODE_STEP	    	4
 #define OUT_OF_TIME		    	15

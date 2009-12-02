@@ -58,7 +58,8 @@ Monster::Monster()
    width=0;
    step=0;
    pos=0;
-   visible=true;
+   visible=false;
+   dead=false;
    
    trace.event(s_fn,0,"leave");
 }
@@ -88,12 +89,28 @@ void Monster::draw(void)
 	
 	GRRLIB_DrawImg( x, y, image, 0, size, size, IMAGE_COLOR );	
 	
-	sprintf(tmp, "%d", energy);
-	GRRLIB_Printf2(x+8, y-14, tmp, 12, COLOR_DARKBLACK); 
+	if (!dead)
+	{  
+	   sprintf(tmp, "%d", energy);
+	   GRRLIB_Printf2(x+8, y-14, tmp, 12, COLOR_DARKBLACK); 
+	}
 }
 
 void Monster::move(void)
 {  
+	if (dead)
+	{
+		if (size>0)
+		{
+			size-=0.01;
+	    }
+		else
+		{
+			visible=false;
+		}
+	    return;
+	}
+	
 	if (startDelay>0)
 	{
 		startDelay--;
@@ -101,39 +118,38 @@ void Monster::move(void)
 		{
 			// First movement on screen. Make monster visible!
 			visible=true;
+			dead=false;
+		}
+		return;
+	}
+
+	if ((x==targetX) && (y==targetY))
+	{
+		// Get new target postion 
+		targetX=grid->getLocationX(pos);
+		targetY=grid->getLocationY(pos);
+		pos++;
+		if (pos>=grid->getMaxLocations())	
+		{
+			// Monster has reach the final destination. Disable it!
+			visible=false;
 		}
 	}
-	else
+	else if (x<targetX)
 	{
-		if ((x==targetX) && (y==targetY))
-		{
-			// Get new target postion 
-			targetX=grid->getLocationX(pos);
-			targetY=grid->getLocationY(pos);
-			pos++;
-			if (pos>=grid->getMaxLocations())	
-			{
-				// Monster has reach the final destination. Disable it!
-				visible=false;
-			}
-		}
-		else if (x<targetX)
-		{
-			x=x+step;
-		}
-		else if (x>targetX)
-		{
-			x=x-step;	
-		}
-			
-		if (y<targetY)
-		{
-			y=y+step;
-		}
-		else if (y>targetY)
-		{
-			y=y-step;	
-		}
+		x=x+step;
+	}
+	else if (x>targetX)
+	{
+		x=x-step;	
+	}	
+	else if (y<targetY)
+	{
+		y=y+step;
+	}
+	else if (y>targetY)
+	{
+		y=y-step;	
 	}
 }
 
@@ -192,7 +208,10 @@ void Monster::setEnergy(int energy1)
 void Monster::setHit(int hit)
 {
 	energy-=hit;
-	if (energy<=0) visible=false;
+	if (energy<=0) 
+	{
+		dead=true;
+	}
 }
 
 // ------------------------------
@@ -219,9 +238,9 @@ int Monster::getStep(void)
    return step;
 }
 
-bool Monster::getVisible(void)
+bool Monster::getDead(void)
 {
-	return visible;
+	return dead;
 }
 
 // ------------------------------
