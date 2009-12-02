@@ -29,7 +29,7 @@
    <manual id="#" image="base" />
    <manual id="~" image="water" />
    <manual id="=" image="bridge angle="0" example="=" />
-   <manual id="H" image="bridge angle="0" example="=" />
+   <manual id="H" image="bridge angle="90" example="=" />
 
 
 </TowerDefense> 

@@ -30,7 +30,7 @@
 int maxLines;
 int maxLocations;
 
-char gridData[16][20];
+char gridData[MAX_GRID_Y][MAX_GRID_X];
 
 typedef struct 
 {
@@ -39,7 +39,7 @@ typedef struct
 }
 location;
 
-location locationList[320];
+location locationList[MAX_GRID_Y*MAX_GRID_X];
 
 extern Trace trace;
 
@@ -77,44 +77,39 @@ void Grid::parseGrid(void)
 	trace.event(s_fn,0,"enter");
    
 	int x,y;
-	char temp[16][20];
+	char temp[MAX_GRID_Y][MAX_GRID_X];
 	boolean ready=false;
 	maxLocations=0;
    
-	// Make copy of grid data
-	for (y=0;y<16;y++)
+	// Make copy of grid data and store start position
+	for (y=0;y<MAX_GRID_Y;y++)
 	{
-		for (x=0;x<20;x++)
+		for (x=0;x<MAX_GRID_X;x++)
 		{
 			if (gridData[y][x]=='~') 
 			{
-				// Remove water from grid
+				// Replace water element with glass element
+				// else monsters walk over water.
 				temp[y][x]='0';
 			}
 			else 
 			{
+				// Store other grid data elements
 				temp[y][x]=gridData[y][x];
+			
+				// Store start position	of grid
+				if (temp[y][x]=='*')
+				{
+					locationList[maxLocations].x=x;
+					locationList[maxLocations].y=y;
+					maxLocations++;
+					temp[y][x]='0';
+				}
 			}
 		}
 	}
    
-	// Find start position
-	for (y=0;y<16;y++)
-	{
-		for (x=0;x<20;x++)
-		{
-			if (temp[y][x]=='*')
-			{
-				locationList[maxLocations].x=x;
-				locationList[maxLocations].y=y;
-				maxLocations++;
-				temp[y][x]='0';
-				break;
-			}
-		}
-	}
-	
-	// Find all other positions
+	// Create walking plan for monsters
 	while (!ready)
 	{
 		ready=true;
@@ -158,10 +153,10 @@ void Grid::parseGrid(void)
 	trace.event(s_fn,0,"leave [maxLocations=%d]",maxLocations);
 }
 
-void Grid::initGrid(const char* filename)
+void Grid::loadGrid(const char* filename)
 {
    const char *s_fn="Grid::initGrid";
-   trace.event(s_fn,0,"enter");
+   trace.event(s_fn,0,"enter [filename=%s]",filename);
    
    FILE *fp;
    mxml_node_t *tree =NULL;
@@ -170,7 +165,7 @@ void Grid::initGrid(const char* filename)
 
    maxLines=0;
    
-   /*Load our xml file! */
+   /* Load our xml file! */
    fp = fopen(filename, "r");
    if (fp!=NULL)
    {   
@@ -191,7 +186,7 @@ void Grid::initGrid(const char* filename)
    
    mxmlDelete(group);
    mxmlDelete(tree);
-   trace.event(s_fn,0,"leave [void]");
+   trace.event(s_fn,0,"leave [maxLines=%d]",maxLines);
 }
 
 void Grid::draw(void)
@@ -202,80 +197,83 @@ void Grid::draw(void)
    int baseY=0;
    
    // Parse
-   for (y=0; y<16; y++)
+   for (y=0; y<MAX_GRID_Y; y++)
    {	
-		for (x=0; x<20; x++)
+		for (x=0; x<MAX_GRID_X; x++)
 		{
 			switch (gridData[y][x])
 			{				
 				case '*': 
 				case '0': 
-					// Sand image
+					// Draw Grass image
 					GRRLIB_DrawImg( x*32, y*32, image5, 0, 1.0, 1.0, IMAGE_COLOR );
 					break;
 	
 				case '1':
-					// Basic road
+					// Draw basic road
 					GRRLIB_DrawImg( (x*32)+32, y*32, image4, 90, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 
 				case '2':
-					// Basic road
+					// Draw basic road
 					GRRLIB_DrawImg( (x*32), (y*32), image4, 0, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 					
 				case '3':
-					// Angle road
+					// Draw angle road
 					GRRLIB_DrawImg( (x*32), (y*32), image3, 0, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 
 				case '4':
-					// Angle road
+					// Draw angle road
 					GRRLIB_DrawImg( (x*32)+32, y*32, image3, 90, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 					
 				case '5':
-					// Angle road
+					// Draw angle road
 					GRRLIB_DrawImg( (x*32)+32, (y*32)+32, image3, 180, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 					
 				case '6':
-					// Angle road
+					// Draw angle road
 					GRRLIB_DrawImg( (x*32), (y*32)+32, image3, 270, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 			
 				case '7':
-					// cross road
+					// Draw Cross road
 					GRRLIB_DrawImg( (x*32), (y*32), image2, 0, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 			
 				case '8':
-					// Tee road
+					// Draw T-section road
 					GRRLIB_DrawImg( (x*32), (y*32), image1, 0, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 
 				case '9':
-					// tee road
+					// Draw T-section road
 					GRRLIB_DrawImg( (x*32), (y*32), image1, 90, 1.0, 1.0, IMAGE_COLOR );
 					break;
 		
 				case '~':
-					// water 
+					// Draw water image 
 					GRRLIB_DrawImg( (x*32), (y*32), imageWater, 0, 1.0, 1.0, IMAGE_COLOR );
 					break;
 
 				case '=':
-					// bridge 
+					// Draw bridge image
 					GRRLIB_DrawImg( (x*32), (y*32), imageBridge, 0, 1.0, 1.0, IMAGE_COLOR );
 					break;
 
 				case 'H':
-					// bridge 
+					// Draw bridge image
 					GRRLIB_DrawImg( (x*32)+32, (y*32), imageBridge, 90, 1.0, 1.0, IMAGE_COLOR );
 					break;
 					
 				case '#':
+					// Draw grass image
 					GRRLIB_DrawImg( (x*32), (y*32), image5, 0, 1.0, 1.0, IMAGE_COLOR );
+					
+					// Store Base Position for later use!
 					baseX=x;
 					baseY=y;
 					break;
@@ -288,19 +286,20 @@ void Grid::draw(void)
 	GRRLIB_DrawImg( (baseX*32)-32, (baseY*32)+5, imageBase, 0, 1.0, 1.0, IMAGE_COLOR );
 }
 
+// Load grid map and parse it for monster movement.
 void Grid::create(const char* filename)
 {
 	const char *s_fn="Grid::render";
-	trace.event(s_fn,0,"enter");
+	trace.event(s_fn,0,"enter [filename=%s]",filename);
    
-    initGrid(filename);
+    loadGrid(filename);
 	parseGrid();
 	
 	trace.event(s_fn,0,"leave [void]");  
 }
 			
 // ------------------------------
-// Getters and Setters
+// Setters
 // ------------------------------
 
 void Grid::setImageRoad1(GRRLIB_texImg *image)
@@ -368,7 +367,7 @@ void Grid::setImageWater(GRRLIB_texImg *image)
    const char *s_fn="Pointer::setImageWater";
    trace.event(s_fn,0,"enter");
    
-   imageBase = image;
+   imageWater = image;
    
    trace.event(s_fn,0,"leave [void]");
 }
@@ -378,7 +377,7 @@ void Grid::setImageBridge(GRRLIB_texImg *image)
    const char *s_fn="Pointer::setImageBrige";
    trace.event(s_fn,0,"enter");
    
-   imageBase = image;
+   imageBridge = image;
    
    trace.event(s_fn,0,"leave [void]");
 }
@@ -395,6 +394,10 @@ void Grid::setLevel(int level1)
    
    trace.event(s_fn,0,"leave [void]");  
 }
+
+// ------------------------------
+// Getters
+// ------------------------------
 
 int Grid::getLocationX(int pos)
 {

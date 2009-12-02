@@ -37,7 +37,7 @@ class Grid
 	GRRLIB_texImg *imageBridge;
 	
 	void parseGrid(void);
-	void initGrid(const char* filename);
+	void loadGrid(const char* filename);
 	
   public:
 	// Constructor & Destructor
