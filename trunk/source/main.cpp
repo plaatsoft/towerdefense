@@ -22,7 +22,8 @@
 **  02/12/2009 Version 0.25
 **  - Bugfix: Monster is now correct initialised
 **  - Improve weapon fire methode.
-**  - Added source code information
+**  - Add background to menu page.
+**  - Added source code information.
 **
 **  01/12/2009 Version 0.24
 **  - Bugfix: Game variables are now correct initialised
@@ -78,7 +79,6 @@
 
 #include "GRRLIB.h"
 #include "General.h"
-#include "http.h"
 #include "Trace.h"
 #include "Monster.h"
 #include "Weapon.h"
@@ -113,7 +113,8 @@ typedef struct
   
   GRRLIB_texImg *background1;
   GRRLIB_texImg *background2;
-
+  GRRLIB_texImg *background3;
+  
   GRRLIB_texImg *monster1;
   GRRLIB_texImg *monster2;
   GRRLIB_texImg *monster3;
@@ -201,6 +202,10 @@ extern int      pic10length;
 // Background2 Image
 extern const unsigned char     pic11data[];
 extern int      pic11length;
+
+// Background3 Image
+extern const unsigned char     pic12data[];
+extern int      pic12length;
 
 // Monster1 Image
 extern const unsigned char     pic101data[];
@@ -382,7 +387,6 @@ extern int      pic600length;
 extern const unsigned char     pic601data[];
 extern int      pic601length;
 
-
 u32         *frameBuffer[1] = {NULL};
 GXRModeObj  *rmode = NULL;
 Mtx         GXmodelView2D;
@@ -394,17 +398,16 @@ int         yjpegOffset       = 0;
 
 Trace trace;
 
-Monster monster[100];
-Pointer pointer[MAX_POINTERS];
-Grid grid;
-Weapon weapon[1];
-Button button[10];
+Monster monsters[MAX_MONSTERS];
+Pointer pointers[MAX_POINTERS];
+Weapon  weapons[MAX_WEAPONS];
+Button  buttons[MAX_BUTTONS];
+Grid    grid;
 
-int maxMonster  = 25;
-int maxBase     = 6;
-int maxMap	    = 1;
-int maxWeapon   = 1;
-int maxButton   = 0;
+int maxMonsters  = 25;
+int maxWeapons   = 1;
+int maxButtons   = 0;
+int maxPointers  = 0; 
 
 int day=0;
 
@@ -437,6 +440,7 @@ void initImages(void)
    
    images.background1=GRRLIB_LoadTexture( pic10data );
    images.background2=GRRLIB_LoadTexture( pic11data );
+   images.background3=GRRLIB_LoadTexture( pic12data );
 	 
    images.monster1=GRRLIB_LoadTexture( pic101data );
    images.monster2=GRRLIB_LoadTexture( pic102data );
@@ -498,14 +502,34 @@ void initWeapons(void)
     const char *s_fn="initWeapons";
     trace.event(s_fn,0,"enter");
    
-	weapon[0].setImage(images.weapon1);
-	weapon[0].setX(100);
-	weapon[0].setY(100);
-	weapon[0].setAngle(0);
-	weapon[0].setStep(2);
-	weapon[0].setDelay(100);
-	weapon[0].setRange(20);
-	weapon[0].setPower(2);
+	weapons[0].setImage(images.weapon1);
+	weapons[0].setX(100);
+	weapons[0].setY(100);
+	weapons[0].setAngle(0);
+	weapons[0].setStep(2);
+	weapons[0].setDelay(100);
+	weapons[0].setRange(100);
+	weapons[0].setPower(2);
+	
+	weapons[1].setImage(images.weapon1);
+	weapons[1].setX(200);
+	weapons[1].setY(200);
+	weapons[1].setAngle(0);
+	weapons[1].setStep(2);
+	weapons[1].setDelay(100);
+	weapons[1].setRange(100);
+	weapons[1].setPower(2);
+	
+	weapons[2].setImage(images.weapon1);
+	weapons[2].setX(300);
+	weapons[2].setY(300);
+	weapons[2].setAngle(0);
+	weapons[2].setStep(2);
+	weapons[2].setDelay(100);
+	weapons[2].setRange(100);
+	weapons[2].setPower(2);
+
+	maxWeapons = 3;
 	
 	trace.event(s_fn,0,"leave [void]");
 }
@@ -517,93 +541,95 @@ void initMonsters(void)
    trace.event(s_fn,0,"enter");
    
    int delay=0;
-   for( int i=0; i<maxMonster; i++ ) 
+   
+   maxMonsters=25;
+   for( int i=0; i<maxMonsters; i++ ) 
    {
    	  trace.event(s_fn,0,"Init monster [%d]",i);
 	 	  
 	  switch (i+1)
 	  {
-	     case 1: monster[i].setImage(images.monster1);
+	     case 1: monsters[i].setImage(images.monster1);
 				 break;
 				 
-	     case 2: monster[i].setImage(images.monster2);
+	     case 2: monsters[i].setImage(images.monster2);
 				 break;
 
-	     case 3: monster[i].setImage(images.monster3);
+	     case 3: monsters[i].setImage(images.monster3);
 				 break;				 
 
-	     case 4: monster[i].setImage(images.monster4);
+	     case 4: monsters[i].setImage(images.monster4);
 				 break;
 				 
-		 case 5: monster[i].setImage(images.monster5);
+		 case 5: monsters[i].setImage(images.monster5);
 				 break;
 
-		 case 6: monster[i].setImage(images.monster6);
+		 case 6: monsters[i].setImage(images.monster6);
 				 break;
 
-		 case 7: monster[i].setImage(images.monster7);
+		 case 7: monsters[i].setImage(images.monster7);
 				 break;
 
-		 case 8: monster[i].setImage(images.monster8);
+		 case 8: monsters[i].setImage(images.monster8);
 				 break;
 
-		 case 9: monster[i].setImage(images.monster9);
+		 case 9: monsters[i].setImage(images.monster9);
 				 break;
 
-		 case 10: monster[i].setImage(images.monster10);
+		 case 10: monsters[i].setImage(images.monster10);
 				 break;
 
-		 case 11: monster[i].setImage(images.monster11);
+		 case 11: monsters[i].setImage(images.monster11);
 				 break;
 
-		 case 12: monster[i].setImage(images.monster12);
+		 case 12: monsters[i].setImage(images.monster12);
 				 break;
 
-		 case 13: monster[i].setImage(images.monster13);
+		 case 13: monsters[i].setImage(images.monster13);
 				 break;
 
-		 case 14: monster[i].setImage(images.monster14);
+		 case 14: monsters[i].setImage(images.monster14);
 				 break;
 
-		 case 15: monster[i].setImage(images.monster15);
+		 case 15: monsters[i].setImage(images.monster15);
 				 break;
 
-		 case 16: monster[i].setImage(images.monster16);
+		 case 16: monsters[i].setImage(images.monster16);
 				 break;
 				 
-		 case 17: monster[i].setImage(images.monster17);
+		 case 17: monsters[i].setImage(images.monster17);
 				 break;
 				 
-		 case 18: monster[i].setImage(images.monster18);
+		 case 18: monsters[i].setImage(images.monster18);
 				 break;
 
-		 case 19: monster[i].setImage(images.monster19);
+		 case 19: monsters[i].setImage(images.monster19);
 				 break;
 				 
-		 case 20: monster[i].setImage(images.monster20);
+		 case 20: monsters[i].setImage(images.monster20);
 				 break;
 				 
-		 case 21: monster[i].setImage(images.monster21);
+		 case 21: monsters[i].setImage(images.monster21);
 				 break;
 
-		 case 22: monster[i].setImage(images.monster22);
+		 case 22: monsters[i].setImage(images.monster22);
 				 break;
 				 
-		 case 23: monster[i].setImage(images.monster23);
+		 case 23: monsters[i].setImage(images.monster23);
 				 break;
 
-		 case 24: monster[i].setImage(images.monster24);
+		 case 24: monsters[i].setImage(images.monster24);
 				 break;
 				 
-		 case 25: monster[i].setImage(images.monster25);
+		 case 25: monsters[i].setImage(images.monster25);
 				 break;
 	  }
 	  	 
 	  //int step = (int) (rand() % 3)+1;
  
-	  monster[i].setStep(1);
-	  monster[i].setStartDelay(delay);
-	  monster[i].setEnergy(10);
+	  monsters[i].setStep(1);
+	  monsters[i].setStartDelay(delay);
+	  monsters[i].setEnergy(10);
 	  
 	  // Wait +/- two seconds before new monster is lanched.
 	  delay+=100;
@@ -617,29 +643,31 @@ void initPointers(void)
    const char *s_fn="initPointers";
    trace.event(s_fn,0,"enter");
    
-   pointer[0].setIndex(0);
-   pointer[0].setX(320);
-   pointer[0].setY(240);
-   pointer[0].setAngle(0);
-   pointer[0].setImage(images.pointer1);
+   pointers[0].setIndex(0);
+   pointers[0].setX(320);
+   pointers[0].setY(240);
+   pointers[0].setAngle(0);
+   pointers[0].setImage(images.pointer1);
 
-   pointer[1].setIndex(1);
-   pointer[1].setX(320);
-   pointer[1].setY(240);
-   pointer[1].setAngle(0);
-   pointer[1].setImage(images.pointer2);
+   pointers[1].setIndex(1);
+   pointers[1].setX(320);
+   pointers[1].setY(240);
+   pointers[1].setAngle(0);
+   pointers[1].setImage(images.pointer2);
 
-   pointer[2].setIndex(2);
-   pointer[2].setX(320);
-   pointer[2].setY(240);
-   pointer[2].setAngle(0);
-   pointer[2].setImage(images.pointer3);
+   pointers[2].setIndex(2);
+   pointers[2].setX(320);
+   pointers[2].setY(240);
+   pointers[2].setAngle(0);
+   pointers[2].setImage(images.pointer3);
 
-   pointer[3].setIndex(3);
-   pointer[3].setX(320);
-   pointer[3].setY(240);
-   pointer[3].setAngle(0);
-   pointer[3].setImage(images.pointer4);	
+   pointers[3].setIndex(3);
+   pointers[3].setX(320);
+   pointers[3].setY(240);
+   pointers[3].setAngle(0);
+   pointers[3].setImage(images.pointer4);	
+   
+   maxPointers=4;
    
    trace.event(s_fn,0,"leave [void]");
 }
@@ -683,27 +711,27 @@ void initButtons(void)
 		//case stateMenu:
 			{
 				// Button (Play Map1)
-				button[0].setX(100);
-				button[0].setY(100);
-				button[0].setImageNormal(images.button1);
-				button[0].setImageFocus(images.buttonFocus1);
-				button[0].setLabel("Map1");
+				buttons[0].setX(100);
+				buttons[0].setY(100);
+				buttons[0].setImageNormal(images.button1);
+				buttons[0].setImageFocus(images.buttonFocus1);
+				buttons[0].setLabel("Map1");
 				
 				// Button (Play Map2)
-				button[1].setX(100);
-				button[1].setY(200);
-				button[1].setImageNormal(images.button1);
-				button[1].setImageFocus(images.buttonFocus1);
-				button[1].setLabel("Map2");
+				buttons[1].setX(100);
+				buttons[1].setY(200);
+				buttons[1].setImageNormal(images.button1);
+				buttons[1].setImageFocus(images.buttonFocus1);
+				buttons[1].setLabel("Map2");
 				
 				// Button (Play Map2)
-				button[2].setX(100);
-				button[2].setY(300);
-				button[2].setImageNormal(images.button1);
-				button[2].setImageFocus(images.buttonFocus1);
-				button[2].setLabel("Map3");
+				buttons[2].setX(100);
+				buttons[2].setY(300);
+				buttons[2].setImageNormal(images.button1);
+				buttons[2].setImageFocus(images.buttonFocus1);
+				buttons[2].setLabel("Map3");
 				
-				maxButton=3;
+				maxButtons=3;
 			}
 			//break;
 	}
@@ -745,7 +773,7 @@ void drawPointers(void)
    int i;
    for( i=0; i<MAX_POINTERS; i++ ) 
    {
-	 pointer[i].draw();
+	 pointers[i].draw();
    }
 }
 
@@ -753,10 +781,10 @@ void drawPointers(void)
 void drawMonsters(void)
 {
    int i;
-   for( i=0; i<maxMonster; i++ ) 
+   for( i=0; i<maxMonsters; i++ ) 
    {
-	  monster[i].move();
-	  monster[i].draw();
+	  monsters[i].move();
+	  monsters[i].draw();
    }
 }
 
@@ -764,10 +792,10 @@ void drawMonsters(void)
 void drawWeapons(void)
 {
    int i;
-   for( i=0; i<maxWeapon; i++ ) 
+   for( i=0; i<maxWeapons; i++ ) 
    {
-     weapon[i].move();
-	 weapon[i].draw();
+     weapons[i].move();
+	 weapons[i].draw();
    }
 }
 
@@ -775,9 +803,9 @@ void drawWeapons(void)
 void drawButtons(void)
 {
    int i;
-   for( i=0; i<maxButton; i++ ) 
+   for( i=0; i<maxButtons; i++ ) 
    {
-	 button[i].draw();
+	 buttons[i].draw();
    }
 }
 
@@ -960,6 +988,9 @@ void drawScreen(void)
 	 
 	 case stateMenu:
 		{
+		  // Draw background
+		  GRRLIB_DrawImg(0,0, images.background3, 0, 1, 1, IMAGE_COLOR );
+		  
 			 // Init text layer	  
           GRRLIB_initTexture();
 	

@@ -81,14 +81,13 @@ Monster::~Monster()
 void Monster::draw(void)
 {
     char tmp[50];
-	int size=12;
 	
 	if (!visible) return;
 	
 	GRRLIB_DrawImg( x, y, image, 0, size, size, IMAGE_COLOR );	
 	
 	sprintf(tmp, "%d", energy);
-	GRRLIB_Printf2(x+8, y-14, tmp, size, COLOR_DARKBLACK); 
+	GRRLIB_Printf2(x+8, y-14, tmp, 12, COLOR_DARKBLACK); 
 }
 
 void Monster::move(void)

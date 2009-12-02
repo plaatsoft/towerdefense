@@ -27,9 +27,10 @@
 #include "Button.h"
   
 extern Trace trace;
+extern Button buttons[MAX_BUTTONS];
+
 extern int stateMachine;
 extern boolean stopApplication;
-extern Button button[10];
 extern int selectedMap;
 
 boolean selectedA=false;
@@ -111,21 +112,21 @@ void buttonA(int x, int y)
 	 
 	 case stateMenu:
 	 {
-	    if (button[0].onSelect(x,y))
+	    if (buttons[0].onSelect(x,y))
 		{
           // Map1 button	      
 		  stateMachine=stateGame;
 		  selectedMap=1;
 		}
 		
-		if (button[1].onSelect(x,y))
+		if (buttons[1].onSelect(x,y))
 		{
           // Map2 button	      
 		  stateMachine=stateGame;
 		  selectedMap=2;
 		}
 		
-		if (button[2].onSelect(x,y))
+		if (buttons[2].onSelect(x,y))
 		{
           // Map3 button	      
 		  stateMachine=stateGame;
@@ -175,11 +176,11 @@ void Pointer::draw(void)
 	if (rumble>0) 
 	{
 		rumble--;
-		WPAD_Rumble(0,1); 
+		WPAD_Rumble(index,1); 
 	}
 	else 
 	{
-		WPAD_Rumble(0,0);
+		WPAD_Rumble(index,0);
 	}
 				
     // Draw Pointer on screen
