@@ -283,7 +283,7 @@ void Grid::draw(void)
 	}
 	
 	// Draw base 
-	GRRLIB_DrawImg( (baseX*32)-32, (baseY*32)+5, imageBase, 0, 1.0, 1.0, IMAGE_COLOR );
+	GRRLIB_DrawImg( (baseX*32)-16, (baseY*32)+5, imageBase, 0, 1.0, 1.0, IMAGE_COLOR );
 }
 
 // Load grid map and parse it for monster movement.

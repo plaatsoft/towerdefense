@@ -103,7 +103,7 @@ void Weapon::fire(void)
 		// fire
 		for (int i=0; i<maxMonsters; i++)
 		{			
-			if ( monsters[i]->getVisible() )
+			if ( !monsters[i]->getDead() )
 			{
 				float distance= 
 					sqrt( ( (monsters[i]->getX()-x) * (monsters[i]->getX()-x) ) + 
