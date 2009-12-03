@@ -99,7 +99,8 @@ void buttonA(int x, int y)
 
 	 case stateIntro2:
 	 {
-	   stateMachine=stateIntro3;
+	   //stateMachine=stateIntro3;
+	   stateMachine=stateMenu;
 	 }
 	 break;
 	 

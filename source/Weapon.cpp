@@ -90,7 +90,7 @@ void Weapon::draw(void)
 	// Draw Weapon on screen
 	GRRLIB_DrawImg( x, y, image, angle, 1, 1, IMAGE_COLOR );		
 
-	sprintf(tmp, "%d", delay);
+	sprintf(tmp, "%d", actualDelay);
 	GRRLIB_Printf2(x, y, tmp, size, COLOR_DARKBLACK); 		
 }
 

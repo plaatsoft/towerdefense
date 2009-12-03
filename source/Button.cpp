@@ -84,7 +84,7 @@ void Button::draw()
 	}
 	
 	// Draw Button label
-    GRRLIB_Printf2((200-((strlen(label)*7)/2)), y+5, label, 18, COLOR_WHITESMOKE);  
+    //GRRLIB_Printf2((200-((strlen(label)*7)/2)), y+5, label, 18, COLOR_WHITESMOKE);  
 }
 
 
