@@ -19,44 +19,33 @@
 **  Release Notes:
 **  ==============
 **
-**  02/12/2009 Version 0.25
-**  - Bugfix: Monster is now correct initialised
-**  - Improve weapon fire methode.
-**  - Add background to menu page.
-**  - Added source code information.
-**  - Improve memory use (Create dynamic classes)
-**
-**  01/12/2009 Version 0.24
-**  - Bugfix: Game variables are now correct initialised
+**  06/12/2009 Version 0.30
+**  - Added gameOver detection
+**  - Improve memory usage (load classes dynamicly when needed)
+**  - Added functionality that weapons can fire.
+**  - Added more comment to source code.
 **  - Added state machine functionality
-**  - Added Grid 3
-**  - Added water and bridge graphic.
-**
-**  30/11/2009 Version 0.23
-**  - Use libogc 1.8.1 library as Wii interface engine.
-**  - Very basic Game menu page.
-**  - Improve grid.
+**  - Added map 3
+**  - Added water and bridge map component.
+**  - Added very basic game menu page.
 **  - Align monster movement on grid.
+**  - Use libogc 1.8.1 library as Wii interface engine.
 **
-**  29/11/2009 Version 0.22
-**  - FreeType is working again with GRRLIB 4.1.1
+**  29/11/2009 Version 0.20
 **  - Added four WiiMote controllers support
-**  - Parsing map grid from file.
-**
-**  27/11/2009 Version 0.21
-**  - Added GRRLib 4.1.1 library
-**  - Refactor Weapon, Monster, Button class
-**
-**  22/11/2009 Version 0.20
-**  - Added trace library functionality
-**  - Added network thread
-**  - Use libfat 1.0.6 as disk access engine
-**  - Use libmxml 2.6 library as xml engine
-**  - Use libogc 1.8.0 library as Wii interface engine
+**  - Added two game maps
+**  - Added functionality to load a map from a xml file.
+**  - Ported my GRRLIB freeType extention to work with GRRLIB 4.1.1
+**  - Ported trace library from c to C++
+**  - Use GRRLib v4.1.1 as graphic engine
+**  - Use libfat v1.0.6 as disk access engine
+**  - Use libmxml v2.6 library as xml engine
+**  - Use libogc v1.8.0 library as Wii interface engine
 **  - Build game with devkitPPC r19 compiler.
 **
-**  22/03/2009 Version 0.10
+**  21/11/2009 Version 0.10 
 **  - Started programming.
+**  - Finding free graphics for game.
 */
 
 #include <stdio.h>
@@ -92,6 +81,7 @@
 // -----------------------------------------------------------
 
 static u8 CalculateFrameRate();
+void checkGameOver(void);
 
 // -----------------------------------------------------------
 // TYPEDEF
@@ -115,6 +105,7 @@ typedef struct
   GRRLIB_texImg *background1;
   GRRLIB_texImg *background2;
   GRRLIB_texImg *background3;
+  GRRLIB_texImg *panel1;
   
   GRRLIB_texImg *monster1;
   GRRLIB_texImg *monster2;
@@ -166,7 +157,6 @@ typedef struct
   GRRLIB_texImg *pointer2;
   GRRLIB_texImg *pointer3; 
   GRRLIB_texImg *pointer4;
-  
 } 
 image;
 
@@ -207,6 +197,10 @@ extern int      pic11length;
 // Background3 Image
 extern const unsigned char     pic12data[];
 extern int      pic12length;
+
+// Panel1 Image
+extern const unsigned char     pic13data[];
+extern int      pic13length;
 
 // Monster1 Image
 extern const unsigned char     pic101data[];
@@ -391,34 +385,27 @@ extern int      pic601length;
 u32         *frameBuffer[1] = {NULL};
 GXRModeObj  *rmode = NULL;
 Mtx         GXmodelView2D;
-//static  MODPlay snd1;
-char        appl_user3[MAX_LEN];
 
-int         yOffset           = 0;
-int         yjpegOffset       = 0;
+int yOffset             = 0;
+int yjpegOffset         = 0;
+int maxMonsters         = 0;
+int maxWeapons          = 0;
+int maxButtons          = 0;
+int maxPointers         = 0; 
+int stateMachine        = stateIntro1;
+int prevStateMachine    = stateNone;
+int selectedMap         = 0; 
+int score		        = 0;
+int monsterInBase		= 0;
+float wave1             = 0;
+float wave2             = 0;
 
-Trace trace;
+Trace   *trace;
 Grid    *grid;
 Monster *monsters[MAX_MONSTERS];
 Pointer *pointers[MAX_POINTERS];
 Weapon  *weapons[MAX_WEAPONS];
 Button  *buttons[MAX_BUTTONS];
-
-int maxMonsters  = 0;
-int maxWeapons   = 0;
-int maxButtons   = 0;
-int maxPointers  = 0; 
-
-int day=0;
-
-int stateMachine=stateIntro1;
-int prevStateMachine=stateNone;
-int selectedMap = 0; 
-
-float   wave1 = 0;
-float   wave2 = 0;
-
-boolean stopApplication = false;
 
 // -----------------------------------
 // INIT and DESTOY METHODES
@@ -427,7 +414,7 @@ boolean stopApplication = false;
 void initImages(void)
 {
    const char *s_fn="initImages";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
 
    images.logo2=GRRLIB_LoadTexture( pic5data );
    images.logo3=GRRLIB_LoadTexture( pic6data );
@@ -441,6 +428,7 @@ void initImages(void)
    images.background1=GRRLIB_LoadTexture( pic10data );
    images.background2=GRRLIB_LoadTexture( pic11data );
    images.background3=GRRLIB_LoadTexture( pic12data );
+   images.panel1=GRRLIB_LoadTexture( pic13data );
 	 
    images.monster1=GRRLIB_LoadTexture( pic101data );
    images.monster2=GRRLIB_LoadTexture( pic102data );
@@ -493,14 +481,14 @@ void initImages(void)
    images.button1=GRRLIB_LoadTexture( pic600data );
    images.buttonFocus1=GRRLIB_LoadTexture( pic601data );
       
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 // Init Weapons
 void initWeapons(void)
 {
     const char *s_fn="initWeapons";
-    trace.event(s_fn,0,"enter");
+    trace->event(s_fn,0,"enter");
     
 	weapons[0]= new Weapon();
 	weapons[0]->setImage(images.weapon1);
@@ -534,21 +522,21 @@ void initWeapons(void)
 
 	maxWeapons = 3;
 	
-	trace.event(s_fn,0,"leave [void]");
+	trace->event(s_fn,0,"leave [void]");
 }
 
 // Init monster
 void initMonsters(void)
 {
    const char *s_fn="initMonsters";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
    
    int delay=0;
    
    maxMonsters=25;
    for( int i=0; i<maxMonsters; i++ ) 
    {
-   	  trace.event(s_fn,0,"Init monster [%d]",i);
+   	  trace->event(s_fn,0,"Init monster [%d]",i);
 
 	  monsters[i]=new Monster();
 	  monsters[i]->setStep(1);
@@ -638,14 +626,14 @@ void initMonsters(void)
 	  // Wait +/- two seconds before new monster is lanched.
 	  delay+=100;
    }
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 // Init Pointes
 void initPointers(void)
 {
    const char *s_fn="initPointers";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
 
    pointers[0] = new Pointer();   
    pointers[0]->setIndex(0);
@@ -677,14 +665,14 @@ void initPointers(void)
    
    maxPointers=4;
    
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 // Init Grid
 void initGrid(int level)
 {
     const char *s_fn="initGrid";
-    trace.event(s_fn,0,"enter [level=%d]",level);
+    trace->event(s_fn,0,"enter [level=%d]",level);
    
     grid = new Grid();
 	grid->setImageRoad1(images.road1);
@@ -710,50 +698,51 @@ void initGrid(int level)
 				break;
 	}
 
-	trace.event(s_fn,0,"leave [void]");
+	trace->event(s_fn,0,"leave [void]");
 }
 
 void initButtons(void)
 {
-	//switch( stateMachine )	
+	switch( stateMachine )	
 	{	
-		//case stateMenu:
-			{
-				// Button (Play Map1)
-				buttons[0]=new Button();
-				buttons[0]->setX(100);
-				buttons[0]->setY(100);
-				buttons[0]->setImageNormal(images.button1);
-				buttons[0]->setImageFocus(images.buttonFocus1);
-				buttons[0]->setLabel("Map1");
+		case stateMenu:
+		{
+			// Button (Play Map1)
+			buttons[0]=new Button();
+			buttons[0]->setX(100);
+			buttons[0]->setY(100);
+			buttons[0]->setImageNormal(images.button1);
+			buttons[0]->setImageFocus(images.buttonFocus1);
+			buttons[0]->setLabel("Map1");
 				
-				// Button (Play Map2)
-				buttons[1]=new Button();
-				buttons[1]->setX(100);
-				buttons[1]->setY(200);
-				buttons[1]->setImageNormal(images.button1);
-				buttons[1]->setImageFocus(images.buttonFocus1);
-				buttons[1]->setLabel("Map2");
+			// Button (Play Map2)
+			buttons[1]=new Button();
+			buttons[1]->setX(100);
+			buttons[1]->setY(200);
+			buttons[1]->setImageNormal(images.button1);
+			buttons[1]->setImageFocus(images.buttonFocus1);
+			buttons[1]->setLabel("Map2");
 				
-				// Button (Play Map2)
-				buttons[2]=new Button();
-				buttons[2]->setX(100);
-				buttons[2]->setY(300);
-				buttons[2]->setImageNormal(images.button1);
-				buttons[2]->setImageFocus(images.buttonFocus1);
-				buttons[2]->setLabel("Map3");
+			// Button (Play Map3)
+			buttons[2]=new Button();
+			buttons[2]->setX(100);
+			buttons[2]->setY(300);
+			buttons[2]->setImageNormal(images.button1);
+			buttons[2]->setImageFocus(images.buttonFocus1);
+			buttons[2]->setLabel("Map3");
 				
-				maxButtons=3;
-			}
-			//break;
+			maxButtons=3;
+		}
+		break;
 	}
 }
 
 void initGame(void)
 {
 	const char *s_fn="initGame";
-	trace.event(s_fn,0,"enter");
+	trace->event(s_fn,0,"enter");
    
+    // Set initial state of statemachine
 	stateMachine=stateIntro1;
 	prevStateMachine=stateNone;
    
@@ -762,11 +751,8 @@ void initGame(void)
    
     // Init pointers
     initPointers();
-		
-	// Init Buttons
-	initButtons();
 	
-	trace.event(s_fn,0,"leave");
+	trace->event(s_fn,0,"leave");
 }
 	
 // -----------------------------------
@@ -785,7 +771,7 @@ void drawPointers(void)
    int i;
    for( i=0; i<maxPointers; i++ ) 
    {
-	 pointers[i]->draw();
+	  pointers[i]->draw();
    }
 }
 
@@ -821,6 +807,12 @@ void drawButtons(void)
    }
 }
 
+// Draw buttons on screen
+void drawControlPanel(void)
+{
+	
+}
+
 void drawText(int x, int y, int type, const char *text)
 {
    char tmp[MAX_LEN];
@@ -831,7 +823,7 @@ void drawText(int x, int y, int type, const char *text)
      strcpy(tmp, text);
 	 
      switch (type)
-     {	   	   	 
+     {  	 
        case fontTitle: 
 	   {
 	      if (x==0) x=320-((strlen(tmp)*34)/2);  
@@ -903,9 +895,26 @@ void drawText(int x, int y, int type, const char *text)
    }
 }
 
+void drawGamePanel(void)
+{
+	char tmp[MAX_LEN];
+	
+	// Draw background
+	GRRLIB_DrawImg(0,470, images.panel1, 0, 1, 1, IMAGE_COLOR );
+		  
+	sprintf(tmp,"Score = %d", score); 
+	GRRLIB_Printf2(20, 480, tmp, 12, COLOR_WHITESMOKE);
+	
+	sprintf(tmp,"Monster in Base = %d", monsterInBase); 
+	GRRLIB_Printf2(20, 490, tmp, 12, COLOR_WHITESMOKE);
+	  
+	sprintf(tmp,"%d fps", CalculateFrameRate()); 
+	GRRLIB_Printf2(420, 480, tmp, 12, COLOR_WHITESMOKE);
+}
+
+
 void drawScreen(void)
 { 	   	
-    //int i=0;
 	char tmp[MAX_LEN];
 				  
     switch( stateMachine )	
@@ -915,7 +924,7 @@ void drawScreen(void)
 	      int  ypos=yOffset;
 		
 	      // Draw background
-		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR );
+		  GRRLIB_DrawImg(0,0, images.background3, 0, 1, 1, IMAGE_COLOR );
 		  
 		  // Draw background
 		  //GRRLIB_DrawImg(((640-images.logo1->w)/2) , ((480-images.logo1->h)/2)-20, images.logo1, 0, size, size, IMAGE_COLOR );
@@ -923,10 +932,13 @@ void drawScreen(void)
 		  // Init text layer	  
           GRRLIB_initTexture();	
 		  
-		  drawText(0, ypos, fontParagraph,  "Created by wplaat"  );
+		  sprintf(tmp,"%s [%s build %s]", PROGRAM_NAME, PROGRAM_VERSION, RELEASE_DATE); 
+		  drawText(0, 60, fontParagraph,  tmp );
+		  ypos+=40;
+		  drawText(0, 60, fontParagraph,  "Created by wplaat"  );
 		  ypos+=20;
-		  drawText(0, ypos, fontParagraph,  "http://www.plaatsoft.nl"  );
-		  ypos+=340;
+		  drawText(0, 60, fontParagraph,  "http://www.plaatsoft.nl"  );
+		  ypos+=300;
 		  drawText(40, ypos, fontNormal,  "This software is open source and may be copied, distributed or modified"  );
 		  ypos+=20;
 		  drawText(60, ypos, fontNormal,  "under the terms of the GNU General Public License (GPL) version 2" );
@@ -998,7 +1010,7 @@ void drawScreen(void)
 	   }	   
 	   break;
 	 
-	 case stateMenu:
+		case stateMenu:
 		{
 		  // Draw background
 		  GRRLIB_DrawImg(0,0, images.background3, 0, 1, 1, IMAGE_COLOR );
@@ -1014,18 +1026,35 @@ void drawScreen(void)
 		}
 		break;
 	
-	 case stateGame:
+		case stateGame:
 		{
 		  // Init text layer	  
           GRRLIB_initTexture();
 		  
-	 	  drawGrid();
+		  drawGrid();
 		  drawMonsters();
 		  drawWeapons();
-		  			 
-		  sprintf(tmp,"%d fps", CalculateFrameRate()); 
-		  GRRLIB_Printf2(20, 460, tmp, 10, COLOR_DARKBLACK);
- 
+		  drawGamePanel();
+		  
+		  checkGameOver();
+		  
+		  // Draw text layer on top of background 
+		  GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
+		}
+		break;
+		
+		case stateGameOver:
+		{
+		  // Init text layer	  
+          GRRLIB_initTexture();
+		  
+		  drawGrid(); 
+		  drawMonsters();
+		  drawWeapons();
+		  drawGamePanel();
+		  
+		  drawText(100,0,fontTitle,"GAME OVER");
+		 
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
@@ -1040,7 +1069,7 @@ void drawScreen(void)
 void destroyImages(void)
 {
    const char *s_fn="destroyImages";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
    
    GRRLIB_FreeTexture(images.logo2);
    GRRLIB_FreeTexture(images.logo3);
@@ -1102,10 +1131,19 @@ void destroyImages(void)
    GRRLIB_FreeTexture(images.button1);
    GRRLIB_FreeTexture(images.buttonFocus1);
 	
-   trace.event(s_fn,0,"leave");
+   trace->event(s_fn,0,"leave");
 }
 
-static u8 CalculateFrameRate() 
+void checkGameOver(void)
+{
+   if (monsterInBase>=10)
+   {
+		// To many monster in Base 
+		stateMachine=stateGameOver;   
+   }
+}
+
+static u8 CalculateFrameRate(void) 
 {
     static u8 frameCount = 0;
     static u32 lastTime;
@@ -1121,6 +1159,7 @@ static u8 CalculateFrameRate()
     return FPS;
 }	
 
+
 void processStateMachine()
 {
   const char *s_fn="processStateMachine";
@@ -1134,32 +1173,36 @@ void processStateMachine()
   {
      case stateIntro1:
 	 {
-	   trace.event(s_fn,0,"stateMachine=stateIntro1");
+	   trace->event(s_fn,0,"stateMachine=stateIntro1");
 	 }
 	 break;
 
 	 case stateIntro2:
 	 {
-	   trace.event(s_fn,0,"stateMachine=stateIntro2");
+	   trace->event(s_fn,0,"stateMachine=stateIntro2");
 	 }
 	 break;
 	 
 	 case stateIntro3:
 	 {
-	   trace.event(s_fn,0,"stateMachine=stateIntro3");
+	   trace->event(s_fn,0,"stateMachine=stateIntro3");
 	 }
 	 break;
 	 
 	 case stateMenu:
 	 {
-		trace.event(s_fn,0,"stateMachine=stateMenu");
+		trace->event(s_fn,0,"stateMachine=stateMenu");
+		initButtons();
 	 }
 	 break;
 	 
 	 case stateGame:
 	 {
-		trace.event(s_fn,0,"stateMachine=stateGame");
+		trace->event(s_fn,0,"stateMachine=stateGame");
 	 
+		score=0;
+		monsterInBase=0;
+		
 		// Init Map
 		initGrid(selectedMap);
 	
@@ -1170,8 +1213,13 @@ void processStateMachine()
 		initWeapons();
 	 }
 	 break;
-   }
-   prevStateMachine=stateMachine;
+	 
+	 case stateGameOver:
+	 {
+		trace->event(s_fn,0,"stateMachine=stateGameOver");
+	 }
+  }
+  prevStateMachine=stateMachine;
 }
    
 // -----------------------------------
@@ -1216,8 +1264,9 @@ int main()
     fatInitDefault();
 
 	// Open trace module
-	trace.open(TRACE_FILENAME);
-	trace.event(s_fn, 0,"%s %s Started", PROGRAM_NAME, PROGRAM_VERSION);
+	trace = new Trace();
+	trace->open(TRACE_FILENAME);
+	trace->event(s_fn, 0,"%s %s Started", PROGRAM_NAME, PROGRAM_VERSION);
 	
 	// Init Game parameters
 	initGame();
@@ -1233,7 +1282,7 @@ int main()
     GRRLIB_Render();
 	
 	// Repeat forever
-    while( !stopApplication )
+    while( stateMachine != stateQuit )
 	{			
 		// Process Statemachine events
 		processStateMachine();
@@ -1252,8 +1301,8 @@ int main()
 	
 	destroyImages();
 	
-	trace.event(s_fn, 0,"%s %s Leaving", PROGRAM_NAME, PROGRAM_VERSION);
-	trace.close();
+	trace->event(s_fn, 0,"%s %s Leaving", PROGRAM_NAME, PROGRAM_VERSION);
+	trace->close();
 	
 	exit(0);
 	return 0; 

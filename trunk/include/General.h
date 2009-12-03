@@ -26,8 +26,8 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.24"
-#define RELEASE_DATE        	"01-12-2009" 
+#define PROGRAM_VERSION     	"0.30"
+#define RELEASE_DATE        	"03-12-2009" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -135,7 +135,7 @@ enum
    stateSound=13,
    stateReleaseNotes=14,
    stateSettings=15,  
-   stateNone=16
+   stateNone=16,
 };
 
 enum

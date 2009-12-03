@@ -26,7 +26,7 @@
 #include "Pointer.h"
 #include "Trace.h"
 
-extern Trace trace;
+extern Trace *trace;
 
 extern Pointer *pointers[MAX_POINTERS];
 extern int maxPointers;
@@ -38,14 +38,14 @@ extern int maxPointers;
 Button::Button()
 {
    const char *s_fn="Button::Button";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
 
    x=0;
    y=0;	
    height=0;
    width=0;
    
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 	
 // ------------------------------
@@ -55,9 +55,9 @@ Button::Button()
 Button::~Button()
 {
    const char *s_fn="Button::~Button";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
 
-   trace.event(s_fn,0,"leave [void]");  
+   trace->event(s_fn,0,"leave [void]");  
 }
 
 // ------------------------------
@@ -95,9 +95,9 @@ boolean Button::onSelect(int x1, int y1)
    boolean selected=false;
    if ( (x1>=x) && (x1<=(x+width)) && (y1>=y) && (y1<=(y+height)) )
    {
-      trace.event(s_fn,0,"enter [x=%|y=%d]",x,y);
-	  trace.event(s_fn,0,"Button selected");
-	  trace.event(s_fn,0,"leave");
+      trace->event(s_fn,0,"enter [x=%|y=%d]",x,y);
+	  trace->event(s_fn,0,"Button selected");
+	  trace->event(s_fn,0,"leave");
 	  
       //SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 0, (char *) effect3_pcm, effect3_pcm_size, effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
 	  selected=true;
@@ -112,59 +112,59 @@ boolean Button::onSelect(int x1, int y1)
 void Button::setImageNormal(GRRLIB_texImg *imageNormal1)
 {
 	const char *s_fn="Button::setImageNormal";
-	trace.event(s_fn,0,"enter");
+	trace->event(s_fn,0,"enter");
 
 	imageNormal=imageNormal1;
 	height=imageNormal->h;
 	width=imageNormal->w;
 	
-	trace.event(s_fn,0,"leave [void]");
+	trace->event(s_fn,0,"leave [void]");
 }
 
 void Button::setImageFocus(GRRLIB_texImg *imageFocus1)
 {
 	const char *s_fn="Button::setImageSelect";
-	trace.event(s_fn,0,"enter");
+	trace->event(s_fn,0,"enter");
 	
 	imageFocus=imageFocus1;
 	
-	trace.event(s_fn,0,"leave [void]");
+	trace->event(s_fn,0,"leave [void]");
 }
 		
 void Button::setX(int x1)
 {
 	const char *s_fn="Button::setX";
-	trace.event(s_fn,0,"enter [x=%d]",x1);
+	trace->event(s_fn,0,"enter [x=%d]",x1);
 	
 	if ((x1>=0) && (x1<=MAX_HORZ_PIXELS))
 	{
 		x = x1;
 	}
 	
-	trace.event(s_fn,0,"leave [void]");
+	trace->event(s_fn,0,"leave [void]");
 }
 
 void Button::setY(int y1)
 {
 	const char *s_fn="Button::setY";
-	trace.event(s_fn,0,"enter [y=%d]",y1);
+	trace->event(s_fn,0,"enter [y=%d]",y1);
 	
 	if ((y1>=0) && (y1<=MAX_VERT_PIXELS))
 	{
 		y = y1;
 	}
    
-	trace.event(s_fn,0,"leave [void]");
+	trace->event(s_fn,0,"leave [void]");
 }
 
 void Button::setLabel(const char *label1)
 {
 	const char *s_fn="Button::setLabel";
-	trace.event(s_fn,0,"enter [label=%s]",label1);
+	trace->event(s_fn,0,"enter [label=%s]",label1);
 	
     strcpy(label,label1);
 	
-	trace.event(s_fn,0,"leave [void]");
+	trace->event(s_fn,0,"leave [void]");
 }
 
 // ------------------------------

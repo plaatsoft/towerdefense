@@ -52,7 +52,7 @@ location;
 
 location locationList[MAX_GRID_Y*MAX_GRID_X];
 
-extern Trace trace;
+extern Trace *trace;
 
 // ------------------------------
 // Constructor
@@ -61,9 +61,9 @@ extern Trace trace;
 Grid::Grid()
 {
 	const char *s_fn="Grid::Grid";
-	trace.event(s_fn,0,"enter");
+	trace->event(s_fn,0,"enter");
   
-	trace.event(s_fn,0,"leave [void]");  
+	trace->event(s_fn,0,"leave [void]");  
 }
 	
 // ------------------------------
@@ -73,9 +73,9 @@ Grid::Grid()
 Grid::~Grid()
 {
 	const char *s_fn="Grid::~Grid";
-	trace.event(s_fn,0,"enter");
+	trace->event(s_fn,0,"enter");
 
-	trace.event(s_fn,0,"leave [void]");  
+	trace->event(s_fn,0,"leave [void]");  
 }
 
 // ------------------------------
@@ -85,7 +85,7 @@ Grid::~Grid()
 void Grid::parseGrid(void)
 {
 	const char *s_fn="Grid::parseGrid";
-	trace.event(s_fn,0,"enter");
+	trace->event(s_fn,0,"enter");
    
 	int x,y;
 	char temp[MAX_GRID_Y][MAX_GRID_X];
@@ -161,13 +161,13 @@ void Grid::parseGrid(void)
 		}
 	}
 	
-	trace.event(s_fn,0,"leave [maxLocations=%d]",maxLocations);
+	trace->event(s_fn,0,"leave [maxLocations=%d]",maxLocations);
 }
 
 void Grid::loadGrid(const char* filename)
 {
    const char *s_fn="Grid::initGrid";
-   trace.event(s_fn,0,"enter [filename=%s]",filename);
+   trace->event(s_fn,0,"enter [filename=%s]",filename);
    
    FILE *fp;
    mxml_node_t *tree =NULL;
@@ -197,7 +197,7 @@ void Grid::loadGrid(const char* filename)
    
    mxmlDelete(group);
    mxmlDelete(tree);
-   trace.event(s_fn,0,"leave [maxLines=%d]",maxLines);
+   trace->event(s_fn,0,"leave [maxLines=%d]",maxLines);
 }
 
 void Grid::draw(void)
@@ -322,12 +322,12 @@ void Grid::draw(void)
 void Grid::create(const char* filename)
 {
 	const char *s_fn="Grid::render";
-	trace.event(s_fn,0,"enter [filename=%s]",filename);
+	trace->event(s_fn,0,"enter [filename=%s]",filename);
    
     loadGrid(filename);
 	parseGrid();
 	
-	trace.event(s_fn,0,"leave [void]");  
+	trace->event(s_fn,0,"leave [void]");  
 }
 			
 // ------------------------------
@@ -337,94 +337,94 @@ void Grid::create(const char* filename)
 void Grid::setImageRoad1(GRRLIB_texImg *image)
 {
    const char *s_fn="Pointer::setImageRoad1";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
    
    image1 = image;
    
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 void Grid::setImageRoad2(GRRLIB_texImg *image)
 {
    const char *s_fn="Pointer::setImageRoad2";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
    
    image2 = image;
    
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 void Grid::setImageRoad3(GRRLIB_texImg *image)
 {
    const char *s_fn="Pointer::setImageRoad3";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
    
    image3 = image;
    
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 void Grid::setImageRoad4(GRRLIB_texImg *image)
 {
    const char *s_fn="Pointer::setImageRoad4";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
    
    image4 = image;
    
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 void Grid::setImageRoad5(GRRLIB_texImg *image)
 {
    const char *s_fn="Pointer::setImageRoad5";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
    
    image5 = image;
    
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 void Grid::setImageBase(GRRLIB_texImg *image)
 {
    const char *s_fn="Pointer::setImageBase";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
    
    imageBase = image;
    
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 void Grid::setImageWater(GRRLIB_texImg *image)
 {
    const char *s_fn="Pointer::setImageWater";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
    
    imageWater = image;
    
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 void Grid::setImageBridge(GRRLIB_texImg *image)
 {
    const char *s_fn="Pointer::setImageBrige";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
    
    imageBridge = image;
    
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 void Grid::setLevel(int level1)
 {
 	const char *s_fn="Grid::setLevel";
-	trace.event(s_fn,0,"enter [level=%d]",level1);
+	trace->event(s_fn,0,"enter [level=%d]",level1);
 	
    if ((level>=0) && (level<=MAX_LEVEL))
    {
       level = level1;
    }
    
-   trace.event(s_fn,0,"leave [void]");  
+   trace->event(s_fn,0,"leave [void]");  
 }
 
 // ------------------------------
