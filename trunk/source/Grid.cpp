@@ -30,6 +30,17 @@
 int maxLines;
 int maxLocations;
 
+typedef struct
+{
+	int filename;
+	bool road;
+	int angle;
+	GRRLIB_texImg *image;
+}
+GridMeta;
+
+GridMeta gridMeta;
+
 char gridData[MAX_GRID_Y][MAX_GRID_X];
 
 typedef struct 
@@ -209,49 +220,70 @@ void Grid::draw(void)
 					GRRLIB_DrawImg( x*32, y*32, image5, 0, 1.0, 1.0, IMAGE_COLOR );
 					break;
 	
+				case 205:
 				case '1':
 					// Draw basic road
 					GRRLIB_DrawImg( (x*32)+32, y*32, image4, 90, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 
+				case 186:
 				case '2':
 					// Draw basic road
 					GRRLIB_DrawImg( (x*32), (y*32), image4, 0, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 					
+				case 188:	
 				case '3':
 					// Draw angle road
 					GRRLIB_DrawImg( (x*32), (y*32), image3, 0, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 
+				case 200:
 				case '4':
 					// Draw angle road
 					GRRLIB_DrawImg( (x*32)+32, y*32, image3, 90, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 					
+				case 201:
 				case '5':
 					// Draw angle road
 					GRRLIB_DrawImg( (x*32)+32, (y*32)+32, image3, 180, 1.0, 1.0, IMAGE_COLOR );
 					break;	
-					
+				
+				case 187:
 				case '6':
 					// Draw angle road
 					GRRLIB_DrawImg( (x*32), (y*32)+32, image3, 270, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 			
+				case 206:
 				case '7':
 					// Draw Cross road
 					GRRLIB_DrawImg( (x*32), (y*32), image2, 0, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 			
+				case 204:
 				case '8':
 					// Draw T-section road
 					GRRLIB_DrawImg( (x*32), (y*32), image1, 0, 1.0, 1.0, IMAGE_COLOR );
 					break;	
 
+				case 203:
 				case '9':
 					// Draw T-section road
 					GRRLIB_DrawImg( (x*32), (y*32), image1, 90, 1.0, 1.0, IMAGE_COLOR );
+					break;
+
+				case 185:
+				case 'A':
+					// Draw T-section road
+					GRRLIB_DrawImg( (x*32), (y*32), image1, 180, 1.0, 1.0, IMAGE_COLOR );
+					break;
+
+				case 202:
+				case 'B':
+					// Draw T-section road
+					GRRLIB_DrawImg( (x*32), (y*32), image1, 270, 1.0, 1.0, IMAGE_COLOR );
 					break;
 		
 				case '~':
