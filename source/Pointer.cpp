@@ -26,11 +26,10 @@
 #include "Trace.h"
 #include "Button.h"
   
-extern Trace trace;
+extern Trace *trace;
 extern Button *buttons[MAX_BUTTONS];
 
 extern int stateMachine;
-extern boolean stopApplication;
 extern int selectedMap;
 
 boolean selectedA=false;
@@ -42,7 +41,7 @@ boolean selectedA=false;
 Pointer::Pointer()
 {
    const char *s_fn="Pointer::Pointer";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
    
    x=0;
    xOffset=0;
@@ -52,7 +51,7 @@ Pointer::Pointer()
    rumble=0;
    rumbleGo=false;
    
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 // ------------------------------
@@ -62,9 +61,9 @@ Pointer::Pointer()
 Pointer::~Pointer()
 {
   const char *s_fn="Pointer::~Pointer";
-  trace.event(s_fn,0,"enter");
+  trace->event(s_fn,0,"enter");
   
-  trace.event(s_fn,0,"leave [void]");
+  trace->event(s_fn,0,"leave [void]");
 }
 
 // ------------------------------
@@ -164,8 +163,8 @@ void Pointer::draw(void)
 	{
 	  if (stateMachine==stateMenu)
 	  {
-		trace.event(s_fn,0,"Home button pressed");
-		stopApplication = true;
+		trace->event(s_fn,0,"Home button pressed");
+		stateMachine=stateQuit;
 	  }
 	  else
 	  {
@@ -194,70 +193,70 @@ void Pointer::draw(void)
 void Pointer::setIndex(int index1)
 {
    const char *s_fn="Pointer::setIndex";
-   trace.event(s_fn,0,"enter [index=%d]",index1);
+   trace->event(s_fn,0,"enter [index=%d]",index1);
   
    index = index1;
    
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 void Pointer::setX(int x1)
 {
    const char *s_fn="Pointer::setX";
-   trace.event(s_fn,0,"enter [x=%d]",x1);
+   trace->event(s_fn,0,"enter [x=%d]",x1);
    
    if ((x1>=0) && (x1<=MAX_HORZ_PIXELS))
    {
       x = x1;
    }
    
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 void Pointer::setY(int y1)
 {
    const char *s_fn="Pointer::setY";
-   trace.event(s_fn,0,"enter [y=%d]",y1);
+   trace->event(s_fn,0,"enter [y=%d]",y1);
    
    if ((y1>=0) && (y1<=MAX_VERT_PIXELS))
    {
       y = y1;
    }
    
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 void Pointer::setAngle(int angle1)
 {
    const char *s_fn="Pointer::setAngle";
-   trace.event(s_fn,0,"enter [angle=%d]",angle1);
+   trace->event(s_fn,0,"enter [angle=%d]",angle1);
    
    if ((angle1>=0) && (angle1<=MAX_ANGLE))
    {
       angle=angle1;
    }
    
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 } 
 
 void Pointer::setImage(GRRLIB_texImg *image1)
 {
    const char *s_fn="Pointer::setImage";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
    
    image = image1;
    
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 void Pointer::setRumble(int rumble1)
 {
    const char *s_fn="Pointer::setRumble";
-   trace.event(s_fn,0,"enter [rumble=%d]",rumble1);
+   trace->event(s_fn,0,"enter [rumble=%d]",rumble1);
    
    rumble=rumble1;
 
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 int Pointer::getX()

@@ -32,11 +32,11 @@
 // Variables
 // ------------------------------
 
-extern Trace trace;
-
+extern Trace *trace;
 extern Grid *grid;
 
 extern GXRModeObj *rmode;
+extern int monsterInBase;
 
 // ------------------------------
 // Constructor 
@@ -45,7 +45,7 @@ extern GXRModeObj *rmode;
 Monster::Monster()
 {
    const char *s_fn="Monster::Monster";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
    
    x=0;
    targetX=0;
@@ -61,7 +61,7 @@ Monster::Monster()
    visible=false;
    dead=false;
    
-   trace.event(s_fn,0,"leave");
+   trace->event(s_fn,0,"leave");
 }
 
 // ------------------------------
@@ -71,9 +71,9 @@ Monster::Monster()
 Monster::~Monster()
 {
    const char *s_fn="Monster::~Monster";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
   
-   trace.event(s_fn,0,"leave");
+   trace->event(s_fn,0,"leave");
 }
 
 // ------------------------------
@@ -133,6 +133,7 @@ void Monster::move(void)
 		{
 			// Monster has reach the final destination. Disable it!
 			visible=false;
+			monsterInBase++;
 		}
 	}
 	else if (x<targetX)
@@ -160,7 +161,7 @@ void Monster::move(void)
 void Monster::setImage(GRRLIB_texImg *image1)
 {
    const char *s_fn="Monster::setImage";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
    
    image = image1;
    
@@ -179,20 +180,20 @@ void Monster::setImage(GRRLIB_texImg *image1)
    
    pos++;
    
-   trace.event(s_fn,0,"leave");
+   trace->event(s_fn,0,"leave");
 }
 
 void Monster::setStep(int step1)
 {
    const char *s_fn="Monster::setStep";
-   trace.event(s_fn,0,"enter [step=%d]",step1);
+   trace->event(s_fn,0,"enter [step=%d]",step1);
    
    if ((step1>=0) && (step1<=MAX_STEP))
    {
       step=step1;
    } 
    
-   trace.event(s_fn,0,"leave");
+   trace->event(s_fn,0,"leave");
 }
 
 void Monster::setStartDelay(int startDelay1)

@@ -39,6 +39,7 @@ class Weapon
 	int delay;
 	int range;
 	int power;
+	int actualDelay;
 
 	// Methodes
 	void fire(void);

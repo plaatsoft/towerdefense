@@ -35,10 +35,11 @@
 
 extern GXRModeObj  *rmode;
 
-extern Trace trace;
+extern Trace   *trace;
 extern Monster *monsters[100];
 
 extern int maxMonsters;
+extern int score;
 
 // ------------------------------
 // Constructor 
@@ -47,7 +48,7 @@ extern int maxMonsters;
 Weapon::Weapon()
 {
    const char *s_fn="Weapon::Weapon";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
    
    x=0;
    y=0;
@@ -60,8 +61,9 @@ Weapon::Weapon()
    range=0;
    power=0;
    delay=0;
+   actualDelay=0;
    
-   trace.event(s_fn,0,"leave");
+   trace->event(s_fn,0,"leave");
 }
 
 // ------------------------------
@@ -71,9 +73,9 @@ Weapon::Weapon()
 Weapon::~Weapon()
 {
    const char *s_fn="Weapon::~Weapon";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
   
-   trace.event(s_fn,0,"leave");
+   trace->event(s_fn,0,"leave");
 }
 
 // ------------------------------
@@ -94,9 +96,9 @@ void Weapon::draw(void)
 
 void Weapon::fire(void)
 {
-	if (delay>0) 
+	if (actualDelay>0) 
 	{
-		delay--;
+		actualDelay--;
 	}
 	else
 	{
@@ -111,8 +113,9 @@ void Weapon::fire(void)
 						  				
 				if (distance<range)
 				{
+					score+=power;
 					monsters[i]->setHit(power);
-					delay=100;
+					actualDelay=delay;
 					break;
 				}
 			}
@@ -134,108 +137,109 @@ void Weapon::move(void)
 void Weapon::setX(int x1)
 {
 	const char *s_fn="Weapon::setX";
-	trace.event(s_fn,0,"enter [x=%d]",x1);
+	trace->event(s_fn,0,"enter [x=%d]",x1);
    
 	if ((x1>=0) && (x1<=MAX_HORZ_PIXELS))
 	{
 		x = x1;
 	}
-	trace.event(s_fn,0,"leave [void]");
+	trace->event(s_fn,0,"leave [void]");
 }
 
 void Weapon::setY(int y1)
 {
    const char *s_fn="Weapon::setY";
-   trace.event(s_fn,0,"enter [y=%d]",y1);
+   trace->event(s_fn,0,"enter [y=%d]",y1);
    
    if ((y1>=0) && (y1<=rmode->xfbHeight))
    {
       y = y1;
    }
    
-   trace.event(s_fn,0,"leave [void]");
+   trace->event(s_fn,0,"leave [void]");
 }
 
 void Weapon::setAlfa(int alfa1)
 {
    const char *s_fn="Weapon::setAlfa";
-   trace.event(s_fn,0,"enter [alfa=%d]",alfa1);
+   trace->event(s_fn,0,"enter [alfa=%d]",alfa1);
    
    if ((alfa1>=0) && (alfa1<=MAX_ALFA))
    {
       alfa=alfa1;
    }
    
-    trace.event(s_fn,0,"leave");
+    trace->event(s_fn,0,"leave");
 }
 		
 void Weapon::setAngle(int angle1)
 {
    const char *s_fn="Weapon::setAngle";
-   trace.event(s_fn,0,"enter [angle=%d]",angle1);
+   trace->event(s_fn,0,"enter [angle=%d]",angle1);
    
    if ((angle1>=0) && (angle1<=MAX_ANGLE))
    {
       angle=angle1;
    } 
    
-   trace.event(s_fn,0,"leave");
+   trace->event(s_fn,0,"leave");
 }
 		
 void Weapon::setStep(int step1)
 {
    const char *s_fn="Weapon::setStep";
-   trace.event(s_fn,0,"enter [step=%d]",step1);
+   trace->event(s_fn,0,"enter [step=%d]",step1);
    
    if ((step1>=0) && (step1<=MAX_STEP))
    {
       step=step1;
    } 
    
-   trace.event(s_fn,0,"leave");
+   trace->event(s_fn,0,"leave");
 }
 
 void Weapon::setImage(GRRLIB_texImg *image1)
 {
    const char *s_fn="Weapon::setImage";
-   trace.event(s_fn,0,"enter");
+   trace->event(s_fn,0,"enter");
    
    image = image1;
    
    height=image->h;
    width=image->w;
    
-   trace.event(s_fn,0,"leave");
+   trace->event(s_fn,0,"leave");
 }
 
 void Weapon::setDelay(int delay1)
 {
    const char *s_fn="Weapon::setDelay";
-   trace.event(s_fn,0,"enter [delay=%d]",delay1);
+   trace->event(s_fn,0,"enter [delay=%d]",delay1);
    
    delay=delay1;
+   actualDelay=delay;
    
-   trace.event(s_fn,0,"leave");
+   trace->event(s_fn,0,"leave");
 }
 
 void Weapon::setRange(int range1)
 {
    const char *s_fn="Weapon::setRange";
-   trace.event(s_fn,0,"enter [range=%d]",range1);
+   trace->event(s_fn,0,"enter [range=%d]",range1);
    
    range=range1;
    
-   trace.event(s_fn,0,"leave");
+   trace->event(s_fn,0,"leave");
 }
 
 void Weapon::setPower(int power1)
 {
    const char *s_fn="Weapon::setPower";
-   trace.event(s_fn,0,"enter [power=%d]",power1);
+   trace->event(s_fn,0,"enter [power=%d]",power1);
    
    power=power1;
    
-   trace.event(s_fn,0,"leave");
+   trace->event(s_fn,0,"leave");
 }
 
 // ------------------------------
