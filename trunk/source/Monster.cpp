@@ -123,7 +123,7 @@ void Monster::move(void)
 		return;
 	}
 
-	if ((x==targetX) && (y==targetY))
+	if ((x==targetX) && (y==targetY) && visible)
 	{
 		// Get new target postion 
 		targetX=grid->getLocationX(pos);

@@ -73,7 +73,7 @@ void GRRLIB_initTexture(void)
    // Clear previous video frame buffer
    if (fontTexture!=NULL) free(fontTexture);
 
-   fontTempLayer = (void*) calloc(1, 640 * 480 * 4);
+   fontTempLayer = (void*) calloc(1, 640 * 540 * 4);
 
    if (fontTempLayer == NULL) 
    {
@@ -191,17 +191,17 @@ GRRLIB_texImg* GRRLIB_GetTexture(void)
 {
 	/* Create a new buffer, this time to hold the final texture 
 	 * in a format suitable for the Wii */
-	fontTexture = memalign(32, 640 * 480 * 4);
+	fontTexture = memalign(32, 640 * 540 * 4);
 
 	/* Convert the RGBA temp buffer to a format usuable by GX */
-	BitmapTo4x4RGBA(fontTempLayer, fontTexture, 640, 480);
-	DCFlushRange(fontTexture, 640 * 480 * 4);
+	BitmapTo4x4RGBA(fontTempLayer, fontTexture, 640, 540);
+	DCFlushRange(fontTexture, 640 * 540 * 4);
 
 	/* The temp buffer is no longer required */
 	free(fontTempLayer);
 	image.data=fontTexture;
 	image.w=640;
-	image.h=480;
+	image.h=540;
 	
 	return &image;
 }

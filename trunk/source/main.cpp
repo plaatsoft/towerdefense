@@ -152,7 +152,13 @@ typedef struct
   
   GRRLIB_texImg *button1;
   GRRLIB_texImg *buttonFocus1;
-    
+  GRRLIB_texImg *buttonMap1;
+  GRRLIB_texImg *buttonMap1Focus;
+  GRRLIB_texImg *buttonMap2;
+  GRRLIB_texImg *buttonMap2Focus;    
+  GRRLIB_texImg *buttonMap3;
+  GRRLIB_texImg *buttonMap3Focus;
+  
   GRRLIB_texImg *pointer1;
   GRRLIB_texImg *pointer2;
   GRRLIB_texImg *pointer3; 
@@ -382,6 +388,30 @@ extern int      pic600length;
 extern const unsigned char     pic601data[];
 extern int      pic601length;
 
+// Button Map1 Image
+extern const unsigned char     pic602data[];
+extern int      pic602length;
+
+// Button Map1 Focus Image
+extern const unsigned char     pic603data[];
+extern int      pic603length;
+
+// Button Map2 Image
+extern const unsigned char     pic604data[];
+extern int      pic604length;
+
+// Button Map2 Focus Image
+extern const unsigned char     pic605data[];
+extern int      pic605length;
+
+// Button Map3 Image
+extern const unsigned char     pic606data[];
+extern int      pic606length;
+
+// Button Map3 Focus Image
+extern const unsigned char     pic607data[];
+extern int      pic607length;
+
 u32         *frameBuffer[1] = {NULL};
 GXRModeObj  *rmode = NULL;
 Mtx         GXmodelView2D;
@@ -480,7 +510,14 @@ void initImages(void)
 
    images.button1=GRRLIB_LoadTexture( pic600data );
    images.buttonFocus1=GRRLIB_LoadTexture( pic601data );
-      
+   
+   images.buttonMap1=GRRLIB_LoadTexture( pic602data );
+   images.buttonMap1Focus=GRRLIB_LoadTexture( pic603data );   
+   images.buttonMap2=GRRLIB_LoadTexture( pic604data );
+   images.buttonMap2Focus=GRRLIB_LoadTexture( pic605data );
+   images.buttonMap3=GRRLIB_LoadTexture( pic606data );
+   images.buttonMap3Focus=GRRLIB_LoadTexture( pic607data );
+   
    trace->event(s_fn,0,"leave [void]");
 }
 
@@ -658,7 +695,7 @@ void initPointers(void)
 
    pointers[3] = new Pointer(); 
    pointers[3]->setIndex(3);
-   pointers[3]->setX(320);
+   pointers[3]->setX(340);
    pointers[3]->setY(240);
    pointers[3]->setAngle(0);
    pointers[3]->setImage(images.pointer4);	
@@ -709,26 +746,26 @@ void initButtons(void)
 		{
 			// Button (Play Map1)
 			buttons[0]=new Button();
-			buttons[0]->setX(100);
-			buttons[0]->setY(100);
-			buttons[0]->setImageNormal(images.button1);
-			buttons[0]->setImageFocus(images.buttonFocus1);
+			buttons[0]->setX(80);
+			buttons[0]->setY(460);
+			buttons[0]->setImageNormal(images.buttonMap1);
+			buttons[0]->setImageFocus(images.buttonMap1Focus);
 			buttons[0]->setLabel("Map1");
 				
 			// Button (Play Map2)
 			buttons[1]=new Button();
-			buttons[1]->setX(100);
-			buttons[1]->setY(200);
-			buttons[1]->setImageNormal(images.button1);
-			buttons[1]->setImageFocus(images.buttonFocus1);
+			buttons[1]->setX(250);
+			buttons[1]->setY(460);
+			buttons[1]->setImageNormal(images.buttonMap2);
+			buttons[1]->setImageFocus(images.buttonMap2Focus);
 			buttons[1]->setLabel("Map2");
 				
 			// Button (Play Map3)
 			buttons[2]=new Button();
-			buttons[2]->setX(100);
-			buttons[2]->setY(300);
-			buttons[2]->setImageNormal(images.button1);
-			buttons[2]->setImageFocus(images.buttonFocus1);
+			buttons[2]->setX(410);
+			buttons[2]->setY(460);
+			buttons[2]->setImageNormal(images.buttonMap3);
+			buttons[2]->setImageFocus(images.buttonMap3Focus);
 			buttons[2]->setLabel("Map3");
 				
 			maxButtons=3;
@@ -903,13 +940,13 @@ void drawGamePanel(void)
 	GRRLIB_DrawImg(0,470, images.panel1, 0, 1, 1, IMAGE_COLOR );
 		  
 	sprintf(tmp,"Score = %d", score); 
-	GRRLIB_Printf2(20, 480, tmp, 12, COLOR_WHITESMOKE);
+	GRRLIB_Printf2(20, 480, tmp, 14, COLOR_WHITESMOKE);
 	
 	sprintf(tmp,"Monster in Base = %d", monsterInBase); 
-	GRRLIB_Printf2(20, 490, tmp, 12, COLOR_WHITESMOKE);
+	GRRLIB_Printf2(20, 490, tmp, 14, COLOR_WHITESMOKE);
 	  
 	sprintf(tmp,"%d fps", CalculateFrameRate()); 
-	GRRLIB_Printf2(420, 480, tmp, 12, COLOR_WHITESMOKE);
+	GRRLIB_Printf2(20, 500, tmp, 14, COLOR_WHITESMOKE);
 }
 
 
@@ -932,19 +969,19 @@ void drawScreen(void)
 		  // Init text layer	  
           GRRLIB_initTexture();	
 		  
-		  sprintf(tmp,"%s [%s build %s]", PROGRAM_NAME, PROGRAM_VERSION, RELEASE_DATE); 
-		  drawText(0, 60, fontParagraph,  tmp );
+		  sprintf(tmp,"%s v%s", PROGRAM_NAME, PROGRAM_VERSION); 
+		  drawText(20, 20, fontParagraph,  tmp );
 		  ypos+=40;
-		  drawText(0, 60, fontParagraph,  "Created by wplaat"  );
+		  drawText(20, ypos, fontNormal,  "Created by wplaat"  );
 		  ypos+=20;
-		  drawText(0, 60, fontParagraph,  "http://www.plaatsoft.nl"  );
-		  ypos+=300;
+		  drawText(20, ypos, fontNormal,  "http://www.plaatsoft.nl"  );
+		  ypos+=370;
 		  drawText(40, ypos, fontNormal,  "This software is open source and may be copied, distributed or modified"  );
 		  ypos+=20;
 		  drawText(60, ypos, fontNormal,  "under the terms of the GNU General Public License (GPL) version 2" );
-		  
+		  ypos+=30;
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
-		  drawText(20, 460, fontSpecial, tmp);
+		  drawText(20, ypos, fontSpecial, tmp);
 		  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -976,7 +1013,7 @@ void drawScreen(void)
 		  drawText(0, ypos, fontParagraph,  "http://www.plaatsoft.nl"  );
 			  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
-		  drawText(20, 460, fontSpecial, tmp);
+		  drawText(20, 480, fontSpecial, tmp);
 		  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -1053,7 +1090,7 @@ void drawScreen(void)
 		  drawWeapons();
 		  drawGamePanel();
 		  
-		  drawText(100,0,fontTitle,"GAME OVER");
+		  drawText(0,250,fontSubTitle2,"GAME OVER");
 		 
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
