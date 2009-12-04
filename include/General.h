@@ -63,10 +63,11 @@
 #define COLOR_DARKBLACK    		0x000000
 
 #define IMAGE_COLOR        		0xFFFFFFFF
+#define IMAGE_COLOR2        	0x66666666
 
 #define MAX_WEAPONS				3
 #define MAX_MONSTERS			100
-#define MAX_BUTTONS         	10
+#define MAX_BUTTONS         	15
 #define MAX_RUMBLE				25
 #define MAX_HORZ_PIXELS			640
 #define MAX_VERT_PIXELS			480
@@ -112,6 +113,7 @@
 #define BUTTON_DOWN         (WPAD_BUTTON_DOWN  | WPAD_CLASSIC_BUTTON_DOWN)
 #define BUTTON_LEFT         (WPAD_BUTTON_LEFT  | WPAD_CLASSIC_BUTTON_LEFT)
 #define BUTTON_RIGHT        (WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT)
+#define BUTTON_PLUS         (WPAD_BUTTON_PLUS  | WPAD_CLASSIC_BUTTON_PLUS)
 
 // -----------------------------------------------------------
 // ENUMS
@@ -150,6 +152,37 @@ enum
    fontButton=7,
    fontWelcome=8
 };
+
+typedef struct 
+{
+	int maxMonsters;
+	int maxWeapons;
+	int maxButtons;
+	int maxPointers; 
+	
+	int stateMachine;
+	int prevStateMachine;
+	int selectedMap; 
+	int score;
+	int monsterInBase;
+
+	float wave1;
+	float wave2;
+	char name[MAX_LEN];
+}
+Game;
+
+
+// Setting[0] First Character Initial
+// Setting[1] Second Character Initial
+// Setting[2] Third Character Initial
+
+typedef struct
+{
+   char   key[MAX_LEN];
+   char   value[MAX_LEN];
+}
+Setting;
 
 #endif
 

@@ -26,10 +26,9 @@
 #include "Pointer.h"
 #include "Trace.h"
 
-extern Trace *trace;
-
+extern Game    game; 
+extern Trace   *trace;
 extern Pointer *pointers[MAX_POINTERS];
-extern int maxPointers;
 
 // ------------------------------
 // Constructor
@@ -67,7 +66,7 @@ Button::~Button()
 void Button::draw()
 {
 	boolean focus=false;
-	for (int i=0; i<maxPointers; i++)
+	for (int i=0; i<game.maxPointers; i++)
 	{
 		if ((pointers[i]->getX()>=x) && (pointers[i]->getX()<=(x+width)) 
 			&& (pointers[i]->getY()>=y) && (pointers[i]->getY()<=(y+height)))
@@ -84,7 +83,7 @@ void Button::draw()
 	}
 	
 	// Draw Button label
-    //GRRLIB_Printf2((200-((strlen(label)*7)/2)), y+5, label, 18, COLOR_WHITESMOKE);  
+    GRRLIB_Printf2(x+35, y+3, label, 16, COLOR_WHITESMOKE);  
 }
 
 

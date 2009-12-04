@@ -32,6 +32,7 @@
 // Variables
 // ------------------------------
 
+extern Game game;
 extern Trace *trace;
 extern Grid *grid;
 
@@ -133,7 +134,7 @@ void Monster::move(void)
 		{
 			// Monster has reach the final destination. Disable it!
 			visible=false;
-			monsterInBase++;
+			game.monsterInBase++;
 		}
 	}
 	else if (x<targetX)

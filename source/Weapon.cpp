@@ -35,11 +35,9 @@
 
 extern GXRModeObj  *rmode;
 
+extern Game game; 
 extern Trace   *trace;
 extern Monster *monsters[100];
-
-extern int maxMonsters;
-extern int score;
 
 // ------------------------------
 // Constructor 
@@ -103,7 +101,7 @@ void Weapon::fire(void)
 	else
 	{
 		// fire
-		for (int i=0; i<maxMonsters; i++)
+		for (int i=0; i<game.maxMonsters; i++)
 		{			
 			if ( !monsters[i]->getDead() )
 			{
@@ -113,7 +111,7 @@ void Weapon::fire(void)
 						  				
 				if (distance<range)
 				{
-					score+=power;
+					game.score+=power;
 					monsters[i]->setHit(power);
 					actualDelay=delay;
 					break;
