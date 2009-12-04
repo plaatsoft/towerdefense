@@ -19,6 +19,7 @@
 */
 
 #include <wiiuse/wpad.h>
+#include <mxml.h>
 
 #include "General.h"
 #include "GRRLIB.h"
@@ -28,9 +29,8 @@
   
 extern Trace *trace;
 extern Button *buttons[MAX_BUTTONS];
-
-extern int stateMachine;
-extern int selectedMap;
+extern Game game;
+extern Setting settings[MAX_SETTINGS+1]; 
 
 boolean selectedA=false;
 
@@ -82,6 +82,178 @@ void Pointer::properties(void)
 	GRRLIB_Printf2(10, 20, tmp, size, COLOR_WHITESMOKE);
 }
 
+void saveSettingFile(const char* filename)
+{
+    const char *s_fn="saveSettingFile";
+    trace->event(s_fn,0,"enter");
+	
+    int i;
+    mxml_node_t *xml;
+    mxml_node_t *group;
+    mxml_node_t *data;   
+    char temp[MAX_LEN];
+      
+    xml = mxmlNewXML("1.0");
+   
+    group = mxmlNewElement(xml, "TowerDefense");
+   
+    for(i=0; i<MAX_SETTINGS; i++)
+    {
+        sprintf(temp, "entry%d", i);
+        data = mxmlNewElement(group, temp);
+  
+        mxmlElementSetAttr(data, "key", settings[i].key);	  
+ 	    mxmlElementSetAttr(data, "value", settings[i].value);			  
+    }
+  
+    /* now lets save the xml file to a file! */
+    FILE *fp;
+    fp = fopen(filename, "w");
+
+    mxmlSaveFile(xml, fp, MXML_NO_CALLBACK);
+   
+    fclose(fp);
+    mxmlDelete(data);
+    mxmlDelete(group);
+    mxmlDelete(xml);
+   
+    // Update game.name value
+    if ((settings[0].value[0]!=0x00) && (settings[1].value[0]!=0x00) && (settings[2].value[0]!=0x00))
+    {
+      sprintf(temp,"%c%c%c",settings[0].value[0],settings[1].value[0],settings[2].value[0]);
+      strcpy(game.name,temp);
+    }
+    trace->event(s_fn,0,"leave [void]");
+}
+
+
+void buttonPlus(int index)
+{
+   switch (index)
+   {
+      case 0:
+         // Music volume
+	     //if (musicVolume<MAX_SOUND_VOLUME) musicVolume++;   
+	     //MODPlay_SetVolume( &snd1, musicVolume*MUSIC_MULTIPLER,musicVolume*MUSIC_MULTIPLER); 
+		 break;
+		 
+	  case 1:
+         // Effect volume
+         //if (effectVolume<MAX_SOUND_VOLUME) effectVolume++; 
+		 break;
+		 
+	  case 2:
+	     // Next music Track
+         //MODPlay_Stop(&snd1);
+         //if (selectedMusic<MAX_MUSIC_TRACK) selectedMusic++; else selectedMusic=1;
+	     //initMusicTrack();
+		 break;
+		 
+	  case 3:
+		  // First Character
+		  if (settings[0].value[0]==0x00) 
+		  {
+		     settings[0].value[0]='A';
+			 strcpy(settings[0].key,"FIRST_CHAR");
+		  }
+		  else
+		  {
+		     if (settings[0].value[0]<90) settings[0].value[0]++; else settings[0].value[0]='A';
+		  }		
+		  break;
+		  
+	  case 4:
+		  // Second Character
+		  if (settings[1].value[0]==0x00) 
+		  {
+		     settings[1].value[0]='A';
+			 strcpy(settings[1].key,"SECOND_CHAR");
+		  }
+		  else
+		  {
+		     if (settings[1].value[0]<90) settings[1].value[0]++; else settings[1].value[0]='A';
+		  }		
+		  break;
+		  
+	  case 5:
+		  // Third Character
+		  if (settings[2].value[0]==0x00) 
+		  {
+		     settings[2].value[0]='A';
+			 strcpy(settings[2].key,"THIRD_CHAR");
+		  }
+		  else
+		  {
+		     if (settings[2].value[0]<90) settings[2].value[0]++; else settings[2].value[0]='A';
+		  }		
+		  break;
+   }
+}
+
+void buttonMinus(int index)
+{
+   switch (index)   
+   {
+       case 0:
+	      // Music volume
+	      //if (musicVolume>0) musicVolume--;   
+	      //MODPlay_SetVolume( &snd1, musicVolume*MUSIC_MULTIPLER,musicVolume*MUSIC_MULTIPLER);
+		  break;
+       
+	   case 1:
+          // Effect volume
+          //if (effectVolume>0) effectVolume--; 
+		  break;
+   
+       case 2:
+	      // Prev music track
+          //MODPlay_Stop(&snd1);
+          //if (selectedMusic>1) selectedMusic--; else selectedMusic=MAX_MUSIC_TRACK;
+	      //initMusicTrack();
+		  break;
+	
+	    case 3:
+		  // First Character
+		  if (settings[0].value[0]==0x00) 
+		  {
+		     settings[0].value[0]='A';
+			 strcpy(settings[0].key,"FIRST_CHAR");
+		  }
+		  else
+		  {
+		     if (settings[0].value[0]>65) settings[0].value[0]--; else settings[0].value[0]='Z';
+		  }		
+		  break;
+		  
+		case 4:
+		  // Second Character
+		  if (settings[1].value[0]==0x00) 
+		  {
+		     settings[1].value[0]='A';
+			 strcpy(settings[1].key,"SECOND_CHAR");
+		  }
+		  else
+		  {
+		     if (settings[1].value[0]>65) settings[1].value[0]--; else settings[1].value[0]='Z';
+		  }		
+		  break;
+		  
+		case 5:
+		  // Third Character
+		  if (settings[2].value[0]==0x00) 
+		  {
+		     settings[2].value[0]='A';
+			 strcpy(settings[2].key,"THIRD_CHAR");
+		  }
+		  else
+		  {
+		     if (settings[2].value[0]>65) settings[2].value[0]--; else settings[2].value[0]='Z';
+		  }		
+		  break;
+   }
+}
+
+
 void buttonA(int x, int y)
 {
   //const char *s_fn="Pointer::buttonA";
@@ -89,24 +261,24 @@ void buttonA(int x, int y)
   if (selectedA) return;
   selectedA=true;
 	  
-  switch (stateMachine)
+  switch (game.stateMachine)
   {
      case stateIntro1:
 	 {
-	   stateMachine=stateIntro2;
+	   game.stateMachine=stateIntro2;
 	 }
 	 break;
 
 	 case stateIntro2:
 	 {
-	   //stateMachine=stateIntro3;
-	   stateMachine=stateMenu;
+	   //game.stateMachine=stateIntro3;
+	   game.stateMachine=stateMenu;
 	 }
 	 break;
 	 
 	 case stateIntro3:
 	 {
-	   stateMachine=stateMenu;
+	   game.stateMachine=stateMenu;
 	 }
 	 break;
 	 
@@ -115,27 +287,98 @@ void buttonA(int x, int y)
 	    if (buttons[0]->onSelect(x,y))
 		{
           // Map1 button	      
-		  stateMachine=stateGame;
-		  selectedMap=1;
+		  game.stateMachine=stateGame;
+		  game.selectedMap=1;
 		}
 		
 		if (buttons[1]->onSelect(x,y))
 		{
           // Map2 button	      
-		  stateMachine=stateGame;
-		  selectedMap=2;
+		  game.stateMachine=stateGame;
+		  game.selectedMap=2;
 		}
 		
 		if (buttons[2]->onSelect(x,y))
 		{
           // Map3 button	      
-		  stateMachine=stateGame;
-		  selectedMap=3;
+		  game.stateMachine=stateGame;
+		  game.selectedMap=3;
+		}
+		
+		if (buttons[5]->onSelect(x,y))
+		{
+          // Credits button	      
+		  game.stateMachine=stateCredits;
+		}
+		
+		if (buttons[8]->onSelect(x,y))
+		{
+          // User Initials button	      
+		  game.stateMachine=stateSettings;
 		}
 	 }
 	 break;
-   }
+   
+	 case stateCredits:
+     {
+        if (buttons[0]->onSelect(x,y))
+	    {
+           // Next button	
+		   game.stateMachine=stateMenu;	     
+	    }
+     }
+	 break;
+	 
+   	 case stateSettings:
+     { 
+        if (buttons[0]->onSelect(x,y))
+	    {
+			// + First Character button event           
+			buttonPlus(3);  
+	    }
+		
+        if (buttons[1]->onSelect(x,y))
+	    {
+			// - First Character button event           
+			buttonPlus(3);  
+	    }
+					
+
+        if (buttons[2]->onSelect(x,y))
+	    {
+			// + Second Character button event           
+			buttonPlus(4);  
+	    }
+		
+        if (buttons[3]->onSelect(x,y))
+	    {
+			// - Second Character button event           
+			buttonPlus(4);  
+	    }
+					    
+        if (buttons[4]->onSelect(x,y))
+	    {
+			// + Third Character button event           
+			buttonPlus(5);  
+	    }
+		
+        if (buttons[5]->onSelect(x,y))
+	    {
+			// - Third Character button event           
+			buttonMinus(5);  
+	    }
+		
+        if (buttons[6]->onSelect(x,y))
+	    {
+           // Next button	
+		   saveSettingFile(SETTING_FILENAME); 
+		   game.stateMachine=stateMenu;	     
+	    }
+     }
+	 break; 
+  }
 }
+
 
 void Pointer::draw(void)
 {   
@@ -147,7 +390,9 @@ void Pointer::draw(void)
 			
 	u32 wpaddown = WPAD_ButtonsDown(index);
 	u32 wpadup   = WPAD_ButtonsUp(index);
-		
+	u32 wpadheld = WPAD_ButtonsHeld(index);
+
+
 	// Scan for ir events 
 	WPAD_IR(index, &ir); 
 	x=ir.sx-WSP_POINTER_X;
@@ -162,17 +407,28 @@ void Pointer::draw(void)
 	// Scan for button events
 	if (wpaddown & WPAD_BUTTON_HOME) 
 	{
-	  if (stateMachine==stateMenu)
+	  if (game.stateMachine==stateMenu)
 	  {
 		trace->event(s_fn,0,"Home button pressed");
-		stateMachine=stateQuit;
+		game.stateMachine=stateQuit;
 	  }
 	  else
 	  {
-		stateMachine=stateMenu;
+		game.stateMachine=stateMenu;
 	  }
 	}
 	
+	 // Make screenshot 
+    if (wpadheld & BUTTON_PLUS)
+    {
+		char filename[MAX_LEN];
+		struct tm *level;	   
+		time_t dt=time(NULL);
+		level = localtime(&dt);
+		sprintf(filename,"%sTowerDefense-%04d%02d%02d%02d%02d%02d.png", GAME_DIRECTORY, level->tm_year+1900,level->tm_mon+1, level->tm_mday,  level->tm_hour, level->tm_min, level->tm_sec);		  
+        GRRLIB_ScrShot(filename);	
+	}
+
 	if (rumble>0) 
 	{
 		rumble--;
