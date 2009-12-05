@@ -21,6 +21,8 @@
 #ifndef POINTER_H
 #define POINTER_H
 
+#include <wiiuse/wpad.h>
+
 #include "GRRLIB.h"
 
 class Pointer
@@ -38,6 +40,12 @@ class Pointer
 	int rumble;
 	boolean rumbleGo;
   
+	void saveSettingFile(const char* filename);
+	void buttonPlus(int index);
+	void buttonMinus(int index);
+	void buttonA(int x, int y);
+	void buttonExit(int index);
+	
   public:
   	Pointer();
  	~Pointer();

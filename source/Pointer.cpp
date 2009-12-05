@@ -18,7 +18,6 @@
 **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#include <wiiuse/wpad.h>
 #include <mxml.h>
 
 #include "General.h"
@@ -27,10 +26,11 @@
 #include "Trace.h"
 #include "Button.h"
   
+extern Game game;
+extern Setting settings[MAX_SETTINGS]; 
+
 extern Trace *trace;
 extern Button *buttons[MAX_BUTTONS];
-extern Game game;
-extern Setting settings[MAX_SETTINGS+1]; 
 
 boolean selectedA=false;
 
@@ -82,7 +82,7 @@ void Pointer::properties(void)
 	GRRLIB_Printf2(10, 20, tmp, size, COLOR_WHITESMOKE);
 }
 
-void saveSettingFile(const char* filename)
+void Pointer::saveSettingFile(const char* filename)
 {
     const char *s_fn="saveSettingFile";
     trace->event(s_fn,0,"enter");
@@ -127,7 +127,7 @@ void saveSettingFile(const char* filename)
 }
 
 
-void buttonPlus(int index)
+void Pointer::buttonPlus(int index)
 {
    switch (index)
    {
@@ -190,7 +190,7 @@ void buttonPlus(int index)
    }
 }
 
-void buttonMinus(int index)
+void Pointer::buttonMinus(int index)
 {
    switch (index)   
    {
@@ -254,7 +254,32 @@ void buttonMinus(int index)
 }
 
 
-void buttonA(int x, int y)
+void Pointer::buttonExit(int index)
+{    
+   // Stop network thread
+   //tcp_stop_thread();
+	
+   // Stop rumble
+   WPAD_Rumble(0,0);
+		
+   // Stop music
+   //MODPlay_Stop(&snd1);
+	
+   // Exit game
+   if (index==0)
+   {   
+       // Exit to loader
+	   exit(0);
+   }
+   else
+   {
+       // Reset Wii
+	   SYS_ResetSystem(SYS_RESTART,0,0);	
+   }
+}
+
+
+void Pointer::buttonA(int x, int y)
 {
   //const char *s_fn="Pointer::buttonA";
 
@@ -305,10 +330,34 @@ void buttonA(int x, int y)
 		  game.selectedMap=3;
 		}
 		
+		if (buttons[3]->onSelect(x,y))
+		{
+          // Highscore button	      
+		  game.stateMachine=stateLocalHighScore;
+		}
+		
+		if (buttons[4]->onSelect(x,y))
+		{
+          // Credits button	      
+		  game.stateMachine=stateHelp;
+		}
+		
 		if (buttons[5]->onSelect(x,y))
 		{
           // Credits button	      
 		  game.stateMachine=stateCredits;
+		}
+		
+		if (buttons[6]->onSelect(x,y))
+		{
+          // Sound Settings button	      
+		  game.stateMachine=stateSound;
+		}
+		
+		if (buttons[7]->onSelect(x,y))
+		{
+          // Release Notes button	      
+		  game.stateMachine=stateReleaseNotes;
 		}
 		
 		if (buttons[8]->onSelect(x,y))
@@ -316,10 +365,50 @@ void buttonA(int x, int y)
           // User Initials button	      
 		  game.stateMachine=stateSettings;
 		}
+		
+		if (buttons[9]->onSelect(x,y))
+		{
+		  buttonExit(0);
+		}
+		
+		if (buttons[10]->onSelect(x,y))
+		{
+		  buttonExit(1);
+		}		
 	 }
 	 break;
    
 	 case stateCredits:
+     {
+        if (buttons[0]->onSelect(x,y))
+	    {
+           // Next button	
+		   game.stateMachine=stateMenu;	     
+	    }
+     }
+	 break;
+
+	 case stateHelp:
+     {
+        if (buttons[0]->onSelect(x,y))
+	    {
+           // Next button	
+		   game.stateMachine=stateMenu;	     
+	    }
+     }
+	 break;
+
+	 case stateReleaseNotes:
+     {
+        if (buttons[0]->onSelect(x,y))
+	    {
+           // Next button	
+		   game.stateMachine=stateMenu;	     
+	    }
+     }
+	 break;
+
+	 case stateLocalHighScore:
      {
         if (buttons[0]->onSelect(x,y))
 	    {
@@ -373,6 +462,18 @@ void buttonA(int x, int y)
            // Next button	
 		   saveSettingFile(SETTING_FILENAME); 
 		   game.stateMachine=stateMenu;	     
+	    }
+		
+		if (buttons[7]->onSelect(x,y))
+	    {
+           // Exit button
+		   game.stateMachine=stateQuit;
+	    }
+		
+		if (buttons[8]->onSelect(x,y))
+	    {
+           // Reset button
+		   game.stateMachine=stateQuit;
 	    }
      }
 	 break; 
