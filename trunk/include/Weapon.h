@@ -21,7 +21,12 @@
 #ifndef WEAPON_H
 #define WEAPON_H
 
+#include "General.h"
 #include "GRRLIB.h"
+#include "Monster.h"
+#include "Trace.h"  
+#include "Pointer.h" 
+
 
 class Weapon
 {
@@ -40,16 +45,14 @@ class Weapon
 	int range;
 	int power;
 	int actualDelay;
-
-	// Methodes
-	void fire(void);
 	
   public:
   	Weapon();
  	~Weapon();
 
 	// Methodes
-	void draw(void);	
+	void draw(Pointer *pointers[MAX_POINTERS]);
+	void fire(Monster *monsters[MAX_MONSTERS]);
 	void move(void);
 	
 	// Setters

@@ -19,11 +19,16 @@
 **  Release Notes:
 **  ==============
 **
-**  06/12/2009 Version 0.30
-**  - Added Initials page
+**  05/12/2009 Version 0.40
+**  - Added Local highscore page (No all functionality is working yet)
+**  - Added User Initials page (No all functionality is working yet)
+**  - Added Sound Settings page (No all functionality is working yet)
 **  - Added Credits page
+**  - Added Help Page
+**  - Improve main menu page.
 **  - Added functionality to make screenshots (Press + button)
 **
+**  03/12/2009 Version 0.30
 **  - Added gameOver detection
 **  - Improve memory usage (load classes dynamicly when needed)
 **  - Added functionality that weapons can fire.
@@ -396,7 +401,6 @@ extern int      pic602length;
 extern const unsigned char     pic603data[];
 extern int      pic603length;
 
-
 u32         *frameBuffer[1] 	= {NULL};
 GXRModeObj  *rmode 				= NULL;
 Mtx         GXmodelView2D;
@@ -404,7 +408,8 @@ int 		yOffset             = 0;
 int 		yjpegOffset         = 0;
 
 Game 	game;
-Setting settings[MAX_SETTINGS+1];
+Setting settings[MAX_SETTINGS];
+
 Trace   *trace;
 Grid    *grid;
 Monster *monsters[MAX_MONSTERS];
@@ -413,8 +418,79 @@ Weapon  *weapons[MAX_WEAPONS];
 Button  *buttons[MAX_BUTTONS];
 
 // -----------------------------------
-// INIT and DESTOY METHODES
+// INIT METHODES
 // -----------------------------------
+
+void loadSettingFile(const char* filename)
+{
+    const char *s_fn="loadSettingFile";
+    trace->event(s_fn,0,"enter");
+	
+    int i;
+    FILE *fp;
+    mxml_node_t *tree=NULL;
+    mxml_node_t *data=NULL;
+    const char *tmp;
+    char temp[MAX_LEN];
+   
+    /*Load our xml file! */
+    fp = fopen(filename, "r");
+    if (fp!=NULL)
+    {
+	    trace->event(s_fn,0,"Load [filename=%s]",filename);
+		
+		tree = mxmlLoadFile(NULL, fp, MXML_NO_CALLBACK);
+		fclose(fp);
+
+		for(i=0; i<MAX_SETTINGS; i++)
+		{
+			sprintf(temp, "entry%d", i);
+			data = mxmlFindElement(tree, tree, temp, NULL, NULL, MXML_DESCEND);
+  
+			tmp=mxmlElementGetAttr(data,"key");   
+			if (tmp!=NULL) strcpy(settings[i].key,tmp); else strcpy(settings[i].key,"");
+		
+			tmp=mxmlElementGetAttr(data,"value"); 
+			if (tmp!=NULL) strcpy(settings[i].value,tmp); else strcpy(settings[i].value,"");
+			
+			trace->event(s_fn,0,"Store [key=%s] [value=%s]",settings[i].key,settings[i].value);
+		}
+    }
+    else
+    {
+	  trace->event(s_fn,0,"Setting file not found, set default values!");
+	  
+      for(i=0; i<MAX_SETTINGS; i++)
+      {
+        memset(settings[i].key,0x00, MAX_LEN);
+		memset(settings[i].value,0x00, MAX_LEN);
+	  }
+	  
+	  // Setting[0] First Character Initial
+	  strcpy(settings[0].key,"FIRST_CHAR");		
+	  strcpy(settings[0].value,"A");
+		
+	  // Setting[1] Second Character Initial
+	  strcpy(settings[1].key,"SECOND_CHAR");
+	  strcpy(settings[1].value,"A");
+		
+	  // Setting[2] Third Character Initial
+	  strcpy(settings[2].key,"THIRD_CHAR");
+	  strcpy(settings[2].value,"A"); 
+   }
+
+   mxmlDelete(data);
+   mxmlDelete(tree);
+   
+   // Update game.name value  
+   if ((settings[0].value[0]!=0x00) && (settings[1].value[0]!=0x00) && (settings[2].value[0]!=0x00))
+   {
+      sprintf(temp,"%c%c%c",settings[0].value[0],settings[1].value[0],settings[2].value[0]);
+      strcpy(game.name,temp);
+   }
+   trace->event(s_fn,0,"leave [void]");
+}
+
 
 void initImages(void)
 {
@@ -485,8 +561,8 @@ void initImages(void)
 
    images.button1=GRRLIB_LoadTexture( pic600data );
    images.buttonFocus1=GRRLIB_LoadTexture( pic601data );
-   images.button2=GRRLIB_LoadTexture( pic602data );
-   images.buttonFocus2=GRRLIB_LoadTexture( pic603data );  
+   images.button2=GRRLIB_LoadTexture( pic603data );
+   images.buttonFocus2=GRRLIB_LoadTexture( pic602data );  
    
    trace->event(s_fn,0,"leave [void]");
 }
@@ -496,6 +572,12 @@ void initWeapons(void)
 {
     const char *s_fn="initWeapons";
     trace->event(s_fn,0,"enter");
+
+    // Clear first array
+    for( int i=0; i<MAX_WEAPONS; i++)
+    {
+       weapons[i] = NULL;
+    }
     
 	weapons[0]= new Weapon();
 	weapons[0]->setImage(images.weapon1);
@@ -537,6 +619,12 @@ void initMonsters(void)
 {
    const char *s_fn="initMonsters";
    trace->event(s_fn,0,"enter");
+
+   // First clear array
+   for( int i=0; i<MAX_MONSTERS; i++)
+   {
+      monsters[i]=NULL;
+   }   
    
    int delay=0;
    
@@ -636,12 +724,18 @@ void initMonsters(void)
    trace->event(s_fn,0,"leave [void]");
 }
 
-// Init Pointes
+// Init Pointers
 void initPointers(void)
 {
    const char *s_fn="initPointers";
    trace->event(s_fn,0,"enter");
 
+   // First clear array
+   for( int i=0; i<MAX_POINTERS; i++)
+   {
+      pointers[i]=NULL;
+   }
+   
    pointers[0] = new Pointer();   
    pointers[0]->setIndex(0);
    pointers[0]->setX(320);
@@ -710,6 +804,12 @@ void initGrid(int level)
 
 void initButtons(void)
 {
+   // First clear array
+   for( int i=0; i<MAX_BUTTONS; i++)
+   {
+      buttons[i]=NULL;
+   }
+   
 	switch( game.stateMachine )	
 	{			
 		case stateMenu:
@@ -806,11 +906,39 @@ void initButtons(void)
 		}
 		break;
 		
+		case stateLocalHighScore:
+	    {
+			// Next Button
+			buttons[0]=new Button();
+			buttons[0]->setX(260);
+			buttons[0]->setY(460);
+			buttons[0]->setImageNormal(images.button2);
+			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setLabel("Next");	
+			
+			game.maxButtons=1;
+		}
+		break;
+		
+		case stateHelp:
+		{
+			// Next Button
+			buttons[0]=new Button();
+			buttons[0]->setX(260);
+			buttons[0]->setY(460);
+			buttons[0]->setImageNormal(images.button2);
+			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setLabel("Next");	
+			
+			game.maxButtons=1;		
+		}
+		break;
+		
 		case stateCredits:
 		{
 			// Next Button
 			buttons[0]=new Button();
-			buttons[0]->setX(0);
+			buttons[0]->setX(260);
 			buttons[0]->setY(460);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
@@ -820,11 +948,39 @@ void initButtons(void)
 		}
 		break;
 
+		case stateSound:
+		{
+			// Next Button
+			buttons[0]=new Button();
+			buttons[0]->setX(260);
+			buttons[0]->setY(460);
+			buttons[0]->setImageNormal(images.button2);
+			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setLabel("Next");	
+			
+			game.maxButtons=1;		
+		}
+		break;
+		
+		case stateReleaseNotes:
+		{
+			// Next Button
+			buttons[0]=new Button();
+			buttons[0]->setX(260);
+			buttons[0]->setY(460);
+			buttons[0]->setImageNormal(images.button2);
+			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setLabel("Next");	
+			
+			game.maxButtons=1;		
+		}
+		break;
+		
 		case stateSettings:
 	    {
 			// Next Button
 			buttons[0]=new Button();
-			buttons[0]->setX(0);
+			buttons[0]->setX(260);
 			buttons[0]->setY(460);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
@@ -832,7 +988,7 @@ void initButtons(void)
 			
 			game.maxButtons=1;
 		}
-		break;
+		break;	
 	}
 }
 
@@ -853,6 +1009,9 @@ void initGame(void)
    
     // Init pointers
     initPointers();
+	
+	// Load Settings from SDCard
+	loadSettingFile(SETTING_FILENAME);
 	
 	trace->event(s_fn,0,"leave");
 }
@@ -892,10 +1051,12 @@ void drawMonsters(void)
 void drawWeapons(void)
 {
    int i;
+   
    for( i=0; i<game.maxWeapons; i++ ) 
    {
      weapons[i]->move();
-	 weapons[i]->draw();
+	 weapons[i]->draw(pointers);
+	 weapons[i]->fire(monsters);
    }
 }
 
@@ -907,12 +1068,6 @@ void drawButtons(void)
    {
 	 buttons[i]->draw();
    }
-}
-
-// Draw buttons on screen
-void drawControlPanel(void)
-{
-	
 }
 
 void drawText(int x, int y, int type, const char *text)
@@ -929,7 +1084,7 @@ void drawText(int x, int y, int type, const char *text)
        case fontTitle: 
 	   {
 	      if (x==0) x=320-((strlen(tmp)*34)/2);  
-		  GRRLIB_Printf2(x, y, tmp, 72, COLOR_WHITESMOKE); 
+		  GRRLIB_Printf2(x, y, tmp, 72, GRRLIB_AQUA); 
 	   }
 	   break;
   
@@ -1001,8 +1156,10 @@ void drawGamePanel(void)
 {
 	char tmp[MAX_LEN];
 	
+	//GRRLIB_Rectangle(0, 0, 100, 520, 0x0000FFC8, 1); // Blue with alpha
+  
 	// Draw background
-	GRRLIB_DrawImg(0,470, images.panel1, 0, 1, 1, IMAGE_COLOR );
+	//GRRLIB_DrawImg(0,470, images.panel1, 0, 1, 1, IMAGE_COLOR );
 		  
 	sprintf(tmp,"Score = %d", game.score); 
 	GRRLIB_Printf2(20, 480, tmp, 14, COLOR_WHITESMOKE);
@@ -1136,7 +1293,7 @@ void drawScreen(void)
 		  drawGrid();
 		  drawMonsters();
 		  drawWeapons();
-		  //drawGamePanel();
+		  drawGamePanel();
 		  
 		  checkGameOver();
 		  
@@ -1153,7 +1310,7 @@ void drawScreen(void)
 		  drawGrid(); 
 		  drawMonsters();
 		  drawWeapons();
-		  //drawGamePanel();
+		  drawGamePanel();
 		  
 		  drawText(0,250,fontSubTitle2,"GAME OVER");
 		 
@@ -1161,6 +1318,133 @@ void drawScreen(void)
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
+		
+		case stateLocalHighScore:
+	    {
+	      int  ypos=yOffset;
+	      //struct tm *local;
+		  //int startEntry;
+		  //int endEntry;
+		  		  
+		  /*if (maxLocalHighScore<13)
+		  {
+		    startEntry=0;
+			endEntry=maxLocalHighScore;
+			scrollEnabled=false;
+		  }
+		  else
+		  {
+			 startEntry=(((float) maxLocalHighScore-13.0)/26.0)*(float)scrollIndex;
+			 endEntry=startEntry+13;
+			 scrollEnabled=true;
+		  }*/
+		  
+		  // Init text layer	  
+          GRRLIB_initTexture();
+		  				   
+          // Draw background
+          GRRLIB_DrawImg(0,0, images.background3, 0, 1, 1, IMAGE_COLOR2 );
+		  
+		  // Draw scrollbar
+		  /*if (scrollEnabled)
+		  {
+		    ypos=SCROLLBAR_Y_MIN;
+            GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
+		    for (i=0; i<9; i++) 
+		    {
+		      ypos+=24;
+		      GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
+		    }
+		    ypos+=24;
+		    GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
+		  }*/
+		 
+	      // Draw title
+		  ypos=yOffset;
+	      drawText(80, ypos, fontTitle, "Local High Score");	
+
+          // Show Content
+          ypos+=90;
+		  drawText(60, ypos, fontParagraph, "TOP"  );
+	      drawText(130, ypos, fontParagraph, "DATE"  );
+	      drawText(320, ypos, fontParagraph, "SCORE" );
+		  drawText(410, ypos, fontParagraph, "NAME"  );
+		  drawText(500, ypos, fontParagraph, "LEVEL" );
+		  ypos+=10;
+		  
+          /*for (i=startEntry; i<endEntry; i++)
+	      {
+  	          ypos+=20;  
+	    
+		      sprintf(tmp,"%02d", i+1);
+		      drawText(60, ypos, fontNormal, tmp);
+			  
+	          local = localtime(&localHighScore[i].localTime);
+	          sprintf(tmp,"%02d-%02d-%04d %02d:%02d:%02d", 
+			     local->tm_mday, local->tm_mon+1, local->tm_year+1900, 
+			     local->tm_hour, local->tm_min, local->tm_sec);
+		      drawText(130, ypos, fontNormal, tmp);
+	   
+	   	      sprintf(tmp,"%05d", localHighScore[i].score);
+		      drawText(320, ypos, fontNormal, tmp);
+	
+		      drawText(410, ypos, fontNormal, localHighScore[i].name);
+	  
+	          sprintf(tmp,"%02d", localHighScore[i].level);
+		      drawText(500, ypos, fontNormal, tmp);
+		  }	*/ 
+		
+          // Draw buttons
+	      drawButtons(); 
+
+		  sprintf(tmp,"%d fps", CalculateFrameRate());
+		  drawText(20, 460, fontSpecial, tmp);
+		  
+          // Draw text layer on top of gameboard 
+          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);	 	   
+	    }
+	    break;
+
+	    case stateHelp:
+	    {
+	      int  ypos=yOffset;
+		  
+		  // Init text layer	  
+          GRRLIB_initTexture();
+		  
+	      // Draw background
+		  GRRLIB_DrawImg(0,0, images.background3, 0, 1, 1, IMAGE_COLOR2 );
+		  
+		   // Show title
+		  drawText(0, ypos, fontTitle, "Help");
+          ypos+=100;
+		  
+		  drawText(0, ypos, fontParagraph, "Wii TowerDefense is an classic 2D action game. Protect ");
+		  ypos+=25;
+     	  drawText(0, ypos, fontParagraph, "your base with all kind of defense systems and kill");	
+		  ypos+=25;
+	      drawText(0, ypos, fontParagraph, "all the waves of enemies.");		
+		
+          ypos+=60;
+	      drawText(0, ypos, fontParagraph, "Tip: You can control which music track is played during");
+		  ypos+=25;
+	      drawText(0, ypos, fontParagraph, "the game with the 1 and 2 button on your WiiMote!");
+		  
+		  ypos+=60;
+	      drawText(0, ypos, fontParagraph, "Note: The global highscore contains the Top 40 of best");
+		  ypos+=25;
+	      drawText(0, ypos, fontParagraph, "internet players. Only one entry per player is showed.");
+				  
+		  // Draw buttons
+	      drawButtons(); 
+		  
+		  sprintf(tmp,"%d fps", CalculateFrameRate());
+		  drawText(20, 460, fontSpecial, tmp);
+		  
+		  // Draw text layer on top of gameboard 
+          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
+	    }
+	    break;
 
 	    case stateCredits:
 	    {
@@ -1170,10 +1454,10 @@ void drawScreen(void)
           GRRLIB_initTexture();
  
 	      // Draw background
-		  GRRLIB_DrawImg(0,0, images.background3, 0, 1, 1, IMAGE_COLOR2 );
+		  GRRLIB_DrawImg(0,0,images.background3, 0, 1.0, 1.0, IMAGE_COLOR2 );
 		  
 		  // Show title
-		  drawText(0, ypos, fontTitle, "      Credits");
+		  drawText(220, ypos, fontTitle, "Credits");
           ypos+=90;
 		  
 		  // Show Content
@@ -1186,8 +1470,10 @@ void drawScreen(void)
   	      ypos+=20;
 	      drawText(0, ypos, fontNormal, "wplaat");
 		  ypos+=20;
-	      drawText(0, ypos, fontNormal, "Pietje Puk");  
-	
+	      drawText(0, ypos, fontNormal, "MLtm");  
+		  ypos+=20;
+	      drawText(0, ypos, fontNormal, "shango46");  		  
+		  
 	      ypos+=30;
 	      drawText(0, ypos, fontParagraph, "MUSIC ");
 	      ypos+=20;
@@ -1214,10 +1500,161 @@ void drawScreen(void)
 		  drawText(20, 460, fontSpecial, tmp);
 		  
 		  // Draw text layer on top of gameboard 
-          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, 255);
+          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
+	   }
+	   break;
+	   	   
+	   case stateSound:
+	   {
+	      int  ypos=yOffset;
+	
+	      // Init text layer	  
+          GRRLIB_initTexture();
+ 
+	      // Draw background
+		  GRRLIB_DrawImg(0,0,images.background3, 0, 1.0, 1.0, IMAGE_COLOR2 );
+		  
+	      // Draw Sound icon
+	      //GRRLIB_DrawImg((640/2)-128, ((480/2)-140)+yOffset, images.sound, angle, 1.4, 1.4, IMAGE_COLOR );
+	
+		  // Show title
+		  drawText(100, ypos, fontTitle, "Sound Settings");
+          ypos+=100;
+		  
+          // Draw content	
+          drawText(0, ypos, fontParagraph, "Music Volume");	
+	      ypos+=20;
+          //GRRLIB_DrawImg(104,ypos,images.bar, 0, 1, 1, IMAGE_COLOR );
+	      ypos+=10;
+	      //GRRLIB_DrawImg(115+(musicVolume*40),ypos, images.barCursor, 0, 1, 1, IMAGE_COLOR );
+  
+          ypos+=80;
+          drawText(0, ypos, fontParagraph, "Effects Volume" );
+	      ypos+=20;	
+	      //GRRLIB_DrawImg(104,ypos, images.bar, 0, 1, 1, IMAGE_COLOR );
+	      ypos+=10;
+	      //GRRLIB_DrawImg(115+(effectVolume*40),ypos,images.barCursor, 0, 1, 1, IMAGE_COLOR );
+	
+	      ypos+=70;
+		  //sprintf(tmp,"  Music track [%d]", selectedMusic);
+	      //drawText(0, ypos, fontParagraph, tmp);	
+		  
+		  //drawText(60, 395, fontNormal,  "Loop track");	
+		  //drawText(505, 395, fontNormal, "Play MP3");	
+		  		
+		   // Draw buttons
+	      drawButtons(); 
+		  
+		  sprintf(tmp,"%d fps", CalculateFrameRate());
+		  drawText(20, 460, fontSpecial, tmp);
+		  
+		  // Draw text layer on top of gameboard 
+          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }
 	   break;
 	   
+	   case stateReleaseNotes:
+	   {
+	      int  ypos;
+	      //int  i=0;
+		  //int len=0;
+		  //int  lineCount=0;
+		  //int maxLines=0;
+		  //char *buffer;
+		  //char text[MAX_BUFFER_SIZE];
+		  
+		  //int startEntry;
+		  //int endEntry;
+		  		  
+		  // Fetch release notes from network thread
+		  /*buffer=tcp_get_releasenote();
+          if (buffer!=NULL) 
+		  {
+		     strncpy(text,buffer,MAX_BUFFER_SIZE);
+			 len=strlen(text);
+			 for (i=0;i<len;i++) if (text[i]=='\n') maxLines++;
+		  }*/
+		  
+		  // Calculate start and end line.
+		  /*if (maxLines<18)
+		  {
+		    startEntry=0;
+			endEntry=maxLines;
+			scrollEnabled=false;
+		  }
+		  else
+		  {
+			 startEntry=(((float) maxLines-18.0)/26.0)*(float)scrollIndex;
+			 endEntry=startEntry+18;
+			 scrollEnabled=true;
+		  }*/
+		  
+	      // Init text layer	  
+          GRRLIB_initTexture();
+ 
+	      // Draw background
+		  GRRLIB_DrawImg(0,0,images.background3, 0, 1.0, 1.0, IMAGE_COLOR2 );
+
+          // Draw scrollbar
+		  /*if (scrollEnabled)
+		  {
+		    ypos=SCROLLBAR_Y_MIN;
+            GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
+		    for (i=0; i<9; i++) 
+		    {
+		      ypos+=24;
+		      GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
+		    }
+		    ypos+=24;
+		    GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
+		  }*/
+		 
+	      // Draw Title	
+		  ypos=yOffset;
+          drawText(100, ypos, fontTitle, "Release Notes");
+          ypos+=80;
+	      
+		  /*if (len!=0)
+		  {		  
+		    int startpos=0;
+  		    for (i=0; i<len; i++)
+		    {
+			  if (text[i]=='\n') 
+			  {			   
+			     text[i]=0x00;
+				 
+				 // Show only 17 lines on screen
+			     if ((lineCount++)>endEntry) break;
+			     if (lineCount>startEntry) 
+				 {				   
+			        ypos+=15;
+				    sprintf(tmp,"%s",text+startpos);
+			        drawText(40, ypos, fontNormal, tmp);	
+				 }		
+			     startpos=i+1;
+		
+		      }
+		    }
+		  }
+		  else*/
+		  {
+		     ypos+=120;
+			 drawText(0, ypos, fontParagraph, "No information available!" );	
+		     ypos+=20;
+			 drawText(0, ypos, fontParagraph, "Information could not be fetch from internet.");
+		  }
+		  
+		  // Draw buttons
+	      drawButtons(); 
+
+		  sprintf(tmp,"%d fps", CalculateFrameRate());
+		  drawText(20, 460, fontSpecial, tmp);
+		  
+		  // Draw text layer on top of gameboard 
+          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
+	   }
+	   break;
+
 	   case stateSettings:
 	   {
 	      int ypos=yOffset;	   
@@ -1229,11 +1666,11 @@ void drawScreen(void)
 		  GRRLIB_DrawImg(0,0,images.background3, 0, 1.0, 1.0, IMAGE_COLOR2 );
       		
 	      // Draw Title	
-          drawText(0, ypos, fontTitle, "    User Initials");
+          drawText(150, ypos, fontTitle, "User Initials");
           ypos+=90;
 		  
-		  drawText(0, ypos, fontParagraph, "This user initials are used in the highscore area.");	
-	      ypos+=80;
+		  //drawText(0, ypos, fontParagraph, "This user initials are used in the highscore area.");	
+	      //ypos+=80;
 		  
 	      // Draw panels		 
 		  GRRLIB_DrawImg(60,ypos, images.panel1, 0, 1.0, 1.0, IMAGE_COLOR );
@@ -1256,7 +1693,7 @@ void drawScreen(void)
 		  drawText(20, 460, fontSpecial, tmp);
 				  
           // Draw text layer on top of gameboard 
-          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, 255);	
+          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);	
 	   }
 	   break;
 	}
@@ -1398,20 +1835,48 @@ void processStateMachine()
 	}
 	break;
 
+	case stateLocalHighScore:
+	{
+		trace->event(s_fn,0,"stateMachine=stateLocalHighScore");
+		initButtons();		
+	}
+	break;
+	
 	case stateCredits:
 	{
 		trace->event(s_fn,0,"stateMachine=stateCredits");
 		initButtons();	
 	}
 	break;
-
+	 
+	case stateSound:
+	{
+		trace->event(s_fn,0,"stateMachine=stateSound");
+		initButtons();	
+	}
+	break;
+	
+	case stateHelp:
+	{
+		trace->event(s_fn,0,"stateMachine=stateHelp");
+		initButtons();		
+	}
+	break;
+	   
+	case stateReleaseNotes:
+	{
+		trace->event(s_fn,0,"stateMachine=stateReleaseNotes");
+		initButtons();		
+	}
+	break;
+	
 	case stateSettings:
 	{
 		trace->event(s_fn,0,"stateMachine=stateSettings");
 		initButtons();	
 	}
 	break;
-	 
+	
 	case stateGame:
 	{
 		trace->event(s_fn,0,"stateMachine=stateGame");
@@ -1438,76 +1903,6 @@ void processStateMachine()
   }
   game.prevStateMachine=game.stateMachine;
 }
-
-// -----------------------------------
-// Load and Save game settings
-// -----------------------------------
-
-void loadSettingFile(char* filename)
-{
-    const char *s_fn="loadSettingFile";
-    trace->event(s_fn,0,"enter");
-	
-    int i;
-    FILE *fp;
-    mxml_node_t *tree=NULL;
-    mxml_node_t *data=NULL;
-    const char *tmp;
-    char temp[MAX_LEN];
-   
-    /*Load our xml file! */
-    fp = fopen(filename, "r");
-    if (fp!=NULL)
-    {
-		tree = mxmlLoadFile(NULL, fp, MXML_NO_CALLBACK);
-		fclose(fp);
-
-		for(i=0; i<MAX_SETTINGS; i++)
-		{
-			sprintf(temp, "entry%d", i);
-			data = mxmlFindElement(tree, tree, temp, NULL, NULL, MXML_DESCEND);
-  
-			tmp=mxmlElementGetAttr(data,"key");   
-			if (tmp!=NULL) strcpy(settings[i].key,tmp); else strcpy(settings[i].key,"");
-		
-			tmp=mxmlElementGetAttr(data,"value"); 
-			if (tmp!=NULL) strcpy(settings[i].value,tmp); else strcpy(settings[i].value,"");
-		}
-    }
-    else
-    {
-      // If file not found, create empty highscore list.
-      for(i=0; i<MAX_SETTINGS; i++)
-      {
-        memset(settings[i].key,0x00, MAX_LEN);
-		memset(settings[i].value,0x00, MAX_LEN);
-
-		// Setting[0] First Character Initial
-		strcpy(settings[0].key,"FIRST_CHAR");		
-		strcpy(settings[0].value,"A");
-		
-		// Setting[1] Second Character Initial
-		strcpy(settings[1].key,"SECOND_CHAR");
-		strcpy(settings[1].value,"A");
-		
-		// Setting[2] Third Character Initial
-		strcpy(settings[2].key,"THIRD_CHAR");
-		strcpy(settings[2].value,"A");
-	  } 
-   }
-
-   mxmlDelete(data);
-   mxmlDelete(tree);
-   
-   // Update game.name value  
-   if ((settings[0].value[0]!=0x00) && (settings[1].value[0]!=0x00) && (settings[2].value[0]!=0x00))
-   {
-      sprintf(temp,"%c%c%c",settings[0].value[0],settings[1].value[0],settings[2].value[0]);
-      strcpy(game.name,temp);
-   }
-   trace->event(s_fn,0,"leave [void]");
-}
-
 
 // -----------------------------------
 // main

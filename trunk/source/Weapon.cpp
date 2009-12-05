@@ -23,11 +23,7 @@
 #include <string.h>
 #include <math.h>
 
-#include "General.h"
-#include "GRRLIB.h"
-#include "Weapon.h"
-#include "Monster.h"
-#include "Trace.h"  
+#include "Weapon.h" 
 
 // ------------------------------
 // Variables
@@ -37,7 +33,6 @@ extern GXRModeObj  *rmode;
 
 extern Game game; 
 extern Trace   *trace;
-extern Monster *monsters[100];
 
 // ------------------------------
 // Constructor 
@@ -80,19 +75,35 @@ Weapon::~Weapon()
 // Others
 // ------------------------------
 	
-void Weapon::draw(void)
+void Weapon::draw(Pointer *pointers[MAX_POINTERS])
 {
 	char tmp[50];
 	int size=12;
 	
+	// Draw range circle if pointer is on weapon 
+	for (int i=0; i<MAX_POINTERS; i++)
+	{
+		if (pointers[i]!=NULL)
+		{
+			if ((x>=pointers[i]->getX()) && (x+width<=pointers[i]->getX()))
+			{
+				if ((y>=pointers[i]->getY()) && (y+height<=pointers[i]->getY()))
+				{
+					GRRLIB_Circle(x + 16, y + 16, range, GRRLIB_OLIVE, 1);
+				}
+			}
+		}
+	}
+	
 	// Draw Weapon on screen
 	GRRLIB_DrawImg( x, y, image, angle, 1, 1, IMAGE_COLOR );		
 
+	// Draw energy level on screen
 	sprintf(tmp, "%d", actualDelay);
 	GRRLIB_Printf2(x, y, tmp, size, COLOR_DARKBLACK); 		
 }
 
-void Weapon::fire(void)
+void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 {
 	if (actualDelay>0) 
 	{
@@ -101,20 +112,23 @@ void Weapon::fire(void)
 	else
 	{
 		// fire
-		for (int i=0; i<game.maxMonsters; i++)
+		for (int i=0; i<MAX_MONSTERS; i++)
 		{			
-			if ( !monsters[i]->getDead() )
+			if (monsters[i]!=NULL)
 			{
-				float distance= 
-					sqrt( ( (monsters[i]->getX()-x) * (monsters[i]->getX()-x) ) + 
+				if ( !monsters[i]->getDead() )
+				{
+					float distance= 
+						sqrt( ( (monsters[i]->getX()-x) * (monsters[i]->getX()-x) ) + 
 				 	  	  ( (monsters[i]->getY()-y) * (monsters[i]->getY()-y) ) );
 						  				
-				if (distance<range)
-				{
-					game.score+=power;
-					monsters[i]->setHit(power);
-					actualDelay=delay;
-					break;
+					if (distance<range)
+					{
+						game.score+=power;
+						monsters[i]->setHit(power);
+						actualDelay=delay;
+						break;
+					}
 				}
 			}
 		}
@@ -125,7 +139,6 @@ void Weapon::move(void)
 {  
 	angle=angle+step;
 	if (angle>MAX_ANGLE) angle=0;
-	fire();
 }
 
 // ------------------------------

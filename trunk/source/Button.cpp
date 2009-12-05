@@ -72,6 +72,10 @@ void Button::draw()
 			&& (pointers[i]->getY()>=y) && (pointers[i]->getY()<=(y+height)))
 		{
 			GRRLIB_DrawImg( x, y, imageFocus, 0, 1, 1, IMAGE_COLOR );	
+			
+			// Draw Button label
+			GRRLIB_Printf2(x+35, y+3, label, 16, GRRLIB_BLUE); 
+			
 		    focus=true;
 			//pointers[i].setRumble(MAX_RUMBLE);
 			break;
@@ -79,11 +83,11 @@ void Button::draw()
 	}
 	if (!focus)
 	{
-		GRRLIB_DrawImg( x, y, imageNormal, 0, 1, 1, IMAGE_COLOR );		
+		GRRLIB_DrawImg( x, y, imageNormal, 0, 1, 1, IMAGE_COLOR );	
+
+		// Draw Button label
+		GRRLIB_Printf2(x+35, y+3, label, 16, COLOR_WHITESMOKE); 	
 	}
-	
-	// Draw Button label
-    GRRLIB_Printf2(x+35, y+3, label, 16, COLOR_WHITESMOKE);  
 }
 
 
