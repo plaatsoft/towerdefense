@@ -171,17 +171,32 @@ void Settings::save( const char *filename)
 	
 void Settings::setFirstChar(char letter)
 {
-   firstChar=letter;
+	const char *s_fn="Settings::setFirstChar";
+    trace->event(s_fn,0,"enter [letter=%c]",letter);
+	
+	firstChar=letter;
+	
+	trace->event(s_fn,0,"leave [void]");
 }
 
 void Settings::setSecondChar(char letter)
 {
-   secondChar=letter;
+	const char *s_fn="Settings::setSecondChar";
+    trace->event(s_fn,0,"enter [letter=%c]",letter);
+	
+	secondChar=letter;
+   
+	trace->event(s_fn,0,"leave [void]");
 }
 
 void Settings::setThirdChar(char letter)
 {
-   thirdChar=letter;
+	const char *s_fn="Settings::setThirdChar";
+    trace->event(s_fn,0,"enter [letter=%c]",letter);
+	
+	thirdChar=letter;
+   
+	trace->event(s_fn,0,"leave [void]");
 }
 
 // ------------------------------
