@@ -93,7 +93,7 @@ void Monster::draw(void)
 	if (!dead)
 	{  
 	   sprintf(tmp, "%d", energy);
-	   GRRLIB_Printf2(x+8, y-14, tmp, 12, COLOR_DARKBLACK); 
+	   GRRLIB_Printf2(x+8, y-14, tmp, 12, GRRLIB_BLACK); 
 	}
 }
 

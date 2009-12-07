@@ -35,7 +35,6 @@ Settings::Settings()
    const char *s_fn="Settings::Settings";
    trace->event(s_fn,0,"enter");
    
-   fp=NULL;
    firstChar=0x00;
    secondChar=0x00;
    thirdChar=0x00;
@@ -53,7 +52,6 @@ Settings::~Settings()
   trace->event(s_fn,0,"enter");
   
   trace->event(s_fn,0,"leave [void]");
-
 }
 
 // ------------------------------
@@ -168,7 +166,7 @@ void Settings::save( const char *filename)
 }
 
 // ------------------------------
-// Settings
+// Setters
 // ------------------------------
 	
 void Settings::setFirstChar(char letter)

@@ -100,7 +100,7 @@ void Weapon::draw(Pointer *pointers[MAX_POINTERS])
 
 	// Draw energy level on screen
 	sprintf(tmp, "%d", actualDelay);
-	GRRLIB_Printf2(x, y, tmp, size, COLOR_DARKBLACK); 		
+	GRRLIB_Printf2(x, y, tmp, size, GRRLIB_BLACK); 		
 }
 
 void Weapon::fire(Monster *monsters[MAX_MONSTERS])

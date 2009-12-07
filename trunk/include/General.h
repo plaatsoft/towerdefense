@@ -26,7 +26,7 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.41"
+#define PROGRAM_VERSION     	"0.31"
 #define RELEASE_DATE        	"07-12-2009" 
 
 // Check latest available version 
@@ -58,26 +58,24 @@
 #define WSP_POINTER_X      		200
 #define WSP_POINTER_Y      		250
 
-#define COLOR_WHITESMOKE   		0xFFFFFF
-#define COLOR_LIGHTRED     		0x3333FF
-#define COLOR_DARKBLACK    		0x000000
-
-#define GRRLIB_BLACK   0x000000FF
-#define GRRLIB_MAROON  0x800000FF
-#define GRRLIB_GREEN   0x008000FF
-#define GRRLIB_OLIVE   0x808000FF
-#define GRRLIB_NAVY    0x000080FF
-#define GRRLIB_PURPLE  0x800080FF
-#define GRRLIB_TEAL    0x008080FF
-#define GRRLIB_GRAY    0x808080FF
-#define GRRLIB_SILVER  0xC0C0C0FF
-#define GRRLIB_RED     0xFF0000FF
-#define GRRLIB_LIME    0x00FF00FF
-#define GRRLIB_YELLOW  0xFFFF00FF
-#define GRRLIB_BLUE    0x0000FFFF
-#define GRRLIB_FUCHSIA 0xFF00FFFF
-#define GRRLIB_AQUA    0x00FFFFFF
-#define GRRLIB_WHITE   0xFFFFFFFF
+#define GRRLIB_WHITESMOKE   	0xFFFFFFFF
+#define GRRLIB_LIGHTRED     	0x3333FFFF
+#define GRRLIB_BLACK   			0x000000FF
+#define GRRLIB_MAROON  			0x800000FF
+#define GRRLIB_GREEN   			0x008000FF
+#define GRRLIB_OLIVE   			0x808000FF
+#define GRRLIB_NAVY    			0x000080FF
+#define GRRLIB_PURPLE  			0x800080FF
+#define GRRLIB_TEAL    			0x008080FF
+#define GRRLIB_GRAY    			0x808080FF
+#define GRRLIB_SILVER  			0xC0C0C0FF
+#define GRRLIB_RED     			0xFF0000FF
+#define GRRLIB_LIME    			0x00FF00FF
+#define GRRLIB_YELLOW  			0xFFFF00FF
+#define GRRLIB_BLUE    			0x0000FFFF
+#define GRRLIB_FUCHSIA 			0xFF00FFFF
+#define GRRLIB_AQUA    			0x00FFFFFF
+#define GRRLIB_WHITE   			0xFFFFFFFF
 
 #define IMAGE_COLOR        		0xFFFFFFFF
 #define IMAGE_COLOR2        	0x66666666
@@ -88,7 +86,7 @@
 #define MAX_RUMBLE				25
 #define MAX_HORZ_PIXELS			640
 #define MAX_VERT_PIXELS			480
-#define MAX_HIGHSCORES 			50
+#define MAX_LOCAL_HIGHSCORE 	15
 #define MAX_SETTINGS			3
 #define MAX_BEST	 			50
 #define MAX_LEVEL    	    	6

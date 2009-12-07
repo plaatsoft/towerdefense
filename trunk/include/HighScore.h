@@ -18,30 +18,37 @@
 **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#ifndef SETTINGS_H
-#define SETTINGS_H
+#ifndef HIGHSCORE_H
+#define HIGHSCORE_H
 
-class Settings
+typedef struct
+{
+   time_t localTime;
+   int    wave;
+   int    score; 
+   char   name[MAX_LEN];
+}
+Score;
+
+class HighScore
 {
   private:
-    char firstChar;
-	char secondChar;
-	char thirdChar;
-	
+	int maxdata;
+	Score scores[MAX_LOCAL_HIGHSCORE];
+
   public:
-  	Settings();
- 	~Settings();
+  	HighScore();
+ 	~HighScore();
 	
 	void load(const char *filename);
 	void save( const char *filename);
 	
-	void setFirstChar(char letter);
-	void setSecondChar(char letter);
-	void setThirdChar(char letter);
-
-	char getFirstChar(void);
-	char getSecondChar(void);
-	char getThirdChar(void);
+	void setScore(const char *name, int wave, int score);
+	
+	char *getName(int index);
+	time_t *getDate(int index);
+	int  getWave(int index);
+	int  getScore(int index);
 };
 
 #endif
