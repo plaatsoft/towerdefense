@@ -18,23 +18,32 @@
 **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#ifndef TRACE_H
-#define TRACE_H
+#ifndef SETTINGS_H
+#define SETTINGS_H
 
-class Trace
+class Settings
 {
   private:
-	FILE * fp;
-	char * getDate();
+	FILE *fp; 
 
-  public:
-  	Trace();
- 	~Trace();
+    char firstChar;
+	char secondChar;
+	char thirdChar;
 	
-	int open(const char *filename);
-	int event( const char *functionName, int threadNr, const char *event, ...);
-	int eventRaw( char character);
-	int close();
+  public:
+  	Settings();
+ 	~Settings();
+	
+	void load(const char *filename);
+	void save( const char *filename);
+	
+	void setFirstChar(char letter);
+	void setSecondChar(char letter);
+	void setThirdChar(char letter);
+
+	char getFirstChar(void);
+	char getSecondChar(void);
+	char getThirdChar(void);
 };
 
 #endif
