@@ -163,7 +163,6 @@ void HighScore::save( const char *filename)
 	char tmp[MAX_LEN];
       
 	xml = mxmlNewXML("1.0");
-   
 	group = mxmlNewElement(xml, "TowerDefense");
    
 	for(i=0; i<MAX_LOCAL_HIGHSCORE; i++)
@@ -198,6 +197,8 @@ void HighScore::save( const char *filename)
    
 	/*Time to clean up!*/
 	fclose(fp);
+	
+	
 	mxmlDelete(data);
 	mxmlDelete(group);
 	mxmlDelete(xml);

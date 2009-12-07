@@ -85,7 +85,10 @@ void Pointer::properties(void)
 
 void Pointer::buttonPlus(int index)
 {
-  char letter;
+   const char *s_fn="Pointer::buttonPlus";
+   trace->event(s_fn,0,"enter [index=%d]",index);
+  
+   char letter;
 
    switch (index)
    {	 
@@ -94,7 +97,7 @@ void Pointer::buttonPlus(int index)
 		  letter=settings->getFirstChar();
 		  if (letter<90) 
 		  {
-			settings->setFirstChar(letter++);
+			settings->setFirstChar(++letter);
 		  }
 		  else 
 		  {
@@ -107,7 +110,7 @@ void Pointer::buttonPlus(int index)
 		  letter=settings->getSecondChar();
 		  if (letter<90) 
 		  {
-			settings->setSecondChar(letter++);
+			settings->setSecondChar(++letter);
 		  }
 		  else 
 		  {
@@ -120,7 +123,7 @@ void Pointer::buttonPlus(int index)
 		  letter=settings->getThirdChar();
 		  if (letter<90) 
 		  {
-			settings->setThirdChar(letter++);
+			settings->setThirdChar(++letter);
 		  }
 		  else 
 		  {
@@ -128,19 +131,23 @@ void Pointer::buttonPlus(int index)
 		  }		
 		  break;
    }
+   trace->event(s_fn,0,"leave");
 }
 
 void Pointer::buttonMinus(int index)
 {
-   char letter;
-   switch (index)   
-   {
+	const char *s_fn="Pointer::buttonMinus";
+	trace->event(s_fn,0,"enter [index=%d]",index);
+   
+	char letter;
+	switch (index)   
+	{
 	    case 0:
 		  // First Character		  
 		  letter=settings->getFirstChar();
 		  if (letter>65) 
 		  {
-			settings->setFirstChar(letter--);
+			settings->setFirstChar(--letter);
 		  }
 		  else 
 		  {
@@ -153,7 +160,7 @@ void Pointer::buttonMinus(int index)
 		  letter=settings->getSecondChar();
 		  if (letter>65) 
 		  {
-			settings->setSecondChar(letter--);
+			settings->setSecondChar(--letter);
 		  }
 		  else 
 		  {
@@ -166,38 +173,43 @@ void Pointer::buttonMinus(int index)
 		  letter=settings->getThirdChar();
 		  if (letter>65) 
 		  {
-			settings->setThirdChar(letter--);
+			settings->setThirdChar(--letter);
 		  }
 		  else 
 		  {
 			settings->setThirdChar('Z');
 		  }		
-		  break;   }
+		  break;   
+	}
+	trace->event(s_fn,0,"leave");
 }
 
-
 void Pointer::buttonExit(int index)
-{    
-   // Stop network thread
-   //tcp_stop_thread();
+{  
+	const char *s_fn="Pointer::buttonExit";
+	trace->event(s_fn,0,"enter [index=%d]",index);
+   
+	// Stop network thread
+	//tcp_stop_thread();
 	
-   // Stop rumble
-   WPAD_Rumble(0,0);
+	// Stop rumble
+	WPAD_Rumble(0,0);
 		
-   // Stop music
-   //MODPlay_Stop(&snd1);
+	// Stop music
+	//MODPlay_Stop(&snd1);
 	
-   // Exit game
-   if (index==0)
-   {   
+	// Exit game
+	if (index==0)
+	{   
        // Exit to loader
 	   exit(0);
-   }
-   else
-   {
+	}
+	else
+	{
        // Reset Wii
 	   SYS_ResetSystem(SYS_RESTART,0,0);	
-   }
+	}
+	trace->event(s_fn,0,"leave");
 }
 
 
@@ -355,37 +367,37 @@ void Pointer::buttonA(int x, int y)
         if (buttons[0]->onSelect(x,y))
 	    {
 			// + First Character button event           
-			buttonPlus(3);  
+			buttonPlus(0);  
 	    }
 		
         if (buttons[1]->onSelect(x,y))
 	    {
 			// - First Character button event           
-			buttonPlus(3);  
+			buttonMinus(0);  
 	    }
 					
         if (buttons[2]->onSelect(x,y))
 	    {
 			// + Second Character button event           
-			buttonPlus(4);  
+			buttonPlus(1);  
 	    }
 		
         if (buttons[3]->onSelect(x,y))
 	    {
 			// - Second Character button event           
-			buttonPlus(4);  
+			buttonMinus(1);  
 	    }
 					    
         if (buttons[4]->onSelect(x,y))
 	    {
 			// + Third Character button event           
-			buttonPlus(5);  
+			buttonPlus(2);  
 	    }
 		
         if (buttons[5]->onSelect(x,y))
 	    {
 			// - Third Character button event           
-			buttonMinus(5);  
+			buttonMinus(2);  
 	    }
 		
         if (buttons[6]->onSelect(x,y))

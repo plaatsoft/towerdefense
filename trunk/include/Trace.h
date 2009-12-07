@@ -21,6 +21,15 @@
 #ifndef TRACE_H
 #define TRACE_H
 
+#include <stdio.h>
+#include <gccore.h>
+#include <ogcsys.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <ogcsys.h>
+#include <stdarg.h>
+
 class Trace
 {
   private:

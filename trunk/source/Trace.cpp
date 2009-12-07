@@ -18,21 +18,10 @@
 **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#include <stdio.h>
-#include <gccore.h>
-#include <ogcsys.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <ogcsys.h>
-#include <stdarg.h>
 #include <time.h>
 
-#include <string>
-
+#include "General.h"
 #include "trace.h"
-
-#define MAX_BUFFER_SIZE		    8192
 
 // Enable / Disable trace file functionality
 bool traceOn = true;
@@ -124,11 +113,10 @@ int Trace::event( const char *functionName, int threadNr, const char *event, ...
    va_list listPointer ;
    va_start( listPointer, event ) ;
 
-   static char buf[ MAX_BUFFER_SIZE ];
+   char buf[ MAX_LEN ];
    
-
    // Clear memory  
-   memset(buf, sizeof(buf), 0x00);
+   memset(buf, MAX_LEN, 0x00);
   
    // Build string
    vsprintf( buf, event, listPointer ) ;

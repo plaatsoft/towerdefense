@@ -22,9 +22,10 @@
 **  07/12/2009 Version 0.31
 **  - Added Local highscore page
 **  - Added User Initials page
-**  - Added Sound Settings page 
 **  - Added Credits page
 **  - Added Help Page
+**  - Added Empty Sound Settings page 
+**  - Added Empty Release Notes page 
 **  - Improve main menu page.
 **  - Added functionality to make screenshots (Press + button)
 **
