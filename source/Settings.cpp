@@ -1,0 +1,210 @@
+/*  
+**  Created by wplaat (www.plaatsoft.nl)
+**
+**  Copyright (C) 2009
+**  ==================
+**
+**  This program is free software; you can redistribute it and/or modify
+**  it under the terms of the GNU General Public License as published by
+**  the Free Software Foundation, version 2.
+**
+**  This program is distributed in the hope that it will be useful,
+**  but WITHOUT ANY WARRANTY; without even the implied warranty of
+**  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**  GNU General Public License for more details.
+**
+**  You should have received a copy of the GNU General Public License
+**  along with this program; if not, write to the Free Software
+**  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+ 
+#include <mxml.h>
+
+#include "General.h"
+#include "Settings.h"
+#include "Trace.h"
+
+extern Trace *trace;
+
+// ------------------------------
+// Constructor 
+// ------------------------------
+
+Settings::Settings()
+{
+   const char *s_fn="Settings::Settings";
+   trace->event(s_fn,0,"enter");
+   
+   fp=NULL;
+   firstChar=0x00;
+   secondChar=0x00;
+   thirdChar=0x00;
+	
+   trace->event(s_fn,0,"leave [void]");
+}
+
+// ------------------------------
+// Destructor
+// ------------------------------
+
+Settings::~Settings()
+{
+  const char *s_fn="Settings::~Settings";
+  trace->event(s_fn,0,"enter");
+  
+  trace->event(s_fn,0,"leave [void]");
+
+}
+
+// ------------------------------
+// Others
+// ------------------------------
+	
+void Settings::load(const char *filename)
+{
+    const char *s_fn="Settings::load";
+    trace->event(s_fn,0,"enter");
+	
+    int i;
+    FILE *fp;
+    mxml_node_t *tree=NULL;
+    mxml_node_t *data=NULL;
+    const char *value;
+    char temp[MAX_LEN];
+   
+    /*Load our xml file! */
+    fp = fopen(filename, "r");
+    if (fp!=NULL)
+    {
+	    trace->event(s_fn,0,"Load [filename=%s]",filename);
+		
+		tree = mxmlLoadFile(NULL, fp, MXML_NO_CALLBACK);
+		fclose(fp);
+
+		for(i=0; i<MAX_SETTINGS; i++)
+		{
+			sprintf(temp, "entry%d", i);
+			data = mxmlFindElement(tree, tree, temp, NULL, NULL, MXML_DESCEND);
+  
+			value=mxmlElementGetAttr(data,"value"); 
+			
+			switch (i)
+			{
+			   case 0: firstChar=value[0];
+					   break;
+
+			   case 1: secondChar=value[0];
+					   break;
+
+			   case 2: thirdChar=value[0];
+					   break;
+			}				
+			trace->event(s_fn,0,"Store [id=%d|value=%s]",i,value);
+		}
+    }
+    else
+    {
+	  trace->event(s_fn,0,"Setting file not found, set default values!");
+	  		
+	  firstChar='A';
+	  secondChar='A';
+	  thirdChar='A'; 
+   }
+
+   mxmlDelete(data);
+   mxmlDelete(tree);
+   trace->event(s_fn,0,"leave [void]");
+}
+
+void Settings::save( const char *filename)
+{
+    const char *s_fn="Settings::save";
+    trace->event(s_fn,0,"enter");
+	
+    int i;
+    mxml_node_t *xml;
+    mxml_node_t *group;
+    mxml_node_t *data;   
+    char temp[MAX_LEN];
+      
+    xml = mxmlNewXML("1.0");
+   
+    group = mxmlNewElement(xml, "TowerDefense");
+   
+    for(i=0; i<MAX_SETTINGS; i++)
+    {
+        sprintf(temp, "entry%d", i);
+        data = mxmlNewElement(group, temp);
+  
+		switch (i)
+		{
+			case 0: sprintf(temp, "%c", firstChar);
+					mxmlElementSetAttr(data, "value", temp);			  
+					break;
+					
+			case 1: sprintf(temp, "%c", secondChar);
+					mxmlElementSetAttr(data, "value", temp);			  
+					break;
+					
+			case 2: sprintf(temp, "%c", thirdChar);
+					mxmlElementSetAttr(data, "value", temp);			  
+					break;
+		}
+    }
+  
+    /* now lets save the xml file to a file! */
+    FILE *fp;
+    fp = fopen(filename, "w");
+
+    mxmlSaveFile(xml, fp, MXML_NO_CALLBACK);
+   
+    fclose(fp);
+	
+    mxmlDelete(data);
+    mxmlDelete(group);
+    mxmlDelete(xml);
+   
+    trace->event(s_fn,0,"leave [void]");
+}
+
+// ------------------------------
+// Settings
+// ------------------------------
+	
+void Settings::setFirstChar(char letter)
+{
+   firstChar=letter;
+}
+
+void Settings::setSecondChar(char letter)
+{
+   secondChar=letter;
+}
+
+void Settings::setThirdChar(char letter)
+{
+   thirdChar=letter;
+}
+
+// ------------------------------
+// Getters
+// ------------------------------
+
+char Settings::getFirstChar()
+{
+   return firstChar;
+}
+
+char Settings::getSecondChar()
+{
+   return secondChar;
+}
+
+char Settings::getThirdChar()
+{
+   return thirdChar;
+};
+
+// ------------------------------
+// The End
+// ------------------------------

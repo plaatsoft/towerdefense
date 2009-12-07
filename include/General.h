@@ -26,8 +26,8 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.40"
-#define RELEASE_DATE        	"05-12-2009" 
+#define PROGRAM_VERSION     	"0.41"
+#define RELEASE_DATE        	"07-12-2009" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -188,17 +188,6 @@ typedef struct
 	char name[MAX_LEN];
 }
 Game;
-
-// Setting[0] First Character Initial
-// Setting[1] Second Character Initial
-// Setting[2] Third Character Initial
-
-typedef struct
-{
-   char   key[MAX_LEN];
-   char   value[MAX_LEN];
-}
-Setting;
 
 #endif
 

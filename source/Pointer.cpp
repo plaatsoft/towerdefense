@@ -23,12 +23,13 @@
 #include "General.h"
 #include "GRRLIB.h"
 #include "Pointer.h"
+#include "Settings.h"
 #include "Trace.h"
 #include "Button.h"
   
 extern Game game;
-extern Setting settings[MAX_SETTINGS]; 
 
+extern Settings *settings;
 extern Trace *trace;
 extern Button *buttons[MAX_BUTTONS];
 
@@ -82,109 +83,48 @@ void Pointer::properties(void)
 	GRRLIB_Printf2(10, 20, tmp, size, COLOR_WHITESMOKE);
 }
 
-void Pointer::saveSettingFile(const char* filename)
-{
-    const char *s_fn="saveSettingFile";
-    trace->event(s_fn,0,"enter");
-	
-    int i;
-    mxml_node_t *xml;
-    mxml_node_t *group;
-    mxml_node_t *data;   
-    char temp[MAX_LEN];
-      
-    xml = mxmlNewXML("1.0");
-   
-    group = mxmlNewElement(xml, "TowerDefense");
-   
-    for(i=0; i<MAX_SETTINGS; i++)
-    {
-        sprintf(temp, "entry%d", i);
-        data = mxmlNewElement(group, temp);
-  
-        mxmlElementSetAttr(data, "key", settings[i].key);	  
- 	    mxmlElementSetAttr(data, "value", settings[i].value);			  
-    }
-  
-    /* now lets save the xml file to a file! */
-    FILE *fp;
-    fp = fopen(filename, "w");
-
-    mxmlSaveFile(xml, fp, MXML_NO_CALLBACK);
-   
-    fclose(fp);
-    mxmlDelete(data);
-    mxmlDelete(group);
-    mxmlDelete(xml);
-   
-    // Update game.name value
-    if ((settings[0].value[0]!=0x00) && (settings[1].value[0]!=0x00) && (settings[2].value[0]!=0x00))
-    {
-      sprintf(temp,"%c%c%c",settings[0].value[0],settings[1].value[0],settings[2].value[0]);
-      strcpy(game.name,temp);
-    }
-    trace->event(s_fn,0,"leave [void]");
-}
-
-
 void Pointer::buttonPlus(int index)
 {
+  char letter;
+
    switch (index)
-   {
-      case 0:
-         // Music volume
-	     //if (musicVolume<MAX_SOUND_VOLUME) musicVolume++;   
-	     //MODPlay_SetVolume( &snd1, musicVolume*MUSIC_MULTIPLER,musicVolume*MUSIC_MULTIPLER); 
-		 break;
-		 
-	  case 1:
-         // Effect volume
-         //if (effectVolume<MAX_SOUND_VOLUME) effectVolume++; 
-		 break;
-		 
-	  case 2:
-	     // Next music Track
-         //MODPlay_Stop(&snd1);
-         //if (selectedMusic<MAX_MUSIC_TRACK) selectedMusic++; else selectedMusic=1;
-	     //initMusicTrack();
-		 break;
-		 
-	  case 3:
+   {	 
+	  case 0:
 		  // First Character
-		  if (settings[0].value[0]==0x00) 
+		  letter=settings->getFirstChar();
+		  if (letter<90) 
 		  {
-		     settings[0].value[0]='A';
-			 strcpy(settings[0].key,"FIRST_CHAR");
+			settings->setFirstChar(letter++);
 		  }
-		  else
+		  else 
 		  {
-		     if (settings[0].value[0]<90) settings[0].value[0]++; else settings[0].value[0]='A';
+			settings->setFirstChar('A');
 		  }		
 		  break;
 		  
-	  case 4:
+	  case 1:
 		  // Second Character
-		  if (settings[1].value[0]==0x00) 
+		  letter=settings->getSecondChar();
+		  if (letter<90) 
 		  {
-		     settings[1].value[0]='A';
-			 strcpy(settings[1].key,"SECOND_CHAR");
+			settings->setSecondChar(letter++);
 		  }
-		  else
+		  else 
 		  {
-		     if (settings[1].value[0]<90) settings[1].value[0]++; else settings[1].value[0]='A';
+			settings->setSecondChar('A');
 		  }		
 		  break;
 		  
-	  case 5:
+	  case 2:
 		  // Third Character
-		  if (settings[2].value[0]==0x00) 
+		  letter=settings->getThirdChar();
+		  if (letter<90) 
 		  {
-		     settings[2].value[0]='A';
-			 strcpy(settings[2].key,"THIRD_CHAR");
+			settings->setThirdChar(letter++);
 		  }
-		  else
+		  else 
 		  {
-		     if (settings[2].value[0]<90) settings[2].value[0]++; else settings[2].value[0]='A';
+			settings->setThirdChar('A');
 		  }		
 		  break;
    }
@@ -192,65 +132,47 @@ void Pointer::buttonPlus(int index)
 
 void Pointer::buttonMinus(int index)
 {
+   char letter;
    switch (index)   
    {
-       case 0:
-	      // Music volume
-	      //if (musicVolume>0) musicVolume--;   
-	      //MODPlay_SetVolume( &snd1, musicVolume*MUSIC_MULTIPLER,musicVolume*MUSIC_MULTIPLER);
-		  break;
-       
-	   case 1:
-          // Effect volume
-          //if (effectVolume>0) effectVolume--; 
-		  break;
-   
-       case 2:
-	      // Prev music track
-          //MODPlay_Stop(&snd1);
-          //if (selectedMusic>1) selectedMusic--; else selectedMusic=MAX_MUSIC_TRACK;
-	      //initMusicTrack();
-		  break;
-	
-	    case 3:
-		  // First Character
-		  if (settings[0].value[0]==0x00) 
+	    case 0:
+		  // First Character		  
+		  letter=settings->getFirstChar();
+		  if (letter>65) 
 		  {
-		     settings[0].value[0]='A';
-			 strcpy(settings[0].key,"FIRST_CHAR");
+			settings->setFirstChar(letter--);
 		  }
-		  else
+		  else 
 		  {
-		     if (settings[0].value[0]>65) settings[0].value[0]--; else settings[0].value[0]='Z';
+			settings->setFirstChar('Z');
 		  }		
 		  break;
-		  
-		case 4:
+		   
+		case 1:
 		  // Second Character
-		  if (settings[1].value[0]==0x00) 
+		  letter=settings->getSecondChar();
+		  if (letter>65) 
 		  {
-		     settings[1].value[0]='A';
-			 strcpy(settings[1].key,"SECOND_CHAR");
+			settings->setSecondChar(letter--);
 		  }
-		  else
+		  else 
 		  {
-		     if (settings[1].value[0]>65) settings[1].value[0]--; else settings[1].value[0]='Z';
+			settings->setSecondChar('Z');
 		  }		
 		  break;
 		  
-		case 5:
+		case 2:
 		  // Third Character
-		  if (settings[2].value[0]==0x00) 
+		  letter=settings->getThirdChar();
+		  if (letter>65) 
 		  {
-		     settings[2].value[0]='A';
-			 strcpy(settings[2].key,"THIRD_CHAR");
+			settings->setThirdChar(letter--);
 		  }
-		  else
+		  else 
 		  {
-		     if (settings[2].value[0]>65) settings[2].value[0]--; else settings[2].value[0]='Z';
+			settings->setThirdChar('Z');
 		  }		
-		  break;
-   }
+		  break;   }
 }
 
 
@@ -460,7 +382,7 @@ void Pointer::buttonA(int x, int y)
         if (buttons[6]->onSelect(x,y))
 	    {
            // Next button	
-		   saveSettingFile(SETTING_FILENAME); 
+		   settings->save(SETTING_FILENAME); 
 		   game.stateMachine=stateMenu;	     
 	    }
 		

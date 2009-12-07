@@ -79,6 +79,7 @@
 #include "GRRLIB.h"
 #include "General.h"
 #include "Trace.h"
+#include "Settings.h"
 #include "Monster.h"
 #include "Weapon.h"
 #include "Button.h"
@@ -408,89 +409,18 @@ int 		yOffset             = 0;
 int 		yjpegOffset         = 0;
 
 Game 	game;
-Setting settings[MAX_SETTINGS];
 
-Trace   *trace;
-Grid    *grid;
-Monster *monsters[MAX_MONSTERS];
-Pointer *pointers[MAX_POINTERS];
-Weapon  *weapons[MAX_WEAPONS];
-Button  *buttons[MAX_BUTTONS];
+Trace    *trace;
+Settings *settings;
+Grid     *grid;
+Monster  *monsters[MAX_MONSTERS];
+Pointer  *pointers[MAX_POINTERS];
+Weapon   *weapons[MAX_WEAPONS];
+Button   *buttons[MAX_BUTTONS];
 
 // -----------------------------------
 // INIT METHODES
 // -----------------------------------
-
-void loadSettingFile(const char* filename)
-{
-    const char *s_fn="loadSettingFile";
-    trace->event(s_fn,0,"enter");
-	
-    int i;
-    FILE *fp;
-    mxml_node_t *tree=NULL;
-    mxml_node_t *data=NULL;
-    const char *tmp;
-    char temp[MAX_LEN];
-   
-    /*Load our xml file! */
-    fp = fopen(filename, "r");
-    if (fp!=NULL)
-    {
-	    trace->event(s_fn,0,"Load [filename=%s]",filename);
-		
-		tree = mxmlLoadFile(NULL, fp, MXML_NO_CALLBACK);
-		fclose(fp);
-
-		for(i=0; i<MAX_SETTINGS; i++)
-		{
-			sprintf(temp, "entry%d", i);
-			data = mxmlFindElement(tree, tree, temp, NULL, NULL, MXML_DESCEND);
-  
-			tmp=mxmlElementGetAttr(data,"key");   
-			if (tmp!=NULL) strcpy(settings[i].key,tmp); else strcpy(settings[i].key,"");
-		
-			tmp=mxmlElementGetAttr(data,"value"); 
-			if (tmp!=NULL) strcpy(settings[i].value,tmp); else strcpy(settings[i].value,"");
-			
-			trace->event(s_fn,0,"Store [key=%s] [value=%s]",settings[i].key,settings[i].value);
-		}
-    }
-    else
-    {
-	  trace->event(s_fn,0,"Setting file not found, set default values!");
-	  
-      for(i=0; i<MAX_SETTINGS; i++)
-      {
-        memset(settings[i].key,0x00, MAX_LEN);
-		memset(settings[i].value,0x00, MAX_LEN);
-	  }
-	  
-	  // Setting[0] First Character Initial
-	  strcpy(settings[0].key,"FIRST_CHAR");		
-	  strcpy(settings[0].value,"A");
-		
-	  // Setting[1] Second Character Initial
-	  strcpy(settings[1].key,"SECOND_CHAR");
-	  strcpy(settings[1].value,"A");
-		
-	  // Setting[2] Third Character Initial
-	  strcpy(settings[2].key,"THIRD_CHAR");
-	  strcpy(settings[2].value,"A"); 
-   }
-
-   mxmlDelete(data);
-   mxmlDelete(tree);
-   
-   // Update game.name value  
-   if ((settings[0].value[0]!=0x00) && (settings[1].value[0]!=0x00) && (settings[2].value[0]!=0x00))
-   {
-      sprintf(temp,"%c%c%c",settings[0].value[0],settings[1].value[0],settings[2].value[0]);
-      strcpy(game.name,temp);
-   }
-   trace->event(s_fn,0,"leave [void]");
-}
-
 
 void initImages(void)
 {
@@ -978,6 +908,88 @@ void initButtons(void)
 		
 		case stateSettings:
 	    {
+			// First letter + button 
+			buttons[0]=new Button();
+			buttons[0]->setX(100);
+			buttons[0]->setY(130);
+			buttons[0]->setImageNormal(images.button2);
+			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setLabel("+");	
+
+			// First letter - button 
+			buttons[1]=new Button();
+			buttons[1]->setX(100);
+			buttons[1]->setY(295);
+			buttons[1]->setImageNormal(images.button2);
+			buttons[1]->setImageFocus(images.buttonFocus2);
+			buttons[1]->setLabel(-");	
+
+			// Second letter + button 
+			buttons[0]=new Button();
+			buttons[0]->setX(100);
+			buttons[0]->setY(130);
+			buttons[0]->setImageNormal(images.button2);
+			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setLabel("+");	
+
+			// second letter - button 
+			buttons[1]=new Button();
+			buttons[1]->setX(100);
+			buttons[1]->setY(295);
+			buttons[1]->setImageNormal(images.button2);
+			buttons[1]->setImageFocus(images.buttonFocus2);
+			buttons[1]->setLabel(-");	
+			
+			 // First letter + button 
+		buttons[0].image=images.button2;
+		buttons[0].imageSelect=images.button2select;
+		strcpy(buttons[0].name,"+");
+		buttons[0].x=100;
+		buttons[0].y=130+yOffset;
+   
+		// First letter - button 
+		buttons[1].image=images.button2;
+		buttons[1].imageSelect=images.button2select;
+		strcpy(buttons[1].name,"-");   
+		buttons[1].x=100;
+		buttons[1].y=295+yOffset;
+				
+		// Second letter + button 
+		buttons[2].image=images.button2;
+		buttons[2].imageSelect=images.button2select;
+		strcpy(buttons[2].name,"+");
+		buttons[2].x=280;
+		buttons[2].y=130+yOffset;
+
+		// Second letter - button 
+		buttons[3].image=images.button2;
+		buttons[3].imageSelect=images.button2select;
+		strcpy(buttons[3].name,"-");   
+		buttons[3].x=280;
+		buttons[3].y=295+yOffset;
+				
+		// Third letter + button 
+		buttons[4].image=images.button2;
+		buttons[4].imageSelect=images.button2select;
+		strcpy(buttons[4].name,"+");
+		buttons[4].x=460;
+		buttons[4].y=130+yOffset;
+   
+		// Third letter - button 
+		buttons[5].image=images.button2;
+		buttons[5].imageSelect=images.button2select;
+		strcpy(buttons[5].name,"-");   
+		buttons[5].x=460;
+		buttons[5].y=295+yOffset;
+		
+		// Back button 
+		buttons[6].image=images.button2;
+		buttons[6].imageSelect=images.button2select;
+		strcpy(buttons[6].name,"Back");
+		buttons[6].x=280;
+		buttons[6].y=400+yOffset;
+
+
 			// Next Button
 			buttons[0]=new Button();
 			buttons[0]->setX(260);
@@ -985,6 +997,14 @@ void initButtons(void)
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Next");	
+			
+			// Next Button
+			buttons[1]=new Button();
+			buttons[1]->setX(260);
+			buttons[1]->setY(460);
+			buttons[1]->setImageNormal(images.button2);
+			buttons[1]->setImageFocus(images.buttonFocus2);
+			buttons[1]->setLabel("Next");	
 			
 			game.maxButtons=1;
 		}
@@ -1009,9 +1029,10 @@ void initGame(void)
    
     // Init pointers
     initPointers();
-	
-	// Load Settings from SDCard
-	loadSettingFile(SETTING_FILENAME);
+
+	// Load Settings from SDCard	
+	settings = new Settings();
+	settings->load(SETTING_FILENAME);
 	
 	trace->event(s_fn,0,"leave");
 }
@@ -1667,21 +1688,21 @@ void drawScreen(void)
       		
 	      // Draw Title	
           drawText(150, ypos, fontTitle, "User Initials");
-          ypos+=90;
-		  
-		  //drawText(0, ypos, fontParagraph, "This user initials are used in the highscore area.");	
-	      //ypos+=80;
+          ypos+=120;
 		  
 	      // Draw panels		 
-		  GRRLIB_DrawImg(60,ypos, images.panel1, 0, 1.0, 1.0, IMAGE_COLOR );
-      	  GRRLIB_DrawImg(240,ypos, images.panel1, 0, 1.0, 1.0, IMAGE_COLOR );
-		  GRRLIB_DrawImg(420,ypos, images.panel1, 0, 1.0, 1.0, IMAGE_COLOR );
+		  GRRLIB_Rectangle(60, ypos, 100, 100, GRRLIB_BLACK, 1); 
+		  GRRLIB_Rectangle(240, ypos, 100, 100, GRRLIB_BLACK, 1);
+		  GRRLIB_Rectangle(420, ypos, 100, 100, GRRLIB_BLACK, 1);
       	  ypos+=10;
 		  
 		  // Draw text  
-		  if (settings[0].value[0]!=0x00) drawText(110, ypos, fontTitle, settings[0].value);
-		  if (settings[1].value[0]!=0x00) drawText(300, ypos, fontTitle, settings[1].value);
-		  if (settings[2].value[0]!=0x00) drawText(480, ypos, fontTitle, settings[2].value);
+		  sprintf(tmp, "%c", settings->getFirstChar());
+		  drawText(110, ypos, fontTitle, tmp);
+		  sprintf(tmp, "%c", settings->getSecondChar());
+		  drawText(300, ypos, fontTitle, tmp);
+		  sprintf(tmp, "%c", settings->getThirdChar());
+		  drawText(480, ypos, fontTitle, tmp);
 
 		  ypos+=170;
 	  	  drawText(0, ypos, fontParagraph, "This initials are used in the highscore area.");	
