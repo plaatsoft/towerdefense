@@ -77,10 +77,10 @@ void Pointer::properties(void)
 	int size=12;
  
 	sprintf(tmp, "x=%d", x);
-	GRRLIB_Printf2(10, 10, tmp, size, COLOR_WHITESMOKE); 
+	GRRLIB_Printf2(10, 10, tmp, size, GRRLIB_WHITESMOKE); 
 	
 	sprintf(tmp, "y=%d", y);
-	GRRLIB_Printf2(10, 20, tmp, size, COLOR_WHITESMOKE);
+	GRRLIB_Printf2(10, 20, tmp, size, GRRLIB_WHITESMOKE);
 }
 
 void Pointer::buttonPlus(int index)
@@ -320,6 +320,16 @@ void Pointer::buttonA(int x, int y)
      }
 	 break;
 
+	 case stateSound:
+     {
+        if (buttons[0]->onSelect(x,y))
+	    {
+           // Next button	
+		   game.stateMachine=stateMenu;	     
+	    }
+     }
+	 break;
+	 
 	 case stateReleaseNotes:
      {
         if (buttons[0]->onSelect(x,y))
@@ -354,7 +364,6 @@ void Pointer::buttonA(int x, int y)
 			buttonPlus(3);  
 	    }
 					
-
         if (buttons[2]->onSelect(x,y))
 	    {
 			// + Second Character button event           
@@ -384,18 +393,6 @@ void Pointer::buttonA(int x, int y)
            // Next button	
 		   settings->save(SETTING_FILENAME); 
 		   game.stateMachine=stateMenu;	     
-	    }
-		
-		if (buttons[7]->onSelect(x,y))
-	    {
-           // Exit button
-		   game.stateMachine=stateQuit;
-	    }
-		
-		if (buttons[8]->onSelect(x,y))
-	    {
-           // Reset button
-		   game.stateMachine=stateQuit;
 	    }
      }
 	 break; 

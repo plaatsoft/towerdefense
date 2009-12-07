@@ -19,10 +19,10 @@
 **  Release Notes:
 **  ==============
 **
-**  05/12/2009 Version 0.40
-**  - Added Local highscore page (No all functionality is working yet)
-**  - Added User Initials page (No all functionality is working yet)
-**  - Added Sound Settings page (No all functionality is working yet)
+**  07/12/2009 Version 0.31
+**  - Added Local highscore page
+**  - Added User Initials page
+**  - Added Sound Settings page 
 **  - Added Credits page
 **  - Added Help Page
 **  - Improve main menu page.
@@ -80,6 +80,7 @@
 #include "General.h"
 #include "Trace.h"
 #include "Settings.h"
+#include "HighScore.h"
 #include "Monster.h"
 #include "Weapon.h"
 #include "Button.h"
@@ -410,13 +411,14 @@ int 		yjpegOffset         = 0;
 
 Game 	game;
 
-Trace    *trace;
-Settings *settings;
-Grid     *grid;
-Monster  *monsters[MAX_MONSTERS];
-Pointer  *pointers[MAX_POINTERS];
-Weapon   *weapons[MAX_WEAPONS];
-Button   *buttons[MAX_BUTTONS];
+Trace     *trace;
+Settings  *settings;
+HighScore *highScore;
+Grid      *grid;
+Monster   *monsters[MAX_MONSTERS];
+Pointer   *pointers[MAX_POINTERS];
+Weapon    *weapons[MAX_WEAPONS];
+Button    *buttons[MAX_BUTTONS];
 
 // -----------------------------------
 // INIT METHODES
@@ -922,91 +924,49 @@ void initButtons(void)
 			buttons[1]->setY(295);
 			buttons[1]->setImageNormal(images.button2);
 			buttons[1]->setImageFocus(images.buttonFocus2);
-			buttons[1]->setLabel(-");	
+			buttons[1]->setLabel("-");	
 
 			// Second letter + button 
-			buttons[0]=new Button();
-			buttons[0]->setX(100);
-			buttons[0]->setY(130);
-			buttons[0]->setImageNormal(images.button2);
-			buttons[0]->setImageFocus(images.buttonFocus2);
-			buttons[0]->setLabel("+");	
+			buttons[2]=new Button();
+			buttons[2]->setX(280);
+			buttons[2]->setY(130);
+			buttons[2]->setImageNormal(images.button2);
+			buttons[2]->setImageFocus(images.buttonFocus2);
+			buttons[2]->setLabel("+");	
 
 			// second letter - button 
-			buttons[1]=new Button();
-			buttons[1]->setX(100);
-			buttons[1]->setY(295);
-			buttons[1]->setImageNormal(images.button2);
-			buttons[1]->setImageFocus(images.buttonFocus2);
-			buttons[1]->setLabel(-");	
-			
-			 // First letter + button 
-		buttons[0].image=images.button2;
-		buttons[0].imageSelect=images.button2select;
-		strcpy(buttons[0].name,"+");
-		buttons[0].x=100;
-		buttons[0].y=130+yOffset;
-   
-		// First letter - button 
-		buttons[1].image=images.button2;
-		buttons[1].imageSelect=images.button2select;
-		strcpy(buttons[1].name,"-");   
-		buttons[1].x=100;
-		buttons[1].y=295+yOffset;
-				
-		// Second letter + button 
-		buttons[2].image=images.button2;
-		buttons[2].imageSelect=images.button2select;
-		strcpy(buttons[2].name,"+");
-		buttons[2].x=280;
-		buttons[2].y=130+yOffset;
+			buttons[3]=new Button();
+			buttons[3]->setX(280);
+			buttons[3]->setY(295);
+			buttons[3]->setImageNormal(images.button2);
+			buttons[3]->setImageFocus(images.buttonFocus2);
+			buttons[3]->setLabel("-");	
 
-		// Second letter - button 
-		buttons[3].image=images.button2;
-		buttons[3].imageSelect=images.button2select;
-		strcpy(buttons[3].name,"-");   
-		buttons[3].x=280;
-		buttons[3].y=295+yOffset;
-				
-		// Third letter + button 
-		buttons[4].image=images.button2;
-		buttons[4].imageSelect=images.button2select;
-		strcpy(buttons[4].name,"+");
-		buttons[4].x=460;
-		buttons[4].y=130+yOffset;
-   
-		// Third letter - button 
-		buttons[5].image=images.button2;
-		buttons[5].imageSelect=images.button2select;
-		strcpy(buttons[5].name,"-");   
-		buttons[5].x=460;
-		buttons[5].y=295+yOffset;
-		
-		// Back button 
-		buttons[6].image=images.button2;
-		buttons[6].imageSelect=images.button2select;
-		strcpy(buttons[6].name,"Back");
-		buttons[6].x=280;
-		buttons[6].y=400+yOffset;
+			// Third letter + button 
+			buttons[4]=new Button();
+			buttons[4]->setX(460);
+			buttons[4]->setY(130);
+			buttons[4]->setImageNormal(images.button2);
+			buttons[4]->setImageFocus(images.buttonFocus2);
+			buttons[4]->setLabel("+");	
 
-
-			// Next Button
-			buttons[0]=new Button();
-			buttons[0]->setX(260);
-			buttons[0]->setY(460);
-			buttons[0]->setImageNormal(images.button2);
-			buttons[0]->setImageFocus(images.buttonFocus2);
-			buttons[0]->setLabel("Next");	
+			// Third letter - button 
+			buttons[5]=new Button();
+			buttons[5]->setX(460);
+			buttons[5]->setY(295);
+			buttons[5]->setImageNormal(images.button2);
+			buttons[5]->setImageFocus(images.buttonFocus2);
+			buttons[5]->setLabel("-");
 			
 			// Next Button
-			buttons[1]=new Button();
-			buttons[1]->setX(260);
-			buttons[1]->setY(460);
-			buttons[1]->setImageNormal(images.button2);
-			buttons[1]->setImageFocus(images.buttonFocus2);
-			buttons[1]->setLabel("Next");	
+			buttons[6]=new Button();
+			buttons[6]->setX(260);
+			buttons[6]->setY(460);
+			buttons[6]->setImageNormal(images.button2);
+			buttons[6]->setImageFocus(images.buttonFocus2);
+			buttons[6]->setLabel("Next");	
 			
-			game.maxButtons=1;
+			game.maxButtons=7;
 		}
 		break;	
 	}
@@ -1033,6 +993,9 @@ void initGame(void)
 	// Load Settings from SDCard	
 	settings = new Settings();
 	settings->load(SETTING_FILENAME);
+	
+	highScore = new HighScore();
+	highScore->load(HIGHSCORE_FILENAME);
 	
 	trace->event(s_fn,0,"leave");
 }
@@ -1111,49 +1074,49 @@ void drawText(int x, int y, int type, const char *text)
   
        case fontWelcome: 
 	   {
-		  GRRLIB_Printf2(x, y, tmp, 40, COLOR_WHITESMOKE); 
+		  GRRLIB_Printf2(x, y, tmp, 40, GRRLIB_WHITESMOKE); 
 	   }
 	   break;
 	   
 	   case fontSubTitle:
 	   {
 	      if (x==0) x=320-((strlen(tmp)*20)/2);
-		  GRRLIB_Printf2(x, y, tmp, 30, COLOR_WHITESMOKE);          
+		  GRRLIB_Printf2(x, y, tmp, 30, GRRLIB_WHITESMOKE);          
 	   }
 	   break;
 	   
 	   case fontSubTitle2:
 	   {
 	      if (x==0) x=320-((strlen(tmp)*20)/2);
-		  GRRLIB_Printf2(x, y, tmp, 30, COLOR_LIGHTRED);          
+		  GRRLIB_Printf2(x, y, tmp, 30, GRRLIB_LIGHTRED);          
 	   }
 	   break;
 	   	   
 	   case fontParagraph:
 	   {
 	       if (x==0) x=320-((strlen(tmp)*10)/2);	   
-		   GRRLIB_Printf2(x, y, tmp, 24, COLOR_WHITESMOKE);            
+		   GRRLIB_Printf2(x, y, tmp, 24, GRRLIB_WHITESMOKE);            
 	   }
 	   break;
 	   	   
 	   case fontNormal:
 	   {
 	       if (x==0) x=320-((strlen(tmp)*7)/2);
-		   GRRLIB_Printf2(x, y, tmp, 18, COLOR_WHITESMOKE);            
+		   GRRLIB_Printf2(x, y, tmp, 18, GRRLIB_WHITESMOKE);            
 	   }
 	   break;
 	         
 	   case fontNew:
 	   {
 	       if (x==0) x=320-((strlen(tmp)*8)/2);	   
-		   GRRLIB_Printf2(x, y, tmp, 22, COLOR_WHITESMOKE);            
+		   GRRLIB_Printf2(x, y, tmp, 22, GRRLIB_WHITESMOKE);            
 	   }
 	   break;
 	   
 	   case fontSpecial:
 	   {
 	       if (x==0) x=320-((strlen(tmp)*10)/2);
-		   GRRLIB_Printf2(x, y, tmp, 10, COLOR_WHITESMOKE);            
+		   GRRLIB_Printf2(x, y, tmp, 10, GRRLIB_WHITESMOKE);            
 	   }
 	   break;
 	   
@@ -1161,11 +1124,11 @@ void drawText(int x, int y, int type, const char *text)
 	   {
 	       if (strlen(tmp)==1)
 		   {
-		      GRRLIB_Printf2(x+35, y, tmp, 24, COLOR_WHITESMOKE);            
+		      GRRLIB_Printf2(x+35, y, tmp, 24, GRRLIB_WHITESMOKE);            
 		   }
 		   else
 		   {
-		      GRRLIB_Printf2(x+20, y, tmp, 24, COLOR_WHITESMOKE);    
+		      GRRLIB_Printf2(x+20, y, tmp, 24, GRRLIB_WHITESMOKE);    
 		   }		   
 	   }
 	   break;
@@ -1183,13 +1146,13 @@ void drawGamePanel(void)
 	//GRRLIB_DrawImg(0,470, images.panel1, 0, 1, 1, IMAGE_COLOR );
 		  
 	sprintf(tmp,"Score = %d", game.score); 
-	GRRLIB_Printf2(20, 480, tmp, 14, COLOR_WHITESMOKE);
+	GRRLIB_Printf2(20, 480, tmp, 14, GRRLIB_WHITESMOKE);
 	
 	sprintf(tmp,"Monster in Base = %d", game.monsterInBase); 
-	GRRLIB_Printf2(20, 490, tmp, 14, COLOR_WHITESMOKE);
+	GRRLIB_Printf2(20, 490, tmp, 14, GRRLIB_WHITESMOKE);
 	  
 	sprintf(tmp,"%d fps", CalculateFrameRate()); 
-	GRRLIB_Printf2(20, 500, tmp, 14, COLOR_WHITESMOKE);
+	GRRLIB_Printf2(20, 500, tmp, 14, GRRLIB_WHITESMOKE);
 }
 
 
@@ -1343,43 +1306,14 @@ void drawScreen(void)
 		case stateLocalHighScore:
 	    {
 	      int  ypos=yOffset;
-	      //struct tm *local;
-		  //int startEntry;
-		  //int endEntry;
-		  		  
-		  /*if (maxLocalHighScore<13)
-		  {
-		    startEntry=0;
-			endEntry=maxLocalHighScore;
-			scrollEnabled=false;
-		  }
-		  else
-		  {
-			 startEntry=(((float) maxLocalHighScore-13.0)/26.0)*(float)scrollIndex;
-			 endEntry=startEntry+13;
-			 scrollEnabled=true;
-		  }*/
+	      struct tm *local;
 		  
 		  // Init text layer	  
           GRRLIB_initTexture();
 		  				   
           // Draw background
           GRRLIB_DrawImg(0,0, images.background3, 0, 1, 1, IMAGE_COLOR2 );
-		  
-		  // Draw scrollbar
-		  /*if (scrollEnabled)
-		  {
-		    ypos=SCROLLBAR_Y_MIN;
-            GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
-		    for (i=0; i<9; i++) 
-		    {
-		      ypos+=24;
-		      GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
-		    }
-		    ypos+=24;
-		    GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
-		  }*/
-		 
+		   
 	      // Draw title
 		  ypos=yOffset;
 	      drawText(80, ypos, fontTitle, "Local High Score");	
@@ -1390,30 +1324,30 @@ void drawScreen(void)
 	      drawText(130, ypos, fontParagraph, "DATE"  );
 	      drawText(320, ypos, fontParagraph, "SCORE" );
 		  drawText(410, ypos, fontParagraph, "NAME"  );
-		  drawText(500, ypos, fontParagraph, "LEVEL" );
+		  drawText(500, ypos, fontParagraph, "WAVE" );
 		  ypos+=10;
 		  
-          /*for (i=startEntry; i<endEntry; i++)
+          for (int i=0; i<MAX_LOCAL_HIGHSCORE; i++)
 	      {
   	          ypos+=20;  
 	    
 		      sprintf(tmp,"%02d", i+1);
 		      drawText(60, ypos, fontNormal, tmp);
 			  
-	          local = localtime(&localHighScore[i].localTime);
+	          local = localtime(highScore->getDate(i));
 	          sprintf(tmp,"%02d-%02d-%04d %02d:%02d:%02d", 
 			     local->tm_mday, local->tm_mon+1, local->tm_year+1900, 
 			     local->tm_hour, local->tm_min, local->tm_sec);
 		      drawText(130, ypos, fontNormal, tmp);
 	   
-	   	      sprintf(tmp,"%05d", localHighScore[i].score);
+	   	      sprintf(tmp,"%05d", highScore->getScore(i));
 		      drawText(320, ypos, fontNormal, tmp);
 	
-		      drawText(410, ypos, fontNormal, localHighScore[i].name);
+		      drawText(410, ypos, fontNormal, highScore->getName(i));
 	  
-	          sprintf(tmp,"%02d", localHighScore[i].level);
+	          sprintf(tmp,"%02d", highScore->getWave(i));
 		      drawText(500, ypos, fontNormal, tmp);
-		  }	*/ 
+		  }	
 		
           // Draw buttons
 	      drawButtons(); 
@@ -1799,7 +1733,13 @@ void checkGameOver(void)
    if (game.monsterInBase>=10)
    {
 		// To many monster in Base 
-		game.stateMachine=stateGameOver;   
+		game.stateMachine=stateGameOver; 
+
+		// Store highscore
+		char tmp[MAX_LEN];
+		sprintf(tmp,"%c%c%c",settings->getFirstChar(), settings->getSecondChar(), settings->getThirdChar());
+		highScore->setScore(tmp, 1, game.score);
+		highScore->save(HIGHSCORE_FILENAME);
    }
 }
 

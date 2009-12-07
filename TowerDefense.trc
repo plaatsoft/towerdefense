@@ -1,550 +1,771 @@
-05-12-2009 22:10:21 [thread0-main] TowerDefense 0.40 Started
-05-12-2009 22:10:21 [thread0-initGame] enter
-05-12-2009 22:10:21 [thread0-initImages] enter
-05-12-2009 22:10:21 [thread0-initImages] leave [void]
-05-12-2009 22:10:21 [thread0-initPointers] enter
-05-12-2009 22:10:21 [thread0-Pointer::Pointer] enter
-05-12-2009 22:10:21 [thread0-Pointer::Pointer] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setIndex] enter [index=0]
-05-12-2009 22:10:21 [thread0-Pointer::setIndex] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setX] enter [x=320]
-05-12-2009 22:10:21 [thread0-Pointer::setX] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setY] enter [y=240]
-05-12-2009 22:10:21 [thread0-Pointer::setY] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setAngle] enter [angle=0]
-05-12-2009 22:10:21 [thread0-Pointer::setAngle] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setImage] enter
-05-12-2009 22:10:21 [thread0-Pointer::setImage] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::Pointer] enter
-05-12-2009 22:10:21 [thread0-Pointer::Pointer] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setIndex] enter [index=1]
-05-12-2009 22:10:21 [thread0-Pointer::setIndex] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setX] enter [x=320]
-05-12-2009 22:10:21 [thread0-Pointer::setX] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setY] enter [y=240]
-05-12-2009 22:10:21 [thread0-Pointer::setY] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setAngle] enter [angle=0]
-05-12-2009 22:10:21 [thread0-Pointer::setAngle] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setImage] enter
-05-12-2009 22:10:21 [thread0-Pointer::setImage] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::Pointer] enter
-05-12-2009 22:10:21 [thread0-Pointer::Pointer] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setIndex] enter [index=2]
-05-12-2009 22:10:21 [thread0-Pointer::setIndex] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setX] enter [x=320]
-05-12-2009 22:10:21 [thread0-Pointer::setX] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setY] enter [y=240]
-05-12-2009 22:10:21 [thread0-Pointer::setY] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setAngle] enter [angle=0]
-05-12-2009 22:10:21 [thread0-Pointer::setAngle] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setImage] enter
-05-12-2009 22:10:21 [thread0-Pointer::setImage] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::Pointer] enter
-05-12-2009 22:10:21 [thread0-Pointer::Pointer] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setIndex] enter [index=3]
-05-12-2009 22:10:21 [thread0-Pointer::setIndex] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setX] enter [x=340]
-05-12-2009 22:10:21 [thread0-Pointer::setX] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setY] enter [y=240]
-05-12-2009 22:10:21 [thread0-Pointer::setY] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setAngle] enter [angle=0]
-05-12-2009 22:10:21 [thread0-Pointer::setAngle] leave [void]
-05-12-2009 22:10:21 [thread0-Pointer::setImage] enter
-05-12-2009 22:10:21 [thread0-Pointer::setImage] leave [void]
-05-12-2009 22:10:21 [thread0-initPointers] leave [void]
-05-12-2009 22:10:21 [thread0-loadSettingFile] enter
-05-12-2009 22:10:21 [thread0-loadSettingFile] Setting file not found, create default settings!
-05-12-2009 22:10:21 [thread0-loadSettingFile] leave [void]
-05-12-2009 22:10:21 [thread0-initGame] leave
-05-12-2009 22:10:21 [thread0-processStateMachine] stateMachine=stateIntro1
-05-12-2009 22:10:24 [thread0-processStateMachine] stateMachine=stateIntro2
-05-12-2009 22:10:24 [thread0-processStateMachine] stateMachine=stateMenu
-05-12-2009 22:10:24 [thread0-Button::Button] enter
-05-12-2009 22:10:24 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setX] enter [x=80]
-05-12-2009 22:10:24 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setY] enter [y=460]
-05-12-2009 22:10:24 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setLabel] enter [label=Map1]
-05-12-2009 22:10:24 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:24 [thread0-Button::Button] enter
-05-12-2009 22:10:24 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setX] enter [x=250]
-05-12-2009 22:10:24 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setY] enter [y=460]
-05-12-2009 22:10:24 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setLabel] enter [label=Map2]
-05-12-2009 22:10:24 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:24 [thread0-Button::Button] enter
-05-12-2009 22:10:24 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setX] enter [x=410]
-05-12-2009 22:10:24 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setY] enter [y=460]
-05-12-2009 22:10:24 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setLabel] enter [label=Map3]
-05-12-2009 22:10:24 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:24 [thread0-Button::Button] enter
-05-12-2009 22:10:24 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:24 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setY] enter [y=50]
-05-12-2009 22:10:24 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setLabel] enter [label=High Score]
-05-12-2009 22:10:24 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:24 [thread0-Button::Button] enter
-05-12-2009 22:10:24 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:24 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setY] enter [y=90]
-05-12-2009 22:10:24 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setLabel] enter [label=Help]
-05-12-2009 22:10:24 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:24 [thread0-Button::Button] enter
-05-12-2009 22:10:24 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:24 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setY] enter [y=130]
-05-12-2009 22:10:24 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setLabel] enter [label=Credits]
-05-12-2009 22:10:24 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:24 [thread0-Button::Button] enter
-05-12-2009 22:10:24 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:24 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setY] enter [y=170]
-05-12-2009 22:10:24 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setLabel] enter [label=Sound Settings]
-05-12-2009 22:10:24 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:24 [thread0-Button::Button] enter
-05-12-2009 22:10:24 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:24 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setY] enter [y=210]
-05-12-2009 22:10:24 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setLabel] enter [label=Release Notes]
-05-12-2009 22:10:24 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:24 [thread0-Button::Button] enter
-05-12-2009 22:10:24 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:24 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setY] enter [y=250]
-05-12-2009 22:10:24 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setLabel] enter [label=User initials]
-05-12-2009 22:10:24 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:24 [thread0-Button::Button] enter
-05-12-2009 22:10:24 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:24 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setY] enter [y=290]
-05-12-2009 22:10:24 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setLabel] enter [label=Exit HBC]
-05-12-2009 22:10:24 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:24 [thread0-Button::Button] enter
-05-12-2009 22:10:24 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:24 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setY] enter [y=330]
-05-12-2009 22:10:24 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:24 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:24 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:24 [thread0-Button::setLabel] enter [label=Reset Wii]
-05-12-2009 22:10:24 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:27 [thread0-Button::onSelect] enter [x=|y=370]
-05-12-2009 22:10:27 [thread0-Button::onSelect] Button selected
-05-12-2009 22:10:27 [thread0-Button::onSelect] leave
-05-12-2009 22:10:31 [thread0-processStateMachine] stateMachine=stateMenu
-05-12-2009 22:10:31 [thread0-Button::Button] enter
-05-12-2009 22:10:31 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setX] enter [x=80]
-05-12-2009 22:10:31 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setY] enter [y=460]
-05-12-2009 22:10:31 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setLabel] enter [label=Map1]
-05-12-2009 22:10:31 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:31 [thread0-Button::Button] enter
-05-12-2009 22:10:31 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setX] enter [x=250]
-05-12-2009 22:10:31 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setY] enter [y=460]
-05-12-2009 22:10:31 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setLabel] enter [label=Map2]
-05-12-2009 22:10:31 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:31 [thread0-Button::Button] enter
-05-12-2009 22:10:31 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setX] enter [x=410]
-05-12-2009 22:10:31 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setY] enter [y=460]
-05-12-2009 22:10:31 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setLabel] enter [label=Map3]
-05-12-2009 22:10:31 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:31 [thread0-Button::Button] enter
-05-12-2009 22:10:31 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:31 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setY] enter [y=50]
-05-12-2009 22:10:31 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setLabel] enter [label=High Score]
-05-12-2009 22:10:31 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:31 [thread0-Button::Button] enter
-05-12-2009 22:10:31 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:31 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setY] enter [y=90]
-05-12-2009 22:10:31 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setLabel] enter [label=Help]
-05-12-2009 22:10:31 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:31 [thread0-Button::Button] enter
-05-12-2009 22:10:31 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:31 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setY] enter [y=130]
-05-12-2009 22:10:31 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setLabel] enter [label=Credits]
-05-12-2009 22:10:31 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:31 [thread0-Button::Button] enter
-05-12-2009 22:10:31 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:31 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setY] enter [y=170]
-05-12-2009 22:10:31 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setLabel] enter [label=Sound Settings]
-05-12-2009 22:10:31 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:31 [thread0-Button::Button] enter
-05-12-2009 22:10:31 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:31 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setY] enter [y=210]
-05-12-2009 22:10:31 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setLabel] enter [label=Release Notes]
-05-12-2009 22:10:31 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:31 [thread0-Button::Button] enter
-05-12-2009 22:10:31 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:31 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setY] enter [y=250]
-05-12-2009 22:10:31 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setLabel] enter [label=User initials]
-05-12-2009 22:10:31 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:31 [thread0-Button::Button] enter
-05-12-2009 22:10:31 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:31 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setY] enter [y=290]
-05-12-2009 22:10:31 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setLabel] enter [label=Exit HBC]
-05-12-2009 22:10:31 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:31 [thread0-Button::Button] enter
-05-12-2009 22:10:31 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:31 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setY] enter [y=330]
-05-12-2009 22:10:31 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:31 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:31 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:31 [thread0-Button::setLabel] enter [label=Reset Wii]
-05-12-2009 22:10:31 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:35 [thread0-Button::onSelect] enter [x=|y=370]
-05-12-2009 22:10:35 [thread0-Button::onSelect] Button selected
-05-12-2009 22:10:35 [thread0-Button::onSelect] leave
-05-12-2009 22:10:35 [thread0-processStateMachine] stateMachine=stateCredits
-05-12-2009 22:10:35 [thread0-Button::Button] enter
-05-12-2009 22:10:35 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:35 [thread0-Button::setX] enter [x=260]
-05-12-2009 22:10:35 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:35 [thread0-Button::setY] enter [y=460]
-05-12-2009 22:10:35 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:35 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:35 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:35 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:35 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:35 [thread0-Button::setLabel] enter [label=Next]
-05-12-2009 22:10:35 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:40 [thread0-processStateMachine] stateMachine=stateMenu
-05-12-2009 22:10:40 [thread0-Button::Button] enter
-05-12-2009 22:10:40 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setX] enter [x=80]
-05-12-2009 22:10:40 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setY] enter [y=460]
-05-12-2009 22:10:40 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setLabel] enter [label=Map1]
-05-12-2009 22:10:40 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:40 [thread0-Button::Button] enter
-05-12-2009 22:10:40 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setX] enter [x=250]
-05-12-2009 22:10:40 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setY] enter [y=460]
-05-12-2009 22:10:40 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setLabel] enter [label=Map2]
-05-12-2009 22:10:40 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:40 [thread0-Button::Button] enter
-05-12-2009 22:10:40 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setX] enter [x=410]
-05-12-2009 22:10:40 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setY] enter [y=460]
-05-12-2009 22:10:40 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setLabel] enter [label=Map3]
-05-12-2009 22:10:40 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:40 [thread0-Button::Button] enter
-05-12-2009 22:10:40 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:40 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setY] enter [y=50]
-05-12-2009 22:10:40 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setLabel] enter [label=High Score]
-05-12-2009 22:10:40 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:40 [thread0-Button::Button] enter
-05-12-2009 22:10:40 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:40 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setY] enter [y=90]
-05-12-2009 22:10:40 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setLabel] enter [label=Help]
-05-12-2009 22:10:40 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:40 [thread0-Button::Button] enter
-05-12-2009 22:10:40 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:40 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setY] enter [y=130]
-05-12-2009 22:10:40 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setLabel] enter [label=Credits]
-05-12-2009 22:10:40 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:40 [thread0-Button::Button] enter
-05-12-2009 22:10:40 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:40 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setY] enter [y=170]
-05-12-2009 22:10:40 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setLabel] enter [label=Sound Settings]
-05-12-2009 22:10:40 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:40 [thread0-Button::Button] enter
-05-12-2009 22:10:40 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:40 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setY] enter [y=210]
-05-12-2009 22:10:40 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setLabel] enter [label=Release Notes]
-05-12-2009 22:10:40 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:40 [thread0-Button::Button] enter
-05-12-2009 22:10:40 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:40 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setY] enter [y=250]
-05-12-2009 22:10:40 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setLabel] enter [label=User initials]
-05-12-2009 22:10:40 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:40 [thread0-Button::Button] enter
-05-12-2009 22:10:40 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:40 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setY] enter [y=290]
-05-12-2009 22:10:40 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setLabel] enter [label=Exit HBC]
-05-12-2009 22:10:40 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:40 [thread0-Button::Button] enter
-05-12-2009 22:10:40 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:40 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setY] enter [y=330]
-05-12-2009 22:10:40 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:40 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:40 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:40 [thread0-Button::setLabel] enter [label=Reset Wii]
-05-12-2009 22:10:40 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:42 [thread0-Button::onSelect] enter [x=|y=370]
-05-12-2009 22:10:42 [thread0-Button::onSelect] Button selected
-05-12-2009 22:10:42 [thread0-Button::onSelect] leave
-05-12-2009 22:10:42 [thread0-processStateMachine] stateMachine=stateHelp
-05-12-2009 22:10:42 [thread0-Button::Button] enter
-05-12-2009 22:10:42 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:42 [thread0-Button::setX] enter [x=260]
-05-12-2009 22:10:42 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:42 [thread0-Button::setY] enter [y=460]
-05-12-2009 22:10:42 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:42 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:42 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:42 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:42 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:42 [thread0-Button::setLabel] enter [label=Next]
-05-12-2009 22:10:42 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:46 [thread0-Button::onSelect] enter [x=|y=260]
-05-12-2009 22:10:46 [thread0-Button::onSelect] Button selected
-05-12-2009 22:10:46 [thread0-Button::onSelect] leave
-05-12-2009 22:10:46 [thread0-processStateMachine] stateMachine=stateMenu
-05-12-2009 22:10:46 [thread0-Button::Button] enter
-05-12-2009 22:10:46 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setX] enter [x=80]
-05-12-2009 22:10:46 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setY] enter [y=460]
-05-12-2009 22:10:46 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:46 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:46 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setLabel] enter [label=Map1]
-05-12-2009 22:10:46 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:46 [thread0-Button::Button] enter
-05-12-2009 22:10:46 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setX] enter [x=250]
-05-12-2009 22:10:46 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setY] enter [y=460]
-05-12-2009 22:10:46 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:46 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:46 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setLabel] enter [label=Map2]
-05-12-2009 22:10:46 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:46 [thread0-Button::Button] enter
-05-12-2009 22:10:46 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setX] enter [x=410]
-05-12-2009 22:10:46 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setY] enter [y=460]
-05-12-2009 22:10:46 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:46 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:46 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setLabel] enter [label=Map3]
-05-12-2009 22:10:46 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:46 [thread0-Button::Button] enter
-05-12-2009 22:10:46 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:46 [thread0-Button::setX] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setY] enter [y=50]
-05-12-2009 22:10:46 [thread0-Button::setY] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setImageNormal] enter
-05-12-2009 22:10:46 [thread0-Button::setImageNormal] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setImageSelect] enter
-05-12-2009 22:10:46 [thread0-Button::setImageSelect] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setLabel] enter [label=High Score]
-05-12-2009 22:10:46 [thread0-Button::setLabel] leave [void]
-05-12-2009 22:10:46 [thread0-Button::Button] enter
-05-12-2009 22:10:46 [thread0-Button::Button] leave [void]
-05-12-2009 22:10:46 [thread0-Button::setX] enter [x=370]
-05-12-2009 22:10:46 [thread0-Butto
+07-12-2009 19:09:45 [thread0-main] TowerDefense 0.31 Started
+07-12-2009 19:09:45 [thread0-initGame] enter
+07-12-2009 19:09:45 [thread0-initImages] enter
+07-12-2009 19:09:46 [thread0-initImages] leave [void]
+07-12-2009 19:09:46 [thread0-initPointers] enter
+07-12-2009 19:09:46 [thread0-Pointer::Pointer] enter
+07-12-2009 19:09:46 [thread0-Pointer::Pointer] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setIndex] enter [index=0]
+07-12-2009 19:09:46 [thread0-Pointer::setIndex] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setX] enter [x=320]
+07-12-2009 19:09:46 [thread0-Pointer::setX] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setY] enter [y=240]
+07-12-2009 19:09:46 [thread0-Pointer::setY] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setAngle] enter [angle=0]
+07-12-2009 19:09:46 [thread0-Pointer::setAngle] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setImage] enter
+07-12-2009 19:09:46 [thread0-Pointer::setImage] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::Pointer] enter
+07-12-2009 19:09:46 [thread0-Pointer::Pointer] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setIndex] enter [index=1]
+07-12-2009 19:09:46 [thread0-Pointer::setIndex] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setX] enter [x=320]
+07-12-2009 19:09:46 [thread0-Pointer::setX] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setY] enter [y=240]
+07-12-2009 19:09:46 [thread0-Pointer::setY] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setAngle] enter [angle=0]
+07-12-2009 19:09:46 [thread0-Pointer::setAngle] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setImage] enter
+07-12-2009 19:09:46 [thread0-Pointer::setImage] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::Pointer] enter
+07-12-2009 19:09:46 [thread0-Pointer::Pointer] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setIndex] enter [index=2]
+07-12-2009 19:09:46 [thread0-Pointer::setIndex] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setX] enter [x=320]
+07-12-2009 19:09:46 [thread0-Pointer::setX] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setY] enter [y=240]
+07-12-2009 19:09:46 [thread0-Pointer::setY] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setAngle] enter [angle=0]
+07-12-2009 19:09:46 [thread0-Pointer::setAngle] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setImage] enter
+07-12-2009 19:09:46 [thread0-Pointer::setImage] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::Pointer] enter
+07-12-2009 19:09:46 [thread0-Pointer::Pointer] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setIndex] enter [index=3]
+07-12-2009 19:09:46 [thread0-Pointer::setIndex] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setX] enter [x=340]
+07-12-2009 19:09:46 [thread0-Pointer::setX] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setY] enter [y=240]
+07-12-2009 19:09:46 [thread0-Pointer::setY] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setAngle] enter [angle=0]
+07-12-2009 19:09:46 [thread0-Pointer::setAngle] leave [void]
+07-12-2009 19:09:46 [thread0-Pointer::setImage] enter
+07-12-2009 19:09:46 [thread0-Pointer::setImage] leave [void]
+07-12-2009 19:09:46 [thread0-initPointers] leave [void]
+07-12-2009 19:09:46 [thread0-Settings::Settings] enter
+07-12-2009 19:09:46 [thread0-Settings::Settings] leave [void]
+07-12-2009 19:09:46 [thread0-Settings::load] enter
+07-12-2009 19:09:46 [thread0-Settings::load] Load [filename=sd:/apps/TowerDefense/settings.xml]
+07-12-2009 19:09:46 [thread0-Settings::load] Store [id=0|value=W]
+07-12-2009 19:09:46 [thread0-Settings::load] Store [id=1|value=P]
+07-12-2009 19:09:46 [thread0-Settings::load] Store [id=2|value=L]
+07-12-2009 19:09:46 [thread0-Settings::load] leave [void]
+07-12-2009 19:09:46 [thread0-HighScore::HighScore] enter
+07-12-2009 19:09:46 [thread0-HighScore::HighScore] leave [void]
+07-12-2009 19:09:46 [thread0-HighScore::load] enter
+07-12-2009 19:09:46 [thread0-HighScore::load] leave [void]
+07-12-2009 19:09:46 [thread0-initGame] leave
+07-12-2009 19:09:46 [thread0-processStateMachine] stateMachine=stateIntro1
+07-12-2009 19:09:48 [thread0-processStateMachine] stateMachine=stateIntro2
+07-12-2009 19:09:49 [thread0-processStateMachine] stateMachine=stateMenu
+07-12-2009 19:09:49 [thread0-Button::Button] enter
+07-12-2009 19:09:49 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setX] enter [x=80]
+07-12-2009 19:09:49 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setY] enter [y=460]
+07-12-2009 19:09:49 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setLabel] enter [label=Map1]
+07-12-2009 19:09:49 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:49 [thread0-Button::Button] enter
+07-12-2009 19:09:49 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setX] enter [x=250]
+07-12-2009 19:09:49 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setY] enter [y=460]
+07-12-2009 19:09:49 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setLabel] enter [label=Map2]
+07-12-2009 19:09:49 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:49 [thread0-Button::Button] enter
+07-12-2009 19:09:49 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setX] enter [x=410]
+07-12-2009 19:09:49 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setY] enter [y=460]
+07-12-2009 19:09:49 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setLabel] enter [label=Map3]
+07-12-2009 19:09:49 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:49 [thread0-Button::Button] enter
+07-12-2009 19:09:49 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:09:49 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setY] enter [y=50]
+07-12-2009 19:09:49 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setLabel] enter [label=High Score]
+07-12-2009 19:09:49 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:49 [thread0-Button::Button] enter
+07-12-2009 19:09:49 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:09:49 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setY] enter [y=90]
+07-12-2009 19:09:49 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setLabel] enter [label=Help]
+07-12-2009 19:09:49 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:49 [thread0-Button::Button] enter
+07-12-2009 19:09:49 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:09:49 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setY] enter [y=130]
+07-12-2009 19:09:49 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setLabel] enter [label=Credits]
+07-12-2009 19:09:49 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:49 [thread0-Button::Button] enter
+07-12-2009 19:09:49 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:09:49 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setY] enter [y=170]
+07-12-2009 19:09:49 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setLabel] enter [label=Sound Settings]
+07-12-2009 19:09:49 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:49 [thread0-Button::Button] enter
+07-12-2009 19:09:49 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:09:49 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setY] enter [y=210]
+07-12-2009 19:09:49 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setLabel] enter [label=Release Notes]
+07-12-2009 19:09:49 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:49 [thread0-Button::Button] enter
+07-12-2009 19:09:49 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:09:49 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setY] enter [y=250]
+07-12-2009 19:09:49 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setLabel] enter [label=User initials]
+07-12-2009 19:09:49 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:49 [thread0-Button::Button] enter
+07-12-2009 19:09:49 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:09:49 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setY] enter [y=290]
+07-12-2009 19:09:49 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setLabel] enter [label=Exit HBC]
+07-12-2009 19:09:49 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:49 [thread0-Button::Button] enter
+07-12-2009 19:09:49 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:09:49 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setY] enter [y=330]
+07-12-2009 19:09:49 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:49 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:49 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:49 [thread0-Button::setLabel] enter [label=Reset Wii]
+07-12-2009 19:09:49 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:51 [thread0-Button::onSelect] enter [x=|y=370]
+07-12-2009 19:09:51 [thread0-Button::onSelect] Button selected
+07-12-2009 19:09:51 [thread0-Button::onSelect] leave
+07-12-2009 19:09:51 [thread0-processStateMachine] stateMachine=stateLocalHighScore
+07-12-2009 19:09:51 [thread0-Button::Button] enter
+07-12-2009 19:09:51 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:51 [thread0-Button::setX] enter [x=260]
+07-12-2009 19:09:51 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:51 [thread0-Button::setY] enter [y=460]
+07-12-2009 19:09:51 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:51 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:51 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:51 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:51 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:51 [thread0-Button::setLabel] enter [label=Next]
+07-12-2009 19:09:51 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:53 [thread0-Button::onSelect] enter [x=|y=260]
+07-12-2009 19:09:53 [thread0-Button::onSelect] Button selected
+07-12-2009 19:09:53 [thread0-Button::onSelect] leave
+07-12-2009 19:09:53 [thread0-processStateMachine] stateMachine=stateMenu
+07-12-2009 19:09:53 [thread0-Button::Button] enter
+07-12-2009 19:09:53 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setX] enter [x=80]
+07-12-2009 19:09:53 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setY] enter [y=460]
+07-12-2009 19:09:53 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setLabel] enter [label=Map1]
+07-12-2009 19:09:53 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:53 [thread0-Button::Button] enter
+07-12-2009 19:09:53 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setX] enter [x=250]
+07-12-2009 19:09:53 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setY] enter [y=460]
+07-12-2009 19:09:53 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setLabel] enter [label=Map2]
+07-12-2009 19:09:53 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:53 [thread0-Button::Button] enter
+07-12-2009 19:09:53 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setX] enter [x=410]
+07-12-2009 19:09:53 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setY] enter [y=460]
+07-12-2009 19:09:53 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setLabel] enter [label=Map3]
+07-12-2009 19:09:53 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:53 [thread0-Button::Button] enter
+07-12-2009 19:09:53 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:09:53 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setY] enter [y=50]
+07-12-2009 19:09:53 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setLabel] enter [label=High Score]
+07-12-2009 19:09:53 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:53 [thread0-Button::Button] enter
+07-12-2009 19:09:53 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:09:53 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setY] enter [y=90]
+07-12-2009 19:09:53 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setLabel] enter [label=Help]
+07-12-2009 19:09:53 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:53 [thread0-Button::Button] enter
+07-12-2009 19:09:53 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:09:53 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setY] enter [y=130]
+07-12-2009 19:09:53 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setLabel] enter [label=Credits]
+07-12-2009 19:09:53 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:53 [thread0-Button::Button] enter
+07-12-2009 19:09:53 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:09:53 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setY] enter [y=170]
+07-12-2009 19:09:53 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setLabel] enter [label=Sound Settings]
+07-12-2009 19:09:53 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:53 [thread0-Button::Button] enter
+07-12-2009 19:09:53 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:09:53 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setY] enter [y=210]
+07-12-2009 19:09:53 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setLabel] enter [label=Release Notes]
+07-12-2009 19:09:53 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:53 [thread0-Button::Button] enter
+07-12-2009 19:09:53 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:09:53 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setY] enter [y=250]
+07-12-2009 19:09:53 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setLabel] enter [label=User initials]
+07-12-2009 19:09:53 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:53 [thread0-Button::Button] enter
+07-12-2009 19:09:53 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:09:53 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setY] enter [y=290]
+07-12-2009 19:09:53 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setLabel] enter [label=Exit HBC]
+07-12-2009 19:09:53 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:53 [thread0-Button::Button] enter
+07-12-2009 19:09:53 [thread0-Button::Button] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:09:53 [thread0-Button::setX] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setY] enter [y=330]
+07-12-2009 19:09:53 [thread0-Button::setY] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] enter
+07-12-2009 19:09:53 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] enter
+07-12-2009 19:09:53 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:09:53 [thread0-Button::setLabel] enter [label=Reset Wii]
+07-12-2009 19:09:53 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:09:54 [thread0-Button::onSelect] enter [x=|y=410]
+07-12-2009 19:09:54 [thread0-Button::onSelect] Button selected
+07-12-2009 19:09:54 [thread0-Button::onSelect] leave
+07-12-2009 19:09:54 [thread0-processStateMachine] stateMachine=stateGame
+07-12-2009 19:09:54 [thread0-initGrid] enter [level=3]
+07-12-2009 19:09:54 [thread0-Grid::Grid] enter
+07-12-2009 19:09:54 [thread0-Grid::Grid] leave [void]
+07-12-2009 19:09:54 [thread0-Pointer::setImageRoad1] enter
+07-12-2009 19:09:54 [thread0-Pointer::setImageRoad1] leave [void]
+07-12-2009 19:09:54 [thread0-Pointer::setImageRoad2] enter
+07-12-2009 19:09:54 [thread0-Pointer::setImageRoad2] leave [void]
+07-12-2009 19:09:54 [thread0-Pointer::setImageRoad3] enter
+07-12-2009 19:09:54 [thread0-Pointer::setImageRoad3] leave [void]
+07-12-2009 19:09:54 [thread0-Pointer::setImageRoad4] enter
+07-12-2009 19:09:54 [thread0-Pointer::setImageRoad4] leave [void]
+07-12-2009 19:09:54 [thread0-Pointer::setImageRoad5] enter
+07-12-2009 19:09:54 [thread0-Pointer::setImageRoad5] leave [void]
+07-12-2009 19:09:54 [thread0-Pointer::setImageWater] enter
+07-12-2009 19:09:54 [thread0-Pointer::setImageWater] leave [void]
+07-12-2009 19:09:54 [thread0-Pointer::setImageBrige] enter
+07-12-2009 19:09:54 [thread0-Pointer::setImageBrige] leave [void]
+07-12-2009 19:09:54 [thread0-Pointer::setImageBase] enter
+07-12-2009 19:09:54 [thread0-Pointer::setImageBase] leave [void]
+07-12-2009 19:09:54 [thread0-Grid::render] enter [filename=sd:/apps/TowerDefense/maps/map3.xml]
+07-12-2009 19:09:54 [thread0-Grid::initGrid] enter [filename=sd:/apps/TowerDefense/maps/map3.xml]
+07-12-2009 19:09:54 [thread0-Grid::initGrid] leave [maxLines=17]
+07-12-2009 19:09:54 [thread0-Grid::parseGrid] enter
+07-12-2009 19:09:54 [thread0-Grid::parseGrid] leave [maxLocations=58]
+07-12-2009 19:09:54 [thread0-Grid::render] leave [void]
+07-12-2009 19:09:54 [thread0-initGrid] leave [void]
+07-12-2009 19:09:54 [thread0-initMonsters] enter
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [0]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [1]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [2]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [3]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [4]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [5]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [6]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [7]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [8]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [9]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [10]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [11]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [12]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [13]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [14]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [15]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [16]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [17]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [18]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [19]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [20]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [21]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [22]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [23]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] Init monster [24]
+07-12-2009 19:09:54 [thread0-Monster::Monster] enter
+07-12-2009 19:09:54 [thread0-Monster::Monster] leave
+07-12-2009 19:09:54 [thread0-Monster::setStep] enter [step=1]
+07-12-2009 19:09:54 [thread0-Monster::setStep] leave
+07-12-2009 19:09:54 [thread0-Monster::setImage] enter
+07-12-2009 19:09:54 [thread0-Monster::setImage] leave
+07-12-2009 19:09:54 [thread0-initMonsters] leave [void]
+07-12-2009 19:09:54 [thread0-initWeapons] enter
+07-12-2009 19:09:54 [thread0-Weapon::Weapon] enter
+07-12-2009 19:09:54 [thread0-Weapon::Weapon] leave
+07-12-2009 19:09:54 [thread0-Weapon::setImage] enter
+07-12-2009 19:09:54 [thread0-Weapon::setImage] leave
+07-12-2009 19:09:54 [thread0-Weapon::setX] enter [x=100]
+07-12-2009 19:09:54 [thread0-Weapon::setX] leave [void]
+07-12-2009 19:09:54 [thread0-Weapon::setY] enter [y=100]
+07-12-2009 19:09:54 [thread0-Weapon::setY] leave [void]
+07-12-2009 19:09:54 [thread0-Weapon::setAngle] enter [angle=0]
+07-12-2009 19:09:54 [thread0-Weapon::setAngle] leave
+07-12-2009 19:09:54 [thread0-Weapon::setStep] enter [step=2]
+07-12-2009 19:09:54 [thread0-Weapon::setStep] leave
+07-12-2009 19:09:54 [thread0-Weapon::setDelay] enter [delay=100]
+07-12-2009 19:09:54 [thread0-Weapon::setDelay] leave
+07-12-2009 19:09:54 [thread0-Weapon::setRange] enter [range=100]
+07-12-2009 19:09:54 [thread0-Weapon::setRange] leave
+07-12-2009 19:09:54 [thread0-Weapon::setPower] enter [power=2]
+07-12-2009 19:09:54 [thread0-Weapon::setPower] leave
+07-12-2009 19:09:54 [thread0-Weapon::Weapon] enter
+07-12-2009 19:09:54 [thread0-Weapon::Weapon] leave
+07-12-2009 19:09:54 [thread0-Weapon::setImage] enter
+07-12-2009 19:09:54 [thread0-Weapon::setImage] leave
+07-12-2009 19:09:54 [thread0-Weapon::setX] enter [x=200]
+07-12-2009 19:09:54 [thread0-Weapon::setX] leave [void]
+07-12-2009 19:09:54 [thread0-Weapon::setY] enter [y=200]
+07-12-2009 19:09:54 [thread0-Weapon::setY] leave [void]
+07-12-2009 19:09:54 [thread0-Weapon::setAngle] enter [angle=0]
+07-12-2009 19:09:54 [thread0-Weapon::setAngle] leave
+07-12-2009 19:09:54 [thread0-Weapon::setStep] enter [step=2]
+07-12-2009 19:09:54 [thread0-Weapon::setStep] leave
+07-12-2009 19:09:54 [thread0-Weapon::setDelay] enter [delay=100]
+07-12-2009 19:09:54 [thread0-Weapon::setDelay] leave
+07-12-2009 19:09:54 [thread0-Weapon::setRange] enter [range=100]
+07-12-2009 19:09:54 [thread0-Weapon::setRange] leave
+07-12-2009 19:09:54 [thread0-Weapon::setPower] enter [power=2]
+07-12-2009 19:09:54 [thread0-Weapon::setPower] leave
+07-12-2009 19:09:54 [thread0-Weapon::Weapon] enter
+07-12-2009 19:09:54 [thread0-Weapon::Weapon] leave
+07-12-2009 19:09:54 [thread0-Weapon::setImage] enter
+07-12-2009 19:09:54 [thread0-Weapon::setImage] leave
+07-12-2009 19:09:54 [thread0-Weapon::setX] enter [x=300]
+07-12-2009 19:09:54 [thread0-Weapon::setX] leave [void]
+07-12-2009 19:09:54 [thread0-Weapon::setY] enter [y=300]
+07-12-2009 19:09:54 [thread0-Weapon::setY] leave [void]
+07-12-2009 19:09:54 [thread0-Weapon::setAngle] enter [angle=0]
+07-12-2009 19:09:54 [thread0-Weapon::setAngle] leave
+07-12-2009 19:09:54 [thread0-Weapon::setStep] enter [step=2]
+07-12-2009 19:09:54 [thread0-Weapon::setStep] leave
+07-12-2009 19:09:54 [thread0-Weapon::setDelay] enter [delay=100]
+07-12-2009 19:09:54 [thread0-Weapon::setDelay] leave
+07-12-2009 19:09:54 [thread0-Weapon::setRange] enter [range=100]
+07-12-2009 19:09:54 [thread0-Weapon::setRange] leave
+07-12-2009 19:09:54 [thread0-Weapon::setPower] enter [power=2]
+07-12-2009 19:09:54 [thread0-Weapon::setPower] leave
+07-12-2009 19:09:54 [thread0-initWeapons] leave [void]
+07-12-2009 19:11:13 [thread0-HighScore::save] enter
+07-12-2009 19:11:13 [thread0-HighScore::save] save highscore [id=0|score=190|localTime=1260213073|wave=1|name=WPL]
+07-12-2009 19:11:13 [thread0-HighScore::save] save highscore [id=1|score=0|localTime=0|wave=0|name=]
+07-12-2009 19:11:13 [thread0-HighScore::save] save highscore [id=2|score=0|localTime=0|wave=0|name=]
+07-12-2009 19:11:13 [thread0-HighScore::save] save highscore [id=3|score=0|localTime=0|wave=0|name=]
+07-12-2009 19:11:13 [thread0-HighScore::save] save highscore [id=4|score=0|localTime=0|wave=0|name=]
+07-12-2009 19:11:13 [thread0-HighScore::save] save highscore [id=5|score=0|localTime=0|wave=0|name=]
+07-12-2009 19:11:13 [thread0-HighScore::save] save highscore [id=6|score=0|localTime=0|wave=0|name=]
+07-12-2009 19:11:13 [thread0-HighScore::save] save highscore [id=7|score=0|localTime=0|wave=0|name=]
+07-12-2009 19:11:13 [thread0-HighScore::save] save highscore [id=8|score=0|localTime=0|wave=0|name=]
+07-12-2009 19:11:13 [thread0-HighScore::save] save highscore [id=9|score=0|localTime=0|wave=0|name=]
+07-12-2009 19:11:13 [thread0-HighScore::save] save highscore [id=10|score=0|localTime=0|wave=0|name=]
+07-12-2009 19:11:13 [thread0-HighScore::save] save highscore [id=11|score=0|localTime=0|wave=0|name=]
+07-12-2009 19:11:13 [thread0-HighScore::save] save highscore [id=12|score=0|localTime=0|wave=0|name=]
+07-12-2009 19:11:13 [thread0-HighScore::save] save highscore [id=13|score=0|localTime=0|wave=0|name=]
+07-12-2009 19:11:13 [thread0-HighScore::save] save highscore [id=14|score=0|localTime=0|wave=0|name=]
+07-12-2009 19:11:13 [thread0-HighScore::save] leave [void]
+07-12-2009 19:11:13 [thread0-processStateMachine] stateMachine=stateGameOver
+07-12-2009 19:11:16 [thread0-processStateMachine] stateMachine=stateMenu
+07-12-2009 19:11:16 [thread0-Button::Button] enter
+07-12-2009 19:11:16 [thread0-Button::Button] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setX] enter [x=80]
+07-12-2009 19:11:16 [thread0-Button::setX] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setY] enter [y=460]
+07-12-2009 19:11:16 [thread0-Button::setY] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] enter
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] enter
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setLabel] enter [label=Map1]
+07-12-2009 19:11:16 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:11:16 [thread0-Button::Button] enter
+07-12-2009 19:11:16 [thread0-Button::Button] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setX] enter [x=250]
+07-12-2009 19:11:16 [thread0-Button::setX] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setY] enter [y=460]
+07-12-2009 19:11:16 [thread0-Button::setY] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] enter
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] enter
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setLabel] enter [label=Map2]
+07-12-2009 19:11:16 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:11:16 [thread0-Button::Button] enter
+07-12-2009 19:11:16 [thread0-Button::Button] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setX] enter [x=410]
+07-12-2009 19:11:16 [thread0-Button::setX] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setY] enter [y=460]
+07-12-2009 19:11:16 [thread0-Button::setY] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] enter
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] enter
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setLabel] enter [label=Map3]
+07-12-2009 19:11:16 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:11:16 [thread0-Button::Button] enter
+07-12-2009 19:11:16 [thread0-Button::Button] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:11:16 [thread0-Button::setX] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setY] enter [y=50]
+07-12-2009 19:11:16 [thread0-Button::setY] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] enter
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] enter
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setLabel] enter [label=High Score]
+07-12-2009 19:11:16 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:11:16 [thread0-Button::Button] enter
+07-12-2009 19:11:16 [thread0-Button::Button] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:11:16 [thread0-Button::setX] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setY] enter [y=90]
+07-12-2009 19:11:16 [thread0-Button::setY] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] enter
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] enter
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setLabel] enter [label=Help]
+07-12-2009 19:11:16 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:11:16 [thread0-Button::Button] enter
+07-12-2009 19:11:16 [thread0-Button::Button] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:11:16 [thread0-Button::setX] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setY] enter [y=130]
+07-12-2009 19:11:16 [thread0-Button::setY] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] enter
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] enter
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setLabel] enter [label=Credits]
+07-12-2009 19:11:16 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:11:16 [thread0-Button::Button] enter
+07-12-2009 19:11:16 [thread0-Button::Button] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:11:16 [thread0-Button::setX] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setY] enter [y=170]
+07-12-2009 19:11:16 [thread0-Button::setY] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] enter
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] enter
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setLabel] enter [label=Sound Settings]
+07-12-2009 19:11:16 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:11:16 [thread0-Button::Button] enter
+07-12-2009 19:11:16 [thread0-Button::Button] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:11:16 [thread0-Button::setX] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setY] enter [y=210]
+07-12-2009 19:11:16 [thread0-Button::setY] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] enter
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] enter
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setLabel] enter [label=Release Notes]
+07-12-2009 19:11:16 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:11:16 [thread0-Button::Button] enter
+07-12-2009 19:11:16 [thread0-Button::Button] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:11:16 [thread0-Button::setX] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setY] enter [y=250]
+07-12-2009 19:11:16 [thread0-Button::setY] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] enter
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] enter
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setLabel] enter [label=User initials]
+07-12-2009 19:11:16 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:11:16 [thread0-Button::Button] enter
+07-12-2009 19:11:16 [thread0-Button::Button] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:11:16 [thread0-Button::setX] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setY] enter [y=290]
+07-12-2009 19:11:16 [thread0-Button::setY] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] enter
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] enter
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setLabel] enter [label=Exit HBC]
+07-12-2009 19:11:16 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:11:16 [thread0-Button::Button] enter
+07-12-2009 19:11:16 [thread0-Button::Button] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setX] enter [x=370]
+07-12-2009 19:11:16 [thread0-Button::setX] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setY] enter [y=330]
+07-12-2009 19:11:16 [thread0-Button::setY] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] enter
+07-12-2009 19:11:16 [thread0-Button::setImageNormal] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] enter
+07-12-2009 19:11:16 [thread0-Button::setImageSelect] leave [void]
+07-12-2009 19:11:16 [thread0-Button::setLabel] enter [label=Reset Wii]
+07-12-2009 19:11:16 [thread0-Button::setLabel] leave [void]
+07-12-2009 19:11:20 [thread0-Button::onSelect] enter [x=|y=370]
+07-12-2009 19:11:20 [thread0-Button::onSelect] Button selected
+07-12-2009 19:11:20 [thread0-Button::onSelect] leave
