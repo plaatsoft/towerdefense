@@ -24,13 +24,13 @@
 **  NOT TESTED YET:
 **  - Added game information panel.
 **		- Added functionality to upgrade power, range and rate of weapons.
-**  - Added Map Select menu screen.
 **  - Added Network thread.
 **  	- Fetch latest available version information from internet.
 **  	- Fetch latest release notes information from internet.
 **  - Added Release Notes screen.
 **
 **  TESTED:
+**  - Added Map Select menu screen.
 **  - Added Local highscore page.
 **		- Added functionality to load/save local highscore from/to SD card.
 **  - Added User Initials screen.
@@ -536,34 +536,46 @@ void initWeapons(void)
     // Clear first array
     for( int i=0; i<MAX_WEAPONS; i++)
     {
-       weapons[i] = NULL;
+      if (weapons[i]!=NULL)
+	  {
+	    trace->event(s_fn,0,"delete weapon %d",i);
+		delete weapons[i];
+		weapons[i]=NULL;
+	  }
     }
     
 	weapons[0]= new Weapon();
 	weapons[0]->setImage(images.weapon2);
-	weapons[0]->setX(100);
-	weapons[0]->setY(100);
+	weapons[0]->setX(200);
+	weapons[0]->setY(200);
 	weapons[0]->setPower(2);
 	weapons[0]->setRange(100);
 	weapons[0]->setRate(100);
+	weapons[0]->setPowerPrice(10);
+	weapons[0]->setRangePrice(10);
+	weapons[0]->setRatePrice(10);
 	
 	weapons[1]= new Weapon();
 	weapons[1]->setImage(images.weapon2);
-	weapons[1]->setX(200);
-	weapons[1]->setY(200);
+	weapons[1]->setX(300);
+	weapons[1]->setY(300);
 	weapons[1]->setPower(2);
 	weapons[1]->setRange(100);
 	weapons[1]->setRate(100);
+	weapons[1]->setPowerPrice(10);
+	weapons[1]->setRangePrice(10);
+	weapons[1]->setRatePrice(10);
 	
 	weapons[2]= new Weapon();
 	weapons[2]->setImage(images.weapon2);
-	weapons[2]->setX(300);
-	weapons[2]->setY(300);
+	weapons[2]->setX(400);
+	weapons[2]->setY(400);
 	weapons[2]->setPower(2);	
 	weapons[2]->setRange(100);
 	weapons[2]->setRate(100);
-
-	game.maxWeapons = 3;
+	weapons[2]->setPowerPrice(10);
+	weapons[2]->setRangePrice(10);
+	weapons[2]->setRatePrice(10);
 	
 	trace->event(s_fn,0,"leave [void]");
 }
@@ -577,13 +589,17 @@ void initMonsters(void)
    // First clear array
    for( int i=0; i<MAX_MONSTERS; i++)
    {
-      monsters[i]=NULL;
+      if (monsters[i]!=NULL)
+	  {
+	    trace->event(s_fn,0,"delete monster %d",i);
+		delete monsters[i];
+		monsters[i]=NULL;
+	  }
    }   
    
    int delay=0;
    
-   game.maxMonsters=25;
-   for( int i=0; i<game.maxMonsters; i++ ) 
+   for( int i=0; i<25; i++ ) 
    {
    	  trace->event(s_fn,0,"Init monster [%d]",i);
 
@@ -687,8 +703,14 @@ void initPointers(void)
    // First clear array
    for( int i=0; i<MAX_POINTERS; i++)
    {
-      pointers[i]=NULL;
+      if (pointers[i]!=NULL)
+	  {
+		trace->event(s_fn,0,"delete pointer %d",i);
+		delete pointers[i];
+		pointers[i]=NULL;
+	  }
    }
+   
    
    pointers[0] = new Pointer();   
    pointers[0]->setIndex(0);
@@ -717,9 +739,7 @@ void initPointers(void)
    pointers[3]->setY(240);
    pointers[3]->setAngle(0);
    pointers[3]->setImage(images.pointer4);	
-   
-   game.maxPointers=4;
-   
+      
    trace->event(s_fn,0,"leave [void]");
 }
 
@@ -741,15 +761,15 @@ void initGrid(int level)
 	switch( level )
 	{
 		case 1: grid->setImageBase(images.base1);
-				grid->create(GRID1_FILENAME );
+				grid->create(GRID1_FILENAME);
 				break;
 			
 		case 2: grid->setImageBase(images.base2);
-				grid->create(GRID2_FILENAME );
+				grid->create(GRID2_FILENAME);
 				break;
 				
 		case 3: grid->setImageBase(images.base3);
-				grid->create(GRID3_FILENAME );
+				grid->create(GRID3_FILENAME);
 				break;
 	}
 
@@ -758,10 +778,18 @@ void initGrid(int level)
 
 void initButtons(void)
 {
+   const char *s_fn="initButtons";
+   trace->event(s_fn,0,"enter");
+
    // First clear array
    for( int i=0; i<MAX_BUTTONS; i++)
    {
-      buttons[i]=NULL;
+      if (buttons[i]!=NULL)
+	  {
+	    trace->event(s_fn,0,"delete button %d",i);
+		delete buttons[i];
+		buttons[i]=NULL;
+	  }
    }
    
 	switch( game.stateMachine )	
@@ -770,7 +798,7 @@ void initButtons(void)
 		{			
 			// HighScore Button 
 			buttons[0]=new Button();
-			buttons[0]->setX(30);
+			buttons[0]->setX(25);
 			buttons[0]->setY(100);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
@@ -778,47 +806,47 @@ void initButtons(void)
 			
 			// Help Button 
 			buttons[1]=new Button();
-			buttons[1]->setX(30);
-			buttons[1]->setY(300);
+			buttons[1]->setX(225);
+			buttons[1]->setY(100);
 			buttons[1]->setImageNormal(images.button2);
 			buttons[1]->setImageFocus(images.buttonFocus2);
 			buttons[1]->setLabel("Help");			
 
 			// Credits Button 
 			buttons[2]=new Button();
-			buttons[2]->setX(30);
-			buttons[2]->setY(500);
+			buttons[2]->setX(425);
+			buttons[2]->setY(100);
 			buttons[2]->setImageNormal(images.button2);
 			buttons[2]->setImageFocus(images.buttonFocus2);
 			buttons[2]->setLabel("Credits");	
 
 			// Sound Settings Button 
 			buttons[3]=new Button();
-			buttons[3]->setX(100);
-			buttons[3]->setY(100);
+			buttons[3]->setX(25);
+			buttons[3]->setY(200);
 			buttons[3]->setImageNormal(images.button2);
 			buttons[3]->setImageFocus(images.buttonFocus2);
 			buttons[3]->setLabel("Sound Settings");	
 
 			// Release Notes Button 
 			buttons[4]=new Button();
-			buttons[4]->setX(300);
-			buttons[4]->setY(100);
+			buttons[4]->setX(225);
+			buttons[4]->setY(200);
 			buttons[4]->setImageNormal(images.button2);
 			buttons[4]->setImageFocus(images.buttonFocus2);
 			buttons[4]->setLabel("Release Notes");				
 
 			// User initials Button 
 			buttons[5]=new Button();
-			buttons[5]->setX(500);
-			buttons[5]->setY(100);
+			buttons[5]->setX(425);
+			buttons[5]->setY(200);
 			buttons[5]->setImageNormal(images.button2);
 			buttons[5]->setImageFocus(images.buttonFocus2);
 			buttons[5]->setLabel("User initials");	
 
 			// Play Button 
 			buttons[6]=new Button();
-			buttons[6]->setX(260);
+			buttons[6]->setX(240);
 			buttons[6]->setY(460);
 			buttons[6]->setImageNormal(images.button2);
 			buttons[6]->setImageFocus(images.buttonFocus2);
@@ -826,21 +854,19 @@ void initButtons(void)
 						
 			// Exit HBC Button 
 			buttons[7]=new Button();
-			buttons[7]->setX(200);
-			buttons[7]->setY(170);
+			buttons[7]->setX(120);
+			buttons[7]->setY(300);
 			buttons[7]->setImageNormal(images.button2);
 			buttons[7]->setImageFocus(images.buttonFocus2);
 			buttons[7]->setLabel("Exit HBC");	
 	 
 			// Reset Wii Button 
 			buttons[8]=new Button();
-			buttons[8]->setX(400);
-			buttons[8]->setY(170);
+			buttons[8]->setX(320);
+			buttons[8]->setY(300);
 			buttons[8]->setImageNormal(images.button2);
 			buttons[8]->setImageFocus(images.buttonFocus2);
 			buttons[8]->setLabel("Reset Wii");	
-
-			game.maxButtons=9;
 		}
 		break;
 				
@@ -848,24 +874,24 @@ void initButtons(void)
 		{	
 			// Button (Play Map1)
 			buttons[0]=new Button();
-			buttons[0]->setX(80);
-			buttons[0]->setY(260);
+			buttons[0]->setX(25);
+			buttons[0]->setY(150);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Map1");
 				
 			// Button (Play Map2)
 			buttons[1]=new Button();
-			buttons[1]->setX(250);
-			buttons[1]->setY(260);
+			buttons[1]->setX(225);
+			buttons[1]->setY(150);
 			buttons[1]->setImageNormal(images.button2);
 			buttons[1]->setImageFocus(images.buttonFocus2);
 			buttons[1]->setLabel("Map2");
 				
 			// Button (Play Map3)
 			buttons[2]=new Button();
-			buttons[2]->setX(410);
-			buttons[2]->setY(260);
+			buttons[2]->setX(425);
+			buttons[2]->setY(150);
 			buttons[2]->setImageNormal(images.button2);
 			buttons[2]->setImageFocus(images.buttonFocus2);
 			buttons[2]->setLabel("Map3");
@@ -877,8 +903,6 @@ void initButtons(void)
 			buttons[3]->setImageNormal(images.button2);
 			buttons[3]->setImageFocus(images.buttonFocus2);
 			buttons[3]->setLabel("Main Menu");
-			
-			game.maxButtons=4;
 		}
 		break;	
 		
@@ -887,40 +911,44 @@ void initButtons(void)
 			// Power Upgrade Button
 			buttons[0]=new Button();
 			buttons[0]->setX(20);
-			buttons[0]->setY(200);
+			buttons[0]->setY(250);
 			buttons[0]->setImageNormal(images.button3);
 			buttons[0]->setImageFocus(images.buttonFocus3);
+			buttons[0]->setLabel("");
 			
 			// Range Upgrade Button
 			buttons[1]=new Button();
 			buttons[1]->setX(20);
-			buttons[1]->setY(250);
+			buttons[1]->setY(300);
 			buttons[1]->setImageNormal(images.button3);
 			buttons[1]->setImageFocus(images.buttonFocus3);
+			buttons[1]->setLabel("");
 
 			// Rate Upgrade Button
 			buttons[2]=new Button();
 			buttons[2]->setX(20);
-			buttons[2]->setY(300);
+			buttons[2]->setY(350);
 			buttons[2]->setImageNormal(images.button3);
 			buttons[2]->setImageFocus(images.buttonFocus3);
+			buttons[2]->setLabel("");
 			
 			// Select previous weapon Button
 			buttons[3]=new Button();
-			buttons[3]->setX(10);
+			buttons[3]->setX(25);
 			buttons[3]->setY(400);
 			buttons[3]->setImageNormal(images.button4);
 			buttons[3]->setImageFocus(images.buttonFocus4);
+			buttons[3]->setLabel("");
 
 			// Select next weapon Button
 			buttons[4]=new Button();
-			buttons[4]->setX(80);
+			buttons[4]->setX(55);
 			buttons[4]->setY(400);
 			buttons[4]->setImageNormal(images.button4);
 			buttons[4]->setImageFocus(images.buttonFocus4);
-			
-			game.maxButtons=5;
+			buttons[4]->setLabel("");
 		}
+		break;
 		
 		case stateLocalHighScore:
 	    {
@@ -931,8 +959,6 @@ void initButtons(void)
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Next");	
-			
-			game.maxButtons=1;
 		}
 		break;
 		
@@ -944,9 +970,7 @@ void initButtons(void)
 			buttons[0]->setY(460);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
-			buttons[0]->setLabel("Main Menu");	
-			
-			game.maxButtons=1;		
+			buttons[0]->setLabel("Main Menu");		
 		}
 		break;
 		
@@ -959,8 +983,6 @@ void initButtons(void)
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Main Menu");	
-			
-			game.maxButtons=1;
 		}
 		break;
 
@@ -973,8 +995,6 @@ void initButtons(void)
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Main Menu");	
-			
-			game.maxButtons=1;		
 		}
 		break;
 		
@@ -986,9 +1006,7 @@ void initButtons(void)
 			buttons[0]->setY(460);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
-			buttons[0]->setLabel("Main Menu");	
-			
-			game.maxButtons=1;		
+			buttons[0]->setLabel("Main Menu");		
 		}
 		break;
 		
@@ -1049,11 +1067,10 @@ void initButtons(void)
 			buttons[6]->setImageNormal(images.button2);
 			buttons[6]->setImageFocus(images.buttonFocus2);
 			buttons[6]->setLabel("Main Menu");	
-			
-			game.maxButtons=7;
 		}
 		break;	
 	}
+	trace->event(s_fn,0,"leave [void]");
 }
 
 // Init Network Module
@@ -1137,10 +1154,13 @@ void drawGrid(void)
 void drawPointers(void)
 {
    int i;
-   for( i=0; i<game.maxPointers; i++ ) 
+   for( i=0; i<MAX_POINTERS; i++ ) 
    {
-	  pointers[i]->action();
-	  pointers[i]->draw();
+	  if (pointers[i]!=NULL) 
+	  {
+		pointers[i]->action();
+		pointers[i]->draw();
+	  }
    }
 }
 
@@ -1148,34 +1168,43 @@ void drawPointers(void)
 void drawMonsters(void)
 {
    int i;
-   for( i=0; i<game.maxMonsters; i++ ) 
+   for( i=0; i<MAX_MONSTERS; i++ ) 
    {
-	  monsters[i]->move();
-	  monsters[i]->draw();
+	  if (monsters[i]!=NULL)
+	  {
+		monsters[i]->move();
+		monsters[i]->draw();
+	  }
    }
 }
 
 // Draw weapons on screen
 void drawWeapons(void)
 {
-   int i;
+	int i;
    
-   for( i=0; i<game.maxWeapons; i++ ) 
-   {
-     weapons[i]->move();
-	 weapons[i]->draw();
-	 weapons[i]->fire(monsters);
-   }
+	for( i=0; i<MAX_WEAPONS; i++ ) 
+	{
+		if (weapons[i]!=NULL)
+		{
+			weapons[i]->move();
+			weapons[i]->draw();
+			weapons[i]->fire(monsters);
+		}
+	}
 }
 
 // Draw buttons on screen
 void drawButtons(void)
 {
-   int i;
-   for( i=0; i<game.maxButtons; i++ ) 
-   {
-	 buttons[i]->draw();
-   }
+	int i;
+	for( i=0; i<MAX_BUTTONS; i++ ) 
+	{
+		if (buttons[i]!=NULL)
+		{
+			buttons[i]->draw();
+		}
+	}
 }
 
 
@@ -1265,10 +1294,10 @@ void drawGamePanel(void)
 	//GRRLIB_Rectangle(0, 0, 100, 520, GRRLIB_BLACK, 1); 
   
 	// Draw background
-	GRRLIB_DrawImg(0,0, images.panel1, 0, 1, 1, IMAGE_COLOR );
+	GRRLIB_DrawImg(0,0, images.panel1, 0, 1, 1, IMAGE_COLOR3 );
 		  
 	ypos+=20;
-	GRRLIB_Printf2(20, ypos, "INFORMATION", 20, GRRLIB_WHITESMOKE);
+	GRRLIB_Printf2(20, ypos, "GENERAL", 18, GRRLIB_WHITESMOKE);
 	
 	ypos+=40;
 	sprintf(tmp,"Score %d", game.score); 
@@ -1283,16 +1312,16 @@ void drawGamePanel(void)
 	GRRLIB_Printf2(20, ypos, tmp, 14, GRRLIB_WHITESMOKE);
 
 	ypos+=40;
-	GRRLIB_Printf2(20, ypos, "UPGRADE", 20, GRRLIB_WHITESMOKE);
+	GRRLIB_Printf2(20, ypos, "UPGRADE", 18, GRRLIB_WHITESMOKE);
 
 	ypos+=40;
-	GRRLIB_Printf2(20, ypos, "POWER", 20, GRRLIB_WHITESMOKE);	
+	GRRLIB_Printf2(20, ypos, "POWER", 16, GRRLIB_WHITESMOKE);	
 
-	ypos+=80;
-	GRRLIB_Printf2(20, ypos, "RANGE", 20, GRRLIB_WHITESMOKE);
+	ypos+=40;
+	GRRLIB_Printf2(20, ypos, "RANGE", 16, GRRLIB_WHITESMOKE);
 
-	ypos+=80;
-	GRRLIB_Printf2(20, ypos, "RATE", 20, GRRLIB_WHITESMOKE);
+	ypos+=40;
+	GRRLIB_Printf2(20, ypos, "RATE", 16, GRRLIB_WHITESMOKE);
 	
 	if (weapons[game.weaponSelect]!=NULL)
 	{
@@ -1309,7 +1338,7 @@ void drawGamePanel(void)
 		buttons[2]->setLabel(tmp);
 	}
 
-	ypos+=60;
+	ypos+=40;
 	GRRLIB_Printf2(20, ypos, "BUILD", 20, GRRLIB_WHITESMOKE);
 	
 	sprintf(tmp,"Monster in Base = %d", game.monsterInBase); 
@@ -1434,7 +1463,7 @@ void drawScreen(void)
 	         drawText(20, ypos, fontNew, tmp);			 
           }  
 
-		  ypos+=120;	 
+		  ypos=400;	 
 		  sprintf(tmp,"NETWORK THREAD: %s",http->tcp_get_state());
 		  drawText(20, ypos, fontSpecial, tmp);
 		  
@@ -1458,7 +1487,7 @@ void drawScreen(void)
           GRRLIB_initTexture();
 
 		  // Draw title
-	      drawText(80, ypos, fontTitle, "Choose Map");	
+	      drawText(120, ypos, fontTitle, "Choose Map");	
 		  
 		  ypos+=435;	
 		  sprintf(tmp,"%d fps", CalculateFrameRate()); 
@@ -1860,8 +1889,9 @@ void checkGameOver(void)
 
 		// Store highscore
 		char tmp[MAX_LEN];
-		sprintf(tmp,"%c%c%c",settings->getFirstChar(), settings->getSecondChar(), settings->getThirdChar());
-		highScore->setScore(tmp, 1, game.score);
+		sprintf(tmp,"%c%c%c",settings->getFirstChar(), 
+			settings->getSecondChar(), settings->getThirdChar());			
+		highScore->setScore(tmp, game.wave, game.score);
 		highScore->save(HIGHSCORE_FILENAME);
    }
 }
@@ -1939,6 +1969,62 @@ void destroyImages(void)
    trace->event(s_fn,0,"leave");
 }
 
+void destroyObjects()
+{
+	// Destroy Weapons
+	for( int i=0; i<MAX_WEAPONS; i++)
+    {
+		if (weapons[i]!=NULL)
+		{
+			delete weapons[i];
+			weapons[i]=NULL;
+		}
+    }
+	
+	// Destroy Buttons
+	for( int i=0; i<MAX_BUTTONS; i++)
+    {
+		if (buttons[i]!=NULL)
+		{
+			delete buttons[i];
+			buttons[i]=NULL;
+		}
+    }
+	
+	// Destroy Monsters
+	for( int i=0; i<MAX_MONSTERS; i++)
+	{
+		if (monsters[i]!=NULL)
+		{
+			delete monsters[i];
+			monsters[i]=NULL;
+		}
+	}  
+	
+	// Destroy Pointers
+	for( int i=0; i<MAX_POINTERS; i++)
+	{
+		if (pointers[i]!=NULL)
+		{
+			delete pointers[i];
+			pointers[i]=NULL;
+		}
+	}	
+	
+	// Destroy Grid
+	if (grid!=NULL)
+	{
+		delete grid;
+	}
+	
+	// Destroy Trace
+	if (trace!=NULL)
+	{
+		delete trace;
+	}
+}
+	
+
 static u8 CalculateFrameRate(void) 
 {
     static u8 frameCount = 0;
@@ -2011,7 +2097,7 @@ void processStateMachine()
 	 
 		// Init game variables
 		game.score=0;
-		game.cash=0;
+		game.cash=50;
 		game.wave=0;
 		game.monsterInBase=0;
 		game.weaponSelect=0;
@@ -2156,9 +2242,6 @@ int main(void)
 		  
 	GRRLIB_Exit();
 	
-	// Destroy all Images
-	destroyImages();
-	
 	// Stop network thread
 	http->tcp_stop_thread();
 	
@@ -2168,11 +2251,17 @@ int main(void)
 	// Stop music
 	//MODPlay_Stop(&snd1);
 	
+	// Destroy all Images
+	destroyImages();
+	
 	// Trace last line
 	trace->event(s_fn, 0,"%s %s Leaving", PROGRAM_NAME, PROGRAM_VERSION);
 	
 	// Close trace file.
 	trace->close();
+	
+	// Destroy all objects
+	destroyObjects();
 	
 	// Exit to loader
 	exit(0);

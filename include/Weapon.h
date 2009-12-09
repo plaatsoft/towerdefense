@@ -73,6 +73,10 @@ class Weapon
 	void setRange(int range);
 	void setRate(int rate);
 	
+	void setPowerPrice(int price);
+    void setRangePrice(int price);
+    void setRatePrice(int price);
+	
 	// Getters
 	int getPowerPrice(void);
 	int getRangePrice(void);
