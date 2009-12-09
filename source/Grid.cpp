@@ -419,12 +419,9 @@ void Grid::setLevel(int level1)
 	const char *s_fn="Grid::setLevel";
 	trace->event(s_fn,0,"enter [level=%d]",level1);
 	
-   if ((level>=0) && (level<=MAX_LEVEL))
-   {
-      level = level1;
-   }
+    level = level1;
    
-   trace->event(s_fn,0,"leave [void]");  
+	trace->event(s_fn,0,"leave [void]");  
 }
 
 // ------------------------------

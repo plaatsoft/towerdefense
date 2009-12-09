@@ -51,6 +51,7 @@ class Pointer
  	~Pointer();
 
 	void draw(void);
+	void action();
 	void properties(void);
 
 	void setIndex(int index);

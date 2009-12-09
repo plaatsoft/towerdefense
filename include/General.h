@@ -55,6 +55,7 @@
 #define GRID2_FILENAME    	  	"sd:/apps/TowerDefense/maps/map2.xml"
 #define GRID3_FILENAME    	  	"sd:/apps/TowerDefense/maps/map3.xml"
 
+#define YOFFSET					25
 #define WSP_POINTER_X      		200
 #define WSP_POINTER_Y      		250
 
@@ -83,26 +84,23 @@
 #define MAX_WEAPONS				3
 #define MAX_MONSTERS			100
 #define MAX_BUTTONS         	15
+#define MAX_POINTERS         	4
+#define MAX_LOCAL_HIGHSCORE 	15
+#define MAX_SETTINGS			3
+
 #define MAX_RUMBLE				25
 #define MAX_HORZ_PIXELS			640
 #define MAX_VERT_PIXELS			480
-#define MAX_LOCAL_HIGHSCORE 	15
-#define MAX_SETTINGS			3
-#define MAX_BEST	 			50
-#define MAX_LEVEL    	    	6
 #define MAX_LEN			    	256
 #define MAX_ANGLE				360
-#define MIN_ALFA				127
 #define MAX_ALFA				255
-#define MIN_SIZE				1.0
-#define MAX_SIZE				1.2
+#define MAX_SIZE				40
 #define MAX_SOUND_VOLUME		10
 #define MAX_MUSIC_TRACK     	16
 #define MAX_LINES		    	200
 #define MAX_BUFFER_SIZE			8192
 #define MAX_IDLE_TIME	    	10
-#define MAX_POINTERS         	4
-#define MAX_STEP		    	25
+
 #define MAX_GRID_X 				20
 #define MAX_GRID_Y 				17
 
@@ -139,20 +137,21 @@ enum
    stateIntro1=0,   
    stateIntro2=1, 
    stateIntro3=2, 
-   stateMenu=3,
-   stateGame=4,
-   stateLevelCleared=5,
-   stateGameOver=6,
-   stateQuit=7,
-   stateLocalHighScore=8,
-   stateTodayHighScore=9,
-   stateGlobalHighScore=10,
-   stateHelp=11,
-   stateCredits=12,
-   stateSound=13,
-   stateReleaseNotes=14,
-   stateSettings=15,  
-   stateNone=16,
+   stateMainMenu=3,
+   stateMapSelectMenu=4,
+   stateGame=5,
+   stateLevelCleared=6,
+   stateGameOver=7,
+   stateQuit=8,
+   stateLocalHighScore=9,
+   stateTodayHighScore=10,
+   stateGlobalHighScore=11,
+   stateHelp=12,
+   stateCredits=13,
+   stateSoundSettings=14,
+   stateReleaseNotes=15,
+   stateUserSettings=16,  
+   stateNone=17,
 };
 
 enum
@@ -161,29 +160,40 @@ enum
    fontSubTitle=1,
    fontSubTitle2=2,
    fontParagraph=3,
-   fontNormal=4,
-   fontSpecial=5,
-   fontNew=6,
-   fontButton=7,
-   fontWelcome=8
+   fontNew=4,
+   fontNormal=5,
+   fontSpecial=6,
+   fontButton=7
 };
 
 typedef struct 
 {
+	// Amount of objects active
 	int maxMonsters;
 	int maxWeapons;
 	int maxButtons;
 	int maxPointers; 
 	
+	// State Machine event status
 	int stateMachine;
 	int prevStateMachine;
+	
+	// Game variables
+	char name[MAX_LEN];	
 	int selectedMap; 
-	int score;
 	int monsterInBase;
-
+	
+	// game panel variables
+	int score;
+	int cash;
+	int wave;
+	int weaponSelect;
+	
+	// Variables for graphical animations
+	float size;
+	int   alfa;
 	float wave1;
 	float wave2;
-	char name[MAX_LEN];
 }
 Game;
 

@@ -71,17 +71,25 @@ void Button::draw()
 		if ((pointers[i]->getX()>=x) && (pointers[i]->getX()<=(x+width)) 
 			&& (pointers[i]->getY()>=y) && (pointers[i]->getY()<=(y+height)))
 		{
-			GRRLIB_DrawImg( x, y, imageFocus, 0, 1, 1, IMAGE_COLOR );	
-			
-			// Draw Button label
-			GRRLIB_Printf2(x+35, y+3, label, 16, GRRLIB_BLUE); 
-			
-		    focus=true;
-			//pointers[i].setRumble(MAX_RUMBLE);
-			break;
+			// Only buttons with a label can be selected
+			if (strlen(label)>0)
+			{
+				focus=true;	
+				break;
+			}
 		}
 	}
-	if (!focus)
+	
+	if (focus)
+	{
+		GRRLIB_DrawImg( x, y, imageFocus, 0, 1, 1, IMAGE_COLOR );	
+			
+		// Draw Button label
+		GRRLIB_Printf2(x+35, y+3, label, 16, GRRLIB_BLUE); 
+			
+		//pointers[i].setRumble(MAX_RUMBLE);
+	}
+	else
 	{
 		GRRLIB_DrawImg( x, y, imageNormal, 0, 1, 1, IMAGE_COLOR );	
 
@@ -91,7 +99,7 @@ void Button::draw()
 }
 
 
-boolean Button::onSelect(int x1, int y1)
+bool Button::onSelect(int x1, int y1)
 {
    const char *s_fn="Button::onSelect";
 
@@ -109,7 +117,7 @@ boolean Button::onSelect(int x1, int y1)
 }	   
 	   
 // ------------------------------
-// Getter and Setters
+// Setters
 // ------------------------------
 
 void Button::setImageNormal(GRRLIB_texImg *imageNormal1)
@@ -162,12 +170,12 @@ void Button::setY(int y1)
 
 void Button::setLabel(const char *label1)
 {
-	const char *s_fn="Button::setLabel";
-	trace->event(s_fn,0,"enter [label=%s]",label1);
+	//const char *s_fn="Button::setLabel";
+	//trace->event(s_fn,0,"enter [label=%s]",label1);
 	
     strcpy(label,label1);
 	
-	trace->event(s_fn,0,"leave [void]");
+	//trace->event(s_fn,0,"leave [void]");
 }
 
 // ------------------------------

@@ -189,10 +189,7 @@ void Monster::setStep(int step1)
    const char *s_fn="Monster::setStep";
    trace->event(s_fn,0,"enter [step=%d]",step1);
    
-   if ((step1>=0) && (step1<=MAX_STEP))
-   {
-      step=step1;
-   } 
+   step=step1;
    
    trace->event(s_fn,0,"leave");
 }

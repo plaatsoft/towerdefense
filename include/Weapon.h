@@ -40,31 +40,43 @@ class Weapon
 	GRRLIB_texImg *image;
 	int height;
 	int width;
-	int step;
 	int delay;
+	
+	boolean selected;
+	
+	int rate;
 	int range;
 	int power;
-	int actualDelay;
+	
+	int powerPrice;
+	int rangePrice;
+	int ratePrice;
+	
 	
   public:
   	Weapon();
  	~Weapon();
 
 	// Methodes
-	void draw(Pointer *pointers[MAX_POINTERS]);
+	void draw();
 	void fire(Monster *monsters[MAX_MONSTERS]);
 	void move(void);
+	int  upgrade(int type);
+	bool onSelect(int x1, int y1);
 	
 	// Setters
 	void setX(int x);
-	void setDelay(int delay);
 	void setY(int y);
-	void setRange(int range);
-	void setAlfa(int alfa);
-	void setAngle(int angle);
 	void setImage(GRRLIB_texImg *image);
-	void setStep(int step);
-	void setPower(int power);
+
+	void setPower(int power);	
+	void setRange(int range);
+	void setRate(int rate);
+	
+	// Getters
+	int getPowerPrice(void);
+	int getRangePrice(void);
+	int getRatePrice(void);
 };
 
 #endif
