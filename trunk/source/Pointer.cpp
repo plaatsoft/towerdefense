@@ -26,12 +26,14 @@
 #include "Settings.h"
 #include "Trace.h"
 #include "Button.h"
+#include "Weapon.h"
   
 extern Game game;
 
-extern Settings *settings;
-extern Trace *trace;
-extern Button *buttons[MAX_BUTTONS];
+extern 	Settings	*settings;
+extern 	Trace 		*trace;
+extern 	Button 		*buttons[MAX_BUTTONS];
+extern  Weapon    	*weapons[MAX_WEAPONS];
 
 boolean selectedA=false;
 
@@ -184,237 +186,270 @@ void Pointer::buttonMinus(int index)
 	trace->event(s_fn,0,"leave");
 }
 
-void Pointer::buttonExit(int index)
-{  
-	const char *s_fn="Pointer::buttonExit";
-	trace->event(s_fn,0,"enter [index=%d]",index);
-   
-	// Stop network thread
-	//tcp_stop_thread();
-	
-	// Stop rumble
-	WPAD_Rumble(0,0);
-		
-	// Stop music
-	//MODPlay_Stop(&snd1);
-	
-	// Exit game
-	if (index==0)
-	{   
-       // Exit to loader
-	   exit(0);
-	}
-	else
-	{
-       // Reset Wii
-	   SYS_ResetSystem(SYS_RESTART,0,0);	
-	}
-	trace->event(s_fn,0,"leave");
-}
-
 
 void Pointer::buttonA(int x, int y)
 {
-  //const char *s_fn="Pointer::buttonA";
+	const char *s_fn="Pointer::buttonA";
 
-  if (selectedA) return;
-  selectedA=true;
+	if (selectedA) return;
+	selectedA=true;
 	  
-  switch (game.stateMachine)
-  {
-     case stateIntro1:
-	 {
-	   game.stateMachine=stateIntro2;
-	 }
-	 break;
+    trace->event(s_fn,0,"enter [x=%d|y=%d]",x,y);
+	  
+	switch (game.stateMachine)
+	{
+		case stateIntro1:
+		{
+			game.stateMachine=stateIntro2;
+		}
+		break;
 
-	 case stateIntro2:
-	 {
-	   //game.stateMachine=stateIntro3;
-	   game.stateMachine=stateMenu;
-	 }
-	 break;
+		case stateIntro2:
+		{
+			//game.stateMachine=stateIntro3;
+			game.stateMachine=stateMainMenu;
+		}
+		break;
 	 
-	 case stateIntro3:
-	 {
-	   game.stateMachine=stateMenu;
-	 }
-	 break;
+		case stateIntro3:
+		{
+			game.stateMachine=stateMainMenu;
+		}
+		break;
 	 
-	 case stateMenu:
-	 {
-	    if (buttons[0]->onSelect(x,y))
-		{
-          // Map1 button	      
-		  game.stateMachine=stateGame;
-		  game.selectedMap=1;
-		}
+		case stateMainMenu:
+		{	
+			if (buttons[0]->onSelect(x,y))
+			{
+				// Highscore button	      
+				game.stateMachine=stateLocalHighScore;
+			}
 		
-		if (buttons[1]->onSelect(x,y))
-		{
-          // Map2 button	      
-		  game.stateMachine=stateGame;
-		  game.selectedMap=2;
-		}
+			if (buttons[1]->onSelect(x,y))
+			{
+				// Credits button	      
+				game.stateMachine=stateHelp;
+			}
 		
-		if (buttons[2]->onSelect(x,y))
-		{
-          // Map3 button	      
-		  game.stateMachine=stateGame;
-		  game.selectedMap=3;
-		}
+			if (buttons[2]->onSelect(x,y))
+			{
+				// Credits button	      
+				game.stateMachine=stateCredits;
+			}
 		
-		if (buttons[3]->onSelect(x,y))
-		{
-          // Highscore button	      
-		  game.stateMachine=stateLocalHighScore;
-		}
+			if (buttons[3]->onSelect(x,y))
+			{
+				// Sound Settings button	      
+				game.stateMachine=stateSoundSettings;
+			}
 		
-		if (buttons[4]->onSelect(x,y))
-		{
-          // Credits button	      
-		  game.stateMachine=stateHelp;
-		}
+			if (buttons[4]->onSelect(x,y))
+			{
+				// Release Notes button	      
+				game.stateMachine=stateReleaseNotes;
+			}
 		
-		if (buttons[5]->onSelect(x,y))
-		{
-          // Credits button	      
-		  game.stateMachine=stateCredits;
+			if (buttons[5]->onSelect(x,y))
+			{
+				// User Initials button	      
+				game.stateMachine=stateUserSettings;
+			}
+			
+			if (buttons[6]->onSelect(x,y))
+			{
+				// SelectMapMenu button	      
+				game.stateMachine=stateMapSelectMenu;
+			}
+			
+			if (buttons[7]->onSelect(x,y))
+			{
+				// Go back to HBC button    
+				game.stateMachine=stateQuit;
+			}
+			
+			if (buttons[8]->onSelect(x,y))
+			{
+				// Stop rumble
+				WPAD_Rumble(0,0);
+			
+				// Reset Wii
+				SYS_ResetSystem(SYS_RESTART,0,0);		   
+			}					
 		}
-		
-		if (buttons[6]->onSelect(x,y))
-		{
-          // Sound Settings button	      
-		  game.stateMachine=stateSound;
-		}
-		
-		if (buttons[7]->onSelect(x,y))
-		{
-          // Release Notes button	      
-		  game.stateMachine=stateReleaseNotes;
-		}
-		
-		if (buttons[8]->onSelect(x,y))
-		{
-          // User Initials button	      
-		  game.stateMachine=stateSettings;
-		}
-		
-		if (buttons[9]->onSelect(x,y))
-		{
-		  buttonExit(0);
-		}
-		
-		if (buttons[10]->onSelect(x,y))
-		{
-		  buttonExit(1);
-		}		
-	 }
-	 break;
+		break;
    
-	 case stateCredits:
-     {
-        if (buttons[0]->onSelect(x,y))
-	    {
-           // Next button	
-		   game.stateMachine=stateMenu;	     
-	    }
-     }
-	 break;
-
-	 case stateHelp:
-     {
-        if (buttons[0]->onSelect(x,y))
-	    {
-           // Next button	
-		   game.stateMachine=stateMenu;	     
-	    }
-     }
-	 break;
-
-	 case stateSound:
-     {
-        if (buttons[0]->onSelect(x,y))
-	    {
-           // Next button	
-		   game.stateMachine=stateMenu;	     
-	    }
-     }
-	 break;
-	 
-	 case stateReleaseNotes:
-     {
-        if (buttons[0]->onSelect(x,y))
-	    {
-           // Next button	
-		   game.stateMachine=stateMenu;	     
-	    }
-     }
-	 break;
-
-	 case stateLocalHighScore:
-     {
-        if (buttons[0]->onSelect(x,y))
-	    {
-           // Next button	
-		   game.stateMachine=stateMenu;	     
-	    }
-     }
-	 break;
-	 
-   	 case stateSettings:
-     { 
-        if (buttons[0]->onSelect(x,y))
-	    {
-			// + First Character button event           
-			buttonPlus(0);  
-	    }
+		case stateMapSelectMenu:
+		{	
+			if (buttons[0]->onSelect(x,y))
+			{
+				// Map1 button	      
+				game.stateMachine=stateGame;
+				game.selectedMap=1;
+			}
 		
-        if (buttons[1]->onSelect(x,y))
-	    {
-			// - First Character button event           
-			buttonMinus(0);  
-	    }
-					
-        if (buttons[2]->onSelect(x,y))
-	    {
-			// + Second Character button event           
-			buttonPlus(1);  
-	    }
+			if (buttons[1]->onSelect(x,y))
+			{
+				// Map2 button	      
+				game.stateMachine=stateGame;
+				game.selectedMap=2;
+			}
 		
-        if (buttons[3]->onSelect(x,y))
-	    {
-			// - Second Character button event           
-			buttonMinus(1);  
-	    }
+			if (buttons[2]->onSelect(x,y))
+			{
+				// Map3 button	      
+				game.stateMachine=stateGame;
+				game.selectedMap=3;
+			}
+			
+			if (buttons[3]->onSelect(x,y))
+			{
+				// Main Menu button	      
+				game.stateMachine=stateMainMenu;
+			}
+		}
+		break;
+	
+		case stateGame:
+		{	
+			if (weapons[game.weaponSelect]!=NULL)
+			{
+				if (buttons[0]->onSelect(x,y))
+				{
+					// Power button	      
+					weapons[game.weaponSelect]->upgrade(0);
+				}
+		
+				if (buttons[1]->onSelect(x,y))
+				{
+					// Range button	      
+					weapons[game.weaponSelect]->upgrade(1);
+				}
+			
+				if (buttons[2]->onSelect(x,y))
+				{
+					// Rate button	      		
+					weapons[game.weaponSelect]->upgrade(2);
+				}
+			}
+		}
+		break;
+		
+		case stateCredits:
+		{
+			if (buttons[0]->onSelect(x,y))
+			{
+				// Main Menu button	 	
+				game.stateMachine=stateMainMenu;	     
+			}
+		}
+		break;
+
+		case stateHelp:
+		{
+			if (buttons[0]->onSelect(x,y))
+			{
+				// Main Menu button	 
+				game.stateMachine=stateMainMenu;	     
+			}
+		}
+		break;
+
+		case stateSoundSettings:
+		{
+			if (buttons[0]->onSelect(x,y))
+			{
+				// Main Menu button	 
+				game.stateMachine=stateMainMenu;	     
+			}
+		}
+		break;
+	 
+		case stateReleaseNotes:
+		{
+			if (buttons[0]->onSelect(x,y))
+			{
+				// Main Menu button	 
+				game.stateMachine=stateMainMenu;	     
+			}
+		}
+		break;
+
+		case stateLocalHighScore:
+		{
+			if (buttons[0]->onSelect(x,y))
+			{
+				// Main Menu button	 
+				game.stateMachine=stateMainMenu;	     
+			}
+		}
+		break;
+	 
+		case stateUserSettings:
+		{ 
+			if (buttons[0]->onSelect(x,y))
+			{
+				// + First Character button event           
+				buttonPlus(0);  
+			}
+		
+			if (buttons[1]->onSelect(x,y))
+			{
+				// - First Character button event           
+				buttonMinus(0);  
+			}
+						
+			if (buttons[2]->onSelect(x,y))
+			{
+				// + Second Character button event           
+				buttonPlus(1);  
+			}
+		
+			if (buttons[3]->onSelect(x,y))
+			{
+				// - Second Character button event           
+				buttonMinus(1);  
+			}
 					    
-        if (buttons[4]->onSelect(x,y))
-	    {
-			// + Third Character button event           
-			buttonPlus(2);  
-	    }
-		
-        if (buttons[5]->onSelect(x,y))
-	    {
-			// - Third Character button event           
-			buttonMinus(2);  
-	    }
-		
-        if (buttons[6]->onSelect(x,y))
-	    {
-           // Next button	
-		   settings->save(SETTING_FILENAME); 
-		   game.stateMachine=stateMenu;	     
-	    }
-     }
-	 break; 
-  }
+			if (buttons[4]->onSelect(x,y))
+			{
+				// + Third Character button event           
+				buttonPlus(2);  
+			}
+			
+			if (buttons[5]->onSelect(x,y))
+			{
+				// - Third Character button event           
+				buttonMinus(2);  
+			}
+			
+			if (buttons[6]->onSelect(x,y))
+			{
+				// Main Menu button	 
+				settings->save(SETTING_FILENAME); 
+				game.stateMachine=stateMainMenu;	     
+			}
+		}
+		break; 
+	}
+	
+	// Check if weapon is selected
+	if (game.stateMachine==stateGame)
+	{
+		for (int i=0;i<MAX_WEAPONS; i++)
+		{
+			if (weapons[i]->onSelect(x,y))
+			{
+				game.weaponSelect=i;
+			}
+		}		
+	}
+	
+	trace->event(s_fn,0,"leave");
 }
 
-
-void Pointer::draw(void)
-{   
-    const char *s_fn="Pointer::draw";
+void Pointer::action(void)
+{
+	const char *s_fn="Pointer::action";
 
 	// Scan for button events
 	WPAD_SetVRes(index, 640, 480);
@@ -424,7 +459,6 @@ void Pointer::draw(void)
 	u32 wpadup   = WPAD_ButtonsUp(index);
 	u32 wpadheld = WPAD_ButtonsHeld(index);
 
-
 	// Scan for ir events 
 	WPAD_IR(index, &ir); 
 	x=ir.sx-WSP_POINTER_X;
@@ -433,20 +467,27 @@ void Pointer::draw(void)
 	yOffset=y+IR_Y_OFFSET;
 	angle=ir.angle;
 	
-	if (wpaddown & BUTTON_A) buttonA(xOffset,yOffset); 
-	if (wpadup & BUTTON_A) selectedA=false;
+	if (wpaddown & BUTTON_A) 
+	{
+		buttonA(xOffset,yOffset); 
+	}
+	
+	if (wpadup & BUTTON_A) 
+	{
+		selectedA=false;
+	}
 
 	// Scan for button events
 	if (wpaddown & WPAD_BUTTON_HOME) 
 	{
-	  if (game.stateMachine==stateMenu)
+	  if (game.stateMachine==stateMainMenu)
 	  {
 		trace->event(s_fn,0,"Home button pressed");
 		game.stateMachine=stateQuit;
 	  }
 	  else
 	  {
-		game.stateMachine=stateMenu;
+		game.stateMachine=stateMainMenu;
 	  }
 	}
 	
@@ -470,7 +511,10 @@ void Pointer::draw(void)
 	{
 		WPAD_Rumble(index,0);
 	}
-				
+}
+
+void Pointer::draw(void)
+{   	
     // Draw Pointer on screen
     GRRLIB_DrawImg( x, y, image, angle, 1.0, 1.0, IMAGE_COLOR );		
 }

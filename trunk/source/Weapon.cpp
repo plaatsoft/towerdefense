@@ -45,17 +45,24 @@ Weapon::Weapon()
    
    x=0;
    y=0;
-   alfa=255;
-   angle=0;
-   targetAngle=0;
+   
    height=0;
    width=0;
-   step=0;
-   range=0;
-   power=0;
-   delay=0;
-   actualDelay=0;
    
+   alfa=255;   
+   angle=0;
+   targetAngle=0;
+   delay=0;
+   selected=false;
+  
+   power=0;
+   range=0;
+   rate=0;
+   
+   powerPrice=10;
+   rangePrice=10;
+   ratePrice=10;
+      
    trace->event(s_fn,0,"leave");
 }
 
@@ -75,39 +82,29 @@ Weapon::~Weapon()
 // Others
 // ------------------------------
 	
-void Weapon::draw(Pointer *pointers[MAX_POINTERS])
+void Weapon::draw()
 {
 	char tmp[50];
 	int size=12;
-	
-	// Draw range circle if pointer is on weapon 
-	for (int i=0; i<MAX_POINTERS; i++)
-	{
-		if (pointers[i]!=NULL)
-		{
-			if ((x>=pointers[i]->getX()) && (x+width<=pointers[i]->getX()))
-			{
-				if ((y>=pointers[i]->getY()) && (y+height<=pointers[i]->getY()))
-				{
-					GRRLIB_Circle(x + 16, y + 16, range, GRRLIB_OLIVE, 1);
-				}
-			}
-		}
+		
+	if (selected)
+	{	
+		GRRLIB_Circle(x + 16, y + 16, range, GRRLIB_OLIVE, 0);
 	}
 	
 	// Draw Weapon on screen
 	GRRLIB_DrawImg( x, y, image, angle, 1, 1, IMAGE_COLOR );		
 
 	// Draw energy level on screen
-	sprintf(tmp, "%d", actualDelay);
+	sprintf(tmp, "%d", delay);
 	GRRLIB_Printf2(x, y, tmp, size, GRRLIB_BLACK); 		
 }
 
 void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 {
-	if (actualDelay>0) 
+	if (delay>0) 
 	{
-		actualDelay--;
+		delay--;
 	}
 	else
 	{
@@ -125,8 +122,9 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 					if (distance<range)
 					{
 						game.score+=power;
+						game.cash+=power;
 						monsters[i]->setHit(power);
-						actualDelay=delay;
+						delay=rate;
 						break;
 					}
 				}
@@ -137,8 +135,76 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 
 void Weapon::move(void)
 {  
-	angle=angle+step;
+	angle++;
 	if (angle>MAX_ANGLE) angle=0;
+}
+
+
+int Weapon::upgrade(int type)
+{
+	const char *s_fn="Weapon::upgrade";
+	trace->event(s_fn,0,"enter [type=%d]",type);
+	
+	if (!selected)
+	{
+		trace->event(s_fn,0,"leave [1]");
+		return 1;
+	}
+	
+	switch (type)
+	{
+		// Power upgrade
+		case 0:	if (game.cash>powerPrice)
+				{
+					power+=1;
+					trace->event(s_fn,0,"Upgrade power to %d",power);
+					game.cash-=powerPrice;
+					powerPrice=powerPrice*2;
+				}
+				break;
+
+		// Range upgrade
+		case 1:	if (game.cash>rangePrice)
+				{
+					range+=50;
+					trace->event(s_fn,0,"Upgrade range to %d",range);
+					game.cash-=rangePrice;
+					rangePrice=rangePrice*2;
+				}
+				break;
+
+		// Rate upgrade		
+		case 2:	if (game.cash>ratePrice)
+				{
+					rate-=10;
+					trace->event(s_fn,0,"Upgrade rate to %d",rate);
+					game.cash-=ratePrice;
+					ratePrice=ratePrice*2;
+				}
+				break;
+	}	
+	trace->event(s_fn,0,"leave [0]");
+	return 0;
+}
+
+
+bool Weapon::onSelect(int x1, int y1)
+{
+   const char *s_fn="Weapon::onSelect";
+   trace->event(s_fn,0,"enter [x=%|y=%d]",x,y);
+
+   boolean selected=false;
+   if ( (x1>=x) && (x1<=(x+width)) && (y1>=y) && (y1<=(y+height)) )
+   {      
+	  trace->event(s_fn,0,"Weapon selected");
+	  selected=true;	  
+   }
+   else
+   {
+      selected=false;
+   }
+   trace->event(s_fn,0,"leave [%b]",selected);
+   return selected;
 }
 
 // ------------------------------
@@ -169,46 +235,7 @@ void Weapon::setY(int y1)
    
    trace->event(s_fn,0,"leave [void]");
 }
-
-void Weapon::setAlfa(int alfa1)
-{
-   const char *s_fn="Weapon::setAlfa";
-   trace->event(s_fn,0,"enter [alfa=%d]",alfa1);
-   
-   if ((alfa1>=0) && (alfa1<=MAX_ALFA))
-   {
-      alfa=alfa1;
-   }
-   
-    trace->event(s_fn,0,"leave");
-}
-		
-void Weapon::setAngle(int angle1)
-{
-   const char *s_fn="Weapon::setAngle";
-   trace->event(s_fn,0,"enter [angle=%d]",angle1);
-   
-   if ((angle1>=0) && (angle1<=MAX_ANGLE))
-   {
-      angle=angle1;
-   } 
-   
-   trace->event(s_fn,0,"leave");
-}
-		
-void Weapon::setStep(int step1)
-{
-   const char *s_fn="Weapon::setStep";
-   trace->event(s_fn,0,"enter [step=%d]",step1);
-   
-   if ((step1>=0) && (step1<=MAX_STEP))
-   {
-      step=step1;
-   } 
-   
-   trace->event(s_fn,0,"leave");
-}
-
+				
 void Weapon::setImage(GRRLIB_texImg *image1)
 {
    const char *s_fn="Weapon::setImage";
@@ -218,27 +245,6 @@ void Weapon::setImage(GRRLIB_texImg *image1)
    
    height=image->h;
    width=image->w;
-   
-   trace->event(s_fn,0,"leave");
-}
-
-void Weapon::setDelay(int delay1)
-{
-   const char *s_fn="Weapon::setDelay";
-   trace->event(s_fn,0,"enter [delay=%d]",delay1);
-   
-   delay=delay1;
-   actualDelay=delay;
-   
-   trace->event(s_fn,0,"leave");
-}
-
-void Weapon::setRange(int range1)
-{
-   const char *s_fn="Weapon::setRange";
-   trace->event(s_fn,0,"enter [range=%d]",range1);
-   
-   range=range1;
    
    trace->event(s_fn,0,"leave");
 }
@@ -253,6 +259,45 @@ void Weapon::setPower(int power1)
    trace->event(s_fn,0,"leave");
 }
 
+void Weapon::setRange(int range1)
+{
+   const char *s_fn="Weapon::setRange";
+   trace->event(s_fn,0,"enter [range=%d]",range1);
+   
+   range=range1;
+   
+   trace->event(s_fn,0,"leave");
+}
+
+void Weapon::setRate(int rate1)
+{
+   const char *s_fn="Weapon::setRate";
+   trace->event(s_fn,0,"enter [rate=%d]",rate1);
+   
+   rate=rate1;
+   
+   trace->event(s_fn,0,"leave");
+}
+
+// ------------------------------
+// Getters 
+// ------------------------------
+
+int Weapon::getPowerPrice(void)
+{
+	return powerPrice;
+}
+
+int Weapon::getRangePrice(void)
+{
+	return rangePrice;
+}
+
+int Weapon::getRatePrice(void)
+{
+	return ratePrice;
+}
+	
 // ------------------------------
 // The end
 // ------------------------------

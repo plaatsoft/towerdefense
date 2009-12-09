@@ -41,7 +41,7 @@ class Button
 
 	// Other
 	void draw();
-	boolean onSelect(int pointerX, int pointerY);
+	bool onSelect(int pointerX, int pointerY);
 	
 	// Setters
 	void setX(int x);
