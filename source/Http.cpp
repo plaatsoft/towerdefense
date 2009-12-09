@@ -31,29 +31,83 @@
 **   18-11-2009  Added fourth HTTP request set for fetching today highScore.
 */
 
-#include <stdio.h>
 #include <ctype.h>
-#include <gccore.h>
-#include <ogcsys.h>
-#include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
-#include <time.h> 
-#include <malloc.h>
 #include <network.h>
 #include <ogc/lwp_watchdog.h>
-#include <sys/types.h>
 #include <sys/errno.h>
-#include <fcntl.h>
 
+#include "GRRLIB.h"
 #include "General.h"
-#include "Http.h"
 #include "Trace.h"
+#include "Http.h"
 
-extern GXRModeObj *rmode;
+// -----------------------------------------------------------
+// DEFINES
+// -----------------------------------------------------------
 
-extern Trace *trace;
+#define TCP_CONNECT_TIMEOUT     5000
+#define TCP_BLOCK_SIZE          (16 * 1024)
+#define TCP_BLOCK_RECV_TIMEOUT  4000
+#define TCP_BLOCK_SEND_TIMEOUT  4000
+#define HTTP_TIMEOUT            300000
+#define MAX_LEN        			256
+#define NUM_THREADS             1
+#define MAX_BUFFER_SIZE		    8192
 
+// -----------------------------------------------------------
+// VARIABLES
+// -----------------------------------------------------------
+
+extern GXRModeObj 	*rmode;
+extern Trace 		*trace;
+
+lwp_t threads[NUM_THREADS];
+mutex_t mutexcheck;
+mutex_t mutexversion;
+bool do_tcp_treat;
+
+char *appl_host; 
+char *appl_path;
+char appl_new_version[MAX_LEN];
+char appl_release_notes[MAX_BUFFER_SIZE];
+char appl_token[MAX_LEN];
+char appl_global_highscore[MAX_BUFFER_SIZE];
+char appl_today_highscore[MAX_BUFFER_SIZE];
+char appl_name[MAX_LEN];
+char appl_version[MAX_LEN];
+
+char appl_id1[MAX_LEN];
+char appl_url1[MAX_LEN];
+char appl_id2[MAX_LEN];
+char appl_url2[MAX_LEN];
+char appl_id3[MAX_LEN];
+char appl_url3[MAX_LEN];
+char appl_id4[MAX_LEN];
+char appl_url4[MAX_LEN];
+char appl_userData2[MAX_LEN];
+char appl_userData3[MAX_LEN];
+
+char var_cookie[MAX_LEN];
+
+int  tcp_state;
+int  tcp_state_prev;
+
+char *http_host;
+u16 http_port;
+char *http_path;
+u32 http_max_size;
+
+int result;
+u32 http_status;
+u32 content_length;
+u8 *http_data;
+
+int retval;
+//u32 http_status;
+u32 outlen;
+u8  *outbuf;
+	
 // ------------------------------
 // Constructor
 // ------------------------------
@@ -84,7 +138,7 @@ Http::~Http()
 // TCP METHODES
 // -----------------------------------------------------------
 
-s32 Http::tcp_socket(void) 
+s32 tcp_socket(void) 
 {
 		const char *s_fn="tcp_socket";
         trace->event(s_fn, 1, "enter" ); 
@@ -104,7 +158,7 @@ s32 Http::tcp_socket(void)
         return s;
 }
 
-s32 Http::tcp_connect(char *host, const u16 port)
+s32 tcp_connect(char *host, const u16 port)
 {
 		const char *s_fn="tcp_connect";
         trace->event(s_fn, 1, "enter [host=%s|port=%d]",host,port ); 
@@ -179,7 +233,7 @@ s32 Http::tcp_connect(char *host, const u16 port)
         return s;
 }
 
-char* Http::tcp_readln(const s32 s, const u16 max_length, const u64 start_time, const u16 timeout) 
+char* tcp_readln(const s32 s, const u16 max_length, const u64 start_time, const u16 timeout) 
 {		
         const char *s_fn="tcp_readln";
 		trace->event(s_fn,1,"enter" ); 
@@ -230,7 +284,7 @@ char* Http::tcp_readln(const s32 s, const u16 max_length, const u64 start_time, 
 		return ret;
 }
 
-bool Http::tcp_read(const s32 s, u8 **buffer, const u32 length) 
+bool tcp_read(const s32 s, u8 **buffer, const u32 length) 
 {
 	    const char *s_fn="tcp_read";
 		trace->event(s_fn,1,"enter" ); 
@@ -285,7 +339,7 @@ bool Http::tcp_read(const s32 s, u8 **buffer, const u32 length)
         return left == 0;
 }
 
-bool Http::tcp_write(const s32 s, const u8 *buffer, const u32 length)
+bool tcp_write(const s32 s, const u8 *buffer, const u32 length)
 {
 	    const char *s_fn="tcp_write";
 		trace->event(s_fn,1,"enter [bufsize=%d]",length ); 
@@ -342,7 +396,7 @@ bool Http::tcp_write(const s32 s, const u8 *buffer, const u32 length)
 }
 
 
-int Http::tcp_init(void) 
+int tcp_init(void) 
 {    
     const char *s_fn="tcp_init";
 	trace->event(s_fn,1,"enter" ); 
@@ -375,7 +429,7 @@ int Http::tcp_init(void)
 }
 
 
-void Http::tcp_sleep(unsigned int seconds)
+void tcp_sleep(unsigned int seconds)
 {
    const char *s_fn="tcp_sleep";
    trace->event(s_fn,1,"enter [wait=%d sec]", seconds ); 
@@ -389,7 +443,7 @@ void Http::tcp_sleep(unsigned int seconds)
 // HTTP METHODES
 // -----------------------------------------------------------
 
-bool Http::http_split_url(char **host, char **path, const char *url)
+bool http_split_url(char **host, char **path, const char *url)
 {
 	    const char *s_fn="http_split_url";
 		trace->event(s_fn,1,"enter" ); 
@@ -420,7 +474,7 @@ bool Http::http_split_url(char **host, char **path, const char *url)
 }
 
 
-char* Http::http_replaceString(char *orgstr, char *oldstr, char *newstr)
+char* http_replaceString(char *orgstr, char *oldstr, char *newstr)
 {
   const char *s_fn="http_replaceString";
   trace->event(s_fn,1,"enter" ); 
@@ -445,7 +499,7 @@ char* Http::http_replaceString(char *orgstr, char *oldstr, char *newstr)
 }
 
 // This function remove all html tag and return and ascii line buffer
-const char* Http::http_convertHTMlToAscii(char *in, int inSize)
+bool http_convertHTMlToAscii(char *in, int inSize)
 {  
    const char *s_fn="http_convertHTMlToAscii";
    trace->event(s_fn, 1,"enter [inSize=%d]", inSize ); 
@@ -455,21 +509,20 @@ const char* Http::http_convertHTMlToAscii(char *in, int inSize)
    int i;
    int startpos=0;
    int size=0;
-   char *out=in;
-   
-   
+   bool tag=true;
+
    // replace some html tags 
-   out = http_replaceString(out,"\r","");
-   out = http_replaceString(out,"\n","");
-   out = http_replaceString(out,"</title>","\n");
-   out = http_replaceString(out,"<h1>","\n");
-   out = http_replaceString(out,"<h2>","\n");
-   out = http_replaceString(out,"<h3>","\n");
-   out = http_replaceString(out,"</h1>","\n\n");
-   out = http_replaceString(out,"</h2>","\n");
-   out = http_replaceString(out,"</h3>","\n");
-   out = http_replaceString(out,"</br>","\n");
-   out = http_replaceString(out,"<br/>","\n");
+   in = http_replaceString(in,"\r","");
+   in = http_replaceString(in,"\n","");
+   in = http_replaceString(in,"</title>","\n");
+   in = http_replaceString(in,"<h1>","\n");
+   in = http_replaceString(in,"<h2>","\n");
+   in = http_replaceString(in,"<h3>","\n");
+   in = http_replaceString(in,"</h1>","\n\n");
+   in = http_replaceString(in,"</h2>","\n");
+   in = http_replaceString(in,"</h3>","\n");
+   in = http_replaceString(in,"</br>","\n");
+   in = http_replaceString(in,"<br/>","\n");
    
    // remove all html tags
    for (i=0; i<inSize; i++)
@@ -500,10 +553,11 @@ const char* Http::http_convertHTMlToAscii(char *in, int inSize)
    						
    trace->event(s_fn, 1,"out=%s", in ); 
    trace->event(s_fn,1, "leave [true]"); 
-   return out;
+   return true;
 }
 
-char Http::http_bin2hex(int val)
+
+char http_bin2hex(int val)
 {
     int i;
 	
@@ -514,7 +568,7 @@ char Http::http_bin2hex(int val)
         return 'A' + (i - 10);
 }
  	
-char *Http::http_encode_url(char *buf, const char *str)
+char *http_encode_url(char *buf, const char *str)
 {
     const char *s_fn="http_encode_url";
     trace->event(s_fn,1,"enter" ); 
@@ -551,7 +605,7 @@ char *Http::http_encode_url(char *buf, const char *str)
 }
 		
 // Google Analytic without JavaScript
-void Http::http_googleAnalysicUrl(char *buffer, char *domain, char *url, char *id)
+void http_googleAnalysicUrl(char *buffer, char *domain, char *url, char *id)
 {
     const char *s_fn="http_googleAnalysicUrl";
     trace->event(s_fn,1,"enter" ); 
@@ -760,7 +814,7 @@ function Curl_to_GA($target,$post_vars=''){
     return $response;
 }*/
 
-extern bool Http::http_request(char *url, const u32 max_size)
+extern bool http_request(char *url, const u32 max_size)
 {
     const char *s_fn="http_request";
     trace->event(s_fn,1,"enter"); 
@@ -889,15 +943,15 @@ extern bool Http::http_request(char *url, const u32 max_size)
            net_close (s);
            return false;
         }
-        		
-        result = HTTPR_OK;
-        net_close(s);
+      		
+    result = HTTPR_OK;
+    net_close(s);
 
-		trace->event(s_fn, 1,"leave [true]"); 
-        return true;
+	trace->event(s_fn, 1,"leave [true]"); 
+    return true;
 }
 
-extern bool Http::http_get_result(u32 *_http_status, u8 **content, u32 *length) 
+extern bool http_get_result(u32 *_http_status, u8 **content, u32 *length) 
 {
 		const char *s_fn="http_get_result";
 		trace->event(s_fn, 1,"enter"); 
@@ -922,7 +976,7 @@ extern bool Http::http_get_result(u32 *_http_status, u8 **content, u32 *length)
         return true;
 }
 
-char * Http::http_findToken(u8 *buffer, int bufsize, char *token)
+char * http_findToken(u8 *buffer, int bufsize, char *token)
 {
 	const char *s_fn="http_findToken";
 	trace->event(s_fn, 1,"enter [%s]", token); 
@@ -991,7 +1045,7 @@ char * Http::http_findToken(u8 *buffer, int bufsize, char *token)
 // THREAD STUFF
 // -----------------------------------------------------------
 	
- void *Http::tcp_thread(void *threadid)
+void *tcp_thread(void *threadid)
 {
 	const char *s_fn="tcp_thread";
 	trace->event(s_fn,1,"enter"); 
@@ -1364,7 +1418,7 @@ char * Http::http_findToken(u8 *buffer, int bufsize, char *token)
    return 0;
 }
 
-void Http::tcp_clear_memory(void)
+void tcp_clear_memory(void)
 {
     const char *s_fn="tcp_clear_memory";
 	trace->event(s_fn,1,"enter"); 

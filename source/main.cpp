@@ -19,15 +19,20 @@
 **  Release Notes:
 **  ==============
 **
-**  07/12/2009 Version 0.31
-**  - Added Local highscore page
-**  - Added User Initials page
-**  - Added Credits page
-**  - Added Help Page
-**  - Added Empty Sound Settings page 
-**  - Added Empty Release Notes page 
+**  09/12/2009 Version 0.40
+**  - Added Local highscore page.
+**		- Added functionality to load/save local highscore from/to SD card.
+**  - Added User Initials page.
+**		- Added functionality to load/save game settings from/to SD card.
+**  - Added Credits page.
+**  - Added Help Page.
+**  - Added Network thread.
+**  	- Fetch latest available version information from internet.
+**  	- Fetch latest release notes information from internet.
+**  - Added Release Notes page.
 **  - Improve main menu page.
-**  - Added functionality to make screenshots (Press + button)
+**  - Added functionality to make screenshots (Press + button).
+**  - Build game with devkitPPC r19 compiler.
 **
 **  03/12/2009 Version 0.30
 **  - Added gameOver detection
@@ -40,6 +45,7 @@
 **  - Added very basic game menu page.
 **  - Align monster movement on grid.
 **  - Use libogc 1.8.1 library as Wii interface engine.
+**  - Build game with devkitPPC r19 compiler.
 **
 **  29/11/2009 Version 0.20
 **  - Added four WiiMote controllers support
@@ -87,6 +93,7 @@
 #include "Button.h"
 #include "Pointer.h"
 #include "Grid.h"
+#include "Http.h"
 
 // -----------------------------------------------------------
 // PROTOTYPES
@@ -409,17 +416,19 @@ GXRModeObj  *rmode 				= NULL;
 Mtx         GXmodelView2D;
 int 		yOffset             = 0;
 int 		yjpegOffset         = 0;
+int     	scrollIndex      	= 0;
+bool    	scrollEnabled    	= false;
 
-Game 	game;
-
-Trace     *trace;
-Settings  *settings;
-HighScore *highScore;
-Grid      *grid;
-Monster   *monsters[MAX_MONSTERS];
-Pointer   *pointers[MAX_POINTERS];
-Weapon    *weapons[MAX_WEAPONS];
-Button    *buttons[MAX_BUTTONS];
+Game 		game;
+Trace     	*trace;
+Http		*http;
+Settings  	*settings;
+HighScore 	*highScore;
+Grid      	*grid;
+Monster   	*monsters[MAX_MONSTERS];
+Pointer   	*pointers[MAX_POINTERS];
+Weapon    	*weapons[MAX_WEAPONS];
+Button    	*buttons[MAX_BUTTONS];
 
 // -----------------------------------
 // INIT METHODES
@@ -973,6 +982,34 @@ void initButtons(void)
 	}
 }
 
+void initNetwork(void)
+{ 
+   const char *s_fn="initNetwork";
+   trace->event(s_fn,0,"enter");
+   
+   char userData1[MAX_LEN];
+   char userData2[MAX_LEN];
+
+   // Set userData1   		 
+   memset(userData1,0x00,sizeof(userData1));
+   sprintf(userData1,"%s=%s",PROGRAM_NAME,PROGRAM_VERSION);
+		
+   // Get userData2 
+   memset(userData2,0x00,sizeof(userData2));
+   sprintf(userData2,"appl=%s",PROGRAM_NAME);
+	   
+   http = new Http();
+	   
+   http->tcp_start_thread(PROGRAM_NAME, PROGRAM_VERSION, 
+			ID1, URL1, 
+			ID2, URL2, 
+			ID3, URL3, 
+			ID4, URL4, 
+			URL_TOKEN, userData1, userData2);
+   
+   trace->event(s_fn,0,"leave [void]");
+}
+
 void initGame(void)
 {
 	const char *s_fn="initGame";
@@ -995,8 +1032,12 @@ void initGame(void)
 	settings = new Settings();
 	settings->load(SETTING_FILENAME);
 	
+	// Load Local Highscore
 	highScore = new HighScore();
 	highScore->load(HIGHSCORE_FILENAME);
+	
+	// Init network Thread
+	initNetwork();
 	
 	trace->event(s_fn,0,"leave");
 }
@@ -1256,12 +1297,30 @@ void drawScreen(void)
 	 
 		case stateMenu:
 		{
+		  const char *version;
+
 		  // Draw background
 		  GRRLIB_DrawImg(0,0, images.background3, 0, 1, 1, IMAGE_COLOR2 );
 		  
 			 // Init text layer	  
           GRRLIB_initTexture();
 	
+		  version=http->tcp_get_version();
+          if ( (version!=NULL) && (strlen(version)>0) && (strcmp(version,PROGRAM_VERSION)!=0) )
+          {    
+	         sprintf(tmp,"New version [v%s] is available.",version);
+	         drawText(20, 300, fontNew, tmp);
+				 			 			 
+			 sprintf(tmp,"Check the release notes.");
+	         drawText(20, 320, fontNew, tmp);			 
+          }  
+
+		  sprintf(tmp,"NETWORK THREAD: %s",http->tcp_get_state());
+		  drawText(20, 440, fontSpecial, tmp);
+
+		  sprintf(tmp,"%d fps", CalculateFrameRate()); 
+		  drawText(20, 460, fontSpecial, tmp); 
+		  
 		  //pointer[0].properties();	  
 		  drawButtons();
 		  
@@ -1512,27 +1571,27 @@ void drawScreen(void)
 	   case stateReleaseNotes:
 	   {
 	      int  ypos;
-	      //int  i=0;
-		  //int len=0;
-		  //int  lineCount=0;
-		  //int maxLines=0;
-		  //char *buffer;
-		  //char text[MAX_BUFFER_SIZE];
+	      int  i=0;
+		  int  len=0;
+		  int  lineCount=0;
+		  int  maxLines=0;
+		  const char *buffer;
+		  char text[MAX_BUFFER_SIZE];
 		  
-		  //int startEntry;
-		  //int endEntry;
+		  int startEntry;
+		  int endEntry;
 		  		  
 		  // Fetch release notes from network thread
-		  /*buffer=tcp_get_releasenote();
+		  buffer=http->tcp_get_releasenote();
           if (buffer!=NULL) 
 		  {
 		     strncpy(text,buffer,MAX_BUFFER_SIZE);
 			 len=strlen(text);
 			 for (i=0;i<len;i++) if (text[i]=='\n') maxLines++;
-		  }*/
+		  }
 		  
 		  // Calculate start and end line.
-		  /*if (maxLines<18)
+		  if (maxLines<18)
 		  {
 		    startEntry=0;
 			endEntry=maxLines;
@@ -1543,7 +1602,7 @@ void drawScreen(void)
 			 startEntry=(((float) maxLines-18.0)/26.0)*(float)scrollIndex;
 			 endEntry=startEntry+18;
 			 scrollEnabled=true;
-		  }*/
+		  }
 		  
 	      // Init text layer	  
           GRRLIB_initTexture();
@@ -1552,25 +1611,25 @@ void drawScreen(void)
 		  GRRLIB_DrawImg(0,0,images.background3, 0, 1.0, 1.0, IMAGE_COLOR2 );
 
           // Draw scrollbar
-		  /*if (scrollEnabled)
+		  if (scrollEnabled)
 		  {
 		    ypos=SCROLLBAR_Y_MIN;
-            GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
+            //GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
 		    for (i=0; i<9; i++) 
 		    {
 		      ypos+=24;
-		      GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
+		      //GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
 		    }
 		    ypos+=24;
-		    GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
-		  }*/
+		    //GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
+		  }
 		 
 	      // Draw Title	
 		  ypos=yOffset;
           drawText(100, ypos, fontTitle, "Release Notes");
           ypos+=80;
 	      
-		  /*if (len!=0)
+		  if (len!=0)
 		  {		  
 		    int startpos=0;
   		    for (i=0; i<len; i++)
@@ -1592,7 +1651,7 @@ void drawScreen(void)
 		      }
 		    }
 		  }
-		  else*/
+		  else
 		  {
 		     ypos+=120;
 			 drawText(0, ypos, fontParagraph, "No information available!" );	
