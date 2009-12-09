@@ -175,12 +175,15 @@ typedef struct
   GRRLIB_texImg *bridge1;
   
   GRRLIB_texImg *weapon1;
+  GRRLIB_texImg *weapon2;
   
-  GRRLIB_texImg *button1;
-  GRRLIB_texImg *buttonFocus1;
   GRRLIB_texImg *button2;
   GRRLIB_texImg *buttonFocus2;
-
+  GRRLIB_texImg *button3;
+  GRRLIB_texImg *buttonFocus3;
+  GRRLIB_texImg *button4;
+  GRRLIB_texImg *buttonFocus4;
+  
   GRRLIB_texImg *pointer1;
   GRRLIB_texImg *pointer2;
   GRRLIB_texImg *pointer3; 
@@ -398,17 +401,13 @@ extern int      pic406length;
 extern const unsigned char     pic407data[];
 extern int      pic407length;
 
-// Rocket Image
+// Weapon1 Image
 extern const unsigned char     pic500data[];
 extern int      pic500length;
 
-// Button1 Image
-extern const unsigned char     pic600data[];
-extern int      pic600length;
-
-// Button1Focus Image
-extern const unsigned char     pic601data[];
-extern int      pic601length;
+// Weapon2 Image
+extern const unsigned char     pic501data[];
+extern int      pic501length;
 
 // Button2 Image
 extern const unsigned char     pic602data[];
@@ -417,6 +416,23 @@ extern int      pic602length;
 // Button2Focus Image
 extern const unsigned char     pic603data[];
 extern int      pic603length;
+
+// Button3 Image
+extern const unsigned char     pic604data[];
+extern int      pic604length;
+
+// Button3Focus Image
+extern const unsigned char     pic605data[];
+extern int      pic605length;
+
+// Button4 Image
+extern const unsigned char     pic606data[];
+extern int      pic606length;
+
+// Button4Focus Image
+extern const unsigned char     pic607data[];
+extern int      pic607length;
+
 
 u32         *frameBuffer[1] 	= {NULL};
 GXRModeObj  *rmode 				= NULL;
@@ -505,11 +521,14 @@ void initImages(void)
    images.bridge1=GRRLIB_LoadTexture( pic407data );	
 
    images.weapon1=GRRLIB_LoadTexture( pic500data );
+   images.weapon2=GRRLIB_LoadTexture( pic501data );
 
-   images.button1=GRRLIB_LoadTexture( pic600data );
-   images.buttonFocus1=GRRLIB_LoadTexture( pic601data );
-   images.button2=GRRLIB_LoadTexture( pic603data );
-   images.buttonFocus2=GRRLIB_LoadTexture( pic602data );  
+   images.button2=GRRLIB_LoadTexture( pic602data );
+   images.buttonFocus2=GRRLIB_LoadTexture( pic603data );  
+   images.button3=GRRLIB_LoadTexture( pic604data );
+   images.buttonFocus3=GRRLIB_LoadTexture( pic605data );  
+   images.button4=GRRLIB_LoadTexture( pic606data );
+   images.buttonFocus4=GRRLIB_LoadTexture( pic607data );  
    
    trace->event(s_fn,0,"leave [void]");
 }
@@ -875,24 +894,38 @@ void initButtons(void)
 			buttons[0]=new Button();
 			buttons[0]->setX(20);
 			buttons[0]->setY(200);
-			buttons[0]->setImageNormal(images.button2);
-			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setImageNormal(images.button3);
+			buttons[0]->setImageFocus(images.buttonFocus3);
 			
 			// Range Upgrade Button
 			buttons[1]=new Button();
 			buttons[1]->setX(20);
 			buttons[1]->setY(250);
-			buttons[1]->setImageNormal(images.button2);
-			buttons[1]->setImageFocus(images.buttonFocus2);
+			buttons[1]->setImageNormal(images.button3);
+			buttons[1]->setImageFocus(images.buttonFocus3);
 
 			// Rate Upgrade Button
 			buttons[2]=new Button();
 			buttons[2]->setX(20);
 			buttons[2]->setY(300);
-			buttons[2]->setImageNormal(images.button2);
-			buttons[2]->setImageFocus(images.buttonFocus2);
-						
-			game.maxButtons=1;
+			buttons[2]->setImageNormal(images.button3);
+			buttons[2]->setImageFocus(images.buttonFocus3);
+			
+			// Select previous weapon Button
+			buttons[3]=new Button();
+			buttons[3]->setX(10);
+			buttons[3]->setY(400);
+			buttons[3]->setImageNormal(images.button4);
+			buttons[3]->setImageFocus(images.buttonFocus4);
+
+			// Select next weapon Button
+			buttons[4]=new Button();
+			buttons[4]->setX(80);
+			buttons[4]->setY(400);
+			buttons[4]->setImageNormal(images.button4);
+			buttons[4]->setImageFocus(images.buttonFocus4);
+			
+			game.maxButtons=5;
 		}
 		
 		case stateLocalHighScore:
@@ -1476,7 +1509,7 @@ void drawScreen(void)
 		  
 		  if (game.size<MAX_SIZE) game.size+=0.1;
 				  
-		  GRRLIB_Printf2(x, y, "GAME OVER", game.size, GRRLIB_WHITESMOKE);
+		  GRRLIB_Printf2(100, 100, "GAME OVER", game.size, GRRLIB_WHITESMOKE);
 		 
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -1900,11 +1933,14 @@ void destroyImages(void)
    GRRLIB_FreeTexture(images.bridge1);
    
    GRRLIB_FreeTexture(images.weapon1);
+   GRRLIB_FreeTexture(images.weapon2);
 	
-   GRRLIB_FreeTexture(images.button1);
-   GRRLIB_FreeTexture(images.buttonFocus1);
    GRRLIB_FreeTexture(images.button2);
    GRRLIB_FreeTexture(images.buttonFocus2);
+   GRRLIB_FreeTexture(images.button3);
+   GRRLIB_FreeTexture(images.buttonFocus3);
+   GRRLIB_FreeTexture(images.button4);
+   GRRLIB_FreeTexture(images.buttonFocus4);
 	
    trace->event(s_fn,0,"leave");
 }

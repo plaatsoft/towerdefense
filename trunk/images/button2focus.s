@@ -5,7 +5,7 @@
 
 pic603length:	.long	picdataend - pic603data
 pic603data:
-.incbin "../images/button10up.png"
+.incbin "../images/button2focus.png"
 picdataend:
 
 
