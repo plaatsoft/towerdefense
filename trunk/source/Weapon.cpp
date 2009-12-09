@@ -29,10 +29,9 @@
 // Variables
 // ------------------------------
 
-extern GXRModeObj  *rmode;
-
-extern Game game; 
-extern Trace   *trace;
+extern GXRModeObj   *rmode;
+extern Game 		game; 
+extern Trace    	*trace;
 
 // ------------------------------
 // Constructor 
@@ -59,9 +58,9 @@ Weapon::Weapon()
    range=0;
    rate=0;
    
-   powerPrice=10;
-   rangePrice=10;
-   ratePrice=10;
+   powerPrice=0;
+   rangePrice=0;
+   ratePrice=0;
       
    trace->event(s_fn,0,"leave");
 }
@@ -89,7 +88,7 @@ void Weapon::draw()
 		
 	if (selected)
 	{	
-		GRRLIB_Circle(x + 16, y + 16, range, GRRLIB_OLIVE, 0);
+		GRRLIB_Circle(x + 16, y + 16, range, GRRLIB_BLACK, 1);
 	}
 	
 	// Draw Weapon on screen
@@ -145,12 +144,6 @@ int Weapon::upgrade(int type)
 	const char *s_fn="Weapon::upgrade";
 	trace->event(s_fn,0,"enter [type=%d]",type);
 	
-	if (!selected)
-	{
-		trace->event(s_fn,0,"leave [1]");
-		return 1;
-	}
-	
 	switch (type)
 	{
 		// Power upgrade
@@ -191,19 +184,24 @@ int Weapon::upgrade(int type)
 bool Weapon::onSelect(int x1, int y1)
 {
    const char *s_fn="Weapon::onSelect";
-   trace->event(s_fn,0,"enter [x=%|y=%d]",x,y);
+   trace->event(s_fn,0,"enter [x=%d|y=%d]",x1,y1);
 
    boolean selected=false;
    if ( (x1>=x) && (x1<=(x+width)) && (y1>=y) && (y1<=(y+height)) )
    {      
-	  trace->event(s_fn,0,"Weapon selected");
-	  selected=true;	  
+	 
+	  if (selected)
+	  {
+		 selected=false;	  
+		 trace->event(s_fn,0,"Weapon deselected");
+	  }
+	  else
+	  {
+	     selected=true;	
+		 trace->event(s_fn,0,"Weapon selected");
+	  }
    }
-   else
-   {
-      selected=false;
-   }
-   trace->event(s_fn,0,"leave [%b]",selected);
+   trace->event(s_fn,0,"leave [%d]",selected);
    return selected;
 }
 
@@ -275,8 +273,25 @@ void Weapon::setRate(int rate1)
    trace->event(s_fn,0,"enter [rate=%d]",rate1);
    
    rate=rate1;
+   delay=rate;
    
    trace->event(s_fn,0,"leave");
+}
+
+
+void Weapon::setPowerPrice(int price)
+{
+	powerPrice=price;
+}
+
+void Weapon::setRangePrice(int price)
+{
+	rangePrice=price;
+}
+
+void Weapon::setRatePrice(int price)
+{
+	ratePrice=price;
 }
 
 // ------------------------------

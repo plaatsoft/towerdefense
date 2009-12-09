@@ -66,16 +66,19 @@ Button::~Button()
 void Button::draw()
 {
 	boolean focus=false;
-	for (int i=0; i<game.maxPointers; i++)
+	for (int i=0; i<MAX_POINTERS; i++)
 	{
-		if ((pointers[i]->getX()>=x) && (pointers[i]->getX()<=(x+width)) 
-			&& (pointers[i]->getY()>=y) && (pointers[i]->getY()<=(y+height)))
-		{
-			// Only buttons with a label can be selected
-			if (strlen(label)>0)
+		if (pointers[i]!=NULL)
+		{	
+			if ((pointers[i]->getX()>=x) && (pointers[i]->getX()<=(x+width)) 
+				&& (pointers[i]->getY()>=y) && (pointers[i]->getY()<=(y+height)))
 			{
-				focus=true;	
-				break;
+				// Only buttons with a label can be selected
+				if (strlen(label)>0)
+				{
+					focus=true;	
+					break;
+				}
 			}
 		}
 	}
@@ -85,8 +88,10 @@ void Button::draw()
 		GRRLIB_DrawImg( x, y, imageFocus, 0, 1, 1, IMAGE_COLOR );	
 			
 		// Draw Button label
-		GRRLIB_Printf2(x+35, y+3, label, 16, GRRLIB_BLUE); 
-			
+		if (strlen(label)>0)
+		{		
+			GRRLIB_Printf2(x+35, y+3, label, 16, GRRLIB_BLUE); 
+		}	
 		//pointers[i].setRumble(MAX_RUMBLE);
 	}
 	else
@@ -94,25 +99,32 @@ void Button::draw()
 		GRRLIB_DrawImg( x, y, imageNormal, 0, 1, 1, IMAGE_COLOR );	
 
 		// Draw Button label
-		GRRLIB_Printf2(x+35, y+3, label, 16, GRRLIB_WHITESMOKE); 	
+		if (strlen(label)>0)
+		{	
+			GRRLIB_Printf2(x+35, y+3, label, 16, GRRLIB_WHITESMOKE); 	
+		}
 	}
 }
-
 
 bool Button::onSelect(int x1, int y1)
 {
    const char *s_fn="Button::onSelect";
+   trace->event(s_fn,0,"enter [x=%d|y=%d]",x1,y1);
 
    boolean selected=false;
    if ( (x1>=x) && (x1<=(x+width)) && (y1>=y) && (y1<=(y+height)) )
-   {
-      trace->event(s_fn,0,"enter [x=%|y=%d]",x,y);
+   {      
 	  trace->event(s_fn,0,"Button selected");
-	  trace->event(s_fn,0,"leave");
-	  
       //SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 0, (char *) effect3_pcm, effect3_pcm_size, effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
 	  selected=true;
    }
+   else
+   {
+	  trace->event(s_fn,0,"No button selected");
+	  selected=false;
+   }
+   trace->event(s_fn,0,"leave");
+   
    return selected;
 }	   
 	   

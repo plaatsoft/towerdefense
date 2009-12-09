@@ -53,12 +53,15 @@ Monster::Monster()
    y=0;
    targetY=0;
    size=1;
+   
    alfa=255;
    energy=0;
+   
    height=0;
    width=0;
    step=0;
    pos=0;
+   
    visible=false;
    dead=false;
    

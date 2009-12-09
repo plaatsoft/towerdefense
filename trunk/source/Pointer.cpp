@@ -223,48 +223,56 @@ void Pointer::buttonA(int x, int y)
 			{
 				// Highscore button	      
 				game.stateMachine=stateLocalHighScore;
+				break;
 			}
 		
 			if (buttons[1]->onSelect(x,y))
 			{
 				// Credits button	      
 				game.stateMachine=stateHelp;
+				break;
 			}
 		
 			if (buttons[2]->onSelect(x,y))
 			{
 				// Credits button	      
 				game.stateMachine=stateCredits;
+				break;
 			}
 		
 			if (buttons[3]->onSelect(x,y))
 			{
 				// Sound Settings button	      
 				game.stateMachine=stateSoundSettings;
+				break;
 			}
 		
 			if (buttons[4]->onSelect(x,y))
 			{
 				// Release Notes button	      
 				game.stateMachine=stateReleaseNotes;
+				break;
 			}
 		
 			if (buttons[5]->onSelect(x,y))
 			{
 				// User Initials button	      
 				game.stateMachine=stateUserSettings;
+				break;
 			}
 			
 			if (buttons[6]->onSelect(x,y))
 			{
 				// SelectMapMenu button	      
 				game.stateMachine=stateMapSelectMenu;
+				break;
 			}
 			
 			if (buttons[7]->onSelect(x,y))
 			{
 				// Go back to HBC button    
 				game.stateMachine=stateQuit;
+				break;
 			}
 			
 			if (buttons[8]->onSelect(x,y))
@@ -274,6 +282,7 @@ void Pointer::buttonA(int x, int y)
 			
 				// Reset Wii
 				SYS_ResetSystem(SYS_RESTART,0,0);		   
+				break;
 			}					
 		}
 		break;
@@ -285,6 +294,7 @@ void Pointer::buttonA(int x, int y)
 				// Map1 button	      
 				game.stateMachine=stateGame;
 				game.selectedMap=1;
+				break;
 			}
 		
 			if (buttons[1]->onSelect(x,y))
@@ -292,6 +302,7 @@ void Pointer::buttonA(int x, int y)
 				// Map2 button	      
 				game.stateMachine=stateGame;
 				game.selectedMap=2;
+				break;
 			}
 		
 			if (buttons[2]->onSelect(x,y))
@@ -299,12 +310,14 @@ void Pointer::buttonA(int x, int y)
 				// Map3 button	      
 				game.stateMachine=stateGame;
 				game.selectedMap=3;
+				break;
 			}
 			
 			if (buttons[3]->onSelect(x,y))
 			{
 				// Main Menu button	      
 				game.stateMachine=stateMainMenu;
+				break;
 			}
 		}
 		break;
@@ -317,18 +330,33 @@ void Pointer::buttonA(int x, int y)
 				{
 					// Power button	      
 					weapons[game.weaponSelect]->upgrade(0);
+					break;
 				}
 		
 				if (buttons[1]->onSelect(x,y))
 				{
 					// Range button	      
 					weapons[game.weaponSelect]->upgrade(1);
+					break;
 				}
 			
 				if (buttons[2]->onSelect(x,y))
 				{
 					// Rate button	      		
 					weapons[game.weaponSelect]->upgrade(2);
+					break;
+				}
+				
+				if (buttons[3]->onSelect(x,y))
+				{
+					// Select previous weapon	      		
+					break;
+				}
+				
+				if (buttons[4]->onSelect(x,y))
+				{
+					// Select next weapon	      		
+					break;
 				}
 			}
 		}
@@ -339,7 +367,8 @@ void Pointer::buttonA(int x, int y)
 			if (buttons[0]->onSelect(x,y))
 			{
 				// Main Menu button	 	
-				game.stateMachine=stateMainMenu;	     
+				game.stateMachine=stateMainMenu;	
+				break;     
 			}
 		}
 		break;
@@ -349,7 +378,8 @@ void Pointer::buttonA(int x, int y)
 			if (buttons[0]->onSelect(x,y))
 			{
 				// Main Menu button	 
-				game.stateMachine=stateMainMenu;	     
+				game.stateMachine=stateMainMenu;	
+				break;      
 			}
 		}
 		break;
@@ -360,6 +390,7 @@ void Pointer::buttonA(int x, int y)
 			{
 				// Main Menu button	 
 				game.stateMachine=stateMainMenu;	     
+				break; 
 			}
 		}
 		break;
@@ -369,7 +400,8 @@ void Pointer::buttonA(int x, int y)
 			if (buttons[0]->onSelect(x,y))
 			{
 				// Main Menu button	 
-				game.stateMachine=stateMainMenu;	     
+				game.stateMachine=stateMainMenu;	
+				break;      
 			}
 		}
 		break;
@@ -379,7 +411,8 @@ void Pointer::buttonA(int x, int y)
 			if (buttons[0]->onSelect(x,y))
 			{
 				// Main Menu button	 
-				game.stateMachine=stateMainMenu;	     
+				game.stateMachine=stateMainMenu;	
+				break;      
 			}
 		}
 		break;
@@ -390,36 +423,42 @@ void Pointer::buttonA(int x, int y)
 			{
 				// + First Character button event           
 				buttonPlus(0);  
+				break; 
 			}
 		
 			if (buttons[1]->onSelect(x,y))
 			{
 				// - First Character button event           
 				buttonMinus(0);  
+				break; 
 			}
 						
 			if (buttons[2]->onSelect(x,y))
 			{
 				// + Second Character button event           
 				buttonPlus(1);  
+				break; 
 			}
 		
 			if (buttons[3]->onSelect(x,y))
 			{
 				// - Second Character button event           
-				buttonMinus(1);  
+				buttonMinus(1); 
+				break;  
 			}
 					    
 			if (buttons[4]->onSelect(x,y))
 			{
 				// + Third Character button event           
 				buttonPlus(2);  
+				break; 
 			}
 			
 			if (buttons[5]->onSelect(x,y))
 			{
 				// - Third Character button event           
 				buttonMinus(2);  
+				break; 
 			}
 			
 			if (buttons[6]->onSelect(x,y))
@@ -427,6 +466,7 @@ void Pointer::buttonA(int x, int y)
 				// Main Menu button	 
 				settings->save(SETTING_FILENAME); 
 				game.stateMachine=stateMainMenu;	     
+				break; 
 			}
 		}
 		break; 
@@ -437,9 +477,10 @@ void Pointer::buttonA(int x, int y)
 	{
 		for (int i=0;i<MAX_WEAPONS; i++)
 		{
-			if (weapons[i]->onSelect(x,y))
+			if ((weapons[i]!=NULL) && (weapons[i]->onSelect(x,y)))
 			{
 				game.weaponSelect=i;
+				break;
 			}
 		}		
 	}
@@ -480,7 +521,7 @@ void Pointer::action(void)
 	// Scan for button events
 	if (wpaddown & WPAD_BUTTON_HOME) 
 	{
-	  if (game.stateMachine==stateMainMenu)
+	  if (game.stateMachine==stateMapSelectMenu)
 	  {
 		trace->event(s_fn,0,"Home button pressed");
 		game.stateMachine=stateQuit;
@@ -520,7 +561,7 @@ void Pointer::draw(void)
 }
 
 // ------------------------------
-// Setters and getters 
+// Setters 
 // ------------------------------
 
 void Pointer::setIndex(int index1)
@@ -591,6 +632,10 @@ void Pointer::setRumble(int rumble1)
 
    trace->event(s_fn,0,"leave [void]");
 }
+
+// ------------------------------
+// Getters
+// ------------------------------
 
 int Pointer::getX()
 {

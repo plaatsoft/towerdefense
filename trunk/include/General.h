@@ -80,6 +80,7 @@
 
 #define IMAGE_COLOR        		0xFFFFFFFF
 #define IMAGE_COLOR2        	0x66666666
+#define IMAGE_COLOR3        	0x33333333
 
 #define MAX_WEAPONS				3
 #define MAX_MONSTERS			100
@@ -168,12 +169,6 @@ enum
 
 typedef struct 
 {
-	// Amount of objects active
-	int maxMonsters;
-	int maxWeapons;
-	int maxButtons;
-	int maxPointers; 
-	
 	// State Machine event status
 	int stateMachine;
 	int prevStateMachine;
