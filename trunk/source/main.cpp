@@ -130,7 +130,6 @@ typedef struct
   
   GRRLIB_texImg *background1;
   GRRLIB_texImg *background2;
-  GRRLIB_texImg *background3;
   GRRLIB_texImg *panel1;
   
   GRRLIB_texImg *monster1;
@@ -224,10 +223,6 @@ extern int      pic10length;
 // Background2 Image
 extern const unsigned char     pic11data[];
 extern int      pic11length;
-
-// Background3 Image
-extern const unsigned char     pic12data[];
-extern int      pic12length;
 
 // Panel1 Image
 extern const unsigned char     pic13data[];
@@ -471,7 +466,6 @@ void initImages(void)
    
    images.background1=GRRLIB_LoadTexture( pic10data );
    images.background2=GRRLIB_LoadTexture( pic11data );
-   images.background3=GRRLIB_LoadTexture( pic12data );
    images.panel1=GRRLIB_LoadTexture( pic13data );
 	 
    images.monster1=GRRLIB_LoadTexture( pic101data );
@@ -546,7 +540,7 @@ void initWeapons(void)
     }
     
 	weapons[0]= new Weapon();
-	weapons[0]->setImage(images.weapon1);
+	weapons[0]->setImage(images.weapon2);
 	weapons[0]->setX(100);
 	weapons[0]->setY(100);
 	weapons[0]->setPower(2);
@@ -554,7 +548,7 @@ void initWeapons(void)
 	weapons[0]->setRate(100);
 	
 	weapons[1]= new Weapon();
-	weapons[1]->setImage(images.weapon1);
+	weapons[1]->setImage(images.weapon2);
 	weapons[1]->setX(200);
 	weapons[1]->setY(200);
 	weapons[1]->setPower(2);
@@ -562,7 +556,7 @@ void initWeapons(void)
 	weapons[1]->setRate(100);
 	
 	weapons[2]= new Weapon();
-	weapons[2]->setImage(images.weapon1);
+	weapons[2]->setImage(images.weapon2);
 	weapons[2]->setX(300);
 	weapons[2]->setY(300);
 	weapons[2]->setPower(2);	
@@ -1268,10 +1262,10 @@ void drawGamePanel(void)
 	char tmp[MAX_LEN];
 	int  ypos=YOFFSET;
 	
-	GRRLIB_Rectangle(0, 0, 100, 520, GRRLIB_BLACK, 1); 
+	//GRRLIB_Rectangle(0, 0, 100, 520, GRRLIB_BLACK, 1); 
   
 	// Draw background
-	//GRRLIB_DrawImg(0,470, images.panel1, 0, 1, 1, IMAGE_COLOR );
+	GRRLIB_DrawImg(0,0, images.panel1, 0, 1, 1, IMAGE_COLOR );
 		  
 	ypos+=20;
 	GRRLIB_Printf2(20, ypos, "INFORMATION", 20, GRRLIB_WHITESMOKE);
@@ -1336,7 +1330,7 @@ void drawScreen(void)
 	   case stateIntro1:
 	   {
 	      // Draw background
-		  GRRLIB_DrawImg(0,0, images.background3, 0, 1, 1, IMAGE_COLOR );
+		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR );
 		  
 		  // Init text layer	  
           GRRLIB_initTexture();	
@@ -1423,7 +1417,7 @@ void drawScreen(void)
 		  const char *version;
 
 		  // Draw background
-		  GRRLIB_DrawImg(0,0, images.background3, 0, 1, 1, IMAGE_COLOR2 );
+		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 		  
 			 // Init text layer	  
           GRRLIB_initTexture();
@@ -1458,7 +1452,7 @@ void drawScreen(void)
 		case stateMapSelectMenu:
 		{
 		  // Draw background
-		  GRRLIB_DrawImg(0,0, images.background3, 0, 1, 1, IMAGE_COLOR2 );
+		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 		  
 			 // Init text layer	  
           GRRLIB_initTexture();
@@ -1524,7 +1518,7 @@ void drawScreen(void)
           GRRLIB_initTexture();
 		  				   
           // Draw background
-          GRRLIB_DrawImg(0,0, images.background3, 0, 1, 1, IMAGE_COLOR2 );
+          GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 		   
 	      // Draw title
 	      drawText(80, ypos, fontTitle, "Local High Score");	
@@ -1577,7 +1571,7 @@ void drawScreen(void)
           GRRLIB_initTexture();
 		  
 	      // Draw background
-		  GRRLIB_DrawImg(0,0, images.background3, 0, 1, 1, IMAGE_COLOR2 );
+		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 		  
 		   // Show title
 		  drawText(0, ypos, fontTitle, "Help");
@@ -1616,7 +1610,7 @@ void drawScreen(void)
           GRRLIB_initTexture();
  
 	      // Draw background
-		  GRRLIB_DrawImg(0,0,images.background3, 0, 1.0, 1.0, IMAGE_COLOR2 );
+		  GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
 		  
 		  // Show title
 		  drawText(220, ypos, fontTitle, "Credits");
@@ -1672,7 +1666,7 @@ void drawScreen(void)
           GRRLIB_initTexture();
  
 	      // Draw background
-		  GRRLIB_DrawImg(0,0,images.background3, 0, 1.0, 1.0, IMAGE_COLOR2 );
+		  GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
 		  
 	      // Draw Sound icon
 	      //GRRLIB_DrawImg((640/2)-128, ((480/2)-140)+yOffset, images.sound, angle, 1.4, 1.4, IMAGE_COLOR );
@@ -1749,7 +1743,7 @@ void drawScreen(void)
           GRRLIB_initTexture();
  
 	      // Draw background
-		  GRRLIB_DrawImg(0,0,images.background3, 0, 1.0, 1.0, IMAGE_COLOR2 );
+		  GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
 
           // Draw scrollbar
 		  if (scrollEnabled)
@@ -1817,7 +1811,7 @@ void drawScreen(void)
           GRRLIB_initTexture();
 		   
 	      // Draw background
-		  GRRLIB_DrawImg(0,0,images.background3, 0, 1.0, 1.0, IMAGE_COLOR2 );
+		  GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
       		
 	      // Draw Title	
           drawText(150, ypos, fontTitle, "User Initials");
