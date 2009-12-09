@@ -86,7 +86,7 @@ void Button::draw()
 		GRRLIB_DrawImg( x, y, imageNormal, 0, 1, 1, IMAGE_COLOR );	
 
 		// Draw Button label
-		GRRLIB_Printf2(x+35, y+3, label, 16, COLOR_WHITESMOKE); 	
+		GRRLIB_Printf2(x+35, y+3, label, 16, GRRLIB_WHITESMOKE); 	
 	}
 }
 
