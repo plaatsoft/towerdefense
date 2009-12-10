@@ -29,6 +29,8 @@
 
 int maxLines;
 int maxLocations;
+int baseX=0;
+int baseY=0;
 
 typedef struct
 {
@@ -53,6 +55,7 @@ location;
 location locationList[MAX_GRID_Y*MAX_GRID_X];
 
 extern Trace *trace;
+extern Game  game; 
 
 // ------------------------------
 // Constructor
@@ -204,8 +207,6 @@ void Grid::draw(void)
 {
    int x;
    int y;
-   int baseX=0;
-   int baseY=0;
    
    // Parse
    for (y=0; y<MAX_GRID_Y; y++)
@@ -318,6 +319,15 @@ void Grid::draw(void)
 	GRRLIB_DrawImg( (baseX*32)-16, (baseY*32)+5, imageBase, 0, 1.0, 1.0, IMAGE_COLOR );
 }
 
+void Grid::text(void)
+{
+    char tmp[50];
+	
+    sprintf(tmp, "%d", game.monsterInBase);
+	GRRLIB_Printf2((baseX*32)-16, (baseY*32)+16, tmp, 12, GRRLIB_BLACK); 
+}
+	
+	
 // Load grid map and parse it for monster movement.
 void Grid::create(const char* filename)
 {

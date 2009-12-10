@@ -19,7 +19,7 @@
 **  Release Notes:
 **  ==============
 **
-**  09/12/2009 Version 0.40
+**  10/12/2009 Version 0.40
 **
 **  NOT TESTED YET:
 **  - Added game information panel.
@@ -175,7 +175,9 @@ typedef struct
   
   GRRLIB_texImg *weapon1;
   GRRLIB_texImg *weapon2;
-  
+
+  GRRLIB_texImg *button1;
+  GRRLIB_texImg *buttonFocus1;  
   GRRLIB_texImg *button2;
   GRRLIB_texImg *buttonFocus2;
   GRRLIB_texImg *button3;
@@ -404,6 +406,14 @@ extern int      pic500length;
 extern const unsigned char     pic501data[];
 extern int      pic501length;
 
+// Button1 Image
+extern const unsigned char     pic600data[];
+extern int      pic600length;
+
+// Button1Focus Image
+extern const unsigned char     pic601data[];
+extern int      pic601length;
+
 // Button2 Image
 extern const unsigned char     pic602data[];
 extern int      pic602length;
@@ -517,6 +527,8 @@ void initImages(void)
    images.weapon1=GRRLIB_LoadTexture( pic500data );
    images.weapon2=GRRLIB_LoadTexture( pic501data );
 
+   images.button1=GRRLIB_LoadTexture( pic600data );
+   images.buttonFocus1=GRRLIB_LoadTexture( pic601data );  
    images.button2=GRRLIB_LoadTexture( pic602data );
    images.buttonFocus2=GRRLIB_LoadTexture( pic603data );  
    images.button3=GRRLIB_LoadTexture( pic604data );
@@ -912,24 +924,24 @@ void initButtons(void)
 			buttons[0]=new Button();
 			buttons[0]->setX(20);
 			buttons[0]->setY(250);
-			buttons[0]->setImageNormal(images.button3);
-			buttons[0]->setImageFocus(images.buttonFocus3);
+			buttons[0]->setImageNormal(images.button1);
+			buttons[0]->setImageFocus(images.buttonFocus1);
 			buttons[0]->setLabel("");
 			
 			// Range Upgrade Button
 			buttons[1]=new Button();
 			buttons[1]->setX(20);
 			buttons[1]->setY(300);
-			buttons[1]->setImageNormal(images.button3);
-			buttons[1]->setImageFocus(images.buttonFocus3);
+			buttons[1]->setImageNormal(images.button1);
+			buttons[1]->setImageFocus(images.buttonFocus1);
 			buttons[1]->setLabel("");
 
 			// Rate Upgrade Button
 			buttons[2]=new Button();
 			buttons[2]->setX(20);
 			buttons[2]->setY(350);
-			buttons[2]->setImageNormal(images.button3);
-			buttons[2]->setImageFocus(images.buttonFocus3);
+			buttons[2]->setImageNormal(images.button1);
+			buttons[2]->setImageFocus(images.buttonFocus1);
 			buttons[2]->setLabel("");
 			
 			// Select previous weapon Button
@@ -1016,48 +1028,48 @@ void initButtons(void)
 			buttons[0]=new Button();
 			buttons[0]->setX(100);
 			buttons[0]->setY(130);
-			buttons[0]->setImageNormal(images.button2);
-			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setImageNormal(images.button1);
+			buttons[0]->setImageFocus(images.buttonFocus1);
 			buttons[0]->setLabel("+");	
 
 			// First letter - button 
 			buttons[1]=new Button();
 			buttons[1]->setX(100);
 			buttons[1]->setY(295);
-			buttons[1]->setImageNormal(images.button2);
-			buttons[1]->setImageFocus(images.buttonFocus2);
+			buttons[1]->setImageNormal(images.button1);
+			buttons[1]->setImageFocus(images.buttonFocus1);
 			buttons[1]->setLabel("-");	
 
 			// Second letter + button 
 			buttons[2]=new Button();
 			buttons[2]->setX(280);
 			buttons[2]->setY(130);
-			buttons[2]->setImageNormal(images.button2);
-			buttons[2]->setImageFocus(images.buttonFocus2);
+			buttons[2]->setImageNormal(images.button1);
+			buttons[2]->setImageFocus(images.buttonFocus1);
 			buttons[2]->setLabel("+");	
 
 			// second letter - button 
 			buttons[3]=new Button();
 			buttons[3]->setX(280);
 			buttons[3]->setY(295);
-			buttons[3]->setImageNormal(images.button2);
-			buttons[3]->setImageFocus(images.buttonFocus2);
+			buttons[3]->setImageNormal(images.button1);
+			buttons[3]->setImageFocus(images.buttonFocus1);
 			buttons[3]->setLabel("-");	
 
 			// Third letter + button 
 			buttons[4]=new Button();
 			buttons[4]->setX(460);
 			buttons[4]->setY(130);
-			buttons[4]->setImageNormal(images.button2);
-			buttons[4]->setImageFocus(images.buttonFocus2);
+			buttons[4]->setImageNormal(images.button1);
+			buttons[4]->setImageFocus(images.buttonFocus1);
 			buttons[4]->setLabel("+");	
 
 			// Third letter - button 
 			buttons[5]=new Button();
 			buttons[5]->setX(460);
 			buttons[5]->setY(295);
-			buttons[5]->setImageNormal(images.button2);
-			buttons[5]->setImageFocus(images.buttonFocus2);
+			buttons[5]->setImageNormal(images.button1);
+			buttons[5]->setImageFocus(images.buttonFocus1);
 			buttons[5]->setLabel("-");
 			
 			// Main Menu Button
@@ -1148,6 +1160,7 @@ void initGame(void)
 void drawGrid(void)
 {
    grid->draw();
+   grid->text();
 }
 
 // Draw pointers on screen
@@ -1174,6 +1187,7 @@ void drawMonsters(void)
 	  {
 		monsters[i]->move();
 		monsters[i]->draw();
+		monsters[i]->text();
 	  }
    }
 }
@@ -1189,6 +1203,7 @@ void drawWeapons(void)
 		{
 			weapons[i]->move();
 			weapons[i]->draw();
+			weapons[i]->text();
 			weapons[i]->fire(monsters);
 		}
 	}
@@ -1340,10 +1355,7 @@ void drawGamePanel(void)
 
 	ypos+=40;
 	GRRLIB_Printf2(20, ypos, "BUILD", 20, GRRLIB_WHITESMOKE);
-	
-	sprintf(tmp,"Monster in Base = %d", game.monsterInBase); 
-	GRRLIB_Printf2(20, 490, tmp, 14, GRRLIB_WHITESMOKE);
-	  
+		  
 	sprintf(tmp,"%d fps", CalculateFrameRate()); 
 	GRRLIB_Printf2(20, 500, tmp, 14, GRRLIB_WHITESMOKE);
 }

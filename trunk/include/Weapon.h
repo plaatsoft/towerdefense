@@ -59,6 +59,7 @@ class Weapon
 
 	// Methodes
 	void draw();
+	void text();
 	void fire(Monster *monsters[MAX_MONSTERS]);
 	void move(void);
 	int  upgrade(int type);

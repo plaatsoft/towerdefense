@@ -83,20 +83,23 @@ Weapon::~Weapon()
 	
 void Weapon::draw()
 {
-	char tmp[50];
-	int size=12;
-		
 	if (selected)
 	{	
-		GRRLIB_Circle(x + 16, y + 16, range, GRRLIB_BLACK, 1);
+		GRRLIB_Circle(x-16, y-16, range, GRRLIB_BLACK, 1);
 	}
 	
 	// Draw Weapon on screen
-	GRRLIB_DrawImg( x, y, image, angle, 1, 1, IMAGE_COLOR );		
+	GRRLIB_DrawImg( x-16, y-16, image, angle, 1, 1, IMAGE_COLOR );				
+}
 
+void Weapon::text()
+{
+	char tmp[50];
+	int size=12;
+		
 	// Draw energy level on screen
 	sprintf(tmp, "%d", delay);
-	GRRLIB_Printf2(x, y, tmp, size, GRRLIB_BLACK); 		
+	GRRLIB_Printf2(x-16, y-16, tmp, size, GRRLIB_BLACK); 		
 }
 
 void Weapon::fire(Monster *monsters[MAX_MONSTERS])
