@@ -87,12 +87,18 @@ Monster::~Monster()
 // Draw Monster on screen
 void Monster::draw(void)
 {
-    char tmp[50];
-	
 	if (!visible) return;
 	
 	GRRLIB_DrawImg( x, y, image, 0, size, size, IMAGE_COLOR );	
+}
+
+// Draw Monster text on screen
+void Monster::text(void)
+{
+    char tmp[50];
 	
+	if (!visible) return;
+		
 	if (!dead)
 	{  
 	   sprintf(tmp, "%d", energy);

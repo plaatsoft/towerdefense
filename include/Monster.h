@@ -79,6 +79,7 @@ class Monster
 
 	// Methodes
 	void draw(void);
+	void text(void);
 	void move(void);
 	
 	// Setters

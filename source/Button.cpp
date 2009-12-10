@@ -74,7 +74,7 @@ void Button::draw()
 				&& (pointers[i]->getY()>=y) && (pointers[i]->getY()<=(y+height)))
 			{
 				// Only buttons with a label can be selected
-				if (strlen(label)>0)
+				//if (strlen(label)>0)
 				{
 					focus=true;	
 					break;

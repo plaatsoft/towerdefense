@@ -46,6 +46,7 @@ class Grid
 
 	// Other
 	void draw(void);
+	void text(void);
 	void create(const char* filename);
 
 	// Setters
