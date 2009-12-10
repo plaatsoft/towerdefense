@@ -27,7 +27,7 @@
 
 #define PROGRAM_NAME	   		"TowerDefense"
 #define PROGRAM_VERSION     	"0.40"
-#define RELEASE_DATE        	"09-12-2009" 
+#define RELEASE_DATE        	"10-12-2009" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -61,7 +61,7 @@
 
 #define GRRLIB_WHITESMOKE   	0xFFFFFFFF
 #define GRRLIB_LIGHTRED     	0x3333FFFF
-#define GRRLIB_BLACK   			0x000000FF
+#define GRRLIB_BLACK   			0x00000000
 #define GRRLIB_MAROON  			0x800000FF
 #define GRRLIB_GREEN   			0x008000FF
 #define GRRLIB_OLIVE   			0x808000FF
@@ -82,9 +82,9 @@
 #define IMAGE_COLOR2        	0x66666666
 #define IMAGE_COLOR3        	0x33333333
 
-#define MAX_WEAPONS				3
-#define MAX_MONSTERS			100
-#define MAX_BUTTONS         	15
+#define MAX_WEAPONS				100
+#define MAX_MONSTERS			200
+#define MAX_BUTTONS         	10
 #define MAX_POINTERS         	4
 #define MAX_LOCAL_HIGHSCORE 	15
 #define MAX_SETTINGS			3
@@ -176,13 +176,13 @@ typedef struct
 	// Game variables
 	char name[MAX_LEN];	
 	int selectedMap; 
-	int monsterInBase;
+	int monsterInBase;	
+	int weaponSelect;
 	
 	// game panel variables
 	int score;
 	int cash;
 	int wave;
-	int weaponSelect;
 	
 	// Variables for graphical animations
 	float size;

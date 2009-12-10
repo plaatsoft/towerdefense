@@ -22,14 +22,15 @@
 **  10/12/2009 Version 0.40
 **
 **  NOT TESTED YET:
-**  - Added game information panel.
-**		- Added functionality to upgrade power, range and rate of weapons.
 **  - Added Network thread.
 **  	- Fetch latest available version information from internet.
 **  	- Fetch latest release notes information from internet.
 **  - Added Release Notes screen.
 **
 **  TESTED:
+**  - Added game information panel.
+**		- Added functionality to upgrade power, range and rate of weapon.
+**  - Added continues monster wave principle.
 **  - Added Map Select menu screen.
 **  - Added Local highscore page.
 **		- Added functionality to load/save local highscore from/to SD card.
@@ -108,6 +109,9 @@
 
 static u8 CalculateFrameRate();
 void checkGameOver(void);
+void checkNextWave(void);
+void moveMonsters(void);
+void moveWeapons(void);
 
 // -----------------------------------------------------------
 // TYPEDEF
@@ -175,6 +179,11 @@ typedef struct
   
   GRRLIB_texImg *weapon1;
   GRRLIB_texImg *weapon2;
+  GRRLIB_texImg *weapon3;
+  GRRLIB_texImg *weapon4;
+  GRRLIB_texImg *weapon5;
+  GRRLIB_texImg *weapon6;
+  GRRLIB_texImg *weapon7;
 
   GRRLIB_texImg *button1;
   GRRLIB_texImg *buttonFocus1;  
@@ -411,6 +420,26 @@ extern int      pic500length;
 extern const unsigned char     pic501data[];
 extern int      pic501length;
 
+// Weapon3 Image
+extern const unsigned char     pic502data[];
+extern int      pic502length;
+
+// Weapon4 Image
+extern const unsigned char     pic503data[];
+extern int      pic503length;
+
+// Weapon5 Image
+extern const unsigned char     pic504data[];
+extern int      pic504length;
+
+// Weapon6 Image
+extern const unsigned char     pic505data[];
+extern int      pic505length;
+
+// Weapon7 Image
+extern const unsigned char     pic506data[];
+extern int      pic506length;
+
 // Button1 Image
 extern const unsigned char     pic600data[];
 extern int      pic600length;
@@ -543,7 +572,12 @@ void initImages(void)
 
    images.weapon1=GRRLIB_LoadTexture( pic500data );
    images.weapon2=GRRLIB_LoadTexture( pic501data );
-
+   images.weapon3=GRRLIB_LoadTexture( pic502data );
+   images.weapon4=GRRLIB_LoadTexture( pic503data );
+   images.weapon5=GRRLIB_LoadTexture( pic504data );
+   images.weapon6=GRRLIB_LoadTexture( pic505data );
+   images.weapon7=GRRLIB_LoadTexture( pic506data );
+   
    images.button1=GRRLIB_LoadTexture( pic600data );
    images.buttonFocus1=GRRLIB_LoadTexture( pic601data );  
    images.button2=GRRLIB_LoadTexture( pic602data );
@@ -560,7 +594,7 @@ void initImages(void)
    trace->event(s_fn,0,"leave [void]");
 }
 
-// Init Weapons
+// Init some Weapons (Just for debugging)
 void initWeapons(void)
 {
     const char *s_fn="initWeapons";
@@ -578,48 +612,87 @@ void initWeapons(void)
     }
     
 	weapons[0]= new Weapon();
-	weapons[0]->setImage(images.weapon2);
+	weapons[0]->setImage(images.weapon1);
 	weapons[0]->setX(200);
-	weapons[0]->setY(200);
+	weapons[0]->setY(180);
 	weapons[0]->setPower(2);
-	weapons[0]->setRange(100);
-	weapons[0]->setRate(100);
+	weapons[0]->setRange(50);
+	weapons[0]->setRate(50);
 	weapons[0]->setPowerPrice(10);
 	weapons[0]->setRangePrice(10);
 	weapons[0]->setRatePrice(10);
-	
+	weapons[0]->setSelected(true);
+		
 	weapons[1]= new Weapon();
 	weapons[1]->setImage(images.weapon2);
 	weapons[1]->setX(300);
-	weapons[1]->setY(300);
-	weapons[1]->setPower(2);
-	weapons[1]->setRange(100);
+	weapons[1]->setY(180);
+	weapons[1]->setPower(4);
+	weapons[1]->setRange(50);
 	weapons[1]->setRate(100);
 	weapons[1]->setPowerPrice(10);
 	weapons[1]->setRangePrice(10);
 	weapons[1]->setRatePrice(10);
+	weapons[1]->setSelected(false);
 	
 	weapons[2]= new Weapon();
-	weapons[2]->setImage(images.weapon2);
+	weapons[2]->setImage(images.weapon3);
 	weapons[2]->setX(400);
-	weapons[2]->setY(400);
-	weapons[2]->setPower(2);	
-	weapons[2]->setRange(100);
-	weapons[2]->setRate(100);
+	weapons[2]->setY(180);
+	weapons[2]->setPower(6);	
+	weapons[2]->setRange(50);
+	weapons[2]->setRate(150);
 	weapons[2]->setPowerPrice(10);
 	weapons[2]->setRangePrice(10);
 	weapons[2]->setRatePrice(10);
+	weapons[2]->setSelected(false);
+	
+	//weapons[3]= new Weapon();
+	//weapons[3]->setImage(images.weapon4);
+	//weapons[3]->setX(200);
+	//weapons[3]->setY(400);
+	//weapons[3]->setPower(6);	
+	//weapons[3]->setRange(50);
+	//weapons[3]->setRate(150);
+	//weapons[3]->setPowerPrice(10);
+	//weapons[3]->setRangePrice(10);
+	//weapons[3]->setRatePrice(10);
+	//weapons[3]->setSelected(false);
+	
+	//weapons[4]= new Weapon();
+	//weapons[4]->setImage(images.weapon5);
+	//weapons[4]->setX(300);
+	//weapons[4]->setY(400);
+	//weapons[4]->setPower(6);	
+	//weapons[4]->setRange(50);
+	//weapons[4]->setRate(150);
+	//weapons[4]->setPowerPrice(10);
+	//weapons[4]->setRangePrice(10);
+	//weapons[4]->setRatePrice(10);
+	//weapons[4]->setSelected(false);
+	
+	//weapons[5]= new Weapon();
+	//weapons[5]->setImage(images.weapon7);
+	//weapons[5]->setX(400);
+	//weapons[5]->setY(400);
+	//weapons[5]->setPower(6);	
+	//weapons[5]->setRange(50);
+	//weapons[5]->setRate(150);
+	//weapons[5]->setPowerPrice(10);
+	//weapons[5]->setRangePrice(10);
+	//weapons[5]->setRatePrice(10);
+	//weapons[5]->setSelected(false);
 	
 	trace->event(s_fn,0,"leave [void]");
 }
 
 // Init monster
-void initMonsters(void)
+void initMonsters()
 {
    const char *s_fn="initMonsters";
    trace->event(s_fn,0,"enter");
 
-   // First clear array
+   // First clear monster array
    for( int i=0; i<MAX_MONSTERS; i++)
    {
       if (monsters[i]!=NULL)
@@ -630,18 +703,31 @@ void initMonsters(void)
 	  }
    }   
    
-   int delay=0;
+   int delay=1;   
    
-   for( int i=0; i<25; i++ ) 
+   // Calculate how much monster will be in the wave
+   int amount=7+(game.wave*3);
+   if (amount>MAX_MONSTERS) amount=MAX_MONSTERS;
+   
+   for( int i=0; i<amount; i++ ) 
    {
    	  trace->event(s_fn,0,"Init monster [%d]",i);
 
-	  monsters[i]=new Monster();
+	  monsters[i]=new Monster();	  
 	  monsters[i]->setStep(1);
 	  monsters[i]->setStartDelay(delay);
-	  monsters[i]->setEnergy(10);
-	 	  
-	  switch (i+1)
+	  
+	  // Each wave the monster get move energy.
+	  monsters[i]->setEnergy(game.wave*5);
+	  
+	  // Calculate delay between two monsters.
+	  int delayOffset=game.wave*3;
+	  if (delayOffset>90) delayOffset=90;
+	  delay+=100-delayOffset;
+
+	  // Each wave a new monster is introduced.
+	  int type = (int) (rand() % game.wave)+1;
+	  switch (type)
 	  {
 	     case 1 : monsters[i]->setImage(images.monster1);
 				  break;
@@ -671,37 +757,37 @@ void initMonsters(void)
 				  break;
 
 		 case 10: monsters[i]->setImage(images.monster10);
-				 break;
+				  break;
 
 		 case 11: monsters[i]->setImage(images.monster11);
-				 break;
+				  break;
 
 		 case 12: monsters[i]->setImage(images.monster12);
-				 break;
+				  break;
 
 		 case 13: monsters[i]->setImage(images.monster13);
-				 break;
+				  break;
 
 		 case 14: monsters[i]->setImage(images.monster14);
-				 break;
+				  break;
 
 		 case 15: monsters[i]->setImage(images.monster15);
-				 break;
+				  break;
 
 		 case 16: monsters[i]->setImage(images.monster16);
-				 break;
+				  break;
 				 
 		 case 17: monsters[i]->setImage(images.monster17);
-				 break;
+				  break;
 				 
 		 case 18: monsters[i]->setImage(images.monster18);
-				 break;
+				  break;
 
 		 case 19: monsters[i]->setImage(images.monster19);
-				 break;
+				  break;
 				 
 		 case 20: monsters[i]->setImage(images.monster20);
-				 break;
+				  break;
 				 
 		 case 21: monsters[i]->setImage(images.monster21);
 				 break;
@@ -715,14 +801,9 @@ void initMonsters(void)
 		 case 24: monsters[i]->setImage(images.monster24);
 				 break;
 				 
-		 case 25: monsters[i]->setImage(images.monster25);
+		 default: monsters[i]->setImage(images.monster25);
 				 break;
-	  }
-	  	 
-	  //int step = (int) (rand() % 3)+1;
- 	  
-	  // Wait +/- two seconds before new monster is lanched.
-	  delay+=100;
+	  }  
    }
    trace->event(s_fn,0,"leave [void]");
 }
@@ -743,8 +824,7 @@ void initPointers(void)
 		pointers[i]=NULL;
 	  }
    }
-   
-   
+      
    pointers[0] = new Pointer();   
    pointers[0]->setIndex(0);
    pointers[0]->setX(320);
@@ -811,19 +891,19 @@ void initGrid(int level)
 
 void initButtons(void)
 {
-   const char *s_fn="initButtons";
-   trace->event(s_fn,0,"enter");
+	const char *s_fn="initButtons";
+	trace->event(s_fn,0,"enter");
 
-   // First clear array
-   for( int i=0; i<MAX_BUTTONS; i++)
-   {
-      if (buttons[i]!=NULL)
-	  {
-	    trace->event(s_fn,0,"delete button %d",i);
-		delete buttons[i];
-		buttons[i]=NULL;
-	  }
-   }
+	// First clear array
+	for( int i=0; i<MAX_BUTTONS; i++)
+	{
+		if (buttons[i]!=NULL)
+		{
+			trace->event(s_fn,0,"delete button %d",i);
+			delete buttons[i];
+			buttons[i]=NULL;
+		}
+	}
    
 	switch( game.stateMachine )	
 	{			
@@ -943,43 +1023,43 @@ void initButtons(void)
 	    {
 			// Power Upgrade Button
 			buttons[0]=new Button();
-			buttons[0]->setX(20);
-			buttons[0]->setY(250);
+			buttons[0]->setX(25);
+			buttons[0]->setY(200);
 			buttons[0]->setImageNormal(images.button1);
 			buttons[0]->setImageFocus(images.buttonFocus1);
 			buttons[0]->setLabel("");
 			
 			// Range Upgrade Button
 			buttons[1]=new Button();
-			buttons[1]->setX(20);
-			buttons[1]->setY(300);
+			buttons[1]->setX(25);
+			buttons[1]->setY(270);
 			buttons[1]->setImageNormal(images.button1);
 			buttons[1]->setImageFocus(images.buttonFocus1);
 			buttons[1]->setLabel("");
 
 			// Rate Upgrade Button
 			buttons[2]=new Button();
-			buttons[2]->setX(20);
-			buttons[2]->setY(350);
+			buttons[2]->setX(25);
+			buttons[2]->setY(340);
 			buttons[2]->setImageNormal(images.button1);
 			buttons[2]->setImageFocus(images.buttonFocus1);
 			buttons[2]->setLabel("");
 			
 			// Select previous weapon Button
-			buttons[3]=new Button();
-			buttons[3]->setX(25);
-			buttons[3]->setY(400);
-			buttons[3]->setImageNormal(images.button4);
-			buttons[3]->setImageFocus(images.buttonFocus4);
-			buttons[3]->setLabel("");
+			//buttons[3]=new Button();
+			//buttons[3]->setX(25);
+			//buttons[3]->setY(400);
+			//buttons[3]->setImageNormal(images.button4);
+			//buttons[3]->setImageFocus(images.buttonFocus4);
+			//buttons[3]->setLabel("");
 
 			// Select next weapon Button
-			buttons[4]=new Button();
-			buttons[4]->setX(55);
-			buttons[4]->setY(400);
-			buttons[4]->setImageNormal(images.button4);
-			buttons[4]->setImageFocus(images.buttonFocus4);
-			buttons[4]->setLabel("");
+			//buttons[4]=new Button();
+			//buttons[4]->setX(55);
+			//buttons[4]->setY(400);
+			//buttons[4]->setImageNormal(images.button4);
+			//buttons[4]->setImageFocus(images.buttonFocus4);
+			//buttons[4]->setLabel("");
 		}
 		break;
 		
@@ -1212,7 +1292,6 @@ void drawMonsters(void)
    {
 	  if (monsters[i]!=NULL)
 	  {
-		monsters[i]->move();
 		monsters[i]->draw();
 	  }
    }
@@ -1240,13 +1319,10 @@ void drawWeapons(void)
 	{
 		if (weapons[i]!=NULL)
 		{
-			//weapons[i]->move();
 			weapons[i]->draw();
-			weapons[i]->fire(monsters);
 		}
 	}
 }
-
 
 // Draw weapons Text on screen
 void drawWeaponsText(void)
@@ -1368,8 +1444,10 @@ void drawText(int x, int y, int type, const char *text)
 // Draw Game panel on screen
 void drawGamePanel(void)
 {
+	int  xoffset=20;
+
 	// Draw background
-	GRRLIB_DrawImg(0,0, images.panel1, 0, 1, 1, IMAGE_COLOR3 );
+	GRRLIB_DrawImg(xoffset,0, images.panel1, 0, 1, 1, IMAGE_COLOR3 );
 }
 	
 	
@@ -1378,51 +1456,46 @@ void drawGamePanelText(void)
 {
 	char tmp[MAX_LEN];
 	int  ypos=YOFFSET;
+	int  xoffset=20;
 	
-	GRRLIB_Printf2(20, ypos, "GENERAL", 18, GRRLIB_WHITESMOKE);
-	
+	GRRLIB_Printf2(20+xoffset, ypos,"SCORE", 18, GRRLIB_BLACK);	
+	ypos+=20;	
+	sprintf(tmp,"%06d", game.score); 
+	GRRLIB_Printf2(20+xoffset, ypos, tmp, 16, GRRLIB_BLACK);
+
 	ypos+=30;
-	sprintf(tmp,"SCORE %d", game.score); 
-	GRRLIB_Printf2(20, ypos, tmp, 14, GRRLIB_WHITESMOKE);
+	GRRLIB_Printf2(25+xoffset, ypos,"CASH", 18, GRRLIB_BLACK);	
+	ypos+=20;
+	sprintf(tmp,"$%04d", game.cash);
+	GRRLIB_Printf2(25+xoffset, ypos, tmp, 16, GRRLIB_BLACK);
 
-	ypos+=15;
-	sprintf(tmp,"CASH  $%d", game.cash); 
-	GRRLIB_Printf2(20, ypos, tmp, 14, GRRLIB_WHITESMOKE);
+	ypos+=30;	
+	GRRLIB_Printf2(25+xoffset, ypos,"WAVE", 18, GRRLIB_BLACK);	
+	ypos+=20;
+	sprintf(tmp,"%02d", game.wave); 
+	GRRLIB_Printf2(40+xoffset, ypos, tmp, 16, GRRLIB_BLACK);
 
-	ypos+=15;	
-	sprintf(tmp,"WAVE  %d", game.wave); 
-	GRRLIB_Printf2(20, ypos, tmp, 14, GRRLIB_WHITESMOKE);
+	ypos+=25;
+	GRRLIB_Printf2(20+xoffset, ypos, "POWER", 18, GRRLIB_BLACK);	
 
-	ypos+=40;
-	//GRRLIB_Printf2(20, ypos, "UPGRADE", 18, GRRLIB_WHITESMOKE);
+	ypos+=70;
+	GRRLIB_Printf2(20+xoffset, ypos, "RANGE", 18, GRRLIB_BLACK);
 
-	ypos+=40;
-	//GRRLIB_Printf2(20, ypos, "POWER", 16, GRRLIB_WHITESMOKE);	
-
-	ypos+=40;
-	//GRRLIB_Printf2(20, ypos, "RANGE", 16, GRRLIB_WHITESMOKE);
-
-	ypos+=40;
-	//GRRLIB_Printf2(20, ypos, "RATE", 16, GRRLIB_WHITESMOKE);
-	
+	ypos+=70;
+	GRRLIB_Printf2(25+xoffset, ypos, "RATE", 18, GRRLIB_BLACK);
+		
 	if (weapons[game.weaponSelect]!=NULL)
 	{
-		ypos-=180;
 		sprintf(tmp,"$%d", weapons[game.weaponSelect]->getPowerPrice() );
 		buttons[0]->setLabel(tmp);
 		
-		ypos+=80;
 		sprintf(tmp,"$%d", weapons[game.weaponSelect]->getRangePrice() );
 		buttons[1]->setLabel(tmp);
 		
-		ypos+=80;
 		sprintf(tmp,"$%d", weapons[game.weaponSelect]->getRatePrice() );
 		buttons[2]->setLabel(tmp);
 	}
-
-	ypos+=40;
-	//GRRLIB_Printf2(20, ypos, "BUILD", 20, GRRLIB_WHITESMOKE);
-		  
+	  
 	sprintf(tmp,"%d fps", CalculateFrameRate()); 
 	drawText(20, 500, fontSpecial, tmp);
 }
@@ -1445,11 +1518,14 @@ void drawScreen(void)
 		  
 		  sprintf(tmp,"%s v%s", PROGRAM_NAME, PROGRAM_VERSION); 
 		  drawText(20, ypos, fontParagraph,  tmp );
+		  ypos+=20;
+		  sprintf(tmp,"%s", RELEASE_DATE); 
+		  drawText(20, ypos, fontParagraph,  tmp );
 		  ypos+=40;
 		  drawText(20, ypos, fontNormal,  "Created by wplaat"  );
 		  ypos+=20;
 		  drawText(20, ypos, fontNormal,  "http://www.plaatsoft.nl"  );
-		  ypos+=370;
+		  ypos+=350;
 		  drawText(40, ypos, fontNormal,  "This software is open source and may be copied, distributed or modified"  );
 		  ypos+=20;
 		  drawText(60, ypos, fontNormal,  "under the terms of the GNU General Public License (GPL) version 2" );
@@ -1594,12 +1670,17 @@ void drawScreen(void)
 	
 		case stateGame:
 		{		  
+		  moveMonsters();
+		  moveWeapons();
+		  
 		  drawGrid();		  
 		  drawMonsters();
 		  drawWeapons();
 		  drawGamePanel();		  
 		  drawButtons();
+		  
 		  checkGameOver();
+		  checkNextWave();
 		  
 		  // Init text layer	  
           GRRLIB_initTexture();
@@ -1621,7 +1702,7 @@ void drawScreen(void)
 		  drawMonsters();
 		  drawWeapons();
 		  drawGamePanel();
-		 
+			 
 		  // Init text layer	  
           GRRLIB_initTexture();
  
@@ -1629,11 +1710,10 @@ void drawScreen(void)
  		  drawMonstersText();
 		  drawWeaponsText();
 		  drawGamePanelText();
-		  drawButtonsText();
-		  
+			  
 		  ypos+=225;	
 		  
-		  GRRLIB_Printf2(200, ypos, "GAME OVER", 30, GRRLIB_BLACK);
+		  GRRLIB_Printf2(200, ypos, "GAME OVER", 60, GRRLIB_BLACK);
 		 
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -1690,7 +1770,7 @@ void drawScreen(void)
 		  // Draw Button Text labels
 		  drawButtonsText();
 		  
-
+		  // Show FPS information
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
 		  drawText(20, 500, fontSpecial, tmp);
 		  
@@ -1971,9 +2051,9 @@ void drawScreen(void)
 		  GRRLIB_Rectangle(60, ypos, 100, 100, GRRLIB_BLACK, 1); 
 		  GRRLIB_Rectangle(240, ypos, 100, 100, GRRLIB_BLACK, 1);
 		  GRRLIB_Rectangle(420, ypos, 100, 100, GRRLIB_BLACK, 1);
-      	  ypos+=10;
-		  
-		  // Draw text  
+      	  
+		  ypos+=50;		  
+		  // Draw initial characters
 		  sprintf(tmp, "%c", settings->getFirstChar());
 		  drawText(110, ypos, fontTitle, tmp);
 		  sprintf(tmp, "%c", settings->getSecondChar());
@@ -2001,6 +2081,41 @@ void drawScreen(void)
 // SUPPORT METHODES
 // -----------------------------------
 
+// Move monsters on screen
+void moveMonsters(void)
+{
+   int i;
+   for( i=0; i<MAX_MONSTERS; i++ ) 
+   {
+	  if (monsters[i]!=NULL)
+	  {		
+		if (monsters[i]->move())
+		{
+			// Monster has reach the final destination. Destroy it!
+			game.monsterInBase++;
+			
+			delete monsters[i];
+			monsters[i]=NULL;
+		}
+	  }
+   }
+}
+
+// Move weapons on screen
+void moveWeapons(void)
+{
+	int i;
+   
+	for( i=0; i<MAX_WEAPONS; i++ ) 
+	{
+		if (weapons[i]!=NULL)
+		{
+			//weapons[i]->move();
+			weapons[i]->fire(monsters);
+		}
+	}
+}
+
 void checkGameOver(void)
 {
    if (game.monsterInBase>=10)
@@ -2015,6 +2130,20 @@ void checkGameOver(void)
 		highScore->setScore(tmp, game.wave, game.score);
 		highScore->save(HIGHSCORE_FILENAME);
    }
+}
+
+void checkNextWave(void)
+{	
+	for (int i=0;i<MAX_MONSTERS;i++)
+	{
+		if (monsters[i]!=NULL)
+		{
+			return;
+		}
+	}
+		
+	game.wave++;
+	initMonsters();
 }
 
 void destroyImages(void)
@@ -2079,7 +2208,12 @@ void destroyImages(void)
    
    GRRLIB_FreeTexture(images.weapon1);
    GRRLIB_FreeTexture(images.weapon2);
-	
+   GRRLIB_FreeTexture(images.weapon3);
+   GRRLIB_FreeTexture(images.weapon4);
+   GRRLIB_FreeTexture(images.weapon5);
+   GRRLIB_FreeTexture(images.weapon6);
+   GRRLIB_FreeTexture(images.weapon7);
+   	
    GRRLIB_FreeTexture(images.button2);
    GRRLIB_FreeTexture(images.buttonFocus2);
    GRRLIB_FreeTexture(images.button3);
@@ -2226,7 +2360,7 @@ void processStateMachine()
 		game.wave=1;
 		game.monsterInBase=0;
 		game.weaponSelect=0;
-		
+			
 		// Init buttons
 		initButtons();	
 		

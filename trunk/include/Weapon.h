@@ -27,7 +27,6 @@
 #include "Trace.h"  
 #include "Pointer.h" 
 
-
 class Weapon
 {
   private:
@@ -42,7 +41,7 @@ class Weapon
 	int width;
 	int delay;
 	
-	boolean selected;
+	bool selected;
 	
 	int rate;
 	int range;
@@ -63,17 +62,16 @@ class Weapon
 	void fire(Monster *monsters[MAX_MONSTERS]);
 	void move(void);
 	int  upgrade(int type);
-	bool onSelect(int x1, int y1);
+	bool onSelect(int x, int y);
 	
 	// Setters
 	void setX(int x);
 	void setY(int y);
 	void setImage(GRRLIB_texImg *image);
-
+	void setSelected(int selected);
 	void setPower(int power);	
 	void setRange(int range);
 	void setRate(int rate);
-	
 	void setPowerPrice(int price);
     void setRangePrice(int price);
     void setRatePrice(int price);
