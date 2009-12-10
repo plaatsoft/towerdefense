@@ -69,9 +69,6 @@ class Monster
 	// Monster is visible on grid
 	boolean visible;
 	
-	// Monster is dead
-	boolean dead;
-	
   public:
 	// Constructor & Destructor
   	Monster();
@@ -87,7 +84,7 @@ class Monster
 	void setStep(int step);
 	void setStartDelay(int delay);
 	void setEnergy(int energy);
-	void setHit(int hit);
+	bool setHit(int hit);
 	
 	// Getters
 	int getX(void);
@@ -95,7 +92,6 @@ class Monster
 	int getAlfa(void);
 	float getSize(void);
 	int getStep(void);
-	bool getDead(void);
 };
 
 #endif

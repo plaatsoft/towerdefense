@@ -65,7 +65,7 @@ Button::~Button()
 
 void Button::draw()
 {
-	boolean focus=false;
+	focus=false;
 	for (int i=0; i<MAX_POINTERS; i++)
 	{
 		if (pointers[i]!=NULL)
@@ -86,23 +86,23 @@ void Button::draw()
 	if (focus)
 	{
 		GRRLIB_DrawImg( x, y, imageFocus, 0, 1, 1, IMAGE_COLOR );	
-			
-		// Draw Button label
-		if (strlen(label)>0)
-		{		
-			GRRLIB_Printf2(x+35, y+3, label, 16, GRRLIB_BLUE); 
-		}	
 		//pointers[i].setRumble(MAX_RUMBLE);
 	}
 	else
 	{
 		GRRLIB_DrawImg( x, y, imageNormal, 0, 1, 1, IMAGE_COLOR );	
+	}
+}
 
-		// Draw Button label
-		if (strlen(label)>0)
-		{	
-			GRRLIB_Printf2(x+35, y+3, label, 16, GRRLIB_WHITESMOKE); 	
-		}
+void Button::text()
+{	
+	if (focus)
+	{
+		GRRLIB_Printf2(x+35, y+3, label, 16, GRRLIB_BLUE); 
+	}
+	else
+	{
+		GRRLIB_Printf2(x+35, y+3, label, 16, GRRLIB_WHITESMOKE); 	
 	}
 }
 
