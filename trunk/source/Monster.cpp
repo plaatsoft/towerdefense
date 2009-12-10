@@ -63,7 +63,6 @@ Monster::Monster()
    pos=0;
    
    visible=false;
-   dead=false;
    
    trace->event(s_fn,0,"leave");
 }
@@ -99,28 +98,12 @@ void Monster::text(void)
 	
 	if (!visible) return;
 		
-	if (!dead)
-	{  
-	   sprintf(tmp, "%d", energy);
-	   GRRLIB_Printf2(x+8, y-14, tmp, 12, GRRLIB_BLACK); 
-	}
+	sprintf(tmp, "%d", energy);
+	GRRLIB_Printf2(x+8, y-14, tmp, 12, GRRLIB_BLACK); 
 }
 
 void Monster::move(void)
 {  
-	if (dead)
-	{
-		if (size>0)
-		{
-			size-=0.01;
-	    }
-		else
-		{
-			visible=false;
-		}
-	    return;
-	}
-	
 	if (startDelay>0)
 	{
 		startDelay--;
@@ -128,7 +111,6 @@ void Monster::move(void)
 		{
 			// First movement on screen. Make monster visible!
 			visible=true;
-			dead=false;
 		}
 		return;
 	}
@@ -213,13 +195,17 @@ void Monster::setEnergy(int energy1)
 	energy=energy1;
 }
 
-void Monster::setHit(int hit)
+bool Monster::setHit(int hit)
 {
+	bool dead=false;
+	
 	energy-=hit;
 	if (energy<=0) 
 	{
 		dead=true;
 	}
+	
+	return dead;
 }
 
 // ------------------------------
@@ -244,11 +230,6 @@ int Monster::getAlfa(void)
 int Monster::getStep(void)
 {
    return step;
-}
-
-bool Monster::getDead(void)
-{
-	return dead;
 }
 
 // ------------------------------

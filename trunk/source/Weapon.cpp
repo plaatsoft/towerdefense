@@ -115,20 +115,20 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 		{			
 			if (monsters[i]!=NULL)
 			{
-				if ( !monsters[i]->getDead() )
-				{
-					float distance= 
-						sqrt( ( (monsters[i]->getX()-x) * (monsters[i]->getX()-x) ) + 
-				 	  	  ( (monsters[i]->getY()-y) * (monsters[i]->getY()-y) ) );
+				float distance= 
+					sqrt( ( (monsters[i]->getX()-x) * (monsters[i]->getX()-x) ) + 
+						  ( (monsters[i]->getY()-y) * (monsters[i]->getY()-y) ) );
 						  				
-					if (distance<range)
+				if (distance<range)
+				{
+					game.score+=power;
+					game.cash+=power;
+					if (monsters[i]->setHit(power))
 					{
-						game.score+=power;
-						game.cash+=power;
-						monsters[i]->setHit(power);
-						delay=rate;
-						break;
+						delete monsters[i];
 					}
+					delay=rate;
+					break;
 				}
 			}
 		}
@@ -150,7 +150,7 @@ int Weapon::upgrade(int type)
 	switch (type)
 	{
 		// Power upgrade
-		case 0:	if (game.cash>powerPrice)
+		case 0:	if (game.cash>=powerPrice)
 				{
 					power+=1;
 					trace->event(s_fn,0,"Upgrade power to %d",power);
@@ -160,7 +160,7 @@ int Weapon::upgrade(int type)
 				break;
 
 		// Range upgrade
-		case 1:	if (game.cash>rangePrice)
+		case 1:	if (game.cash>=rangePrice)
 				{
 					range+=50;
 					trace->event(s_fn,0,"Upgrade range to %d",range);
@@ -170,7 +170,7 @@ int Weapon::upgrade(int type)
 				break;
 
 		// Rate upgrade		
-		case 2:	if (game.cash>ratePrice)
+		case 2:	if (game.cash>=ratePrice)
 				{
 					rate-=10;
 					trace->event(s_fn,0,"Upgrade rate to %d",rate);

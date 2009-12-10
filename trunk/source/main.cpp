@@ -189,6 +189,11 @@ typedef struct
   GRRLIB_texImg *pointer2;
   GRRLIB_texImg *pointer3; 
   GRRLIB_texImg *pointer4;
+  
+  GRRLIB_texImg *map1;
+  GRRLIB_texImg *map2;
+  GRRLIB_texImg *map3;
+  
 } 
 image;
 
@@ -438,6 +443,18 @@ extern int      pic606length;
 extern const unsigned char     pic607data[];
 extern int      pic607length;
 
+// Map1 Sample Image
+extern const unsigned char     pic700data[];
+extern int      pic700length;
+
+// Map2 Sample Image
+extern const unsigned char     pic701data[];
+extern int      pic701length;
+
+// Map3 Sample Image
+extern const unsigned char     pic702data[];
+extern int      pic702length;
+
 
 u32         *frameBuffer[1] 	= {NULL};
 GXRModeObj  *rmode 				= NULL;
@@ -535,6 +552,10 @@ void initImages(void)
    images.buttonFocus3=GRRLIB_LoadTexture( pic605data );  
    images.button4=GRRLIB_LoadTexture( pic606data );
    images.buttonFocus4=GRRLIB_LoadTexture( pic607data );  
+   
+   images.map1=GRRLIB_LoadTexture( pic700data );  
+   images.map2=GRRLIB_LoadTexture( pic701data );  
+   images.map3=GRRLIB_LoadTexture( pic702data );  
    
    trace->event(s_fn,0,"leave [void]");
 }
@@ -891,7 +912,7 @@ void initButtons(void)
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Map1");
-				
+						
 			// Button (Play Map2)
 			buttons[1]=new Button();
 			buttons[1]->setX(225);
@@ -1027,7 +1048,7 @@ void initButtons(void)
 			// First letter + button 
 			buttons[0]=new Button();
 			buttons[0]->setX(100);
-			buttons[0]->setY(130);
+			buttons[0]->setY(150);
 			buttons[0]->setImageNormal(images.button1);
 			buttons[0]->setImageFocus(images.buttonFocus1);
 			buttons[0]->setLabel("+");	
@@ -1043,7 +1064,7 @@ void initButtons(void)
 			// Second letter + button 
 			buttons[2]=new Button();
 			buttons[2]->setX(280);
-			buttons[2]->setY(130);
+			buttons[2]->setY(150);
 			buttons[2]->setImageNormal(images.button1);
 			buttons[2]->setImageFocus(images.buttonFocus1);
 			buttons[2]->setLabel("+");	
@@ -1059,7 +1080,7 @@ void initButtons(void)
 			// Third letter + button 
 			buttons[4]=new Button();
 			buttons[4]->setX(460);
-			buttons[4]->setY(130);
+			buttons[4]->setY(150);
 			buttons[4]->setImageNormal(images.button1);
 			buttons[4]->setImageFocus(images.buttonFocus1);
 			buttons[4]->setLabel("+");	
@@ -1159,8 +1180,14 @@ void initGame(void)
 // Draw grid on screen
 void drawGrid(void)
 {
-   grid->draw();
-   grid->text();
+   grid->draw();   
+}
+
+
+// Draw grid on screen
+void drawGridText(void)
+{
+   grid->text();   
 }
 
 // Draw pointers on screen
@@ -1187,6 +1214,18 @@ void drawMonsters(void)
 	  {
 		monsters[i]->move();
 		monsters[i]->draw();
+	  }
+   }
+}
+
+// Draw monsters Text on screen
+void drawMonstersText(void)
+{
+   int i;
+   for( i=0; i<MAX_MONSTERS; i++ ) 
+   {
+	  if (monsters[i]!=NULL)
+	  {
 		monsters[i]->text();
 	  }
    }
@@ -1201,10 +1240,24 @@ void drawWeapons(void)
 	{
 		if (weapons[i]!=NULL)
 		{
-			weapons[i]->move();
+			//weapons[i]->move();
 			weapons[i]->draw();
-			weapons[i]->text();
 			weapons[i]->fire(monsters);
+		}
+	}
+}
+
+
+// Draw weapons Text on screen
+void drawWeaponsText(void)
+{
+	int i;
+   
+	for( i=0; i<MAX_WEAPONS; i++ ) 
+	{
+		if (weapons[i]!=NULL)
+		{
+			weapons[i]->text();
 		}
 	}
 }
@@ -1222,6 +1275,18 @@ void drawButtons(void)
 	}
 }
 
+// Draw buttons Text on screen
+void drawButtonsText(void)
+{
+	int i;
+	for( i=0; i<MAX_BUTTONS; i++ ) 
+	{
+		if (buttons[i]!=NULL)
+		{
+			buttons[i]->text();
+		}
+	}
+}
 
 // Draw text on screen
 void drawText(int x, int y, int type, const char *text)
@@ -1303,61 +1368,63 @@ void drawText(int x, int y, int type, const char *text)
 // Draw Game panel on screen
 void drawGamePanel(void)
 {
+	// Draw background
+	GRRLIB_DrawImg(0,0, images.panel1, 0, 1, 1, IMAGE_COLOR3 );
+}
+	
+	
+// Draw Game panel Text on screen
+void drawGamePanelText(void)
+{
 	char tmp[MAX_LEN];
 	int  ypos=YOFFSET;
 	
-	//GRRLIB_Rectangle(0, 0, 100, 520, GRRLIB_BLACK, 1); 
-  
-	// Draw background
-	GRRLIB_DrawImg(0,0, images.panel1, 0, 1, 1, IMAGE_COLOR3 );
-		  
-	ypos+=20;
 	GRRLIB_Printf2(20, ypos, "GENERAL", 18, GRRLIB_WHITESMOKE);
 	
-	ypos+=40;
-	sprintf(tmp,"Score %d", game.score); 
+	ypos+=30;
+	sprintf(tmp,"SCORE %d", game.score); 
 	GRRLIB_Printf2(20, ypos, tmp, 14, GRRLIB_WHITESMOKE);
 
-	ypos+=20;
-	sprintf(tmp,"Cash $ %d", game.cash); 
+	ypos+=15;
+	sprintf(tmp,"CASH  $%d", game.cash); 
 	GRRLIB_Printf2(20, ypos, tmp, 14, GRRLIB_WHITESMOKE);
 
-	ypos+=20;	
-	sprintf(tmp,"Wave %d", game.wave); 
+	ypos+=15;	
+	sprintf(tmp,"WAVE  %d", game.wave); 
 	GRRLIB_Printf2(20, ypos, tmp, 14, GRRLIB_WHITESMOKE);
 
 	ypos+=40;
-	GRRLIB_Printf2(20, ypos, "UPGRADE", 18, GRRLIB_WHITESMOKE);
+	//GRRLIB_Printf2(20, ypos, "UPGRADE", 18, GRRLIB_WHITESMOKE);
 
 	ypos+=40;
-	GRRLIB_Printf2(20, ypos, "POWER", 16, GRRLIB_WHITESMOKE);	
+	//GRRLIB_Printf2(20, ypos, "POWER", 16, GRRLIB_WHITESMOKE);	
 
 	ypos+=40;
-	GRRLIB_Printf2(20, ypos, "RANGE", 16, GRRLIB_WHITESMOKE);
+	//GRRLIB_Printf2(20, ypos, "RANGE", 16, GRRLIB_WHITESMOKE);
 
 	ypos+=40;
-	GRRLIB_Printf2(20, ypos, "RATE", 16, GRRLIB_WHITESMOKE);
+	//GRRLIB_Printf2(20, ypos, "RATE", 16, GRRLIB_WHITESMOKE);
 	
 	if (weapons[game.weaponSelect]!=NULL)
 	{
 		ypos-=180;
-		sprintf(tmp,"$ %d", weapons[game.weaponSelect]->getPowerPrice() );
+		sprintf(tmp,"$%d", weapons[game.weaponSelect]->getPowerPrice() );
 		buttons[0]->setLabel(tmp);
 		
 		ypos+=80;
-		sprintf(tmp,"$ %d", weapons[game.weaponSelect]->getRangePrice() );
+		sprintf(tmp,"$%d", weapons[game.weaponSelect]->getRangePrice() );
 		buttons[1]->setLabel(tmp);
 		
 		ypos+=80;
-		sprintf(tmp,"$ %d", weapons[game.weaponSelect]->getRatePrice() );
+		sprintf(tmp,"$%d", weapons[game.weaponSelect]->getRatePrice() );
 		buttons[2]->setLabel(tmp);
 	}
 
 	ypos+=40;
-	GRRLIB_Printf2(20, ypos, "BUILD", 20, GRRLIB_WHITESMOKE);
+	//GRRLIB_Printf2(20, ypos, "BUILD", 20, GRRLIB_WHITESMOKE);
 		  
 	sprintf(tmp,"%d fps", CalculateFrameRate()); 
-	GRRLIB_Printf2(20, 500, tmp, 14, GRRLIB_WHITESMOKE);
+	drawText(20, 500, fontSpecial, tmp);
 }
 
 // draw screens
@@ -1388,7 +1455,7 @@ void drawScreen(void)
 		  drawText(60, ypos, fontNormal,  "under the terms of the GNU General Public License (GPL) version 2" );
 		  ypos+=30;
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
-		  drawText(20, ypos, fontSpecial, tmp);
+		  drawText(20, 500, fontSpecial, tmp);
 		  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -1420,7 +1487,7 @@ void drawScreen(void)
 		  drawText(0, ypos, fontParagraph,  "http://www.plaatsoft.nl" );
 			  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
-		  drawText(20, 480, fontSpecial, tmp);
+		  drawText(20, 500, fontSpecial, tmp);
 		  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -1446,7 +1513,7 @@ void drawScreen(void)
 		  drawText(400, ypos, fontNormal,  "by www.plaatsoft.nl"  );
 			 
 		  sprintf(tmp,"%d fps", CalculateFrameRate()); 
-		  drawText(590, 460, fontSpecial, tmp); 
+		  drawText(590, 500, fontSpecial, tmp); 
  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -1460,7 +1527,10 @@ void drawScreen(void)
 		  // Draw background
 		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 		  
-			 // Init text layer	  
+		  // Draw Buttons
+		  drawButtons();
+			
+		  // Init text layer	  
           GRRLIB_initTexture();
 	
 		  version=http->tcp_get_version();
@@ -1477,13 +1547,14 @@ void drawScreen(void)
 
 		  ypos=400;	 
 		  sprintf(tmp,"NETWORK THREAD: %s",http->tcp_get_state());
-		  drawText(20, ypos, fontSpecial, tmp);
+		  drawText(20, 480, fontSpecial, tmp);
 		  
 		  ypos+=20;	
 		  sprintf(tmp,"%d fps", CalculateFrameRate()); 
-		  drawText(20, ypos, fontSpecial, tmp); 
+		  drawText(20, 500, fontSpecial, tmp); 
 		   
-		  drawButtons();
+		  // Draw Button Text labels
+		  drawButtonsText();
 		  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -1494,36 +1565,50 @@ void drawScreen(void)
 		{
 		  // Draw background
 		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+		
+		  // Draw Buttons
+		  drawButtons();
 		  
-			 // Init text layer	  
+		  // Draw samples maps
+		  GRRLIB_DrawImg(40,200, images.map1, 0, 1, 1, IMAGE_COLOR );
+		  GRRLIB_DrawImg(230,200, images.map2, 0, 1, 1, IMAGE_COLOR );
+		  GRRLIB_DrawImg(440,200, images.map3, 0, 1, 1, IMAGE_COLOR );
+			  
+		  // Init text layer	  
           GRRLIB_initTexture();
 
 		  // Draw title
 	      drawText(120, ypos, fontTitle, "Choose Map");	
+
+		  // Draw Button Text labels
+		  drawButtonsText();
 		  
 		  ypos+=435;	
 		  sprintf(tmp,"%d fps", CalculateFrameRate()); 
-		  drawText(20, ypos, fontSpecial, tmp); 
-		   
-		  drawButtons();
-		  
+		  drawText(20, 500, fontSpecial, tmp); 
+	   		  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 	
 		case stateGame:
-		{
-		  // Init text layer	  
-          GRRLIB_initTexture();
-		  
-		  drawGrid();
+		{		  
+		  drawGrid();		  
 		  drawMonsters();
 		  drawWeapons();
 		  drawGamePanel();		  
 		  drawButtons();
-		  
 		  checkGameOver();
+		  
+		  // Init text layer	  
+          GRRLIB_initTexture();
+		  
+		  drawGridText();	
+		  drawMonstersText();
+		  drawWeaponsText();
+		  drawGamePanelText();
+		  drawButtonsText();
 		  
 		  // Draw text layer on top of background 
 		  GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -1531,20 +1616,24 @@ void drawScreen(void)
 		break;
 		
 		case stateGameOver:
-		{
-		  // Init text layer	  
-          GRRLIB_initTexture();
-		  
+		{	  
 		  drawGrid(); 
 		  drawMonsters();
 		  drawWeapons();
 		  drawGamePanel();
+		 
+		  // Init text layer	  
+          GRRLIB_initTexture();
+ 
+		  drawGridText();	
+ 		  drawMonstersText();
+		  drawWeaponsText();
+		  drawGamePanelText();
+		  drawButtonsText();
 		  
 		  ypos+=225;	
 		  
-		  if (game.size<MAX_SIZE) game.size+=0.1;
-				  
-		  GRRLIB_Printf2(100, 100, "GAME OVER", game.size, GRRLIB_WHITESMOKE);
+		  GRRLIB_Printf2(200, ypos, "GAME OVER", 30, GRRLIB_BLACK);
 		 
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -1554,13 +1643,16 @@ void drawScreen(void)
 		case stateLocalHighScore:
 	    {
 	      struct tm *local;
+		  	  				   
+          // Draw background
+          GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+		  
+		  // Draw buttons
+	      drawButtons(); 
 		  
 		  // Init text layer	  
           GRRLIB_initTexture();
-		  				   
-          // Draw background
-          GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
-		   
+ 
 	      // Draw title
 	      drawText(80, ypos, fontTitle, "Local High Score");	
 
@@ -1594,12 +1686,13 @@ void drawScreen(void)
 	          sprintf(tmp,"%02d", highScore->getWave(i));
 		      drawText(500, ypos, fontNormal, tmp);
 		  }	
-		
-          // Draw buttons
-	      drawButtons(); 
+		  
+		  // Draw Button Text labels
+		  drawButtonsText();
+		  
 
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
-		  drawText(20, 460, fontSpecial, tmp);
+		  drawText(20, 500, fontSpecial, tmp);
 		  
           // Draw text layer on top of gameboard 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);	 	   
@@ -1607,13 +1700,16 @@ void drawScreen(void)
 	    break;
 
 	    case stateHelp:
-	    {
-		  // Init text layer	  
-          GRRLIB_initTexture();
-		  
+	    {	  
 	      // Draw background
 		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+		 
+		  // Draw buttons
+	      drawButtons(); 
 		  
+		  // Init text layer	  
+          GRRLIB_initTexture();
+ 
 		   // Show title
 		  drawText(0, ypos, fontTitle, "Help");
           ypos+=100;
@@ -1632,13 +1728,13 @@ void drawScreen(void)
 		  ypos+=60;
 	      drawText(0, ypos, fontParagraph, "Note: The global highscore contains the Top 40 of best");
 		  ypos+=25;
-	      drawText(0, ypos, fontParagraph, "internet players. Only one entry per player is showed.");
-				  
-		  // Draw buttons
-	      drawButtons(); 
+	      drawText(0, ypos, fontParagraph, "internet players. Only one entry per player is showed.");	  
+
+		  // Draw Button Text labels
+		  drawButtonsText();
 		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
-		  drawText(20, 460, fontSpecial, tmp);
+		  drawText(20, 500, fontSpecial, tmp);
 		  
 		  // Draw text layer on top of gameboard 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -1646,12 +1742,15 @@ void drawScreen(void)
 	    break;
 
 	    case stateCredits:
-	    { 
-          // Init text layer	  
-          GRRLIB_initTexture();
- 
+	    {  
 	      // Draw background
 		  GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
+		  
+		  // Draw buttons
+	      drawButtons(); 
+		  
+		  // Init text layer	  
+          GRRLIB_initTexture();
 		  
 		  // Show title
 		  drawText(220, ypos, fontTitle, "Credits");
@@ -1689,12 +1788,12 @@ void drawScreen(void)
 												
 	      ypos+=30;
 	      drawText(0, ypos, fontNormal,"Greetings to everybody in the Wii homebrew scene");
-
-		  // Draw buttons
-	      drawButtons(); 
-
+		  
+		  // Draw Button Text labels
+		  drawButtonsText();
+		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
-		  drawText(20, 460, fontSpecial, tmp);
+		  drawText(20, 500, fontSpecial, tmp);
 		  
 		  // Draw text layer on top of gameboard 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -1702,13 +1801,17 @@ void drawScreen(void)
 	   break;
 	   	   
 	   case stateSoundSettings:
-	   {
-	      // Init text layer	  
-          GRRLIB_initTexture();
- 
+	   { 
 	      // Draw background
 		  GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
+		
+		  // Draw buttons
+	      drawButtons(); 
 		  
+		  
+	      // Init text layer	  
+          GRRLIB_initTexture();
+  
 	      // Draw Sound icon
 	      //GRRLIB_DrawImg((640/2)-128, ((480/2)-140)+yOffset, images.sound, angle, 1.4, 1.4, IMAGE_COLOR );
 	
@@ -1734,11 +1837,11 @@ void drawScreen(void)
 		  //sprintf(tmp,"  Music track [%d]", selectedMusic);
 	      //drawText(0, ypos, fontParagraph, tmp);	
 		  		  		
-		   // Draw buttons
-	      drawButtons(); 
+		  // Draw Button Text labels
+		  drawButtonsText();
 		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
-		  drawText(20, 460, fontSpecial, tmp);
+		  drawText(20, 500, fontSpecial, tmp);
 		  
 		  // Draw text layer on top of gameboard 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -1779,13 +1882,16 @@ void drawScreen(void)
 			 endEntry=startEntry+18;
 			 scrollEnabled=true;
 		  }
-		  
-	      // Init text layer	  
-          GRRLIB_initTexture();
- 
+		   
 	      // Draw background
 		  GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
 
+		  // Draw buttons
+	      drawButtons(); 
+		  
+	      // Init text layer	  
+          GRRLIB_initTexture();
+		  
           // Draw scrollbar
 		  if (scrollEnabled)
 		  {
@@ -1835,11 +1941,11 @@ void drawScreen(void)
 			 drawText(0, ypos, fontParagraph, "Information could not be fetch from internet.");
 		  }
 		  
-		  // Draw buttons
-	      drawButtons(); 
-
+		  // Draw Button Text labels
+		  drawButtonsText();
+		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
-		  drawText(20, 460, fontSpecial, tmp);
+		  drawText(20, 500, fontSpecial, tmp);
 		  
 		  // Draw text layer on top of gameboard 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -1848,12 +1954,15 @@ void drawScreen(void)
 
 	   case stateUserSettings:
 	   {         	
-	      // Init text layer	  
-          GRRLIB_initTexture();
-		   
 	      // Draw background
 		  GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
-      		
+      	
+		  // Draw buttons
+	      drawButtons(); 
+		  
+	      // Init text layer	  
+          GRRLIB_initTexture();
+	
 	      // Draw Title	
           drawText(150, ypos, fontTitle, "User Initials");
           ypos+=120;
@@ -1872,14 +1981,14 @@ void drawScreen(void)
 		  sprintf(tmp, "%c", settings->getThirdChar());
 		  drawText(480, ypos, fontTitle, tmp);
 
-		  ypos+=170;
+		  ypos+=200;
 	  	  drawText(0, ypos, fontParagraph, "This initials are used in the highscore area.");	
-	      
-		   // Draw buttons
-	      drawButtons(); 
+	     		  
+		  // Draw Button Text labels
+		  drawButtonsText();
 		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
-		  drawText(20, 460, fontSpecial, tmp);
+		  drawText(20, 500, fontSpecial, tmp);
 				  
           // Draw text layer on top of gameboard 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);	
@@ -1977,7 +2086,11 @@ void destroyImages(void)
    GRRLIB_FreeTexture(images.buttonFocus3);
    GRRLIB_FreeTexture(images.button4);
    GRRLIB_FreeTexture(images.buttonFocus4);
-	
+   
+   GRRLIB_FreeTexture(images.map1);
+   GRRLIB_FreeTexture(images.map2);
+   GRRLIB_FreeTexture(images.map3);
+   
    trace->event(s_fn,0,"leave");
 }
 
@@ -2110,7 +2223,7 @@ void processStateMachine()
 		// Init game variables
 		game.score=0;
 		game.cash=50;
-		game.wave=0;
+		game.wave=1;
 		game.monsterInBase=0;
 		game.weaponSelect=0;
 		

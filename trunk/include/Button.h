@@ -33,6 +33,7 @@ class Button
 	int height;
 	int width;
 	char label[100];
+	bool focus;
 	
   public:
 	// Constructor & Destructor
@@ -41,6 +42,7 @@ class Button
 
 	// Other
 	void draw();
+	void text();
 	bool onSelect(int pointerX, int pointerY);
 	
 	// Setters
