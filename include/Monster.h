@@ -77,14 +77,15 @@ class Monster
 	// Methodes
 	void draw(void);
 	void text(void);
-	void move(void);
+	bool move(void);
+	bool hit(int hit);
 	
 	// Setters
 	void setImage(GRRLIB_texImg *image);	
 	void setStep(int step);
 	void setStartDelay(int delay);
 	void setEnergy(int energy);
-	bool setHit(int hit);
+	
 	
 	// Getters
 	int getX(void);

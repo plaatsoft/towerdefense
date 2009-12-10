@@ -85,11 +85,11 @@ void Weapon::draw()
 {
 	if (selected)
 	{	
-		GRRLIB_Circle(x-16, y-16, range, GRRLIB_BLACK, 1);
+		GRRLIB_Circle(x+16, y+16, range, IMAGE_COLOR3, 1);
 	}
 	
 	// Draw Weapon on screen
-	GRRLIB_DrawImg( x-16, y-16, image, angle, 1, 1, IMAGE_COLOR );				
+	GRRLIB_DrawImg( x, y, image, angle, 1, 1, IMAGE_COLOR );				
 }
 
 void Weapon::text()
@@ -97,9 +97,9 @@ void Weapon::text()
 	char tmp[50];
 	int size=12;
 		
-	// Draw energy level on screen
-	sprintf(tmp, "%d", delay);
-	GRRLIB_Printf2(x-16, y-16, tmp, size, GRRLIB_BLACK); 		
+	// Draw fire delay counter on screen
+	sprintf(tmp, "%d", (delay/10));
+	GRRLIB_Printf2(x+6, y-16, tmp, size, GRRLIB_BLACK); 		
 }
 
 void Weapon::fire(Monster *monsters[MAX_MONSTERS])
@@ -123,9 +123,11 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 				{
 					game.score+=power;
 					game.cash+=power;
-					if (monsters[i]->setHit(power))
+					
+					if (monsters[i]->hit(power))
 					{
 						delete monsters[i];
+						monsters[i]=NULL;
 					}
 					delay=rate;
 					break;
@@ -140,7 +142,6 @@ void Weapon::move(void)
 	angle++;
 	if (angle>MAX_ANGLE) angle=0;
 }
-
 
 int Weapon::upgrade(int type)
 {
@@ -162,7 +163,7 @@ int Weapon::upgrade(int type)
 		// Range upgrade
 		case 1:	if (game.cash>=rangePrice)
 				{
-					range+=50;
+					range+=5;
 					trace->event(s_fn,0,"Upgrade range to %d",range);
 					game.cash-=rangePrice;
 					rangePrice=rangePrice*2;
@@ -172,7 +173,7 @@ int Weapon::upgrade(int type)
 		// Rate upgrade		
 		case 2:	if (game.cash>=ratePrice)
 				{
-					rate-=10;
+					rate-=5;
 					trace->event(s_fn,0,"Upgrade rate to %d",rate);
 					game.cash-=ratePrice;
 					ratePrice=ratePrice*2;
@@ -186,26 +187,18 @@ int Weapon::upgrade(int type)
 
 bool Weapon::onSelect(int x1, int y1)
 {
-   const char *s_fn="Weapon::onSelect";
-   trace->event(s_fn,0,"enter [x=%d|y=%d]",x1,y1);
-
-   boolean selected=false;
-   if ( (x1>=x) && (x1<=(x+width)) && (y1>=y) && (y1<=(y+height)) )
-   {      
-	 
-	  if (selected)
-	  {
-		 selected=false;	  
-		 trace->event(s_fn,0,"Weapon deselected");
-	  }
-	  else
-	  {
-	     selected=true;	
-		 trace->event(s_fn,0,"Weapon selected");
-	  }
-   }
-   trace->event(s_fn,0,"leave [%d]",selected);
-   return selected;
+	const char *s_fn="Weapon::onSelect";
+	trace->event(s_fn,0,"enter [x=%d|y=%d]",x1,y1);
+   
+    bool selected=false;
+	if ( (x1>=x) && (x1<=(x+width)) && (y1>=y) && (y1<=(y+height)) )
+	{      	 
+		selected=true;				
+		trace->event(s_fn,0,"Weapon selected");		
+	}
+		 
+	trace->event(s_fn,0,"leave [%d]",selected);
+	return selected;
 }
 
 // ------------------------------
@@ -295,6 +288,11 @@ void Weapon::setRangePrice(int price)
 void Weapon::setRatePrice(int price)
 {
 	ratePrice=price;
+}
+
+void Weapon::setSelected(int selected1)
+{
+	selected=selected1;
 }
 
 // ------------------------------

@@ -32,7 +32,6 @@
 // Variables
 // ------------------------------
 
-extern Game game;
 extern Trace *trace;
 extern Grid *grid;
 
@@ -86,9 +85,10 @@ Monster::~Monster()
 // Draw Monster on screen
 void Monster::draw(void)
 {
-	if (!visible) return;
-	
-	GRRLIB_DrawImg( x, y, image, 0, size, size, IMAGE_COLOR );	
+	if (visible) 	
+	{	
+		GRRLIB_DrawImg( x, y, image, 0, size, size, IMAGE_COLOR );	
+	}
 }
 
 // Draw Monster text on screen
@@ -96,13 +96,14 @@ void Monster::text(void)
 {
     char tmp[50];
 	
-	if (!visible) return;
-		
-	sprintf(tmp, "%d", energy);
-	GRRLIB_Printf2(x+8, y-14, tmp, 12, GRRLIB_BLACK); 
+	if (visible) 
+	{
+		sprintf(tmp, "%d", energy);
+		GRRLIB_Printf2(x+8, y-14, tmp, 12, GRRLIB_BLACK); 
+	}
 }
 
-void Monster::move(void)
+bool Monster::move(void)
 {  
 	if (startDelay>0)
 	{
@@ -112,10 +113,10 @@ void Monster::move(void)
 			// First movement on screen. Make monster visible!
 			visible=true;
 		}
-		return;
+		return false;
 	}
 
-	if ((x==targetX) && (y==targetY) && visible)
+	if ((x==targetX) && (y==targetY))
 	{
 		// Get new target postion 
 		targetX=grid->getLocationX(pos);
@@ -125,7 +126,7 @@ void Monster::move(void)
 		{
 			// Monster has reach the final destination. Disable it!
 			visible=false;
-			game.monsterInBase++;
+			return true;
 		}
 	}
 	else if (x<targetX)
@@ -144,6 +145,20 @@ void Monster::move(void)
 	{
 		y=y-step;	
 	}
+	return false;
+}
+
+bool Monster::hit(int hit)
+{
+	bool dead=false;
+	
+	energy-=hit;
+	if (energy<=0) 
+	{
+		dead=true;
+	}
+	
+	return dead;
 }
 
 // ------------------------------
@@ -193,19 +208,6 @@ void Monster::setStartDelay(int startDelay1)
 void Monster::setEnergy(int energy1)
 {
 	energy=energy1;
-}
-
-bool Monster::setHit(int hit)
-{
-	bool dead=false;
-	
-	energy-=hit;
-	if (energy<=0) 
-	{
-		dead=true;
-	}
-	
-	return dead;
 }
 
 // ------------------------------

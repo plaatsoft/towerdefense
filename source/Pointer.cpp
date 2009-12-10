@@ -347,7 +347,7 @@ void Pointer::buttonA(int x, int y)
 					break;
 				}
 				
-				if (buttons[3]->onSelect(x,y))
+				/*if (buttons[3]->onSelect(x,y))
 				{
 					// Select previous weapon	      		
 					break;
@@ -357,7 +357,7 @@ void Pointer::buttonA(int x, int y)
 				{
 					// Select next weapon	      		
 					break;
-				}
+				}*/
 			}
 		}
 		break;
@@ -479,12 +479,19 @@ void Pointer::buttonA(int x, int y)
 		{
 			if ((weapons[i]!=NULL) && (weapons[i]->onSelect(x,y)))
 			{
+				// Deselected all weapons
+				for (int j=0;j<MAX_WEAPONS; j++)
+				{
+					if (weapons[j]!=NULL) weapons[j]->setSelected(false);
+				}
+				
+				// Selected new weapons
 				game.weaponSelect=i;
+				weapons[i]->setSelected(true);
 				break;
 			}
 		}		
-	}
-	
+	}	
 	trace->event(s_fn,0,"leave");
 }
 
@@ -521,15 +528,22 @@ void Pointer::action(void)
 	// Scan for button events
 	if (wpaddown & WPAD_BUTTON_HOME) 
 	{
-	  if (game.stateMachine==stateMapSelectMenu)
-	  {
 		trace->event(s_fn,0,"Home button pressed");
-		game.stateMachine=stateQuit;
-	  }
-	  else
-	  {
-		game.stateMachine=stateMainMenu;
-	  }
+		if (game.stateMachine==stateMainMenu)
+		{			
+			game.stateMachine=stateQuit;
+		}
+		else
+		{
+			if (game.stateMachine==stateGame)
+			{
+				game.stateMachine=stateMapSelectMenu;
+			}
+			else
+			{
+				game.stateMachine=stateMainMenu;
+			}
+		}		
 	}
 	
 	 // Make screenshot 
