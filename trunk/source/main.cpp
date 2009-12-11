@@ -28,6 +28,7 @@
 **  - Added Release Notes screen.
 **
 **  TESTED:
+*   - Added wave lanch button on game board.
 **  - Added game information panel.
 **		- Added functionality to upgrade power, range and rate of weapon.
 **  - Added continues monster wave principle.
@@ -622,6 +623,7 @@ void initWeapons(void)
 	weapons[0]->setRangePrice(10);
 	weapons[0]->setRatePrice(10);
 	weapons[0]->setSelected(true);
+	weapons[0]->setIndex(0);
 		
 	weapons[1]= new Weapon();
 	weapons[1]->setImage(images.weapon2);
@@ -634,6 +636,7 @@ void initWeapons(void)
 	weapons[1]->setRangePrice(10);
 	weapons[1]->setRatePrice(10);
 	weapons[1]->setSelected(false);
+	weapons[1]->setIndex(1);
 	
 	weapons[2]= new Weapon();
 	weapons[2]->setImage(images.weapon3);
@@ -646,166 +649,232 @@ void initWeapons(void)
 	weapons[2]->setRangePrice(10);
 	weapons[2]->setRatePrice(10);
 	weapons[2]->setSelected(false);
+	weapons[2]->setIndex(2);
 	
-	//weapons[3]= new Weapon();
-	//weapons[3]->setImage(images.weapon4);
-	//weapons[3]->setX(200);
-	//weapons[3]->setY(400);
-	//weapons[3]->setPower(6);	
-	//weapons[3]->setRange(50);
-	//weapons[3]->setRate(150);
-	//weapons[3]->setPowerPrice(10);
-	//weapons[3]->setRangePrice(10);
-	//weapons[3]->setRatePrice(10);
-	//weapons[3]->setSelected(false);
+	weapons[3]= new Weapon();
+	weapons[3]->setImage(images.weapon4);
+	weapons[3]->setX(200);
+	weapons[3]->setY(400);
+	weapons[3]->setPower(6);	
+	weapons[3]->setRange(50);
+	weapons[3]->setRate(150);
+	weapons[3]->setPowerPrice(10);
+	weapons[3]->setRangePrice(10);
+	weapons[3]->setRatePrice(10);
+	weapons[3]->setSelected(false);
+	weapons[3]->setIndex(3);
 	
-	//weapons[4]= new Weapon();
-	//weapons[4]->setImage(images.weapon5);
-	//weapons[4]->setX(300);
-	//weapons[4]->setY(400);
-	//weapons[4]->setPower(6);	
-	//weapons[4]->setRange(50);
-	//weapons[4]->setRate(150);
-	//weapons[4]->setPowerPrice(10);
-	//weapons[4]->setRangePrice(10);
-	//weapons[4]->setRatePrice(10);
-	//weapons[4]->setSelected(false);
+	weapons[4]= new Weapon();
+	weapons[4]->setImage(images.weapon5);
+	weapons[4]->setX(300);
+	weapons[4]->setY(400);
+	weapons[4]->setPower(6);	
+	weapons[4]->setRange(50);
+	weapons[4]->setRate(150);
+	weapons[4]->setPowerPrice(10);
+	weapons[4]->setRangePrice(10);
+	weapons[4]->setRatePrice(10);
+	weapons[4]->setSelected(false);
+	weapons[4]->setIndex(4);
 	
-	//weapons[5]= new Weapon();
-	//weapons[5]->setImage(images.weapon7);
-	//weapons[5]->setX(400);
-	//weapons[5]->setY(400);
-	//weapons[5]->setPower(6);	
-	//weapons[5]->setRange(50);
-	//weapons[5]->setRate(150);
-	//weapons[5]->setPowerPrice(10);
-	//weapons[5]->setRangePrice(10);
-	//weapons[5]->setRatePrice(10);
-	//weapons[5]->setSelected(false);
+	weapons[5]= new Weapon();
+	weapons[5]->setImage(images.weapon7);
+	weapons[5]->setX(400);
+	weapons[5]->setY(400);
+	weapons[5]->setPower(6);	
+	weapons[5]->setRange(50);
+	weapons[5]->setRate(150);
+	weapons[5]->setPowerPrice(10);
+	weapons[5]->setRangePrice(10);
+	weapons[5]->setRatePrice(10);
+	weapons[5]->setSelected(false);
+	weapons[5]->setIndex(5);
 	
 	trace->event(s_fn,0,"leave [void]");
 }
 
 // Init monster
-void initMonsters()
+void initMonsters(bool clear)
 {
-   const char *s_fn="initMonsters";
-   trace->event(s_fn,0,"enter");
-
-   // First clear monster array
-   for( int i=0; i<MAX_MONSTERS; i++)
-   {
-      if (monsters[i]!=NULL)
-	  {
-	    trace->event(s_fn,0,"delete monster %d",i);
-		delete monsters[i];
-		monsters[i]=NULL;
-	  }
-   }   
+	const char *s_fn="initMonsters";
+	trace->event(s_fn,0,"enter");
    
-   int delay=1;   
+	int delay=1;   
    
-   // Calculate how much monster will be in the wave
-   int amount=7+(game.wave*3);
-   if (amount>MAX_MONSTERS) amount=MAX_MONSTERS;
+	if (clear)
+	{
+		trace->event(s_fn,0,"Clear monster array");
+	
+		// Clear monster array
+		for( int i=0; i<MAX_MONSTERS; i++)	
+		{
+			if (monsters[i]!=NULL)
+			{
+				delete monsters[i];
+				monsters[i]=NULL;
+			}
+		}
+	}
+	
+	// Calculate how much monster will be in the wave
+	int amount=3+(game.wave*2);
+	if (amount>MAX_MONSTERS) amount=MAX_MONSTERS;
    
-   for( int i=0; i<amount; i++ ) 
-   {
-   	  trace->event(s_fn,0,"Init monster [%d]",i);
+	for( int i=0; i<amount; i++ ) 
+	{		
+		trace->event(s_fn,0,"Init monster [%d]",i);
+	
+		// Find first empty place in monster array
+		int id=0;
+		while (monsters[id]!=NULL) 
+		{
+			if (++id>=(MAX_MONSTERS-1)) 
+			{
+				id=(MAX_MONSTERS-1);
+				break;
+			}
+		}
+		
+		monsters[id]=new Monster();	  		
+		monsters[id]->setIndex(id);
+		monsters[id]->setDelay(delay);
+			  	  
+		// Calculate delay between two monsters.
+		int delayOffset=game.wave*3;
+		if (delayOffset>90) delayOffset=90;
+		delay+=(100-delayOffset);
 
-	  monsters[i]=new Monster();	  
-	  monsters[i]->setStep(1);
-	  monsters[i]->setStartDelay(delay);
-	  
-	  // Each wave the monster get move energy.
-	  monsters[i]->setEnergy(game.wave*5);
-	  
-	  // Calculate delay between two monsters.
-	  int delayOffset=game.wave*3;
-	  if (delayOffset>90) delayOffset=90;
-	  delay+=100-delayOffset;
+		// Each wave a new monster is introduced.
+		int type = (int) (rand() % game.wave)+1;
+		switch (type)
+		{
+			case 1 : 	monsters[id]->setImage(images.monster1);
+						monsters[id]->setEnergy(5);
+						monsters[id]->setStep(1);
+						break;
+					
+			case 2 : 	monsters[id]->setImage(images.monster2);
+						monsters[id]->setEnergy(10);
+						monsters[id]->setStep(1);
+						break;
 
-	  // Each wave a new monster is introduced.
-	  int type = (int) (rand() % game.wave)+1;
-	  switch (type)
-	  {
-	     case 1 : monsters[i]->setImage(images.monster1);
-				  break;
+			case 3 : 	monsters[id]->setImage(images.monster3);
+						monsters[id]->setEnergy(15);
+						monsters[id]->setStep(1);
+						break;				 
+
+			case 4 : 	monsters[id]->setImage(images.monster4);
+						monsters[id]->setEnergy(20);
+						monsters[id]->setStep(1);
+						break;
 				 
-	     case 2 : monsters[i]->setImage(images.monster2);
-				  break;
+			case 5 : 	monsters[id]->setImage(images.monster5);
+						monsters[id]->setEnergy(25);
+						monsters[id]->setStep(1);						
+						break;
 
-	     case 3 : monsters[i]->setImage(images.monster3);
-				  break;				 
+			case 6 : 	monsters[id]->setImage(images.monster6);
+						monsters[id]->setEnergy(30);
+						monsters[id]->setStep(1);
+						break;
 
-	     case 4 : monsters[i]->setImage(images.monster4);
-				  break;
+			case 7 : 	monsters[id]->setImage(images.monster7);
+						monsters[id]->setEnergy(35);
+						monsters[id]->setStep(1);
+						break;
+			
+			case 8 : 	monsters[id]->setImage(images.monster8);
+						monsters[id]->setEnergy(40);
+						monsters[id]->setStep(1);
+						break;
+
+			case 9 : 	monsters[id]->setImage(images.monster9);
+						monsters[id]->setEnergy(45);
+						monsters[id]->setStep(1);
+						break;
+			
+			case 10: 	monsters[id]->setImage(images.monster10);
+						monsters[id]->setEnergy(50);
+						monsters[id]->setStep(1);
+						break;
+
+			case 11: 	monsters[id]->setImage(images.monster11);
+						monsters[id]->setEnergy(60);
+						monsters[id]->setStep(1);
+						break;
+	
+			case 12: 	monsters[id]->setImage(images.monster12);
+						monsters[id]->setEnergy(80);
+						monsters[id]->setStep(1);
+						break;
+
+			case 13: 	monsters[id]->setImage(images.monster13);
+						monsters[id]->setEnergy(100);
+						monsters[id]->setStep(1);
+						break;
+
+			case 14: 	monsters[id]->setImage(images.monster14);
+						monsters[id]->setEnergy(120);
+						monsters[id]->setStep(1);
+						break;
+
+			case 15: 	monsters[id]->setImage(images.monster15);
+						monsters[id]->setEnergy(140);
+						monsters[id]->setStep(1);
+						break;
+
+			case 16: 	monsters[id]->setImage(images.monster16);
+						monsters[id]->setEnergy(160);
+						monsters[id]->setStep(1);
+						break;
 				 
-		 case 5 : monsters[i]->setImage(images.monster5);
-				  break;
-
-		 case 6 : monsters[i]->setImage(images.monster6);
-				  break;
-
-		 case 7 : monsters[i]->setImage(images.monster7);
-				  break;
-
-		 case 8 : monsters[i]->setImage(images.monster8);
-				  break;
-
-		 case 9 : monsters[i]->setImage(images.monster9);
-				  break;
-
-		 case 10: monsters[i]->setImage(images.monster10);
-				  break;
-
-		 case 11: monsters[i]->setImage(images.monster11);
-				  break;
-
-		 case 12: monsters[i]->setImage(images.monster12);
-				  break;
-
-		 case 13: monsters[i]->setImage(images.monster13);
-				  break;
-
-		 case 14: monsters[i]->setImage(images.monster14);
-				  break;
-
-		 case 15: monsters[i]->setImage(images.monster15);
-				  break;
-
-		 case 16: monsters[i]->setImage(images.monster16);
-				  break;
+			case 17: 	monsters[id]->setImage(images.monster17);
+						monsters[id]->setEnergy(190);
+						monsters[id]->setStep(1);
+						break;
 				 
-		 case 17: monsters[i]->setImage(images.monster17);
-				  break;
-				 
-		 case 18: monsters[i]->setImage(images.monster18);
-				  break;
+			case 18: 	monsters[id]->setImage(images.monster18);
+						monsters[id]->setEnergy(230);
+						monsters[id]->setStep(1);
+						break;
 
-		 case 19: monsters[i]->setImage(images.monster19);
-				  break;
+			case 19: 	monsters[id]->setImage(images.monster19);
+						monsters[id]->setEnergy(250);
+						monsters[id]->setStep(1);						
+						break;
 				 
-		 case 20: monsters[i]->setImage(images.monster20);
-				  break;
+			case 20: 	monsters[id]->setImage(images.monster20);
+						monsters[id]->setEnergy(280);
+						monsters[id]->setStep(1);
+						break;
 				 
-		 case 21: monsters[i]->setImage(images.monster21);
-				 break;
+			case 21: 	monsters[id]->setImage(images.monster21);
+						monsters[id]->setEnergy(300);
+						monsters[id]->setStep(1);
+						break;
 
-		 case 22: monsters[i]->setImage(images.monster22);
-				 break;
+			case 22: 	monsters[id]->setImage(images.monster22);
+						monsters[id]->setEnergy(350);
+						monsters[id]->setStep(1);
+						break;
 				 
-		 case 23: monsters[i]->setImage(images.monster23);
-				 break;
-
-		 case 24: monsters[i]->setImage(images.monster24);
-				 break;
+			case 23: 	monsters[id]->setImage(images.monster23);
+						monsters[id]->setEnergy(400);
+						monsters[id]->setStep(1);
+						break;
+					
+			case 24: 	monsters[id]->setImage(images.monster24);
+						monsters[id]->setEnergy(450);
+						monsters[id]->setStep(1);
+						break;
 				 
-		 default: monsters[i]->setImage(images.monster25);
-				 break;
-	  }  
-   }
-   trace->event(s_fn,0,"leave [void]");
+			default: 	monsters[id]->setImage(images.monster25);
+						monsters[id]->setEnergy(500);
+						monsters[id]->setStep(1);
+						break;
+		}  
+	}
+	trace->event(s_fn,0,"leave [void]");
 }
 
 // Init Pointers
@@ -1023,7 +1092,7 @@ void initButtons(void)
 	    {
 			// Power Upgrade Button
 			buttons[0]=new Button();
-			buttons[0]->setX(25);
+			buttons[0]->setX(35);
 			buttons[0]->setY(200);
 			buttons[0]->setImageNormal(images.button1);
 			buttons[0]->setImageFocus(images.buttonFocus1);
@@ -1031,7 +1100,7 @@ void initButtons(void)
 			
 			// Range Upgrade Button
 			buttons[1]=new Button();
-			buttons[1]->setX(25);
+			buttons[1]->setX(35);
 			buttons[1]->setY(270);
 			buttons[1]->setImageNormal(images.button1);
 			buttons[1]->setImageFocus(images.buttonFocus1);
@@ -1039,11 +1108,19 @@ void initButtons(void)
 
 			// Rate Upgrade Button
 			buttons[2]=new Button();
-			buttons[2]->setX(25);
+			buttons[2]->setX(35);
 			buttons[2]->setY(340);
 			buttons[2]->setImageNormal(images.button1);
 			buttons[2]->setImageFocus(images.buttonFocus1);
 			buttons[2]->setLabel("");
+						
+			// Rate Lanch Button
+			buttons[3]=new Button();
+			buttons[3]->setX(35);
+			buttons[3]->setY(430);
+			buttons[3]->setImageNormal(images.button1);
+			buttons[3]->setImageFocus(images.buttonFocus1);
+			buttons[3]->setLabel("Lanch");
 			
 			// Select previous weapon Button
 			//buttons[3]=new Button();
@@ -1226,9 +1303,12 @@ void initGame(void)
 	
 	trace->event(s_fn,0,"enter");
    
-    // Set initial state of statemachine
+    // Set statemachine
 	game.stateMachine=stateIntro1;
 	game.prevStateMachine=stateNone;
+	
+	// Set event
+	game.event=eventNone;
    
 	game.wave1 = 0;
 	game.wave2 = 0;
@@ -1273,8 +1353,7 @@ void drawGridText(void)
 // Draw pointers on screen
 void drawPointers(void)
 {
-   int i;
-   for( i=0; i<MAX_POINTERS; i++ ) 
+   for( int i=0; i<MAX_POINTERS; i++ ) 
    {
 	  if (pointers[i]!=NULL) 
 	  {
@@ -1287,8 +1366,7 @@ void drawPointers(void)
 // Draw monsters on screen
 void drawMonsters(void)
 {
-   int i;
-   for( i=0; i<MAX_MONSTERS; i++ ) 
+   for( int i=0; i<MAX_MONSTERS; i++ ) 
    {
 	  if (monsters[i]!=NULL)
 	  {
@@ -1300,8 +1378,7 @@ void drawMonsters(void)
 // Draw monsters Text on screen
 void drawMonstersText(void)
 {
-   int i;
-   for( i=0; i<MAX_MONSTERS; i++ ) 
+   for( int i=0; i<MAX_MONSTERS; i++ ) 
    {
 	  if (monsters[i]!=NULL)
 	  {
@@ -1313,9 +1390,7 @@ void drawMonstersText(void)
 // Draw weapons on screen
 void drawWeapons(void)
 {
-	int i;
-   
-	for( i=0; i<MAX_WEAPONS; i++ ) 
+	for( int i=0; i<MAX_WEAPONS; i++ ) 
 	{
 		if (weapons[i]!=NULL)
 		{
@@ -1327,9 +1402,7 @@ void drawWeapons(void)
 // Draw weapons Text on screen
 void drawWeaponsText(void)
 {
-	int i;
-   
-	for( i=0; i<MAX_WEAPONS; i++ ) 
+	for( int i=0; i<MAX_WEAPONS; i++ ) 
 	{
 		if (weapons[i]!=NULL)
 		{
@@ -1341,8 +1414,7 @@ void drawWeaponsText(void)
 // Draw buttons on screen
 void drawButtons(void)
 {
-	int i;
-	for( i=0; i<MAX_BUTTONS; i++ ) 
+	for( int i=0; i<MAX_BUTTONS; i++ ) 
 	{
 		if (buttons[i]!=NULL)
 		{
@@ -1354,8 +1426,7 @@ void drawButtons(void)
 // Draw buttons Text on screen
 void drawButtonsText(void)
 {
-	int i;
-	for( i=0; i<MAX_BUTTONS; i++ ) 
+	for( int i=0; i<MAX_BUTTONS; i++ ) 
 	{
 		if (buttons[i]!=NULL)
 		{
@@ -2084,8 +2155,9 @@ void drawScreen(void)
 // Move monsters on screen
 void moveMonsters(void)
 {
-   int i;
-   for( i=0; i<MAX_MONSTERS; i++ ) 
+   //const char *s_fn="moveMonsters";
+
+   for( int i=0; i<MAX_MONSTERS; i++ ) 
    {
 	  if (monsters[i]!=NULL)
 	  {		
@@ -2104,9 +2176,9 @@ void moveMonsters(void)
 // Move weapons on screen
 void moveWeapons(void)
 {
-	int i;
+	//const char *s_fn="moveWeapons";	
    
-	for( i=0; i<MAX_WEAPONS; i++ ) 
+	for( int i=0; i<MAX_WEAPONS; i++ ) 
 	{
 		if (weapons[i]!=NULL)
 		{
@@ -2116,34 +2188,37 @@ void moveWeapons(void)
 	}
 }
 
+// Check if game is over!
 void checkGameOver(void)
 {
+   //const char *s_fn="checkGameOver";
+   
    if (game.monsterInBase>=10)
    {
-		// To many monster in Base 
+		// Too many monster in Base 
 		game.stateMachine=stateGameOver; 
-
-		// Store highscore
-		char tmp[MAX_LEN];
-		sprintf(tmp,"%c%c%c",settings->getFirstChar(), 
-			settings->getSecondChar(), settings->getThirdChar());			
-		highScore->setScore(tmp, game.wave, game.score);
-		highScore->save(HIGHSCORE_FILENAME);
+		game.event=eventSaveHighScore;		
    }
 }
 
 void checkNextWave(void)
-{	
-	for (int i=0;i<MAX_MONSTERS;i++)
+{		
+	//const char *s_fn="checkNextWave";
+	
+	if (--game.waveCountDown>0)
 	{
-		if (monsters[i]!=NULL)
+		// Check if there are any monster left. If not start next wave
+		for (int i=0;i<MAX_MONSTERS;i++)
 		{
-			return;
+			if (monsters[i]!=NULL)
+			{
+				return;
+			}
 		}
-	}
-		
-	game.wave++;
-	initMonsters();
+	}	
+	
+	// Lanch new monster wave;
+	game.event=eventLanch;
 }
 
 void destroyImages(void)
@@ -2300,16 +2375,75 @@ static u8 CalculateFrameRate(void)
     return FPS;
 }	
 
+// Proces event changes
+void processEvent()
+{
+	const char *s_fn="processEvent";
+	    
+    // If event is none return directly!
+    if (game.event==eventNone) return;
+  
+	// Event state
+	switch (game.event)
+	{
+		case eventLanch:
+		{
+			trace->event(s_fn,0,"event=eventLanch");	
 
+			// Create next monster wave
+			if (game.waveDelay>100) game.waveDelay-=100;
+			game.waveCountDown=game.waveDelay;
+			game.wave++;
+			initMonsters(false);		
+		}
+		break;
+		
+		case eventSaveHighScore:
+		{				
+			trace->event(s_fn,0,"event=eventSaveHighScore");
+			
+			// Store highscore
+			char tmp[MAX_LEN];
+			sprintf(tmp,"%c%c%c",settings->getFirstChar(), 
+				settings->getSecondChar(), settings->getThirdChar());			
+			highScore->setScore(tmp, game.wave, game.score);
+			highScore->save(HIGHSCORE_FILENAME);
+		}
+		break;
+		
+		case eventWeaponPowerUpgrade:
+		{
+			trace->event(s_fn,0,"event=eventWeaponPowerUpgrade");			
+			weapons[game.weaponSelect]->upgrade(0);
+		}
+		break;
+				
+		case eventWeaponRangeUpgrade:
+		{ 			
+			trace->event(s_fn,0,"event=eventWeaponRangeUpgrade");			
+			weapons[game.weaponSelect]->upgrade(1);
+		}
+		break;
+			
+		case eventWeaponRateUpgrade:
+		{ 
+ 			trace->event(s_fn,0,"event=eventWeaponRateUpgrade");
+			weapons[game.weaponSelect]->upgrade(2);
+		}
+		break;			
+	}
+	
+	// Clear event
+	game.event=eventNone;
+}
+
+	
 void processStateMachine()
 {
   const char *s_fn="processStateMachine";
 	
   // If state is not changed return directly!
-  if (game.prevStateMachine==game.stateMachine) 
-  {
-	return;
-  }
+  if (game.prevStateMachine==game.stateMachine) return;
     
   // Process new state
   switch (game.stateMachine)
@@ -2361,6 +2495,9 @@ void processStateMachine()
 		game.monsterInBase=0;
 		game.weaponSelect=0;
 			
+		// Start delay between to waves is +/- 25 seconds.
+		game.waveDelay = 2500;
+		
 		// Init buttons
 		initButtons();	
 		
@@ -2368,7 +2505,7 @@ void processStateMachine()
 		initGrid(game.selectedMap);
 	
 		// Init monster
-		initMonsters();
+		initMonsters(true);
 	
 		// Init Weapons
 		initWeapons();
@@ -2486,9 +2623,12 @@ int main(void)
 	// Repeat forever
     while( game.stateMachine != stateQuit )
 	{			
-		// Process state machine event
+		// Process state machine
 		processStateMachine();
 		
+		// Process event
+		processEvent();
+				
 		// draw Screen
 		drawScreen();
 

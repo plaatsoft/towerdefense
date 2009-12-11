@@ -27,7 +27,7 @@
 
 #define PROGRAM_NAME	   		"TowerDefense"
 #define PROGRAM_VERSION     	"0.40"
-#define RELEASE_DATE        	"10-12-2009" 
+#define RELEASE_DATE        	"11-12-2009" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -132,27 +132,39 @@
 // -----------------------------------------------------------
 // ENUMS
 // -----------------------------------------------------------
- 
+
+// State machine states
 enum
 {
-   stateIntro1=0,   
-   stateIntro2=1, 
-   stateIntro3=2, 
-   stateMainMenu=3,
-   stateMapSelectMenu=4,
-   stateGame=5,
-   stateLevelCleared=6,
-   stateGameOver=7,
-   stateQuit=8,
-   stateLocalHighScore=9,
-   stateTodayHighScore=10,
-   stateGlobalHighScore=11,
-   stateHelp=12,
-   stateCredits=13,
-   stateSoundSettings=14,
-   stateReleaseNotes=15,
-   stateUserSettings=16,  
-   stateNone=17,
+	stateNone=0,
+	stateIntro1=1,   
+	stateIntro2=2, 
+	stateIntro3=3, 
+	stateMainMenu=4,
+	stateMapSelectMenu=5,
+	stateGame=6,
+	stateLevelCleared=7,
+	stateGameOver=8,
+	stateQuit=9,
+	stateLocalHighScore=10,
+	stateTodayHighScore=11,
+	stateGlobalHighScore=12,
+	stateHelp=13,
+	stateCredits=14,
+	stateSoundSettings=15,
+	stateReleaseNotes=16,
+	stateUserSettings=17
+};
+
+// Event machine events
+enum
+{
+	eventNone=0,
+	eventLanch=1,  
+	eventSaveHighScore=2,
+	eventWeaponPowerUpgrade=3,
+	eventWeaponRangeUpgrade=4,
+	eventWeaponRateUpgrade=5
 };
 
 enum
@@ -169,15 +181,21 @@ enum
 
 typedef struct 
 {
-	// State Machine event status
+	// State Machine status
 	int stateMachine;
 	int prevStateMachine;
 	
+	// Events
+	int event;
+	int prevEvent;
+		
 	// Game variables
 	char name[MAX_LEN];	
 	int selectedMap; 
 	int monsterInBase;	
 	int weaponSelect;
+	int waveDelay;
+	int waveCountDown;
 	
 	// game panel variables
 	int score;

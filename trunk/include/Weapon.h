@@ -40,6 +40,7 @@ class Weapon
 	int height;
 	int width;
 	int delay;
+	int index;
 	
 	bool selected;
 	
@@ -75,6 +76,7 @@ class Weapon
 	void setPowerPrice(int price);
     void setRangePrice(int price);
     void setRatePrice(int price);
+	void setIndex(int index);
 	
 	// Getters
 	int getPowerPrice(void);
