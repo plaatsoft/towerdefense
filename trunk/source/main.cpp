@@ -978,74 +978,74 @@ void initButtons(void)
 	{			
 		case stateMainMenu:
 		{			
+			// Play Button 
+			buttons[6]=new Button();
+			buttons[6]->setX(440);
+			buttons[6]->setY(40);
+			buttons[6]->setImageNormal(images.button2);
+			buttons[6]->setImageFocus(images.buttonFocus2);
+			buttons[6]->setLabel("Play");
+			
 			// HighScore Button 
 			buttons[0]=new Button();
-			buttons[0]->setX(25);
-			buttons[0]->setY(100);
+			buttons[0]->setX(440);
+			buttons[0]->setY(80);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("High Score");
 			
 			// Help Button 
 			buttons[1]=new Button();
-			buttons[1]->setX(225);
-			buttons[1]->setY(100);
+			buttons[1]->setX(440);
+			buttons[1]->setY(120);
 			buttons[1]->setImageNormal(images.button2);
 			buttons[1]->setImageFocus(images.buttonFocus2);
 			buttons[1]->setLabel("Help");			
 
 			// Credits Button 
 			buttons[2]=new Button();
-			buttons[2]->setX(425);
-			buttons[2]->setY(100);
+			buttons[2]->setX(440);
+			buttons[2]->setY(160);
 			buttons[2]->setImageNormal(images.button2);
 			buttons[2]->setImageFocus(images.buttonFocus2);
 			buttons[2]->setLabel("Credits");	
 
+			// Release Notes Button 
+			buttons[4]=new Button();
+			buttons[4]->setX(440);
+			buttons[4]->setY(200);
+			buttons[4]->setImageNormal(images.button2);
+			buttons[4]->setImageFocus(images.buttonFocus2);
+			buttons[4]->setLabel("Release Notes");	
+			
 			// Sound Settings Button 
 			buttons[3]=new Button();
-			buttons[3]->setX(25);
-			buttons[3]->setY(200);
+			buttons[3]->setX(440);
+			buttons[3]->setY(240);
 			buttons[3]->setImageNormal(images.button2);
 			buttons[3]->setImageFocus(images.buttonFocus2);
 			buttons[3]->setLabel("Sound Settings");	
 
-			// Release Notes Button 
-			buttons[4]=new Button();
-			buttons[4]->setX(225);
-			buttons[4]->setY(200);
-			buttons[4]->setImageNormal(images.button2);
-			buttons[4]->setImageFocus(images.buttonFocus2);
-			buttons[4]->setLabel("Release Notes");				
-
 			// User initials Button 
 			buttons[5]=new Button();
-			buttons[5]->setX(425);
-			buttons[5]->setY(200);
+			buttons[5]->setX(440);
+			buttons[5]->setY(280);
 			buttons[5]->setImageNormal(images.button2);
 			buttons[5]->setImageFocus(images.buttonFocus2);
 			buttons[5]->setLabel("User initials");	
-
-			// Play Button 
-			buttons[6]=new Button();
-			buttons[6]->setX(240);
-			buttons[6]->setY(460);
-			buttons[6]->setImageNormal(images.button2);
-			buttons[6]->setImageFocus(images.buttonFocus2);
-			buttons[6]->setLabel("Play");
 						
 			// Exit HBC Button 
 			buttons[7]=new Button();
-			buttons[7]->setX(120);
-			buttons[7]->setY(300);
+			buttons[7]->setX(440);
+			buttons[7]->setY(400);
 			buttons[7]->setImageNormal(images.button2);
 			buttons[7]->setImageFocus(images.buttonFocus2);
 			buttons[7]->setLabel("Exit HBC");	
 	 
 			// Reset Wii Button 
 			buttons[8]=new Button();
-			buttons[8]->setX(320);
-			buttons[8]->setY(300);
+			buttons[8]->setX(440);
+			buttons[8]->setY(440);
 			buttons[8]->setImageNormal(images.button2);
 			buttons[8]->setImageFocus(images.buttonFocus2);
 			buttons[8]->setLabel("Reset Wii");	
@@ -1080,7 +1080,7 @@ void initButtons(void)
 			
 			// Button (Main Menu)
 			buttons[3]=new Button();
-			buttons[3]->setX(260);
+			buttons[3]->setX(225);
 			buttons[3]->setY(460);
 			buttons[3]->setImageNormal(images.button2);
 			buttons[3]->setImageFocus(images.buttonFocus2);
@@ -1092,7 +1092,7 @@ void initButtons(void)
 	    {
 			// Power Upgrade Button
 			buttons[0]=new Button();
-			buttons[0]->setX(35);
+			buttons[0]->setX(30);
 			buttons[0]->setY(200);
 			buttons[0]->setImageNormal(images.button1);
 			buttons[0]->setImageFocus(images.buttonFocus1);
@@ -1100,7 +1100,7 @@ void initButtons(void)
 			
 			// Range Upgrade Button
 			buttons[1]=new Button();
-			buttons[1]->setX(35);
+			buttons[1]->setX(30);
 			buttons[1]->setY(270);
 			buttons[1]->setImageNormal(images.button1);
 			buttons[1]->setImageFocus(images.buttonFocus1);
@@ -1108,7 +1108,7 @@ void initButtons(void)
 
 			// Rate Upgrade Button
 			buttons[2]=new Button();
-			buttons[2]->setX(35);
+			buttons[2]->setX(30);
 			buttons[2]->setY(340);
 			buttons[2]->setImageNormal(images.button1);
 			buttons[2]->setImageFocus(images.buttonFocus1);
@@ -1116,8 +1116,8 @@ void initButtons(void)
 						
 			// Rate Lanch Button
 			buttons[3]=new Button();
-			buttons[3]->setX(35);
-			buttons[3]->setY(430);
+			buttons[3]->setX(30);
+			buttons[3]->setY(400);
 			buttons[3]->setImageNormal(images.button1);
 			buttons[3]->setImageFocus(images.buttonFocus1);
 			buttons[3]->setLabel("Lanch");
@@ -1144,7 +1144,7 @@ void initButtons(void)
 	    {
 			// Next Button
 			buttons[0]=new Button();
-			buttons[0]->setX(260);
+			buttons[0]->setX(225);
 			buttons[0]->setY(460);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
@@ -1156,7 +1156,7 @@ void initButtons(void)
 		{
 			// Main Menu Button
 			buttons[0]=new Button();
-			buttons[0]->setX(260);
+			buttons[0]->setX(225);
 			buttons[0]->setY(460);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
@@ -1168,7 +1168,7 @@ void initButtons(void)
 		{
 			// Main Menu Button
 			buttons[0]=new Button();
-			buttons[0]->setX(260);
+			buttons[0]->setX(225);
 			buttons[0]->setY(460);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
@@ -1180,7 +1180,7 @@ void initButtons(void)
 		{
 			// Main Menu Button
 			buttons[0]=new Button();
-			buttons[0]->setX(260);
+			buttons[0]->setX(225);
 			buttons[0]->setY(460);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
@@ -1192,7 +1192,7 @@ void initButtons(void)
 		{
 			// Main Menu Button
 			buttons[0]=new Button();
-			buttons[0]->setX(260);
+			buttons[0]->setX(225);
 			buttons[0]->setY(460);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
@@ -1252,7 +1252,7 @@ void initButtons(void)
 			
 			// Main Menu Button
 			buttons[6]=new Button();
-			buttons[6]->setX(260);
+			buttons[6]->setX(225);
 			buttons[6]->setY(460);
 			buttons[6]->setImageNormal(images.button2);
 			buttons[6]->setImageFocus(images.buttonFocus2);
@@ -1446,7 +1446,13 @@ void drawText(int x, int y, int type, const char *text)
      strcpy(tmp, text);
 	 
      switch (type)
-     {  	 
+     {  	
+       case fontWelcome: 
+	   {
+		  GRRLIB_Printf2(x, y, tmp, 40, GRRLIB_WHITESMOKE); 
+	   }
+	   break;
+ 
        case fontTitle: 
 	   {
 	      if (x==0) x=320-((strlen(tmp)*34)/2);  
@@ -1546,7 +1552,7 @@ void drawGamePanelText(void)
 	sprintf(tmp,"%02d", game.wave); 
 	GRRLIB_Printf2(40+xoffset, ypos, tmp, 16, GRRLIB_BLACK);
 
-	ypos+=25;
+	ypos+=30;
 	GRRLIB_Printf2(20+xoffset, ypos, "POWER", 18, GRRLIB_BLACK);	
 
 	ypos+=70;
@@ -1587,12 +1593,9 @@ void drawScreen(void)
 		  // Init text layer	  
           GRRLIB_initTexture();	
 		  
-		  sprintf(tmp,"%s v%s", PROGRAM_NAME, PROGRAM_VERSION); 
-		  drawText(20, ypos, fontParagraph,  tmp );
-		  ypos+=20;
-		  sprintf(tmp,"%s", RELEASE_DATE); 
-		  drawText(20, ypos, fontParagraph,  tmp );
-		  ypos+=40;
+		  sprintf(tmp,"%s", PROGRAM_NAME); 
+		  drawText(20, ypos, fontWelcome,  tmp );
+		  ypos+=60;
 		  drawText(20, ypos, fontNormal,  "Created by wplaat"  );
 		  ypos+=20;
 		  drawText(20, ypos, fontNormal,  "http://www.plaatsoft.nl"  );
@@ -1679,6 +1682,12 @@ void drawScreen(void)
 			
 		  // Init text layer	  
           GRRLIB_initTexture();
+		  
+		  sprintf(tmp,"%s v%s", PROGRAM_NAME, PROGRAM_VERSION); 
+		  drawText(20, ypos, fontWelcome,  tmp );
+		  ypos+=60;
+		  sprintf(tmp,"%s", RELEASE_DATE); 
+		  drawText(20, ypos, fontParagraph,  tmp );
 	
 		  version=http->tcp_get_version();
           if ( (version!=NULL) && (strlen(version)>0) && (strcmp(version,PROGRAM_VERSION)!=0) )
@@ -1691,12 +1700,10 @@ void drawScreen(void)
 			 sprintf(tmp,"Check the release notes.");
 	         drawText(20, ypos, fontNew, tmp);			 
           }  
-
-		  ypos=400;	 
-		  sprintf(tmp,"NETWORK THREAD: %s",http->tcp_get_state());
-		  drawText(20, 480, fontSpecial, tmp);
 		  
-		  ypos+=20;	
+		  sprintf(tmp,"NETWORK THREAD: %s",http->tcp_get_state());
+		  drawText(20, 485, fontSpecial, tmp);
+		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate()); 
 		  drawText(20, 500, fontSpecial, tmp); 
 		   
@@ -1818,24 +1825,28 @@ void drawScreen(void)
 		  
           for (int i=0; i<MAX_LOCAL_HIGHSCORE; i++)
 	      {
-  	          ypos+=20;  
+  	          // Only show highscore entries which contain data
+			  if (highScore->getDate(i)!=0)
+			  {
+				ypos+=20;  
 	    
-		      sprintf(tmp,"%02d", i+1);
-		      drawText(60, ypos, fontNormal, tmp);
+				sprintf(tmp,"%02d", i+1);
+				drawText(60, ypos, fontNormal, tmp);
 			  
-	          local = localtime(highScore->getDate(i));
-	          sprintf(tmp,"%02d-%02d-%04d %02d:%02d:%02d", 
-			     local->tm_mday, local->tm_mon+1, local->tm_year+1900, 
-			     local->tm_hour, local->tm_min, local->tm_sec);
-		      drawText(130, ypos, fontNormal, tmp);
+				local = localtime(highScore->getDate(i));
+				sprintf(tmp,"%02d-%02d-%04d %02d:%02d:%02d", 
+					local->tm_mday, local->tm_mon+1, local->tm_year+1900, 
+					local->tm_hour, local->tm_min, local->tm_sec);
+				drawText(130, ypos, fontNormal, tmp);
 	   
-	   	      sprintf(tmp,"%05d", highScore->getScore(i));
-		      drawText(320, ypos, fontNormal, tmp);
+				sprintf(tmp,"%05d", highScore->getScore(i));
+				drawText(320, ypos, fontNormal, tmp);
 	
-		      drawText(410, ypos, fontNormal, highScore->getName(i));
+				drawText(410, ypos, fontNormal, highScore->getName(i));
 	  
-	          sprintf(tmp,"%02d", highScore->getWave(i));
-		      drawText(500, ypos, fontNormal, tmp);
+				sprintf(tmp,"%02d", highScore->getWave(i));
+				drawText(500, ypos, fontNormal, tmp);
+			 }
 		  }	
 		  
 		  // Draw Button Text labels
@@ -1916,10 +1927,6 @@ void drawScreen(void)
 	      drawText(0, ypos, fontParagraph, "GAME GRAPHICS  ");
   	      ypos+=20;
 	      drawText(0, ypos, fontNormal, "wplaat");
-		  ypos+=20;
-	      drawText(0, ypos, fontNormal, "MLtm");  
-		  ypos+=20;
-	      drawText(0, ypos, fontNormal, "shango46");  		  
 		  
 	      ypos+=30;
 	      drawText(0, ypos, fontParagraph, "MUSIC ");
@@ -2176,8 +2183,6 @@ void moveMonsters(void)
 // Move weapons on screen
 void moveWeapons(void)
 {
-	//const char *s_fn="moveWeapons";	
-   
 	for( int i=0; i<MAX_WEAPONS; i++ ) 
 	{
 		if (weapons[i]!=NULL)
@@ -2191,8 +2196,6 @@ void moveWeapons(void)
 // Check if game is over!
 void checkGameOver(void)
 {
-   //const char *s_fn="checkGameOver";
-   
    if (game.monsterInBase>=10)
    {
 		// Too many monster in Base 
@@ -2203,8 +2206,6 @@ void checkGameOver(void)
 
 void checkNextWave(void)
 {		
-	//const char *s_fn="checkNextWave";
-	
 	if (--game.waveCountDown>0)
 	{
 		// Check if there are any monster left. If not start next wave
@@ -2359,6 +2360,7 @@ void destroyObjects()
 }
 	
 
+// Calculate Video Frame Rate (Indication how game engine performs)
 static u8 CalculateFrameRate(void) 
 {
     static u8 frameCount = 0;
@@ -2390,11 +2392,21 @@ void processEvent()
 		{
 			trace->event(s_fn,0,"event=eventLanch");	
 
-			// Create next monster wave
-			if (game.waveDelay>100) game.waveDelay-=100;
-			game.waveCountDown=game.waveDelay;
-			game.wave++;
-			initMonsters(false);		
+			int count=0;
+			for(int i=0;i<MAX_MONSTERS;i++)
+			{
+				if (monsters[i]==NULL) count++;
+			}
+			int amount=3+(game.wave*2);
+			
+			if (amount<count)
+			{
+				// Create next monster wave
+				if (game.waveDelay>100) game.waveDelay-=100;
+				game.waveCountDown=game.waveDelay;
+				game.wave++;
+				initMonsters(false);		
+			}
 		}
 		break;
 		
@@ -2437,7 +2449,8 @@ void processEvent()
 	game.event=eventNone;
 }
 
-	
+
+// Process state Machine change
 void processStateMachine()
 {
   const char *s_fn="processStateMachine";
@@ -2497,6 +2510,7 @@ void processStateMachine()
 			
 		// Start delay between to waves is +/- 25 seconds.
 		game.waveDelay = 2500;
+		game.waveCountDown=game.waveDelay;
 		
 		// Init buttons
 		initButtons();	
