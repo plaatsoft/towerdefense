@@ -347,91 +347,73 @@ void Grid::create(const char* filename)
 void Grid::setImageRoad1(GRRLIB_texImg *image)
 {
    const char *s_fn="Pointer::setImageRoad1";
-   trace->event(s_fn,0,"enter");
+   trace->event(s_fn,0,"data");
    
    image1 = image;
-   
-   trace->event(s_fn,0,"leave [void]");
 }
 
 void Grid::setImageRoad2(GRRLIB_texImg *image)
 {
    const char *s_fn="Pointer::setImageRoad2";
-   trace->event(s_fn,0,"enter");
+   trace->event(s_fn,0,"data");
    
    image2 = image;
-   
-   trace->event(s_fn,0,"leave [void]");
 }
 
 void Grid::setImageRoad3(GRRLIB_texImg *image)
 {
    const char *s_fn="Pointer::setImageRoad3";
-   trace->event(s_fn,0,"enter");
+   trace->event(s_fn,0,"data");
    
    image3 = image;
-   
-   trace->event(s_fn,0,"leave [void]");
 }
 
 void Grid::setImageRoad4(GRRLIB_texImg *image)
 {
    const char *s_fn="Pointer::setImageRoad4";
-   trace->event(s_fn,0,"enter");
+   trace->event(s_fn,0,"data");
    
    image4 = image;
-   
-   trace->event(s_fn,0,"leave [void]");
 }
 
 void Grid::setImageRoad5(GRRLIB_texImg *image)
 {
    const char *s_fn="Pointer::setImageRoad5";
-   trace->event(s_fn,0,"enter");
+   trace->event(s_fn,0,"data");
    
    image5 = image;
-   
-   trace->event(s_fn,0,"leave [void]");
 }
 
 void Grid::setImageBase(GRRLIB_texImg *image)
 {
    const char *s_fn="Pointer::setImageBase";
-   trace->event(s_fn,0,"enter");
+   trace->event(s_fn,0,"data");
    
    imageBase = image;
-   
-   trace->event(s_fn,0,"leave [void]");
 }
 
 void Grid::setImageWater(GRRLIB_texImg *image)
 {
    const char *s_fn="Pointer::setImageWater";
-   trace->event(s_fn,0,"enter");
+   trace->event(s_fn,0,"data");
    
    imageWater = image;
-   
-   trace->event(s_fn,0,"leave [void]");
 }
 
 void Grid::setImageBridge(GRRLIB_texImg *image)
 {
    const char *s_fn="Pointer::setImageBrige";
-   trace->event(s_fn,0,"enter");
+   trace->event(s_fn,0,"data");
    
    imageBridge = image;
-   
-   trace->event(s_fn,0,"leave [void]");
 }
 
 void Grid::setLevel(int level1)
 {
 	const char *s_fn="Grid::setLevel";
-	trace->event(s_fn,0,"enter [level=%d]",level1);
+	trace->event(s_fn,0,"%d",level1);
 	
     level = level1;
-   
-	trace->event(s_fn,0,"leave [void]");  
 }
 
 // ------------------------------

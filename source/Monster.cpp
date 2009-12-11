@@ -36,7 +36,6 @@ extern Trace *trace;
 extern Grid *grid;
 
 extern GXRModeObj *rmode;
-extern int monsterInBase;
 
 // ------------------------------
 // Constructor 
@@ -52,6 +51,7 @@ Monster::Monster()
    y=0;
    targetY=0;
    size=1;
+   index=0;
    
    alfa=255;
    energy=0;
@@ -103,15 +103,22 @@ void Monster::text(void)
 	}
 }
 
+// Move Monster
 bool Monster::move(void)
-{  
-	if (startDelay>0)
+{  	
+	const char *s_fn="Monster::move";
+		
+	if (delay>0)
 	{
-		startDelay--;
-		if (startDelay==0)
+		delay--;
+		if (delay==0)
 		{
-			// First movement on screen. Make monster visible!
+			//trace->event(s_fn,0,"Monster %d start moving!", index);
 			visible=true;
+		}
+		else
+		{
+			//trace->event(s_fn,0,"Monster %d is waiting %d", index, delay);
 		}
 		return false;
 	}
@@ -124,9 +131,13 @@ bool Monster::move(void)
 		pos++;
 		if (pos>=grid->getMaxLocations())	
 		{
-			// Monster has reach the final destination. Disable it!
+			trace->event(s_fn,0,"Monster %d has reach the final destination.", index);
 			visible=false;
 			return true;
+		}
+		else
+		{
+			//trace->event(s_fn,0,"Monster %d has new target.", index);
 		}
 	}
 	else if (x<targetX)
@@ -145,16 +156,22 @@ bool Monster::move(void)
 	{
 		y=y-step;	
 	}
+	
+	//trace->event(s_fn,0,"Monster %d has moved", index);
+		
 	return false;
 }
 
 bool Monster::hit(int hit)
 {
+	const char *s_fn="Monster::hit";
+	
 	bool dead=false;
 	
 	energy-=hit;
 	if (energy<=0) 
 	{
+		trace->event(s_fn,0,"Monster %d is dead!", index);
 		dead=true;
 	}
 	
@@ -168,7 +185,7 @@ bool Monster::hit(int hit)
 void Monster::setImage(GRRLIB_texImg *image1)
 {
    const char *s_fn="Monster::setImage";
-   trace->event(s_fn,0,"enter");
+   trace->event(s_fn,0,"data");
    
    image = image1;
    
@@ -186,28 +203,38 @@ void Monster::setImage(GRRLIB_texImg *image1)
    visible=false;
    
    pos++;
-   
-   trace->event(s_fn,0,"leave");
 }
 
 void Monster::setStep(int step1)
 {
    const char *s_fn="Monster::setStep";
-   trace->event(s_fn,0,"enter [step=%d]",step1);
+   trace->event(s_fn,0,"%d",step1);
    
    step=step1;
-   
-   trace->event(s_fn,0,"leave");
 }
 
-void Monster::setStartDelay(int startDelay1)
-{
-	startDelay=startDelay1;
+void Monster::setDelay(int delay1)
+{ 
+	const char *s_fn="Monster::setDelay";
+    trace->event(s_fn,0,"%d",delay1);   
+	
+	delay=delay1;
 }
 
 void Monster::setEnergy(int energy1)
 {
+	const char *s_fn="Monster::setEnergy";
+    trace->event(s_fn,0,"%d",energy1);  
+	
 	energy=energy1;
+}
+
+void Monster::setIndex(int index1)
+{
+	const char *s_fn="Monster::setIndex";
+    trace->event(s_fn,0,"%d",index1);  
+	
+	index=index1;
 }
 
 // ------------------------------

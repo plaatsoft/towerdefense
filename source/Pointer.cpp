@@ -28,8 +28,7 @@
 #include "Button.h"
 #include "Weapon.h"
   
-extern Game game;
-
+extern  Game 		game;
 extern 	Settings	*settings;
 extern 	Trace 		*trace;
 extern 	Button 		*buttons[MAX_BUTTONS];
@@ -195,30 +194,36 @@ void Pointer::buttonA(int x, int y)
 	selectedA=true;
 	  
     trace->event(s_fn,0,"enter [x=%d|y=%d]",x,y);
-	  
+	 
 	switch (game.stateMachine)
 	{
 		case stateIntro1:
 		{
+			// if A button is pressed continue to next intro screen
 			game.stateMachine=stateIntro2;
 		}
 		break;
 
 		case stateIntro2:
 		{
+			// if A button is pressed continue to next intro screen
 			//game.stateMachine=stateIntro3;
+			
+			
 			game.stateMachine=stateMainMenu;
 		}
 		break;
 	 
 		case stateIntro3:
 		{
+			// if A button is pressed continue to main menu screen
 			game.stateMachine=stateMainMenu;
 		}
 		break;
 	 
 		case stateMainMenu:
 		{	
+			// Check if button is pressed on screen
 			if (buttons[0]->onSelect(x,y))
 			{
 				// Highscore button	      
@@ -289,6 +294,7 @@ void Pointer::buttonA(int x, int y)
    
 		case stateMapSelectMenu:
 		{	
+			// Check if button is pressed on screen
 			if (buttons[0]->onSelect(x,y))
 			{
 				// Map1 button	      
@@ -324,46 +330,76 @@ void Pointer::buttonA(int x, int y)
 	
 		case stateGame:
 		{	
+			// Check if weapon is selected on screen
+			for (int i=0;i<MAX_WEAPONS; i++)
+			{
+				if ((weapons[i]!=NULL) && (weapons[i]->onSelect(x,y)))
+				{
+					// Deselected all weapons
+					for (int j=0;j<MAX_WEAPONS; j++)
+					{
+						if (weapons[j]!=NULL) 
+						{
+							weapons[j]->setSelected(false);
+						}
+					}
+				
+					// Selected new weapons
+					game.weaponSelect=i;
+					weapons[i]->setSelected(true);
+					break;
+				}
+			}
+			
+			// Check if button is pressed on screen
 			if (weapons[game.weaponSelect]!=NULL)
 			{
 				if (buttons[0]->onSelect(x,y))
 				{
 					// Power button	      
-					weapons[game.weaponSelect]->upgrade(0);
+					game.event=eventWeaponPowerUpgrade;
 					break;
 				}
 		
 				if (buttons[1]->onSelect(x,y))
 				{
 					// Range button	      
-					weapons[game.weaponSelect]->upgrade(1);
+					game.event=eventWeaponRangeUpgrade;
 					break;
 				}
 			
 				if (buttons[2]->onSelect(x,y))
 				{
 					// Rate button	      		
-					weapons[game.weaponSelect]->upgrade(2);
+					game.event=eventWeaponRateUpgrade;
 					break;
 				}
 				
-				/*if (buttons[3]->onSelect(x,y))
+				if (buttons[3]->onSelect(x,y))
+				{
+					// Lanch button	
+					game.event=eventLanch;
+					break;
+				}
+				
+				/*if (buttons[4]->onSelect(x,y))
 				{
 					// Select previous weapon	      		
 					break;
 				}
 				
-				if (buttons[4]->onSelect(x,y))
+				if (buttons[5]->onSelect(x,y))
 				{
 					// Select next weapon	      		
 					break;
 				}*/
-			}
+			}		
 		}
 		break;
 		
 		case stateCredits:
 		{
+			// Check if button is pressed on screen
 			if (buttons[0]->onSelect(x,y))
 			{
 				// Main Menu button	 	
@@ -375,6 +411,7 @@ void Pointer::buttonA(int x, int y)
 
 		case stateHelp:
 		{
+			// Check if button is pressed on screen
 			if (buttons[0]->onSelect(x,y))
 			{
 				// Main Menu button	 
@@ -386,6 +423,7 @@ void Pointer::buttonA(int x, int y)
 
 		case stateSoundSettings:
 		{
+			// Check if button is pressed on screen
 			if (buttons[0]->onSelect(x,y))
 			{
 				// Main Menu button	 
@@ -397,6 +435,7 @@ void Pointer::buttonA(int x, int y)
 	 
 		case stateReleaseNotes:
 		{
+			// Check if button is pressed on screen
 			if (buttons[0]->onSelect(x,y))
 			{
 				// Main Menu button	 
@@ -408,6 +447,7 @@ void Pointer::buttonA(int x, int y)
 
 		case stateLocalHighScore:
 		{
+			// Check if button is pressed on screen
 			if (buttons[0]->onSelect(x,y))
 			{
 				// Main Menu button	 
@@ -419,6 +459,7 @@ void Pointer::buttonA(int x, int y)
 	 
 		case stateUserSettings:
 		{ 
+			// Check if button is pressed on screen
 			if (buttons[0]->onSelect(x,y))
 			{
 				// + First Character button event           
@@ -471,27 +512,7 @@ void Pointer::buttonA(int x, int y)
 		}
 		break; 
 	}
-	
-	// Check if weapon is selected
-	if (game.stateMachine==stateGame)
-	{
-		for (int i=0;i<MAX_WEAPONS; i++)
-		{
-			if ((weapons[i]!=NULL) && (weapons[i]->onSelect(x,y)))
-			{
-				// Deselected all weapons
-				for (int j=0;j<MAX_WEAPONS; j++)
-				{
-					if (weapons[j]!=NULL) weapons[j]->setSelected(false);
-				}
-				
-				// Selected new weapons
-				game.weaponSelect=i;
-				weapons[i]->setSelected(true);
-				break;
-			}
-		}		
-	}	
+
 	trace->event(s_fn,0,"leave");
 }
 
@@ -581,70 +602,58 @@ void Pointer::draw(void)
 void Pointer::setIndex(int index1)
 {
    const char *s_fn="Pointer::setIndex";
-   trace->event(s_fn,0,"enter [index=%d]",index1);
+   trace->event(s_fn,0,"%d",index1);
   
    index = index1;
-   
-   trace->event(s_fn,0,"leave [void]");
 }
 
 void Pointer::setX(int x1)
 {
    const char *s_fn="Pointer::setX";
-   trace->event(s_fn,0,"enter [x=%d]",x1);
+   trace->event(s_fn,0,"%d",x1);
    
    if ((x1>=0) && (x1<=MAX_HORZ_PIXELS))
    {
       x = x1;
    }
-   
-   trace->event(s_fn,0,"leave [void]");
 }
 
 void Pointer::setY(int y1)
 {
    const char *s_fn="Pointer::setY";
-   trace->event(s_fn,0,"enter [y=%d]",y1);
+   trace->event(s_fn,0,"%d",y1);
    
    if ((y1>=0) && (y1<=MAX_VERT_PIXELS))
    {
       y = y1;
    }
-   
-   trace->event(s_fn,0,"leave [void]");
 }
 
 void Pointer::setAngle(int angle1)
 {
    const char *s_fn="Pointer::setAngle";
-   trace->event(s_fn,0,"enter [angle=%d]",angle1);
+   trace->event(s_fn,0,"%d",angle1);
    
    if ((angle1>=0) && (angle1<=MAX_ANGLE))
    {
       angle=angle1;
    }
-   
-   trace->event(s_fn,0,"leave [void]");
 } 
 
 void Pointer::setImage(GRRLIB_texImg *image1)
 {
    const char *s_fn="Pointer::setImage";
-   trace->event(s_fn,0,"enter");
+   trace->event(s_fn,0,"data");
    
    image = image1;
-   
-   trace->event(s_fn,0,"leave [void]");
 }
 
 void Pointer::setRumble(int rumble1)
 {
    const char *s_fn="Pointer::setRumble";
-   trace->event(s_fn,0,"enter [rumble=%d]",rumble1);
+   trace->event(s_fn,0,"%d",rumble1);
    
    rumble=rumble1;
-
-   trace->event(s_fn,0,"leave [void]");
 }
 
 // ------------------------------

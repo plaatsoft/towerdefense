@@ -135,29 +135,25 @@ bool Button::onSelect(int x1, int y1)
 void Button::setImageNormal(GRRLIB_texImg *imageNormal1)
 {
 	const char *s_fn="Button::setImageNormal";
-	trace->event(s_fn,0,"enter");
+	trace->event(s_fn,0,"image");
 
 	imageNormal=imageNormal1;
 	height=imageNormal->h;
 	width=imageNormal->w;
-	
-	trace->event(s_fn,0,"leave [void]");
 }
 
 void Button::setImageFocus(GRRLIB_texImg *imageFocus1)
 {
 	const char *s_fn="Button::setImageSelect";
-	trace->event(s_fn,0,"enter");
+	trace->event(s_fn,0,"image");
 	
 	imageFocus=imageFocus1;
-	
-	trace->event(s_fn,0,"leave [void]");
 }
 		
 void Button::setX(int x1)
 {
 	const char *s_fn="Button::setX";
-	trace->event(s_fn,0,"enter [x=%d]",x1);
+	trace->event(s_fn,0,"%d",x1);
 	
 	if ((x1>=0) && (x1<=MAX_HORZ_PIXELS))
 	{
@@ -170,7 +166,7 @@ void Button::setX(int x1)
 void Button::setY(int y1)
 {
 	const char *s_fn="Button::setY";
-	trace->event(s_fn,0,"enter [y=%d]",y1);
+	trace->event(s_fn,0,"%d",y1);
 	
 	if ((y1>=0) && (y1<=MAX_VERT_PIXELS))
 	{
@@ -183,11 +179,9 @@ void Button::setY(int y1)
 void Button::setLabel(const char *label1)
 {
 	//const char *s_fn="Button::setLabel";
-	//trace->event(s_fn,0,"enter [label=%s]",label1);
+	//trace->event(s_fn,0,"%s",label1);
 	
     strcpy(label,label1);
-	
-	//trace->event(s_fn,0,"leave [void]");
 }
 
 // ------------------------------
