@@ -24,6 +24,8 @@
 #include <math.h>
 
 #include "Weapon.h" 
+#include "Trace.h" 
+#include "Sound.h" 
 
 // ------------------------------
 // Variables
@@ -32,6 +34,7 @@
 extern GXRModeObj   *rmode;
 extern Game 		game; 
 extern Trace    	*trace;
+extern Sound    	*sound;
 
 // ------------------------------
 // Constructor 
@@ -122,6 +125,7 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 						  				
 				if (distance<range)
 				{
+					sound->effect(1);	
 					game.score+=power;
 					game.cash+=power;
 					
@@ -190,7 +194,8 @@ bool Weapon::onSelect(int x1, int y1)
 	const char *s_fn="Weapon::onSelect";
 	if ( (x1>=x) && (x1<=(x+width)) && (y1>=y) && (y1<=(y+height)) )
 	{      	 	
-		trace->event(s_fn,0,"Weapon %d selected", index);	
+		trace->event(s_fn,0,"Weapon %d selected", index);
+		sound->effect(2);	
 		return true;
 	}
 	return false;

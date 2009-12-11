@@ -25,9 +25,11 @@
 #include "Button.h"
 #include "Pointer.h"
 #include "Trace.h"
+#include "Sound.h" 
 
 extern Game    game; 
 extern Trace   *trace;
+extern Sound   *sound;
 extern Pointer *pointers[MAX_POINTERS];
 
 // ------------------------------
@@ -115,7 +117,7 @@ bool Button::onSelect(int x1, int y1)
    if ( (x1>=x) && (x1<=(x+width)) && (y1>=y) && (y1<=(y+height)) )
    {      
 	  trace->event(s_fn,0,"Button selected");
-      //SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 0, (char *) effect3_pcm, effect3_pcm_size, effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
+	  sound->effect(2);
 	  selected=true;
    }
    else
@@ -159,8 +161,6 @@ void Button::setX(int x1)
 	{
 		x = x1;
 	}
-	
-	trace->event(s_fn,0,"leave [void]");
 }
 
 void Button::setY(int y1)
@@ -172,8 +172,6 @@ void Button::setY(int y1)
 	{
 		y = y1;
 	}
-   
-	trace->event(s_fn,0,"leave [void]");
 }
 
 void Button::setLabel(const char *label1)

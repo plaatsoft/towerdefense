@@ -27,14 +27,18 @@
 #include "Trace.h"
 #include "Button.h"
 #include "Weapon.h"
+#include "Sound.h"
   
 extern  Game 		game;
 extern 	Settings	*settings;
+extern 	Sound		*sound;
 extern 	Trace 		*trace;
 extern 	Button 		*buttons[MAX_BUTTONS];
 extern  Weapon    	*weapons[MAX_WEAPONS];
 
-boolean selectedA=false;
+bool selected1;
+bool selected2;
+bool selectedA;
 
 // ------------------------------
 // Constructor 
@@ -52,6 +56,10 @@ Pointer::Pointer()
    angle=0;
    rumble=0;
    rumbleGo=false;
+   
+   selectedA=false;   
+   selected1=false;
+   selected2=false;
    
    trace->event(s_fn,0,"leave [void]");
 }
@@ -82,6 +90,28 @@ void Pointer::properties(void)
 	
 	sprintf(tmp, "y=%d", y);
 	GRRLIB_Printf2(10, 20, tmp, size, GRRLIB_WHITESMOKE);
+}
+
+void Pointer::button1x(void)
+{
+   if (!selected1)
+   {
+      selected1=true;
+	  
+	  int track=sound->getMusicTrack();
+	  sound->setMusicTrack(++track);
+   }        
+}
+
+void Pointer::button2y(void)
+{
+   if (!selected2)
+   { 
+      selected2=true;   
+	  
+	  int track=sound->getMusicTrack();
+	  sound->setMusicTrack(--track);
+   }
 }
 
 void Pointer::buttonPlus(int index)
@@ -130,6 +160,30 @@ void Pointer::buttonPlus(int index)
 		  {
 			settings->setThirdChar('A');
 		  }		
+		  break;
+		  
+	   case 3:
+	      // Music volume
+		  {
+			int volume=sound->getMusicVolume();
+			sound->setMusicVolume(++volume);   
+		  }
+		  break;
+       
+	   case 4:
+          // Effect volume
+		  {
+			int volume=sound->getEffectVolume();
+			sound->setEffectVolume(++volume);  
+		  }
+		  break;
+
+	   case 5:
+	      // Prev music track
+		  {
+			int track=sound->getMusicTrack();
+			sound->setMusicTrack(++track);   
+		  }
 		  break;
    }
    trace->event(s_fn,0,"leave");
@@ -181,6 +235,31 @@ void Pointer::buttonMinus(int index)
 			settings->setThirdChar('Z');
 		  }		
 		  break;   
+		  
+	   case 3:
+	      // Music volume
+		  {
+			int volume=sound->getMusicVolume();
+			sound->setMusicVolume(--volume);   
+		  }
+		  break;
+       
+	   case 4:
+          // Effect volume
+		  {
+			int volume=sound->getEffectVolume();
+			sound->setEffectVolume(--volume);  
+		  }
+		  break;
+
+	   case 5:
+	      // Music track
+		  {
+			int track=sound->getMusicTrack();
+			sound->setMusicTrack(--track);   
+		  }
+		  break;
+
 	}
 	trace->event(s_fn,0,"leave");
 }
@@ -421,18 +500,6 @@ void Pointer::buttonA(int x, int y)
 		}
 		break;
 
-		case stateSoundSettings:
-		{
-			// Check if button is pressed on screen
-			if (buttons[0]->onSelect(x,y))
-			{
-				// Main Menu button	 
-				game.stateMachine=stateMainMenu;	     
-				break; 
-			}
-		}
-		break;
-	 
 		case stateReleaseNotes:
 		{
 			// Check if button is pressed on screen
@@ -456,7 +523,67 @@ void Pointer::buttonA(int x, int y)
 			}
 		}
 		break;
+		
+		
+		case stateSoundSettings:
+		{
+			// Check if button is pressed on screen
+			if (buttons[0]->onSelect(x,y))
+			{
+				// Main Menu button	 
+				game.stateMachine=stateMainMenu;	
+				settings->setMusicVolume(sound->getMusicVolume());
+				settings->setEffectVolume(sound->getEffectVolume());
+				settings->save(SETTING_FILENAME); 
+				break; 
+			}
+			
+			if (buttons[1]->onSelect(x,y))
+			{
+				// - music volume button event	           
+			    buttonMinus(3);
+			    break;	   
+			}
+			
+			if (buttons[2]->onSelect(x,y))
+			{
+				// + music volume button event	           
+			    buttonPlus(3);
+			    break;	 
+			}
+				
+			if (buttons[3]->onSelect(x,y))
+			{
+				// - effect volume button event	           
+			    buttonMinus(4);
+			    break;	   
+			}
+			 
+			if (buttons[4]->onSelect(x,y))
+			{
+				// + effect volume button event	           
+			    buttonPlus(4);
+			    break;	 
+			}
+			
+			if (buttons[5]->onSelect(x,y))
+			{
+				// - music track button event	           
+			    buttonMinus(5);
+			    break;	   
+			}
+
+			if (buttons[6]->onSelect(x,y))
+			{			
+				// + music track  button event	           
+			    buttonPlus(5);
+			    break;
+			}
+			
+		}
+		break;
 	 
+ 
 		case stateUserSettings:
 		{ 
 			// Check if button is pressed on screen
@@ -544,6 +671,26 @@ void Pointer::action(void)
 	if (wpadup & BUTTON_A) 
 	{
 		selectedA=false;
+	}
+
+	if (wpaddown & BUTTON_1 ) 
+	{
+		button1x();								
+	}
+    
+	if (wpadup & BUTTON_1) 
+	{
+		selected1=false;		
+	}
+		  
+	if (wpaddown & BUTTON_2 ) 
+	{
+		button2y();		
+	}
+	
+	if (wpadup & BUTTON_2) 
+	{
+		selected2=false;
 	}
 
 	// Scan for button events

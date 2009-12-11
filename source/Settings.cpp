@@ -35,10 +35,12 @@ Settings::Settings()
    const char *s_fn="Settings::Settings";
    trace->event(s_fn,0,"enter");
    
-   firstChar=0x00;
-   secondChar=0x00;
-   thirdChar=0x00;
-	
+   firstChar='A';
+   secondChar='A';
+   thirdChar='A'; 
+   musicVolume = 5;
+   effectVolume = 9;
+   	
    trace->event(s_fn,0,"leave [void]");
 }
 
@@ -48,10 +50,10 @@ Settings::Settings()
 
 Settings::~Settings()
 {
-  const char *s_fn="Settings::~Settings";
-  trace->event(s_fn,0,"enter");
+	const char *s_fn="Settings::~Settings";
+	trace->event(s_fn,0,"enter");
   
-  trace->event(s_fn,0,"leave [void]");
+	trace->event(s_fn,0,"leave [void]");
 }
 
 // ------------------------------
@@ -84,34 +86,39 @@ void Settings::load(const char *filename)
 			sprintf(temp, "entry%d", i);
 			data = mxmlFindElement(tree, tree, temp, NULL, NULL, MXML_DESCEND);
   
-			value=mxmlElementGetAttr(data,"value"); 
-			
-			switch (i)
+			if (data!=NULL)
 			{
-			   case 0: firstChar=value[0];
-					   break;
+				value=mxmlElementGetAttr(data,"value"); 
+			
+				switch (i)
+				{
+					case 0: firstChar=value[0];
+							break;
 
-			   case 1: secondChar=value[0];
-					   break;
+					case 1: secondChar=value[0];
+							break;
 
-			   case 2: thirdChar=value[0];
-					   break;
-			}				
-			trace->event(s_fn,0,"Store [id=%d|value=%s]",i,value);
+					case 2: thirdChar=value[0];
+							break;
+	
+					case 3: musicVolume=atoi(value);
+							break;
+					   
+					case 4: effectVolume=atoi(value);
+							break;
+				}							
+				trace->event(s_fn,0,"Store [id=%d|value=%s]",i,value);
+			}
 		}
-    }
-    else
+	}
+	else
     {
-	  trace->event(s_fn,0,"Setting file not found, set default values!");
-	  		
-	  firstChar='A';
-	  secondChar='A';
-	  thirdChar='A'; 
-   }
+		trace->event(s_fn,0,"Setting file not found, use default values!");
+    }
 
-   mxmlDelete(data);
-   mxmlDelete(tree);
-   trace->event(s_fn,0,"leave [void]");
+	mxmlDelete(data);
+	mxmlDelete(tree);
+	trace->event(s_fn,0,"leave [void]");
 }
 
 void Settings::save( const char *filename)
@@ -147,6 +154,14 @@ void Settings::save( const char *filename)
 			case 2: sprintf(temp, "%c", thirdChar);
 					mxmlElementSetAttr(data, "value", temp);			  
 					break;
+					
+			case 3: sprintf(temp, "%d", musicVolume);
+					mxmlElementSetAttr(data, "value", temp);			  
+					break;
+					
+			case 4: sprintf(temp, "%d", effectVolume);
+					mxmlElementSetAttr(data, "value", temp);			  
+					break;
 		}
     }
   
@@ -172,21 +187,17 @@ void Settings::save( const char *filename)
 void Settings::setFirstChar(char letter)
 {
 	const char *s_fn="Settings::setFirstChar";
-    trace->event(s_fn,0,"enter [letter=%c]",letter);
+    trace->event(s_fn,0,"%c",letter);
 	
 	firstChar=letter;
-	
-	trace->event(s_fn,0,"leave [void]");
 }
 
 void Settings::setSecondChar(char letter)
 {
 	const char *s_fn="Settings::setSecondChar";
-    trace->event(s_fn,0,"enter [letter=%c]",letter);
+    trace->event(s_fn,0,"%c",letter);
 	
 	secondChar=letter;
-   
-	trace->event(s_fn,0,"leave [void]");
 }
 
 void Settings::setThirdChar(char letter)
@@ -195,28 +206,52 @@ void Settings::setThirdChar(char letter)
     trace->event(s_fn,0,"enter [letter=%c]",letter);
 	
 	thirdChar=letter;
-   
-	trace->event(s_fn,0,"leave [void]");
 }
 
+void Settings::setMusicVolume(int volume)
+{
+	const char *s_fn="Settings::setMusicVolume";
+    trace->event(s_fn,0,"%d",volume);
+	
+	musicVolume=volume;
+}
+
+void Settings::setEffectVolume(int volume)
+{
+	const char *s_fn="Settings::setEffectVolume";
+    trace->event(s_fn,0,"%d", volume);
+	
+	effectVolume=volume;
+}
+		
 // ------------------------------
 // Getters
 // ------------------------------
 
-char Settings::getFirstChar()
+char Settings::getFirstChar(void)
 {
-   return firstChar;
+	return firstChar;
 }
 
-char Settings::getSecondChar()
+char Settings::getSecondChar(void)
 {
-   return secondChar;
+	return secondChar;
 }
 
-char Settings::getThirdChar()
+char Settings::getThirdChar(void)
 {
-   return thirdChar;
+	return thirdChar;
 };
+
+int Settings::getMusicVolume(void)
+{
+	return musicVolume;
+}
+
+int Settings::getEffectVolume(void)
+{
+	return effectVolume;
+}
 
 // ------------------------------
 // The End

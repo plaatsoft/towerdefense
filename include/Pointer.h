@@ -45,6 +45,8 @@ class Pointer
 	void buttonMinus(int index);
 	void buttonA(int x, int y);
 	void buttonExit(int index);
+	void button1x(void);
+	void button2y(void);
 	
   public:
   	Pointer();

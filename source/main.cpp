@@ -26,6 +26,9 @@
 **  	- Fetch latest available version information from internet.
 **  	- Fetch latest release notes information from internet.
 **  - Added Release Notes screen.
+**  - Added sound setting Screen.
+**  - Added nigh tracks background music.
+**  - Added sound basic sound effects.
 **
 **  TESTED:
 *   - Added wave lanch button on game board.
@@ -97,6 +100,7 @@
 #include "Trace.h"
 #include "Settings.h"
 #include "HighScore.h"
+#include "Sound.h"
 #include "Monster.h"
 #include "Weapon.h"
 #include "Button.h"
@@ -136,7 +140,9 @@ typedef struct
   GRRLIB_texImg *background1;
   GRRLIB_texImg *background2;
   GRRLIB_texImg *panel1;
-  
+  GRRLIB_texImg *bar;
+  GRRLIB_texImg *barCursor;  
+    
   GRRLIB_texImg *monster1;
   GRRLIB_texImg *monster2;
   GRRLIB_texImg *monster3;
@@ -203,7 +209,6 @@ typedef struct
   GRRLIB_texImg *map1;
   GRRLIB_texImg *map2;
   GRRLIB_texImg *map3;
-  
 } 
 image;
 
@@ -244,6 +249,14 @@ extern int      pic11length;
 // Panel1 Image
 extern const unsigned char     pic13data[];
 extern int      pic13length;
+
+// Bar Image
+extern const unsigned char     pic14data[];
+extern int      pic14length;
+
+// Bar_cursor Image
+extern const unsigned char     pic15data[];
+extern int      pic15length;
 
 // Monster1 Image
 extern const unsigned char     pic101data[];
@@ -498,6 +511,7 @@ Http		*http;
 Settings  	*settings;
 HighScore 	*highScore;
 Grid      	*grid;
+Sound      	*sound;
 Monster   	*monsters[MAX_MONSTERS];
 Pointer   	*pointers[MAX_POINTERS];
 Weapon    	*weapons[MAX_WEAPONS];
@@ -524,6 +538,8 @@ void initImages(void)
    images.background1=GRRLIB_LoadTexture( pic10data );
    images.background2=GRRLIB_LoadTexture( pic11data );
    images.panel1=GRRLIB_LoadTexture( pic13data );
+   images.bar=GRRLIB_LoadTexture( pic14data );
+   images.barCursor=GRRLIB_LoadTexture( pic15data );
 	 
    images.monster1=GRRLIB_LoadTexture( pic101data );
    images.monster2=GRRLIB_LoadTexture( pic102data );
@@ -1056,7 +1072,7 @@ void initButtons(void)
 		{	
 			// Button (Play Map1)
 			buttons[0]=new Button();
-			buttons[0]->setX(25);
+			buttons[0]->setX(40);
 			buttons[0]->setY(150);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
@@ -1064,7 +1080,7 @@ void initButtons(void)
 						
 			// Button (Play Map2)
 			buttons[1]=new Button();
-			buttons[1]->setX(225);
+			buttons[1]->setX(240);
 			buttons[1]->setY(150);
 			buttons[1]->setImageNormal(images.button2);
 			buttons[1]->setImageFocus(images.buttonFocus2);
@@ -1072,7 +1088,7 @@ void initButtons(void)
 				
 			// Button (Play Map3)
 			buttons[2]=new Button();
-			buttons[2]->setX(425);
+			buttons[2]->setX(440);
 			buttons[2]->setY(150);
 			buttons[2]->setImageNormal(images.button2);
 			buttons[2]->setImageFocus(images.buttonFocus2);
@@ -1080,7 +1096,7 @@ void initButtons(void)
 			
 			// Button (Main Menu)
 			buttons[3]=new Button();
-			buttons[3]->setX(225);
+			buttons[3]->setX(240);
 			buttons[3]->setY(460);
 			buttons[3]->setImageNormal(images.button2);
 			buttons[3]->setImageFocus(images.buttonFocus2);
@@ -1156,7 +1172,7 @@ void initButtons(void)
 		{
 			// Main Menu Button
 			buttons[0]=new Button();
-			buttons[0]->setX(225);
+			buttons[0]->setX(240);
 			buttons[0]->setY(460);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
@@ -1168,7 +1184,7 @@ void initButtons(void)
 		{
 			// Main Menu Button
 			buttons[0]=new Button();
-			buttons[0]->setX(225);
+			buttons[0]->setX(240);
 			buttons[0]->setY(460);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
@@ -1180,11 +1196,59 @@ void initButtons(void)
 		{
 			// Main Menu Button
 			buttons[0]=new Button();
-			buttons[0]->setX(225);
+			buttons[0]->setX(240);
 			buttons[0]->setY(460);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Main Menu");	
+			
+			// Music Volume - button 
+			buttons[1]=new Button();
+			buttons[1]->setX(20);
+			buttons[1]->setY(135+YOFFSET);
+			buttons[1]->setImageNormal(images.button1);
+			buttons[1]->setImageFocus(images.buttonFocus1);
+			buttons[1]->setLabel("-");	
+			
+			// Music Volume + button 
+			buttons[2]=new Button();
+			buttons[2]->setX(540);
+			buttons[2]->setY(130+YOFFSET);
+			buttons[2]->setImageNormal(images.button1);
+			buttons[2]->setImageFocus(images.buttonFocus1);
+			buttons[2]->setLabel("+");	
+			
+			// Effect Volume - button 
+			buttons[3]=new Button();
+			buttons[3]->setX(20);
+			buttons[3]->setY(230+YOFFSET);
+			buttons[3]->setImageNormal(images.button1);
+			buttons[3]->setImageFocus(images.buttonFocus1);
+			buttons[3]->setLabel("-");	
+			
+			// Effect Volume + button 
+			buttons[4]=new Button();
+			buttons[4]->setX(540);
+			buttons[4]->setY(230+YOFFSET);
+			buttons[4]->setImageNormal(images.button1);
+			buttons[4]->setImageFocus(images.buttonFocus1);
+			buttons[4]->setLabel("+");	
+			
+			// Music track - button 
+			buttons[5]=new Button();
+			buttons[5]->setX(140);
+			buttons[5]->setY(310+YOFFSET);
+			buttons[5]->setImageNormal(images.button1);
+			buttons[5]->setImageFocus(images.buttonFocus1);
+			buttons[5]->setLabel("-");	
+		
+			// Music track + button 
+			buttons[6]=new Button();
+			buttons[6]->setX(420);
+			buttons[6]->setY(310+YOFFSET);
+			buttons[6]->setImageNormal(images.button1);
+			buttons[6]->setImageFocus(images.buttonFocus1);
+			buttons[6]->setLabel("+");	
 		}
 		break;
 		
@@ -1192,7 +1256,7 @@ void initButtons(void)
 		{
 			// Main Menu Button
 			buttons[0]=new Button();
-			buttons[0]->setX(225);
+			buttons[0]->setX(240);
 			buttons[0]->setY(460);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
@@ -1252,7 +1316,7 @@ void initButtons(void)
 			
 			// Main Menu Button
 			buttons[6]=new Button();
-			buttons[6]->setX(225);
+			buttons[6]->setX(240);
 			buttons[6]->setY(460);
 			buttons[6]->setImageNormal(images.button2);
 			buttons[6]->setImageFocus(images.buttonFocus2);
@@ -1312,7 +1376,7 @@ void initGame(void)
    
 	game.wave1 = 0;
 	game.wave2 = 0;
-	
+		
    	// Init Images
 	initImages();
    
@@ -1326,6 +1390,12 @@ void initGame(void)
 	// Load Local Highscore
 	highScore = new HighScore();
 	highScore->load(HIGHSCORE_FILENAME);
+	
+	// Init Sound (Start play first mode file)
+	sound = new Sound();
+	sound->setMusicVolume(settings->getMusicVolume());
+	sound->setEffectVolume(settings->getEffectVolume());	
+	sound->play();
 	
 	// Init network Thread
 	initNetwork();
@@ -1724,9 +1794,9 @@ void drawScreen(void)
 		  drawButtons();
 		  
 		  // Draw samples maps
-		  GRRLIB_DrawImg(40,200, images.map1, 0, 1, 1, IMAGE_COLOR );
-		  GRRLIB_DrawImg(230,200, images.map2, 0, 1, 1, IMAGE_COLOR );
-		  GRRLIB_DrawImg(440,200, images.map3, 0, 1, 1, IMAGE_COLOR );
+		  GRRLIB_DrawImg(65, 200, images.map1, 0, 1, 1, IMAGE_COLOR );
+		  GRRLIB_DrawImg(245,200, images.map2, 0, 1, 1, IMAGE_COLOR );
+		  GRRLIB_DrawImg(455,200, images.map3, 0, 1, 1, IMAGE_COLOR );
 			  
 		  // Init text layer	  
           GRRLIB_initTexture();
@@ -1965,8 +2035,7 @@ void drawScreen(void)
 		
 		  // Draw buttons
 	      drawButtons(); 
-		  
-		  
+		  		  
 	      // Init text layer	  
           GRRLIB_initTexture();
   
@@ -1980,20 +2049,20 @@ void drawScreen(void)
           // Draw content	
           drawText(0, ypos, fontParagraph, "Music Volume");	
 	      ypos+=20;
-          //GRRLIB_DrawImg(104,ypos,images.bar, 0, 1, 1, IMAGE_COLOR );
+          GRRLIB_DrawImg(104,ypos,images.bar, 0, 1, 1, IMAGE_COLOR );
 	      ypos+=10;
-	      //GRRLIB_DrawImg(115+(musicVolume*40),ypos, images.barCursor, 0, 1, 1, IMAGE_COLOR );
+	      GRRLIB_DrawImg(115+(sound->getMusicVolume()*40),ypos, images.barCursor, 0, 1, 1, IMAGE_COLOR );
   
           ypos+=80;
           drawText(0, ypos, fontParagraph, "Effects Volume" );
 	      ypos+=20;	
-	      //GRRLIB_DrawImg(104,ypos, images.bar, 0, 1, 1, IMAGE_COLOR );
+	      GRRLIB_DrawImg(104,ypos, images.bar, 0, 1, 1, IMAGE_COLOR );
 	      ypos+=10;
-	      //GRRLIB_DrawImg(115+(effectVolume*40),ypos,images.barCursor, 0, 1, 1, IMAGE_COLOR );
+	      GRRLIB_DrawImg(115+(sound->getEffectVolume()*40),ypos,images.barCursor, 0, 1, 1, IMAGE_COLOR );
 	
 	      ypos+=70;
-		  //sprintf(tmp,"  Music track [%d]", selectedMusic);
-	      //drawText(0, ypos, fontParagraph, tmp);	
+		  sprintf(tmp,"  Music track [%d]", sound->getMusicTrack());
+	      drawText(0, ypos, fontParagraph, tmp);	
 		  		  		
 		  // Draw Button Text labels
 		  drawButtonsText();
@@ -2235,6 +2304,9 @@ void destroyImages(void)
    
    GRRLIB_FreeTexture(images.background1);
    GRRLIB_FreeTexture(images.background2);
+   GRRLIB_FreeTexture(images.panel1);
+   GRRLIB_FreeTexture(images.bar);
+   GRRLIB_FreeTexture(images.barCursor);
    
    GRRLIB_FreeTexture(images.monster1);
    GRRLIB_FreeTexture(images.monster2);
