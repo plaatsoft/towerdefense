@@ -87,7 +87,7 @@
 #define MAX_BUTTONS         	10
 #define MAX_POINTERS         	4
 #define MAX_LOCAL_HIGHSCORE 	15
-#define MAX_SETTINGS			3
+#define MAX_SETTINGS			5
 
 #define MAX_RUMBLE				25
 #define MAX_HORZ_PIXELS			640
@@ -97,16 +97,13 @@
 #define MAX_ALFA				255
 #define MAX_SIZE				40
 #define MAX_SOUND_VOLUME		10
-#define MAX_MUSIC_TRACK     	16
+#define MAX_MUSIC_TRACK     	9
 #define MAX_LINES		    	200
 #define MAX_BUFFER_SIZE			8192
 #define MAX_IDLE_TIME	    	10
 
 #define MAX_GRID_X 				20
 #define MAX_GRID_Y 				17
-
-#define EXPLODE_STEP	    	4
-#define OUT_OF_TIME		    	15
 
 #define IR_X_OFFSET         	40
 #define IR_Y_OFFSET         	40
@@ -197,7 +194,7 @@ typedef struct
 	int weaponSelect;
 	int waveDelay;
 	int waveCountDown;
-	
+
 	// game panel variables
 	int score;
 	int cash;

@@ -18,36 +18,36 @@
 **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#ifndef SETTINGS_H
-#define SETTINGS_H
+#ifndef SOUND_H
+#define SOUND_H
 
-class Settings
+#include <gcmodplay.h> 
+#include <asndlib.h>
+
+class Sound
 {
   private:
-    char firstChar;
-	char secondChar;
-	char thirdChar;
-	int  musicVolume;
-	int  effectVolume;
+	MODPlay snd1;	
+	int musicVolume;
+	int effectVolume;
+	int musicTrack;
 	
   public:
-  	Settings();
- 	~Settings();
-	
-	void load(const char *filename);
-	void save( const char *filename);
-	
-	void setFirstChar(char letter);
-	void setSecondChar(char letter);
-	void setThirdChar(char letter);
+  	Sound();
+ 	~Sound();
+
+	void play(void);
+	void effect(int type);
+
+	// Setters	
 	void setMusicVolume(int volume);
 	void setEffectVolume(int volume);
-
-	char getFirstChar(void);
-	char getSecondChar(void);
-	char getThirdChar(void);
-	int  getMusicVolume(void);
-	int  getEffectVolume(void);
+	void setMusicTrack(int track);
+		
+	// Getters
+	int getMusicVolume(void);
+	int getEffectVolume(void);
+	int getMusicTrack(void);
 };
 
 #endif

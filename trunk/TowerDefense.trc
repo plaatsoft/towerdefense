@@ -1,1160 +1,1044 @@
-11-12-2009 15:05:26 [thread0-initGame] TowerDefense 0.40 Started
-11-12-2009 15:05:26 [thread0-initGame] enter
-11-12-2009 15:05:26 [thread0-initImages] enter
-11-12-2009 15:05:26 [thread0-initImages] leave [void]
-11-12-2009 15:05:26 [thread0-initPointers] enter
-11-12-2009 15:05:26 [thread0-Pointer::Pointer] enter
-11-12-2009 15:05:26 [thread0-Pointer::Pointer] leave [void]
-11-12-2009 15:05:26 [thread0-Pointer::setIndex] 0
-11-12-2009 15:05:26 [thread0-Pointer::setX] 320
-11-12-2009 15:05:26 [thread0-Pointer::setY] 240
-11-12-2009 15:05:26 [thread0-Pointer::setAngle] 0
-11-12-2009 15:05:26 [thread0-Pointer::setImage] data
-11-12-2009 15:05:26 [thread0-Pointer::Pointer] enter
-11-12-2009 15:05:26 [thread0-Pointer::Pointer] leave [void]
-11-12-2009 15:05:26 [thread0-Pointer::setIndex] 1
-11-12-2009 15:05:26 [thread0-Pointer::setX] 320
-11-12-2009 15:05:26 [thread0-Pointer::setY] 240
-11-12-2009 15:05:26 [thread0-Pointer::setAngle] 0
-11-12-2009 15:05:26 [thread0-Pointer::setImage] data
-11-12-2009 15:05:26 [thread0-Pointer::Pointer] enter
-11-12-2009 15:05:26 [thread0-Pointer::Pointer] leave [void]
-11-12-2009 15:05:26 [thread0-Pointer::setIndex] 2
-11-12-2009 15:05:26 [thread0-Pointer::setX] 320
-11-12-2009 15:05:26 [thread0-Pointer::setY] 240
-11-12-2009 15:05:26 [thread0-Pointer::setAngle] 0
-11-12-2009 15:05:26 [thread0-Pointer::setImage] data
-11-12-2009 15:05:26 [thread0-Pointer::Pointer] enter
-11-12-2009 15:05:26 [thread0-Pointer::Pointer] leave [void]
-11-12-2009 15:05:26 [thread0-Pointer::setIndex] 3
-11-12-2009 15:05:26 [thread0-Pointer::setX] 340
-11-12-2009 15:05:26 [thread0-Pointer::setY] 240
-11-12-2009 15:05:26 [thread0-Pointer::setAngle] 0
-11-12-2009 15:05:26 [thread0-Pointer::setImage] data
-11-12-2009 15:05:26 [thread0-initPointers] leave [void]
-11-12-2009 15:05:26 [thread0-Settings::Settings] enter
-11-12-2009 15:05:26 [thread0-Settings::Settings] leave [void]
-11-12-2009 15:05:26 [thread0-Settings::load] enter
-11-12-2009 15:05:26 [thread0-Settings::load] Load [filename=sd:/apps/TowerDefense/settings.xml]
-11-12-2009 15:05:26 [thread0-Settings::load] Store [id=0|value=S]
-11-12-2009 15:05:26 [thread0-Settings::load] Store [id=1|value=A]
-11-12-2009 15:05:26 [thread0-Settings::load] Store [id=2|value=N]
-11-12-2009 15:05:26 [thread0-Settings::load] leave [void]
-11-12-2009 15:05:26 [thread0-HighScore::HighScore] enter
-11-12-2009 15:05:26 [thread0-HighScore::HighScore] leave [void]
-11-12-2009 15:05:26 [thread0-HighScore::load] enter
-11-12-2009 15:05:26 [thread0-HighScore::load] load highscore [id=0|score=4650|localTime=1260488044|wave=8|name=SAN]
-11-12-2009 15:05:26 [thread0-HighScore::load] load highscore [id=1|score=4616|localTime=1260540004|wave=14|name=SAN]
-11-12-2009 15:05:26 [thread0-HighScore::load] load highscore [id=2|score=638|localTime=1260542878|wave=11|name=SAN]
-11-12-2009 15:05:26 [thread0-HighScore::load] load highscore [id=3|score=360|localTime=1260487195|wave=3|name=SAN]
-11-12-2009 15:05:26 [thread0-HighScore::load] load highscore [id=4|score=360|localTime=1260487195|wave=3|name=SAN]
-11-12-2009 15:05:26 [thread0-HighScore::load] load highscore [id=5|score=360|localTime=1260487195|wave=3|name=SAN]
-11-12-2009 15:05:26 [thread0-HighScore::load] load highscore [id=6|score=360|localTime=1260487195|wave=3|name=SAN]
-11-12-2009 15:05:26 [thread0-HighScore::load] load highscore [id=7|score=360|localTime=1260487195|wave=3|name=SAN]
-11-12-2009 15:05:26 [thread0-HighScore::load] load highscore [id=8|score=226|localTime=1260531639|wave=70|name=SAN]
-11-12-2009 15:05:26 [thread0-HighScore::load] load highscore [id=9|score=208|localTime=1260237020|wave=1|name=WPL]
-11-12-2009 15:05:26 [thread0-HighScore::load] load highscore [id=10|score=208|localTime=1260237020|wave=1|name=WPL]
-11-12-2009 15:05:26 [thread0-HighScore::load] load highscore [id=11|score=204|localTime=1260223914|wave=1|name=WPL]
-11-12-2009 15:05:26 [thread0-HighScore::load] load highscore [id=12|score=204|localTime=1260223914|wave=1|name=WPL]
-11-12-2009 15:05:26 [thread0-HighScore::load] load highscore [id=13|score=204|localTime=1260223914|wave=1|name=WPL]
-11-12-2009 15:05:26 [thread0-HighScore::load] load highscore [id=14|score=190|localTime=1260224749|wave=1|name=QRQ]
-11-12-2009 15:05:26 [thread0-HighScore::load] leave [void]
-11-12-2009 15:05:26 [thread0-initNetwork] enter
-11-12-2009 15:05:26 [thread0-Http::Http] enter
-11-12-2009 15:05:26 [thread0-Http::Http] leave [void]
-11-12-2009 15:05:26 [thread1-tcp_start_thread] enter
-11-12-2009 15:05:26 [thread1-tcp_clear_memory] enter
-11-12-2009 15:05:26 [thread1-tcp_clear_memory] leave
-11-12-2009 15:05:26 [thread1-tcp_start_thread] leave [0]
-11-12-2009 15:05:26 [thread0-initNetwork] leave [void]
-11-12-2009 15:05:26 [thread0-initGame] leave
-11-12-2009 15:05:26 [thread1-tcp_thread] enter
-11-12-2009 15:05:26 [thread1-tcp_thread] stateMachine=TCP_INIT
-11-12-2009 15:05:26 [thread1-tcp_init] enter
-11-12-2009 15:05:26 [thread1-tcp_init] Waiting for network to initialise...
-11-12-2009 15:05:26 [thread0-processStateMachine] stateMachine=stateIntro1
-11-12-2009 15:05:30 [thread1-tcp_init] Network initialised [10.240.136.110].
-11-12-2009 15:05:30 [thread1-tcp_init] leave [0]
-11-12-2009 15:05:30 [thread1-tcp_thread] stateMachine=TCP_REQUEST1a
-11-12-2009 15:05:30 [thread1-http_request] enter
-11-12-2009 15:05:30 [thread1-http_split_url] enter
-11-12-2009 15:05:30 [thread1-http_split_url] leave [true]
-11-12-2009 15:05:30 [thread1-tcp_connect] enter [host=www.plaatsoft.nl|port=80]
-11-12-2009 15:05:30 [thread1-tcp_connect] net_gethostbyname successfull resolved
-11-12-2009 15:05:30 [thread1-tcp_socket] enter
-11-12-2009 15:05:30 [thread1-tcp_socket] net_socket succesfull
-11-12-2009 15:05:30 [thread1-tcp_socket] leave [0]
-11-12-2009 15:05:30 [thread1-tcp_connect] tcp_socket succesfull
-11-12-2009 15:05:30 [thread1-tcp_connect] DNS resolve=85.158.203.157
-11-12-2009 15:05:30 [thread1-tcp_connect] net_connect succesfull
-11-12-2009 15:05:30 [thread1-tcp_connect] leave [0]
-11-12-2009 15:05:30 [thread1-http_request] tcp_connect(www.plaatsoft.nl, 80) = 0
-11-12-2009 15:05:30 [thread1-http_request] request=GET /service/releasenotes5.html HTTP/1.1
+11-12-2009 22:27:02 [thread0-initGame] TowerDefense 0.40 Started
+11-12-2009 22:27:02 [thread0-initGame] enter
+11-12-2009 22:27:02 [thread0-initImages] enter
+11-12-2009 22:27:02 [thread0-initImages] leave [void]
+11-12-2009 22:27:02 [thread0-initPointers] enter
+11-12-2009 22:27:02 [thread0-Pointer::Pointer] enter
+11-12-2009 22:27:02 [thread0-Pointer::Pointer] leave [void]
+11-12-2009 22:27:02 [thread0-Pointer::setIndex] 0
+11-12-2009 22:27:02 [thread0-Pointer::setX] 320
+11-12-2009 22:27:02 [thread0-Pointer::setY] 240
+11-12-2009 22:27:02 [thread0-Pointer::setAngle] 0
+11-12-2009 22:27:02 [thread0-Pointer::setImage] data
+11-12-2009 22:27:02 [thread0-Pointer::Pointer] enter
+11-12-2009 22:27:02 [thread0-Pointer::Pointer] leave [void]
+11-12-2009 22:27:02 [thread0-Pointer::setIndex] 1
+11-12-2009 22:27:02 [thread0-Pointer::setX] 320
+11-12-2009 22:27:02 [thread0-Pointer::setY] 240
+11-12-2009 22:27:02 [thread0-Pointer::setAngle] 0
+11-12-2009 22:27:02 [thread0-Pointer::setImage] data
+11-12-2009 22:27:02 [thread0-Pointer::Pointer] enter
+11-12-2009 22:27:02 [thread0-Pointer::Pointer] leave [void]
+11-12-2009 22:27:02 [thread0-Pointer::setIndex] 2
+11-12-2009 22:27:02 [thread0-Pointer::setX] 320
+11-12-2009 22:27:02 [thread0-Pointer::setY] 240
+11-12-2009 22:27:02 [thread0-Pointer::setAngle] 0
+11-12-2009 22:27:02 [thread0-Pointer::setImage] data
+11-12-2009 22:27:02 [thread0-Pointer::Pointer] enter
+11-12-2009 22:27:02 [thread0-Pointer::Pointer] leave [void]
+11-12-2009 22:27:02 [thread0-Pointer::setIndex] 3
+11-12-2009 22:27:02 [thread0-Pointer::setX] 340
+11-12-2009 22:27:02 [thread0-Pointer::setY] 240
+11-12-2009 22:27:02 [thread0-Pointer::setAngle] 0
+11-12-2009 22:27:02 [thread0-Pointer::setImage] data
+11-12-2009 22:27:02 [thread0-initPointers] leave [void]
+11-12-2009 22:27:02 [thread0-HighScore::HighScore] enter
+11-12-2009 22:27:02 [thread0-HighScore::HighScore] leave [void]
+11-12-2009 22:27:02 [thread0-HighScore::load] enter
+11-12-2009 22:27:02 [thread0-HighScore::load] leave [void]
+11-12-2009 22:27:02 [thread0-Sound::Sound] enter
+11-12-2009 22:27:02 [thread0-Sound::Sound] leave [void]
+11-12-2009 22:27:02 [thread0-Sound::setMusicVolume] 5
+11-12-2009 22:27:02 [thread0-Sound::setEffectVolume] 9
+11-12-2009 22:27:02 [thread0-Sound::play] enter
+11-12-2009 22:27:02 [thread0-Sound::play] leave [void]
+11-12-2009 22:27:02 [thread0-initNetwork] enter
+11-12-2009 22:27:02 [thread0-Http::Http] enter
+11-12-2009 22:27:02 [thread0-Http::Http] leave [void]
+11-12-2009 22:27:02 [thread1-tcp_start_thread] enter
+11-12-2009 22:27:02 [thread1-tcp_clear_memory] enter
+11-12-2009 22:27:02 [thread1-tcp_clear_memory] leave
+11-12-2009 22:27:02 [thread1-tcp_start_thread] leave [0]
+11-12-2009 22:27:02 [thread0-initNetwork] leave [void]
+11-12-2009 22:27:02 [thread0-initGame] leave
+11-12-2009 22:27:02 [thread1-tcp_thread] enter
+11-12-2009 22:27:02 [thread1-tcp_thread] stateMachine=TCP_INIT
+11-12-2009 22:27:02 [thread1-tcp_init] enter
+11-12-2009 22:27:02 [thread1-tcp_init] Waiting for network to initialise...
+11-12-2009 22:27:02 [thread0-processStateMachine] stateMachine=stateIntro1
+11-12-2009 22:27:04 [thread0-Pointer::buttonA] enter [x=325|y=269]
+11-12-2009 22:27:04 [thread0-Pointer::buttonA] leave
+11-12-2009 22:27:04 [thread0-processStateMachine] stateMachine=stateIntro2
+11-12-2009 22:27:05 [thread0-Pointer::buttonA] enter [x=364|y=294]
+11-12-2009 22:27:05 [thread0-Pointer::buttonA] leave
+11-12-2009 22:27:05 [thread0-processStateMachine] stateMachine=stateMainMenu
+11-12-2009 22:27:05 [thread0-initButtons] enter
+11-12-2009 22:27:05 [thread0-Button::Button] enter
+11-12-2009 22:27:05 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:05 [thread0-Button::setX] 440
+11-12-2009 22:27:05 [thread0-Button::setY] 40
+11-12-2009 22:27:05 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:05 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:05 [thread0-Button::Button] enter
+11-12-2009 22:27:05 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:05 [thread0-Button::setX] 440
+11-12-2009 22:27:05 [thread0-Button::setY] 80
+11-12-2009 22:27:05 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:05 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:05 [thread0-Button::Button] enter
+11-12-2009 22:27:05 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:05 [thread0-Button::setX] 440
+11-12-2009 22:27:05 [thread0-Button::setY] 120
+11-12-2009 22:27:05 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:05 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:05 [thread0-Button::Button] enter
+11-12-2009 22:27:05 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:05 [thread0-Button::setX] 440
+11-12-2009 22:27:05 [thread0-Button::setY] 160
+11-12-2009 22:27:05 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:05 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:05 [thread0-Button::Button] enter
+11-12-2009 22:27:05 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:05 [thread0-Button::setX] 440
+11-12-2009 22:27:05 [thread0-Button::setY] 200
+11-12-2009 22:27:05 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:05 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:05 [thread0-Button::Button] enter
+11-12-2009 22:27:05 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:05 [thread0-Button::setX] 440
+11-12-2009 22:27:05 [thread0-Button::setY] 240
+11-12-2009 22:27:05 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:05 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:05 [thread0-Button::Button] enter
+11-12-2009 22:27:05 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:05 [thread0-Button::setX] 440
+11-12-2009 22:27:05 [thread0-Button::setY] 280
+11-12-2009 22:27:05 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:05 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:05 [thread0-Button::Button] enter
+11-12-2009 22:27:05 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:05 [thread0-Button::setX] 440
+11-12-2009 22:27:05 [thread0-Button::setY] 400
+11-12-2009 22:27:05 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:05 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:05 [thread0-Button::Button] enter
+11-12-2009 22:27:05 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:05 [thread0-Button::setX] 440
+11-12-2009 22:27:05 [thread0-Button::setY] 440
+11-12-2009 22:27:05 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:05 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:05 [thread0-initButtons] leave [void]
+11-12-2009 22:27:06 [thread1-tcp_init] Network initialised [10.240.136.110].
+11-12-2009 22:27:06 [thread1-tcp_init] leave [0]
+11-12-2009 22:27:06 [thread1-tcp_thread] stateMachine=TCP_REQUEST1a
+11-12-2009 22:27:06 [thread1-http_request] enter
+11-12-2009 22:27:06 [thread1-http_split_url] enter
+11-12-2009 22:27:06 [thread1-http_split_url] leave [true]
+11-12-2009 22:27:06 [thread1-tcp_connect] enter [host=www.plaatsoft.nl|port=80]
+11-12-2009 22:27:06 [thread1-tcp_connect] net_gethostbyname successfull resolved
+11-12-2009 22:27:06 [thread1-tcp_socket] enter
+11-12-2009 22:27:06 [thread1-tcp_socket] net_socket succesfull
+11-12-2009 22:27:06 [thread1-tcp_socket] leave [0]
+11-12-2009 22:27:06 [thread1-tcp_connect] tcp_socket succesfull
+11-12-2009 22:27:06 [thread1-tcp_connect] DNS resolve=85.158.203.157
+11-12-2009 22:27:06 [thread1-tcp_connect] net_connect succesfull
+11-12-2009 22:27:06 [thread1-tcp_connect] leave [0]
+11-12-2009 22:27:06 [thread1-http_request] tcp_connect(www.plaatsoft.nl, 80) = 0
+11-12-2009 22:27:06 [thread1-http_request] request=GET /service/releasenotes5.html HTTP/1.1
 Host: www.plaatsoft.nl
 User-Agent: TowerDefense/0.40 (compatible; v3.X; Nintendo Wii)
 Accept: text/xml,text/html,text/plain,image/gif
 Cache-Control: no-cache
 
 
-11-12-2009 15:05:30 [thread1-tcp_write] enter [bufsize=206]
-11-12-2009 15:05:30 [thread1-tcp_write] buffer=GET /service/releasenotes5.html HTTP/1.1
+11-12-2009 22:27:06 [thread1-tcp_write] enter [bufsize=206]
+11-12-2009 22:27:06 [thread1-tcp_write] buffer=GET /service/releasenotes5.html HTTP/1.1
 Host: www.plaatsoft.nl
 User-Agent: TowerDefense/0.40 (compatible; v3.X; Nintendo Wii)
 Accept: text/xml,text/html,text/plain,image/gif
 Cache-Control: no-cache
 
 
-11-12-2009 15:05:30 [thread1-tcp_write] leave [left=0]
-11-12-2009 15:05:30 [thread1-tcp_readln] enter
-11-12-2009 15:05:30 [thread1-tcp_readln] leave [bufsize=19]
-11-12-2009 15:05:30 [thread1-http_request] HTTP/1.1 302 Found
-11-12-2009 15:05:30 [thread1-tcp_readln] enter
-11-12-2009 15:05:30 [thread1-tcp_readln] leave [bufsize=36]
-11-12-2009 15:05:30 [thread1-http_request] Date: Fri, 11 Dec 2009 14:03:38 GMT
-11-12-2009 15:05:30 [thread1-tcp_readln] enter
-11-12-2009 15:05:30 [thread1-tcp_readln] leave [bufsize=17]
-11-12-2009 15:05:30 [thread1-http_request] Server: Apache/2
-11-12-2009 15:05:30 [thread1-tcp_readln] enter
-11-12-2009 15:05:30 [thread1-tcp_readln] leave [bufsize=51]
-11-12-2009 15:05:30 [thread1-http_request] Location: http://www.plaatsoft.nl/wiibrew/notFound
-11-12-2009 15:05:30 [thread1-tcp_readln] enter
-11-12-2009 15:05:30 [thread1-tcp_readln] leave [bufsize=20]
-11-12-2009 15:05:30 [thread1-http_request] Content-Length: 224
-11-12-2009 15:05:30 [thread1-tcp_readln] enter
-11-12-2009 15:05:30 [thread1-tcp_readln] leave [bufsize=44]
-11-12-2009 15:05:30 [thread1-http_request] Content-Type: text/html; charset=iso-8859-1
-11-12-2009 15:05:30 [thread1-tcp_readln] enter
-11-12-2009 15:05:30 [thread1-tcp_readln] leave [bufsize=1]
-11-12-2009 15:05:30 [thread1-http_request] 
-11-12-2009 15:05:30 [thread1-http_request] content_length=224, status=302, linecount=6
-11-12-2009 15:05:30 [thread1-tcp_thread] Error making http request1a
-11-12-2009 15:05:30 [thread1-tcp_thread] stateMachine=TCP_RETRY
-11-12-2009 15:05:30 [thread1-tcp_sleep] enter [wait=10 sec]
-11-12-2009 15:05:35 [thread0-Pointer::buttonA] enter [x=328|y=310]
-11-12-2009 15:05:35 [thread0-Pointer::buttonA] leave
-11-12-2009 15:05:35 [thread0-processStateMachine] stateMachine=stateIntro2
-11-12-2009 15:05:36 [thread0-Pointer::buttonA] enter [x=392|y=292]
-11-12-2009 15:05:36 [thread0-Pointer::buttonA] leave
-11-12-2009 15:05:36 [thread0-processStateMachine] stateMachine=stateMainMenu
-11-12-2009 15:05:36 [thread0-initButtons] enter
-11-12-2009 15:05:36 [thread0-Button::Button] enter
-11-12-2009 15:05:36 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setX] 440
-11-12-2009 15:05:36 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setY] 40
-11-12-2009 15:05:36 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:36 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:36 [thread0-Button::Button] enter
-11-12-2009 15:05:36 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setX] 440
-11-12-2009 15:05:36 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setY] 80
-11-12-2009 15:05:36 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:36 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:36 [thread0-Button::Button] enter
-11-12-2009 15:05:36 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setX] 440
-11-12-2009 15:05:36 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setY] 120
-11-12-2009 15:05:36 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:36 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:36 [thread0-Button::Button] enter
-11-12-2009 15:05:36 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setX] 440
-11-12-2009 15:05:36 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setY] 160
-11-12-2009 15:05:36 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:36 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:36 [thread0-Button::Button] enter
-11-12-2009 15:05:36 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setX] 440
-11-12-2009 15:05:36 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setY] 200
-11-12-2009 15:05:36 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:36 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:36 [thread0-Button::Button] enter
-11-12-2009 15:05:36 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setX] 440
-11-12-2009 15:05:36 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setY] 240
-11-12-2009 15:05:36 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:36 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:36 [thread0-Button::Button] enter
-11-12-2009 15:05:36 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setX] 440
-11-12-2009 15:05:36 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setY] 280
-11-12-2009 15:05:36 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:36 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:36 [thread0-Button::Button] enter
-11-12-2009 15:05:36 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setX] 440
-11-12-2009 15:05:36 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setY] 400
-11-12-2009 15:05:36 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:36 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:36 [thread0-Button::Button] enter
-11-12-2009 15:05:36 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setX] 440
-11-12-2009 15:05:36 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setY] 440
-11-12-2009 15:05:36 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:36 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:36 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:36 [thread0-initButtons] leave [void]
-11-12-2009 15:05:40 [thread1-tcp_sleep] leave [void]
-11-12-2009 15:05:40 [thread1-tcp_thread] stateMachine=TCP_REQUEST1a
-11-12-2009 15:05:40 [thread1-http_request] enter
-11-12-2009 15:05:40 [thread1-http_split_url] enter
-11-12-2009 15:05:40 [thread1-http_split_url] leave [true]
-11-12-2009 15:05:40 [thread1-tcp_connect] enter [host=www.plaatsoft.nl|port=80]
-11-12-2009 15:05:40 [thread1-tcp_connect] net_gethostbyname successfull resolved
-11-12-2009 15:05:40 [thread1-tcp_socket] enter
-11-12-2009 15:05:40 [thread1-tcp_socket] net_socket succesfull
-11-12-2009 15:05:40 [thread1-tcp_socket] leave [0]
-11-12-2009 15:05:40 [thread1-tcp_connect] tcp_socket succesfull
-11-12-2009 15:05:40 [thread1-tcp_connect] DNS resolve=85.158.203.157
-11-12-2009 15:05:40 [thread1-tcp_connect] net_connect succesfull
-11-12-2009 15:05:40 [thread1-tcp_connect] leave [0]
-11-12-2009 15:05:40 [thread1-http_request] tcp_connect(www.plaatsoft.nl, 80) = 0
-11-12-2009 15:05:40 [thread1-http_request] request=GET /service/releasenotes5.html HTTP/1.1
+11-12-2009 22:27:06 [thread1-tcp_write] leave [left=0]
+11-12-2009 22:27:06 [thread1-tcp_readln] enter
+11-12-2009 22:27:06 [thread1-tcp_readln] leave [bufsize=19]
+11-12-2009 22:27:06 [thread1-http_request] HTTP/1.1 302 Found
+11-12-2009 22:27:06 [thread1-tcp_readln] enter
+11-12-2009 22:27:06 [thread1-tcp_readln] leave [bufsize=36]
+11-12-2009 22:27:06 [thread1-http_request] Date: Fri, 11 Dec 2009 21:25:13 GMT
+11-12-2009 22:27:06 [thread1-tcp_readln] enter
+11-12-2009 22:27:06 [thread1-tcp_readln] leave [bufsize=17]
+11-12-2009 22:27:06 [thread1-http_request] Server: Apache/2
+11-12-2009 22:27:06 [thread1-tcp_readln] enter
+11-12-2009 22:27:06 [thread1-tcp_readln] leave [bufsize=51]
+11-12-2009 22:27:06 [thread1-http_request] Location: http://www.plaatsoft.nl/wiibrew/notFound
+11-12-2009 22:27:06 [thread1-tcp_readln] enter
+11-12-2009 22:27:06 [thread1-tcp_readln] leave [bufsize=20]
+11-12-2009 22:27:06 [thread1-http_request] Content-Length: 224
+11-12-2009 22:27:06 [thread1-tcp_readln] enter
+11-12-2009 22:27:06 [thread1-tcp_readln] leave [bufsize=44]
+11-12-2009 22:27:06 [thread1-http_request] Content-Type: text/html; charset=iso-8859-1
+11-12-2009 22:27:06 [thread1-tcp_readln] enter
+11-12-2009 22:27:06 [thread1-tcp_readln] leave [bufsize=1]
+11-12-2009 22:27:06 [thread1-http_request] 
+11-12-2009 22:27:06 [thread1-http_request] content_length=224, status=302, linecount=6
+11-12-2009 22:27:06 [thread1-tcp_thread] Error making http request1a
+11-12-2009 22:27:06 [thread1-tcp_thread] stateMachine=TCP_RETRY
+11-12-2009 22:27:06 [thread1-tcp_sleep] enter [wait=10 sec]
+11-12-2009 22:27:13 [thread0-Pointer::buttonA] enter [x=509|y=57]
+11-12-2009 22:27:13 [thread0-Button::onSelect] enter [x=509|y=57]
+11-12-2009 22:27:13 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:13 [thread0-Button::onSelect] leave
+11-12-2009 22:27:13 [thread0-Button::onSelect] enter [x=509|y=57]
+11-12-2009 22:27:13 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:13 [thread0-Button::onSelect] leave
+11-12-2009 22:27:13 [thread0-Button::onSelect] enter [x=509|y=57]
+11-12-2009 22:27:13 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:13 [thread0-Button::onSelect] leave
+11-12-2009 22:27:13 [thread0-Button::onSelect] enter [x=509|y=57]
+11-12-2009 22:27:13 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:13 [thread0-Button::onSelect] leave
+11-12-2009 22:27:13 [thread0-Button::onSelect] enter [x=509|y=57]
+11-12-2009 22:27:13 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:13 [thread0-Button::onSelect] leave
+11-12-2009 22:27:13 [thread0-Button::onSelect] enter [x=509|y=57]
+11-12-2009 22:27:13 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:13 [thread0-Button::onSelect] leave
+11-12-2009 22:27:13 [thread0-Button::onSelect] enter [x=509|y=57]
+11-12-2009 22:27:13 [thread0-Button::onSelect] Button selected
+11-12-2009 22:27:13 [thread0-Button::onSelect] leave
+11-12-2009 22:27:13 [thread0-Pointer::buttonA] leave
+11-12-2009 22:27:13 [thread0-processStateMachine] stateMachine=stateMapSelectMenu
+11-12-2009 22:27:13 [thread0-initButtons] enter
+11-12-2009 22:27:13 [thread0-initButtons] delete button 0
+11-12-2009 22:27:13 [thread0-Button::~Button] enter
+11-12-2009 22:27:13 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:13 [thread0-initButtons] delete button 1
+11-12-2009 22:27:13 [thread0-Button::~Button] enter
+11-12-2009 22:27:13 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:13 [thread0-initButtons] delete button 2
+11-12-2009 22:27:13 [thread0-Button::~Button] enter
+11-12-2009 22:27:13 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:13 [thread0-initButtons] delete button 3
+11-12-2009 22:27:13 [thread0-Button::~Button] enter
+11-12-2009 22:27:13 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:13 [thread0-initButtons] delete button 4
+11-12-2009 22:27:13 [thread0-Button::~Button] enter
+11-12-2009 22:27:13 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:13 [thread0-initButtons] delete button 5
+11-12-2009 22:27:13 [thread0-Button::~Button] enter
+11-12-2009 22:27:13 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:13 [thread0-initButtons] delete button 6
+11-12-2009 22:27:13 [thread0-Button::~Button] enter
+11-12-2009 22:27:13 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:13 [thread0-initButtons] delete button 7
+11-12-2009 22:27:13 [thread0-Button::~Button] enter
+11-12-2009 22:27:13 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:13 [thread0-initButtons] delete button 8
+11-12-2009 22:27:13 [thread0-Button::~Button] enter
+11-12-2009 22:27:13 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:13 [thread0-Button::Button] enter
+11-12-2009 22:27:13 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:13 [thread0-Button::setX] 40
+11-12-2009 22:27:13 [thread0-Button::setY] 150
+11-12-2009 22:27:13 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:13 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:13 [thread0-Button::Button] enter
+11-12-2009 22:27:13 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:13 [thread0-Button::setX] 240
+11-12-2009 22:27:13 [thread0-Button::setY] 150
+11-12-2009 22:27:13 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:13 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:13 [thread0-Button::Button] enter
+11-12-2009 22:27:13 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:13 [thread0-Button::setX] 440
+11-12-2009 22:27:13 [thread0-Button::setY] 150
+11-12-2009 22:27:13 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:13 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:13 [thread0-Button::Button] enter
+11-12-2009 22:27:13 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:13 [thread0-Button::setX] 240
+11-12-2009 22:27:13 [thread0-Button::setY] 460
+11-12-2009 22:27:13 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:13 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:13 [thread0-initButtons] leave [void]
+11-12-2009 22:27:14 [thread0-Pointer::buttonA] enter [x=316|y=477]
+11-12-2009 22:27:14 [thread0-Button::onSelect] enter [x=316|y=477]
+11-12-2009 22:27:14 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:14 [thread0-Button::onSelect] leave
+11-12-2009 22:27:14 [thread0-Button::onSelect] enter [x=316|y=477]
+11-12-2009 22:27:14 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:14 [thread0-Button::onSelect] leave
+11-12-2009 22:27:14 [thread0-Button::onSelect] enter [x=316|y=477]
+11-12-2009 22:27:14 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:14 [thread0-Button::onSelect] leave
+11-12-2009 22:27:14 [thread0-Button::onSelect] enter [x=316|y=477]
+11-12-2009 22:27:14 [thread0-Button::onSelect] Button selected
+11-12-2009 22:27:14 [thread0-Button::onSelect] leave
+11-12-2009 22:27:14 [thread0-Pointer::buttonA] leave
+11-12-2009 22:27:14 [thread0-processStateMachine] stateMachine=stateMainMenu
+11-12-2009 22:27:14 [thread0-initButtons] enter
+11-12-2009 22:27:14 [thread0-initButtons] delete button 0
+11-12-2009 22:27:14 [thread0-Button::~Button] enter
+11-12-2009 22:27:14 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:14 [thread0-initButtons] delete button 1
+11-12-2009 22:27:14 [thread0-Button::~Button] enter
+11-12-2009 22:27:14 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:14 [thread0-initButtons] delete button 2
+11-12-2009 22:27:14 [thread0-Button::~Button] enter
+11-12-2009 22:27:14 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:14 [thread0-initButtons] delete button 3
+11-12-2009 22:27:14 [thread0-Button::~Button] enter
+11-12-2009 22:27:14 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:14 [thread0-Button::Button] enter
+11-12-2009 22:27:14 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:14 [thread0-Button::setX] 440
+11-12-2009 22:27:14 [thread0-Button::setY] 40
+11-12-2009 22:27:14 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:14 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:14 [thread0-Button::Button] enter
+11-12-2009 22:27:14 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:14 [thread0-Button::setX] 440
+11-12-2009 22:27:14 [thread0-Button::setY] 80
+11-12-2009 22:27:14 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:14 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:14 [thread0-Button::Button] enter
+11-12-2009 22:27:14 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:14 [thread0-Button::setX] 440
+11-12-2009 22:27:14 [thread0-Button::setY] 120
+11-12-2009 22:27:14 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:14 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:14 [thread0-Button::Button] enter
+11-12-2009 22:27:14 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:14 [thread0-Button::setX] 440
+11-12-2009 22:27:14 [thread0-Button::setY] 160
+11-12-2009 22:27:14 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:14 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:14 [thread0-Button::Button] enter
+11-12-2009 22:27:14 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:14 [thread0-Button::setX] 440
+11-12-2009 22:27:14 [thread0-Button::setY] 200
+11-12-2009 22:27:14 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:14 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:14 [thread0-Button::Button] enter
+11-12-2009 22:27:14 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:14 [thread0-Button::setX] 440
+11-12-2009 22:27:14 [thread0-Button::setY] 240
+11-12-2009 22:27:14 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:14 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:14 [thread0-Button::Button] enter
+11-12-2009 22:27:14 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:14 [thread0-Button::setX] 440
+11-12-2009 22:27:14 [thread0-Button::setY] 280
+11-12-2009 22:27:14 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:14 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:14 [thread0-Button::Button] enter
+11-12-2009 22:27:14 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:14 [thread0-Button::setX] 440
+11-12-2009 22:27:14 [thread0-Button::setY] 400
+11-12-2009 22:27:14 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:14 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:14 [thread0-Button::Button] enter
+11-12-2009 22:27:14 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:14 [thread0-Button::setX] 440
+11-12-2009 22:27:14 [thread0-Button::setY] 440
+11-12-2009 22:27:14 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:14 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:14 [thread0-initButtons] leave [void]
+11-12-2009 22:27:15 [thread0-Pointer::buttonA] enter [x=512|y=114]
+11-12-2009 22:27:15 [thread0-Button::onSelect] enter [x=512|y=114]
+11-12-2009 22:27:15 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:15 [thread0-Button::onSelect] leave
+11-12-2009 22:27:15 [thread0-Button::onSelect] enter [x=512|y=114]
+11-12-2009 22:27:15 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:15 [thread0-Button::onSelect] leave
+11-12-2009 22:27:15 [thread0-Button::onSelect] enter [x=512|y=114]
+11-12-2009 22:27:15 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:15 [thread0-Button::onSelect] leave
+11-12-2009 22:27:15 [thread0-Button::onSelect] enter [x=512|y=114]
+11-12-2009 22:27:15 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:15 [thread0-Button::onSelect] leave
+11-12-2009 22:27:15 [thread0-Button::onSelect] enter [x=512|y=114]
+11-12-2009 22:27:15 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:15 [thread0-Button::onSelect] leave
+11-12-2009 22:27:15 [thread0-Button::onSelect] enter [x=512|y=114]
+11-12-2009 22:27:15 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:15 [thread0-Button::onSelect] leave
+11-12-2009 22:27:15 [thread0-Button::onSelect] enter [x=512|y=114]
+11-12-2009 22:27:15 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:15 [thread0-Button::onSelect] leave
+11-12-2009 22:27:15 [thread0-Button::onSelect] enter [x=512|y=114]
+11-12-2009 22:27:15 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:15 [thread0-Button::onSelect] leave
+11-12-2009 22:27:15 [thread0-Button::onSelect] enter [x=512|y=114]
+11-12-2009 22:27:15 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:15 [thread0-Button::onSelect] leave
+11-12-2009 22:27:15 [thread0-Pointer::buttonA] leave
+11-12-2009 22:27:16 [thread0-Pointer::buttonA] enter [x=515|y=107]
+11-12-2009 22:27:16 [thread0-Button::onSelect] enter [x=515|y=107]
+11-12-2009 22:27:16 [thread0-Button::onSelect] Button selected
+11-12-2009 22:27:16 [thread0-Button::onSelect] leave
+11-12-2009 22:27:16 [thread0-Pointer::buttonA] leave
+11-12-2009 22:27:16 [thread0-processStateMachine] stateMachine=stateLocalHighScore
+11-12-2009 22:27:16 [thread0-initButtons] enter
+11-12-2009 22:27:16 [thread0-initButtons] delete button 0
+11-12-2009 22:27:16 [thread0-Button::~Button] enter
+11-12-2009 22:27:16 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:16 [thread0-initButtons] delete button 1
+11-12-2009 22:27:16 [thread0-Button::~Button] enter
+11-12-2009 22:27:16 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:16 [thread0-initButtons] delete button 2
+11-12-2009 22:27:16 [thread0-Button::~Button] enter
+11-12-2009 22:27:16 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:16 [thread0-initButtons] delete button 3
+11-12-2009 22:27:16 [thread0-Button::~Button] enter
+11-12-2009 22:27:16 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:16 [thread0-initButtons] delete button 4
+11-12-2009 22:27:16 [thread0-Button::~Button] enter
+11-12-2009 22:27:16 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:16 [thread0-initButtons] delete button 5
+11-12-2009 22:27:16 [thread0-Button::~Button] enter
+11-12-2009 22:27:16 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:16 [thread0-initButtons] delete button 6
+11-12-2009 22:27:16 [thread0-Button::~Button] enter
+11-12-2009 22:27:16 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:16 [thread0-initButtons] delete button 7
+11-12-2009 22:27:16 [thread0-Button::~Button] enter
+11-12-2009 22:27:16 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:16 [thread0-initButtons] delete button 8
+11-12-2009 22:27:16 [thread0-Button::~Button] enter
+11-12-2009 22:27:16 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:16 [thread0-Button::Button] enter
+11-12-2009 22:27:16 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:16 [thread0-Button::setX] 225
+11-12-2009 22:27:16 [thread0-Button::setY] 460
+11-12-2009 22:27:16 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:16 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:16 [thread0-initButtons] leave [void]
+11-12-2009 22:27:16 [thread1-tcp_sleep] leave [void]
+11-12-2009 22:27:16 [thread1-tcp_thread] stateMachine=TCP_REQUEST1a
+11-12-2009 22:27:16 [thread1-http_request] enter
+11-12-2009 22:27:16 [thread1-http_split_url] enter
+11-12-2009 22:27:16 [thread1-http_split_url] leave [true]
+11-12-2009 22:27:16 [thread1-tcp_connect] enter [host=www.plaatsoft.nl|port=80]
+11-12-2009 22:27:16 [thread1-tcp_connect] net_gethostbyname successfull resolved
+11-12-2009 22:27:16 [thread1-tcp_socket] enter
+11-12-2009 22:27:16 [thread1-tcp_socket] net_socket succesfull
+11-12-2009 22:27:16 [thread1-tcp_socket] leave [0]
+11-12-2009 22:27:16 [thread1-tcp_connect] tcp_socket succesfull
+11-12-2009 22:27:16 [thread1-tcp_connect] DNS resolve=85.158.203.157
+11-12-2009 22:27:16 [thread1-tcp_connect] net_connect succesfull
+11-12-2009 22:27:16 [thread1-tcp_connect] leave [0]
+11-12-2009 22:27:16 [thread1-http_request] tcp_connect(www.plaatsoft.nl, 80) = 0
+11-12-2009 22:27:16 [thread1-http_request] request=GET /service/releasenotes5.html HTTP/1.1
 Host: www.plaatsoft.nl
 User-Agent: TowerDefense/0.40 (compatible; v3.X; Nintendo Wii)
 Accept: text/xml,text/html,text/plain,image/gif
 Cache-Control: no-cache
 
 
-11-12-2009 15:05:40 [thread1-tcp_write] enter [bufsize=206]
-11-12-2009 15:05:40 [thread1-tcp_write] buffer=GET /service/releasenotes5.html HTTP/1.1
+11-12-2009 22:27:16 [thread1-tcp_write] enter [bufsize=206]
+11-12-2009 22:27:16 [thread1-tcp_write] buffer=GET /service/releasenotes5.html HTTP/1.1
 Host: www.plaatsoft.nl
 User-Agent: TowerDefense/0.40 (compatible; v3.X; Nintendo Wii)
 Accept: text/xml,text/html,text/plain,image/gif
 Cache-Control: no-cache
 
 
-11-12-2009 15:05:40 [thread1-tcp_write] leave [left=0]
-11-12-2009 15:05:40 [thread1-tcp_readln] enter
-11-12-2009 15:05:40 [thread1-tcp_readln] leave [bufsize=19]
-11-12-2009 15:05:40 [thread1-http_request] HTTP/1.1 302 Found
-11-12-2009 15:05:40 [thread1-tcp_readln] enter
-11-12-2009 15:05:40 [thread1-tcp_readln] leave [bufsize=36]
-11-12-2009 15:05:40 [thread1-http_request] Date: Fri, 11 Dec 2009 14:03:49 GMT
-11-12-2009 15:05:40 [thread1-tcp_readln] enter
-11-12-2009 15:05:40 [thread1-tcp_readln] leave [bufsize=17]
-11-12-2009 15:05:40 [thread1-http_request] Server: Apache/2
-11-12-2009 15:05:40 [thread1-tcp_readln] enter
-11-12-2009 15:05:40 [thread1-tcp_readln] leave [bufsize=51]
-11-12-2009 15:05:40 [thread1-http_request] Location: http://www.plaatsoft.nl/wiibrew/notFound
-11-12-2009 15:05:40 [thread1-tcp_readln] enter
-11-12-2009 15:05:40 [thread1-tcp_readln] leave [bufsize=20]
-11-12-2009 15:05:40 [thread1-http_request] Content-Length: 224
-11-12-2009 15:05:40 [thread1-tcp_readln] enter
-11-12-2009 15:05:40 [thread1-tcp_readln] leave [bufsize=44]
-11-12-2009 15:05:40 [thread1-http_request] Content-Type: text/html; charset=iso-8859-1
-11-12-2009 15:05:40 [thread1-tcp_readln] enter
-11-12-2009 15:05:40 [thread1-tcp_readln] leave [bufsize=1]
-11-12-2009 15:05:40 [thread1-http_request] 
-11-12-2009 15:05:40 [thread1-http_request] content_length=224, status=302, linecount=6
-11-12-2009 15:05:40 [thread1-tcp_thread] Error making http request1a
-11-12-2009 15:05:40 [thread1-tcp_thread] stateMachine=TCP_RETRY
-11-12-2009 15:05:40 [thread1-tcp_sleep] enter [wait=10 sec]
-11-12-2009 15:05:50 [thread1-tcp_sleep] leave [void]
-11-12-2009 15:05:50 [thread1-tcp_thread] stateMachine=TCP_REQUEST1a
-11-12-2009 15:05:50 [thread1-http_request] enter
-11-12-2009 15:05:50 [thread1-http_split_url] enter
-11-12-2009 15:05:50 [thread1-http_split_url] leave [true]
-11-12-2009 15:05:50 [thread1-tcp_connect] enter [host=www.plaatsoft.nl|port=80]
-11-12-2009 15:05:50 [thread1-tcp_connect] net_gethostbyname successfull resolved
-11-12-2009 15:05:50 [thread1-tcp_socket] enter
-11-12-2009 15:05:50 [thread1-tcp_socket] net_socket succesfull
-11-12-2009 15:05:50 [thread1-tcp_socket] leave [0]
-11-12-2009 15:05:50 [thread1-tcp_connect] tcp_socket succesfull
-11-12-2009 15:05:50 [thread1-tcp_connect] DNS resolve=85.158.203.157
-11-12-2009 15:05:50 [thread1-tcp_connect] net_connect succesfull
-11-12-2009 15:05:50 [thread1-tcp_connect] leave [0]
-11-12-2009 15:05:50 [thread1-http_request] tcp_connect(www.plaatsoft.nl, 80) = 0
-11-12-2009 15:05:50 [thread1-http_request] request=GET /service/releasenotes5.html HTTP/1.1
+11-12-2009 22:27:16 [thread1-tcp_write] leave [left=0]
+11-12-2009 22:27:16 [thread1-tcp_readln] enter
+11-12-2009 22:27:16 [thread1-tcp_readln] leave [bufsize=19]
+11-12-2009 22:27:16 [thread1-http_request] HTTP/1.1 302 Found
+11-12-2009 22:27:16 [thread1-tcp_readln] enter
+11-12-2009 22:27:16 [thread1-tcp_readln] leave [bufsize=36]
+11-12-2009 22:27:16 [thread1-http_request] Date: Fri, 11 Dec 2009 21:25:24 GMT
+11-12-2009 22:27:16 [thread1-tcp_readln] enter
+11-12-2009 22:27:16 [thread1-tcp_readln] leave [bufsize=17]
+11-12-2009 22:27:16 [thread1-http_request] Server: Apache/2
+11-12-2009 22:27:16 [thread1-tcp_readln] enter
+11-12-2009 22:27:16 [thread1-tcp_readln] leave [bufsize=51]
+11-12-2009 22:27:16 [thread1-http_request] Location: http://www.plaatsoft.nl/wiibrew/notFound
+11-12-2009 22:27:16 [thread1-tcp_readln] enter
+11-12-2009 22:27:16 [thread1-tcp_readln] leave [bufsize=20]
+11-12-2009 22:27:16 [thread1-http_request] Content-Length: 224
+11-12-2009 22:27:16 [thread1-tcp_readln] enter
+11-12-2009 22:27:16 [thread1-tcp_readln] leave [bufsize=44]
+11-12-2009 22:27:16 [thread1-http_request] Content-Type: text/html; charset=iso-8859-1
+11-12-2009 22:27:16 [thread1-tcp_readln] enter
+11-12-2009 22:27:16 [thread1-tcp_readln] leave [bufsize=1]
+11-12-2009 22:27:16 [thread1-http_request] 
+11-12-2009 22:27:16 [thread1-http_request] content_length=224, status=302, linecount=6
+11-12-2009 22:27:16 [thread1-tcp_thread] Error making http request1a
+11-12-2009 22:27:16 [thread1-tcp_thread] stateMachine=TCP_RETRY
+11-12-2009 22:27:16 [thread1-tcp_sleep] enter [wait=10 sec]
+11-12-2009 22:27:17 [thread0-Pointer::buttonA] enter [x=299|y=495]
+11-12-2009 22:27:17 [thread0-Button::onSelect] enter [x=299|y=495]
+11-12-2009 22:27:17 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:17 [thread0-Button::onSelect] leave
+11-12-2009 22:27:17 [thread0-Pointer::buttonA] leave
+11-12-2009 22:27:17 [thread0-Pointer::buttonA] enter [x=306|y=481]
+11-12-2009 22:27:17 [thread0-Button::onSelect] enter [x=306|y=481]
+11-12-2009 22:27:17 [thread0-Button::onSelect] Button selected
+11-12-2009 22:27:17 [thread0-Button::onSelect] leave
+11-12-2009 22:27:17 [thread0-Pointer::buttonA] leave
+11-12-2009 22:27:17 [thread0-processStateMachine] stateMachine=stateMainMenu
+11-12-2009 22:27:17 [thread0-initButtons] enter
+11-12-2009 22:27:17 [thread0-initButtons] delete button 0
+11-12-2009 22:27:17 [thread0-Button::~Button] enter
+11-12-2009 22:27:17 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:17 [thread0-Button::Button] enter
+11-12-2009 22:27:17 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:17 [thread0-Button::setX] 440
+11-12-2009 22:27:17 [thread0-Button::setY] 40
+11-12-2009 22:27:17 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:17 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:17 [thread0-Button::Button] enter
+11-12-2009 22:27:17 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:17 [thread0-Button::setX] 440
+11-12-2009 22:27:17 [thread0-Button::setY] 80
+11-12-2009 22:27:17 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:17 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:17 [thread0-Button::Button] enter
+11-12-2009 22:27:17 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:17 [thread0-Button::setX] 440
+11-12-2009 22:27:17 [thread0-Button::setY] 120
+11-12-2009 22:27:17 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:17 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:17 [thread0-Button::Button] enter
+11-12-2009 22:27:17 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:17 [thread0-Button::setX] 440
+11-12-2009 22:27:17 [thread0-Button::setY] 160
+11-12-2009 22:27:17 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:17 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:17 [thread0-Button::Button] enter
+11-12-2009 22:27:17 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:17 [thread0-Button::setX] 440
+11-12-2009 22:27:17 [thread0-Button::setY] 200
+11-12-2009 22:27:17 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:17 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:17 [thread0-Button::Button] enter
+11-12-2009 22:27:17 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:17 [thread0-Button::setX] 440
+11-12-2009 22:27:17 [thread0-Button::setY] 240
+11-12-2009 22:27:17 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:17 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:17 [thread0-Button::Button] enter
+11-12-2009 22:27:17 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:17 [thread0-Button::setX] 440
+11-12-2009 22:27:17 [thread0-Button::setY] 280
+11-12-2009 22:27:17 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:17 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:17 [thread0-Button::Button] enter
+11-12-2009 22:27:17 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:17 [thread0-Button::setX] 440
+11-12-2009 22:27:17 [thread0-Button::setY] 400
+11-12-2009 22:27:17 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:17 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:17 [thread0-Button::Button] enter
+11-12-2009 22:27:17 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:17 [thread0-Button::setX] 440
+11-12-2009 22:27:17 [thread0-Button::setY] 440
+11-12-2009 22:27:17 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:17 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:17 [thread0-initButtons] leave [void]
+11-12-2009 22:27:18 [thread0-Pointer::buttonA] enter [x=495|y=145]
+11-12-2009 22:27:18 [thread0-Button::onSelect] enter [x=495|y=145]
+11-12-2009 22:27:18 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:18 [thread0-Button::onSelect] leave
+11-12-2009 22:27:18 [thread0-Button::onSelect] enter [x=495|y=145]
+11-12-2009 22:27:18 [thread0-Button::onSelect] Button selected
+11-12-2009 22:27:18 [thread0-Button::onSelect] leave
+11-12-2009 22:27:18 [thread0-Pointer::buttonA] leave
+11-12-2009 22:27:18 [thread0-processStateMachine] stateMachine=stateHelp
+11-12-2009 22:27:18 [thread0-initButtons] enter
+11-12-2009 22:27:18 [thread0-initButtons] delete button 0
+11-12-2009 22:27:18 [thread0-Button::~Button] enter
+11-12-2009 22:27:18 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:18 [thread0-initButtons] delete button 1
+11-12-2009 22:27:18 [thread0-Button::~Button] enter
+11-12-2009 22:27:18 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:18 [thread0-initButtons] delete button 2
+11-12-2009 22:27:18 [thread0-Button::~Button] enter
+11-12-2009 22:27:18 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:18 [thread0-initButtons] delete button 3
+11-12-2009 22:27:18 [thread0-Button::~Button] enter
+11-12-2009 22:27:18 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:18 [thread0-initButtons] delete button 4
+11-12-2009 22:27:18 [thread0-Button::~Button] enter
+11-12-2009 22:27:18 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:18 [thread0-initButtons] delete button 5
+11-12-2009 22:27:18 [thread0-Button::~Button] enter
+11-12-2009 22:27:18 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:18 [thread0-initButtons] delete button 6
+11-12-2009 22:27:18 [thread0-Button::~Button] enter
+11-12-2009 22:27:18 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:18 [thread0-initButtons] delete button 7
+11-12-2009 22:27:18 [thread0-Button::~Button] enter
+11-12-2009 22:27:18 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:18 [thread0-initButtons] delete button 8
+11-12-2009 22:27:18 [thread0-Button::~Button] enter
+11-12-2009 22:27:18 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:18 [thread0-Button::Button] enter
+11-12-2009 22:27:18 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:18 [thread0-Button::setX] 240
+11-12-2009 22:27:18 [thread0-Button::setY] 460
+11-12-2009 22:27:18 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:18 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:18 [thread0-initButtons] leave [void]
+11-12-2009 22:27:22 [thread0-Pointer::buttonA] enter [x=305|y=487]
+11-12-2009 22:27:22 [thread0-Button::onSelect] enter [x=305|y=487]
+11-12-2009 22:27:22 [thread0-Button::onSelect] Button selected
+11-12-2009 22:27:22 [thread0-Button::onSelect] leave
+11-12-2009 22:27:22 [thread0-Pointer::buttonA] leave
+11-12-2009 22:27:22 [thread0-processStateMachine] stateMachine=stateMainMenu
+11-12-2009 22:27:22 [thread0-initButtons] enter
+11-12-2009 22:27:22 [thread0-initButtons] delete button 0
+11-12-2009 22:27:22 [thread0-Button::~Button] enter
+11-12-2009 22:27:22 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:22 [thread0-Button::Button] enter
+11-12-2009 22:27:22 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:22 [thread0-Button::setX] 440
+11-12-2009 22:27:22 [thread0-Button::setY] 40
+11-12-2009 22:27:22 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:22 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:22 [thread0-Button::Button] enter
+11-12-2009 22:27:22 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:22 [thread0-Button::setX] 440
+11-12-2009 22:27:22 [thread0-Button::setY] 80
+11-12-2009 22:27:22 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:22 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:22 [thread0-Button::Button] enter
+11-12-2009 22:27:22 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:22 [thread0-Button::setX] 440
+11-12-2009 22:27:22 [thread0-Button::setY] 120
+11-12-2009 22:27:22 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:22 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:22 [thread0-Button::Button] enter
+11-12-2009 22:27:22 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:22 [thread0-Button::setX] 440
+11-12-2009 22:27:22 [thread0-Button::setY] 160
+11-12-2009 22:27:22 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:22 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:22 [thread0-Button::Button] enter
+11-12-2009 22:27:22 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:22 [thread0-Button::setX] 440
+11-12-2009 22:27:22 [thread0-Button::setY] 200
+11-12-2009 22:27:22 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:22 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:22 [thread0-Button::Button] enter
+11-12-2009 22:27:22 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:22 [thread0-Button::setX] 440
+11-12-2009 22:27:22 [thread0-Button::setY] 240
+11-12-2009 22:27:22 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:22 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:22 [thread0-Button::Button] enter
+11-12-2009 22:27:22 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:22 [thread0-Button::setX] 440
+11-12-2009 22:27:22 [thread0-Button::setY] 280
+11-12-2009 22:27:22 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:22 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:22 [thread0-Button::Button] enter
+11-12-2009 22:27:22 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:22 [thread0-Button::setX] 440
+11-12-2009 22:27:22 [thread0-Button::setY] 400
+11-12-2009 22:27:22 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:22 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:22 [thread0-Button::Button] enter
+11-12-2009 22:27:22 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:22 [thread0-Button::setX] 440
+11-12-2009 22:27:22 [thread0-Button::setY] 440
+11-12-2009 22:27:22 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:22 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:22 [thread0-initButtons] leave [void]
+11-12-2009 22:27:24 [thread0-Pointer::buttonA] enter [x=485|y=227]
+11-12-2009 22:27:24 [thread0-Button::onSelect] enter [x=485|y=227]
+11-12-2009 22:27:24 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:24 [thread0-Button::onSelect] leave
+11-12-2009 22:27:24 [thread0-Button::onSelect] enter [x=485|y=227]
+11-12-2009 22:27:24 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:24 [thread0-Button::onSelect] leave
+11-12-2009 22:27:24 [thread0-Button::onSelect] enter [x=485|y=227]
+11-12-2009 22:27:24 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:24 [thread0-Button::onSelect] leave
+11-12-2009 22:27:24 [thread0-Button::onSelect] enter [x=485|y=227]
+11-12-2009 22:27:24 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:24 [thread0-Button::onSelect] leave
+11-12-2009 22:27:24 [thread0-Button::onSelect] enter [x=485|y=227]
+11-12-2009 22:27:24 [thread0-Button::onSelect] Button selected
+11-12-2009 22:27:24 [thread0-Button::onSelect] leave
+11-12-2009 22:27:24 [thread0-Pointer::buttonA] leave
+11-12-2009 22:27:24 [thread0-processStateMachine] stateMachine=stateReleaseNotes
+11-12-2009 22:27:24 [thread0-initButtons] enter
+11-12-2009 22:27:24 [thread0-initButtons] delete button 0
+11-12-2009 22:27:24 [thread0-Button::~Button] enter
+11-12-2009 22:27:24 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:24 [thread0-initButtons] delete button 1
+11-12-2009 22:27:24 [thread0-Button::~Button] enter
+11-12-2009 22:27:24 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:24 [thread0-initButtons] delete button 2
+11-12-2009 22:27:24 [thread0-Button::~Button] enter
+11-12-2009 22:27:24 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:24 [thread0-initButtons] delete button 3
+11-12-2009 22:27:24 [thread0-Button::~Button] enter
+11-12-2009 22:27:24 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:24 [thread0-initButtons] delete button 4
+11-12-2009 22:27:24 [thread0-Button::~Button] enter
+11-12-2009 22:27:24 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:24 [thread0-initButtons] delete button 5
+11-12-2009 22:27:24 [thread0-Button::~Button] enter
+11-12-2009 22:27:24 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:24 [thread0-initButtons] delete button 6
+11-12-2009 22:27:24 [thread0-Button::~Button] enter
+11-12-2009 22:27:24 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:24 [thread0-initButtons] delete button 7
+11-12-2009 22:27:24 [thread0-Button::~Button] enter
+11-12-2009 22:27:24 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:24 [thread0-initButtons] delete button 8
+11-12-2009 22:27:24 [thread0-Button::~Button] enter
+11-12-2009 22:27:24 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:24 [thread0-Button::Button] enter
+11-12-2009 22:27:24 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:24 [thread0-Button::setX] 240
+11-12-2009 22:27:24 [thread0-Button::setY] 460
+11-12-2009 22:27:24 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:24 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:24 [thread0-initButtons] leave [void]
+11-12-2009 22:27:24 [thread0-Pointer::buttonA] enter [x=330|y=489]
+11-12-2009 22:27:24 [thread0-Button::onSelect] enter [x=330|y=489]
+11-12-2009 22:27:24 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:24 [thread0-Button::onSelect] leave
+11-12-2009 22:27:24 [thread0-Pointer::buttonA] leave
+11-12-2009 22:27:25 [thread0-Pointer::buttonA] enter [x=336|y=483]
+11-12-2009 22:27:25 [thread0-Button::onSelect] enter [x=336|y=483]
+11-12-2009 22:27:25 [thread0-Button::onSelect] Button selected
+11-12-2009 22:27:25 [thread0-Button::onSelect] leave
+11-12-2009 22:27:25 [thread0-Pointer::buttonA] leave
+11-12-2009 22:27:25 [thread0-processStateMachine] stateMachine=stateMainMenu
+11-12-2009 22:27:25 [thread0-initButtons] enter
+11-12-2009 22:27:25 [thread0-initButtons] delete button 0
+11-12-2009 22:27:25 [thread0-Button::~Button] enter
+11-12-2009 22:27:25 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:25 [thread0-Button::Button] enter
+11-12-2009 22:27:25 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:25 [thread0-Button::setX] 440
+11-12-2009 22:27:25 [thread0-Button::setY] 40
+11-12-2009 22:27:25 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:25 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:25 [thread0-Button::Button] enter
+11-12-2009 22:27:25 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:25 [thread0-Button::setX] 440
+11-12-2009 22:27:25 [thread0-Button::setY] 80
+11-12-2009 22:27:25 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:25 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:25 [thread0-Button::Button] enter
+11-12-2009 22:27:25 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:25 [thread0-Button::setX] 440
+11-12-2009 22:27:25 [thread0-Button::setY] 120
+11-12-2009 22:27:25 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:25 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:25 [thread0-Button::Button] enter
+11-12-2009 22:27:25 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:25 [thread0-Button::setX] 440
+11-12-2009 22:27:25 [thread0-Button::setY] 160
+11-12-2009 22:27:25 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:25 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:25 [thread0-Button::Button] enter
+11-12-2009 22:27:25 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:25 [thread0-Button::setX] 440
+11-12-2009 22:27:25 [thread0-Button::setY] 200
+11-12-2009 22:27:25 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:25 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:25 [thread0-Button::Button] enter
+11-12-2009 22:27:25 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:25 [thread0-Button::setX] 440
+11-12-2009 22:27:25 [thread0-Button::setY] 240
+11-12-2009 22:27:25 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:25 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:25 [thread0-Button::Button] enter
+11-12-2009 22:27:25 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:25 [thread0-Button::setX] 440
+11-12-2009 22:27:25 [thread0-Button::setY] 280
+11-12-2009 22:27:25 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:25 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:25 [thread0-Button::Button] enter
+11-12-2009 22:27:25 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:25 [thread0-Button::setX] 440
+11-12-2009 22:27:25 [thread0-Button::setY] 400
+11-12-2009 22:27:25 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:25 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:25 [thread0-Button::Button] enter
+11-12-2009 22:27:25 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:25 [thread0-Button::setX] 440
+11-12-2009 22:27:25 [thread0-Button::setY] 440
+11-12-2009 22:27:25 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:25 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:25 [thread0-initButtons] leave [void]
+11-12-2009 22:27:26 [thread1-tcp_sleep] leave [void]
+11-12-2009 22:27:26 [thread1-tcp_thread] stateMachine=TCP_REQUEST1a
+11-12-2009 22:27:26 [thread1-http_request] enter
+11-12-2009 22:27:26 [thread1-http_split_url] enter
+11-12-2009 22:27:26 [thread1-http_split_url] leave [true]
+11-12-2009 22:27:26 [thread1-tcp_connect] enter [host=www.plaatsoft.nl|port=80]
+11-12-2009 22:27:26 [thread1-tcp_connect] net_gethostbyname successfull resolved
+11-12-2009 22:27:26 [thread1-tcp_socket] enter
+11-12-2009 22:27:26 [thread1-tcp_socket] net_socket succesfull
+11-12-2009 22:27:26 [thread1-tcp_socket] leave [0]
+11-12-2009 22:27:26 [thread1-tcp_connect] tcp_socket succesfull
+11-12-2009 22:27:26 [thread1-tcp_connect] DNS resolve=85.158.203.157
+11-12-2009 22:27:26 [thread0-Pointer::buttonA] enter [x=483|y=262]
+11-12-2009 22:27:26 [thread0-Button::onSelect] enter [x=483|y=262]
+11-12-2009 22:27:26 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:26 [thread0-Button::onSelect] leave
+11-12-2009 22:27:26 [thread0-Button::onSelect] enter [x=483|y=262]
+11-12-2009 22:27:26 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:26 [thread0-Button::onSelect] leave
+11-12-2009 22:27:26 [thread0-Button::onSelect] enter [x=483|y=262]
+11-12-2009 22:27:26 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:26 [thread0-Button::onSelect] leave
+11-12-2009 22:27:26 [thread0-Button::onSelect] enter [x=483|y=262]
+11-12-2009 22:27:26 [thread0-Button::onSelect] Button selected
+11-12-2009 22:27:26 [thread0-Button::onSelect] leave
+11-12-2009 22:27:26 [thread0-Pointer::buttonA] leave
+11-12-2009 22:27:26 [thread1-tcp_connect] net_connect succesfull
+11-12-2009 22:27:26 [thread1-tcp_connect] leave [0]
+11-12-2009 22:27:26 [thread1-http_request] tcp_connect(www.plaatsoft.nl, 80) = 0
+11-12-2009 22:27:26 [thread1-http_request] request=GET /service/releasenotes5.html HTTP/1.1
 Host: www.plaatsoft.nl
 User-Agent: TowerDefense/0.40 (compatible; v3.X; Nintendo Wii)
 Accept: text/xml,text/html,text/plain,image/gif
 Cache-Control: no-cache
 
 
-11-12-2009 15:05:50 [thread1-tcp_write] enter [bufsize=206]
-11-12-2009 15:05:50 [thread1-tcp_write] buffer=GET /service/releasenotes5.html HTTP/1.1
+11-12-2009 22:27:26 [thread1-tcp_write] enter [bufsize=206]
+11-12-2009 22:27:26 [thread1-tcp_write] buffer=GET /service/releasenotes5.html HTTP/1.1
 Host: www.plaatsoft.nl
 User-Agent: TowerDefense/0.40 (compatible; v3.X; Nintendo Wii)
 Accept: text/xml,text/html,text/plain,image/gif
 Cache-Control: no-cache
 
 
-11-12-2009 15:05:50 [thread1-tcp_write] leave [left=0]
-11-12-2009 15:05:50 [thread1-tcp_readln] enter
-11-12-2009 15:05:50 [thread1-tcp_readln] leave [bufsize=19]
-11-12-2009 15:05:50 [thread1-http_request] HTTP/1.1 302 Found
-11-12-2009 15:05:50 [thread1-tcp_readln] enter
-11-12-2009 15:05:50 [thread1-tcp_readln] leave [bufsize=36]
-11-12-2009 15:05:50 [thread1-http_request] Date: Fri, 11 Dec 2009 14:03:59 GMT
-11-12-2009 15:05:50 [thread1-tcp_readln] enter
-11-12-2009 15:05:50 [thread1-tcp_readln] leave [bufsize=17]
-11-12-2009 15:05:50 [thread1-http_request] Server: Apache/2
-11-12-2009 15:05:50 [thread1-tcp_readln] enter
-11-12-2009 15:05:51 [thread1-tcp_readln] leave [bufsize=51]
-11-12-2009 15:05:51 [thread1-http_request] Location: http://www.plaatsoft.nl/wiibrew/notFound
-11-12-2009 15:05:51 [thread1-tcp_readln] enter
-11-12-2009 15:05:51 [thread1-tcp_readln] leave [bufsize=20]
-11-12-2009 15:05:51 [thread1-http_request] Content-Length: 224
-11-12-2009 15:05:51 [thread1-tcp_readln] enter
-11-12-2009 15:05:51 [thread1-tcp_readln] leave [bufsize=44]
-11-12-2009 15:05:51 [thread1-http_request] Content-Type: text/html; charset=iso-8859-1
-11-12-2009 15:05:51 [thread1-tcp_readln] enter
-11-12-2009 15:05:51 [thread1-tcp_readln] leave [bufsize=1]
-11-12-2009 15:05:51 [thread1-http_request] 
-11-12-2009 15:05:51 [thread1-http_request] content_length=224, status=302, linecount=6
-11-12-2009 15:05:51 [thread1-tcp_thread] Error making http request1a
-11-12-2009 15:05:51 [thread1-tcp_thread] stateMachine=TCP_RETRY
-11-12-2009 15:05:51 [thread1-tcp_sleep] enter [wait=10 sec]
-11-12-2009 15:05:52 [thread0-Pointer::buttonA] enter [x=509|y=56]
-11-12-2009 15:05:52 [thread0-Button::onSelect] enter [x=509|y=56]
-11-12-2009 15:05:52 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:52 [thread0-Button::onSelect] leave
-11-12-2009 15:05:52 [thread0-Button::onSelect] enter [x=509|y=56]
-11-12-2009 15:05:52 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:52 [thread0-Button::onSelect] leave
-11-12-2009 15:05:52 [thread0-Button::onSelect] enter [x=509|y=56]
-11-12-2009 15:05:52 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:52 [thread0-Button::onSelect] leave
-11-12-2009 15:05:52 [thread0-Button::onSelect] enter [x=509|y=56]
-11-12-2009 15:05:52 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:52 [thread0-Button::onSelect] leave
-11-12-2009 15:05:52 [thread0-Button::onSelect] enter [x=509|y=56]
-11-12-2009 15:05:52 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:52 [thread0-Button::onSelect] leave
-11-12-2009 15:05:52 [thread0-Button::onSelect] enter [x=509|y=56]
-11-12-2009 15:05:52 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:52 [thread0-Button::onSelect] leave
-11-12-2009 15:05:52 [thread0-Button::onSelect] enter [x=509|y=56]
-11-12-2009 15:05:52 [thread0-Button::onSelect] Button selected
-11-12-2009 15:05:52 [thread0-Button::onSelect] leave
-11-12-2009 15:05:52 [thread0-Pointer::buttonA] leave
-11-12-2009 15:05:52 [thread0-processStateMachine] stateMachine=stateMapSelectMenu
-11-12-2009 15:05:52 [thread0-initButtons] enter
-11-12-2009 15:05:52 [thread0-initButtons] delete button 0
-11-12-2009 15:05:52 [thread0-Button::~Button] enter
-11-12-2009 15:05:52 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:52 [thread0-initButtons] delete button 1
-11-12-2009 15:05:52 [thread0-Button::~Button] enter
-11-12-2009 15:05:52 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:52 [thread0-initButtons] delete button 2
-11-12-2009 15:05:52 [thread0-Button::~Button] enter
-11-12-2009 15:05:52 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:52 [thread0-initButtons] delete button 3
-11-12-2009 15:05:52 [thread0-Button::~Button] enter
-11-12-2009 15:05:52 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:52 [thread0-initButtons] delete button 4
-11-12-2009 15:05:52 [thread0-Button::~Button] enter
-11-12-2009 15:05:52 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:52 [thread0-initButtons] delete button 5
-11-12-2009 15:05:52 [thread0-Button::~Button] enter
-11-12-2009 15:05:52 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:52 [thread0-initButtons] delete button 6
-11-12-2009 15:05:52 [thread0-Button::~Button] enter
-11-12-2009 15:05:52 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:52 [thread0-initButtons] delete button 7
-11-12-2009 15:05:52 [thread0-Button::~Button] enter
-11-12-2009 15:05:52 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:52 [thread0-initButtons] delete button 8
-11-12-2009 15:05:52 [thread0-Button::~Button] enter
-11-12-2009 15:05:52 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:52 [thread0-Button::Button] enter
-11-12-2009 15:05:52 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:52 [thread0-Button::setX] 25
-11-12-2009 15:05:52 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:52 [thread0-Button::setY] 150
-11-12-2009 15:05:52 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:52 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:52 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:52 [thread0-Button::Button] enter
-11-12-2009 15:05:52 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:52 [thread0-Button::setX] 225
-11-12-2009 15:05:52 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:52 [thread0-Button::setY] 150
-11-12-2009 15:05:52 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:52 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:52 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:52 [thread0-Button::Button] enter
-11-12-2009 15:05:52 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:52 [thread0-Button::setX] 425
-11-12-2009 15:05:52 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:52 [thread0-Button::setY] 150
-11-12-2009 15:05:52 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:52 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:52 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:52 [thread0-Button::Button] enter
-11-12-2009 15:05:52 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:52 [thread0-Button::setX] 225
-11-12-2009 15:05:52 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:52 [thread0-Button::setY] 460
-11-12-2009 15:05:52 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:52 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:52 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:52 [thread0-initButtons] leave [void]
-11-12-2009 15:05:54 [thread0-Pointer::buttonA] enter [x=334|y=462]
-11-12-2009 15:05:54 [thread0-Button::onSelect] enter [x=334|y=462]
-11-12-2009 15:05:54 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:54 [thread0-Button::onSelect] leave
-11-12-2009 15:05:54 [thread0-Button::onSelect] enter [x=334|y=462]
-11-12-2009 15:05:54 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:54 [thread0-Button::onSelect] leave
-11-12-2009 15:05:54 [thread0-Button::onSelect] enter [x=334|y=462]
-11-12-2009 15:05:54 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:54 [thread0-Button::onSelect] leave
-11-12-2009 15:05:54 [thread0-Button::onSelect] enter [x=334|y=462]
-11-12-2009 15:05:54 [thread0-Button::onSelect] Button selected
-11-12-2009 15:05:54 [thread0-Button::onSelect] leave
-11-12-2009 15:05:54 [thread0-Pointer::buttonA] leave
-11-12-2009 15:05:54 [thread0-processStateMachine] stateMachine=stateMainMenu
-11-12-2009 15:05:54 [thread0-initButtons] enter
-11-12-2009 15:05:54 [thread0-initButtons] delete button 0
-11-12-2009 15:05:54 [thread0-Button::~Button] enter
-11-12-2009 15:05:54 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:54 [thread0-initButtons] delete button 1
-11-12-2009 15:05:54 [thread0-Button::~Button] enter
-11-12-2009 15:05:54 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:54 [thread0-initButtons] delete button 2
-11-12-2009 15:05:54 [thread0-Button::~Button] enter
-11-12-2009 15:05:54 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:54 [thread0-initButtons] delete button 3
-11-12-2009 15:05:54 [thread0-Button::~Button] enter
-11-12-2009 15:05:54 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:54 [thread0-Button::Button] enter
-11-12-2009 15:05:54 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setX] 440
-11-12-2009 15:05:54 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setY] 40
-11-12-2009 15:05:54 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:54 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:54 [thread0-Button::Button] enter
-11-12-2009 15:05:54 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setX] 440
-11-12-2009 15:05:54 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setY] 80
-11-12-2009 15:05:54 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:54 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:54 [thread0-Button::Button] enter
-11-12-2009 15:05:54 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setX] 440
-11-12-2009 15:05:54 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setY] 120
-11-12-2009 15:05:54 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:54 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:54 [thread0-Button::Button] enter
-11-12-2009 15:05:54 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setX] 440
-11-12-2009 15:05:54 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setY] 160
-11-12-2009 15:05:54 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:54 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:54 [thread0-Button::Button] enter
-11-12-2009 15:05:54 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setX] 440
-11-12-2009 15:05:54 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setY] 200
-11-12-2009 15:05:54 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:54 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:54 [thread0-Button::Button] enter
-11-12-2009 15:05:54 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setX] 440
-11-12-2009 15:05:54 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setY] 240
-11-12-2009 15:05:54 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:54 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:54 [thread0-Button::Button] enter
-11-12-2009 15:05:54 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setX] 440
-11-12-2009 15:05:54 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setY] 280
-11-12-2009 15:05:54 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:54 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:54 [thread0-Button::Button] enter
-11-12-2009 15:05:54 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setX] 440
-11-12-2009 15:05:54 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setY] 400
-11-12-2009 15:05:54 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:54 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:54 [thread0-Button::Button] enter
-11-12-2009 15:05:54 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setX] 440
-11-12-2009 15:05:54 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setY] 440
-11-12-2009 15:05:54 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:54 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:54 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:54 [thread0-initButtons] leave [void]
-11-12-2009 15:05:55 [thread0-Pointer::buttonA] enter [x=532|y=62]
-11-12-2009 15:05:55 [thread0-Button::onSelect] enter [x=532|y=62]
-11-12-2009 15:05:55 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:55 [thread0-Button::onSelect] leave
-11-12-2009 15:05:55 [thread0-Button::onSelect] enter [x=532|y=62]
-11-12-2009 15:05:55 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:55 [thread0-Button::onSelect] leave
-11-12-2009 15:05:55 [thread0-Button::onSelect] enter [x=532|y=62]
-11-12-2009 15:05:55 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:55 [thread0-Button::onSelect] leave
-11-12-2009 15:05:55 [thread0-Button::onSelect] enter [x=532|y=62]
-11-12-2009 15:05:55 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:55 [thread0-Button::onSelect] leave
-11-12-2009 15:05:55 [thread0-Button::onSelect] enter [x=532|y=62]
-11-12-2009 15:05:55 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:55 [thread0-Button::onSelect] leave
-11-12-2009 15:05:55 [thread0-Button::onSelect] enter [x=532|y=62]
-11-12-2009 15:05:55 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:55 [thread0-Button::onSelect] leave
-11-12-2009 15:05:55 [thread0-Button::onSelect] enter [x=532|y=62]
-11-12-2009 15:05:55 [thread0-Button::onSelect] Button selected
-11-12-2009 15:05:55 [thread0-Button::onSelect] leave
-11-12-2009 15:05:55 [thread0-Pointer::buttonA] leave
-11-12-2009 15:05:55 [thread0-processStateMachine] stateMachine=stateMapSelectMenu
-11-12-2009 15:05:55 [thread0-initButtons] enter
-11-12-2009 15:05:55 [thread0-initButtons] delete button 0
-11-12-2009 15:05:55 [thread0-Button::~Button] enter
-11-12-2009 15:05:55 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:55 [thread0-initButtons] delete button 1
-11-12-2009 15:05:55 [thread0-Button::~Button] enter
-11-12-2009 15:05:55 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:55 [thread0-initButtons] delete button 2
-11-12-2009 15:05:55 [thread0-Button::~Button] enter
-11-12-2009 15:05:55 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:55 [thread0-initButtons] delete button 3
-11-12-2009 15:05:55 [thread0-Button::~Button] enter
-11-12-2009 15:05:55 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:55 [thread0-initButtons] delete button 4
-11-12-2009 15:05:55 [thread0-Button::~Button] enter
-11-12-2009 15:05:55 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:55 [thread0-initButtons] delete button 5
-11-12-2009 15:05:55 [thread0-Button::~Button] enter
-11-12-2009 15:05:55 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:55 [thread0-initButtons] delete button 6
-11-12-2009 15:05:55 [thread0-Button::~Button] enter
-11-12-2009 15:05:55 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:55 [thread0-initButtons] delete button 7
-11-12-2009 15:05:55 [thread0-Button::~Button] enter
-11-12-2009 15:05:55 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:55 [thread0-initButtons] delete button 8
-11-12-2009 15:05:55 [thread0-Button::~Button] enter
-11-12-2009 15:05:55 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:55 [thread0-Button::Button] enter
-11-12-2009 15:05:55 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:55 [thread0-Button::setX] 25
-11-12-2009 15:05:55 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:55 [thread0-Button::setY] 150
-11-12-2009 15:05:55 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:55 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:55 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:55 [thread0-Button::Button] enter
-11-12-2009 15:05:55 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:55 [thread0-Button::setX] 225
-11-12-2009 15:05:55 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:55 [thread0-Button::setY] 150
-11-12-2009 15:05:55 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:55 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:55 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:55 [thread0-Button::Button] enter
-11-12-2009 15:05:55 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:55 [thread0-Button::setX] 425
-11-12-2009 15:05:55 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:55 [thread0-Button::setY] 150
-11-12-2009 15:05:55 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:55 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:55 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:55 [thread0-Button::Button] enter
-11-12-2009 15:05:55 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:55 [thread0-Button::setX] 225
-11-12-2009 15:05:55 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:55 [thread0-Button::setY] 460
-11-12-2009 15:05:55 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:55 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:55 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:55 [thread0-initButtons] leave [void]
-11-12-2009 15:05:58 [thread0-Pointer::buttonA] enter [x=299|y=475]
-11-12-2009 15:05:58 [thread0-Button::onSelect] enter [x=299|y=475]
-11-12-2009 15:05:58 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:58 [thread0-Button::onSelect] leave
-11-12-2009 15:05:58 [thread0-Button::onSelect] enter [x=299|y=475]
-11-12-2009 15:05:58 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:58 [thread0-Button::onSelect] leave
-11-12-2009 15:05:58 [thread0-Button::onSelect] enter [x=299|y=475]
-11-12-2009 15:05:58 [thread0-Button::onSelect] No button selected
-11-12-2009 15:05:58 [thread0-Button::onSelect] leave
-11-12-2009 15:05:58 [thread0-Button::onSelect] enter [x=299|y=475]
-11-12-2009 15:05:58 [thread0-Button::onSelect] Button selected
-11-12-2009 15:05:58 [thread0-Button::onSelect] leave
-11-12-2009 15:05:58 [thread0-Pointer::buttonA] leave
-11-12-2009 15:05:58 [thread0-processStateMachine] stateMachine=stateMainMenu
-11-12-2009 15:05:58 [thread0-initButtons] enter
-11-12-2009 15:05:58 [thread0-initButtons] delete button 0
-11-12-2009 15:05:58 [thread0-Button::~Button] enter
-11-12-2009 15:05:58 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:58 [thread0-initButtons] delete button 1
-11-12-2009 15:05:58 [thread0-Button::~Button] enter
-11-12-2009 15:05:58 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:58 [thread0-initButtons] delete button 2
-11-12-2009 15:05:58 [thread0-Button::~Button] enter
-11-12-2009 15:05:58 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:58 [thread0-initButtons] delete button 3
-11-12-2009 15:05:58 [thread0-Button::~Button] enter
-11-12-2009 15:05:58 [thread0-Button::~Button] leave [void]
-11-12-2009 15:05:58 [thread0-Button::Button] enter
-11-12-2009 15:05:58 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setX] 440
-11-12-2009 15:05:58 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setY] 40
-11-12-2009 15:05:58 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:58 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:58 [thread0-Button::Button] enter
-11-12-2009 15:05:58 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setX] 440
-11-12-2009 15:05:58 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setY] 80
-11-12-2009 15:05:58 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:58 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:58 [thread0-Button::Button] enter
-11-12-2009 15:05:58 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setX] 440
-11-12-2009 15:05:58 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setY] 120
-11-12-2009 15:05:58 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:58 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:58 [thread0-Button::Button] enter
-11-12-2009 15:05:58 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setX] 440
-11-12-2009 15:05:58 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setY] 160
-11-12-2009 15:05:58 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:58 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:58 [thread0-Button::Button] enter
-11-12-2009 15:05:58 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setX] 440
-11-12-2009 15:05:58 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setY] 200
-11-12-2009 15:05:58 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:58 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:58 [thread0-Button::Button] enter
-11-12-2009 15:05:58 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setX] 440
-11-12-2009 15:05:58 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setY] 240
-11-12-2009 15:05:58 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:58 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:58 [thread0-Button::Button] enter
-11-12-2009 15:05:58 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setX] 440
-11-12-2009 15:05:58 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setY] 280
-11-12-2009 15:05:58 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:58 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:58 [thread0-Button::Button] enter
-11-12-2009 15:05:58 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setX] 440
-11-12-2009 15:05:58 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setY] 400
-11-12-2009 15:05:58 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:58 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:58 [thread0-Button::Button] enter
-11-12-2009 15:05:58 [thread0-Button::Button] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setX] 440
-11-12-2009 15:05:58 [thread0-Button::setX] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setY] 440
-11-12-2009 15:05:58 [thread0-Button::setY] leave [void]
-11-12-2009 15:05:58 [thread0-Button::setImageNormal] image
-11-12-2009 15:05:58 [thread0-Button::setImageSelect] image
-11-12-2009 15:05:58 [thread0-initButtons] leave [void]
-11-12-2009 15:06:00 [thread0-Pointer::buttonA] enter [x=519|y=134]
-11-12-2009 15:06:00 [thread0-Button::onSelect] enter [x=519|y=134]
-11-12-2009 15:06:00 [thread0-Button::onSelect] No button selected
-11-12-2009 15:06:00 [thread0-Button::onSelect] leave
-11-12-2009 15:06:00 [thread0-Button::onSelect] enter [x=519|y=134]
-11-12-2009 15:06:00 [thread0-Button::onSelect] Button selected
-11-12-2009 15:06:00 [thread0-Button::onSelect] leave
-11-12-2009 15:06:00 [thread0-Pointer::buttonA] leave
-11-12-2009 15:06:00 [thread0-processStateMachine] stateMachine=stateHelp
-11-12-2009 15:06:00 [thread0-initButtons] enter
-11-12-2009 15:06:00 [thread0-initButtons] delete button 0
-11-12-2009 15:06:00 [thread0-Button::~Button] enter
-11-12-2009 15:06:00 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:00 [thread0-initButtons] delete button 1
-11-12-2009 15:06:00 [thread0-Button::~Button] enter
-11-12-2009 15:06:00 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:00 [thread0-initButtons] delete button 2
-11-12-2009 15:06:00 [thread0-Button::~Button] enter
-11-12-2009 15:06:00 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:00 [thread0-initButtons] delete button 3
-11-12-2009 15:06:00 [thread0-Button::~Button] enter
-11-12-2009 15:06:00 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:00 [thread0-initButtons] delete button 4
-11-12-2009 15:06:00 [thread0-Button::~Button] enter
-11-12-2009 15:06:00 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:00 [thread0-initButtons] delete button 5
-11-12-2009 15:06:00 [thread0-Button::~Button] enter
-11-12-2009 15:06:00 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:00 [thread0-initButtons] delete button 6
-11-12-2009 15:06:00 [thread0-Button::~Button] enter
-11-12-2009 15:06:00 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:00 [thread0-initButtons] delete button 7
-11-12-2009 15:06:00 [thread0-Button::~Button] enter
-11-12-2009 15:06:00 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:00 [thread0-initButtons] delete button 8
-11-12-2009 15:06:00 [thread0-Button::~Button] enter
-11-12-2009 15:06:00 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:00 [thread0-Button::Button] enter
-11-12-2009 15:06:00 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:00 [thread0-Button::setX] 225
-11-12-2009 15:06:00 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:00 [thread0-Button::setY] 460
-11-12-2009 15:06:00 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:00 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:00 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:00 [thread0-initButtons] leave [void]
-11-12-2009 15:06:01 [thread1-tcp_sleep] leave [void]
-11-12-2009 15:06:01 [thread1-tcp_thread] stateMachine=TCP_REQUEST1a
-11-12-2009 15:06:01 [thread1-http_request] enter
-11-12-2009 15:06:01 [thread1-http_split_url] enter
-11-12-2009 15:06:01 [thread1-http_split_url] leave [true]
-11-12-2009 15:06:01 [thread1-tcp_connect] enter [host=www.plaatsoft.nl|port=80]
-11-12-2009 15:06:01 [thread1-tcp_connect] net_gethostbyname successfull resolved
-11-12-2009 15:06:01 [thread1-tcp_socket] enter
-11-12-2009 15:06:01 [thread1-tcp_socket] net_socket succesfull
-11-12-2009 15:06:01 [thread1-tcp_socket] leave [0]
-11-12-2009 15:06:01 [thread1-tcp_connect] tcp_socket succesfull
-11-12-2009 15:06:01 [thread1-tcp_connect] DNS resolve=85.158.203.157
-11-12-2009 15:06:01 [thread1-tcp_connect] net_connect succesfull
-11-12-2009 15:06:01 [thread1-tcp_connect] leave [0]
-11-12-2009 15:06:01 [thread1-http_request] tcp_connect(www.plaatsoft.nl, 80) = 0
-11-12-2009 15:06:01 [thread1-http_request] request=GET /service/releasenotes5.html HTTP/1.1
-Host: www.plaatsoft.nl
-User-Agent: TowerDefense/0.40 (compatible; v3.X; Nintendo Wii)
-Accept: text/xml,text/html,text/plain,image/gif
-Cache-Control: no-cache
-
-
-11-12-2009 15:06:01 [thread1-tcp_write] enter [bufsize=206]
-11-12-2009 15:06:01 [thread1-tcp_write] buffer=GET /service/releasenotes5.html HTTP/1.1
-Host: www.plaatsoft.nl
-User-Agent: TowerDefense/0.40 (compatible; v3.X; Nintendo Wii)
-Accept: text/xml,text/html,text/plain,image/gif
-Cache-Control: no-cache
-
-
-11-12-2009 15:06:01 [thread1-tcp_write] leave [left=0]
-11-12-2009 15:06:01 [thread1-tcp_readln] enter
-11-12-2009 15:06:01 [thread1-tcp_readln] leave [bufsize=19]
-11-12-2009 15:06:01 [thread1-http_request] HTTP/1.1 302 Found
-11-12-2009 15:06:01 [thread1-tcp_readln] enter
-11-12-2009 15:06:01 [thread1-tcp_readln] leave [bufsize=36]
-11-12-2009 15:06:01 [thread1-http_request] Date: Fri, 11 Dec 2009 14:04:09 GMT
-11-12-2009 15:06:01 [thread1-tcp_readln] enter
-11-12-2009 15:06:01 [thread1-tcp_readln] leave [bufsize=17]
-11-12-2009 15:06:01 [thread1-http_request] Server: Apache/2
-11-12-2009 15:06:01 [thread1-tcp_readln] enter
-11-12-2009 15:06:01 [thread1-tcp_readln] leave [bufsize=51]
-11-12-2009 15:06:01 [thread1-http_request] Location: http://www.plaatsoft.nl/wiibrew/notFound
-11-12-2009 15:06:01 [thread1-tcp_readln] enter
-11-12-2009 15:06:01 [thread1-tcp_readln] leave [bufsize=20]
-11-12-2009 15:06:01 [thread1-http_request] Content-Length: 224
-11-12-2009 15:06:01 [thread1-tcp_readln] enter
-11-12-2009 15:06:01 [thread1-tcp_readln] leave [bufsize=44]
-11-12-2009 15:06:01 [thread1-http_request] Content-Type: text/html; charset=iso-8859-1
-11-12-2009 15:06:01 [thread1-tcp_readln] enter
-11-12-2009 15:06:01 [thread1-tcp_readln] leave [bufsize=1]
-11-12-2009 15:06:01 [thread1-http_request] 
-11-12-2009 15:06:01 [thread1-http_request] content_length=224, status=302, linecount=6
-11-12-2009 15:06:01 [thread1-tcp_thread] Error making http request1a
-11-12-2009 15:06:01 [thread1-tcp_thread] stateMachine=TCP_RETRY
-11-12-2009 15:06:01 [thread1-tcp_sleep] enter [wait=10 sec]
-11-12-2009 15:06:01 [thread0-Pointer::buttonA] enter [x=308|y=475]
-11-12-2009 15:06:01 [thread0-Button::onSelect] enter [x=308|y=475]
-11-12-2009 15:06:01 [thread0-Button::onSelect] Button selected
-11-12-2009 15:06:01 [thread0-Button::onSelect] leave
-11-12-2009 15:06:01 [thread0-Pointer::buttonA] leave
-11-12-2009 15:06:01 [thread0-processStateMachine] stateMachine=stateMainMenu
-11-12-2009 15:06:01 [thread0-initButtons] enter
-11-12-2009 15:06:01 [thread0-initButtons] delete button 0
-11-12-2009 15:06:01 [thread0-Button::~Button] enter
-11-12-2009 15:06:01 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:01 [thread0-Button::Button] enter
-11-12-2009 15:06:01 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setX] 440
-11-12-2009 15:06:01 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setY] 40
-11-12-2009 15:06:01 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:01 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:01 [thread0-Button::Button] enter
-11-12-2009 15:06:01 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setX] 440
-11-12-2009 15:06:01 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setY] 80
-11-12-2009 15:06:01 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:01 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:01 [thread0-Button::Button] enter
-11-12-2009 15:06:01 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setX] 440
-11-12-2009 15:06:01 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setY] 120
-11-12-2009 15:06:01 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:01 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:01 [thread0-Button::Button] enter
-11-12-2009 15:06:01 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setX] 440
-11-12-2009 15:06:01 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setY] 160
-11-12-2009 15:06:01 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:01 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:01 [thread0-Button::Button] enter
-11-12-2009 15:06:01 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setX] 440
-11-12-2009 15:06:01 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setY] 200
-11-12-2009 15:06:01 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:01 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:01 [thread0-Button::Button] enter
-11-12-2009 15:06:01 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setX] 440
-11-12-2009 15:06:01 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setY] 240
-11-12-2009 15:06:01 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:01 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:01 [thread0-Button::Button] enter
-11-12-2009 15:06:01 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setX] 440
-11-12-2009 15:06:01 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setY] 280
-11-12-2009 15:06:01 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:01 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:01 [thread0-Button::Button] enter
-11-12-2009 15:06:01 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setX] 440
-11-12-2009 15:06:01 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setY] 400
-11-12-2009 15:06:01 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:01 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:01 [thread0-Button::Button] enter
-11-12-2009 15:06:01 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setX] 440
-11-12-2009 15:06:01 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setY] 440
-11-12-2009 15:06:01 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:01 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:01 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:01 [thread0-initButtons] leave [void]
-11-12-2009 15:06:03 [thread0-Pointer::buttonA] enter [x=490|y=207]
-11-12-2009 15:06:03 [thread0-Button::onSelect] enter [x=490|y=207]
-11-12-2009 15:06:03 [thread0-Button::onSelect] No button selected
-11-12-2009 15:06:03 [thread0-Button::onSelect] leave
-11-12-2009 15:06:03 [thread0-Button::onSelect] enter [x=490|y=207]
-11-12-2009 15:06:03 [thread0-Button::onSelect] No button selected
-11-12-2009 15:06:03 [thread0-Button::onSelect] leave
-11-12-2009 15:06:03 [thread0-Button::onSelect] enter [x=490|y=207]
-11-12-2009 15:06:03 [thread0-Button::onSelect] No button selected
-11-12-2009 15:06:03 [thread0-Button::onSelect] leave
-11-12-2009 15:06:03 [thread0-Button::onSelect] enter [x=490|y=207]
-11-12-2009 15:06:03 [thread0-Button::onSelect] No button selected
-11-12-2009 15:06:03 [thread0-Button::onSelect] leave
-11-12-2009 15:06:03 [thread0-Button::onSelect] enter [x=490|y=207]
-11-12-2009 15:06:03 [thread0-Button::onSelect] Button selected
-11-12-2009 15:06:03 [thread0-Button::onSelect] leave
-11-12-2009 15:06:03 [thread0-Pointer::buttonA] leave
-11-12-2009 15:06:03 [thread0-processStateMachine] stateMachine=stateReleaseNotes
-11-12-2009 15:06:03 [thread0-initButtons] enter
-11-12-2009 15:06:03 [thread0-initButtons] delete button 0
-11-12-2009 15:06:03 [thread0-Button::~Button] enter
-11-12-2009 15:06:03 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:03 [thread0-initButtons] delete button 1
-11-12-2009 15:06:03 [thread0-Button::~Button] enter
-11-12-2009 15:06:03 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:03 [thread0-initButtons] delete button 2
-11-12-2009 15:06:03 [thread0-Button::~Button] enter
-11-12-2009 15:06:03 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:03 [thread0-initButtons] delete button 3
-11-12-2009 15:06:03 [thread0-Button::~Button] enter
-11-12-2009 15:06:03 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:03 [thread0-initButtons] delete button 4
-11-12-2009 15:06:03 [thread0-Button::~Button] enter
-11-12-2009 15:06:03 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:03 [thread0-initButtons] delete button 5
-11-12-2009 15:06:03 [thread0-Button::~Button] enter
-11-12-2009 15:06:03 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:03 [thread0-initButtons] delete button 6
-11-12-2009 15:06:03 [thread0-Button::~Button] enter
-11-12-2009 15:06:03 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:03 [thread0-initButtons] delete button 7
-11-12-2009 15:06:03 [thread0-Button::~Button] enter
-11-12-2009 15:06:03 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:03 [thread0-initButtons] delete button 8
-11-12-2009 15:06:03 [thread0-Button::~Button] enter
-11-12-2009 15:06:03 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:03 [thread0-Button::Button] enter
-11-12-2009 15:06:03 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setX] 225
-11-12-2009 15:06:03 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setY] 460
-11-12-2009 15:06:03 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:03 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:03 [thread0-initButtons] leave [void]
-11-12-2009 15:06:03 [thread0-Pointer::buttonA] enter [x=300|y=481]
-11-12-2009 15:06:03 [thread0-Button::onSelect] enter [x=300|y=481]
-11-12-2009 15:06:03 [thread0-Button::onSelect] Button selected
-11-12-2009 15:06:03 [thread0-Button::onSelect] leave
-11-12-2009 15:06:03 [thread0-Pointer::buttonA] leave
-11-12-2009 15:06:03 [thread0-processStateMachine] stateMachine=stateMainMenu
-11-12-2009 15:06:03 [thread0-initButtons] enter
-11-12-2009 15:06:03 [thread0-initButtons] delete button 0
-11-12-2009 15:06:03 [thread0-Button::~Button] enter
-11-12-2009 15:06:03 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:03 [thread0-Button::Button] enter
-11-12-2009 15:06:03 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setX] 440
-11-12-2009 15:06:03 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setY] 40
-11-12-2009 15:06:03 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:03 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:03 [thread0-Button::Button] enter
-11-12-2009 15:06:03 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setX] 440
-11-12-2009 15:06:03 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setY] 80
-11-12-2009 15:06:03 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:03 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:03 [thread0-Button::Button] enter
-11-12-2009 15:06:03 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setX] 440
-11-12-2009 15:06:03 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setY] 120
-11-12-2009 15:06:03 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:03 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:03 [thread0-Button::Button] enter
-11-12-2009 15:06:03 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setX] 440
-11-12-2009 15:06:03 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setY] 160
-11-12-2009 15:06:03 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:03 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:03 [thread0-Button::Button] enter
-11-12-2009 15:06:03 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setX] 440
-11-12-2009 15:06:03 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setY] 200
-11-12-2009 15:06:03 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:03 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:03 [thread0-Button::Button] enter
-11-12-2009 15:06:03 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setX] 440
-11-12-2009 15:06:03 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setY] 240
-11-12-2009 15:06:03 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:03 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:03 [thread0-Button::Button] enter
-11-12-2009 15:06:03 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setX] 440
-11-12-2009 15:06:03 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setY] 280
-11-12-2009 15:06:03 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:03 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:03 [thread0-Button::Button] enter
-11-12-2009 15:06:03 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setX] 440
-11-12-2009 15:06:03 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setY] 400
-11-12-2009 15:06:03 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:03 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:03 [thread0-Button::Button] enter
-11-12-2009 15:06:03 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setX] 440
-11-12-2009 15:06:03 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setY] 440
-11-12-2009 15:06:03 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:03 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:03 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:03 [thread0-initButtons] leave [void]
-11-12-2009 15:06:04 [thread0-Pointer::buttonA] enter [x=515|y=255]
-11-12-2009 15:06:04 [thread0-Button::onSelect] enter [x=515|y=255]
-11-12-2009 15:06:04 [thread0-Button::onSelect] No button selected
-11-12-2009 15:06:04 [thread0-Button::onSelect] leave
-11-12-2009 15:06:04 [thread0-Button::onSelect] enter [x=515|y=255]
-11-12-2009 15:06:04 [thread0-Button::onSelect] No button selected
-11-12-2009 15:06:04 [thread0-Button::onSelect] leave
-11-12-2009 15:06:04 [thread0-Button::onSelect] enter [x=515|y=255]
-11-12-2009 15:06:04 [thread0-Button::onSelect] No button selected
-11-12-2009 15:06:04 [thread0-Button::onSelect] leave
-11-12-2009 15:06:04 [thread0-Button::onSelect] enter [x=515|y=255]
-11-12-2009 15:06:04 [thread0-Button::onSelect] Button selected
-11-12-2009 15:06:04 [thread0-Button::onSelect] leave
-11-12-2009 15:06:04 [thread0-Pointer::buttonA] leave
-11-12-2009 15:06:04 [thread0-processStateMachine] stateMachine=stateSoundSettings
-11-12-2009 15:06:04 [thread0-initButtons] enter
-11-12-2009 15:06:04 [thread0-initButtons] delete button 0
-11-12-2009 15:06:04 [thread0-Button::~Button] enter
-11-12-2009 15:06:04 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:04 [thread0-initButtons] delete button 1
-11-12-2009 15:06:04 [thread0-Button::~Button] enter
-11-12-2009 15:06:04 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:04 [thread0-initButtons] delete button 2
-11-12-2009 15:06:04 [thread0-Button::~Button] enter
-11-12-2009 15:06:04 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:04 [thread0-initButtons] delete button 3
-11-12-2009 15:06:04 [thread0-Button::~Button] enter
-11-12-2009 15:06:04 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:04 [thread0-initButtons] delete button 4
-11-12-2009 15:06:04 [thread0-Button::~Button] enter
-11-12-2009 15:06:04 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:04 [thread0-initButtons] delete button 5
-11-12-2009 15:06:04 [thread0-Button::~Button] enter
-11-12-2009 15:06:04 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:04 [thread0-initButtons] delete button 6
-11-12-2009 15:06:04 [thread0-Button::~Button] enter
-11-12-2009 15:06:04 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:04 [thread0-initButtons] delete button 7
-11-12-2009 15:06:04 [thread0-Button::~Button] enter
-11-12-2009 15:06:04 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:04 [thread0-initButtons] delete button 8
-11-12-2009 15:06:04 [thread0-Button::~Button] enter
-11-12-2009 15:06:04 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:04 [thread0-Button::Button] enter
-11-12-2009 15:06:04 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:04 [thread0-Button::setX] 225
-11-12-2009 15:06:04 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:04 [thread0-Button::setY] 460
-11-12-2009 15:06:04 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:04 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:04 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:04 [thread0-initButtons] leave [void]
-11-12-2009 15:06:05 [thread0-Pointer::buttonA] enter [x=351|y=478]
-11-12-2009 15:06:05 [thread0-Button::onSelect] enter [x=351|y=478]
-11-12-2009 15:06:05 [thread0-Button::onSelect] Button selected
-11-12-2009 15:06:05 [thread0-Button::onSelect] leave
-11-12-2009 15:06:05 [thread0-Pointer::buttonA] leave
-11-12-2009 15:06:05 [thread0-processStateMachine] stateMachine=stateMainMenu
-11-12-2009 15:06:05 [thread0-initButtons] enter
-11-12-2009 15:06:05 [thread0-initButtons] delete button 0
-11-12-2009 15:06:05 [thread0-Button::~Button] enter
-11-12-2009 15:06:05 [thread0-Button::~Button] leave [void]
-11-12-2009 15:06:05 [thread0-Button::Button] enter
-11-12-2009 15:06:05 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setX] 440
-11-12-2009 15:06:05 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setY] 40
-11-12-2009 15:06:05 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:05 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:05 [thread0-Button::Button] enter
-11-12-2009 15:06:05 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setX] 440
-11-12-2009 15:06:05 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setY] 80
-11-12-2009 15:06:05 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:05 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:05 [thread0-Button::Button] enter
-11-12-2009 15:06:05 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setX] 440
-11-12-2009 15:06:05 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setY] 120
-11-12-2009 15:06:05 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:05 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:05 [thread0-Button::Button] enter
-11-12-2009 15:06:05 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setX] 440
-11-12-2009 15:06:05 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setY] 160
-11-12-2009 15:06:05 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:05 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:05 [thread0-Button::Button] enter
-11-12-2009 15:06:05 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setX] 440
-11-12-2009 15:06:05 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setY] 200
-11-12-2009 15:06:05 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:05 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:05 [thread0-Button::Button] enter
-11-12-2009 15:06:05 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setX] 440
-11-12-2009 15:06:05 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setY] 240
-11-12-2009 15:06:05 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:05 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:05 [thread0-Button::Button] enter
-11-12-2009 15:06:05 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setX] 440
-11-12-2009 15:06:05 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setY] 280
-11-12-2009 15:06:05 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:05 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:05 [thread0-Button::Button] enter
-11-12-2009 15:06:05 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setX] 440
-11-12-2009 15:06:05 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setY] 400
-11-12-2009 15:06:05 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:05 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:05 [thread0-Button::Button] enter
-11-12-2009 15:06:05 [thread0-Button::Button] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setX] 440
-11-12-2009 15:06:05 [thread0-Button::setX] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setY] 440
-11-12-2009 15:06:05 [thread0-Button::setY] leave [void]
-11-12-2009 15:06:05 [thread0-Button::setImageNormal] image
-11-12-2009 15:06:05 [thread0-Button::setImageSelect] image
-11-12-2009 15:06:05 [thread0-initButtons] leave [void]
-11-12-2009 15:06:06 [thread0-Pointer::buttonA] enter [x=510|y=282]
-11-12-2009 15:06:06 [thread0-Button::onSelect] enter [x=510|y=282]
-11-12-2009 15:06:06 [thread0-Button::onSelect] No button selected
-11-12-2009 15:06:06 [thread0-Button::onSelect] leave
-11-12-2009 15:06:06 [thread0-Button::onSelect] enter [x=510|y=282]
-11-12-2009 15:06:06 [thread0-Button::onSelect] No button selec
+11-12-2009 22:27:26 [thread1-tcp_write] leave [left=0]
+11-12-2009 22:27:26 [thread1-tcp_readln] enter
+11-12-2009 22:27:26 [thread0-processStateMachine] stateMachine=stateSoundSettings
+11-12-2009 22:27:26 [thread0-initButtons] enter
+11-12-2009 22:27:26 [thread0-initButtons] delete button 0
+11-12-2009 22:27:26 [thread0-Button::~Button] enter
+11-12-2009 22:27:26 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:26 [thread0-initButtons] delete button 1
+11-12-2009 22:27:26 [thread0-Button::~Button] enter
+11-12-2009 22:27:26 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:26 [thread0-initButtons] delete button 2
+11-12-2009 22:27:26 [thread0-Button::~Button] enter
+11-12-2009 22:27:26 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:26 [thread0-initButtons] delete button 3
+11-12-2009 22:27:26 [thread0-Button::~Button] enter
+11-12-2009 22:27:26 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:26 [thread0-initButtons] delete button 4
+11-12-2009 22:27:26 [thread0-Button::~Button] enter
+11-12-2009 22:27:26 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:26 [thread0-initButtons] delete button 5
+11-12-2009 22:27:26 [thread0-Button::~Button] enter
+11-12-2009 22:27:26 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:26 [thread0-initButtons] delete button 6
+11-12-2009 22:27:26 [thread0-Button::~Button] enter
+11-12-2009 22:27:26 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:26 [thread0-initButtons] delete button 7
+11-12-2009 22:27:26 [thread0-Button::~Button] enter
+11-12-2009 22:27:26 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:26 [thread0-initButtons] delete button 8
+11-12-2009 22:27:26 [thread0-Button::~Button] enter
+11-12-2009 22:27:26 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:26 [thread0-Button::Button] enter
+11-12-2009 22:27:26 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:26 [thread0-Button::setX] 240
+11-12-2009 22:27:26 [thread0-Button::setY] 460
+11-12-2009 22:27:26 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:26 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:26 [thread0-Button::Button] enter
+11-12-2009 22:27:26 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:26 [thread0-Button::setX] 20
+11-12-2009 22:27:26 [thread0-Button::setY] 160
+11-12-2009 22:27:26 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:26 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:26 [thread0-Button::Button] enter
+11-12-2009 22:27:26 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:26 [thread0-Button::setX] 540
+11-12-2009 22:27:26 [thread0-Button::setY] 155
+11-12-2009 22:27:26 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:26 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:26 [thread0-Button::Button] enter
+11-12-2009 22:27:26 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:26 [thread0-Button::setX] 20
+11-12-2009 22:27:26 [thread0-Button::setY] 255
+11-12-2009 22:27:26 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:26 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:26 [thread0-Button::Button] enter
+11-12-2009 22:27:26 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:26 [thread0-Button::setX] 540
+11-12-2009 22:27:26 [thread0-Button::setY] 255
+11-12-2009 22:27:26 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:26 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:26 [thread0-Button::Button] enter
+11-12-2009 22:27:26 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:26 [thread0-Button::setX] 140
+11-12-2009 22:27:26 [thread0-Button::setY] 335
+11-12-2009 22:27:26 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:26 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:26 [thread0-Button::Button] enter
+11-12-2009 22:27:26 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:26 [thread0-Button::setX] 420
+11-12-2009 22:27:26 [thread0-Button::setY] 335
+11-12-2009 22:27:26 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:26 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:26 [thread0-initButtons] leave [void]
+11-12-2009 22:27:26 [thread1-tcp_readln] leave [bufsize=19]
+11-12-2009 22:27:26 [thread1-http_request] HTTP/1.1 302 Found
+11-12-2009 22:27:26 [thread1-tcp_readln] enter
+11-12-2009 22:27:26 [thread1-tcp_readln] leave [bufsize=36]
+11-12-2009 22:27:26 [thread1-http_request] Date: Fri, 11 Dec 2009 21:25:34 GMT
+11-12-2009 22:27:26 [thread1-tcp_readln] enter
+11-12-2009 22:27:27 [thread1-tcp_readln] leave [bufsize=17]
+11-12-2009 22:27:27 [thread1-http_request] Server: Apache/2
+11-12-2009 22:27:27 [thread1-tcp_readln] enter
+11-12-2009 22:27:27 [thread1-tcp_readln] leave [bufsize=51]
+11-12-2009 22:27:27 [thread1-http_request] Location: http://www.plaatsoft.nl/wiibrew/notFound
+11-12-2009 22:27:27 [thread1-tcp_readln] enter
+11-12-2009 22:27:27 [thread1-tcp_readln] leave [bufsize=20]
+11-12-2009 22:27:27 [thread1-http_request] Content-Length: 224
+11-12-2009 22:27:27 [thread1-tcp_readln] enter
+11-12-2009 22:27:27 [thread1-tcp_readln] leave [bufsize=44]
+11-12-2009 22:27:27 [thread1-http_request] Content-Type: text/html; charset=iso-8859-1
+11-12-2009 22:27:27 [thread1-tcp_readln] enter
+11-12-2009 22:27:27 [thread1-tcp_readln] leave [bufsize=1]
+11-12-2009 22:27:27 [thread1-http_request] 
+11-12-2009 22:27:27 [thread1-http_request] content_length=224, status=302, linecount=6
+11-12-2009 22:27:27 [thread1-tcp_thread] Error making http request1a
+11-12-2009 22:27:27 [thread1-tcp_thread] stateMachine=TCP_RETRY
+11-12-2009 22:27:27 [thread1-tcp_sleep] enter [wait=10 sec]
+11-12-2009 22:27:28 [thread0-Pointer::buttonA] enter [x=345|y=489]
+11-12-2009 22:27:28 [thread0-Button::onSelect] enter [x=345|y=489]
+11-12-2009 22:27:28 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:28 [thread0-Button::onSelect] leave
+11-12-2009 22:27:28 [thread0-Button::onSelect] enter [x=345|y=489]
+11-12-2009 22:27:28 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:28 [thread0-Button::onSelect] leave
+11-12-2009 22:27:28 [thread0-Button::onSelect] enter [x=345|y=489]
+11-12-2009 22:27:28 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:28 [thread0-Button::onSelect] leave
+11-12-2009 22:27:28 [thread0-Button::onSelect] enter [x=345|y=489]
+11-12-2009 22:27:28 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:28 [thread0-Button::onSelect] leave
+11-12-2009 22:27:28 [thread0-Button::onSelect] enter [x=345|y=489]
+11-12-2009 22:27:28 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:28 [thread0-Button::onSelect] leave
+11-12-2009 22:27:28 [thread0-Button::onSelect] enter [x=345|y=489]
+11-12-2009 22:27:28 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:28 [thread0-Button::onSelect] leave
+11-12-2009 22:27:28 [thread0-Button::onSelect] enter [x=345|y=489]
+11-12-2009 22:27:28 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:28 [thread0-Button::onSelect] leave
+11-12-2009 22:27:28 [thread0-Pointer::buttonA] leave
+11-12-2009 22:27:28 [thread0-Pointer::buttonA] enter [x=346|y=486]
+11-12-2009 22:27:28 [thread0-Button::onSelect] enter [x=346|y=486]
+11-12-2009 22:27:28 [thread0-Button::onSelect] Button selected
+11-12-2009 22:27:28 [thread0-Button::onSelect] leave
+11-12-2009 22:27:28 [thread0-Pointer::buttonA] leave
+11-12-2009 22:27:28 [thread0-processStateMachine] stateMachine=stateMainMenu
+11-12-2009 22:27:28 [thread0-initButtons] enter
+11-12-2009 22:27:28 [thread0-initButtons] delete button 0
+11-12-2009 22:27:28 [thread0-Button::~Button] enter
+11-12-2009 22:27:28 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:28 [thread0-initButtons] delete button 1
+11-12-2009 22:27:28 [thread0-Button::~Button] enter
+11-12-2009 22:27:28 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:28 [thread0-initButtons] delete button 2
+11-12-2009 22:27:28 [thread0-Button::~Button] enter
+11-12-2009 22:27:28 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:28 [thread0-initButtons] delete button 3
+11-12-2009 22:27:28 [thread0-Button::~Button] enter
+11-12-2009 22:27:28 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:28 [thread0-initButtons] delete button 4
+11-12-2009 22:27:28 [thread0-Button::~Button] enter
+11-12-2009 22:27:28 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:28 [thread0-initButtons] delete button 5
+11-12-2009 22:27:28 [thread0-Button::~Button] enter
+11-12-2009 22:27:28 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:28 [thread0-initButtons] delete button 6
+11-12-2009 22:27:28 [thread0-Button::~Button] enter
+11-12-2009 22:27:28 [thread0-Button::~Button] leave [void]
+11-12-2009 22:27:28 [thread0-Button::Button] enter
+11-12-2009 22:27:28 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:28 [thread0-Button::setX] 440
+11-12-2009 22:27:28 [thread0-Button::setY] 40
+11-12-2009 22:27:28 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:28 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:28 [thread0-Button::Button] enter
+11-12-2009 22:27:28 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:28 [thread0-Button::setX] 440
+11-12-2009 22:27:28 [thread0-Button::setY] 80
+11-12-2009 22:27:28 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:28 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:28 [thread0-Button::Button] enter
+11-12-2009 22:27:28 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:28 [thread0-Button::setX] 440
+11-12-2009 22:27:28 [thread0-Button::setY] 120
+11-12-2009 22:27:28 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:28 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:28 [thread0-Button::Button] enter
+11-12-2009 22:27:28 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:28 [thread0-Button::setX] 440
+11-12-2009 22:27:28 [thread0-Button::setY] 160
+11-12-2009 22:27:28 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:28 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:28 [thread0-Button::Button] enter
+11-12-2009 22:27:28 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:28 [thread0-Button::setX] 440
+11-12-2009 22:27:28 [thread0-Button::setY] 200
+11-12-2009 22:27:28 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:28 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:28 [thread0-Button::Button] enter
+11-12-2009 22:27:28 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:28 [thread0-Button::setX] 440
+11-12-2009 22:27:28 [thread0-Button::setY] 240
+11-12-2009 22:27:28 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:28 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:28 [thread0-Button::Button] enter
+11-12-2009 22:27:28 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:28 [thread0-Button::setX] 440
+11-12-2009 22:27:28 [thread0-Button::setY] 280
+11-12-2009 22:27:28 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:28 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:28 [thread0-Button::Button] enter
+11-12-2009 22:27:28 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:28 [thread0-Button::setX] 440
+11-12-2009 22:27:28 [thread0-Button::setY] 400
+11-12-2009 22:27:28 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:28 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:28 [thread0-Button::Button] enter
+11-12-2009 22:27:28 [thread0-Button::Button] leave [void]
+11-12-2009 22:27:28 [thread0-Button::setX] 440
+11-12-2009 22:27:28 [thread0-Button::setY] 440
+11-12-2009 22:27:28 [thread0-Button::setImageNormal] image
+11-12-2009 22:27:28 [thread0-Button::setImageSelect] image
+11-12-2009 22:27:28 [thread0-initButtons] leave [void]
+11-12-2009 22:27:29 [thread0-Pointer::buttonA] enter [x=463|y=421]
+11-12-2009 22:27:29 [thread0-Button::onSelect] enter [x=463|y=421]
+11-12-2009 22:27:29 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:29 [thread0-Button::onSelect] leave
+11-12-2009 22:27:29 [thread0-Button::onSelect] enter [x=463|y=421]
+11-12-2009 22:27:29 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:29 [thread0-Button::onSelect] leave
+11-12-2009 22:27:29 [thread0-Button::onSelect] enter [x=463|y=421]
+11-12-2009 22:27:29 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:29 [thread0-Button::onSelect] leave
+11-12-2009 22:27:29 [thread0-Button::onSelect] enter [x=463|y=421]
+11-12-2009 22:27:29 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:29 [thread0-Button::onSelect] leave
+11-12-2009 22:27:29 [thread0-Button::onSelect] enter [x=463|y=421]
+11-12-2009 22:27:29 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:29 [thread0-Button::onSelect] leave
+11-12-2009 22:27:29 [thread0-Button::onSelect] enter [x=463|y=421]
+11-12-2009 22:27:29 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:29 [thread0-Button::onSelect] leave
+11-12-2009 22:27:29 [thread0-Button::onSelect] enter [x=463|y=421]
+11-12-2009 22:27:29 [thread0-Button::onSelect] No button selected
+11-12-2009 22:27:29 [thread0-Button::onSelect] leave
+11-12-2009 22:27:29 [thread0-Button::onSelect] enter [x=463|y=421]
+11-12-2009 22:27:29 [thread0-Button::onSelect] Button selected
+11-12-2009 22:27:29 [thread0-Button::onSelect] leave
+11-12-2009 22:27:29 [thread0-Pointer::buttonA] leave
+11-12-2009 22:27:29 [thread1-tcp_stop_thread] enter
+11-12-2009 22:27:29 [thread1-tcp_stop_thread] leave [0]
+11-12-2009 22:27:29 [thread0-destroyImages] enter
+11-12-2009 22:27:29 [thread0-destroyImages] leave
+11-12-2009 22:27:29 [thread0-main] TowerDefense 0.40 Leaving
