@@ -213,13 +213,15 @@ void HighScore::save( const char *filename)
 // Insert new score on the ready place in the list.
 void HighScore::setScore(const char *name, int wave, int score)
 {
+	const char *s_fn="HighScore::setScore";
+	trace->event(s_fn,0,"enter [name=%s|wave=%d|score=%d)", name, wave, score);
+	
 	int marker=-1;
-	int i=0;
 	
 	// Find score position
-	for(i=0; i<MAX_LOCAL_HIGHSCORE; i++)
+	for(int i=0; i<MAX_LOCAL_HIGHSCORE; i++)
 	{
-		if (scores[i].score<score)
+		if (score>=scores[i].score)
 		{
 			marker=i;
 			break;
@@ -230,11 +232,11 @@ void HighScore::setScore(const char *name, int wave, int score)
 	if (marker==-1) return;
 	
 	// Move all entry on step down.
-	for (i=(MAX_LOCAL_HIGHSCORE-1); i>marker; i--)
+	for (int i=(MAX_LOCAL_HIGHSCORE-2); i>=marker; i--)
 	{
 		int offset=i+1;
 		scores[offset].score = scores[i].score;
-		scores[offset].wave=  scores[i].wave;
+		scores[offset].wave =  scores[i].wave;
 		scores[offset].localTime = scores[i].localTime;
 		strcpy(scores[offset].name,scores[i].name);
 	}
@@ -244,6 +246,8 @@ void HighScore::setScore(const char *name, int wave, int score)
 	scores[marker].wave=wave;
 	scores[marker].localTime=time(NULL);
 	strcpy(scores[marker].name,name);
+	
+	trace->event(s_fn,0,"leave [void]");
 }
 
 

@@ -176,7 +176,8 @@ enum
    fontNew=4,
    fontNormal=5,
    fontSpecial=6,
-   fontButton=7
+   fontButton=7,
+   fontWelcome=8
 };
 
 typedef struct 
