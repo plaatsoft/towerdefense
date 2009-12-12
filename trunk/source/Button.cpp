@@ -65,7 +65,7 @@ Button::~Button()
 // Others
 // ------------------------------
 
-void Button::draw()
+void Button::draw(int mode)
 {
 	focus=false;
 	for (int i=0; i<MAX_POINTERS; i++)
@@ -87,24 +87,42 @@ void Button::draw()
 	
 	if (focus)
 	{
-		GRRLIB_DrawImg( x, y, imageFocus, 0, 1, 1, IMAGE_COLOR );	
+		if (mode==0)
+		{
+			// alfa 100%
+			GRRLIB_DrawImg( x, y, imageFocus, 0, 1, 1, IMAGE_COLOR );	
+		}
+		else
+		{
+			// alfa 60% (transparent)
+			GRRLIB_DrawImg( x, y, imageFocus, 0, 1, 1, IMAGE_COLOR3 );
+		}
 		//pointers[i].setRumble(MAX_RUMBLE);
 	}
 	else
 	{
-		GRRLIB_DrawImg( x, y, imageNormal, 0, 1, 1, IMAGE_COLOR );	
+		if (mode==0)
+		{
+			// alfa 100%
+			GRRLIB_DrawImg( x, y, imageNormal, 0, 1, 1, IMAGE_COLOR );	
+		}
+		else
+		{
+			// alfa 60% (transparent)
+			GRRLIB_DrawImg( x, y, imageNormal, 0, 1, 1, IMAGE_COLOR3 );	
+		}
 	}
 }
 
-void Button::text()
+void Button::text(int offset)
 {	
 	if (focus)
 	{
-		GRRLIB_Printf2(x+35, y+3, label, 16, GRRLIB_BLUE); 
+		GRRLIB_Printf2(x+35+offset, y+3, label, 16, GRRLIB_BLUE); 
 	}
 	else
 	{
-		GRRLIB_Printf2(x+35, y+3, label, 16, GRRLIB_WHITESMOKE); 	
+		GRRLIB_Printf2(x+35+offset, y+3, label, 16, GRRLIB_WHITESMOKE); 	
 	}
 }
 

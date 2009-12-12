@@ -42,6 +42,10 @@ class Weapon
 	int delay;
 	int index;
 	
+	int fireDelay;
+	int monsterX;
+	int monsterY;
+	
 	bool selected;
 	
 	int rate;
@@ -51,7 +55,6 @@ class Weapon
 	int powerPrice;
 	int rangePrice;
 	int ratePrice;
-	
 	
   public:
   	Weapon();

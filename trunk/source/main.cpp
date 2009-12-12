@@ -20,23 +20,19 @@
 **  ==============
 **
 **  TODO:
-**  - Added weapon fire graphic effect 
-**  - Added weapon on game board
-**  - Debug network thread
-**  - Debug save settings and highscore to file.
+**  - Added weapons to game board
+**  - Bugfix: Network thread
+**  - Bugfix: Save settings and highscore to file is not working stable.
+**  - Bugfix: Balance sound effect volume.
+**  - Bugfix: Button rumble support is not working
 **
-**  10/12/2009 Version 0.40
-**  NOT TESTED YET:
-**  - Added Network thread.
-**  	- Fetch latest available version information from internet.
-**  	- Fetch latest release notes information from internet.
-**  - Added Release Notes screen.
-**
-**  TESTED:
+**  13/12/2009 Version 0.40
+**  - Added basic weapon fire graphic effect 
+**  - Added event engine.
 **  - Added music & effect control screen.
 **  	- Added nigh tracks background music.
 **  	- Added game sound effects.
-*   - Added wave lanch button on game board.
+**  - Added wave lanch button on game board.
 **  - Added game information panel.
 **		- Added functionality to upgrade power, range and rate of weapon.
 **  - Added continues monster wave principle.
@@ -49,9 +45,13 @@
 **  - Added Help screen.
 **  - Improve main menu screen.
 **  - Added functionality to make screenshots (Press + button).
+**  - Added Network thread.
+**  	- Fetch latest available version information from internet.
+**  	- Fetch latest release notes information from internet.
+**  	- Added Release Notes screen.
 **  - Build game with devkitPPC r19 compiler.
 **
-**  03/12/2009 Version 0.30
+**  06/12/2009 Version 0.30
 **  - Added gameOver detection
 **  - Improve memory usage (load classes dynamicly when needed)
 **  - Added functionality that weapons can fire.
@@ -77,8 +77,10 @@
 **  - Build game with devkitPPC r19 compiler.
 **
 **  21/11/2009 Version 0.10 
-**  - Started programming.
+**  - Started programming in C++.
 **  - Finding free graphics for game.
+**  - Setup basic directory structure for new project.
+**  - Store source code in Google code SVN repository.
 */
 
 #include <stdio.h>
@@ -263,6 +265,9 @@ extern int      pic14length;
 extern const unsigned char     pic15data[];
 extern int      pic15length;
 
+
+
+
 // Monster1 Image
 extern const unsigned char     pic101data[];
 extern int      pic101length;
@@ -363,6 +368,9 @@ extern int      pic124length;
 extern const unsigned char     pic125data[];
 extern int      pic125length;
 
+
+
+
 // Pointer1 Image
 extern const unsigned char     pic200data[];
 extern int      pic200length;
@@ -378,6 +386,9 @@ extern int      pic202length;
 // Pointer4 Image
 extern const unsigned char     pic203data[];
 extern int      pic203length;
+
+
+
 
 // Base1 Image
 extern const unsigned char     pic301data[];
@@ -431,6 +442,8 @@ extern int      pic406length;
 extern const unsigned char     pic407data[];
 extern int      pic407length;
 
+
+
 // Weapon1 Image
 extern const unsigned char     pic500data[];
 extern int      pic500length;
@@ -458,6 +471,8 @@ extern int      pic505length;
 // Weapon7 Image
 extern const unsigned char     pic506data[];
 extern int      pic506length;
+
+
 
 // Button1 Image
 extern const unsigned char     pic600data[];
@@ -490,6 +505,8 @@ extern int      pic606length;
 // Button4Focus Image
 extern const unsigned char     pic607data[];
 extern int      pic607length;
+
+
 
 // Map1 Sample Image
 extern const unsigned char     pic700data[];
@@ -1111,53 +1128,55 @@ void initButtons(void)
 		
 		case stateGame:
 	    {
+			int  xoffset=20;
+			
 			// Power Upgrade Button
 			buttons[0]=new Button();
-			buttons[0]->setX(30);
-			buttons[0]->setY(200);
-			buttons[0]->setImageNormal(images.button1);
-			buttons[0]->setImageFocus(images.buttonFocus1);
+			buttons[0]->setX(10+xoffset);
+			buttons[0]->setY(190);
+			buttons[0]->setImageNormal(images.button3);
+			buttons[0]->setImageFocus(images.buttonFocus3);
 			buttons[0]->setLabel("");
 			
 			// Range Upgrade Button
 			buttons[1]=new Button();
-			buttons[1]->setX(30);
-			buttons[1]->setY(270);
-			buttons[1]->setImageNormal(images.button1);
-			buttons[1]->setImageFocus(images.buttonFocus1);
+			buttons[1]->setX(10+xoffset);
+			buttons[1]->setY(260);
+			buttons[1]->setImageNormal(images.button3);
+			buttons[1]->setImageFocus(images.buttonFocus3);
 			buttons[1]->setLabel("");
 
 			// Rate Upgrade Button
 			buttons[2]=new Button();
-			buttons[2]->setX(30);
-			buttons[2]->setY(340);
-			buttons[2]->setImageNormal(images.button1);
-			buttons[2]->setImageFocus(images.buttonFocus1);
+			buttons[2]->setX(10+xoffset);
+			buttons[2]->setY(330);
+			buttons[2]->setImageNormal(images.button3);
+			buttons[2]->setImageFocus(images.buttonFocus3);
 			buttons[2]->setLabel("");
-						
-			// Rate Lanch Button
-			buttons[3]=new Button();
-			buttons[3]->setX(30);
-			buttons[3]->setY(400);
-			buttons[3]->setImageNormal(images.button1);
-			buttons[3]->setImageFocus(images.buttonFocus1);
-			buttons[3]->setLabel("Lanch");
-			
+								
 			// Select previous weapon Button
-			//buttons[3]=new Button();
-			//buttons[3]->setX(25);
-			//buttons[3]->setY(400);
-			//buttons[3]->setImageNormal(images.button4);
-			//buttons[3]->setImageFocus(images.buttonFocus4);
-			//buttons[3]->setLabel("");
+			buttons[3]=new Button();
+			buttons[3]->setX(10+xoffset);
+			buttons[3]->setY(400);
+			buttons[3]->setImageNormal(images.button4);
+			buttons[3]->setImageFocus(images.buttonFocus4);
+			buttons[3]->setLabel("<");
 
 			// Select next weapon Button
-			//buttons[4]=new Button();
-			//buttons[4]->setX(55);
-			//buttons[4]->setY(400);
-			//buttons[4]->setImageNormal(images.button4);
-			//buttons[4]->setImageFocus(images.buttonFocus4);
-			//buttons[4]->setLabel("");
+			buttons[4]=new Button();
+			buttons[4]->setX(66+xoffset);
+			buttons[4]->setY(400);
+			buttons[4]->setImageNormal(images.button4);
+			buttons[4]->setImageFocus(images.buttonFocus4);
+			buttons[4]->setLabel(">");
+			
+			// Rate Lanch Button
+			buttons[5]=new Button();
+			buttons[5]->setX(10+xoffset);
+			buttons[5]->setY(440);
+			buttons[5]->setImageNormal(images.button3);
+			buttons[5]->setImageFocus(images.buttonFocus3);
+			buttons[5]->setLabel("LANCH");
 		}
 		break;
 		
@@ -1381,7 +1400,7 @@ void initGame(void)
    
 	game.wave1 = 0;
 	game.wave2 = 0;
-		
+				
    	// Init Images
 	initImages();
    
@@ -1487,25 +1506,25 @@ void drawWeaponsText(void)
 }
 
 // Draw buttons on screen
-void drawButtons(void)
+void drawButtons(int mode)
 {
 	for( int i=0; i<MAX_BUTTONS; i++ ) 
 	{
 		if (buttons[i]!=NULL)
 		{
-			buttons[i]->draw();
+			buttons[i]->draw(mode);
 		}
 	}
 }
 
 // Draw buttons Text on screen
-void drawButtonsText(void)
+void drawButtonsText(int offset)
 {
 	for( int i=0; i<MAX_BUTTONS; i++ ) 
 	{
 		if (buttons[i]!=NULL)
 		{
-			buttons[i]->text();
+			buttons[i]->text(offset);
 		}
 	}
 }
@@ -1600,6 +1619,27 @@ void drawGamePanel(void)
 
 	// Draw background
 	GRRLIB_DrawImg(xoffset,0, images.panel1, 0, 1, 1, IMAGE_COLOR3 );
+	
+	switch (game.weaponType)
+	{
+		case 0: GRRLIB_DrawImg(xoffset+35,400, images.weapon1, 0, 1, 1, IMAGE_COLOR );
+				break;
+				
+		case 1: GRRLIB_DrawImg(xoffset+35,400, images.weapon2, 0, 1, 1, IMAGE_COLOR );
+				break;
+				
+		case 2: GRRLIB_DrawImg(xoffset+35,400, images.weapon3, 0, 1, 1, IMAGE_COLOR );
+				break;
+				
+		case 3: GRRLIB_DrawImg(xoffset+35,400, images.weapon4, 0, 1, 1, IMAGE_COLOR );
+				break;
+				
+		case 4: GRRLIB_DrawImg(xoffset+35,400, images.weapon5, 0, 1, 1, IMAGE_COLOR );
+				break;
+				
+		case 5: GRRLIB_DrawImg(xoffset+35,400, images.weapon7, 0, 1, 1, IMAGE_COLOR );
+				break;
+	}
 }
 	
 	
@@ -1607,34 +1647,37 @@ void drawGamePanel(void)
 void drawGamePanelText(void)
 {
 	char tmp[MAX_LEN];
-	int  ypos=YOFFSET;
+	int  ypos=YOFFSET-10;
 	int  xoffset=20;
 	
-	GRRLIB_Printf2(20+xoffset, ypos,"SCORE", 18, GRRLIB_BLACK);	
+	GRRLIB_Printf2(20+xoffset, ypos,"SCORE", 18, GRRLIB_WHITESMOKE);	
 	ypos+=20;	
 	sprintf(tmp,"%06d", game.score); 
-	GRRLIB_Printf2(20+xoffset, ypos, tmp, 16, GRRLIB_BLACK);
+	GRRLIB_Printf2(20+xoffset, ypos, tmp, 16, GRRLIB_WHITESMOKE);
 
 	ypos+=30;
-	GRRLIB_Printf2(25+xoffset, ypos,"CASH", 18, GRRLIB_BLACK);	
+	GRRLIB_Printf2(25+xoffset, ypos,"CASH", 18, GRRLIB_WHITESMOKE);	
 	ypos+=20;
 	sprintf(tmp,"$%04d", game.cash);
-	GRRLIB_Printf2(25+xoffset, ypos, tmp, 16, GRRLIB_BLACK);
+	GRRLIB_Printf2(25+xoffset, ypos, tmp, 16, GRRLIB_WHITESMOKE);
 
 	ypos+=30;	
-	GRRLIB_Printf2(25+xoffset, ypos,"WAVE", 18, GRRLIB_BLACK);	
+	GRRLIB_Printf2(25+xoffset, ypos,"WAVE", 18, GRRLIB_WHITESMOKE);	
 	ypos+=20;
 	sprintf(tmp,"%02d", game.wave); 
-	GRRLIB_Printf2(40+xoffset, ypos, tmp, 16, GRRLIB_BLACK);
+	GRRLIB_Printf2(40+xoffset, ypos, tmp, 16, GRRLIB_WHITESMOKE);
 
 	ypos+=30;
-	GRRLIB_Printf2(20+xoffset, ypos, "POWER", 18, GRRLIB_BLACK);	
+	GRRLIB_Printf2(20+xoffset, ypos, "POWER", 18, GRRLIB_WHITESMOKE);	
 
 	ypos+=70;
-	GRRLIB_Printf2(20+xoffset, ypos, "RANGE", 18, GRRLIB_BLACK);
+	GRRLIB_Printf2(20+xoffset, ypos, "RANGE", 18, GRRLIB_WHITESMOKE);
 
 	ypos+=70;
-	GRRLIB_Printf2(25+xoffset, ypos, "RATE", 18, GRRLIB_BLACK);
+	GRRLIB_Printf2(25+xoffset, ypos, "RATE", 18, GRRLIB_WHITESMOKE);
+	
+	ypos+=70;
+	GRRLIB_Printf2(20+xoffset, ypos, "BUILD", 18, GRRLIB_WHITESMOKE);
 		
 	if (weapons[game.weaponSelect]!=NULL)
 	{
@@ -1753,7 +1796,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 		  
 		  // Draw Buttons
-		  drawButtons();
+		  drawButtons(0);
 			
 		  // Init text layer	  
           GRRLIB_initTexture();
@@ -1783,7 +1826,7 @@ void drawScreen(void)
 		  drawText(20, 500, fontSpecial, tmp); 
 		   
 		  // Draw Button Text labels
-		  drawButtonsText();
+		  drawButtonsText(0);
 		  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -1796,7 +1839,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 		
 		  // Draw Buttons
-		  drawButtons();
+		  drawButtons(0);
 		  
 		  // Draw samples maps
 		  GRRLIB_DrawImg(65, 200, images.map1, 0, 1, 1, IMAGE_COLOR );
@@ -1810,7 +1853,7 @@ void drawScreen(void)
 	      drawText(120, ypos, fontTitle, "Choose Map");	
 
 		  // Draw Button Text labels
-		  drawButtonsText();
+		  drawButtonsText(0);
 		  
 		  ypos+=435;	
 		  sprintf(tmp,"%d fps", CalculateFrameRate()); 
@@ -1830,7 +1873,7 @@ void drawScreen(void)
 		  drawMonsters();
 		  drawWeapons();
 		  drawGamePanel();		  
-		  drawButtons();
+		  drawButtons(1);
 		  
 		  checkGameOver();
 		  checkNextWave();
@@ -1842,7 +1885,7 @@ void drawScreen(void)
 		  drawMonstersText();
 		  drawWeaponsText();
 		  drawGamePanelText();
-		  drawButtonsText();
+		  drawButtonsText(-28);
 		  
 		  // Draw text layer on top of background 
 		  GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -1881,7 +1924,7 @@ void drawScreen(void)
           GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 		  
 		  // Draw buttons
-	      drawButtons(); 
+	      drawButtons(0); 
 		  
 		  // Init text layer	  
           GRRLIB_initTexture();
@@ -1925,7 +1968,7 @@ void drawScreen(void)
 		  }	
 		  
 		  // Draw Button Text labels
-		  drawButtonsText();
+		  drawButtonsText(0);
 		  
 		  // Show FPS information
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
@@ -1942,7 +1985,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 		 
 		  // Draw buttons
-	      drawButtons(); 
+	      drawButtons(0); 
 		  
 		  // Init text layer	  
           GRRLIB_initTexture();
@@ -1968,7 +2011,7 @@ void drawScreen(void)
 	      drawText(0, ypos, fontParagraph, "internet players. Only one entry per player is showed.");	  
 
 		  // Draw Button Text labels
-		  drawButtonsText();
+		  drawButtonsText(0);
 		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
 		  drawText(20, 500, fontSpecial, tmp);
@@ -1984,7 +2027,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
 		  
 		  // Draw buttons
-	      drawButtons(); 
+	      drawButtons(0); 
 		  
 		  // Init text layer	  
           GRRLIB_initTexture();
@@ -2023,7 +2066,7 @@ void drawScreen(void)
 	      drawText(0, ypos, fontNormal,"Greetings to everybody in the Wii homebrew scene");
 		  
 		  // Draw Button Text labels
-		  drawButtonsText();
+		  drawButtonsText(0);
 		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
 		  drawText(20, 500, fontSpecial, tmp);
@@ -2039,7 +2082,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
 		
 		  // Draw buttons
-	      drawButtons(); 
+	      drawButtons(0); 
 		  		  
 	      // Init text layer	  
           GRRLIB_initTexture();
@@ -2070,7 +2113,7 @@ void drawScreen(void)
 	      drawText(0, ypos, fontParagraph, tmp);	
 		  		  		
 		  // Draw Button Text labels
-		  drawButtonsText();
+		  drawButtonsText(0);
 		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
 		  drawText(20, 500, fontSpecial, tmp);
@@ -2119,7 +2162,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
 
 		  // Draw buttons
-	      drawButtons(); 
+	      drawButtons(0); 
 		  
 	      // Init text layer	  
           GRRLIB_initTexture();
@@ -2174,7 +2217,7 @@ void drawScreen(void)
 		  }
 		  
 		  // Draw Button Text labels
-		  drawButtonsText();
+		  drawButtonsText(0);
 		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
 		  drawText(20, 500, fontSpecial, tmp);
@@ -2190,7 +2233,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
       	
 		  // Draw buttons
-	      drawButtons(); 
+	      drawButtons(0); 
 		  
 	      // Init text layer	  
           GRRLIB_initTexture();
@@ -2198,12 +2241,7 @@ void drawScreen(void)
 	      // Draw Title	
           drawText(150, ypos, fontTitle, "User Initials");
           ypos+=120;
-		  
-	      // Draw panels		 
-		  GRRLIB_Rectangle(60, ypos, 100, 100, GRRLIB_BLACK, 1); 
-		  GRRLIB_Rectangle(240, ypos, 100, 100, GRRLIB_BLACK, 1);
-		  GRRLIB_Rectangle(420, ypos, 100, 100, GRRLIB_BLACK, 1);
-      	  
+		        	  
 		  ypos+=50;		  
 		  // Draw initial characters
 		  sprintf(tmp, "%c", settings->getFirstChar());
@@ -2217,7 +2255,7 @@ void drawScreen(void)
 	  	  drawText(0, ypos, fontParagraph, "This initials are used in the highscore area.");	
 	     		  
 		  // Draw Button Text labels
-		  drawButtonsText();
+		  drawButtonsText(0);
 		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
 		  drawText(20, 500, fontSpecial, tmp);
@@ -2583,10 +2621,11 @@ void processStateMachine()
 	 
 		// Init game variables
 		game.score=0;
-		game.cash=50;
+		game.cash=5000;
 		game.wave=1;
 		game.monsterInBase=0;
 		game.weaponSelect=0;
+		game.weaponType=0;
 			
 		// Start delay between to waves is +/- 25 seconds.
 		game.waveDelay = 2500;

@@ -307,56 +307,48 @@ void Pointer::buttonA(int x, int y)
 			{
 				// Highscore button	      
 				game.stateMachine=stateLocalHighScore;
-				break;
 			}
 		
 			if (buttons[1]->onSelect(x,y))
 			{
 				// Credits button	      
 				game.stateMachine=stateHelp;
-				break;
 			}
 		
 			if (buttons[2]->onSelect(x,y))
 			{
 				// Credits button	      
 				game.stateMachine=stateCredits;
-				break;
 			}
 		
 			if (buttons[3]->onSelect(x,y))
 			{
 				// Sound Settings button	      
 				game.stateMachine=stateSoundSettings;
-				break;
 			}
 		
 			if (buttons[4]->onSelect(x,y))
 			{
 				// Release Notes button	      
 				game.stateMachine=stateReleaseNotes;
-				break;
 			}
 		
 			if (buttons[5]->onSelect(x,y))
 			{
 				// User Initials button	      
 				game.stateMachine=stateUserSettings;
-				break;
 			}
 			
 			if (buttons[6]->onSelect(x,y))
 			{
 				// SelectMapMenu button	      
 				game.stateMachine=stateMapSelectMenu;
-				break;
 			}
 			
 			if (buttons[7]->onSelect(x,y))
 			{
 				// Go back to HBC button    
 				game.stateMachine=stateQuit;
-				break;
 			}
 			
 			if (buttons[8]->onSelect(x,y))
@@ -366,7 +358,6 @@ void Pointer::buttonA(int x, int y)
 			
 				// Reset Wii
 				SYS_ResetSystem(SYS_RESTART,0,0);		   
-				break;
 			}					
 		}
 		break;
@@ -379,7 +370,6 @@ void Pointer::buttonA(int x, int y)
 				// Map1 button	      
 				game.stateMachine=stateGame;
 				game.selectedMap=1;
-				break;
 			}
 		
 			if (buttons[1]->onSelect(x,y))
@@ -387,7 +377,6 @@ void Pointer::buttonA(int x, int y)
 				// Map2 button	      
 				game.stateMachine=stateGame;
 				game.selectedMap=2;
-				break;
 			}
 		
 			if (buttons[2]->onSelect(x,y))
@@ -395,14 +384,12 @@ void Pointer::buttonA(int x, int y)
 				// Map3 button	      
 				game.stateMachine=stateGame;
 				game.selectedMap=3;
-				break;
 			}
 			
 			if (buttons[3]->onSelect(x,y))
 			{
 				// Main Menu button	      
 				game.stateMachine=stateMainMenu;
-				break;
 			}
 		}
 		break;
@@ -426,7 +413,6 @@ void Pointer::buttonA(int x, int y)
 					// Selected new weapons
 					game.weaponSelect=i;
 					weapons[i]->setSelected(true);
-					break;
 				}
 			}
 			
@@ -437,41 +423,51 @@ void Pointer::buttonA(int x, int y)
 				{
 					// Power button	      
 					game.event=eventWeaponPowerUpgrade;
-					break;
 				}
 		
 				if (buttons[1]->onSelect(x,y))
 				{
 					// Range button	      
 					game.event=eventWeaponRangeUpgrade;
-					break;
 				}
 			
 				if (buttons[2]->onSelect(x,y))
 				{
 					// Rate button	      		
 					game.event=eventWeaponRateUpgrade;
-					break;
 				}
-				
+							
 				if (buttons[3]->onSelect(x,y))
 				{
-					// Lanch button	
-					game.event=eventLanch;
-					break;
-				}
+					// Select previous weapon	
+					if (game.weaponType>0) 
+					{
+						game.weaponType--; 
+					}
+					else 
+					{
+						game.weaponType=MAX_WEAPON_TYPE-1;
+					}
+				}					
 				
-				/*if (buttons[4]->onSelect(x,y))
+				if (buttons[4]->onSelect(x,y))
 				{
-					// Select previous weapon	      		
-					break;
+					// Select next weapon
+					if (game.weaponType<(MAX_WEAPON_TYPE-1)) 
+					{
+						game.weaponType++; 
+					}
+					else 
+					{
+						game.weaponType=0;
+					}     		
 				}
 				
 				if (buttons[5]->onSelect(x,y))
 				{
-					// Select next weapon	      		
-					break;
-				}*/
+					// Lanch button	
+					game.event=eventLanch;
+				}
 			}		
 		}
 		break;
@@ -482,8 +478,7 @@ void Pointer::buttonA(int x, int y)
 			if (buttons[0]->onSelect(x,y))
 			{
 				// Main Menu button	 	
-				game.stateMachine=stateMainMenu;	
-				break;     
+				game.stateMachine=stateMainMenu;	    
 			}
 		}
 		break;
@@ -494,8 +489,7 @@ void Pointer::buttonA(int x, int y)
 			if (buttons[0]->onSelect(x,y))
 			{
 				// Main Menu button	 
-				game.stateMachine=stateMainMenu;	
-				break;      
+				game.stateMachine=stateMainMenu;	     
 			}
 		}
 		break;
@@ -506,8 +500,7 @@ void Pointer::buttonA(int x, int y)
 			if (buttons[0]->onSelect(x,y))
 			{
 				// Main Menu button	 
-				game.stateMachine=stateMainMenu;	
-				break;      
+				game.stateMachine=stateMainMenu;	    
 			}
 		}
 		break;
@@ -518,8 +511,7 @@ void Pointer::buttonA(int x, int y)
 			if (buttons[0]->onSelect(x,y))
 			{
 				// Main Menu button	 
-				game.stateMachine=stateMainMenu;	
-				break;      
+				game.stateMachine=stateMainMenu;	     
 			}
 		}
 		break;
@@ -535,51 +527,43 @@ void Pointer::buttonA(int x, int y)
 				settings->setMusicVolume(sound->getMusicVolume());
 				settings->setEffectVolume(sound->getEffectVolume());
 				settings->save(SETTING_FILENAME); 
-				break; 
 			}
 			
 			if (buttons[1]->onSelect(x,y))
 			{
 				// - music volume button event	           
-			    buttonMinus(3);
-			    break;	   
+			    buttonMinus(3);   
 			}
 			
 			if (buttons[2]->onSelect(x,y))
 			{
 				// + music volume button event	           
-			    buttonPlus(3);
-			    break;	 
+			    buttonPlus(3); 
 			}
 				
 			if (buttons[3]->onSelect(x,y))
 			{
 				// - effect volume button event	           
-			    buttonMinus(4);
-			    break;	   
+			    buttonMinus(4);  
 			}
 			 
 			if (buttons[4]->onSelect(x,y))
 			{
 				// + effect volume button event	           
 			    buttonPlus(4);
-			    break;	 
 			}
 			
 			if (buttons[5]->onSelect(x,y))
 			{
 				// - music track button event	           
-			    buttonMinus(5);
-			    break;	   
+			    buttonMinus(5); 
 			}
 
 			if (buttons[6]->onSelect(x,y))
 			{			
 				// + music track  button event	           
 			    buttonPlus(5);
-			    break;
 			}
-			
 		}
 		break;
 	 
@@ -591,42 +575,36 @@ void Pointer::buttonA(int x, int y)
 			{
 				// + First Character button event           
 				buttonPlus(0);  
-				break; 
 			}
 		
 			if (buttons[1]->onSelect(x,y))
 			{
 				// - First Character button event           
 				buttonMinus(0);  
-				break; 
 			}
 						
 			if (buttons[2]->onSelect(x,y))
 			{
 				// + Second Character button event           
 				buttonPlus(1);  
-				break; 
 			}
 		
 			if (buttons[3]->onSelect(x,y))
 			{
 				// - Second Character button event           
 				buttonMinus(1); 
-				break;  
 			}
 					    
 			if (buttons[4]->onSelect(x,y))
 			{
 				// + Third Character button event           
 				buttonPlus(2);  
-				break; 
 			}
 			
 			if (buttons[5]->onSelect(x,y))
 			{
 				// - Third Character button event           
 				buttonMinus(2);  
-				break; 
 			}
 			
 			if (buttons[6]->onSelect(x,y))
@@ -634,7 +612,6 @@ void Pointer::buttonA(int x, int y)
 				// Main Menu button	 
 				settings->save(SETTING_FILENAME); 
 				game.stateMachine=stateMainMenu;	     
-				break; 
 			}
 		}
 		break; 

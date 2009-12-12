@@ -41,8 +41,8 @@ class Button
  	~Button();
 
 	// Other
-	void draw();
-	void text();
+	void draw(int mode);
+	void text(int offset);
 	bool onSelect(int pointerX, int pointerY);
 	
 	// Setters
