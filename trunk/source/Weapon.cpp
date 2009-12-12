@@ -125,14 +125,43 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 						  				
 				if (distance<range)
 				{
-					sound->effect(1);	
+					switch(index)
+					{
+						case 0: // Gun
+								sound->effect(3);	
+								break;
+								
+						case 1: // Laser
+								sound->effect(4);	
+								break;
+								
+						case 2: // Rifle
+								sound->effect(5);	
+								break;
+								
+						case 3: // Rocket
+								sound->effect(6);	
+								break;
+								
+						case 4: // Canon
+								sound->effect(0);	
+								break;
+								
+						default: // Gun
+								sound->effect(3);	
+								break;
+					}
+								
 					game.score+=power;
 					game.cash+=power;
 					
 					if (monsters[i]->hit(power))
-					{
+					{						
 						delete monsters[i];
 						monsters[i]=NULL;
+						
+						// Dead
+						sound->effect(2);	
 					}
 					delay=rate;
 					break;
@@ -162,6 +191,7 @@ int Weapon::upgrade(int type)
 					trace->event(s_fn,0,"Weapon %d upgrade power to %d",index, power);
 					game.cash-=powerPrice;
 					powerPrice=powerPrice*2;
+					sound->effect(7);
 				}
 				break;
 
@@ -172,6 +202,7 @@ int Weapon::upgrade(int type)
 					trace->event(s_fn,0,"Weapon %d upgrade range to %d",index, range);
 					game.cash-=rangePrice;
 					rangePrice=rangePrice*2;
+					sound->effect(7);
 				}
 				break;
 
@@ -182,6 +213,7 @@ int Weapon::upgrade(int type)
 					trace->event(s_fn,0,"Weapon %d upgrade rate to %d",index, rate);
 					game.cash-=ratePrice;
 					ratePrice=ratePrice*2;
+					sound->effect(7);
 				}
 				break;
 	}	
@@ -195,7 +227,9 @@ bool Weapon::onSelect(int x1, int y1)
 	if ( (x1>=x) && (x1<=(x+width)) && (y1>=y) && (y1<=(y+height)) )
 	{      	 	
 		trace->event(s_fn,0,"Weapon %d selected", index);
-		sound->effect(2);	
+		
+		// Click
+		sound->effect(1);	
 		return true;
 	}
 	return false;

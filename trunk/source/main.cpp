@@ -19,18 +19,23 @@
 **  Release Notes:
 **  ==============
 **
-**  10/12/2009 Version 0.40
+**  TODO:
+**  - Added weapon fire graphic effect 
+**  - Added weapon on game board
+**  - Debug network thread
+**  - Debug save settings and highscore to file.
 **
+**  10/12/2009 Version 0.40
 **  NOT TESTED YET:
 **  - Added Network thread.
 **  	- Fetch latest available version information from internet.
 **  	- Fetch latest release notes information from internet.
 **  - Added Release Notes screen.
-**  - Added sound setting Screen.
-**  - Added nigh tracks background music.
-**  - Added sound basic sound effects.
 **
 **  TESTED:
+**  - Added music & effect control screen.
+**  	- Added nigh tracks background music.
+**  	- Added game sound effects.
 *   - Added wave lanch button on game board.
 **  - Added game information panel.
 **		- Added functionality to upgrade power, range and rate of weapon.
@@ -2463,6 +2468,9 @@ void processEvent()
 		case eventLanch:
 		{
 			trace->event(s_fn,0,"event=eventLanch");	
+			
+			// Lanch sound effect
+			sound->effect(10);
 
 			int count=0;
 			for(int i=0;i<MAX_MONSTERS;i++)

@@ -27,6 +27,7 @@
 #include "Monster.h"
 #include "Trace.h"  
 #include "Grid.h"  
+#include "Sound.h"
 
 // ------------------------------
 // Variables
@@ -34,6 +35,7 @@
 
 extern Trace *trace;
 extern Grid *grid;
+extern Sound *sound;
 
 extern GXRModeObj *rmode;
 
@@ -115,6 +117,9 @@ bool Monster::move(void)
 		{
 			//trace->event(s_fn,0,"Monster %d start moving!", index);
 			visible=true;
+			
+			// Start
+			sound->effect(8);	
 		}
 		else
 		{
@@ -133,6 +138,10 @@ bool Monster::move(void)
 		{
 			trace->event(s_fn,0,"Monster %d has reach the final destination.", index);
 			visible=false;
+			
+			// Finish
+			sound->effect(9);	
+			
 			return true;
 		}
 		else

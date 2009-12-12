@@ -117,7 +117,9 @@ bool Button::onSelect(int x1, int y1)
    if ( (x1>=x) && (x1<=(x+width)) && (y1>=y) && (y1<=(y+height)) )
    {      
 	  trace->event(s_fn,0,"Button selected");
-	  sound->effect(2);
+	  
+	  // Click
+	  sound->effect(1);
 	  selected=true;
    }
    else

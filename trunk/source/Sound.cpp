@@ -24,9 +24,18 @@
 #include "Sound.h"
 #include "Trace.h"
 
-#include "effect1_pcm.h"
-#include "effect2_pcm.h"
-#include "effect3_pcm.h"
+#include "canon_pcm.h"
+#include "click_pcm.h"
+#include "death_pcm.h"
+#include "gun_pcm.h"
+#include "laser_pcm.h"
+#include "rifle_pcm.h"
+#include "rocket_pcm.h"
+#include "upgrade_pcm.h"
+#include "start_pcm.h"
+#include "finish_pcm.h"
+#include "lanch_pcm.h"
+
 #include "track1_mod.h"
 #include "track2_mod.h"
 #include "track3_mod.h"
@@ -137,23 +146,83 @@ void Sound::effect(int type)
 {
 	switch(type)
 	{
+		// Canon
 		case 0:
-           SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_8BIT, 8000, 
-				0, (u8 *) effect1_pcm, effect1_pcm_size, 
+           SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
+				0, (u8 *) canon_pcm, canon_pcm_size, 
 				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
 			break;
-			
+		
+		// Click
 		case 1:
-			SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_8BIT, 8000, 
-				0, (u8 *) effect2_pcm, effect2_pcm_size, 
+			SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
+				0, (u8 *) click_pcm, click_pcm_size, 
 				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);				   
 			break;
 
+		// Dead
 		case 2:
             SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
-				0, (char *) effect3_pcm, effect3_pcm_size, 
+				0, (char *) death_pcm, death_pcm_size, 
 				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
  	        break;	
+		
+		// Gun
+		case 3:
+            SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
+				0, (char *) gun_pcm, gun_pcm_size, 
+				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
+ 	        break;	
+			
+		// Laser
+		case 4:
+           SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
+				0, (char *) laser_pcm, laser_pcm_size, 
+				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
+ 	        break;	
+
+		// Rifle
+		case 5:
+            SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
+				0, (char *) rifle_pcm, rifle_pcm_size, 
+				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
+ 	        break;	
+			
+		// Rocket
+		case 6:
+            SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
+				0, (char *) rocket_pcm, rocket_pcm_size, 
+				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
+ 	        break;	
+			
+		// Upgrade
+		case 7:
+            SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
+				0, (char *) upgrade_pcm, upgrade_pcm_size, 
+				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
+ 	        break;	
+			
+		// Start
+		case 8:
+            SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
+				0, (char *) start_pcm, start_pcm_size, 
+				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
+ 	        break;	
+
+		// Finish
+		case 9:
+            SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
+				0, (char *) finish_pcm, finish_pcm_size, 
+				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
+ 	        break;	
+			
+		// Lanch
+		case 10:
+            SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
+				0, (char *) lanch_pcm, lanch_pcm_size, 
+				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
+ 	        break;	
+			
 	}
 }
 
