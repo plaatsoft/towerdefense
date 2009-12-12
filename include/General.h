@@ -80,7 +80,7 @@
 
 #define IMAGE_COLOR        		0xFFFFFFFF
 #define IMAGE_COLOR2        	0x66666666
-#define IMAGE_COLOR3        	0x33333333
+#define IMAGE_COLOR3        	0x44444444
 
 #define MAX_WEAPONS				100
 #define MAX_MONSTERS			200
@@ -101,6 +101,7 @@
 #define MAX_LINES		    	200
 #define MAX_BUFFER_SIZE			8192
 #define MAX_IDLE_TIME	    	10
+#define MAX_WEAPON_TYPE         6
 
 #define MAX_GRID_X 				20
 #define MAX_GRID_Y 				17
@@ -192,8 +193,10 @@ typedef struct
 	int selectedMap; 
 	int monsterInBase;	
 	int weaponSelect;
+	int weaponType;
 	int waveDelay;
 	int waveCountDown;
+	
 
 	// game panel variables
 	int score;

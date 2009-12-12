@@ -58,6 +58,10 @@ Weapon::Weapon()
    selected=false;
    index=0;
    
+   fireDelay=0;
+   monsterX=0;
+   monsterY=0;
+   
    power=0;
    range=0;   
    rate=0;
@@ -92,6 +96,11 @@ void Weapon::draw()
 		GRRLIB_Circle(x+16, y+16, range, IMAGE_COLOR3, 1);
 	}
 	
+	if (--fireDelay>0)
+	{
+		GRRLIB_Line( x+16, y+16, monsterX+16, monsterY+16, GRRLIB_LIGHTRED);								
+	}
+	
 	// Draw Weapon on screen
 	GRRLIB_DrawImg( x, y, image, angle, 1, 1, IMAGE_COLOR );				
 }
@@ -124,7 +133,12 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 						  ( (monsters[i]->getY()-y) * (monsters[i]->getY()-y) ) );
 						  				
 				if (distance<range)
-				{
+				{					
+					// Store monster position were fired on!
+					monsterX=monsters[i]->getX();
+					monsterY=monsters[i]->getY();
+					fireDelay=15;
+					
 					switch(index)
 					{
 						case 0: // Gun
