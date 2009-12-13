@@ -419,25 +419,32 @@ void Pointer::buttonA(int x, int y)
 			// Check if button is pressed on screen
 			if (weapons[game.weaponSelect]!=NULL)
 			{
+							
 				if (buttons[0]->onSelect(x,y))
+				{
+					// Lanch button	
+					game.event=eventLanch;
+				}
+				
+				if (buttons[1]->onSelect(x,y))
 				{
 					// Power button	      
 					game.event=eventWeaponPowerUpgrade;
 				}
 		
-				if (buttons[1]->onSelect(x,y))
+				if (buttons[2]->onSelect(x,y))
 				{
 					// Range button	      
 					game.event=eventWeaponRangeUpgrade;
 				}
 			
-				if (buttons[2]->onSelect(x,y))
+				if (buttons[3]->onSelect(x,y))
 				{
 					// Rate button	      		
 					game.event=eventWeaponRateUpgrade;
 				}
 							
-				if (buttons[3]->onSelect(x,y))
+				if (buttons[4]->onSelect(x,y))
 				{
 					// Select previous weapon	
 					if (game.weaponType>0) 
@@ -450,7 +457,7 @@ void Pointer::buttonA(int x, int y)
 					}
 				}					
 				
-				if (buttons[4]->onSelect(x,y))
+				if (buttons[5]->onSelect(x,y))
 				{
 					// Select next weapon
 					if (game.weaponType<(MAX_WEAPON_TYPE-1)) 
@@ -461,12 +468,6 @@ void Pointer::buttonA(int x, int y)
 					{
 						game.weaponType=0;
 					}     		
-				}
-				
-				if (buttons[5]->onSelect(x,y))
-				{
-					// Lanch button	
-					game.event=eventLanch;
 				}
 			}		
 		}

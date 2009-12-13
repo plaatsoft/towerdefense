@@ -32,7 +32,7 @@
 #include "trace.h"
 
 // Enable / Disable trace file functionality
-bool traceOn = true;
+bool traceOn = false;
 
 // ------------------------------
 // Constructor
@@ -67,8 +67,7 @@ int Trace::open(const char *filename)
    {
       printf("Error: Cannot open trace file.\n");
       returnValue=-2;
-   }
-   
+   }   
    return returnValue;
 }
 
