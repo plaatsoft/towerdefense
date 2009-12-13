@@ -39,6 +39,7 @@ extern  Weapon    	*weapons[MAX_WEAPONS];
 bool selected1;
 bool selected2;
 bool selectedA;
+bool weaponSelected;
 
 // ------------------------------
 // Constructor 
@@ -396,6 +397,48 @@ void Pointer::buttonA(int x, int y)
 	
 		case stateGame:
 		{	
+			if (buttons[0]->onSelect(x,y))
+			{
+				// Lanch button	
+				game.waveCountDown=25;
+			}
+			
+			if (buttons[4]->onSelect(x,y))
+			{
+				// Select previous weapon	
+				if (game.weaponType>0) 
+				{
+					game.weaponType--; 
+				}
+				else 
+				{
+					game.weaponType=MAX_WEAPON_TYPE-1;
+				}
+			}					
+				
+			if (buttons[5]->onSelect(x,y))
+			{
+				// Select next weapon
+				if (game.weaponType<(MAX_WEAPON_TYPE-1)) 
+				{
+					game.weaponType++; 
+				}
+				else 
+				{
+					game.weaponType=0;
+				}     		
+			}
+			
+			if (button[6]->onSelect(x,y)
+			{
+				weaponSelected=true;
+				button[6]
+			
+			}
+			
+			
+			
+			
 			// Check if weapon is selected on screen
 			for (int i=0;i<MAX_WEAPONS; i++)
 			{
@@ -415,17 +458,10 @@ void Pointer::buttonA(int x, int y)
 					weapons[i]->setSelected(true);
 				}
 			}
-			
+				
 			// Check if button is pressed on screen
 			if (weapons[game.weaponSelect]!=NULL)
 			{
-							
-				if (buttons[0]->onSelect(x,y))
-				{
-					// Lanch button	
-					game.event=eventLanch;
-				}
-				
 				if (buttons[1]->onSelect(x,y))
 				{
 					// Power button	      
@@ -442,33 +478,7 @@ void Pointer::buttonA(int x, int y)
 				{
 					// Rate button	      		
 					game.event=eventWeaponRateUpgrade;
-				}
-							
-				if (buttons[4]->onSelect(x,y))
-				{
-					// Select previous weapon	
-					if (game.weaponType>0) 
-					{
-						game.weaponType--; 
-					}
-					else 
-					{
-						game.weaponType=MAX_WEAPON_TYPE-1;
-					}
-				}					
-				
-				if (buttons[5]->onSelect(x,y))
-				{
-					// Select next weapon
-					if (game.weaponType<(MAX_WEAPON_TYPE-1)) 
-					{
-						game.weaponType++; 
-					}
-					else 
-					{
-						game.weaponType=0;
-					}     		
-				}
+				}						
 			}		
 		}
 		break;
@@ -649,8 +659,19 @@ void Pointer::action(void)
 	if (wpadup & BUTTON_A) 
 	{
 		selectedA=false;
+		if (weaponSelected)
+		{
+			event=weaponSelected=false;
+			button
+		}
 	}
 
+	if (weaponSelected)
+	{
+		button[6].setX(X);
+		button[6].setY(Y);
+	}
+		
 	if (wpaddown & BUTTON_1 ) 
 	{
 		button1x();								
