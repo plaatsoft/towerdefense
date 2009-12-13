@@ -192,16 +192,17 @@ typedef struct
 	char name[MAX_LEN];	
 	int selectedMap; 
 	int monsterInBase;	
-	int weaponSelect;
-	int weaponType;
+	int weaponSelect;	
 	int waveDelay;
-	int waveCountDown;
-	
-
+		
 	// game panel variables
+	int panelXOffset;
+	int panelYOffset;
 	int score;
-	int cash;
+	int cash;	
 	int wave;
+	int weaponType;
+	int waveCountDown;
 	
 	// Variables for graphical animations
 	float size;

@@ -1095,7 +1095,7 @@ void initButtons(void)
 			// Button (Play Map1)
 			buttons[0]=new Button();
 			buttons[0]->setX(40);
-			buttons[0]->setY(150);
+			buttons[0]->setY(250);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Map1");
@@ -1103,7 +1103,7 @@ void initButtons(void)
 			// Button (Play Map2)
 			buttons[1]=new Button();
 			buttons[1]->setX(240);
-			buttons[1]->setY(150);
+			buttons[1]->setY(250);
 			buttons[1]->setImageNormal(images.button2);
 			buttons[1]->setImageFocus(images.buttonFocus2);
 			buttons[1]->setLabel("Map2");
@@ -1111,7 +1111,7 @@ void initButtons(void)
 			// Button (Play Map3)
 			buttons[2]=new Button();
 			buttons[2]->setX(440);
-			buttons[2]->setY(150);
+			buttons[2]->setY(250);
 			buttons[2]->setImageNormal(images.button2);
 			buttons[2]->setImageFocus(images.buttonFocus2);
 			buttons[2]->setLabel("Map3");
@@ -1125,61 +1125,7 @@ void initButtons(void)
 			buttons[3]->setLabel("Main Menu");
 		}
 		break;	
-		
-		case stateGame:
-	    {
-			int  xoffset=20;
-			
-			// Power Upgrade Button
-			buttons[0]=new Button();
-			buttons[0]->setX(10+xoffset);
-			buttons[0]->setY(190);
-			buttons[0]->setImageNormal(images.button3);
-			buttons[0]->setImageFocus(images.buttonFocus3);
-			buttons[0]->setLabel("");
-			
-			// Range Upgrade Button
-			buttons[1]=new Button();
-			buttons[1]->setX(10+xoffset);
-			buttons[1]->setY(260);
-			buttons[1]->setImageNormal(images.button3);
-			buttons[1]->setImageFocus(images.buttonFocus3);
-			buttons[1]->setLabel("");
-
-			// Rate Upgrade Button
-			buttons[2]=new Button();
-			buttons[2]->setX(10+xoffset);
-			buttons[2]->setY(330);
-			buttons[2]->setImageNormal(images.button3);
-			buttons[2]->setImageFocus(images.buttonFocus3);
-			buttons[2]->setLabel("");
-								
-			// Select previous weapon Button
-			buttons[3]=new Button();
-			buttons[3]->setX(10+xoffset);
-			buttons[3]->setY(400);
-			buttons[3]->setImageNormal(images.button4);
-			buttons[3]->setImageFocus(images.buttonFocus4);
-			buttons[3]->setLabel("<");
-
-			// Select next weapon Button
-			buttons[4]=new Button();
-			buttons[4]->setX(66+xoffset);
-			buttons[4]->setY(400);
-			buttons[4]->setImageNormal(images.button4);
-			buttons[4]->setImageFocus(images.buttonFocus4);
-			buttons[4]->setLabel(">");
-			
-			// Rate Lanch Button
-			buttons[5]=new Button();
-			buttons[5]->setX(10+xoffset);
-			buttons[5]->setY(440);
-			buttons[5]->setImageNormal(images.button3);
-			buttons[5]->setImageFocus(images.buttonFocus3);
-			buttons[5]->setLabel("LANCH");
-		}
-		break;
-		
+				
 		case stateLocalHighScore:
 	    {
 			// Next Button
@@ -1216,6 +1162,18 @@ void initButtons(void)
 		}
 		break;
 
+		case stateReleaseNotes:
+		{
+			// Main Menu Button
+			buttons[0]=new Button();
+			buttons[0]->setX(240);
+			buttons[0]->setY(460);
+			buttons[0]->setImageNormal(images.button2);
+			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setLabel("Main Menu");		
+		}
+		break;
+		
 		case stateSoundSettings:
 		{
 			// Main Menu Button
@@ -1275,19 +1233,7 @@ void initButtons(void)
 			buttons[6]->setLabel("+");	
 		}
 		break;
-		
-		case stateReleaseNotes:
-		{
-			// Main Menu Button
-			buttons[0]=new Button();
-			buttons[0]->setX(240);
-			buttons[0]->setY(460);
-			buttons[0]->setImageNormal(images.button2);
-			buttons[0]->setImageFocus(images.buttonFocus2);
-			buttons[0]->setLabel("Main Menu");		
-		}
-		break;
-		
+				
 		case stateUserSettings:
 	    {
 			// First letter + button 
@@ -1347,6 +1293,65 @@ void initButtons(void)
 			buttons[6]->setLabel("Main Menu");	
 		}
 		break;	
+		
+		case stateGame:
+	    {									
+			int ypos=70;
+			
+			// New Wave lanch Button
+			buttons[0]=new Button();
+			buttons[0]->setX(10+game.panelXOffset);
+			buttons[0]->setY(ypos+game.panelYOffset);
+			buttons[0]->setImageNormal(images.button3);
+			buttons[0]->setImageFocus(images.buttonFocus3);
+			buttons[0]->setLabel("");
+			
+			// Power Upgrade Button
+			ypos+=150;
+			buttons[1]=new Button();
+			buttons[1]->setX(10+game.panelXOffset);
+			buttons[1]->setY(ypos+game.panelYOffset);
+			buttons[1]->setImageNormal(images.button3);
+			buttons[1]->setImageFocus(images.buttonFocus3);
+			buttons[1]->setLabel("");
+			
+			// Range Upgrade Button
+			ypos+=60;
+			buttons[2]=new Button();
+			buttons[2]->setX(10+game.panelXOffset);
+			buttons[2]->setY(ypos+game.panelYOffset);
+			buttons[2]->setImageNormal(images.button3);
+			buttons[2]->setImageFocus(images.buttonFocus3);
+			buttons[2]->setLabel("");
+
+			// Rate Upgrade Button
+			ypos+=60;
+			buttons[3]=new Button();
+			buttons[3]->setX(10+game.panelXOffset);
+			buttons[3]->setY(ypos+game.panelYOffset);
+			buttons[3]->setImageNormal(images.button3);
+			buttons[3]->setImageFocus(images.buttonFocus3);
+			buttons[3]->setLabel("");
+								
+			// Select previous weapon Button
+			ypos+=60;
+			buttons[4]=new Button();
+			buttons[4]->setX(10+game.panelXOffset);
+			buttons[4]->setY(ypos+game.panelYOffset);
+			buttons[4]->setImageNormal(images.button4);
+			buttons[4]->setImageFocus(images.buttonFocus4);
+			buttons[4]->setLabel("<");
+
+			// Select next weapon Button
+			buttons[5]=new Button();
+			buttons[5]->setX(66+game.panelXOffset);
+			buttons[5]->setY(ypos+game.panelYOffset);
+			buttons[5]->setImageNormal(images.button4);
+			buttons[5]->setImageFocus(images.buttonFocus4);
+			buttons[5]->setLabel(">");
+		}
+		break;
+		
 	}
 	trace->event(s_fn,0,"leave [void]");
 }
@@ -1615,81 +1620,99 @@ void drawText(int x, int y, int type, const char *text)
 // Draw Game panel on screen
 void drawGamePanel(void)
 {
-	int  xoffset=20;
-
 	// Draw background
-	GRRLIB_DrawImg(xoffset,0, images.panel1, 0, 1, 1, IMAGE_COLOR3 );
+	GRRLIB_DrawImg(game.panelXOffset,0, images.panel1, 0, 1, 1, IMAGE_COLOR3 );
 	
+	int ypos=400;
 	switch (game.weaponType)
 	{
-		case 0: GRRLIB_DrawImg(xoffset+35,400, images.weapon1, 0, 1, 1, IMAGE_COLOR );
+		case 0: GRRLIB_DrawImg(33+game.panelXOffset, ypos+game.panelYOffset, 
+					images.weapon1, 0, 1, 1, IMAGE_COLOR );
 				break;
 				
-		case 1: GRRLIB_DrawImg(xoffset+35,400, images.weapon2, 0, 1, 1, IMAGE_COLOR );
+		case 1: GRRLIB_DrawImg(33+game.panelXOffset, ypos+game.panelYOffset, 
+					images.weapon2, 0, 1, 1, IMAGE_COLOR );
 				break;
 				
-		case 2: GRRLIB_DrawImg(xoffset+35,400, images.weapon3, 0, 1, 1, IMAGE_COLOR );
+		case 2: GRRLIB_DrawImg(33+game.panelXOffset, ypos+game.panelYOffset, 
+					images.weapon3, 0, 1, 1, IMAGE_COLOR );
 				break;
 				
-		case 3: GRRLIB_DrawImg(xoffset+35,400, images.weapon4, 0, 1, 1, IMAGE_COLOR );
+		case 3: GRRLIB_DrawImg(33+game.panelXOffset, ypos+game.panelYOffset, 
+					images.weapon4, 0, 1, 1, IMAGE_COLOR );
 				break;
 				
-		case 4: GRRLIB_DrawImg(xoffset+35,400, images.weapon5, 0, 1, 1, IMAGE_COLOR );
+		case 4: GRRLIB_DrawImg(33+game.panelXOffset, ypos+game.panelYOffset, 
+					images.weapon5, 0, 1, 1, IMAGE_COLOR );
 				break;
 				
-		case 5: GRRLIB_DrawImg(xoffset+35,400, images.weapon7, 0, 1, 1, IMAGE_COLOR );
+		case 5: GRRLIB_DrawImg(33+game.panelXOffset, ypos+game.panelYOffset, 
+					images.weapon7, 0, 1, 1, IMAGE_COLOR );
 				break;
 	}
 }
-	
-	
+		
 // Draw Game panel Text on screen
 void drawGamePanelText(void)
 {
 	char tmp[MAX_LEN];
-	int  ypos=YOFFSET-10;
-	int  xoffset=20;
+	char power[MAX_LEN];
+	char range[MAX_LEN];
+	char rate[MAX_LEN];
 	
-	GRRLIB_Printf2(20+xoffset, ypos,"SCORE", 18, GRRLIB_WHITESMOKE);	
-	ypos+=20;	
-	sprintf(tmp,"%06d", game.score); 
-	GRRLIB_Printf2(20+xoffset, ypos, tmp, 16, GRRLIB_WHITESMOKE);
-
-	ypos+=30;
-	GRRLIB_Printf2(25+xoffset, ypos,"CASH", 18, GRRLIB_WHITESMOKE);	
-	ypos+=20;
-	sprintf(tmp,"$%04d", game.cash);
-	GRRLIB_Printf2(25+xoffset, ypos, tmp, 16, GRRLIB_WHITESMOKE);
-
-	ypos+=30;	
-	GRRLIB_Printf2(25+xoffset, ypos,"WAVE", 18, GRRLIB_WHITESMOKE);	
-	ypos+=20;
+	int  ypos=10;
+	
+	// General info + control
+	GRRLIB_Printf2(25+game.panelXOffset, ypos+game.panelYOffset,"WAVE", 18, GRRLIB_WHITESMOKE);	
+	ypos+=15;
 	sprintf(tmp,"%02d", game.wave); 
-	GRRLIB_Printf2(40+xoffset, ypos, tmp, 16, GRRLIB_WHITESMOKE);
+	GRRLIB_Printf2(40+game.panelXOffset, ypos+game.panelYOffset, tmp, 16, GRRLIB_WHITESMOKE);	
+	ypos+=25;
+	GRRLIB_Printf2(22+game.panelXOffset, ypos+game.panelYOffset, "LANCH", 18, GRRLIB_WHITESMOKE);
+	ypos+=60;	
+	GRRLIB_Printf2(20+game.panelXOffset, ypos+game.panelYOffset,"SCORE", 18, GRRLIB_WHITESMOKE);	
+	ypos+=15;	
+	sprintf(tmp,"%06d", game.score); 
+	GRRLIB_Printf2(20+game.panelXOffset, ypos+game.panelYOffset, tmp, 16, GRRLIB_WHITESMOKE);
+	ypos+=25;
+	GRRLIB_Printf2(25+game.panelXOffset, ypos+game.panelYOffset,"CASH", 18, GRRLIB_WHITESMOKE);	
+	ypos+=15;
+	sprintf(tmp,"$%04d", game.cash);
+	GRRLIB_Printf2(25+game.panelXOffset, ypos+game.panelYOffset, tmp, 16, GRRLIB_WHITESMOKE);
 
-	ypos+=30;
-	GRRLIB_Printf2(20+xoffset, ypos, "POWER", 18, GRRLIB_WHITESMOKE);	
-
-	ypos+=70;
-	GRRLIB_Printf2(20+xoffset, ypos, "RANGE", 18, GRRLIB_WHITESMOKE);
-
-	ypos+=70;
-	GRRLIB_Printf2(25+xoffset, ypos, "RATE", 18, GRRLIB_WHITESMOKE);
+	// Upgrade information + control
+	ypos+=35;
+	GRRLIB_Printf2(20+game.panelXOffset, ypos+game.panelYOffset, "POWER", 18, GRRLIB_WHITESMOKE);	
+	ypos+=60;
+	GRRLIB_Printf2(20+game.panelXOffset, ypos+game.panelYOffset, "RANGE", 18, GRRLIB_WHITESMOKE);
+	ypos+=60;
+	GRRLIB_Printf2(30+game.panelXOffset, ypos+game.panelYOffset, "RATE", 18, GRRLIB_WHITESMOKE);
 	
-	ypos+=70;
-	GRRLIB_Printf2(20+xoffset, ypos, "BUILD", 18, GRRLIB_WHITESMOKE);
+	// Build information + control
+	ypos+=60;
+	GRRLIB_Printf2(28+game.panelXOffset, ypos+game.panelYOffset, "BUILD", 18, GRRLIB_WHITESMOKE);
 		
 	if (weapons[game.weaponSelect]!=NULL)
 	{
-		sprintf(tmp,"$%d", weapons[game.weaponSelect]->getPowerPrice() );
-		buttons[0]->setLabel(tmp);
-		
-		sprintf(tmp,"$%d", weapons[game.weaponSelect]->getRangePrice() );
-		buttons[1]->setLabel(tmp);
-		
-		sprintf(tmp,"$%d", weapons[game.weaponSelect]->getRatePrice() );
-		buttons[2]->setLabel(tmp);
+		// Get upgrade prices of selected weapon.
+		sprintf(power,"$%d", weapons[game.weaponSelect]->getPowerPrice() );		
+		sprintf(range,"$%d", weapons[game.weaponSelect]->getRangePrice() );		
+		sprintf(rate,"$%d", weapons[game.weaponSelect]->getRatePrice() );
 	}
+	else
+	{
+		// No weapon selected yet!
+		strcpy(power,"");
+		strcpy(range,"");
+		strcpy(rate,"");
+	}
+		
+	// Set button label values
+	sprintf(tmp,"  %d", game.waveCountDown/25 );
+	buttons[0]->setLabel(tmp);	
+	buttons[1]->setLabel(power);
+	buttons[2]->setLabel(range);
+	buttons[3]->setLabel(rate);
 	  
 	sprintf(tmp,"%d fps", CalculateFrameRate()); 
 	drawText(20, 500, fontSpecial, tmp);
@@ -1842,9 +1865,9 @@ void drawScreen(void)
 		  drawButtons(0);
 		  
 		  // Draw samples maps
-		  GRRLIB_DrawImg(65, 200, images.map1, 0, 1, 1, IMAGE_COLOR );
-		  GRRLIB_DrawImg(245,200, images.map2, 0, 1, 1, IMAGE_COLOR );
-		  GRRLIB_DrawImg(455,200, images.map3, 0, 1, 1, IMAGE_COLOR );
+		  GRRLIB_DrawImg(60, 130, images.map1, 0, 1, 1, IMAGE_COLOR );
+		  GRRLIB_DrawImg(255,130, images.map2, 0, 1, 1, IMAGE_COLOR );
+		  GRRLIB_DrawImg(455,130, images.map3, 0, 1, 1, IMAGE_COLOR );
 			  
 		  // Init text layer	  
           GRRLIB_initTexture();
@@ -2626,6 +2649,8 @@ void processStateMachine()
 		game.monsterInBase=0;
 		game.weaponSelect=0;
 		game.weaponType=0;
+		game.panelXOffset=20;
+		game.panelYOffset=0;
 			
 		// Start delay between to waves is +/- 25 seconds.
 		game.waveDelay = 2500;
