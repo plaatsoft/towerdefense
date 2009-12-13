@@ -39,7 +39,7 @@ extern  Weapon    	*weapons[MAX_WEAPONS];
 bool selected1;
 bool selected2;
 bool selectedA;
-bool weaponSelected;
+bool selectNewWeapon;
 
 // ------------------------------
 // Constructor 
@@ -55,12 +55,14 @@ Pointer::Pointer()
    y=0;
    yOffset=0;
    angle=0;
+   index=0;
    rumble=0;
    rumbleGo=false;
    
    selectedA=false;   
    selected1=false;
    selected2=false;
+   selectNewWeapon=false;
    
    trace->event(s_fn,0,"leave [void]");
 }
@@ -288,8 +290,7 @@ void Pointer::buttonA(int x, int y)
 		{
 			// if A button is pressed continue to next intro screen
 			//game.stateMachine=stateIntro3;
-			
-			
+						
 			game.stateMachine=stateMainMenu;
 		}
 		break;
@@ -395,105 +396,6 @@ void Pointer::buttonA(int x, int y)
 		}
 		break;
 	
-		case stateGame:
-		{	
-			if (buttons[0]->onSelect(x,y))
-			{
-				// Lanch button	
-				game.waveCountDown=25;
-			}
-			
-			if (buttons[4]->onSelect(x,y))
-			{
-				// Select previous weapon	
-				if (game.weaponType>0) 
-				{
-					game.weaponType--; 
-				}
-				else 
-				{
-					game.weaponType=MAX_WEAPON_TYPE-1;
-				}
-			}					
-				
-			if (buttons[5]->onSelect(x,y))
-			{
-				// Select next weapon
-				if (game.weaponType<(MAX_WEAPON_TYPE-1)) 
-				{
-					game.weaponType++; 
-				}
-				else 
-				{
-					game.weaponType=0;
-				}     		
-			}
-			
-			if (button[6]->onSelect(x,y)
-			{
-				weaponSelected=true;
-				button[6]
-			
-			}
-			
-			
-			
-			
-			// Check if weapon is selected on screen
-			for (int i=0;i<MAX_WEAPONS; i++)
-			{
-				if ((weapons[i]!=NULL) && (weapons[i]->onSelect(x,y)))
-				{
-					// Deselected all weapons
-					for (int j=0;j<MAX_WEAPONS; j++)
-					{
-						if (weapons[j]!=NULL) 
-						{
-							weapons[j]->setSelected(false);
-						}
-					}
-				
-					// Selected new weapons
-					game.weaponSelect=i;
-					weapons[i]->setSelected(true);
-				}
-			}
-				
-			// Check if button is pressed on screen
-			if (weapons[game.weaponSelect]!=NULL)
-			{
-				if (buttons[1]->onSelect(x,y))
-				{
-					// Power button	      
-					game.event=eventWeaponPowerUpgrade;
-				}
-		
-				if (buttons[2]->onSelect(x,y))
-				{
-					// Range button	      
-					game.event=eventWeaponRangeUpgrade;
-				}
-			
-				if (buttons[3]->onSelect(x,y))
-				{
-					// Rate button	      		
-					game.event=eventWeaponRateUpgrade;
-				}						
-			}		
-		}
-		break;
-		
-		case stateCredits:
-		{
-			// Check if button is pressed on screen
-			if (buttons[0]->onSelect(x,y))
-			{
-				// Main Menu button	 	
-				game.stateMachine=stateMainMenu;	    
-			}
-		}
-		break;
-
 		case stateHelp:
 		{
 			// Check if button is pressed on screen
@@ -578,7 +480,6 @@ void Pointer::buttonA(int x, int y)
 		}
 		break;
 	 
- 
 		case stateUserSettings:
 		{ 
 			// Check if button is pressed on screen
@@ -626,6 +527,88 @@ void Pointer::buttonA(int x, int y)
 			}
 		}
 		break; 
+
+		case stateCredits:
+		{
+			// Check if button is pressed on screen
+			if (buttons[0]->onSelect(x,y))
+			{
+				// Main Menu button	 	
+				game.stateMachine=stateMainMenu;	    
+			}
+		}
+		break;
+			
+		case stateGame:
+		{	
+			if (buttons[0]->onSelect(x,y))
+			{
+				// Lanch button	(set lanch timer on 0 (24/25ste) second.
+				game.waveCountDown=24;
+			}
+			
+			if (buttons[4]->onSelect(x,y))
+			{
+				// Select previous weapon	
+				game.event=eventNewWeaponPrevious;
+			}					
+				
+			if (buttons[5]->onSelect(x,y))
+			{
+				// Select next weapon
+				game.event=eventNewWeaponPrevious;    		
+			}
+			
+			// New weapon is selected
+			if (buttons[6]->onSelect(x,y))
+			{				
+				game.event=eventNewWeaponSelected;	
+				selectNewWeapon=true;
+			}
+			
+			// Check if weapon is selected on screen
+			for (int i=0;i<MAX_WEAPONS; i++)
+			{
+				if ((weapons[i]!=NULL) && (weapons[i]->onSelect(x,y)))
+				{
+					// Deselected all weapons
+					for (int j=0;j<MAX_WEAPONS; j++)
+					{
+						if (weapons[j]!=NULL) 
+						{
+							weapons[j]->setSelected(false);
+						}
+					}
+				
+					// Selected new weapons
+					game.weaponSelect=i;
+					weapons[i]->setSelected(true);
+				}
+			}
+				
+			// Check if weapon upgrade button is pressed on screen
+			if (weapons[game.weaponSelect]!=NULL)
+			{
+				if (buttons[1]->onSelect(x,y))
+				{
+					// Power button	      
+					game.event=eventWeaponPowerUpgrade;
+				}
+		
+				if (buttons[2]->onSelect(x,y))
+				{
+					// Range button	      
+					game.event=eventWeaponRangeUpgrade;
+				}
+			
+				if (buttons[3]->onSelect(x,y))
+				{
+					// Rate button	      		
+					game.event=eventWeaponRateUpgrade;
+				}						
+			}		
+		}
+		break;
 	}
 
 	trace->event(s_fn,0,"leave");
@@ -636,12 +619,8 @@ void Pointer::action(void)
 	const char *s_fn="Pointer::action";
 
 	// Scan for button events
-	WPAD_SetVRes(index, 640, 480);
+	WPAD_SetVRes(index, 640, 528);
 	WPAD_ScanPads();
-			
-	u32 wpaddown = WPAD_ButtonsDown(index);
-	u32 wpadup   = WPAD_ButtonsUp(index);
-	u32 wpadheld = WPAD_ButtonsHeld(index);
 
 	// Scan for ir events 
 	WPAD_IR(index, &ir); 
@@ -650,88 +629,90 @@ void Pointer::action(void)
 	y=ir.sy-WSP_POINTER_Y;
 	yOffset=y+IR_Y_OFFSET;
 	angle=ir.angle;
-	
-	if (wpaddown & BUTTON_A) 
+				
+	// Only the first WiiMote can control the game.
+	if (index==0)
 	{
-		buttonA(xOffset,yOffset); 
-	}
-	
-	if (wpadup & BUTTON_A) 
-	{
-		selectedA=false;
-		if (weaponSelected)
-		{
-			event=weaponSelected=false;
-			button
-		}
-	}
+		u32 wpaddown = WPAD_ButtonsDown(index);
+		u32 wpadup   = WPAD_ButtonsUp(index);
+		u32 wpadheld = WPAD_ButtonsHeld(index);
 
-	if (weaponSelected)
-	{
-		button[6].setX(X);
-		button[6].setY(Y);
-	}
+		if (wpaddown & BUTTON_A) 
+		{
+			buttonA(xOffset,yOffset); 
+		}
 		
-	if (wpaddown & BUTTON_1 ) 
-	{
-		button1x();								
-	}
-    
-	if (wpadup & BUTTON_1) 
-	{
-		selected1=false;		
-	}
-		  
-	if (wpaddown & BUTTON_2 ) 
-	{
-		button2y();		
-	}
-	
-	if (wpadup & BUTTON_2) 
-	{
-		selected2=false;
-	}
-
-	// Scan for button events
-	if (wpaddown & WPAD_BUTTON_HOME) 
-	{
-		trace->event(s_fn,0,"Home button pressed");
-		if (game.stateMachine==stateMainMenu)
-		{			
-			game.stateMachine=stateQuit;
-		}
-		else
+		if (wpadup & BUTTON_A) 
 		{
-			if (game.stateMachine==stateGame)
+			selectedA=false;
+			if (selectNewWeapon) 
 			{
-				game.stateMachine=stateMapSelectMenu;
+				selectNewWeapon=false;
+				game.event=eventNewweaponDeployed;
+			}
+		}
+			
+		if (wpaddown & BUTTON_1 ) 
+		{
+			button1x();								
+		}
+    
+		if (wpadup & BUTTON_1) 
+		{
+			selected1=false;		
+		}
+			
+		if (wpaddown & BUTTON_2 ) 
+		{
+			button2y();		
+		}
+	
+		if (wpadup & BUTTON_2) 
+		{
+			selected2=false;
+		}
+
+		// Scan for button events
+		if (wpaddown & WPAD_BUTTON_HOME) 
+		{
+			trace->event(s_fn,0,"Home button pressed");
+			if (game.stateMachine==stateMainMenu)
+			{			
+				game.stateMachine=stateQuit;
 			}
 			else
 			{
-				game.stateMachine=stateMainMenu;
-			}
-		}		
-	}
+				if (game.stateMachine==stateGame)
+				{
+					game.stateMachine=stateMapSelectMenu;
+				}
+				else
+				{
+					game.stateMachine=stateMainMenu;
+				}
+			}		
+		}
 	
-	 // Make screenshot 
-    if (wpadheld & BUTTON_PLUS)
-    {
-		char filename[MAX_LEN];
-		struct tm *level;	   
-		time_t dt=time(NULL);
-		level = localtime(&dt);
-		sprintf(filename,"%sTowerDefense-%04d%02d%02d%02d%02d%02d.png", GAME_DIRECTORY, level->tm_year+1900,level->tm_mon+1, level->tm_mday,  level->tm_hour, level->tm_min, level->tm_sec);		  
-        GRRLIB_ScrShot(filename);	
-	}
+		// Make screenshot 
+		if (wpadheld & BUTTON_PLUS)
+		{
+			char filename[MAX_LEN];
+			struct tm *level;	   
+			time_t dt=time(NULL);
+			level = localtime(&dt);
+			sprintf(filename,"%sTowerDefense-%04d%02d%02d%02d%02d%02d.png", GAME_DIRECTORY, level->tm_year+1900,level->tm_mon+1, level->tm_mday,  level->tm_hour, level->tm_min, level->tm_sec);		  
+			GRRLIB_ScrShot(filename);	
+		}
 
-	if (rumble>0) 
-	{
-		rumble--;
-		WPAD_Rumble(index,1); 
-	}
-	else 
-	{
-		WPAD_Rumble(index,0);
+		if (rumble>0) 
+		{
+			rumble--;
+			WPAD_Rumble(index,1); 
+		}
+		else 
+		{
+			WPAD_Rumble(index,0);
+		}
 	}
 }
 
@@ -808,14 +789,25 @@ void Pointer::setRumble(int rumble1)
 
 int Pointer::getX()
 {
-	return xOffset;
+	return x;
 }
 
 int Pointer::getY()
 {
-	return yOffset;
+	return y;
 }
 	
+
+int Pointer::getXOffset()
+{
+	return xOffset;
+}
+
+int Pointer::getYOffset()
+{
+	return yOffset;
+}
+
 // ------------------------------
 // The End
 // ------------------------------

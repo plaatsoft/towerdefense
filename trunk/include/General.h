@@ -26,8 +26,8 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.40"
-#define RELEASE_DATE        	"11-12-2009" 
+#define PROGRAM_VERSION     	"0.41"
+#define RELEASE_DATE        	"14-12-2009" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -88,6 +88,10 @@
 #define MAX_POINTERS         	4
 #define MAX_LOCAL_HIGHSCORE 	15
 #define MAX_SETTINGS			5
+#define MAX_WEAPON_TYPE         6
+
+#define MAX_SOUND_VOLUME		10
+#define MAX_MUSIC_TRACK     	9
 
 #define MAX_RUMBLE				25
 #define MAX_HORZ_PIXELS			640
@@ -96,12 +100,10 @@
 #define MAX_ANGLE				360
 #define MAX_ALFA				255
 #define MAX_SIZE				40
-#define MAX_SOUND_VOLUME		10
-#define MAX_MUSIC_TRACK     	9
+
 #define MAX_LINES		    	200
 #define MAX_BUFFER_SIZE			8192
 #define MAX_IDLE_TIME	    	10
-#define MAX_WEAPON_TYPE         6
 
 #define MAX_GRID_X 				20
 #define MAX_GRID_Y 				17
@@ -162,7 +164,12 @@ enum
 	eventSaveHighScore=2,
 	eventWeaponPowerUpgrade=3,
 	eventWeaponRangeUpgrade=4,
-	eventWeaponRateUpgrade=5
+	eventWeaponRateUpgrade=5,
+	
+	eventNewWeaponNext=6,
+	eventNewWeaponPrevious=7,
+	eventNewWeaponSelected=8,
+	eventNewweaponDeployed=9
 };
 
 enum

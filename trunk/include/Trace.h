@@ -28,9 +28,11 @@ class Trace
 	char * getDate();
 
   public:
-  	Trace();
+  	// Constructor & Destructor
+	Trace();
  	~Trace();
 	
+	// Methodes
 	int open(const char *filename);
 	int event( const char *functionName, int threadNr, const char *event, ...);
 	int eventRaw( char character);

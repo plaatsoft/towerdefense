@@ -41,6 +41,7 @@ class Weapon
 	int width;
 	int delay;
 	int index;
+	int type;
 	
 	int fireDelay;
 	int monsterX;
@@ -57,7 +58,8 @@ class Weapon
 	int ratePrice;
 	
   public:
-  	Weapon();
+  	// Constructor & Destructor
+	Weapon();
  	~Weapon();
 
 	// Methodes
@@ -80,6 +82,7 @@ class Weapon
     void setRangePrice(int price);
     void setRatePrice(int price);
 	void setIndex(int index);
+	void setType(int type);
 	
 	// Getters
 	int getPowerPrice(void);

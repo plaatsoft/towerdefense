@@ -139,30 +139,30 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 					monsterY=monsters[i]->getY();
 					fireDelay=15;
 					
-					switch(index)
+					switch(type)
 					{
 						case 0: // Gun
-								sound->effect(3);	
+								sound->effect(SOUND_GUN);	
+								break;
+			
+						case 1: // Rifle
+								sound->effect(SOUND_RIFLE);	
 								break;
 								
-						case 1: // Laser
-								sound->effect(4);	
+						case 2: // Canon
+								sound->effect(SOUND_CANON);	
+								break;
+					
+						case 3: // Missle
+								sound->effect(SOUND_MISSLE);	
 								break;
 								
-						case 2: // Rifle
-								sound->effect(5);	
+						case 4: // Laser
+								sound->effect(SOUND_LASER);	
 								break;
 								
-						case 3: // Rocket
-								sound->effect(6);	
-								break;
-								
-						case 4: // Canon
-								sound->effect(0);	
-								break;
-								
-						default: // Gun
-								sound->effect(3);	
+						default: // Unknown (TODO)
+								sound->effect(SOUND_LASER);	
 								break;
 					}
 								
@@ -175,7 +175,7 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 						monsters[i]=NULL;
 						
 						// Dead
-						sound->effect(2);	
+						sound->effect(SOUND_DEAD);	
 					}
 					delay=rate;
 					break;
@@ -204,8 +204,8 @@ int Weapon::upgrade(int type)
 					power+=1;
 					trace->event(s_fn,0,"Weapon %d upgrade power to %d",index, power);
 					game.cash-=powerPrice;
-					powerPrice=powerPrice*2;
-					sound->effect(7);
+					powerPrice=powerPrice*2;					
+					sound->effect(SOUND_UPGRADE);
 				}
 				break;
 
@@ -216,7 +216,7 @@ int Weapon::upgrade(int type)
 					trace->event(s_fn,0,"Weapon %d upgrade range to %d",index, range);
 					game.cash-=rangePrice;
 					rangePrice=rangePrice*2;
-					sound->effect(7);
+					sound->effect(SOUND_UPGRADE);
 				}
 				break;
 
@@ -227,7 +227,7 @@ int Weapon::upgrade(int type)
 					trace->event(s_fn,0,"Weapon %d upgrade rate to %d",index, rate);
 					game.cash-=ratePrice;
 					ratePrice=ratePrice*2;
-					sound->effect(7);
+					sound->effect(SOUND_UPGRADE);
 				}
 				break;
 	}	
@@ -243,7 +243,7 @@ bool Weapon::onSelect(int x1, int y1)
 		trace->event(s_fn,0,"Weapon %d selected", index);
 		
 		// Click
-		sound->effect(1);	
+		sound->effect(SOUND_CLICK);	
 		return true;
 	}
 	return false;
@@ -347,6 +347,11 @@ void Weapon::setIndex(int index1)
 void Weapon::setSelected(int selected1)
 {
 	selected=selected1;
+}
+
+void Weapon::setType(int type1)
+{
+	type=type1;
 }
 
 // ------------------------------

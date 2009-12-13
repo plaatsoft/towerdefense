@@ -49,13 +49,16 @@ class Pointer
 	void button2y(void);
 	
   public:
-  	Pointer();
+  	// Constructor & Destructor
+	Pointer();
  	~Pointer();
 
+	// Other
 	void draw(void);
 	void action();
 	void properties(void);
 
+	// Setters
 	void setIndex(int index);
 	void setX(int x);
 	void setY(int y);
@@ -63,8 +66,11 @@ class Pointer
 	void setImage(GRRLIB_texImg *image);
 	void setRumble(int rumble);
 		
+	// Getters
 	int getX();
 	int getY();
+	int getXOffset();
+	int getYOffset();
 };
 
 #endif

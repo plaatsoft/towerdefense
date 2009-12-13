@@ -24,6 +24,22 @@
 #include <gcmodplay.h> 
 #include <asndlib.h>
 
+enum
+{
+	SOUND_GUN=0,
+	SOUND_RIFLE=1,
+	SOUND_CANON=2,
+	SOUND_MISSLE=3,
+	SOUND_LASER=4,	
+	
+	SOUND_CLICK=5,
+	SOUND_DEAD=6,
+	SOUND_UPGRADE=7,
+	SOUND_START=8,
+	SOUND_FINISH=9,
+	SOUND_LANCH=10
+};
+				
 class Sound
 {
   private:
@@ -33,9 +49,11 @@ class Sound
 	int musicTrack;
 	
   public:
-  	Sound();
+  	// Constructor & Destructor
+	Sound();
  	~Sound();
 
+	// Methodes
 	void play(void);
 	void effect(int type);
 
