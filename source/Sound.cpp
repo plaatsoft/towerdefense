@@ -141,83 +141,85 @@ void Sound::play(void)
     
 	trace->event(s_fn,0,"leave [void]");
 }
-
+	
 void Sound::effect(int type)
 {
 	switch(type)
 	{
+		// Gun
+		case SOUND_GUN:
+            SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
+				0, (char *) gun_pcm, gun_pcm_size, 
+				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
+ 	        break;	
+			
+		// Rifle
+		case SOUND_RIFLE:
+            SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
+				0, (char *) rifle_pcm, rifle_pcm_size, 
+				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
+ 	        break;	
+			
 		// Canon
-		case 0:
+		case SOUND_CANON:
            SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
 				0, (u8 *) canon_pcm, canon_pcm_size, 
 				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
 			break;
 		
+		// Missle
+		case SOUND_MISSLE:
+            SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
+				0, (char *) rocket_pcm, rocket_pcm_size, 
+				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
+ 	        break;	
+			
+		// Laser
+		case SOUND_LASER:
+           SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
+				0, (char *) laser_pcm, laser_pcm_size, 
+				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
+ 	        break;	
+			
+
+			
 		// Click
-		case 1:
+		case SOUND_CLICK:
 			SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
 				0, (u8 *) click_pcm, click_pcm_size, 
 				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);				   
 			break;
 
 		// Dead
-		case 2:
+		case SOUND_DEAD:
             SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
 				0, (char *) death_pcm, death_pcm_size, 
 				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
  	        break;	
-		
-		// Gun
-		case 3:
-            SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
-				0, (char *) gun_pcm, gun_pcm_size, 
-				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
- 	        break;	
-			
-		// Laser
-		case 4:
-           SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
-				0, (char *) laser_pcm, laser_pcm_size, 
-				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
- 	        break;	
 
-		// Rifle
-		case 5:
-            SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
-				0, (char *) rifle_pcm, rifle_pcm_size, 
-				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
- 	        break;	
-			
-		// Rocket
-		case 6:
-            SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
-				0, (char *) rocket_pcm, rocket_pcm_size, 
-				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
- 	        break;	
-			
 		// Upgrade
-		case 7:
+		case SOUND_UPGRADE:
             SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
 				0, (char *) upgrade_pcm, upgrade_pcm_size, 
 				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
  	        break;	
 			
 		// Start
-		case 8:
+		case SOUND_START:
             SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
 				0, (char *) start_pcm, start_pcm_size, 
 				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
  	        break;	
 
 		// Finish
-		case 9:
+		case SOUND_FINISH:
             SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
 				0, (char *) finish_pcm, finish_pcm_size, 
 				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
  	        break;	
 			
 		// Lanch
-		case 10:
+		case SOUND_LANCH:
             SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
 				0, (char *) lanch_pcm, lanch_pcm_size, 
 				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);

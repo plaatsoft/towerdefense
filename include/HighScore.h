@@ -37,14 +37,18 @@ class HighScore
 	Score scores[MAX_LOCAL_HIGHSCORE];
 
   public:
-  	HighScore();
+  	// Constructor & Destructor
+	HighScore();
  	~HighScore();
 	
+	// Other
 	void load(const char *filename);
 	void save( const char *filename);
 	
+	// Setters
 	void setScore(const char *name, int wave, int score);
 	
+	// Getters
 	char *getName(int index);
 	time_t *getDate(int index);
 	int  getWave(int index);

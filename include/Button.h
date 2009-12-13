@@ -34,6 +34,7 @@ class Button
 	int width;
 	char label[100];
 	bool focus;
+	u32 color;
 	
   public:
 	// Constructor & Destructor
@@ -41,7 +42,7 @@ class Button
  	~Button();
 
 	// Other
-	void draw(int mode);
+	void draw();
 	void text(int offset);
 	bool onSelect(int pointerX, int pointerY);
 	
@@ -51,6 +52,7 @@ class Button
 	void setLabel(const char *label);
 	void setImageNormal(GRRLIB_texImg *imageNormal);
 	void setImageFocus(GRRLIB_texImg *imageFocus);
+	void setColor(u32 color);
 };
 
 #endif

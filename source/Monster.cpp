@@ -119,7 +119,7 @@ bool Monster::move(void)
 			visible=true;
 			
 			// Start
-			sound->effect(8);	
+			sound->effect(SOUND_START);	
 		}
 		else
 		{
@@ -140,7 +140,7 @@ bool Monster::move(void)
 			visible=false;
 			
 			// Finish
-			sound->effect(9);	
+			sound->effect(SOUND_FINISH);	
 			
 			return true;
 		}

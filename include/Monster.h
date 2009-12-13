@@ -48,7 +48,7 @@ class Monster
   	Monster();
  	~Monster();
 
-	// Methodes
+	// Other
 	void draw(void);
 	void text(void);
 	bool move(void);

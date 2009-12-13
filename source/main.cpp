@@ -20,11 +20,13 @@
 **  ==============
 **
 **  TODO:
-**  - Added weapons to game board
+**  - Improve weapon graphics
 **  - Bugfix: Network thread
-**  - Bugfix: Save settings and highscore to file is not working stable.
 **  - Bugfix: Balance sound effect volume.
 **  - Bugfix: Button rumble support is not working
+**
+**  14/12/2009 Version 0.41
+**  - Added dynamic weapon placement on the gameboard
 **
 **  13/12/2009 Version 0.40
 **  - Added basic weapon fire graphic effect 
@@ -124,6 +126,8 @@ void checkGameOver(void);
 void checkNextWave(void);
 void moveMonsters(void);
 void moveWeapons(void);
+GRRLIB_texImg *getNewWeaponImage(int type);
+int getWeaponPrice(int type);
 
 // -----------------------------------------------------------
 // TYPEDEF
@@ -197,7 +201,6 @@ typedef struct
   GRRLIB_texImg *weapon4;
   GRRLIB_texImg *weapon5;
   GRRLIB_texImg *weapon6;
-  GRRLIB_texImg *weapon7;
 
   GRRLIB_texImg *button1;
   GRRLIB_texImg *buttonFocus1;  
@@ -468,10 +471,6 @@ extern int      pic504length;
 extern const unsigned char     pic505data[];
 extern int      pic505length;
 
-// Weapon7 Image
-extern const unsigned char     pic506data[];
-extern int      pic506length;
-
 
 
 // Button1 Image
@@ -615,7 +614,6 @@ void initImages(void)
    images.weapon4=GRRLIB_LoadTexture( pic503data );
    images.weapon5=GRRLIB_LoadTexture( pic504data );
    images.weapon6=GRRLIB_LoadTexture( pic505data );
-   images.weapon7=GRRLIB_LoadTexture( pic506data );
    
    images.button1=GRRLIB_LoadTexture( pic600data );
    images.buttonFocus1=GRRLIB_LoadTexture( pic601data );  
@@ -633,7 +631,7 @@ void initImages(void)
    trace->event(s_fn,0,"leave [void]");
 }
 
-// Init some Weapons (Just for debugging)
+// Init Weapons 
 void initWeapons(void)
 {
     const char *s_fn="initWeapons";
@@ -649,85 +647,7 @@ void initWeapons(void)
 		weapons[i]=NULL;
 	  }
     }
-    
-	weapons[0]= new Weapon();
-	weapons[0]->setImage(images.weapon1);
-	weapons[0]->setX(200);
-	weapons[0]->setY(180);
-	weapons[0]->setPower(2);
-	weapons[0]->setRange(50);
-	weapons[0]->setRate(50);
-	weapons[0]->setPowerPrice(10);
-	weapons[0]->setRangePrice(10);
-	weapons[0]->setRatePrice(10);
-	weapons[0]->setSelected(true);
-	weapons[0]->setIndex(0);
-		
-	weapons[1]= new Weapon();
-	weapons[1]->setImage(images.weapon2);
-	weapons[1]->setX(300);
-	weapons[1]->setY(180);
-	weapons[1]->setPower(4);
-	weapons[1]->setRange(50);
-	weapons[1]->setRate(100);
-	weapons[1]->setPowerPrice(10);
-	weapons[1]->setRangePrice(10);
-	weapons[1]->setRatePrice(10);
-	weapons[1]->setSelected(false);
-	weapons[1]->setIndex(1);
-	
-	weapons[2]= new Weapon();
-	weapons[2]->setImage(images.weapon3);
-	weapons[2]->setX(400);
-	weapons[2]->setY(180);
-	weapons[2]->setPower(6);	
-	weapons[2]->setRange(50);
-	weapons[2]->setRate(150);
-	weapons[2]->setPowerPrice(10);
-	weapons[2]->setRangePrice(10);
-	weapons[2]->setRatePrice(10);
-	weapons[2]->setSelected(false);
-	weapons[2]->setIndex(2);
-	
-	weapons[3]= new Weapon();
-	weapons[3]->setImage(images.weapon4);
-	weapons[3]->setX(200);
-	weapons[3]->setY(400);
-	weapons[3]->setPower(6);	
-	weapons[3]->setRange(50);
-	weapons[3]->setRate(150);
-	weapons[3]->setPowerPrice(10);
-	weapons[3]->setRangePrice(10);
-	weapons[3]->setRatePrice(10);
-	weapons[3]->setSelected(false);
-	weapons[3]->setIndex(3);
-	
-	weapons[4]= new Weapon();
-	weapons[4]->setImage(images.weapon5);
-	weapons[4]->setX(300);
-	weapons[4]->setY(400);
-	weapons[4]->setPower(6);	
-	weapons[4]->setRange(50);
-	weapons[4]->setRate(150);
-	weapons[4]->setPowerPrice(10);
-	weapons[4]->setRangePrice(10);
-	weapons[4]->setRatePrice(10);
-	weapons[4]->setSelected(false);
-	weapons[4]->setIndex(4);
-	
-	weapons[5]= new Weapon();
-	weapons[5]->setImage(images.weapon7);
-	weapons[5]->setX(400);
-	weapons[5]->setY(400);
-	weapons[5]->setPower(6);	
-	weapons[5]->setRange(50);
-	weapons[5]->setRate(150);
-	weapons[5]->setPowerPrice(10);
-	weapons[5]->setRangePrice(10);
-	weapons[5]->setRatePrice(10);
-	weapons[5]->setSelected(false);
-	weapons[5]->setIndex(5);
-	
+    	
 	trace->event(s_fn,0,"leave [void]");
 }
 
@@ -938,6 +858,7 @@ void initPointers(void)
    pointers[0]->setY(240);
    pointers[0]->setAngle(0);
    pointers[0]->setImage(images.pointer1);
+   pointers[0]->setIndex(0);
 
    pointers[1] = new Pointer(); 
    pointers[1]->setIndex(1);
@@ -945,6 +866,7 @@ void initPointers(void)
    pointers[1]->setY(240);
    pointers[1]->setAngle(0);
    pointers[1]->setImage(images.pointer2);
+   pointers[1]->setIndex(1);
 
    pointers[2] = new Pointer(); 
    pointers[2]->setIndex(2);
@@ -952,6 +874,7 @@ void initPointers(void)
    pointers[2]->setY(240);
    pointers[2]->setAngle(0);
    pointers[2]->setImage(images.pointer3);
+   pointers[2]->setIndex(2);
 
    pointers[3] = new Pointer(); 
    pointers[3]->setIndex(3);
@@ -959,6 +882,7 @@ void initPointers(void)
    pointers[3]->setY(240);
    pointers[3]->setAngle(0);
    pointers[3]->setImage(images.pointer4);	
+   pointers[3]->setIndex(3);
       
    trace->event(s_fn,0,"leave [void]");
 }
@@ -1023,6 +947,7 @@ void initButtons(void)
 			buttons[6]->setImageNormal(images.button2);
 			buttons[6]->setImageFocus(images.buttonFocus2);
 			buttons[6]->setLabel("Play");
+			buttons[6]->setColor(IMAGE_COLOR);
 			
 			// HighScore Button 
 			buttons[0]=new Button();
@@ -1031,6 +956,7 @@ void initButtons(void)
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("High Score");
+			buttons[0]->setColor(IMAGE_COLOR);
 			
 			// Help Button 
 			buttons[1]=new Button();
@@ -1039,6 +965,7 @@ void initButtons(void)
 			buttons[1]->setImageNormal(images.button2);
 			buttons[1]->setImageFocus(images.buttonFocus2);
 			buttons[1]->setLabel("Help");			
+			buttons[1]->setColor(IMAGE_COLOR);
 
 			// Credits Button 
 			buttons[2]=new Button();
@@ -1047,6 +974,7 @@ void initButtons(void)
 			buttons[2]->setImageNormal(images.button2);
 			buttons[2]->setImageFocus(images.buttonFocus2);
 			buttons[2]->setLabel("Credits");	
+			buttons[2]->setColor(IMAGE_COLOR);
 
 			// Release Notes Button 
 			buttons[4]=new Button();
@@ -1055,6 +983,7 @@ void initButtons(void)
 			buttons[4]->setImageNormal(images.button2);
 			buttons[4]->setImageFocus(images.buttonFocus2);
 			buttons[4]->setLabel("Release Notes");	
+			buttons[4]->setColor(IMAGE_COLOR);
 			
 			// Sound Settings Button 
 			buttons[3]=new Button();
@@ -1063,6 +992,7 @@ void initButtons(void)
 			buttons[3]->setImageNormal(images.button2);
 			buttons[3]->setImageFocus(images.buttonFocus2);
 			buttons[3]->setLabel("Sound Settings");	
+			buttons[3]->setColor(IMAGE_COLOR);
 
 			// User initials Button 
 			buttons[5]=new Button();
@@ -1071,6 +1001,7 @@ void initButtons(void)
 			buttons[5]->setImageNormal(images.button2);
 			buttons[5]->setImageFocus(images.buttonFocus2);
 			buttons[5]->setLabel("User initials");	
+			buttons[5]->setColor(IMAGE_COLOR);
 						
 			// Exit HBC Button 
 			buttons[7]=new Button();
@@ -1079,6 +1010,7 @@ void initButtons(void)
 			buttons[7]->setImageNormal(images.button2);
 			buttons[7]->setImageFocus(images.buttonFocus2);
 			buttons[7]->setLabel("Exit HBC");	
+			buttons[7]->setColor(IMAGE_COLOR);
 	 
 			// Reset Wii Button 
 			buttons[8]=new Button();
@@ -1087,6 +1019,7 @@ void initButtons(void)
 			buttons[8]->setImageNormal(images.button2);
 			buttons[8]->setImageFocus(images.buttonFocus2);
 			buttons[8]->setLabel("Reset Wii");	
+			buttons[8]->setColor(IMAGE_COLOR);
 		}
 		break;
 				
@@ -1099,6 +1032,7 @@ void initButtons(void)
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Map1");
+			buttons[0]->setColor(IMAGE_COLOR);
 						
 			// Button (Play Map2)
 			buttons[1]=new Button();
@@ -1107,6 +1041,7 @@ void initButtons(void)
 			buttons[1]->setImageNormal(images.button2);
 			buttons[1]->setImageFocus(images.buttonFocus2);
 			buttons[1]->setLabel("Map2");
+			buttons[1]->setColor(IMAGE_COLOR);
 				
 			// Button (Play Map3)
 			buttons[2]=new Button();
@@ -1115,6 +1050,7 @@ void initButtons(void)
 			buttons[2]->setImageNormal(images.button2);
 			buttons[2]->setImageFocus(images.buttonFocus2);
 			buttons[2]->setLabel("Map3");
+			buttons[2]->setColor(IMAGE_COLOR);
 			
 			// Button (Main Menu)
 			buttons[3]=new Button();
@@ -1123,6 +1059,7 @@ void initButtons(void)
 			buttons[3]->setImageNormal(images.button2);
 			buttons[3]->setImageFocus(images.buttonFocus2);
 			buttons[3]->setLabel("Main Menu");
+			buttons[3]->setColor(IMAGE_COLOR);
 		}
 		break;	
 				
@@ -1135,6 +1072,7 @@ void initButtons(void)
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Next");	
+			buttons[0]->setColor(IMAGE_COLOR);
 		}
 		break;
 		
@@ -1146,7 +1084,8 @@ void initButtons(void)
 			buttons[0]->setY(460);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
-			buttons[0]->setLabel("Main Menu");		
+			buttons[0]->setLabel("Main Menu");	
+			buttons[0]->setColor(IMAGE_COLOR);	
 		}
 		break;
 		
@@ -1159,6 +1098,7 @@ void initButtons(void)
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Main Menu");	
+			buttons[0]->setColor(IMAGE_COLOR);
 		}
 		break;
 
@@ -1171,6 +1111,7 @@ void initButtons(void)
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Main Menu");		
+			buttons[0]->setColor(IMAGE_COLOR);
 		}
 		break;
 		
@@ -1183,6 +1124,7 @@ void initButtons(void)
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Main Menu");	
+			buttons[0]->setColor(IMAGE_COLOR);
 			
 			// Music Volume - button 
 			buttons[1]=new Button();
@@ -1191,6 +1133,7 @@ void initButtons(void)
 			buttons[1]->setImageNormal(images.button1);
 			buttons[1]->setImageFocus(images.buttonFocus1);
 			buttons[1]->setLabel("-");	
+			buttons[1]->setColor(IMAGE_COLOR);
 			
 			// Music Volume + button 
 			buttons[2]=new Button();
@@ -1199,6 +1142,7 @@ void initButtons(void)
 			buttons[2]->setImageNormal(images.button1);
 			buttons[2]->setImageFocus(images.buttonFocus1);
 			buttons[2]->setLabel("+");	
+			buttons[2]->setColor(IMAGE_COLOR);
 			
 			// Effect Volume - button 
 			buttons[3]=new Button();
@@ -1207,6 +1151,7 @@ void initButtons(void)
 			buttons[3]->setImageNormal(images.button1);
 			buttons[3]->setImageFocus(images.buttonFocus1);
 			buttons[3]->setLabel("-");	
+			buttons[3]->setColor(IMAGE_COLOR);
 			
 			// Effect Volume + button 
 			buttons[4]=new Button();
@@ -1215,6 +1160,7 @@ void initButtons(void)
 			buttons[4]->setImageNormal(images.button1);
 			buttons[4]->setImageFocus(images.buttonFocus1);
 			buttons[4]->setLabel("+");	
+			buttons[4]->setColor(IMAGE_COLOR);
 			
 			// Music track - button 
 			buttons[5]=new Button();
@@ -1223,6 +1169,7 @@ void initButtons(void)
 			buttons[5]->setImageNormal(images.button1);
 			buttons[5]->setImageFocus(images.buttonFocus1);
 			buttons[5]->setLabel("-");	
+			buttons[5]->setColor(IMAGE_COLOR);
 		
 			// Music track + button 
 			buttons[6]=new Button();
@@ -1231,6 +1178,7 @@ void initButtons(void)
 			buttons[6]->setImageNormal(images.button1);
 			buttons[6]->setImageFocus(images.buttonFocus1);
 			buttons[6]->setLabel("+");	
+			buttons[6]->setColor(IMAGE_COLOR);
 		}
 		break;
 				
@@ -1243,6 +1191,7 @@ void initButtons(void)
 			buttons[0]->setImageNormal(images.button1);
 			buttons[0]->setImageFocus(images.buttonFocus1);
 			buttons[0]->setLabel("+");	
+			buttons[0]->setColor(IMAGE_COLOR);
 
 			// First letter - button 
 			buttons[1]=new Button();
@@ -1251,6 +1200,7 @@ void initButtons(void)
 			buttons[1]->setImageNormal(images.button1);
 			buttons[1]->setImageFocus(images.buttonFocus1);
 			buttons[1]->setLabel("-");	
+			buttons[1]->setColor(IMAGE_COLOR);
 
 			// Second letter + button 
 			buttons[2]=new Button();
@@ -1259,6 +1209,7 @@ void initButtons(void)
 			buttons[2]->setImageNormal(images.button1);
 			buttons[2]->setImageFocus(images.buttonFocus1);
 			buttons[2]->setLabel("+");	
+			buttons[2]->setColor(IMAGE_COLOR);
 
 			// second letter - button 
 			buttons[3]=new Button();
@@ -1267,6 +1218,7 @@ void initButtons(void)
 			buttons[3]->setImageNormal(images.button1);
 			buttons[3]->setImageFocus(images.buttonFocus1);
 			buttons[3]->setLabel("-");	
+			buttons[3]->setColor(IMAGE_COLOR);
 
 			// Third letter + button 
 			buttons[4]=new Button();
@@ -1275,6 +1227,7 @@ void initButtons(void)
 			buttons[4]->setImageNormal(images.button1);
 			buttons[4]->setImageFocus(images.buttonFocus1);
 			buttons[4]->setLabel("+");	
+			buttons[4]->setColor(IMAGE_COLOR);
 
 			// Third letter - button 
 			buttons[5]=new Button();
@@ -1283,6 +1236,7 @@ void initButtons(void)
 			buttons[5]->setImageNormal(images.button1);
 			buttons[5]->setImageFocus(images.buttonFocus1);
 			buttons[5]->setLabel("-");
+			buttons[5]->setColor(IMAGE_COLOR);
 			
 			// Main Menu Button
 			buttons[6]=new Button();
@@ -1291,6 +1245,7 @@ void initButtons(void)
 			buttons[6]->setImageNormal(images.button2);
 			buttons[6]->setImageFocus(images.buttonFocus2);
 			buttons[6]->setLabel("Main Menu");	
+			buttons[6]->setColor(IMAGE_COLOR);
 		}
 		break;	
 		
@@ -1305,6 +1260,7 @@ void initButtons(void)
 			buttons[0]->setImageNormal(images.button3);
 			buttons[0]->setImageFocus(images.buttonFocus3);
 			buttons[0]->setLabel("");
+			buttons[0]->setColor(IMAGE_COLOR3);
 			
 			// Power Upgrade Button
 			ypos+=150;
@@ -1314,6 +1270,7 @@ void initButtons(void)
 			buttons[1]->setImageNormal(images.button3);
 			buttons[1]->setImageFocus(images.buttonFocus3);
 			buttons[1]->setLabel("");
+			buttons[1]->setColor(IMAGE_COLOR3);
 			
 			// Range Upgrade Button
 			ypos+=60;
@@ -1323,6 +1280,7 @@ void initButtons(void)
 			buttons[2]->setImageNormal(images.button3);
 			buttons[2]->setImageFocus(images.buttonFocus3);
 			buttons[2]->setLabel("");
+			buttons[2]->setColor(IMAGE_COLOR3);
 
 			// Rate Upgrade Button
 			ypos+=60;
@@ -1332,6 +1290,7 @@ void initButtons(void)
 			buttons[3]->setImageNormal(images.button3);
 			buttons[3]->setImageFocus(images.buttonFocus3);
 			buttons[3]->setLabel("");
+			buttons[3]->setColor(IMAGE_COLOR3);
 								
 			// Select previous weapon Button
 			ypos+=60;
@@ -1341,6 +1300,7 @@ void initButtons(void)
 			buttons[4]->setImageNormal(images.button4);
 			buttons[4]->setImageFocus(images.buttonFocus4);
 			buttons[4]->setLabel("<");
+			buttons[4]->setColor(IMAGE_COLOR3);
 
 			// Select next weapon Button
 			buttons[5]=new Button();
@@ -1349,6 +1309,16 @@ void initButtons(void)
 			buttons[5]->setImageNormal(images.button4);
 			buttons[5]->setImageFocus(images.buttonFocus4);
 			buttons[5]->setLabel(">");
+			buttons[5]->setColor(IMAGE_COLOR3);
+								
+			// Select next weapon Button
+			buttons[6]=new Button();
+			buttons[6]->setX(33+game.panelXOffset);
+			buttons[6]->setY(400+game.panelYOffset);
+			buttons[6]->setImageNormal(getNewWeaponImage(game.weaponType));
+			buttons[6]->setImageFocus(getNewWeaponImage(game.weaponType));
+			buttons[6]->setLabel("");			
+			buttons[6]->setColor(IMAGE_COLOR);
 		}
 		break;
 		
@@ -1511,13 +1481,13 @@ void drawWeaponsText(void)
 }
 
 // Draw buttons on screen
-void drawButtons(int mode)
+void drawButtons()
 {
 	for( int i=0; i<MAX_BUTTONS; i++ ) 
 	{
 		if (buttons[i]!=NULL)
 		{
-			buttons[i]->draw(mode);
+			buttons[i]->draw();
 		}
 	}
 }
@@ -1616,40 +1586,12 @@ void drawText(int x, int y, int type, const char *text)
 	 }
    }
 }
-
+				
 // Draw Game panel on screen
 void drawGamePanel(void)
 {
 	// Draw background
 	GRRLIB_DrawImg(game.panelXOffset,0, images.panel1, 0, 1, 1, IMAGE_COLOR3 );
-	
-	int ypos=400;
-	switch (game.weaponType)
-	{
-		case 0: GRRLIB_DrawImg(33+game.panelXOffset, ypos+game.panelYOffset, 
-					images.weapon1, 0, 1, 1, IMAGE_COLOR );
-				break;
-				
-		case 1: GRRLIB_DrawImg(33+game.panelXOffset, ypos+game.panelYOffset, 
-					images.weapon2, 0, 1, 1, IMAGE_COLOR );
-				break;
-				
-		case 2: GRRLIB_DrawImg(33+game.panelXOffset, ypos+game.panelYOffset, 
-					images.weapon3, 0, 1, 1, IMAGE_COLOR );
-				break;
-				
-		case 3: GRRLIB_DrawImg(33+game.panelXOffset, ypos+game.panelYOffset, 
-					images.weapon4, 0, 1, 1, IMAGE_COLOR );
-				break;
-				
-		case 4: GRRLIB_DrawImg(33+game.panelXOffset, ypos+game.panelYOffset, 
-					images.weapon5, 0, 1, 1, IMAGE_COLOR );
-				break;
-				
-		case 5: GRRLIB_DrawImg(33+game.panelXOffset, ypos+game.panelYOffset, 
-					images.weapon7, 0, 1, 1, IMAGE_COLOR );
-				break;
-	}
 }
 		
 // Draw Game panel Text on screen
@@ -1708,11 +1650,25 @@ void drawGamePanelText(void)
 	}
 		
 	// Set button label values
-	sprintf(tmp,"  %d", game.waveCountDown/25 );
+	sprintf(tmp,"      %d", game.waveCountDown/25 );
 	buttons[0]->setLabel(tmp);	
 	buttons[1]->setLabel(power);
 	buttons[2]->setLabel(range);
 	buttons[3]->setLabel(rate);
+	
+	// Set button 
+	if (game.cash>=getWeaponPrice(game.weaponType))
+	{
+		// Weapon normal
+		buttons[6]->setColor(IMAGE_COLOR);
+	}
+	else
+	{
+		// Weapon Transparent (Not for sale)
+		buttons[6]->setColor(IMAGE_COLOR3);
+	}
+	buttons[6]->setImageNormal(getNewWeaponImage(game.weaponType));
+	buttons[6]->setImageFocus(getNewWeaponImage(game.weaponType));
 	  
 	sprintf(tmp,"%d fps", CalculateFrameRate()); 
 	drawText(20, 500, fontSpecial, tmp);
@@ -1819,7 +1775,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 		  
 		  // Draw Buttons
-		  drawButtons(0);
+		  drawButtons();
 			
 		  // Init text layer	  
           GRRLIB_initTexture();
@@ -1862,7 +1818,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 		
 		  // Draw Buttons
-		  drawButtons(0);
+		  drawButtons();
 		  
 		  // Draw samples maps
 		  GRRLIB_DrawImg(60, 130, images.map1, 0, 1, 1, IMAGE_COLOR );
@@ -1896,7 +1852,7 @@ void drawScreen(void)
 		  drawMonsters();
 		  drawWeapons();
 		  drawGamePanel();		  
-		  drawButtons(1);
+		  drawButtons();
 		  
 		  checkGameOver();
 		  checkNextWave();
@@ -1947,7 +1903,7 @@ void drawScreen(void)
           GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 		  
 		  // Draw buttons
-	      drawButtons(0); 
+	      drawButtons(); 
 		  
 		  // Init text layer	  
           GRRLIB_initTexture();
@@ -2008,7 +1964,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 		 
 		  // Draw buttons
-	      drawButtons(0); 
+	      drawButtons(); 
 		  
 		  // Init text layer	  
           GRRLIB_initTexture();
@@ -2050,7 +2006,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
 		  
 		  // Draw buttons
-	      drawButtons(0); 
+	      drawButtons(); 
 		  
 		  // Init text layer	  
           GRRLIB_initTexture();
@@ -2105,7 +2061,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
 		
 		  // Draw buttons
-	      drawButtons(0); 
+	      drawButtons(); 
 		  		  
 	      // Init text layer	  
           GRRLIB_initTexture();
@@ -2185,7 +2141,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
 
 		  // Draw buttons
-	      drawButtons(0); 
+	      drawButtons(); 
 		  
 	      // Init text layer	  
           GRRLIB_initTexture();
@@ -2256,7 +2212,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
       	
 		  // Draw buttons
-	      drawButtons(0); 
+	      drawButtons(); 
 		  
 	      // Init text layer	  
           GRRLIB_initTexture();
@@ -2293,6 +2249,156 @@ void drawScreen(void)
 // -----------------------------------
 // SUPPORT METHODES
 // -----------------------------------
+
+
+// Create new weapon with correct game parameters
+void createWeapon(int x, int y, int id, int type)
+{
+	const char *s_fn="createWeapon";
+	trace->event(s_fn,0,"enter");
+   
+	weapons[id]= new Weapon();	
+	weapons[id]->setX(x);
+	weapons[id]->setY(y);
+	weapons[id]->setSelected(true);
+	weapons[id]->setIndex(id);
+	weapons[id]->setImage(getNewWeaponImage(type));
+	weapons[id]->setType(type);
+	
+	switch (type)
+	{
+		case 0:	{
+					// Gun
+					weapons[id]->setPower(2);
+					weapons[id]->setRange(50);
+					weapons[id]->setRate(100);
+					weapons[id]->setPowerPrice(10);
+					weapons[id]->setRangePrice(10);
+					weapons[id]->setRatePrice(10);		
+				}
+				break;
+				
+		case 1:	{
+					
+					// Rifle
+					weapons[id]->setPower(4);
+					weapons[id]->setRange(55);
+					weapons[id]->setRate(90);
+					weapons[id]->setPowerPrice(25);
+					weapons[id]->setRangePrice(25);
+					weapons[id]->setRatePrice(25);		
+				}
+				break;
+				
+		case 2:	{
+					// Canon
+					weapons[id]->setPower(6);
+					weapons[id]->setRange(60);
+					weapons[id]->setRate(80);
+					weapons[id]->setPowerPrice(50);
+					weapons[id]->setRangePrice(50);
+					weapons[id]->setRatePrice(50);		
+				}
+				break;
+				
+		case 3:	{
+					// Missle				
+					weapons[id]->setPower(8);
+					weapons[id]->setRange(65);
+					weapons[id]->setRate(80);
+					weapons[id]->setPowerPrice(75);
+					weapons[id]->setRangePrice(75);
+					weapons[id]->setRatePrice(75);		
+				}
+				break;
+								
+		case 4:	{
+					// Laser
+					weapons[id]->setPower(10);
+					weapons[id]->setRange(70);
+					weapons[id]->setRate(70);
+					weapons[id]->setPowerPrice(100);
+					weapons[id]->setRangePrice(100);
+					weapons[id]->setRatePrice(100);		
+				}
+				break;
+				
+		case 5:	{
+					// Unknown (TODO)
+					weapons[id]->setPower(20);
+					weapons[id]->setRange(80);
+					weapons[id]->setRate(100);
+					weapons[id]->setPowerPrice(500);
+					weapons[id]->setRangePrice(500);
+					weapons[id]->setRatePrice(500);		
+				}
+				break;
+	}
+	trace->event(s_fn,0,"leave");
+}
+		
+// Return Weapon Image per Type		
+GRRLIB_texImg *getNewWeaponImage(int type)
+{
+	switch (game.weaponType)
+	{
+		case 0:  // Gun
+				 return images.weapon1;
+				 break;
+				
+		case 1:  // Rifle
+				 return images.weapon2;
+				 break;
+				
+		case 2:  // Canon
+				 return images.weapon3;
+				 break;
+				
+		case 3:  // Missle
+				 return images.weapon4;
+				 break;
+				
+		case 4:  // Laser
+				 return images.weapon5;
+				 break;
+				
+		default: // unknown (TODO)
+				 return images.weapon6;
+				 break;
+	}
+}
+
+
+// Return Weapon price per type
+int getWeaponPrice(int type)
+{
+	switch (game.weaponType)
+	{
+		case 0:  // Gun
+				 return 100;
+				 break;
+				
+		case 1:  // Rifle
+				 return 200;
+				 break;
+				
+		case 2:  // Canon
+				 return 500;
+				 break;
+				
+		case 3:  // Missle
+				 return 1000;
+				 break;
+				
+		case 4:  // Laser
+				 return 1500;
+				 break;
+				
+		default: // unknown (TODO)
+				 return 2000;
+				 break;
+	}
+}
 
 // Move monsters on screen
 void moveMonsters(void)
@@ -2353,8 +2459,12 @@ void checkNextWave(void)
 		}
 	}	
 	
-	// Lanch new monster wave;
-	game.event=eventLanch;
+	// If event is idle
+	if (game.event==eventNone)
+	{	
+		// Lanch new monster wave else wait one game cycle
+		game.event=eventLanch;
+	}
 }
 
 void destroyImages(void)
@@ -2426,7 +2536,6 @@ void destroyImages(void)
    GRRLIB_FreeTexture(images.weapon4);
    GRRLIB_FreeTexture(images.weapon5);
    GRRLIB_FreeTexture(images.weapon6);
-   GRRLIB_FreeTexture(images.weapon7);
    	
    GRRLIB_FreeTexture(images.button2);
    GRRLIB_FreeTexture(images.buttonFocus2);
@@ -2497,7 +2606,6 @@ void destroyObjects()
 	}
 }
 	
-
 // Calculate Video Frame Rate (Indication how game engine performs)
 static u8 CalculateFrameRate(void) 
 {
@@ -2526,13 +2634,112 @@ void processEvent()
 	// Event state
 	switch (game.event)
 	{
+		case eventNewWeaponSelected:		
+		{
+			trace->event(s_fn,0,"event=eventNewWeaponSelected");
+			
+			if (game.cash>=getWeaponPrice(game.weaponType))
+			{
+				// Change pointer image to weapon image (For location defination)
+				pointers[0]->setImage(getNewWeaponImage(game.weaponType));
+			}
+		}
+		break;
+		
+		case eventNewweaponDeployed:
+		{
+			trace->event(s_fn,0,"event=eventNewweaponDeployed");
+			
+			if (game.cash>=getWeaponPrice(game.weaponType))
+			{
+				// First restore pointer image
+				pointers[0]->setImage(images.pointer1);
+			
+				// Find first empty place in weapons array
+				int id=0;
+				while (weapons[id]!=NULL) 
+				{
+					if (++id>=(MAX_WEAPONS-1)) 
+					{
+						id=(MAX_WEAPONS-1);
+						break;
+					}
+				}
+					
+				// Deselected all weapons
+				for (int j=0;j<MAX_WEAPONS; j++)
+				{
+					if (weapons[j]!=NULL) 
+					{
+						weapons[j]->setSelected(false);
+					}
+				}
+				
+				createWeapon(pointers[0]->getX(),pointers[0]->getY(),id, game.weaponType);
+							
+				// Selected new weapon
+				game.weaponSelect=id;	
+
+				// Pay for the weapon
+				game.cash-=getWeaponPrice(game.weaponType);
+			}
+		}		
+		break;
+		
+		case eventNewWeaponNext:		
+		{
+			trace->event(s_fn,0,"event=eventNewWeaponNext");
+			
+			if (game.weaponType<(MAX_WEAPON_TYPE-1)) 
+			{
+				game.weaponType++; 
+			}
+	 
+	 		// Set button 
+			if (game.cash>=getWeaponPrice(game.weaponType))
+			{
+				// Weapon normal
+				buttons[6]->setColor(IMAGE_COLOR);
+			}
+			else
+			{
+				// Weapon Transparent (Not for sale)
+				buttons[6]->setColor(IMAGE_COLOR3);
+			}			
+			buttons[6]->setImageNormal(getNewWeaponImage(game.weaponType));
+			buttons[6]->setImageFocus(getNewWeaponImage(game.weaponType));
+		}
+		break;
+
+		case eventNewWeaponPrevious:		
+		{
+			trace->event(s_fn,0,"event=eventNewWeaponPrevious");
+			
+			if (game.weaponType>0) 
+			{
+				game.weaponType--; 
+			}
+	
+			// Set button 
+			if (game.cash>=getWeaponPrice(game.weaponType))
+			{
+				// Weapon normal
+				buttons[6]->setColor(IMAGE_COLOR);
+			}
+			else
+			{
+				// Weapon Transparent (Not for sale)
+				buttons[6]->setColor(IMAGE_COLOR3);
+			}
+			buttons[6]->setImageNormal(getNewWeaponImage(game.weaponType));
+			buttons[6]->setImageFocus(getNewWeaponImage(game.weaponType));
+		}
+		break;
+				
 		case eventLanch:
 		{
 			trace->event(s_fn,0,"event=eventLanch");	
 			
-			// Lanch sound effect
-			sound->effect(10);
-
 			int count=0;
 			for(int i=0;i<MAX_MONSTERS;i++)
 			{
@@ -2546,8 +2753,16 @@ void processEvent()
 				if (game.waveDelay>100) game.waveDelay-=100;
 				game.waveCountDown=game.waveDelay;
 				game.wave++;
-				initMonsters(false);		
+				initMonsters(false);	
+
+				// Lanch sound effect
+				sound->effect(SOUND_LANCH);	
 			}
+			else
+			{
+				// If no room in monster array wait 24 cycles and try again!
+				game.waveCountDown=24;
+			}				
 		}
 		break;
 		
@@ -2567,26 +2782,38 @@ void processEvent()
 		case eventWeaponPowerUpgrade:
 		{
 			trace->event(s_fn,0,"event=eventWeaponPowerUpgrade");			
-			weapons[game.weaponSelect]->upgrade(0);
+			
+			if (weapons[game.weaponSelect]!=NULL)
+			{
+				weapons[game.weaponSelect]->upgrade(0);
+			}
 		}
 		break;
 				
 		case eventWeaponRangeUpgrade:
 		{ 			
-			trace->event(s_fn,0,"event=eventWeaponRangeUpgrade");			
-			weapons[game.weaponSelect]->upgrade(1);
+			trace->event(s_fn,0,"event=eventWeaponRangeUpgrade");						
+			
+			if (weapons[game.weaponSelect]!=NULL)
+			{
+				weapons[game.weaponSelect]->upgrade(1);
+			}
 		}
 		break;
 			
 		case eventWeaponRateUpgrade:
 		{ 
  			trace->event(s_fn,0,"event=eventWeaponRateUpgrade");
-			weapons[game.weaponSelect]->upgrade(2);
+			
+			if (weapons[game.weaponSelect]!=NULL)
+			{
+				weapons[game.weaponSelect]->upgrade(2);
+			}
 		}
 		break;			
 	}
 	
-	// Clear event
+	// Event is progress, set event handler to none!
 	game.event=eventNone;
 }
 
@@ -2779,7 +3006,7 @@ int main(void)
     GRRLIB_Render();
 	
 	// Repeat forever
-    while( game.stateMachine != stateQuit )
+    while( game.stateMachine!=stateQuit )
 	{			
 		// Process state machine
 		processStateMachine();

@@ -65,15 +65,15 @@ Button::~Button()
 // Others
 // ------------------------------
 
-void Button::draw(int mode)
+void Button::draw()
 {
 	focus=false;
 	for (int i=0; i<MAX_POINTERS; i++)
 	{
 		if (pointers[i]!=NULL)
 		{	
-			if ((pointers[i]->getX()>=x) && (pointers[i]->getX()<=(x+width)) 
-				&& (pointers[i]->getY()>=y) && (pointers[i]->getY()<=(y+height)))
+			if ((pointers[i]->getXOffset()>=x) && (pointers[i]->getXOffset()<=(x+width)) 
+				&& (pointers[i]->getYOffset()>=y) && (pointers[i]->getYOffset()<=(y+height)))
 			{
 				// Only buttons with a label can be selected
 				//if (strlen(label)>0)
@@ -87,30 +87,12 @@ void Button::draw(int mode)
 	
 	if (focus)
 	{
-		if (mode==0)
-		{
-			// alfa 100%
-			GRRLIB_DrawImg( x, y, imageFocus, 0, 1, 1, IMAGE_COLOR );	
-		}
-		else
-		{
-			// alfa 60% (transparent)
-			GRRLIB_DrawImg( x, y, imageFocus, 0, 1, 1, IMAGE_COLOR3 );
-		}
+		GRRLIB_DrawImg( x, y, imageFocus, 0, 1, 1, color );	
 		//pointers[i].setRumble(MAX_RUMBLE);
 	}
 	else
 	{
-		if (mode==0)
-		{
-			// alfa 100%
-			GRRLIB_DrawImg( x, y, imageNormal, 0, 1, 1, IMAGE_COLOR );	
-		}
-		else
-		{
-			// alfa 60% (transparent)
-			GRRLIB_DrawImg( x, y, imageNormal, 0, 1, 1, IMAGE_COLOR3 );	
-		}
+		GRRLIB_DrawImg( x, y, imageNormal, 0, 1, 1, color );	
 	}
 }
 
@@ -137,7 +119,7 @@ bool Button::onSelect(int x1, int y1)
 	  trace->event(s_fn,0,"Button selected");
 	  
 	  // Click
-	  sound->effect(1);
+	  sound->effect(SOUND_CLICK);
 	  selected=true;
    }
    else
@@ -200,6 +182,14 @@ void Button::setLabel(const char *label1)
 	//trace->event(s_fn,0,"%s",label1);
 	
     strcpy(label,label1);
+}
+
+void Button::setColor(u32 color1)
+{
+	//const char *s_fn="Button::setColor";
+	//trace->event(s_fn,0,"%s",label1);
+	
+    color=color1;
 }
 
 // ------------------------------

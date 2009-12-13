@@ -31,18 +31,22 @@ class Settings
 	int  effectVolume;
 	
   public:
-  	Settings();
+  	// Constructor & Destructor
+	Settings();
  	~Settings();
 	
+	// Methodes
 	void load(const char *filename);
 	void save( const char *filename);
 	
+	// Setters
 	void setFirstChar(char letter);
 	void setSecondChar(char letter);
 	void setThirdChar(char letter);
 	void setMusicVolume(int volume);
 	void setEffectVolume(int volume);
 
+	// Getters
 	char getFirstChar(void);
 	char getSecondChar(void);
 	char getThirdChar(void);
