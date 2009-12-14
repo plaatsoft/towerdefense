@@ -26,7 +26,7 @@
 class Grid
 {
   private:
-    int level;
+    int index;
 	GRRLIB_texImg *image1;
 	GRRLIB_texImg *image2;
 	GRRLIB_texImg *image3;
@@ -58,7 +58,7 @@ class Grid
 	void setImageBase(GRRLIB_texImg *image);	
 	void setImageWater(GRRLIB_texImg *image);
 	void setImageBridge(GRRLIB_texImg *image);
-	void setLevel(int level);
+	void setIndex(int index);
 	
 	// Getters
 	int getLocationX(int pos);

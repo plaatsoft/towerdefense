@@ -21,12 +21,17 @@
 **
 **  TODO:
 **  - Improve weapon graphics
+**  - Snap weapon to grid!
 **  - Bugfix: Network thread
 **  - Bugfix: Balance sound effect volume.
 **  - Bugfix: Button rumble support is not working
 **
 **  14/12/2009 Version 0.41
 **  - Added dynamic weapon placement on the gameboard
+**  - Added bonus cash (score) when wave is cleared
+**  - Improve Game Over and Next Wave information on screen
+**  - Added "coming soon" teaser for Map 4, 5 and 6.
+**  - Improve map2 base location.
 **
 **  13/12/2009 Version 0.40
 **  - Added basic weapon fire graphic effect 
@@ -219,6 +224,7 @@ typedef struct
   GRRLIB_texImg *map1;
   GRRLIB_texImg *map2;
   GRRLIB_texImg *map3;
+  GRRLIB_texImg *map4;
 } 
 image;
 
@@ -519,6 +525,10 @@ extern int      pic701length;
 extern const unsigned char     pic702data[];
 extern int      pic702length;
 
+// Map4 Sample Image
+extern const unsigned char     pic703data[];
+extern int      pic703length;
+
 
 u32         *frameBuffer[1] 	= {NULL};
 GXRModeObj  *rmode 				= NULL;
@@ -627,6 +637,7 @@ void initImages(void)
    images.map1=GRRLIB_LoadTexture( pic700data );  
    images.map2=GRRLIB_LoadTexture( pic701data );  
    images.map3=GRRLIB_LoadTexture( pic702data );  
+   images.map4=GRRLIB_LoadTexture( pic703data );  
    
    trace->event(s_fn,0,"leave [void]");
 }
@@ -650,30 +661,15 @@ void initWeapons(void)
     	
 	trace->event(s_fn,0,"leave [void]");
 }
-
+	
 // Init monster
-void initMonsters(bool clear)
+void initMonsters(void)
 {
 	const char *s_fn="initMonsters";
 	trace->event(s_fn,0,"enter");
    
 	int delay=1;   
    
-	if (clear)
-	{
-		trace->event(s_fn,0,"Clear monster array");
-	
-		// Clear monster array
-		for( int i=0; i<MAX_MONSTERS; i++)	
-		{
-			if (monsters[i]!=NULL)
-			{
-				delete monsters[i];
-				monsters[i]=NULL;
-			}
-		}
-	}
-	
 	// Calculate how much monster will be in the wave
 	int amount=3+(game.wave*2);
 	if (amount>MAX_MONSTERS) amount=MAX_MONSTERS;
@@ -888,10 +884,10 @@ void initPointers(void)
 }
 
 // Init Grid
-void initGrid(int level)
+void initGrid(int index)
 {
     const char *s_fn="initGrid";
-    trace->event(s_fn,0,"enter [level=%d]",level);
+    trace->event(s_fn,0,"enter [index=%d]",index);
    
     grid = new Grid();
 	grid->setImageRoad1(images.road1);
@@ -901,8 +897,9 @@ void initGrid(int level)
 	grid->setImageRoad5(images.road5);
 	grid->setImageWater(images.water1);
 	grid->setImageBridge(images.bridge1);
+	grid->setIndex(index);
 	
-	switch( level )
+	switch( index )
 	{
 		case 1: grid->setImageBase(images.base1);
 				grid->create(GRID1_FILENAME);
@@ -1052,14 +1049,41 @@ void initButtons(void)
 			buttons[2]->setLabel("Map3");
 			buttons[2]->setColor(IMAGE_COLOR);
 			
-			// Button (Main Menu)
+			// Button (Play Map4)
 			buttons[3]=new Button();
-			buttons[3]->setX(240);
-			buttons[3]->setY(460);
+			buttons[3]->setX(40);
+			buttons[3]->setY(410);
 			buttons[3]->setImageNormal(images.button2);
 			buttons[3]->setImageFocus(images.buttonFocus2);
-			buttons[3]->setLabel("Main Menu");
+			buttons[3]->setLabel("Map4");
 			buttons[3]->setColor(IMAGE_COLOR);
+						
+			// Button (Play Map5)
+			buttons[4]=new Button();
+			buttons[4]->setX(240);
+			buttons[4]->setY(410);
+			buttons[4]->setImageNormal(images.button2);
+			buttons[4]->setImageFocus(images.buttonFocus2);
+			buttons[4]->setLabel("Map5");
+			buttons[4]->setColor(IMAGE_COLOR);
+				
+			// Button (Play Map6)
+			buttons[5]=new Button();
+			buttons[5]->setX(440);
+			buttons[5]->setY(410);
+			buttons[5]->setImageNormal(images.button2);
+			buttons[5]->setImageFocus(images.buttonFocus2);
+			buttons[5]->setLabel("Map6");
+			buttons[5]->setColor(IMAGE_COLOR);
+			
+			// Button (Main Menu)
+			buttons[6]=new Button();
+			buttons[6]->setX(240);
+			buttons[6]->setY(460);
+			buttons[6]->setImageNormal(images.button2);
+			buttons[6]->setImageFocus(images.buttonFocus2);
+			buttons[6]->setLabel("Main Menu");
+			buttons[6]->setColor(IMAGE_COLOR);
 		}
 		break;	
 				
@@ -1821,15 +1845,23 @@ void drawScreen(void)
 		  drawButtons();
 		  
 		  // Draw samples maps
-		  GRRLIB_DrawImg(60, 130, images.map1, 0, 1, 1, IMAGE_COLOR );
-		  GRRLIB_DrawImg(255,130, images.map2, 0, 1, 1, IMAGE_COLOR );
-		  GRRLIB_DrawImg(455,130, images.map3, 0, 1, 1, IMAGE_COLOR );
-			  
+		  GRRLIB_DrawImg(60,  135, images.map1, 0, 1, 1, IMAGE_COLOR );
+		  GRRLIB_DrawImg(255, 135, images.map2, 0, 1, 1, IMAGE_COLOR );
+		  GRRLIB_DrawImg(455, 135, images.map3, 0, 1, 1, IMAGE_COLOR );
+		  
+		  GRRLIB_DrawImg(60,  295, images.map4, 0, 1, 1, IMAGE_COLOR );
+		  GRRLIB_DrawImg(255, 295, images.map4, 0, 1, 1, IMAGE_COLOR );
+		  GRRLIB_DrawImg(455, 295, images.map4, 0, 1, 1, IMAGE_COLOR );
+		  
 		  // Init text layer	  
           GRRLIB_initTexture();
 
 		  // Draw title
 	      drawText(120, ypos, fontTitle, "Choose Map");	
+
+		  drawText(75,  335, fontNormal, "Coming soon");
+		  drawText(270, 335, fontNormal, "Coming soon");
+		  drawText(470, 335, fontNormal, "Coming soon");
 
 		  // Draw Button Text labels
 		  drawButtonsText(0);
@@ -1843,58 +1875,6 @@ void drawScreen(void)
 		}
 		break;
 	
-		case stateGame:
-		{		  
-		  moveMonsters();
-		  moveWeapons();
-		  
-		  drawGrid();		  
-		  drawMonsters();
-		  drawWeapons();
-		  drawGamePanel();		  
-		  drawButtons();
-		  
-		  checkGameOver();
-		  checkNextWave();
-		  
-		  // Init text layer	  
-          GRRLIB_initTexture();
-		  
-		  drawGridText();	
-		  drawMonstersText();
-		  drawWeaponsText();
-		  drawGamePanelText();
-		  drawButtonsText(-28);
-		  
-		  // Draw text layer on top of background 
-		  GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
-		}
-		break;
-		
-		case stateGameOver:
-		{	  
-		  drawGrid(); 
-		  drawMonsters();
-		  drawWeapons();
-		  drawGamePanel();
-			 
-		  // Init text layer	  
-          GRRLIB_initTexture();
- 
-		  drawGridText();	
- 		  drawMonstersText();
-		  drawWeaponsText();
-		  drawGamePanelText();
-			  
-		  ypos+=225;	
-		  
-		  GRRLIB_Printf2(200, ypos, "GAME OVER", 60, GRRLIB_BLACK);
-		 
-		  // Draw text layer on top of background 
-          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
-		}
-		break;
-		
 		case stateLocalHighScore:
 	    {
 	      struct tm *local;
@@ -2243,6 +2223,65 @@ void drawScreen(void)
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);	
 	   }
 	   break;
+	   
+	   case stateGame:
+		{		  
+		  moveMonsters();
+		  moveWeapons();
+		  
+		  drawGrid();		  
+		  drawMonsters();
+		  drawWeapons();
+		  drawGamePanel();		  
+		  drawButtons();
+		  
+		  checkGameOver();
+		  checkNextWave();
+		  
+		  // Init text layer	  
+          GRRLIB_initTexture();
+		  
+		  if (game.alfa>0)
+		  {
+			ypos=210;	
+			sprintf(tmp,"WAVE %02d", game.wave);
+			GRRLIB_Printf2(180, ypos, tmp, 80, GRRLIB_RED);
+			game.alfa-=5;
+		  }
+		  
+		  drawGridText();	
+		  drawMonstersText();
+		  drawWeaponsText();
+		  drawGamePanelText();
+		  drawButtonsText(-28);
+		  
+		  // Draw text layer on top of background 
+		  GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
+		}
+		break;
+		
+		case stateGameOver:
+		{	  
+		  drawGrid(); 
+		  drawMonsters();
+		  drawWeapons();
+		  drawGamePanel();
+			 
+		  // Init text layer	  
+          GRRLIB_initTexture();
+ 
+		  drawGridText();	
+ 		  drawMonstersText();
+		  drawWeaponsText();
+		  drawGamePanelText();
+			  
+		  ypos+=210;	
+		  GRRLIB_Printf2(130, ypos, "GAME OVER", 80, GRRLIB_RED);
+		 
+		  // Draw text layer on top of background 
+          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
+		}
+		break;
 	}
 }
 
@@ -2250,6 +2289,22 @@ void drawScreen(void)
 // SUPPORT METHODES
 // -----------------------------------
 
+void clearMonsters()
+{
+	const char *s_fn="clearMonsters";
+	trace->event(s_fn,0,"enter");
+	
+	// Clear monster array
+	for( int i=0; i<MAX_MONSTERS; i++)	
+	{
+		if (monsters[i]!=NULL)
+		{
+			delete monsters[i];
+			monsters[i]=NULL;
+		}
+	}
+	trace->event(s_fn,0,"leave");
+}
 
 // Create new weapon with correct game parameters
 void createWeapon(int x, int y, int id, int type)
@@ -2391,11 +2446,11 @@ int getWeaponPrice(int type)
 				 break;
 				
 		case 4:  // Laser
-				 return 1500;
+				 return 2000;
 				 break;
 				
 		default: // unknown (TODO)
-				 return 2000;
+				 return 3000;
 				 break;
 	}
 }
@@ -2441,7 +2496,7 @@ void checkGameOver(void)
    {
 		// Too many monster in Base 
 		game.stateMachine=stateGameOver; 
-		game.event=eventSaveHighScore;		
+		game.event=eventSaveHighScore;
    }
 }
 
@@ -2547,6 +2602,7 @@ void destroyImages(void)
    GRRLIB_FreeTexture(images.map1);
    GRRLIB_FreeTexture(images.map2);
    GRRLIB_FreeTexture(images.map3);
+   GRRLIB_FreeTexture(images.map4);
    
    trace->event(s_fn,0,"leave");
 }
@@ -2750,10 +2806,17 @@ void processEvent()
 			if (amount<count)
 			{
 				// Create next monster wave
-				if (game.waveDelay>100) game.waveDelay-=100;
+				if (game.waveDelay>500) game.waveDelay-=100;
 				game.waveCountDown=game.waveDelay;
 				game.wave++;
-				initMonsters(false);	
+				initMonsters();	
+				
+				// Get Bonus score and Bonus cash
+				game.score+=(game.wave*100);
+				game.cash+=(game.wave*100);
+
+				// Show WAVE text on screen
+				game.alfa=MAX_ALFA;
 
 				// Lanch sound effect
 				sound->effect(SOUND_LANCH);	
@@ -2871,17 +2934,20 @@ void processStateMachine()
 	 
 		// Init game variables
 		game.score=0;
-		game.cash=5000;
-		game.wave=1;
+		game.cash=2000;
+		game.wave=0;
 		game.monsterInBase=0;
 		game.weaponSelect=0;
 		game.weaponType=0;
 		game.panelXOffset=20;
 		game.panelYOffset=0;
 			
-		// Start delay between to waves is +/- 25 seconds.
-		game.waveDelay = 2500;
+		// Start delay between two waves
+		game.waveDelay = 3000;
 		game.waveCountDown=game.waveDelay;
+
+		// Show New Wave text on screen
+		game.alfa=MAX_ALFA;
 		
 		// Init buttons
 		initButtons();	
@@ -2889,11 +2955,14 @@ void processStateMachine()
 		// Init Map
 		initGrid(game.selectedMap);
 	
-		// Init monster
-		initMonsters(true);
+		// clear monster array (clean up previous game)
+		clearMonsters();
 	
 		// Init Weapons
 		initWeapons();
+	
+		// Lanch first monster wave
+		game.event=eventLanch;
 	}
 	break;
 	

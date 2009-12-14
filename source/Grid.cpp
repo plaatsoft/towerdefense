@@ -315,13 +315,19 @@ void Grid::draw(void)
 		
 	}
 	
-	// Draw base 
+	// Workarround to set base image on correct place
+	if (index==2) baseX+=1;
+
+	// Draw base
 	GRRLIB_DrawImg( (baseX*32)-16, (baseY*32)+5, imageBase, 0, 1.0, 1.0, IMAGE_COLOR );
 }
 
 void Grid::text(void)
 {
     char tmp[50];
+
+	// Workarround to set base image on correct place
+	if (index==2) baseX+=1;
 	
     sprintf(tmp, "%d", game.monsterInBase);
 	GRRLIB_Printf2((baseX*32)-16, (baseY*32)+16, tmp, 12, GRRLIB_BLACK); 
@@ -408,12 +414,12 @@ void Grid::setImageBridge(GRRLIB_texImg *image)
    imageBridge = image;
 }
 
-void Grid::setLevel(int level1)
+void Grid::setIndex(int index1)
 {
-	const char *s_fn="Grid::setLevel";
-	trace->event(s_fn,0,"%d",level1);
+	const char *s_fn="Grid::setIndex";
+	trace->event(s_fn,0,"%d",index1);
 	
-    level = level1;
+    index = index1;
 }
 
 // ------------------------------

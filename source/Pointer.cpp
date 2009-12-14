@@ -390,6 +390,27 @@ void Pointer::buttonA(int x, int y)
 			
 			if (buttons[3]->onSelect(x,y))
 			{
+				// Map4 button	      
+				//game.stateMachine=stateGame;
+				//game.selectedMap=1;
+			}
+		
+			if (buttons[4]->onSelect(x,y))
+			{
+				// Map5 button	      
+				//game.stateMachine=stateGame;
+				//game.selectedMap=2;
+			}
+		
+			if (buttons[5]->onSelect(x,y))
+			{
+				// Map3 button	      
+				//game.stateMachine=stateGame;
+				//game.selectedMap=3;
+			}
+			
+			if (buttons[6]->onSelect(x,y))
+			{
 				// Main Menu button	      
 				game.stateMachine=stateMainMenu;
 			}
@@ -556,7 +577,7 @@ void Pointer::buttonA(int x, int y)
 			if (buttons[5]->onSelect(x,y))
 			{
 				// Select next weapon
-				game.event=eventNewWeaponPrevious;    		
+				game.event=eventNewWeaponNext;    		
 			}
 			
 			// New weapon is selected
@@ -629,6 +650,9 @@ void Pointer::action(void)
 	y=ir.sy-WSP_POINTER_Y;
 	yOffset=y+IR_Y_OFFSET;
 	angle=ir.angle;
+	
+	// disable angle to improve navigation.
+	angle=0;
 				
 	// Only the first WiiMote can control the game.
 	if (index==0)
