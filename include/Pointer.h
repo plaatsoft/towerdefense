@@ -41,6 +41,8 @@ class Pointer
 	boolean rumbleGo;
   
 	void saveSettingFile(const char* filename);
+	
+	void buttonScroll(int x,int y );
 	void buttonPlus(int index);
 	void buttonMinus(int index);
 	void buttonA(int x, int y);

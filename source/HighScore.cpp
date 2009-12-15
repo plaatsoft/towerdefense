@@ -275,6 +275,16 @@ int HighScore::getWave(int index)
 	return scores[index].wave;
 }
 
+int HighScore::getAmount(void)
+{
+	int amount=0;
+	for (int i=0; i<MAX_LOCAL_HIGHSCORE; i++)
+	{
+		if (scores[i].score!=0) amount++;
+	}
+	return amount;
+}
+
 // ------------------------------
 // The End
 // ------------------------------
