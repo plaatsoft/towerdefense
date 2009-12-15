@@ -108,7 +108,7 @@ void Button::text(int offset)
 	}
 }
 
-bool Button::onSelect(int x1, int y1)
+bool Button::onSelect(int x1, int y1, bool clickEffect)
 {
    const char *s_fn="Button::onSelect";
    trace->event(s_fn,0,"enter [x=%d|y=%d]",x1,y1);
@@ -119,7 +119,7 @@ bool Button::onSelect(int x1, int y1)
 	  trace->event(s_fn,0,"Button selected");
 	  
 	  // Click
-	  sound->effect(SOUND_CLICK);
+	  if (clickEffect) sound->effect(SOUND_CLICK);
 	  selected=true;
    }
    else
@@ -190,6 +190,20 @@ void Button::setColor(u32 color1)
 	//trace->event(s_fn,0,"%s",label1);
 	
     color=color1;
+}
+
+// ------------------------------
+// Getters
+// ------------------------------
+
+int Button::getX(void)
+{
+    return x;
+}
+
+int Button::getY(void)
+{
+    return y;
 }
 
 // ------------------------------

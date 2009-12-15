@@ -27,20 +27,26 @@
 **   21-01-2009  Create one unique cookie during startup.
 **   26-01-2009  Increase internal buffersize to 8kB.
 **   15-01-2009  Added extra debug statements
-**   15-11-2009  Added stdextra trace->events remove key functionality in score game result request.
+**   15-11-2009  Added extra //trace->events remove key functionality in score game result request.
 **   18-11-2009  Added fourth HTTP request set for fetching today highScore.
 */
 
+#include <stdio.h>
 #include <ctype.h>
+#include <gccore.h>
+#include <ogcsys.h>
+#include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
+#include <time.h> 
+#include <malloc.h>
 #include <network.h>
 #include <ogc/lwp_watchdog.h>
+#include <sys/types.h>
 #include <sys/errno.h>
+#include <fcntl.h>
 
-#include "GRRLIB.h"
-#include "General.h"
-#include "Trace.h"
-#include "Http.h"
+#include "http.h"
 
 // -----------------------------------------------------------
 // DEFINES
@@ -56,11 +62,23 @@
 #define MAX_BUFFER_SIZE		    8192
 
 // -----------------------------------------------------------
-// VARIABLES
+// ENUMS
 // -----------------------------------------------------------
 
-extern GXRModeObj 	*rmode;
-extern Trace 		*trace;
+typedef enum 
+{
+	HTTPR_OK,
+	HTTPR_ERR_CONNECT,
+	HTTPR_ERR_REQUEST,
+	HTTPR_ERR_STATUS,
+	HTTPR_ERR_TOOBIG,
+	HTTPR_ERR_RECEIVE
+} 
+http_res;
+
+// -----------------------------------------------------------
+// VARIABLES
+// -----------------------------------------------------------
 
 lwp_t threads[NUM_THREADS];
 mutex_t mutexcheck;
@@ -69,27 +87,34 @@ bool do_tcp_treat;
 
 char *appl_host; 
 char *appl_path;
+
 char appl_new_version[MAX_LEN];
 char appl_release_notes[MAX_BUFFER_SIZE];
 char appl_token[MAX_LEN];
 char appl_global_highscore[MAX_BUFFER_SIZE];
 char appl_today_highscore[MAX_BUFFER_SIZE];
+
 char appl_name[MAX_LEN];
 char appl_version[MAX_LEN];
 
 char appl_id1[MAX_LEN];
 char appl_url1[MAX_LEN];
+
 char appl_id2[MAX_LEN];
 char appl_url2[MAX_LEN];
+
 char appl_id3[MAX_LEN];
 char appl_url3[MAX_LEN];
+
 char appl_id4[MAX_LEN];
 char appl_url4[MAX_LEN];
+
 char appl_userData2[MAX_LEN];
 char appl_userData3[MAX_LEN];
 
 char var_cookie[MAX_LEN];
 
+extern GXRModeObj *rmode;
 int  tcp_state;
 int  tcp_state_prev;
 
@@ -98,41 +123,15 @@ u16 http_port;
 char *http_path;
 u32 http_max_size;
 
-int result;
+http_res result;
 u32 http_status;
 u32 content_length;
 u8 *http_data;
 
 int retval;
-//u32 http_status;
+u32 http_status;
 u32 outlen;
 u8  *outbuf;
-	
-// ------------------------------
-// Constructor
-// ------------------------------
-
-Http::Http()
-{
-   const char *s_fn="Http::Http";
-   trace->event(s_fn,0,"enter");
-
-   
-   trace->event(s_fn,0,"leave [void]");
-}
-	
-// ------------------------------
-// Destructor
-// ------------------------------
-
-Http::~Http()
-{
-   const char *s_fn="Http::~Http";
-   trace->event(s_fn,0,"enter");
-
-   trace->event(s_fn,0,"leave [void]");  
-}
-
 
 // -----------------------------------------------------------
 // TCP METHODES
@@ -140,28 +139,28 @@ Http::~Http()
 
 s32 tcp_socket(void) 
 {
-		const char *s_fn="tcp_socket";
-        trace->event(s_fn, 1, "enter" ); 
+		//char *s_fn="tcp_socket";
+        //trace->event(s_fn, 1, "enter" ); 
         s32 s;
 
         s = net_socket (AF_INET, SOCK_STREAM, IPPROTO_IP);
         if (s < 0) 
 		{
-			trace->event(s_fn, 1, "net_socket failed: %d",s); 
+			//trace->event(s_fn, 1, "net_socket failed: %d",s); 
         }
 		else
 		{
-		   trace->event(s_fn, 1, "net_socket succesfull"); 
+		   //trace->event(s_fn, 1, "net_socket succesfull"); 
 		}
 
-	    trace->event(s_fn, 1, "leave [%d]",s); 
+	    //trace->event(s_fn, 1, "leave [%d]",s); 
         return s;
 }
 
 s32 tcp_connect(char *host, const u16 port)
 {
-		const char *s_fn="tcp_connect";
-        trace->event(s_fn, 1, "enter [host=%s|port=%d]",host,port ); 
+		//char *s_fn="tcp_connect";
+        //trace->event(s_fn, 1, "enter [host=%s|port=%d]",host,port ); 
 				
         struct hostent *hp;
         struct sockaddr_in sa;
@@ -171,23 +170,23 @@ s32 tcp_connect(char *host, const u16 port)
         hp = net_gethostbyname(host);
         if (!hp || !(hp->h_addrtype == PF_INET)) 
 		{            
-			trace->event(s_fn, 1, "net_gethostbyname failed: errno=[%d]",errno); 
+			//trace->event(s_fn, 1, "net_gethostbyname failed: errno=[%d]",errno); 
             return errno;
         }
 		else
 		{
-		   trace->event(s_fn, 1, "net_gethostbyname successfull resolved"); 
+		   //trace->event(s_fn, 1, "net_gethostbyname successfull resolved"); 
 		}
 
         s = tcp_socket();
         if (s < 0)
 		{
-		   trace->event(s_fn,1,"Error creating socket, exiting"); 
+		   //trace->event(s_fn,1,"Error creating socket, exiting"); 
            return s;
 	    }
 		else
 		{
-		   trace->event(s_fn, 1, "tcp_socket succesfull"); 
+		   //trace->event(s_fn, 1, "tcp_socket succesfull"); 
 		}
 
         memset (&sa, 0, sizeof (struct sockaddr_in));
@@ -197,14 +196,14 @@ s32 tcp_connect(char *host, const u16 port)
         sa.sin_port= htons(port);
         memcpy ((char *) &sa.sin_addr, hp->h_addr_list[0], hp->h_length);
 
-        trace->event(s_fn, 1,"DNS resolve=%d.%d.%d.%d", (unsigned char) hp->h_addr_list[0][0], (unsigned char) hp->h_addr_list[0][1], (unsigned char) hp->h_addr_list[0][2], (unsigned char)  hp->h_addr_list[0][3]); 
+        //trace->event(s_fn, 1,"DNS resolve=%d.%d.%d.%d", (unsigned char) hp->h_addr_list[0][0], (unsigned char) hp->h_addr_list[0][1], (unsigned char) hp->h_addr_list[0][2], (unsigned char)  hp->h_addr_list[0][3]); 
 
         t = gettime();
         while (true) 
 		{
                 if (ticks_to_millisecs (diff_ticks (t, gettime ())) > TCP_CONNECT_TIMEOUT) 
 				{
-					trace->event(s_fn,1,"tcp_connect timeout"); 
+					//trace->event(s_fn,1,"tcp_connect timeout"); 
                     net_close (s);
                     return -ETIMEDOUT;
                 }
@@ -221,22 +220,22 @@ s32 tcp_connect(char *host, const u16 port)
                        continue;
                    }
 
-   				   trace->event(s_fn, 1,"net_connect failed [res=%d]",res);
+   				   //trace->event(s_fn, 1,"net_connect failed [res=%d]",res);
                    net_close(s);
                    return res;
                 }
                 break;
         }
 		
-		trace->event(s_fn, 1, "net_connect succesfull");
-		trace->event(s_fn, 1, "leave [%d]",s); 
+		//trace->event(s_fn, 1, "net_connect succesfull");
+		//trace->event(s_fn, 1, "leave [%d]",s); 
         return s;
 }
 
-char* tcp_readln(const s32 s, const u16 max_length, const u64 start_time, const u16 timeout) 
+char * tcp_readln(const s32 s, const u16 max_length, const u64 start_time, const u16 timeout) 
 {		
-        const char *s_fn="tcp_readln";
-		trace->event(s_fn,1,"enter" ); 
+        //char *s_fn="tcp_readln";
+		//trace->event(s_fn,1,"enter" ); 
 		
 		char *buf;
         u16 c;
@@ -262,7 +261,7 @@ char* tcp_readln(const s32 s, const u16 max_length, const u64 start_time, const 
 
                 if (res < 0) 
 				{                       
-						trace->event(s_fn,1,"net_read failed [res=%d]", res); 
+						//trace->event(s_fn,1,"net_read failed [res=%d]", res); 
                         break;
                 }
 
@@ -280,14 +279,14 @@ char* tcp_readln(const s32 s, const u16 max_length, const u64 start_time, const 
                 if (c == max_length) break;
         }
         free (buf);
-		trace->event(s_fn,1,"leave [bufsize=%d]", c); 
+		//trace->event(s_fn,1,"leave [bufsize=%d]", c); 
 		return ret;
 }
 
 bool tcp_read(const s32 s, u8 **buffer, const u32 length) 
 {
-	    const char *s_fn="tcp_read";
-		trace->event(s_fn,1,"enter" ); 
+	    //char *s_fn="tcp_read";
+		//trace->event(s_fn,1,"enter" ); 
 		
         u8 *p;
         u32 step, left, block, received;
@@ -304,7 +303,7 @@ bool tcp_read(const s32 s, u8 **buffer, const u32 length)
 		{
                 if (ticks_to_millisecs (diff_ticks (t, gettime ())) > TCP_BLOCK_RECV_TIMEOUT)
 			    {
-				   trace->event(s_fn,1,"net_read timeout"); 
+				   //trace->event(s_fn,1,"net_read timeout"); 
                    break;
                 }
 
@@ -320,7 +319,7 @@ bool tcp_read(const s32 s, u8 **buffer, const u32 length)
 
                 if (res < 0) 
 				{
-					trace->event(s_fn,1,"net_read failed [res=%d]", res); 
+					//trace->event(s_fn,1,"net_read failed [res=%d]", res); 
                     break;
                 }
 
@@ -335,16 +334,16 @@ bool tcp_read(const s32 s, u8 **buffer, const u32 length)
                 }
         }
 
-		trace->event(s_fn,1,"leave [left=%d]", left ); 
+		//trace->event(s_fn,1,"leave [left=%d]", left ); 
         return left == 0;
 }
 
 bool tcp_write(const s32 s, const u8 *buffer, const u32 length)
 {
-	    const char *s_fn="tcp_write";
-		trace->event(s_fn,1,"enter [bufsize=%d]",length ); 
+	    //char *s_fn="tcp_write";
+		//trace->event(s_fn,1,"enter [bufsize=%d]",length ); 
 				
-		trace->event(s_fn,1,"buffer=%s",buffer ); 
+		//trace->event(s_fn,1,"buffer=%s",buffer ); 
 		
         const u8 *p;
         u32 step, left, block, sent;
@@ -361,7 +360,7 @@ bool tcp_write(const s32 s, const u8 *buffer, const u32 length)
 		{
                 if (ticks_to_millisecs (diff_ticks (t, gettime ())) > TCP_BLOCK_SEND_TIMEOUT) 
 				{
- 					trace->event(s_fn,1,"net_write timeout"); 
+ 					//trace->event(s_fn,1,"net_write timeout"); 
                     break;
                 }
 
@@ -377,7 +376,7 @@ bool tcp_write(const s32 s, const u8 *buffer, const u32 length)
 
                 if (res < 0) 
 				{
-					trace->event(s_fn,1, "failed: [res=%d]",res); 
+					//trace->event(s_fn,1, "failed: [res=%d]",res); 
                     break;
                 }
                 sent += res;
@@ -391,17 +390,17 @@ bool tcp_write(const s32 s, const u8 *buffer, const u32 length)
                 }
         }
 		
-		trace->event(s_fn, 1, "leave [left=%d]",left); 
+		//trace->event(s_fn, 1, "leave [left=%d]",left); 
         return left == 0;
 }
 
 
 int tcp_init(void) 
 {    
-    const char *s_fn="tcp_init";
-	trace->event(s_fn,1,"enter" ); 
+    //char *s_fn="tcp_init";
+	//trace->event(s_fn,1,"enter" ); 
 	 	
-    trace->event(s_fn, 1,"Waiting for network to initialise..."); 
+    //trace->event(s_fn, 1,"Waiting for network to initialise..."); 
 			
 	s32 result;
     while ((result = net_init()) == -EAGAIN);
@@ -411,32 +410,32 @@ int tcp_init(void)
         char myIP[16];
         if (if_config(myIP, NULL, NULL, true) < 0) 
         {
-            trace->event(s_fn, 1, "Error reading IP address, exiting"); 
-			trace->event(s_fn, 1,"leave [-1]"); 
+            //trace->event(s_fn, 1, "Error reading IP address, exiting"); 
+			//trace->event(s_fn, 1,"leave [-1]"); 
 			return -1;
         }
-        trace->event(s_fn, 1,"Network initialised [%s].",myIP); 
+        //trace->event(s_fn, 1,"Network initialised [%s].",myIP); 
     } 
     else 
     {
-      trace->event(s_fn, 1,"Unable to initialise network, exiting"); 
-	  trace->event(s_fn, 1,"leave [-2]"); 
+      //trace->event(s_fn, 1,"Unable to initialise network, exiting"); 
+	  //trace->event(s_fn, 1,"leave [-2]"); 
 	  return -2;
     }
 	
-	trace->event(s_fn, 1,"leave [0]"); 
+	//trace->event(s_fn, 1,"leave [0]"); 
 	return 0;
 }
 
 
 void tcp_sleep(unsigned int seconds)
 {
-   const char *s_fn="tcp_sleep";
-   trace->event(s_fn,1,"enter [wait=%d sec]", seconds ); 
+   //char *s_fn="tcp_sleep";
+   //trace->event(s_fn,1,"enter [wait=%d sec]", seconds ); 
 
    sleep(seconds);
    
-   trace->event(s_fn, 1,"leave [void]"); 
+   //trace->event(s_fn, 1,"leave [void]"); 
 }
 
 // -----------------------------------------------------------
@@ -445,15 +444,15 @@ void tcp_sleep(unsigned int seconds)
 
 bool http_split_url(char **host, char **path, const char *url)
 {
-	    const char *s_fn="http_split_url";
-		trace->event(s_fn,1,"enter" ); 
+	    //char *s_fn="http_split_url";
+		//trace->event(s_fn,1,"enter" ); 
 		
         const char *p;
         char *c;
 
         if (strncasecmp (url, "http://", 7))
 		{
-		   trace->event(s_fn, 1,"leave [false]"); 
+		   //trace->event(s_fn, 1,"leave [false]"); 
            return false;
 		}
 
@@ -462,22 +461,22 @@ bool http_split_url(char **host, char **path, const char *url)
 
         if (c[0] == 0)
 		{
-		    trace->event(s_fn, 1,"leave [false]"); 
+		    //trace->event(s_fn, 1,"leave [false]"); 
 		    return false;
 	    }
 
         *host = strndup (p, c - p);
         *path = strdup (c);
 
-		trace->event(s_fn, 1,"leave [true]"); 	
+		//trace->event(s_fn, 1,"leave [true]"); 	
         return true;
 }
 
 
-char* http_replaceString(char *orgstr, char *oldstr, char *newstr)
+char *http_replaceString(char *orgstr, char *oldstr, char *newstr)
 {
-  const char *s_fn="http_replaceString";
-  trace->event(s_fn,1,"enter" ); 
+  //char *s_fn="http_replaceString";
+  //trace->event(s_fn,1,"enter" ); 
 		
   int oldlen, newlen;
   char *s, *p;
@@ -494,17 +493,17 @@ char* http_replaceString(char *orgstr, char *oldstr, char *newstr)
     memcpy(p, newstr, newlen);
     s = p + newlen;
   }
-  trace->event(s_fn, 1,"leave [char *]"); 	  
+  //trace->event(s_fn, 1,"leave [char *]"); 	  
   return orgstr;
 }
 
 // This function remove all html tag and return and ascii line buffer
 bool http_convertHTMlToAscii(char *in, int inSize)
 {  
-   const char *s_fn="http_convertHTMlToAscii";
-   trace->event(s_fn, 1,"enter [inSize=%d]", inSize ); 
+   //char *s_fn="http_convertHTMlToAscii";
+   //trace->event(s_fn, 1,"enter [inSize=%d]", inSize ); 
    
-   trace->event(s_fn, 1,"in=%s", in ); 
+   //trace->event(s_fn, 1,"in=%s", in ); 
    
    int i;
    int startpos=0;
@@ -551,11 +550,10 @@ bool http_convertHTMlToAscii(char *in, int inSize)
 	  }
    }   
    						
-   trace->event(s_fn, 1,"out=%s", in ); 
-   trace->event(s_fn,1, "leave [true]"); 
+   //trace->event(s_fn, 1,"out=%s", in ); 
+   //trace->event(s_fn,1, "leave [true]"); 
    return true;
 }
-
 
 char http_bin2hex(int val)
 {
@@ -570,8 +568,8 @@ char http_bin2hex(int val)
  	
 char *http_encode_url(char *buf, const char *str)
 {
-    const char *s_fn="http_encode_url";
-    trace->event(s_fn,1,"enter" ); 
+    //char *s_fn="http_encode_url";
+    //trace->event(s_fn,1,"enter" ); 
 
     int i, j;
     int len;
@@ -599,20 +597,20 @@ char *http_encode_url(char *buf, const char *str)
     }
     buf[j] = '\0';
 	
-	trace->event(s_fn, 1,"buf=[%s]",buf); 		
-	trace->event(s_fn, 1,"leave [char *]"); 	
+	//trace->event(s_fn, 1,"buf=[%s]",buf); 		
+	//trace->event(s_fn, 1,"leave [char *]"); 	
     return buf;
 }
 		
 // Google Analytic without JavaScript
 void http_googleAnalysicUrl(char *buffer, char *domain, char *url, char *id)
 {
-    const char *s_fn="http_googleAnalysicUrl";
-    trace->event(s_fn,1,"enter" ); 
+    //char *s_fn="http_googleAnalysicUrl";
+    //trace->event(s_fn,1,"enter" ); 
 
-	trace->event(s_fn,1,"domain=[%s]", domain); 
-	trace->event(s_fn,1,"url=[%s]", url); 
-	trace->event(s_fn,1,"id=[%s]", id); 
+	//trace->event(s_fn,1,"domain=[%s]", domain); 
+	//trace->event(s_fn,1,"url=[%s]", url); 
+	//trace->event(s_fn,1,"id=[%s]", id); 
 		
     char utmhn[MAX_LEN];
     char utmac[MAX_LEN];
@@ -706,13 +704,13 @@ void http_googleAnalysicUrl(char *buffer, char *domain, char *url, char *id)
     strcpy(utmsc, "32-bit" );
 	
 	// user language
-	const char *utmul = "en";											 
+	char *utmul = "en";											 
 	
 	// support for java
-	const char *utmje = "1";
+	char *utmje = "1";
 				
     // flash version							 
-	const char *utmfl = "";			
+	char *utmfl = "";			
 
     time_t  today =time(NULL);
 	long base = (long) today;
@@ -732,7 +730,7 @@ void http_googleAnalysicUrl(char *buffer, char *domain, char *url, char *id)
 	// Google Analytics account	
 	strcpy(utmac, id );
 
-	trace->event(s_fn, 1,"utmac=[%s]", utmac); 
+	//trace->event(s_fn, 1,"utmac=[%s]", utmac); 
 		   
 	sprintf(tmp1, "utmwv=1&utmn=%s&utmcs=UTF-8&utmsr=%s&utmsc=%s&utmul=%s&utmje=%s&utmfl=%s&utmcr=1&utmdt=%s&utmhn=%s&utmr=%s&utmp=%s&utmac=%s",
 		utmn, 
@@ -770,8 +768,8 @@ void http_googleAnalysicUrl(char *buffer, char *domain, char *url, char *id)
 				
     sprintf(buffer,"http://www.google-analytics.com/__utm.gif?%s%s", tmp1, tmp2 );
 	
-	trace->event(s_fn,1,"buffer=%s",buffer); 
-	trace->event(s_fn,1,"leave [void]"); 
+	//trace->event(s_fn,1,"buffer=%s",buffer); 
+	//trace->event(s_fn,1,"leave [void]"); 
 }
 
 // Google Analytic without JavaScript (php example)
@@ -816,8 +814,8 @@ function Curl_to_GA($target,$post_vars=''){
 
 extern bool http_request(char *url, const u32 max_size)
 {
-    const char *s_fn="http_request";
-    trace->event(s_fn,1,"enter"); 
+    //char *s_fn="http_request";
+    //trace->event(s_fn,1,"enter"); 
  		
         int linecount;
 		boolean chunked=false;
@@ -834,11 +832,11 @@ extern bool http_request(char *url, const u32 max_size)
 
         int s = tcp_connect(http_host, http_port);
 
-		trace->event(s_fn, 1,"tcp_connect(%s, %hu) = %d",http_host, http_port, s); 
+		//trace->event(s_fn, 1,"tcp_connect(%s, %hu) = %d",http_host, http_port, s); 
         if (s < 0) 
 		{
-			trace->event(s_fn, 1,"HTTPR_ERR_CONNECT"); 
-			trace->event(s_fn, 1,"leave [false]"); 
+			//trace->event(s_fn, 1,"HTTPR_ERR_CONNECT"); 
+			//trace->event(s_fn, 1,"leave [false]"); 
 			
             result = HTTPR_ERR_CONNECT;
             return false;
@@ -852,7 +850,7 @@ extern bool http_request(char *url, const u32 max_size)
         r += sprintf (r,"Accept: text/xml,text/html,text/plain,image/gif\r\n");
         r += sprintf (r,"Cache-Control: no-cache\r\n\r\n");
 
-        trace->event(s_fn, 1,"request=%s", request); 
+        //trace->event(s_fn, 1,"request=%s", request); 
 
         bool b = tcp_write (s, (u8 *) request, strlen (request));
 
@@ -862,7 +860,7 @@ extern bool http_request(char *url, const u32 max_size)
         for (linecount=0; linecount < 32; linecount++) 
 		{
             char *line = tcp_readln ((s32) s, (u16) 0xff, (u64) gettime(), (u16) HTTP_TIMEOUT);
-		    trace->event(s_fn, 1,"%s", line ? line : "(null)"); 
+		    //trace->event(s_fn, 1,"%s", line ? line : "(null)"); 
           
             if (!line) 
 			{
@@ -906,7 +904,7 @@ extern bool http_request(char *url, const u32 max_size)
             sscanf (line, "Content-Length: %u", &content_length);
 			if ( strstr(line, "Transfer-Encoding: chunked")!=0 )
 			{
-				trace->event(s_fn, 1,"Chunked frame found"); 
+				//trace->event(s_fn, 1,"Chunked frame found"); 
 				free (line);
 				line = NULL;
 				chunked=true;
@@ -916,7 +914,7 @@ extern bool http_request(char *url, const u32 max_size)
             line = NULL;
         }
         
-		trace->event(s_fn, 1,"content_length=%d, status=%d, linecount=%d", content_length, http_status, linecount); 
+		//trace->event(s_fn, 1,"content_length=%d, status=%d, linecount=%d", content_length, http_status, linecount); 
 
         if (http_status != 200) 
 		{
@@ -943,18 +941,18 @@ extern bool http_request(char *url, const u32 max_size)
            net_close (s);
            return false;
         }
-      		
-    result = HTTPR_OK;
-    net_close(s);
+        		
+        result = HTTPR_OK;
+        net_close(s);
 
-	trace->event(s_fn, 1,"leave [true]"); 
-    return true;
+		//trace->event(s_fn, 1,"leave [true]"); 
+        return true;
 }
 
 extern bool http_get_result(u32 *_http_status, u8 **content, u32 *length) 
 {
-		const char *s_fn="http_get_result";
-		trace->event(s_fn, 1,"enter"); 
+		//char *s_fn="http_get_result";
+		//trace->event(s_fn, 1,"enter"); 
 		
         if (http_status) *_http_status = http_status;
 
@@ -972,14 +970,14 @@ extern bool http_get_result(u32 *_http_status, u8 **content, u32 *length)
         free (http_host);
         free (http_path);
 
-		trace->event(s_fn, 1,"leave [true]"); 
+		//trace->event(s_fn, 1,"leave [true]"); 
         return true;
 }
 
 char * http_findToken(u8 *buffer, int bufsize, char *token)
 {
-	const char *s_fn="http_findToken";
-	trace->event(s_fn, 1,"enter [%s]", token); 
+	//char *s_fn="http_findToken";
+	//trace->event(s_fn, 1,"enter [%s]", token); 
    
    int i, j=0;
    int startpos=-1;
@@ -991,7 +989,7 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
    startpos=-1;
    j=0;
    
-   trace->event(s_fn, 1,"len=%d",len); 
+   //trace->event(s_fn, 1,"len=%d",len); 
 	
    for (i=0; i<bufsize; i++)
    {
@@ -1000,7 +998,7 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 	     if (startpos==-1) startpos=i;	
 		 if (++j>=len) 
 		 {  
-		    trace->event(s_fn, 1,"startpos=%d",startpos); 
+		    //trace->event(s_fn, 1,"startpos=%d",startpos); 
 		    found=true;
 			break;
 	     }
@@ -1026,17 +1024,17 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
          if ((buffer[i]=='\n') || (buffer[i]=='\r') || (buffer[i]==' '))
 	     {  	     
 		    endpos=i;
-			trace->event(s_fn, 1,"endpos=%d",endpos); 
+			//trace->event(s_fn, 1,"endpos=%d",endpos); 
 			
 			// (small hack) End string
 			buffer[endpos]=0x00;
 			
-			trace->event(s_fn, 1,"leave [%s]", buffer+startpos); 
+			//trace->event(s_fn, 1,"leave [%s]", buffer+startpos); 
 			return (char*) buffer+startpos;
 	     }
 	  }
    }   
-   trace->event(s_fn, 1,"leave [NULL]"); 
+   //trace->event(s_fn, 1,"leave [NULL]"); 
    return NULL;
 }
 
@@ -1045,10 +1043,10 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 // THREAD STUFF
 // -----------------------------------------------------------
 	
-void *tcp_thread(void *threadid)
+ void *tcp_thread(void *threadid)
 {
-	const char *s_fn="tcp_thread";
-	trace->event(s_fn,1,"enter"); 
+	//char *s_fn="tcp_thread";
+	//trace->event(s_fn,1,"enter"); 
 
    int retval;
    u32 http_status;
@@ -1067,7 +1065,7 @@ void *tcp_thread(void *threadid)
 	    // Init ethernet DHCP network
 	    case TCP_INIT:   
 		{
-		  trace->event(s_fn,1,"stateMachine=TCP_INIT"); 
+		  //trace->event(s_fn,1,"stateMachine=TCP_INIT"); 
 		  retval=tcp_init();
 		  if (retval==0) 
 		  { 
@@ -1083,7 +1081,7 @@ void *tcp_thread(void *threadid)
 		// Error ocure during network init, retry after 60 seconds.				  
 		case TCP_ERROR:
 		{
-		    trace->event(s_fn, 1,"stateMachine=TCP_ERROR"); 
+		    //trace->event(s_fn, 1,"stateMachine=TCP_ERROR"); 
 	        tcp_sleep(60);
 		    tcp_state=TCP_INIT;
 	    }
@@ -1092,13 +1090,13 @@ void *tcp_thread(void *threadid)
         // Check for new application version					 
 		case TCP_REQUEST1a: 
 		{		
-		  trace->event(s_fn,1, "stateMachine=TCP_REQUEST1a"); 
+		  //trace->event(s_fn,1, "stateMachine=TCP_REQUEST1a"); 
           retval = http_request(appl_url1, 1 << 31);
           if (!retval) 
           {
 		     tcp_state_prev=tcp_state;
 		     tcp_state=TCP_RETRY;
-	         trace->event(s_fn, 1,"Error making http request1a"); 
+	         //trace->event(s_fn, 1,"Error making http request1a"); 
           }
           else
           {     
@@ -1110,16 +1108,17 @@ void *tcp_thread(void *threadid)
 			 if (tmp!=NULL) 
 			 {
 			     strncpy(appl_new_version, tmp, sizeof(tmp));	 	 
-				 trace->event(s_fn, 1,"version=%s",appl_new_version); 
+				 //trace->event(s_fn, 1,"version=%s",appl_new_version); 
 		     }
 			 else
 			 {
-			     trace->event(s_fn,1, "version=<none>");  
+			     //trace->event(s_fn,1, "version=<none>");  
 			 }
 			 LWP_MutexUnlock(mutexversion);
 			 
 	         free(outbuf);			 
-			 tcp_state=TCP_REQUEST1b;
+			 //tcp_state=TCP_REQUEST1b;
+			 tcp_state=TCP_REQUEST2a;
           } 	 
           //tcp_sleep(10);	 		  
 		} 	
@@ -1128,7 +1127,7 @@ void *tcp_thread(void *threadid)
 		// Update Google Statistics
 		case TCP_REQUEST1b: 
 		{	
-		  trace->event(s_fn, 1,"stateMachine=TCP_REQUEST1b"); 
+		  //trace->event(s_fn, 1,"stateMachine=TCP_REQUEST1b"); 
 				  
 		  char buffer[512];
 		  memset(buffer,0x00,sizeof(buffer));
@@ -1145,13 +1144,13 @@ void *tcp_thread(void *threadid)
           {
 		     tcp_state_prev=tcp_state;
 		     tcp_state=TCP_RETRY;
-	         trace->event(s_fn,1, "Error making http request1b"); 			 
+	         //trace->event(s_fn,1, "Error making http request1b"); 			 
           }
           else
           {     		    
 	         http_get_result(&http_status, &outbuf, &outlen);   	
 			 int i; 
-			 for (i=0; i<(int) outlen; i++) trace->eventRaw(outbuf[i]);  
+			 for (i=0; i<outlen; i++) //trace->eventRaw(outbuf[i]);  
 			 free(outbuf);
 			 tcp_state=TCP_REQUEST2a;
           } 	
@@ -1163,13 +1162,13 @@ void *tcp_thread(void *threadid)
 		// Get Release note information
 		case TCP_REQUEST2a: 
 		{		  
-		  trace->event(s_fn,1,"stateMachine=TCP_REQUEST2a"); 
+		  //trace->event(s_fn,1,"stateMachine=TCP_REQUEST2a"); 
           retval = http_request(appl_url2, 1 << 31);
           if (!retval) 
           {
 		  	 tcp_state_prev=tcp_state;
 		     tcp_state=TCP_RETRY;
-	         trace->event(s_fn, 1,"Error making http request2a"); 
+	         //trace->event(s_fn, 1,"Error making http request2a"); 
           }
           else
           {     		    
@@ -1181,10 +1180,11 @@ void *tcp_thread(void *threadid)
 			 if (result!=NULL) result[0]=0x00;
 			 			
 			 int i;  
-			 for (i=0; i< (int) strlen(appl_release_notes); i++) trace->eventRaw( appl_release_notes[i] ); 
+			 for (i=0; i<strlen(appl_release_notes); i++) //trace->eventRaw( appl_release_notes[i] ); 
 	
 			 free(outbuf);			 
-			 tcp_state=TCP_REQUEST2b;			
+			 //tcp_state=TCP_REQUEST2b;			
+			 tcp_state=TCP_REQUEST3a;
           } 	
 		} 	
         break;	 
@@ -1195,7 +1195,7 @@ void *tcp_thread(void *threadid)
 		  char buffer[512];
 		  memset(buffer,0x00,sizeof(buffer));
 		  
-		  trace->event(s_fn, 1,"stateMachine=TCP_REQUEST2b"); 
+		  //trace->event(s_fn, 1,"stateMachine=TCP_REQUEST2b"); 
 		 	  
 		  if (!http_split_url(&appl_host, &appl_path, appl_url2)) return false;
 			  		  		  		    
@@ -1205,13 +1205,13 @@ void *tcp_thread(void *threadid)
           {
 		  	 tcp_state_prev=tcp_state;
 		     tcp_state=TCP_RETRY;
-	         trace->event(s_fn, 1,"Error making http request2b"); 
+	         //trace->event(s_fn, 1,"Error making http request2b"); 
           }
           else
           {     		    
 	         http_get_result(&http_status, &outbuf, &outlen);   	
 			 int i; 
-			 for (i=0; i<(int) outlen; i++) trace->eventRaw(outbuf[i] );  
+			 for (i=0; i<outlen; i++) //trace->eventRaw(outbuf[i] );  
 			 free(outbuf);
 			 tcp_state=TCP_REQUEST3a;
           } 
@@ -1224,7 +1224,7 @@ void *tcp_thread(void *threadid)
 		// Get today high score from all players in the world.
 		case TCP_REQUEST3a: 
 		{
-		  trace->event(s_fn, 1,"stateMachine=TCP_REQUEST3a"); 
+		  //trace->event(s_fn, 1,"stateMachine=TCP_REQUEST3a"); 
 		  
 
           char url[MAX_LEN];
@@ -1236,7 +1236,7 @@ void *tcp_thread(void *threadid)
           {
 		  	 tcp_state_prev=tcp_state;
 		     tcp_state=TCP_RETRY;
-	         trace->event(s_fn, 1,"Error making http request3a"); 		 
+	         //trace->event(s_fn, 1,"Error making http request3a"); 		 
           }
           else
           {  
@@ -1244,7 +1244,7 @@ void *tcp_thread(void *threadid)
  
 			 int i;   		   					 
 			 memset(appl_today_highscore,0x00,sizeof(appl_today_highscore));
-  		     for (i=0; i<(int) outlen; i++) appl_today_highscore[i]=outbuf[i];	
+  		     for (i=0; i<outlen; i++) appl_today_highscore[i]=outbuf[i];	
 
 			 
 		     char* result=strstr(appl_today_highscore,"</highscore>");
@@ -1252,14 +1252,15 @@ void *tcp_thread(void *threadid)
 			 {
 			    // Terminated received xml data 
 			    result[13]=0x00; 
-    			for (i=0; i<(int) strlen(appl_today_highscore); i++) trace->eventRaw(appl_today_highscore[i] ); 
+    			for (i=0; i<strlen(appl_today_highscore); i++) //trace->eventRaw(appl_today_highscore[i] ); 
 				   
-				tcp_state=TCP_REQUEST3b;
+				//tcp_state=TCP_REQUEST3b;
+				tcp_state=TCP_REQUEST4a;
 			 }
 			 else
 			 {
 			    // Something is wrong with the response
-				trace->event(s_fn, 1,"Received today highscore xml data was corrupt" ); 
+				//trace->event(s_fn, 1,"Received today highscore xml data was corrupt" ); 
 				
 				// Clear received trash
 				memset(appl_today_highscore,0x00,sizeof(appl_today_highscore));
@@ -1279,7 +1280,7 @@ void *tcp_thread(void *threadid)
 		  char buffer[512];
 		  memset(buffer,0x00,sizeof(buffer));
 		  
-		  trace->event(s_fn, 1,"stateMachine=TCP_REQUEST3b"); 
+		  //trace->event(s_fn, 1,"stateMachine=TCP_REQUEST3b"); 
 		 		  
 		  if (!http_split_url(&appl_host, &appl_path, appl_url3)) return false;
 		  		  
@@ -1289,12 +1290,12 @@ void *tcp_thread(void *threadid)
           {
 		  	 tcp_state_prev=tcp_state;
 		     tcp_state=TCP_RETRY;
-	         trace->event(s_fn, 1,"Error making http request3b"); 
+	         //trace->event(s_fn, 1,"Error making http request3b"); 
           }
           else
           {     		    
 	         http_get_result(&http_status, &outbuf, &outlen);   	
-			 int i; for (i=0; i<(int)outlen; i++) trace->eventRaw( outbuf[i] ); 
+			 int i; for (i=0; i<outlen; i++) //trace->eventRaw( outbuf[i] ); 
 			 free(outbuf);
 			 tcp_state=TCP_REQUEST4a;
           } 	
@@ -1306,7 +1307,7 @@ void *tcp_thread(void *threadid)
 		// Get global high score from all players in the world.
 		case TCP_REQUEST4a: 
 		{
-		  trace->event(s_fn, 1,"stateMachine=TCP_REQUEST4a"); 
+		  //trace->event(s_fn, 1,"stateMachine=TCP_REQUEST4a"); 
 		  
           char url[MAX_LEN];
 		  memset(url,0x00,sizeof(url));		  
@@ -1317,7 +1318,7 @@ void *tcp_thread(void *threadid)
           {
 		  	 tcp_state_prev=tcp_state;
 		     tcp_state=TCP_RETRY;
-	         trace->event(s_fn, 1,"Error making http request4a"); 		 
+	         //trace->event(s_fn, 1,"Error making http request4a"); 		 
           }
           else
           {  
@@ -1325,7 +1326,7 @@ void *tcp_thread(void *threadid)
  
 			 int i;   		   					 
 			 memset(appl_global_highscore,0x00,sizeof(appl_global_highscore));
-  		     for (i=0; i<(int)outlen; i++) appl_global_highscore[i]=outbuf[i];	
+  		     for (i=0; i<outlen; i++) appl_global_highscore[i]=outbuf[i];	
 
 			 
 		     char* result=strstr(appl_global_highscore,"</highscore>");
@@ -1333,14 +1334,15 @@ void *tcp_thread(void *threadid)
 			 {
 			    // Terminated received xml data 
 			    result[13]=0x00; 
-    			for (i=0; i<(int) strlen(appl_global_highscore); i++) trace->eventRaw(appl_global_highscore[i] ); 
+    			for (i=0; i<strlen(appl_global_highscore); i++) //trace->eventRaw(appl_global_highscore[i] ); 
 				   
-				tcp_state=TCP_REQUEST4b;
+				tcp_state=TCP_IDLE;
+				//tcp_state=TCP_REQUEST4b;
 			 }
 			 else
 			 {
 			    // Something is wrong with the response
-				trace->event(s_fn, 1,"Received global highscore xml data was corrupt" ); 
+				//trace->event(s_fn, 1,"Received global highscore xml data was corrupt" ); 
 				
 				// Clear received trash
 				memset(appl_global_highscore,0x00,sizeof(appl_global_highscore));
@@ -1360,7 +1362,7 @@ void *tcp_thread(void *threadid)
 		  char buffer[512];
 		  memset(buffer,0x00,sizeof(buffer));
 		  
-		  trace->event(s_fn, 1,"stateMachine=TCP_REQUEST4b"); 
+		  //trace->event(s_fn, 1,"stateMachine=TCP_REQUEST4b"); 
 		 		  
 		  if (!http_split_url(&appl_host, &appl_path, appl_url4)) return false;
 		  		  
@@ -1370,12 +1372,12 @@ void *tcp_thread(void *threadid)
           {
 		  	 tcp_state_prev=tcp_state;
 		     tcp_state=TCP_RETRY;
-	         trace->event(s_fn, 1,"Error making http request4b"); 
+	         //trace->event(s_fn, 1,"Error making http request4b"); 
           }
           else
           {     		    
 	         http_get_result(&http_status, &outbuf, &outlen);   	
-			 int i; for (i=0; i<(int)outlen; i++) trace->eventRaw( outbuf[i] ); 
+			 int i; for (i=0; i<outlen; i++) //trace->eventRaw( outbuf[i] ); 
 			 free(outbuf);
 			 tcp_state=TCP_IDLE;
           } 	
@@ -1387,7 +1389,7 @@ void *tcp_thread(void *threadid)
 		// Error ocure during http request, retry after 120 seconds.
 		case TCP_RETRY:
 		{
-		    trace->event(s_fn,1,"stateMachine=TCP_RETRY" ); 
+		    //trace->event(s_fn,1,"stateMachine=TCP_RETRY" ); 
 	        tcp_sleep(10);
 		    tcp_state=tcp_state_prev;
 	    }
@@ -1396,7 +1398,7 @@ void *tcp_thread(void *threadid)
         // Do nothing, wait for new order.
 		case TCP_IDLE:
 		{
-		    trace->event(s_fn,1, "stateMachine=TCP_IDLE" ); 
+		    //trace->event(s_fn,1, "stateMachine=TCP_IDLE" ); 
 	        tcp_sleep(2);	
 	    }
 		break;
@@ -1404,7 +1406,7 @@ void *tcp_thread(void *threadid)
 		// Thread is ready, shut it down.
 		case TCP_END:
 		{
-		   trace->event(s_fn,1, "stateMachine=TCP_END"); 
+		   //trace->event(s_fn,1, "stateMachine=TCP_END"); 
            do_tcp_treat=false;
 		}		
         break;			
@@ -1414,32 +1416,32 @@ void *tcp_thread(void *threadid)
    LWP_MutexUnlock(mutexcheck);
    //LWP_SuspendThread(tid);
    
-   trace->event(s_fn, 1,"leave [0]"); 
+   //trace->event(s_fn, 1,"leave [0]"); 
    return 0;
 }
 
 void tcp_clear_memory(void)
 {
-    const char *s_fn="tcp_clear_memory";
-	trace->event(s_fn,1,"enter"); 
+    //char *s_fn="tcp_clear_memory";
+	//trace->event(s_fn,1,"enter"); 
 	
 	memset( appl_release_notes,0x00,sizeof(appl_release_notes));
 	memset( appl_today_highscore,0x00,sizeof(appl_today_highscore));
 	memset( appl_global_highscore,0x00,sizeof(appl_global_highscore));
 
-	trace->event(s_fn,1, "leave"); 
+	//trace->event(s_fn,1, "leave"); 
 }
 	
 // -----------------------------------------------------------
 // INTERFACE API
 // -----------------------------------------------------------
 
-int Http::tcp_get_state_nr(void)
+int tcp_get_state_nr(void)
 {
    return tcp_state;
 }
 
-const char *Http::tcp_get_state(void)
+char *tcp_get_state(void)
 {
    switch (tcp_state)
    {
@@ -1500,53 +1502,53 @@ const char *Http::tcp_get_state(void)
    }
 }
 
-int Http::tcp_set_state(int state, const char *userData3)
+int tcp_set_state(int state, char *userData3)
 {
-   const char *s_fn="tcp_set_state";
-   trace->event(s_fn,1,"enter [state=%d]",state); 
+   //char *s_fn="tcp_set_state";
+   //trace->event(s_fn,1,"enter [state=%d]",state); 
 	
    LWP_MutexLock(mutexversion);
    if (tcp_state==TCP_IDLE)
    {
-      trace->event(s_fn,1,"Update state!"); 
+      //trace->event(s_fn,1,"Update state!"); 
 	  
       strcpy(appl_userData3, userData3);
       tcp_state=state;
    }
    LWP_MutexUnlock(mutexversion);
-   trace->event(s_fn,1,"leave [state=%d]",state); 
+   //trace->event(s_fn,1,"leave [state=%d]",state); 
    return state;
 }
 
-const char* Http::tcp_get_version(void)
+char *tcp_get_version(void)
 {
    LWP_MutexLock(mutexversion);
    return appl_new_version;
    LWP_MutexUnlock(mutexversion);
 }
 
-const char* Http::tcp_get_releasenote(void)
+char *tcp_get_releasenote(void)
 {
    LWP_MutexLock(mutexversion);  
    return appl_release_notes;
    LWP_MutexUnlock(mutexversion);
 }
 
-const char* Http::tcp_get_global_highscore(void)
+char *tcp_get_global_highscore(void)
 {
    LWP_MutexLock(mutexversion);  
    return appl_global_highscore;
    LWP_MutexUnlock(mutexversion);
 }
 
-const char* Http::tcp_get_today_highscore(void)
+char *tcp_get_today_highscore(void)
 {
    LWP_MutexLock(mutexversion);  
    return appl_today_highscore;
    LWP_MutexUnlock(mutexversion);
 }
 
-int Http::tcp_start_thread( const char *name, const char *version, 
+int tcp_start_thread(const char *name, const char *version, 
 							const char *id1, const char *url1, 
 							const char *id2, const char *url2, 
 							const char *id3, const char *url3, 
@@ -1554,8 +1556,8 @@ int Http::tcp_start_thread( const char *name, const char *version,
 							const char *token, const char *userData2, 
 							const char *userData3)
 {
-	const char *s_fn="tcp_start_thread";
-	trace->event(s_fn,1,"enter"); 
+	//char *s_fn="tcp_start_thread";
+	//trace->event(s_fn,1,"enter"); 
 
     tcp_state=TCP_INIT;
     do_tcp_treat = true;
@@ -1613,29 +1615,28 @@ int Http::tcp_start_thread( const char *name, const char *version,
 	int rc = LWP_CreateThread(&threads[0], tcp_thread, NULL, NULL, 0, 1);
     if(rc!=0) 
 	{
-         trace->event(s_fn,1,"ERROR; return code from LWP_CreateThread is %d", rc); 
+         //trace->event(s_fn,1,"ERROR; return code from LWP_CreateThread is %d", rc); 
     }
 	
-	trace->event(s_fn,1,"leave [%d]",rc); 
+	//trace->event(s_fn,1,"leave [%d]",rc); 
 	   
 	return rc;
 }
 	
-int Http::tcp_stop_thread(void)
+int tcp_stop_thread(void)
 {
-   const char *s_fn="tcp_stop_thread";
-   trace->event(s_fn,1,"enter"); 
+   //char *s_fn="tcp_stop_thread";
+   //trace->event(s_fn,1,"enter"); 
 
    LWP_MutexLock (mutexcheck);
    do_tcp_treat = false;
    LWP_MutexUnlock (mutexcheck);
    
-   trace->event(s_fn,1,"leave [0]"); 
+   //trace->event(s_fn,1,"leave [0]"); 
    return 0;
 }
 
 // -----------------------------------------------------------
 // THE END
 // -----------------------------------------------------------
-
 

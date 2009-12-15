@@ -44,7 +44,7 @@ class Button
 	// Other
 	void draw();
 	void text(int offset);
-	bool onSelect(int pointerX, int pointerY);
+	bool onSelect(int pointerX, int pointerY, bool sound);
 	
 	// Setters
 	void setX(int x);
@@ -53,6 +53,10 @@ class Button
 	void setImageNormal(GRRLIB_texImg *imageNormal);
 	void setImageFocus(GRRLIB_texImg *imageFocus);
 	void setColor(u32 color);
+	
+	// Getters
+	int getX(void);
+	int getY(void);
 };
 
 #endif

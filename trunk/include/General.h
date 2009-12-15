@@ -26,8 +26,8 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.41"
-#define RELEASE_DATE        	"14-12-2009" 
+#define PROGRAM_VERSION     	"0.43"
+#define RELEASE_DATE        	"15-12-2009" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -86,7 +86,9 @@
 #define MAX_MONSTERS			200
 #define MAX_BUTTONS         	10
 #define MAX_POINTERS         	4
-#define MAX_LOCAL_HIGHSCORE 	15
+#define MAX_LOCAL_HIGHSCORE 	50
+#define MAX_TODAY_HIGHSCORE	 	50
+#define MAX_GLOBAL_HIGHSCORE	50
 #define MAX_SETTINGS			5
 #define MAX_WEAPON_TYPE         6
 
@@ -104,6 +106,8 @@
 #define MAX_LINES		    	200
 #define MAX_BUFFER_SIZE			8192
 #define MAX_IDLE_TIME	    	10
+
+
 
 #define MAX_GRID_X 				20
 #define MAX_GRID_Y 				17
@@ -216,6 +220,7 @@ typedef struct
 	int   alfa;
 	float wave1;
 	float wave2;
+	int   scrollIndex;
 }
 Game;
 

@@ -53,6 +53,7 @@ class HighScore
 	time_t *getDate(int index);
 	int  getWave(int index);
 	int  getScore(int index);
+	int  getAmount();
 };
 
 #endif

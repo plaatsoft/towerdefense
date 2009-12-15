@@ -26,6 +26,16 @@
 **  - Bugfix: Balance sound effect volume.
 **  - Bugfix: Button rumble support is not working
 **
+**  15/12/2009 Version 0.42
+**  - Added Network thread.
+**  	- Fetch latest available version information from internet.
+**  	- Fetch latest release notes information from internet.
+**  	- Added Release Notes screen.
+**  - Added today Highscore screen.
+**  - Added global Highscore screen.
+**  - Added new releas check on internet.
+**  - Added Release Notes screen.
+**
 **  14/12/2009 Version 0.41
 **  - Added dynamic weapon placement on the gameboard
 **  - Added bonus cash (score) when wave is cleared
@@ -52,10 +62,6 @@
 **  - Added Help screen.
 **  - Improve main menu screen.
 **  - Added functionality to make screenshots (Press + button).
-**  - Added Network thread.
-**  	- Fetch latest available version information from internet.
-**  	- Fetch latest release notes information from internet.
-**  	- Added Release Notes screen.
 **  - Build game with devkitPPC r19 compiler.
 **
 **  06/12/2009 Version 0.30
@@ -120,7 +126,7 @@
 #include "Button.h"
 #include "Pointer.h"
 #include "Grid.h"
-#include "Http.h"
+#include "http.h"
 
 // -----------------------------------------------------------
 // PROTOTYPES
@@ -133,6 +139,9 @@ void moveMonsters(void);
 void moveWeapons(void);
 GRRLIB_texImg *getNewWeaponImage(int type);
 int getWeaponPrice(int type);
+
+void loadTodayHighScore(char *buffer);
+void loadGlobalHighScore(char *buffer);
 
 // -----------------------------------------------------------
 // TYPEDEF
@@ -158,7 +167,11 @@ typedef struct
   GRRLIB_texImg *panel1;
   GRRLIB_texImg *bar;
   GRRLIB_texImg *barCursor;  
-    
+  GRRLIB_texImg *scrollbar;
+  GRRLIB_texImg *scrollTop;
+  GRRLIB_texImg *scrollMiddle;
+  GRRLIB_texImg *scrollBottom;
+  
   GRRLIB_texImg *monster1;
   GRRLIB_texImg *monster2;
   GRRLIB_texImg *monster3;
@@ -230,6 +243,18 @@ image;
 
 image images;
 
+typedef struct
+{
+   time_t dt;
+   char   score[MAX_LEN];
+   char   name[MAX_LEN];
+   char   location[MAX_LEN];
+}
+topscore;
+
+topscore todayHighScore[MAX_TODAY_HIGHSCORE+1];
+topscore globalHighScore[MAX_GLOBAL_HIGHSCORE+1];
+
 // -----------------------------------------------------------
 // VARIABLES
 // -----------------------------------------------------------
@@ -274,6 +299,21 @@ extern int      pic14length;
 extern const unsigned char     pic15data[];
 extern int      pic15length;
 
+// Scrollbar image
+extern const unsigned char     pic33data[];
+extern const int      pic33length;
+
+// ScrollTop image
+extern const unsigned char     pic34data[];
+extern const int      pic34length;
+
+// ScrollMiddle image
+extern const unsigned char     pic35data[];
+extern const int      pic35length;
+
+// scrollBottom image
+extern const unsigned char     pic36data[];
+extern const int      pic36length;
 
 
 
@@ -533,12 +573,11 @@ extern int      pic703length;
 u32         *frameBuffer[1] 	= {NULL};
 GXRModeObj  *rmode 				= NULL;
 Mtx         GXmodelView2D;
-int     	scrollIndex      	= 0;
-bool    	scrollEnabled    	= false;
+int     	maxTodayHighScore  	= 0;
+int     	maxGlobalHighScore 	= 0;
 
 Game 		game;
 Trace     	*trace;
-Http		*http;
 Settings  	*settings;
 HighScore 	*highScore;
 Grid      	*grid;
@@ -551,6 +590,44 @@ Button    	*buttons[MAX_BUTTONS];
 // -----------------------------------
 // INIT METHODES
 // -----------------------------------
+
+void initTodayHighScore(void)
+{
+   const char *s_fn="initTodayHighScore";
+   trace->event(s_fn,0,"enter");
+   
+  int i;   
+
+  // Clear today highscore memory
+  for(i=0; i<MAX_TODAY_HIGHSCORE; i++)
+  {
+  	todayHighScore[i].score[0]=0x00;
+	todayHighScore[i].dt=0;
+	todayHighScore[i].name[0]=0x00;
+	todayHighScore[i].location[0]=0x00;
+  } 
+  trace->event(s_fn,0,"leave [void]");
+}
+
+void initGlobalHighScore(void)
+{
+   const char *s_fn="initGlobalHighScore";
+   trace->event(s_fn,0,"enter");
+   
+  int i;   
+
+  // Clear global highscore memory
+  for(i=0; i<MAX_GLOBAL_HIGHSCORE; i++)
+  {
+  	globalHighScore[i].score[0]=0x00;
+	globalHighScore[i].dt=0;
+	globalHighScore[i].name[0]=0x00;
+	globalHighScore[i].location[0]=0x00;
+  } 
+  
+  trace->event(s_fn,0,"leave [void]");
+}
+
 
 void initImages(void)
 {
@@ -571,7 +648,11 @@ void initImages(void)
    images.panel1=GRRLIB_LoadTexture( pic13data );
    images.bar=GRRLIB_LoadTexture( pic14data );
    images.barCursor=GRRLIB_LoadTexture( pic15data );
-	 
+   images.scrollbar=GRRLIB_LoadTexture(pic33data);
+   images.scrollTop=GRRLIB_LoadTexture( pic34data);
+   images.scrollMiddle=GRRLIB_LoadTexture( pic35data);
+   images.scrollBottom=GRRLIB_LoadTexture( pic36data);
+   
    images.monster1=GRRLIB_LoadTexture( pic101data );
    images.monster2=GRRLIB_LoadTexture( pic102data );
    images.monster3=GRRLIB_LoadTexture( pic103data );
@@ -1097,6 +1178,59 @@ void initButtons(void)
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Next");	
 			buttons[0]->setColor(IMAGE_COLOR);
+			
+			// Scrollbar button 
+			buttons[1]=new Button();
+			buttons[1]->setX(SCROLLBAR_x);
+			buttons[1]->setY(SCROLLBAR_Y_MIN);
+			buttons[1]->setImageNormal(images.scrollbar);
+			buttons[1]->setImageFocus(images.scrollbar);
+			buttons[1]->setLabel("");
+			buttons[1]->setColor(IMAGE_COLOR);
+		}
+		break;
+		
+		case stateTodayHighScore:
+	    {
+			// Next Button
+			buttons[0]=new Button();
+			buttons[0]->setX(225);
+			buttons[0]->setY(460);
+			buttons[0]->setImageNormal(images.button2);
+			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setLabel("Next");	
+			buttons[0]->setColor(IMAGE_COLOR);
+			
+			// Scrollbar button 
+			buttons[1]=new Button();
+			buttons[1]->setX(SCROLLBAR_x);
+			buttons[1]->setY(SCROLLBAR_Y_MIN);
+			buttons[1]->setImageNormal(images.scrollbar);
+			buttons[1]->setImageFocus(images.scrollbar);
+			buttons[1]->setLabel("");
+			buttons[1]->setColor(IMAGE_COLOR);
+		}
+		break;
+		
+		case stateGlobalHighScore:
+	    {
+			// Next Button
+			buttons[0]=new Button();
+			buttons[0]->setX(225);
+			buttons[0]->setY(460);
+			buttons[0]->setImageNormal(images.button2);
+			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setLabel("Main Menu");	
+			buttons[0]->setColor(IMAGE_COLOR);
+			
+			// Scrollbar button 
+			buttons[1]=new Button();
+			buttons[1]->setX(SCROLLBAR_x);
+			buttons[1]->setY(SCROLLBAR_Y_MIN);
+			buttons[1]->setImageNormal(images.scrollbar);
+			buttons[1]->setImageFocus(images.scrollbar);
+			buttons[1]->setLabel("");
+			buttons[1]->setColor(IMAGE_COLOR);
 		}
 		break;
 		
@@ -1136,6 +1270,15 @@ void initButtons(void)
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Main Menu");		
 			buttons[0]->setColor(IMAGE_COLOR);
+			
+			// Scrollbar button 
+			buttons[1]=new Button();
+			buttons[1]->setX(SCROLLBAR_x);
+			buttons[1]->setY(SCROLLBAR_Y_MIN);
+			buttons[1]->setImageNormal(images.scrollbar);
+			buttons[1]->setImageFocus(images.scrollbar);
+			buttons[1]->setLabel("");
+			buttons[1]->setColor(IMAGE_COLOR);
 		}
 		break;
 		
@@ -1366,10 +1509,8 @@ void initNetwork(void)
    // Get userData2 
    memset(userData2,0x00,sizeof(userData2));
    sprintf(userData2,"appl=%s",PROGRAM_NAME);
-	   
-   http = new Http();
-	   
-   http->tcp_start_thread(PROGRAM_NAME, PROGRAM_VERSION, 
+	     
+   tcp_start_thread(PROGRAM_NAME, PROGRAM_VERSION, 
 			ID1, URL1, 
 			ID2, URL2, 
 			ID3, URL3, 
@@ -1419,6 +1560,9 @@ void initGame(void)
 	sound->setMusicVolume(settings->getMusicVolume());
 	sound->setEffectVolume(settings->getEffectVolume());	
 	sound->play();
+	
+	initTodayHighScore();
+	initGlobalHighScore();
 	
 	// Init network Thread
 	initNetwork();
@@ -1810,10 +1954,10 @@ void drawScreen(void)
 		  sprintf(tmp,"%s", RELEASE_DATE); 
 		  drawText(20, ypos, fontParagraph,  tmp );
 	
-		  version=http->tcp_get_version();
+		  version=tcp_get_version();
           if ( (version!=NULL) && (strlen(version)>0) && (strcmp(version,PROGRAM_VERSION)!=0) )
           {    
-			 ypos+=275;
+			 ypos+=235;
 	         sprintf(tmp,"New version [v%s] is available.",version);
 	         drawText(20, ypos, fontNew, tmp);
 				 		
@@ -1822,7 +1966,7 @@ void drawScreen(void)
 	         drawText(20, ypos, fontNew, tmp);			 
           }  
 		  
-		  sprintf(tmp,"NETWORK THREAD: %s",http->tcp_get_state());
+		  sprintf(tmp,"NETWORK THREAD: %s",tcp_get_state());
 		  drawText(20, 485, fontSpecial, tmp);
 		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate()); 
@@ -1878,10 +2022,34 @@ void drawScreen(void)
 		case stateLocalHighScore:
 	    {
 	      struct tm *local;
-		  	  				   
+		  int startEntry;
+		  int endEntry;
+		  		  
+		  if (highScore->getAmount()<15)
+		  {
+		    startEntry=0;
+			endEntry=maxTodayHighScore;
+		  }
+		  else
+		  {
+			 startEntry=(((float) highScore->getAmount()-13.0)/26.0)*(float)game.scrollIndex;
+			 endEntry=startEntry+15;
+		  }
+				   
           // Draw background
           GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 		  
+		  // Draw scrollbar
+		  ypos=SCROLLBAR_Y_MIN;
+          GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
+		  for (int i=0; i<9; i++) 
+		  {
+		     ypos+=24;
+		     GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
+		  }
+		  ypos+=24;
+		  GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
+		  		  
 		  // Draw buttons
 	      drawButtons(); 
 		  
@@ -1889,6 +2057,7 @@ void drawScreen(void)
           GRRLIB_initTexture();
  
 	      // Draw title
+		  ypos=YOFFSET;
 	      drawText(80, ypos, fontTitle, "Local High Score");	
 
           // Show Content
@@ -1900,7 +2069,7 @@ void drawScreen(void)
 		  drawText(500, ypos, fontParagraph, "WAVE" );
 		  ypos+=10;
 		  
-          for (int i=0; i<MAX_LOCAL_HIGHSCORE; i++)
+		  for (int i=startEntry; i<endEntry; i++)
 	      {
   	          // Only show highscore entries which contain data
 			  if (highScore->getDate(i)!=0)
@@ -1930,6 +2099,180 @@ void drawScreen(void)
 		  drawButtonsText(0);
 		  
 		  // Show FPS information
+		  sprintf(tmp,"%d fps", CalculateFrameRate());
+		  drawText(20, 500, fontSpecial, tmp);
+		  
+          // Draw text layer on top of gameboard 
+          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);	 	   
+	    }
+	    break;
+
+		case stateTodayHighScore:
+	    {	      
+	      struct tm *local;
+		  int startEntry;
+		  int endEntry;
+		  		  
+		  if (maxTodayHighScore<15)
+		  {
+		    startEntry=0;
+			endEntry=maxTodayHighScore;
+		  }
+		  else
+		  {
+			 startEntry=(((float) maxTodayHighScore-13.0)/26.0)*(float)game.scrollIndex;
+			 endEntry=startEntry+15;
+		  }
+		  
+          // Init text layer	  
+          GRRLIB_initTexture();
+		   
+          // Draw background
+          GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+      	     	
+		  // Draw scrollbar
+		  ypos=SCROLLBAR_Y_MIN;
+          GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
+		  for (int i=0; i<9; i++) 
+		  {
+		    ypos+=24;
+		    GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
+		  }
+		  ypos+=24;
+		  GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
+		  		  
+	      // Draw title
+		  ypos=YOFFSET;
+	      drawText(0, ypos, fontTitle, "   Today High Score");	
+
+          // Show Content
+          ypos+=90;
+
+		  drawText(20, ypos, fontParagraph,  "TOP"  );
+	      drawText(80, ypos, fontParagraph, "DATE" );
+	      drawText(270, ypos, fontParagraph, "SCORE" );
+		  drawText(350, ypos, fontParagraph, "NAME"  );
+		  drawText(430, ypos, fontParagraph, "LOCATION" );
+		  ypos+=10;
+		  
+		  if (todayHighScore[0].dt!=0)
+		  {
+            for (int i=startEntry; i<endEntry; i++)
+            {
+  	          ypos+=20;  
+	    
+		      sprintf(tmp,"%02d", i+1);
+		      drawText(20, ypos, fontNormal, tmp);
+			  			  
+	          local = localtime(&todayHighScore[i].dt);
+	          sprintf(tmp,"%02d-%02d-%04d %02d:%02d:%02d", 
+			     local->tm_mday, local->tm_mon+1, local->tm_year+1900, 
+			     local->tm_hour, local->tm_min, local->tm_sec);
+		      drawText(80, ypos, fontNormal, tmp);
+	   
+		      drawText(270, ypos, fontNormal, todayHighScore[i].score);			  
+			  drawText(350, ypos, fontNormal, todayHighScore[i].name);			  
+			  drawText(430, ypos, fontNormal, todayHighScore[i].location);
+		    }			
+		  }
+		  else
+		  {
+		      ypos+=120;
+		      drawText(0, ypos, fontParagraph, "No information available!");
+			  ypos+=20;
+			  drawText(0, ypos, fontParagraph, "Information could not be fetch from internet.");
+		  }
+			 
+          // Draw buttons
+	      drawButtons(); 
+		  
+		  sprintf(tmp,"%d fps", CalculateFrameRate());
+		  drawText(20, 500, fontSpecial, tmp);
+		  
+          // Draw text layer on top of gameboard 
+          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);	 	   
+	    }
+	    break;
+	   
+		case stateGlobalHighScore:
+	    {	      
+	      struct tm *local;
+		  int startEntry;
+		  int endEntry;
+		  		  
+		  if (maxGlobalHighScore<13)
+		  {
+		    startEntry=0;
+			endEntry=maxGlobalHighScore;
+		  }
+		  else
+		  {
+			 startEntry=(((float) maxGlobalHighScore-13.0)/26.0)*(float)game.scrollIndex;
+			 endEntry=startEntry+13;
+		  }
+		  
+          // Init text layer	  
+          GRRLIB_initTexture();
+		   
+          // Draw background
+          GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+      	     	
+		  // Draw scrollbar
+		  ypos=SCROLLBAR_Y_MIN;
+          GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
+		  for (int i=0; i<9; i++) 
+		  {
+		    ypos+=24;
+		    GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
+		  }
+		  ypos+=24;
+		  GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
+		  		  
+	      // Draw titl
+		  ypos=YOFFSET;
+	      drawText(0, ypos, fontTitle, "   Global High Score");	
+
+          // Show Content
+          ypos+=90;
+
+		  drawText(20, ypos, fontParagraph,  "TOP"  );
+	      drawText(80, ypos, fontParagraph,  "DATE" );
+	      drawText(270, ypos, fontParagraph, "SCORE" );
+		  drawText(350, ypos, fontParagraph, "NAME"  );
+		  drawText(430, ypos, fontParagraph, "LOCATION" );
+		  ypos+=10;
+		  
+		  if (globalHighScore[0].dt!=0)
+		  {
+            for (int i=startEntry; i<endEntry; i++)
+            {
+  	          ypos+=20;  
+	    
+		      sprintf(tmp,"%02d", i+1);
+		      drawText(20, ypos, fontNormal, tmp);
+			  			  
+	          local = localtime(&globalHighScore[i].dt);
+	          sprintf(tmp,"%02d-%02d-%04d %02d:%02d:%02d", 
+			     local->tm_mday, local->tm_mon+1, local->tm_year+1900, 
+			     local->tm_hour, local->tm_min, local->tm_sec);
+		      drawText(80, ypos, fontNormal, tmp);
+	   
+		      drawText(270, ypos, fontNormal, globalHighScore[i].score);			  
+			  drawText(350, ypos, fontNormal, globalHighScore[i].name);			  
+			  drawText(430, ypos, fontNormal, globalHighScore[i].location);
+		    }			
+		  }
+		  else
+		  {
+		      ypos+=120;
+		      drawText(0, ypos, fontParagraph, "No information available!");
+			  ypos+=20;
+			  drawText(0, ypos, fontParagraph, "Information could not be fetch from internet.");
+		  }
+			 
+          // Draw buttons
+	      drawButtons(); 
+		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
 		  drawText(20, 500, fontSpecial, tmp);
 		  
@@ -2095,7 +2438,7 @@ void drawScreen(void)
 		  int endEntry;
 		  		  
 		  // Fetch release notes from network thread
-		  buffer=http->tcp_get_releasenote();
+		  buffer=tcp_get_releasenote();
           if (buffer!=NULL) 
 		  {
 		     strncpy(text,buffer,MAX_BUFFER_SIZE);
@@ -2104,17 +2447,15 @@ void drawScreen(void)
 		  }
 		  
 		  // Calculate start and end line.
-		  if (maxLines<18)
+		  if (maxLines<20)
 		  {
 		    startEntry=0;
 			endEntry=maxLines;
-			scrollEnabled=false;
 		  }
 		  else
 		  {
-			 startEntry=(((float) maxLines-18.0)/26.0)*(float)scrollIndex;
-			 endEntry=startEntry+18;
-			 scrollEnabled=true;
+			 startEntry=(((float) maxLines-18.0)/26.0)*(float)game.scrollIndex;
+			 endEntry=startEntry+20;
 		  }
 		   
 	      // Draw background
@@ -2127,19 +2468,16 @@ void drawScreen(void)
           GRRLIB_initTexture();
 		  
           // Draw scrollbar
-		  if (scrollEnabled)
+		  ypos=SCROLLBAR_Y_MIN;
+          GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
+		  for (i=0; i<9; i++) 
 		  {
-		    ypos=SCROLLBAR_Y_MIN;
-            //GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
-		    for (i=0; i<9; i++) 
-		    {
-		      ypos+=24;
-		      //GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
-		    }
-		    ypos+=24;
-		    //GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
+				ypos+=24;
+				GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
 		  }
-		 
+		  ypos+=24;
+		  GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
+		  		 
 	      // Draw Title	
 		  ypos=YOFFSET;
           drawText(100, ypos, fontTitle, "Release Notes");
@@ -2154,7 +2492,7 @@ void drawScreen(void)
 			  {			   
 			     text[i]=0x00;
 				 
-				 // Show only 17 lines on screen
+				 // Show only 19 lines on screen
 			     if ((lineCount++)>endEntry) break;
 			     if (lineCount>startEntry) 
 				 {				   
@@ -2288,6 +2626,115 @@ void drawScreen(void)
 // -----------------------------------
 // SUPPORT METHODES
 // -----------------------------------
+
+void loadTodayHighScore(char *buffer)
+{
+    const char *s_fn="loadTodayHighScore";
+    trace->event(s_fn,0,"enter");
+	
+   int i;
+   mxml_node_t *tree=NULL;
+   mxml_node_t *data=NULL;
+   const char *tmp;
+   char temp[MAX_LEN];
+   
+   maxTodayHighScore=0;
+   
+   // Clear memory
+   for(i=0; i<MAX_TODAY_HIGHSCORE; i++)
+   {
+      	todayHighScore[i].score[0]=0x00;
+		todayHighScore[i].dt=0;
+		todayHighScore[i].name[0]=0x00;
+		todayHighScore[i].location[0]=0x00;
+   } 
+	 
+   // If xml data available, parse it....
+   if ((buffer!=NULL) && (strlen(buffer)>0))
+   {  
+      tree = mxmlLoadString(NULL, buffer, MXML_NO_CALLBACK);
+
+      for(i=0; i<MAX_TODAY_HIGHSCORE; i++)
+      {		
+	    sprintf(temp, "item%d", i+1);
+        data = mxmlFindElement(tree, tree, temp, NULL, NULL, MXML_DESCEND);
+
+        tmp=mxmlElementGetAttr(data,"dt");   
+        if (tmp!=NULL) todayHighScore[maxTodayHighScore].dt=atoi(tmp); else todayHighScore[maxTodayHighScore].dt=0; 
+		
+		tmp=mxmlElementGetAttr(data,"score");   
+        if (tmp!=NULL) strcpy(todayHighScore[maxTodayHighScore].score,tmp); else strcpy(todayHighScore[maxTodayHighScore].score,"");
+		
+        tmp=mxmlElementGetAttr(data,"name");   
+        if (tmp!=NULL) strcpy(todayHighScore[maxTodayHighScore].name,tmp); else strcpy(todayHighScore[maxTodayHighScore].name,"");
+
+		tmp=mxmlElementGetAttr(data,"location");   
+        if (tmp!=NULL) strcpy(todayHighScore[maxTodayHighScore].location,tmp); else strcpy(todayHighScore[maxTodayHighScore].location,"");
+		
+		// Entry is valid (Keep the inforamtion)
+        if (strlen(todayHighScore[maxTodayHighScore].score)>0) maxTodayHighScore++;	
+      }   
+      mxmlDelete(data);
+      mxmlDelete(tree);
+   }
+   
+    trace->event(s_fn,0,"leave [void]");
+}
+
+void loadGlobalHighScore(char *buffer)
+{
+    const char *s_fn="loadGlobalHighScore";
+    trace->event(s_fn,0,"enter");
+	
+   int i;
+   mxml_node_t *tree=NULL;
+   mxml_node_t *data=NULL;
+   const char *tmp;
+   char temp[MAX_LEN];
+   
+   maxGlobalHighScore=0;
+   
+   // Clear memory
+   for(i=0; i<MAX_GLOBAL_HIGHSCORE; i++)
+   {
+      	globalHighScore[i].score[0]=0x00;
+		globalHighScore[i].dt=0;
+		globalHighScore[i].name[0]=0x00;
+		globalHighScore[i].location[0]=0x00;
+   } 
+	 
+   // If xml data available, parse it....
+   if ((buffer!=NULL) && (strlen(buffer)>0))
+   {  
+      tree = mxmlLoadString(NULL, buffer, MXML_NO_CALLBACK);
+
+      for(i=0; i<MAX_GLOBAL_HIGHSCORE; i++)
+      {		
+	    sprintf(temp, "item%d", i+1);
+        data = mxmlFindElement(tree, tree, temp, NULL, NULL, MXML_DESCEND);
+
+        tmp=mxmlElementGetAttr(data,"dt");   
+        if (tmp!=NULL) globalHighScore[maxGlobalHighScore].dt=atoi(tmp); else globalHighScore[maxGlobalHighScore].dt=0; 
+		
+		tmp=mxmlElementGetAttr(data,"score");   
+        if (tmp!=NULL) strcpy(globalHighScore[maxGlobalHighScore].score,tmp); else strcpy(globalHighScore[maxGlobalHighScore].score,"");
+		
+        tmp=mxmlElementGetAttr(data,"name");   
+        if (tmp!=NULL) strcpy(globalHighScore[maxGlobalHighScore].name,tmp); else strcpy(globalHighScore[maxGlobalHighScore].name,"");
+
+		tmp=mxmlElementGetAttr(data,"location");   
+        if (tmp!=NULL) strcpy(globalHighScore[maxGlobalHighScore].location,tmp); else strcpy(globalHighScore[maxGlobalHighScore].location,"");
+		
+		// Entry is valid (Keep the inforamtion)
+        if (strlen(globalHighScore[maxGlobalHighScore].score)>0) maxGlobalHighScore++;	
+      }   
+      mxmlDelete(data);
+      mxmlDelete(tree);
+   }
+   
+    trace->event(s_fn,0,"leave [void]");
+}
+
 
 void clearMonsters()
 {
@@ -2660,6 +3107,12 @@ void destroyObjects()
 	{
 		delete trace;
 	}
+	
+	// Destroy Sound
+	if (sound!=NULL)
+	{
+		delete sound;
+	}
 }
 	
 // Calculate Video Frame Rate (Indication how game engine performs)
@@ -2833,12 +3286,18 @@ void processEvent()
 		{				
 			trace->event(s_fn,0,"event=eventSaveHighScore");
 			
-			// Store highscore
+			// Store highscore local
 			char tmp[MAX_LEN];
 			sprintf(tmp,"%c%c%c",settings->getFirstChar(), 
 				settings->getSecondChar(), settings->getThirdChar());			
 			highScore->setScore(tmp, game.wave, game.score);
 			highScore->save(HIGHSCORE_FILENAME);
+			
+			// Store highscore on internet
+			char tmp2[MAX_LEN];
+			sprintf(tmp2,"appl=%s&level=%d&score=%d&name=%s&dt=%d",
+				PROGRAM_NAME, game.wave, game.score, tmp, (int)time(NULL));
+			tcp_set_state(TCP_REQUEST3a, tmp2);	
 		}
 		break;
 		
@@ -2977,7 +3436,8 @@ void processStateMachine()
 	case stateReleaseNotes:
 	{
 		trace->event(s_fn,0,"stateMachine=stateReleaseNotes");
-		
+		game.scrollIndex=0;
+	
 		// Init buttons
 		initButtons();		
 	}
@@ -2986,7 +3446,36 @@ void processStateMachine()
 	case stateLocalHighScore:
 	{
 		trace->event(s_fn,0,"stateMachine=stateLocalHighScore");
+		game.scrollIndex=0;
 		
+		// Init buttons
+		initButtons();		
+	}
+	break;
+	
+	case stateTodayHighScore:
+	{
+		trace->event(s_fn,0,"stateMachine=stateTodayHighScore");
+		game.scrollIndex=0;
+		
+		// Fetch data for network thread
+		char *buffer=tcp_get_today_highscore();
+		loadTodayHighScore(buffer);		     
+			  
+		// Init buttons
+		initButtons();		
+	}
+	break;
+	
+	case stateGlobalHighScore:
+	{
+		trace->event(s_fn,0,"stateMachine=stateGlobalHighScore");
+		game.scrollIndex=0;
+		
+		// Fetch data for network thread
+		char *buffer=tcp_get_global_highscore();
+		loadGlobalHighScore(buffer);		     
+			  
 		// Init buttons
 		initButtons();		
 	}
@@ -3096,14 +3585,11 @@ int main(void)
 	GRRLIB_Exit();
 	
 	// Stop network thread
-	http->tcp_stop_thread();
+	//tcp_stop_thread();
 	
 	// Stop rumble
 	WPAD_Rumble(0,0);
 		
-	// Stop music
-	//MODPlay_Stop(&snd1);
-	
 	// Destroy all Images
 	destroyImages();
 	
