@@ -694,6 +694,25 @@ void Pointer::buttonA(int x, int y)
 			}		
 		}
 		break;
+		
+		case stateGameQuit:
+		{
+			if (buttons[0]->onSelect(x,y,true))
+			{
+				// No 
+				game.stateMachine=stateGame;
+			}
+			
+			if (buttons[1]->onSelect(x,y,true))
+			{
+				// Yes
+				game.stateMachine=stateMainMenu;
+				
+				// Score current score;
+				game.event=eventSaveHighScore;
+			}	
+		}
+		break;
 	}
 
 	trace->event(s_fn,0,"leave");
@@ -777,7 +796,7 @@ void Pointer::action(void)
 			{
 				if (game.stateMachine==stateGame)
 				{
-					game.stateMachine=stateMapSelectMenu;
+					game.stateMachine=stateGameQuit;
 				}
 				else
 				{

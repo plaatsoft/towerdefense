@@ -95,7 +95,7 @@
 #define MAX_SOUND_VOLUME		10
 #define MAX_MUSIC_TRACK     	9
 
-#define MAX_RUMBLE				25
+#define MAX_RUMBLE				2
 #define MAX_HORZ_PIXELS			640
 #define MAX_VERT_PIXELS			480
 #define MAX_LEN			    	256
@@ -106,8 +106,6 @@
 #define MAX_LINES		    	200
 #define MAX_BUFFER_SIZE			8192
 #define MAX_IDLE_TIME	    	10
-
-
 
 #define MAX_GRID_X 				20
 #define MAX_GRID_Y 				17
@@ -148,7 +146,7 @@ enum
 	stateMapSelectMenu=5,
 	stateGame=6,
 	stateGameOver=7,
-	stateGameStop=8,
+	stateGameQuit=8,
 	stateQuit=9,
 	stateLocalHighScore=10,
 	stateTodayHighScore=11,
@@ -218,7 +216,6 @@ typedef struct
 	int waveCountDown;
 	
 	// Variables for graphical animations
-	float size;
 	int   alfa;
 	float wave1;
 	float wave2;

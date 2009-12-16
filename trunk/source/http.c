@@ -1149,8 +1149,8 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
           else
           {     		    
 	         http_get_result(&http_status, &outbuf, &outlen);   	
-			 int i; 
-			 for (i=0; i<outlen; i++) //trace->eventRaw(outbuf[i]);  
+			
+			 //for (int i=0; i<outlen; i++) trace->eventRaw(outbuf[i]);  
 			 free(outbuf);
 			 tcp_state=TCP_REQUEST2a;
           } 	
@@ -1179,8 +1179,7 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 			 char* result=strstr(appl_release_notes,"Other:");
 			 if (result!=NULL) result[0]=0x00;
 			 			
-			 int i;  
-			 for (i=0; i<strlen(appl_release_notes); i++) //trace->eventRaw( appl_release_notes[i] ); 
+			 //for (int i=0; i<strlen(appl_release_notes); i++) trace->eventRaw( appl_release_notes[i] ); 
 	
 			 free(outbuf);			 
 			 //tcp_state=TCP_REQUEST2b;			
@@ -1210,8 +1209,8 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
           else
           {     		    
 	         http_get_result(&http_status, &outbuf, &outlen);   	
-			 int i; 
-			 for (i=0; i<outlen; i++) //trace->eventRaw(outbuf[i] );  
+			 
+			 //for (int i=0; i<outlen; i++) trace->eventRaw(outbuf[i] );  
 			 free(outbuf);
 			 tcp_state=TCP_REQUEST3a;
           } 
@@ -1240,9 +1239,9 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
           }
           else
           {  
-		     http_get_result(&http_status, &outbuf, &outlen);   	
- 
-			 int i;   		   					 
+		     int i;
+			 http_get_result(&http_status, &outbuf, &outlen);   	
+ 			   		   					 
 			 memset(appl_today_highscore,0x00,sizeof(appl_today_highscore));
   		     for (i=0; i<outlen; i++) appl_today_highscore[i]=outbuf[i];	
 
@@ -1252,7 +1251,7 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 			 {
 			    // Terminated received xml data 
 			    result[13]=0x00; 
-    			for (i=0; i<strlen(appl_today_highscore); i++) //trace->eventRaw(appl_today_highscore[i] ); 
+    				// for (int i=0; i<strlen(appl_today_highscore); i++) trace->eventRaw(appl_today_highscore[i] ); 
 				   
 				//tcp_state=TCP_REQUEST3b;
 				tcp_state=TCP_REQUEST4a;
@@ -1295,7 +1294,7 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
           else
           {     		    
 	         http_get_result(&http_status, &outbuf, &outlen);   	
-			 int i; for (i=0; i<outlen; i++) //trace->eventRaw( outbuf[i] ); 
+			 //for (int i=0; i<outlen; i++) trace->eventRaw( outbuf[i] ); 
 			 free(outbuf);
 			 tcp_state=TCP_REQUEST4a;
           } 	
@@ -1322,19 +1321,22 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
           }
           else
           {  
-		     http_get_result(&http_status, &outbuf, &outlen);   	
+		    http_get_result(&http_status, &outbuf, &outlen);   	
  
-			 int i;   		   					 
-			 memset(appl_global_highscore,0x00,sizeof(appl_global_highscore));
-  		     for (i=0; i<outlen; i++) appl_global_highscore[i]=outbuf[i];	
+			int i; 		   					 
+			memset(appl_global_highscore,0x00,sizeof(appl_global_highscore));
+  		    for (i=0; i<outlen; i++) 
+			{
+				appl_global_highscore[i]=outbuf[i];	
+			}
 
 			 
-		     char* result=strstr(appl_global_highscore,"</highscore>");
-			 if (result!=NULL) 
+		    char* result=strstr(appl_global_highscore,"</highscore>");
+			if (result!=NULL) 
 			 {
 			    // Terminated received xml data 
 			    result[13]=0x00; 
-    			for (i=0; i<strlen(appl_global_highscore); i++) //trace->eventRaw(appl_global_highscore[i] ); 
+    			//for (i=0; i<strlen(appl_global_highscore); i++) trace->eventRaw(appl_global_highscore[i] ); 
 				   
 				tcp_state=TCP_IDLE;
 				//tcp_state=TCP_REQUEST4b;
@@ -1377,7 +1379,7 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
           else
           {     		    
 	         http_get_result(&http_status, &outbuf, &outlen);   	
-			 int i; for (i=0; i<outlen; i++) //trace->eventRaw( outbuf[i] ); 
+			 //for (int i=0; i<outlen; i++) trace->eventRaw( outbuf[i] ); 
 			 free(outbuf);
 			 tcp_state=TCP_IDLE;
           } 	

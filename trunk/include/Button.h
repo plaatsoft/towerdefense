@@ -23,6 +23,7 @@
 
 #include "GRRLIB.h"
 
+
 class Button
 {
   private:
@@ -35,6 +36,7 @@ class Button
 	char label[100];
 	bool focus;
 	u32 color;
+	bool rumble[MAX_POINTERS];
 	
   public:
 	// Constructor & Destructor
