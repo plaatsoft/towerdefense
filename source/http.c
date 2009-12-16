@@ -1120,7 +1120,6 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 			 //tcp_state=TCP_REQUEST1b;
 			 tcp_state=TCP_REQUEST2a;
           } 	 
-          //tcp_sleep(10);	 		  
 		} 	
         break;	 
 		
@@ -1550,23 +1549,11 @@ char *tcp_get_today_highscore(void)
    LWP_MutexUnlock(mutexversion);
 }
 
-int tcp_start_thread(const char *name, const char *version, 
-							const char *id1, const char *url1, 
-							const char *id2, const char *url2, 
-							const char *id3, const char *url3, 
-							const char *id4, const char *url4, 
-							const char *token, const char *userData2, 
-							const char *userData3)
+void tcp_init_layer(void)
 {
-	//char *s_fn="tcp_start_thread";
-	//trace->event(s_fn,1,"enter"); 
+	tcp_clear_memory();
 
-    tcp_state=TCP_INIT;
-    do_tcp_treat = true;
-
-    tcp_clear_memory();
-
-    memset(appl_new_version,0x00,sizeof(appl_new_version));
+	memset(appl_new_version,0x00,sizeof(appl_new_version));
 	memset(appl_name,0x00,sizeof(appl_name));
 	memset(appl_version,0x00,sizeof(appl_version));
 	
@@ -1587,6 +1574,22 @@ int tcp_start_thread(const char *name, const char *version,
 	
 	memset(appl_token,0x00,sizeof(appl_token));	
 	memset(var_cookie,0x00,sizeof(var_cookie));
+
+    tcp_state=TCP_INIT;
+}
+
+int tcp_start_thread(const char *name, const char *version, 
+							const char *id1, const char *url1, 
+							const char *id2, const char *url2, 
+							const char *id3, const char *url3, 
+							const char *id4, const char *url4, 
+							const char *token, const char *userData2, 
+							const char *userData3)
+{
+	//char *s_fn="tcp_start_thread";
+	//trace->event(s_fn,1,"enter"); 
+
+    do_tcp_treat = true;
 
 	strcpy(appl_name, name);
 	strcpy(appl_version, version);
@@ -1621,7 +1624,6 @@ int tcp_start_thread(const char *name, const char *version,
     }
 	
 	//trace->event(s_fn,1,"leave [%d]",rc); 
-	   
 	return rc;
 }
 	

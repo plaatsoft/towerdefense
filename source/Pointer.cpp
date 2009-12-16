@@ -674,19 +674,19 @@ void Pointer::buttonA(int x, int y)
 			// Check if weapon upgrade button is pressed on screen
 			if (weapons[game.weaponSelect]!=NULL)
 			{
-				if (buttons[1]->onSelect(x,y,true))
+				if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))
 				{
 					// Power button	      
 					game.event=eventWeaponPowerUpgrade;
 				}
 		
-				if (buttons[2]->onSelect(x,y,true))
+				if ((buttons[2]!=NULL) && (buttons[2]->onSelect(x,y,true)))
 				{
 					// Range button	      
 					game.event=eventWeaponRangeUpgrade;
 				}
 			
-				if (buttons[3]->onSelect(x,y,true))
+				if ((buttons[3]!=NULL) && (buttons[3]->onSelect(x,y,true)))
 				{
 					// Rate button	      		
 					game.event=eventWeaponRateUpgrade;
@@ -697,24 +697,23 @@ void Pointer::buttonA(int x, int y)
 		
 		case stateGameQuit:
 		{
-			if (buttons[0]->onSelect(x,y,true))
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
-				// No 
-				game.stateMachine=stateGame;
-			}
-			
-			if (buttons[1]->onSelect(x,y,true))
-			{
-				// Yes
-				game.stateMachine=stateMainMenu;
+				// Yes button
+				game.stateMachine=stateMapSelectMenu;
 				
 				// Score current score;
 				game.event=eventSaveHighScore;
+			}
+
+			if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))
+			{
+				// No button
+				game.stateMachine=stateGame;
 			}	
 		}
 		break;
 	}
-
 	trace->event(s_fn,0,"leave");
 }
 
@@ -798,7 +797,7 @@ void Pointer::action(void)
 				{
 					game.stateMachine=stateGameQuit;
 				}
-				else
+				else if (game.stateMachine!=stateGameQuit)
 				{
 					game.stateMachine=stateMainMenu;
 				}

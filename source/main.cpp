@@ -24,22 +24,22 @@
 **  - Realtime rendering of map examples in map select page.
 **  - Realtime monsters animation on map select page.
 **  - Add map 4, 5, 6 and maybe more!
-** 
-**  TODO:
 **  - Improve weapon graphics
 **  - Snap weapon to grid!
+**  - Bugfix: Network thread (Google analistics call crash)
+** 
+**  TODO:
 **  - Bugfix: Balance sound effect volume.
 **  - Improve scroll bar button design.
 **
 **  16/12/2009 Version 0.43
-**  - Added help screen two
-**  - Added help screen screen
-**  - Limit weapon upgrade levels.
-**  - Added WiiMote rumble support when pointer is on a button.
-**  - Improve button pointer detection area.
-**  - Added "Quit Game" screen.
+**  - Added help screen two. 
+**  - Added help screen screen. 
+**  - Limit weapon upgrade levels. 
+**  - Added WiiMote rumble support when pointer is on a button. 
+**  - Improve button pointer detection area. 
+**  - Added "Quit Game" screen. 
 **  - Bugfix: Placing weapons under the information panel is not allowed anymore.
-**  - Bugfix: Network thread
 **  - Build game with devkitPPC r19 compiler.
 **
 **  15/12/2009 Version 0.42
@@ -156,8 +156,7 @@ void checkNextWave(void);
 void moveMonsters(void);
 void moveWeapons(void);
 GRRLIB_texImg *getNewWeaponImage(int type);
-int getWeaponPrice(int type);
-
+int  getWeaponPrice(int type);
 void loadTodayHighScore(char *buffer);
 void loadGlobalHighScore(char *buffer);
 
@@ -1535,23 +1534,23 @@ void initButtons(void)
 	
 		case stateGameQuit:	
 		{
-			// No button 
-			buttons[0]=new Button();
-			buttons[0]->setX(270);
-			buttons[0]->setY(270);
-			buttons[0]->setImageNormal(images.button1);
-			buttons[0]->setImageFocus(images.buttonFocus1);
-			buttons[0]->setLabel("No");	
-			buttons[0]->setColor(IMAGE_COLOR);
-
 			// Yes button 
+			buttons[0]=new Button();
+			buttons[0]->setX(230);
+			buttons[0]->setY(270);
+			buttons[0]->setImageNormal(images.button3);
+			buttons[0]->setImageFocus(images.buttonFocus3);
+			buttons[0]->setLabel("YES");	
+			buttons[0]->setColor(IMAGE_COLOR3);
+			
+			// No button 
 			buttons[1]=new Button();
-			buttons[1]->setX(350);
+			buttons[1]->setX(330);
 			buttons[1]->setY(270);
-			buttons[1]->setImageNormal(images.button1);
-			buttons[1]->setImageFocus(images.buttonFocus1);
-			buttons[1]->setLabel("Yes");	
-			buttons[1]->setColor(IMAGE_COLOR);		
+			buttons[1]->setImageNormal(images.button3);
+			buttons[1]->setImageFocus(images.buttonFocus3);
+			buttons[1]->setLabel("NO");	
+			buttons[1]->setColor(IMAGE_COLOR3);		
 		}
 		break;
 	}
@@ -1574,13 +1573,15 @@ void initNetwork(void)
    // Get userData2 
    memset(userData2,0x00,sizeof(userData2));
    sprintf(userData2,"appl=%s",PROGRAM_NAME);
-	     
-   /*tcp_start_thread(PROGRAM_NAME, PROGRAM_VERSION, 
+	 
+   tcp_init_layer();
+    
+   tcp_start_thread(PROGRAM_NAME, PROGRAM_VERSION, 
 			ID1, URL1, 
 			ID2, URL2, 
 			ID3, URL3, 
 			ID4, URL4, 
-			URL_TOKEN, userData1, userData2);*/
+			URL_TOKEN, userData1, userData2);
    
    trace->event(s_fn,0,"leave [void]");
 }
@@ -1605,6 +1606,7 @@ void initGame(void)
    
 	game.wave1 = 0;
 	game.wave2 = 0;
+	game.panelXOffset=20;
 				
    	// Init Images
 	initImages();
@@ -1824,7 +1826,8 @@ void drawText(int x, int y, int type, const char *text)
 void drawGamePanel(void)
 {
 	// Draw background
-	GRRLIB_DrawImg(game.panelXOffset,0, images.panel1, 0, 1, 1, IMAGE_COLOR3 );
+	//GRRLIB_DrawImg(game.panelXOffset,0, images.panel1, 0, 1, 1, IMAGE_COLOR3 );
+	GRRLIB_Rectangle(game.panelXOffset, 0, 100, 440, GRRLIB_BLACK, 1);
 }
 		
 // Draw Game panel Text on screen
@@ -2002,7 +2005,7 @@ void drawScreen(void)
 	 
 		case stateMainMenu:
 		{
-		  const char *version;
+		  char *version=NULL;
 
 		  // Draw background
 		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
@@ -2031,7 +2034,10 @@ void drawScreen(void)
 	         drawText(20, ypos, fontNew, tmp);			 
           }  
 		  
-		  sprintf(tmp,"NETWORK THREAD: %s",tcp_get_state());
+		  char *state=NULL;
+		  state=tcp_get_state();
+		  
+		  sprintf(tmp,"NETWORK THREAD: %s",state);
 		  drawText(20, 485, fontSpecial, tmp);
 		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate()); 
@@ -2402,62 +2408,66 @@ void drawScreen(void)
 		   // Show title
 		  drawText(170, ypos, fontTitle, "Weapons");
 		  
+		  int xoffset=50;
+		  
           ypos+=100;
-		  drawText(20, ypos,  fontParagraph, "Icon");
-		  drawText(70, ypos,  fontParagraph, "Type");
-		  drawText(135, ypos, fontParagraph, "Price");
-		  drawText(200, ypos, fontParagraph, "Power");
-		  drawText(340, ypos, fontParagraph, "Range");
-		  drawText(470, ypos, fontParagraph, "Rate");
+		  drawText(30+xoffset, ypos,  fontParagraph, "Icon");
+		  drawText(80+xoffset, ypos,  fontParagraph, "Type");
+		  drawText(155+xoffset, ypos, fontParagraph, "Price");
+		  drawText(240+xoffset, ypos, fontParagraph, "Power");
+		  drawText(340+xoffset, ypos, fontParagraph, "Range");
+		  drawText(440+xoffset, ypos, fontParagraph, "Rate");
 	
 		  ypos+=50;	  
-		  GRRLIB_DrawImg(20,ypos, images.weapon1, 0, 1, 1, IMAGE_COLOR );
-		  drawText(70, ypos, fontNormal, "Gun");
-		  drawText(135, ypos, fontNormal, "$100");
-		  drawText(200, ypos, fontNormal, "2-5 [$10]");
-		  drawText(340, ypos, fontNormal, "50-75 [$10] ");
-		  drawText(470, ypos, fontNormal, "50-100 [$10]");
+		  GRRLIB_DrawImg(30+xoffset,ypos, images.weapon1, 0, 1, 1, IMAGE_COLOR );
+		  drawText(80+xoffset, ypos, fontNormal, "Gun");
+		  drawText(155+xoffset, ypos, fontNormal, "$100");
+		  drawText(240+xoffset, ypos, fontNormal, "002-005");
+		  drawText(340+xoffset, ypos, fontNormal, "050-075");
+		  drawText(440+xoffset, ypos, fontNormal, "050-100");
 		  					
 		  ypos+=40;
-		  GRRLIB_DrawImg(20,ypos, images.weapon2, 0, 1, 1, IMAGE_COLOR );
-		  drawText(70, ypos, fontNormal, "Rifle");
-		  drawText(135, ypos, fontNormal, "$200");
-		  drawText(200, ypos, fontNormal, "4-10 [$25]");
-		  drawText(340, ypos, fontNormal, "90-100 [$25]");
-		  drawText(470, ypos, fontNormal, "45-80 [$25]");
+		  GRRLIB_DrawImg(30+xoffset,ypos, images.weapon2, 0, 1, 1, IMAGE_COLOR );
+		  drawText(80+xoffset, ypos, fontNormal, "Rifle");
+		  drawText(155+xoffset, ypos, fontNormal, "$200");
+		  drawText(240+xoffset, ypos, fontNormal, "004-010");
+		  drawText(340+xoffset, ypos, fontNormal, "090-100");
+		  drawText(440+xoffset, ypos, fontNormal, "045-080");
 					
 		  ypos+=40;
-		  GRRLIB_DrawImg(20,ypos, images.weapon3, 0, 1, 1, IMAGE_COLOR );
-		  drawText(70, ypos, fontNormal, "Canon");
-		  drawText(135, ypos, fontNormal, "$500");
-		  drawText(200, ypos, fontNormal, "8-30 [$50]");
-		  drawText(340, ypos, fontNormal, "60-125 [$50]");
-		  drawText(470, ypos, fontNormal, "30-80 [$50]");
+		  GRRLIB_DrawImg(30+xoffset,ypos, images.weapon3, 0, 1, 1, IMAGE_COLOR );
+		  drawText(80+xoffset, ypos, fontNormal, "Canon");
+		  drawText(155+xoffset, ypos, fontNormal, "$500");
+		  drawText(240+xoffset, ypos, fontNormal, "008-030");
+		  drawText(340+xoffset, ypos, fontNormal, "060-125");
+		  drawText(440+xoffset, ypos, fontNormal, "030-080");
 		
 		  ypos+=40;
-		  GRRLIB_DrawImg(20,ypos, images.weapon4, 0, 1, 1, IMAGE_COLOR );
-		  drawText(70, ypos, fontNormal, "Missle");
-		  drawText(135, ypos, fontNormal, "$1000");
-		  drawText(200, ypos, fontNormal, "15-40 [$75]");
-		  drawText(340, ypos, fontNormal, "80-125 [$75]");
-		  drawText(470, ypos, fontNormal, "40-80 [$75]");
+		  GRRLIB_DrawImg(30+xoffset,ypos, images.weapon4, 0, 1, 1, IMAGE_COLOR );
+		  drawText(80+xoffset, ypos, fontNormal, "Missle");
+		  drawText(155+xoffset, ypos, fontNormal, "$1000");
+		  drawText(240+xoffset, ypos, fontNormal, "015-040");
+		  drawText(340+xoffset, ypos, fontNormal, "080-125");
+		  drawText(440+xoffset, ypos, fontNormal, "040-080");
 					
 		  ypos+=40;
-		  GRRLIB_DrawImg(20,ypos, images.weapon5, 0, 1, 1, IMAGE_COLOR );
-		  drawText(70, ypos, fontNormal, "Laser");
-		  drawText(135, ypos, fontNormal, "$2000");
-		  drawText(200, ypos, fontNormal, "30-60 [$100]");
-		  drawText(340, ypos, fontNormal, "50-75 [$100]");
-		  drawText(470, ypos, fontNormal, "40-80 [$100]");
+		  GRRLIB_DrawImg(30+xoffset,ypos, images.weapon5, 0, 1, 1, IMAGE_COLOR );
+		  drawText(80+xoffset, ypos, fontNormal, "Laser");
+		  drawText(155+xoffset, ypos, fontNormal, "$2000");
+		  drawText(240+xoffset, ypos, fontNormal, "030-060");
+		  drawText(340+xoffset, ypos, fontNormal, "050-075");
+		  drawText(440+xoffset, ypos, fontNormal, "040-080");
 			
 		  ypos+=40;
-		  GRRLIB_DrawImg(20,ypos, images.weapon6, 0, 1, 1, IMAGE_COLOR );
-		  drawText(70, ypos, fontNormal, "Nuck");
-		  drawText(135, ypos, fontNormal, "$4000");
-		  drawText(200, ypos, fontNormal, "100-200 [$250]");
-		  drawText(340, ypos, fontNormal, "80-100 [$250]");
-		  drawText(470, ypos, fontNormal, "100-200 [$250]");			
-		  
+		  GRRLIB_DrawImg(30+xoffset,ypos, images.weapon6, 0, 1, 1, IMAGE_COLOR );
+		  drawText(80+xoffset, ypos, fontNormal, "Nuck");
+		  drawText(155+xoffset, ypos, fontNormal, "$4000");
+		  drawText(240+xoffset, ypos, fontNormal, "100-200");
+		  drawText(340+xoffset, ypos, fontNormal, "080-100");
+		  drawText(440+xoffset, ypos, fontNormal, "100-200");			
+		
+		  drawText(130, 420, fontNormal, "Overview of upgrade range of each weapon system.");	
+		
 		  // Draw Button Text labels
 		  drawButtonsText(0);
 		  
@@ -2483,7 +2493,7 @@ void drawScreen(void)
 		   // Show title
 		  drawText(0, ypos, fontTitle, "Monsters");
         
-		  ypos=150;
+		  ypos=130;
 		  int xpos=50;
 		  GRRLIB_DrawImg( xpos, ypos, images.monster1, 0, 1, 1, IMAGE_COLOR );
 		  drawText(xpos+40, ypos, fontNormal, "5");
@@ -2512,7 +2522,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg( xpos, ypos, images.monster7, 0, 1, 1, IMAGE_COLOR );
 		  drawText(xpos+40, ypos, fontNormal, "35");
 		  
-		  ypos=150;
+		  ypos=130;
 		  xpos+=150;
 		  	
 		  GRRLIB_DrawImg( xpos, ypos, images.monster8, 0, 1, 1, IMAGE_COLOR );
@@ -2542,7 +2552,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg( xpos, ypos, images.monster14, 0, 1, 1, IMAGE_COLOR );
 		  drawText(xpos+40, ypos, fontNormal, "120");
 
-		  ypos=150;
+		  ypos=130;
 		  xpos+=150;
 		  	
 		  GRRLIB_DrawImg( xpos, ypos, images.monster15, 0, 1, 1, IMAGE_COLOR );
@@ -2572,7 +2582,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg( xpos, ypos, images.monster21, 0, 1, 1, IMAGE_COLOR );
 		  drawText(xpos+40, ypos, fontNormal, "300");
 		  
-		  ypos=150;
+		  ypos=130;
 		  xpos+=150;
 		  	
 		  GRRLIB_DrawImg( xpos, ypos, images.monster22, 0, 1, 1, IMAGE_COLOR );
@@ -2588,8 +2598,11 @@ void drawScreen(void)
 
 		  ypos+=40;	
 		  GRRLIB_DrawImg( xpos, ypos, images.monster25, 0, 1, 1, IMAGE_COLOR );
-		  drawText(xpos+40, ypos, fontNormal, "500");		   
-		  
+		  drawText(xpos+40, ypos, fontNormal, "500");	
+
+   	      drawText(130, 420, fontNormal, "Overview of energy level of each monster type.");	
+		  	   		  \
+					  \
 		  // Draw Button Text labels
 		  drawButtonsText(0);
 		  
@@ -2625,6 +2638,10 @@ void drawScreen(void)
 	      drawText(0, ypos, fontParagraph, "GAME GRAPHICS  ");
   	      ypos+=20;
 	      drawText(0, ypos, fontNormal, "wplaat");
+		  ypos+=20;
+	      drawText(0, ypos, fontNormal, "MLtm");
+		  ypos+=20;
+	      drawText(0, ypos, fontNormal, "shango64");
 		  
 	      ypos+=30;
 	      drawText(0, ypos, fontParagraph, "MUSIC ");
@@ -2709,7 +2726,7 @@ void drawScreen(void)
 		  int  len=0;
 		  int  lineCount=0;
 		  int  maxLines=0;
-		  const char *buffer;
+		  char *buffer=NULL;
 		  char text[MAX_BUFFER_SIZE];
 		  
 		  int startEntry;
@@ -2881,8 +2898,9 @@ void drawScreen(void)
 		  drawGrid(); 
 		  drawMonsters();
 		  drawWeapons();
-		  drawGamePanel();
 		  drawButtons();
+	
+		  GRRLIB_Rectangle(210, 220, 220, 100, GRRLIB_BLACK, 1);
 	
 		  // Init text layer	  
           GRRLIB_initTexture();
@@ -2890,11 +2908,9 @@ void drawScreen(void)
 		  drawGridText();	
  		  drawMonstersText();
 		  drawWeaponsText();
-		  drawGamePanelText();
-		  drawButtonsText(-28);
+		  drawButtonsText(-10);
 	
-		  GRRLIB_Rectangle(200, 150, 400, 200, GRRLIB_BLACK, 1);
- 	      drawText(0, 250, fontParagraph, "Quit game?");	
+ 	      drawText(0, 230, fontParagraph, "Quit game?");	
 	     
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -3498,8 +3514,8 @@ void processEvent()
 			pointers[0]->setImage(images.pointer1);
 			
 			if ((game.cash>=getWeaponPrice(game.weaponType)) &&
-				( pointers[0]->getX()>=130) &&
-				( pointers[0]->getX()<=630))
+				( pointers[0]->getX()>=115) &&
+				( pointers[0]->getX()<=600))
 			{
 				// Find first empty place in weapons array
 				int id=0;
@@ -3726,39 +3742,42 @@ void processStateMachine()
 	
 	case stateGame:
 	{
-		trace->event(s_fn,0,"stateMachine=stateGame");
-	 
-		// Init game variables
-		game.score=0;
-		game.cash=2000;
-		game.wave=0;
-		game.monsterInBase=0;
-		game.weaponSelect=0;
-		game.weaponType=0;
-		game.panelXOffset=20;
-		game.panelYOffset=0;
-			
-		// Start delay between two waves
-		game.waveDelay = 3000;
-		game.waveCountDown=game.waveDelay;
-
-		// Show New Wave text on screen
-		game.alfa=MAX_ALFA;
-		
 		// Init buttons
 		initButtons();	
+			
+		if (game.prevStateMachine!=stateGameQuit)
+		{
+			trace->event(s_fn,0,"stateMachine=stateGame");
+	 
+			// Init game variables
+			game.score=0;
+			game.cash=2000;
+			game.wave=0;
+			game.monsterInBase=0;
+			game.weaponSelect=0;
+			game.weaponType=0;
+			game.panelXOffset=20;
+			game.panelYOffset=0;
+			
+			// Start delay between two waves
+			game.waveDelay = 3000;
+			game.waveCountDown=game.waveDelay;
+
+			// Show New Wave text on screen
+			game.alfa=MAX_ALFA;
 		
-		// Init Map
-		initGrid(game.selectedMap);
+			// Init Map
+			initGrid(game.selectedMap);
 	
-		// clear monster array (clean up previous game)
-		clearMonsters();
+			// clear monster array (clean up previous game)
+			clearMonsters();
 	
-		// Init Weapons
-		initWeapons();
+			// Init Weapons
+			initWeapons();
 	
-		// Lanch first monster wave
-		game.event=eventLanch;
+			// Lanch first monster wave
+			game.event=eventLanch;
+		}
 	}
 	break;
 	
@@ -3806,7 +3825,9 @@ void processStateMachine()
 		game.scrollIndex=0;
 		
 		// Fetch data for network thread
-		char *buffer=tcp_get_today_highscore();
+		char *buffer=NULL;
+		
+		buffer=tcp_get_today_highscore();
 		loadTodayHighScore(buffer);		     
 			  
 		// Init buttons
@@ -3820,7 +3841,9 @@ void processStateMachine()
 		game.scrollIndex=0;
 		
 		// Fetch data for network thread
-		char *buffer=tcp_get_global_highscore();
+		char *buffer=NULL;
+		
+		buffer=tcp_get_global_highscore();
 		loadGlobalHighScore(buffer);		     
 			  
 		// Init buttons

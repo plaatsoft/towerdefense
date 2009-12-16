@@ -200,7 +200,7 @@ void Button::setLabel(const char *label1)
 void Button::setColor(u32 color1)
 {
 	//const char *s_fn="Button::setColor";
-	//trace->event(s_fn,0,"%s",label1);
+	//trace->event(s_fn,0,"%s",color1);
 	
     color=color1;
 }
