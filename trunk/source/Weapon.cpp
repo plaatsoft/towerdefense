@@ -213,7 +213,7 @@ int Weapon::upgrade(int type)
 					power+=1;
 					trace->event(s_fn,0,"Weapon %d upgrade power to %d",index, power);
 					game.cash-=powerPrice;
-					//powerPrice=powerPrice*2;					
+					powerPrice=powerPrice*2;					
 					sound->effect(SOUND_UPGRADE);
 				}
 				break;
@@ -224,18 +224,18 @@ int Weapon::upgrade(int type)
 					range+=5;
 					trace->event(s_fn,0,"Weapon %d upgrade range to %d",index, range);
 					game.cash-=rangePrice;
-					//rangePrice=rangePrice*2;
+					rangePrice=rangePrice*2;
 					sound->effect(SOUND_UPGRADE);
 				}
 				break;
 
 		// Rate upgrade		
-		case 2:	if ((game.cash>=ratePrice) && (rate<maxRate))
+		case 2:	if ((game.cash>=ratePrice) && (rate>maxRate))
 				{
 					rate-=5;
 					trace->event(s_fn,0,"Weapon %d upgrade rate to %d",index, rate);
 					game.cash-=ratePrice;
-					//ratePrice=ratePrice*2;
+					ratePrice=ratePrice*2;
 					sound->effect(SOUND_UPGRADE);
 				}
 				break;
