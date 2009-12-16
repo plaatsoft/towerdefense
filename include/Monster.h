@@ -52,7 +52,7 @@ class Monster
 	void draw(void);
 	void text(void);
 	bool move(void);
-	bool hit(int hit);
+	int hit(int hit);
 	
 	// Setters
 	void setImage(GRRLIB_texImg *image);	

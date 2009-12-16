@@ -335,7 +335,7 @@ void Pointer::buttonA(int x, int y)
 			if (buttons[1]->onSelect(x,y,true))
 			{
 				// Credits button	      
-				game.stateMachine=stateHelp;
+				game.stateMachine=stateHelp1;
 			}
 		
 			if (buttons[2]->onSelect(x,y,true))
@@ -438,7 +438,29 @@ void Pointer::buttonA(int x, int y)
 		}
 		break;
 	
-		case stateHelp:
+		case stateHelp1:
+		{
+			// Check if button is pressed on screen
+			if (buttons[0]->onSelect(x,y,true))
+			{
+				// Next button	 
+				game.stateMachine=stateHelp2;	     
+			}
+		}
+		break;
+
+		case stateHelp2:
+		{
+			// Check if button is pressed on screen
+			if (buttons[0]->onSelect(x,y,true))
+			{
+				// Next button	 
+				game.stateMachine=stateHelp3;	     
+			}
+		}
+		break;
+
+		case stateHelp3:
 		{
 			// Check if button is pressed on screen
 			if (buttons[0]->onSelect(x,y,true))
@@ -448,7 +470,7 @@ void Pointer::buttonA(int x, int y)
 			}
 		}
 		break;
-
+		
 		case stateReleaseNotes:
 		{
 			// Check if button is pressed on screen

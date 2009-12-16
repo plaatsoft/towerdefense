@@ -52,6 +52,10 @@ class Weapon
 	int rate;
 	int range;
 	int power;
+
+    int maxPower;
+    int maxRange;   
+    int maxRate;
 	
 	int powerPrice;
 	int rangePrice;
@@ -78,6 +82,9 @@ class Weapon
 	void setPower(int power);	
 	void setRange(int range);
 	void setRate(int rate);
+	void setMaxPower(int maxPower);	
+	void setMaxRange(int maxRange);
+	void setMaxRate(int maxRate);
 	void setPowerPrice(int price);
     void setRangePrice(int price);
     void setRatePrice(int price);

@@ -27,7 +27,7 @@
 
 #define PROGRAM_NAME	   		"TowerDefense"
 #define PROGRAM_VERSION     	"0.43"
-#define RELEASE_DATE        	"15-12-2009" 
+#define RELEASE_DATE        	"16-12-2009" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -147,17 +147,19 @@ enum
 	stateMainMenu=4,
 	stateMapSelectMenu=5,
 	stateGame=6,
-	stateLevelCleared=7,
-	stateGameOver=8,
+	stateGameOver=7,
+	stateGameStop=8,
 	stateQuit=9,
 	stateLocalHighScore=10,
 	stateTodayHighScore=11,
 	stateGlobalHighScore=12,
-	stateHelp=13,
-	stateCredits=14,
-	stateSoundSettings=15,
-	stateReleaseNotes=16,
-	stateUserSettings=17
+	stateHelp1=13,
+	stateHelp2=14,
+	stateHelp3=15,
+	stateCredits=16,
+	stateSoundSettings=17,
+	stateReleaseNotes=18,
+	stateUserSettings=19
 };
 
 // Event machine events

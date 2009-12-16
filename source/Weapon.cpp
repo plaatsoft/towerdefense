@@ -66,6 +66,10 @@ Weapon::Weapon()
    range=0;   
    rate=0;
    
+   maxPower=0;
+   maxRange=0;   
+   maxRate=0;
+   
    powerPrice=0;
    rangePrice=0;
    ratePrice=0;
@@ -166,10 +170,9 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 								break;
 					}
 								
-					game.score+=power;
-					game.cash+=power;
-					
-					if (monsters[i]->hit(power))
+					int energyLeft=monsters[i]->hit(power);
+										
+					if (energyLeft==0)
 					{						
 						delete monsters[i];
 						monsters[i]=NULL;
@@ -177,6 +180,12 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 						// Dead
 						sound->effect(SOUND_DEAD);	
 					}
+					
+					// Receive score and cash for shooting the monster
+					game.score+=power;
+					game.cash+=power;
+					
+					// Reset delay counter;
 					delay=rate;
 					break;
 				}
@@ -199,34 +208,34 @@ int Weapon::upgrade(int type)
 	switch (type)
 	{
 		// Power upgrade
-		case 0:	if (game.cash>=powerPrice)
+		case 0:	if ((game.cash>=powerPrice) && (power<maxPower))
 				{
 					power+=1;
 					trace->event(s_fn,0,"Weapon %d upgrade power to %d",index, power);
 					game.cash-=powerPrice;
-					powerPrice=powerPrice*2;					
+					//powerPrice=powerPrice*2;					
 					sound->effect(SOUND_UPGRADE);
 				}
 				break;
 
 		// Range upgrade
-		case 1:	if (game.cash>=rangePrice)
+		case 1:	if ((game.cash>=rangePrice) && (range<maxRange))
 				{
 					range+=5;
 					trace->event(s_fn,0,"Weapon %d upgrade range to %d",index, range);
 					game.cash-=rangePrice;
-					rangePrice=rangePrice*2;
+					//rangePrice=rangePrice*2;
 					sound->effect(SOUND_UPGRADE);
 				}
 				break;
 
 		// Rate upgrade		
-		case 2:	if (game.cash>=ratePrice)
+		case 2:	if ((game.cash>=ratePrice) && (rate<maxRate))
 				{
 					rate-=5;
 					trace->event(s_fn,0,"Weapon %d upgrade rate to %d",index, rate);
 					game.cash-=ratePrice;
-					ratePrice=ratePrice*2;
+					//ratePrice=ratePrice*2;
 					sound->effect(SOUND_UPGRADE);
 				}
 				break;
@@ -309,6 +318,31 @@ void Weapon::setRate(int rate1)
    
    rate=rate1;
    delay=rate;
+}
+
+
+void Weapon::setMaxPower(int maxPower1)
+{
+   const char *s_fn="Weapon::setmaxPower";
+   trace->event(s_fn,0,"%d",maxPower1);
+   
+   maxPower=maxPower1;
+}
+
+void Weapon::setMaxRange(int maxRange1)
+{
+   const char *s_fn="Weapon::setMaxRange";
+   trace->event(s_fn,0,"%d",maxRange1); 
+   
+   maxRange=maxRange1;
+ }
+
+void Weapon::setMaxRate(int maxRate1)
+{
+   const char *s_fn="Weapon::setMaxRate";
+   trace->event(s_fn,0,"%d",maxRate1);
+   
+   maxRate=maxRate1;
 }
 
 
