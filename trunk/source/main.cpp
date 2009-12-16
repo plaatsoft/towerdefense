@@ -26,6 +26,11 @@
 **  - Bugfix: Balance sound effect volume.
 **  - Bugfix: Button rumble support is not working
 **
+**  16/12/2009 Version 0.43
+**  - Added help screen two
+**  - Added help screen screen
+**  - Limit weapon upgrade levels.
+**
 **  15/12/2009 Version 0.42
 **  - Added Network thread.
 **  	- Fetch latest available version information from internet.
@@ -33,8 +38,7 @@
 **  	- Added Release Notes screen.
 **  - Added today Highscore screen.
 **  - Added global Highscore screen.
-**  - Added new releas check on internet.
-**  - Added Release Notes screen.
+**  - Added release notes screen.
 **
 **  14/12/2009 Version 0.41
 **  - Added dynamic weapon placement on the gameboard
@@ -1234,7 +1238,33 @@ void initButtons(void)
 		}
 		break;
 		
-		case stateHelp:
+		case stateHelp1:
+		{
+			// Main Menu Button
+			buttons[0]=new Button();
+			buttons[0]->setX(240);
+			buttons[0]->setY(460);
+			buttons[0]->setImageNormal(images.button2);
+			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setLabel("Next");	
+			buttons[0]->setColor(IMAGE_COLOR);	
+		}
+		break;
+		
+		case stateHelp2:
+		{
+			// Main Menu Button
+			buttons[0]=new Button();
+			buttons[0]->setX(240);
+			buttons[0]->setY(460);
+			buttons[0]->setImageNormal(images.button2);
+			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setLabel("Next");	
+			buttons[0]->setColor(IMAGE_COLOR);	
+		}
+		break;
+		
+		case stateHelp3:
 		{
 			// Main Menu Button
 			buttons[0]=new Button();
@@ -2281,7 +2311,7 @@ void drawScreen(void)
 	    }
 	    break;
 
-	    case stateHelp:
+	    case stateHelp1:
 	    {	  
 	      // Draw background
 		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
@@ -2323,6 +2353,194 @@ void drawScreen(void)
 	    }
 	    break;
 
+		case stateHelp2:
+	    {	  
+	      // Draw background
+		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+		 
+		  // Draw buttons
+	      drawButtons(); 
+		  
+		  // Init text layer	  
+          GRRLIB_initTexture();
+ 
+		   // Show title
+		  drawText(0, ypos, fontTitle, "Weapon Information");
+		  
+          ypos+=100;
+		  drawText(20, ypos,  fontParagraph, "Type");
+		  drawText(100, ypos, fontParagraph, "Price");
+		  drawText(200, ypos, fontParagraph, "Power");
+		  drawText(300, ypos, fontParagraph, "Range");
+		  drawText(400, ypos, fontParagraph, "Rate");
+	
+		  ypos+=50;	  
+		  GRRLIB_DrawImg(20,ypos, images.weapon1, 0, 1, 1, IMAGE_COLOR );
+		  drawText(100, ypos, fontNormal, "Gun");
+		  drawText(200, ypos, fontNormal, "$100");
+		  drawText(300, ypos, fontNormal, "2-5 [$10]");
+		  drawText(400, ypos, fontNormal, "50-75 [$10] ");
+		  drawText(500, ypos, fontNormal, "100-50 [$10]");
+		  					
+		  ypos+=30;
+		  GRRLIB_DrawImg(20,ypos, images.weapon2, 0, 1, 1, IMAGE_COLOR );
+		  drawText(50, ypos, fontNormal, "Rifle");
+		  drawText(200, ypos, fontNormal, "$200");
+		  drawText(300, ypos, fontNormal, "4-10 [$25]");
+		  drawText(400, ypos, fontNormal, "90-100 [$25]");
+		  drawText(500, ypos, fontNormal, "80-45 [$25]");
+					
+		  ypos+=30;
+		  GRRLIB_DrawImg(20,ypos, images.weapon3, 0, 1, 1, IMAGE_COLOR );
+		  drawText(50, ypos, fontNormal, "Canon");
+		  drawText(200, ypos, fontNormal, "$500");
+		  drawText(300, ypos, fontNormal, "8-30 [$50]");
+		  drawText(400, ypos, fontNormal, "60-125 [$50]");
+		  drawText(500, ypos, fontNormal, "80-30] [$50]");
+		
+		  ypos+=30;
+		  GRRLIB_DrawImg(20,ypos, images.weapon4, 0, 1, 1, IMAGE_COLOR );
+		  drawText(50, ypos, fontNormal, "Missle");
+		  drawText(200, ypos, fontNormal, "$1000");
+		  drawText(300, ypos, fontNormal, "15-40 [$75]");
+		  drawText(400, ypos, fontNormal, "80-125 [$75]");
+		  drawText(500, ypos, fontNormal, "80-40 [$75]");
+					
+		  ypos+=30;
+		  GRRLIB_DrawImg(20,ypos, images.weapon5, 0, 1, 1, IMAGE_COLOR );
+		  drawText(50, ypos, fontNormal, "Laser");
+		  drawText(200, ypos, fontNormal, "$2000");
+		  drawText(300, ypos, fontNormal, "30-60 [$100]");
+		  drawText(400, ypos, fontNormal, "50-75 [$100]");
+		  drawText(500, ypos, fontNormal, "80-40 [$100]");
+			
+		  ypos+=30;
+		  GRRLIB_DrawImg(20,ypos, images.weapon6, 0, 1, 1, IMAGE_COLOR );
+		  drawText(50, ypos, fontNormal, "Nuck");
+		  drawText(200, ypos, fontNormal, "$4000");
+		  drawText(300, ypos, fontNormal, "100-200 [$250]");
+		  drawText(400, ypos, fontNormal, "80-100 [$250]");
+		  drawText(500, ypos, fontNormal, "200-100 [$250]");			
+		}
+		
+		case stateHelp3:
+	    {	  
+	      // Draw background
+		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+		 
+		  // Draw buttons
+	      drawButtons(); 
+		  
+		  // Init text layer	  
+          GRRLIB_initTexture();
+ 
+		   // Show title
+		  drawText(0, ypos, fontTitle, "Monster Information");
+        
+		  ypos+=100;	  
+		  GRRLIB_DrawImg(20, ypos, images.monster1, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "5");
+		  
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster2, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "10");
+		  
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster3, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "15");
+		  
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster4, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "20");
+
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster5, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "25");		  
+
+		  ypos+=100;	  
+		  GRRLIB_DrawImg(20, ypos, images.monster6, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "30");
+		  
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster7, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "35");
+		  
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster8, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "40");
+		  
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster9, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "45");
+
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster10, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "50");
+		  
+
+		  ypos+=100;	  
+		  GRRLIB_DrawImg(20, ypos, images.monster11, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "55");
+		  
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster12, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "60");
+		  
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster13, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "65");
+		  
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster14, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "70");
+
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster15, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "75");		  
+
+		  ypos+=100;	  
+		  GRRLIB_DrawImg(20, ypos, images.monster16, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "80");
+		  
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster17, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "85");
+		  
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster18, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "90");
+		  
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster19, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "95");
+
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster20, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "100");
+		  
+
+		  ypos+=100;	  
+		  GRRLIB_DrawImg(20, ypos, images.monster21, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "105");
+		  
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster22, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "110");
+		  
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster23, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "115");
+		  
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster24, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "120");
+
+		  ypos+=50;	
+		  GRRLIB_DrawImg(20, ypos, images.monster25, 0, 1, 1, IMAGE_COLOR );
+		  drawText(60, ypos, fontNormal, "130");		  
+
+		}
+		  
 	    case stateCredits:
 	    {  
 	      // Draw background
@@ -2598,6 +2816,12 @@ void drawScreen(void)
 		}
 		break;
 		
+		case stateGameStop:
+		{
+		
+		}
+		break;
+		
 		case stateGameOver:
 		{	  
 		  drawGrid(); 
@@ -2774,6 +2998,11 @@ void createWeapon(int x, int y, int id, int type)
 					weapons[id]->setPower(2);
 					weapons[id]->setRange(50);
 					weapons[id]->setRate(100);
+					
+					weapons[id]->setMaxPower(5);
+					weapons[id]->setMaxRange(75);
+					weapons[id]->setMaxRate(50);
+					
 					weapons[id]->setPowerPrice(10);
 					weapons[id]->setRangePrice(10);
 					weapons[id]->setRatePrice(10);		
@@ -2786,6 +3015,11 @@ void createWeapon(int x, int y, int id, int type)
 					weapons[id]->setPower(4);
 					weapons[id]->setRange(55);
 					weapons[id]->setRate(90);
+					
+					weapons[id]->setMaxPower(10);
+					weapons[id]->setMaxRange(100);
+					weapons[id]->setMaxRate(50);
+					
 					weapons[id]->setPowerPrice(25);
 					weapons[id]->setRangePrice(25);
 					weapons[id]->setRatePrice(25);		
@@ -2794,9 +3028,14 @@ void createWeapon(int x, int y, int id, int type)
 				
 		case 2:	{
 					// Canon
-					weapons[id]->setPower(6);
+					weapons[id]->setPower(8);
 					weapons[id]->setRange(60);
 					weapons[id]->setRate(80);
+					
+					weapons[id]->setMaxPower(20);
+					weapons[id]->setMaxRange(125);
+					weapons[id]->setMaxRate(40);
+					
 					weapons[id]->setPowerPrice(50);
 					weapons[id]->setRangePrice(50);
 					weapons[id]->setRatePrice(50);		
@@ -2805,9 +3044,14 @@ void createWeapon(int x, int y, int id, int type)
 				
 		case 3:	{
 					// Missle				
-					weapons[id]->setPower(8);
-					weapons[id]->setRange(65);
+					weapons[id]->setPower(15);
+					weapons[id]->setRange(80);
 					weapons[id]->setRate(80);
+					
+					weapons[id]->setMaxPower(40);
+					weapons[id]->setMaxRange(125);
+					weapons[id]->setMaxRate(40);
+					
 					weapons[id]->setPowerPrice(75);
 					weapons[id]->setRangePrice(75);
 					weapons[id]->setRatePrice(75);		
@@ -2816,9 +3060,14 @@ void createWeapon(int x, int y, int id, int type)
 								
 		case 4:	{
 					// Laser
-					weapons[id]->setPower(10);
-					weapons[id]->setRange(70);
-					weapons[id]->setRate(70);
+					weapons[id]->setPower(30);
+					weapons[id]->setRange(50);
+					weapons[id]->setRate(80);
+					
+					weapons[id]->setMaxPower(60);
+					weapons[id]->setMaxRange(75);
+					weapons[id]->setMaxRate(40);
+					
 					weapons[id]->setPowerPrice(100);
 					weapons[id]->setRangePrice(100);
 					weapons[id]->setRatePrice(100);		
@@ -2826,13 +3075,18 @@ void createWeapon(int x, int y, int id, int type)
 				break;
 				
 		case 5:	{
-					// Unknown (TODO)
-					weapons[id]->setPower(20);
+					// Nuck
+					weapons[id]->setPower(100);
 					weapons[id]->setRange(80);
-					weapons[id]->setRate(100);
-					weapons[id]->setPowerPrice(500);
-					weapons[id]->setRangePrice(500);
-					weapons[id]->setRatePrice(500);		
+					weapons[id]->setRate(200);
+					
+					weapons[id]->setMaxPower(200);
+					weapons[id]->setMaxRange(100);
+					weapons[id]->setMaxRate(100);
+					
+					weapons[id]->setPowerPrice(250);
+					weapons[id]->setRangePrice(250);
+					weapons[id]->setRatePrice(250);		
 				}
 				break;
 	}
@@ -3499,9 +3753,27 @@ void processStateMachine()
 	}
 	break;
 	
-	case stateHelp:
+	case stateHelp1:
 	{
-		trace->event(s_fn,0,"stateMachine=stateHelp");
+		trace->event(s_fn,0,"stateMachine=stateHelp1");
+		
+		// Init buttons
+		initButtons();		
+	}
+	break;
+
+	case stateHelp2:
+	{
+		trace->event(s_fn,0,"stateMachine=stateHelp2");
+		
+		// Init buttons
+		initButtons();		
+	}
+	break;
+	
+	case stateHelp3:
+	{
+		trace->event(s_fn,0,"stateMachine=stateHelp3");
 		
 		// Init buttons
 		initButtons();		

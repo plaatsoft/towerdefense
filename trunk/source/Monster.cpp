@@ -171,20 +171,18 @@ bool Monster::move(void)
 	return false;
 }
 
-bool Monster::hit(int hit)
+int Monster::hit(int hit)
 {
 	const char *s_fn="Monster::hit";
-	
-	bool dead=false;
 	
 	energy-=hit;
 	if (energy<=0) 
 	{
 		trace->event(s_fn,0,"Monster %d is dead!", index);
-		dead=true;
+		energy=0;
 	}
 	
-	return dead;
+	return energy;
 }
 
 // ------------------------------
