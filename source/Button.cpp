@@ -23,9 +23,9 @@
 #include "General.h"
 #include "GRRLIB.h"
 #include "Button.h"
-#include "Pointer.h"
 #include "Trace.h"
 #include "Sound.h" 
+#include "Pointer.h"
 
 extern Game    game; 
 extern Trace   *trace;
@@ -38,15 +38,20 @@ extern Pointer *pointers[MAX_POINTERS];
 
 Button::Button()
 {
-   const char *s_fn="Button::Button";
-   trace->event(s_fn,0,"enter");
+	const char *s_fn="Button::Button";
+	trace->event(s_fn,0,"enter");
 
-   x=0;
-   y=0;	
-   height=0;
-   width=0;
+	x=0;
+	y=0;	
+	height=0;
+	width=0;
    
-   trace->event(s_fn,0,"leave [void]");
+	for (int i=0; i<MAX_POINTERS; i++)
+	{
+		rumble[i]=false;
+	}
+   
+	trace->event(s_fn,0,"leave [void]");
 }
 	
 // ------------------------------
@@ -68,19 +73,27 @@ Button::~Button()
 void Button::draw()
 {
 	focus=false;
+	
 	for (int i=0; i<MAX_POINTERS; i++)
 	{
 		if (pointers[i]!=NULL)
 		{	
-			if ((pointers[i]->getXOffset()>=x) && (pointers[i]->getXOffset()<=(x+width)) 
-				&& (pointers[i]->getYOffset()>=y) && (pointers[i]->getYOffset()<=(y+height)))
+			if ( (pointers[i]->getXOffset()>=(x+3)) && 
+			     (pointers[i]->getXOffset()<=(x+width+3))	&& 
+				 (pointers[i]->getYOffset()>=(y-3)) && 
+				 (pointers[i]->getYOffset()<=(y+height+3)))
 			{
-				// Only buttons with a label can be selected
-				//if (strlen(label)>0)
+				focus=true;	
+				
+				if (!rumble[i])
 				{
-					focus=true;	
-					break;
+					pointers[i]->setRumble(MAX_RUMBLE);
+					rumble[i]=true;
 				}
+			}
+			else
+			{
+				rumble[i]=false;	
 			}
 		}
 	}
@@ -88,11 +101,11 @@ void Button::draw()
 	if (focus)
 	{
 		GRRLIB_DrawImg( x, y, imageFocus, 0, 1, 1, color );	
-		//pointers[i].setRumble(MAX_RUMBLE);
 	}
 	else
 	{
 		GRRLIB_DrawImg( x, y, imageNormal, 0, 1, 1, color );	
+		
 	}
 }
 
@@ -114,11 +127,11 @@ bool Button::onSelect(int x1, int y1, bool clickEffect)
    trace->event(s_fn,0,"enter [x=%d|y=%d]",x1,y1);
 
    boolean selected=false;
-   if ( (x1>=x) && (x1<=(x+width)) && (y1>=y) && (y1<=(y+height)) )
+   if ( (x1>=(x-3)) && (x1<=(x+width+3)) && (y1>=(y-3) && (y1<=(y+height+3))) )
    {      
 	  trace->event(s_fn,0,"Button selected");
 	  
-	  // Click
+	  // Click sound
 	  if (clickEffect) sound->effect(SOUND_CLICK);
 	  selected=true;
    }
