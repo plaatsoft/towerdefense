@@ -277,7 +277,7 @@ void Pointer::buttonScroll(int x,int y )
 	 case stateGlobalHighScore:
 	 case stateReleaseNotes:
 	 {     
-  	    if (buttons[1]->onSelect(x,y,false))
+  	    if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,false)))
 		{
 			if ((y-40)>SCROLLBAR_Y_MIN && (y-40)<SCROLLBAR_Y_MAX) 
 			{
@@ -326,55 +326,55 @@ void Pointer::buttonA(int x, int y)
 		case stateMainMenu:
 		{	
 			// Check if button is pressed on screen
-			if (buttons[0]->onSelect(x,y,true))
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
 				// Highscore button	      
 				game.stateMachine=stateLocalHighScore;
 			}
 		
-			if (buttons[1]->onSelect(x,y,true))
+			if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))
 			{
 				// Credits button	      
 				game.stateMachine=stateHelp1;
 			}
 		
-			if (buttons[2]->onSelect(x,y,true))
+			if ((buttons[2]!=NULL) && (buttons[2]->onSelect(x,y,true)))
 			{
 				// Credits button	      
 				game.stateMachine=stateCredits;
 			}
 		
-			if (buttons[3]->onSelect(x,y,true))
+			if ((buttons[3]!=NULL) && (buttons[3]->onSelect(x,y,true)))
 			{
 				// Sound Settings button	      
 				game.stateMachine=stateSoundSettings;
 			}
 		
-			if (buttons[4]->onSelect(x,y,true))
+			if ((buttons[4]!=NULL) && (buttons[4]->onSelect(x,y,true)))
 			{
 				// Release Notes button	      
 				game.stateMachine=stateReleaseNotes;
 			}
 		
-			if (buttons[5]->onSelect(x,y,true))
+			if ((buttons[5]!=NULL) && (buttons[5]->onSelect(x,y,true)))
 			{
 				// User Initials button	      
 				game.stateMachine=stateUserSettings;
 			}
 			
-			if (buttons[6]->onSelect(x,y,true))
+			if ((buttons[6]!=NULL) && (buttons[6]->onSelect(x,y,true)))
 			{
 				// SelectMapMenu button	      
 				game.stateMachine=stateMapSelectMenu;
 			}
 			
-			if (buttons[7]->onSelect(x,y,true))
+			if ((buttons[7]!=NULL) && (buttons[7]->onSelect(x,y,true)))
 			{
 				// Go back to HBC button    
 				game.stateMachine=stateQuit;
 			}
 			
-			if (buttons[8]->onSelect(x,y,true))
+			if ((buttons[8]!=NULL) && (buttons[8]->onSelect(x,y,true)))
 			{
 				// Stop rumble
 				WPAD_Rumble(0,0);
@@ -388,49 +388,49 @@ void Pointer::buttonA(int x, int y)
 		case stateMapSelectMenu:
 		{	
 			// Check if button is pressed on screen
-			if (buttons[0]->onSelect(x,y,true))
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
 				// Map1 button	      
 				game.stateMachine=stateGame;
 				game.selectedMap=1;
 			}
 		
-			if (buttons[1]->onSelect(x,y,true))
+			if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))
 			{
 				// Map2 button	      
 				game.stateMachine=stateGame;
 				game.selectedMap=2;
 			}
 		
-			if (buttons[2]->onSelect(x,y,true))
+			if ((buttons[2]!=NULL) && (buttons[2]->onSelect(x,y,true)))
 			{
 				// Map3 button	      
 				game.stateMachine=stateGame;
 				game.selectedMap=3;
 			}
 			
-			if (buttons[3]->onSelect(x,y,true))
+			if ((buttons[3]!=NULL) && (buttons[3]->onSelect(x,y,true)))
 			{
 				// Map4 button	      
 				//game.stateMachine=stateGame;
 				//game.selectedMap=1;
 			}
 		
-			if (buttons[4]->onSelect(x,y,true))
+			if ((buttons[4]!=NULL) && (buttons[4]->onSelect(x,y,true)))
 			{
 				// Map5 button	      
 				//game.stateMachine=stateGame;
 				//game.selectedMap=2;
 			}
 		
-			if (buttons[5]->onSelect(x,y,true))
+			if ((buttons[5]!=NULL) && (buttons[5]->onSelect(x,y,true)))
 			{
 				// Map3 button	      
 				//game.stateMachine=stateGame;
 				//game.selectedMap=3;
 			}
 			
-			if (buttons[6]->onSelect(x,y,true))
+			if ((buttons[6]!=NULL) && (buttons[6]->onSelect(x,y,true)))
 			{
 				// Main Menu button	      
 				game.stateMachine=stateMainMenu;
@@ -441,7 +441,7 @@ void Pointer::buttonA(int x, int y)
 		case stateHelp1:
 		{
 			// Check if button is pressed on screen
-			if (buttons[0]->onSelect(x,y,true))
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
 				// Next button	 
 				game.stateMachine=stateHelp2;	     
@@ -452,7 +452,7 @@ void Pointer::buttonA(int x, int y)
 		case stateHelp2:
 		{
 			// Check if button is pressed on screen
-			if (buttons[0]->onSelect(x,y,true))
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
 				// Next button	 
 				game.stateMachine=stateHelp3;	     
@@ -463,7 +463,7 @@ void Pointer::buttonA(int x, int y)
 		case stateHelp3:
 		{
 			// Check if button is pressed on screen
-			if (buttons[0]->onSelect(x,y,true))
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
 				// Main Menu button	 
 				game.stateMachine=stateMainMenu;	     
@@ -474,7 +474,7 @@ void Pointer::buttonA(int x, int y)
 		case stateReleaseNotes:
 		{
 			// Check if button is pressed on screen
-			if (buttons[0]->onSelect(x,y,true))
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
 				// Main Menu button	 
 				game.stateMachine=stateMainMenu;	    
@@ -485,7 +485,7 @@ void Pointer::buttonA(int x, int y)
 		case stateLocalHighScore:
 		{
 			// Check if button is pressed on screen
-			if (buttons[0]->onSelect(x,y,true))
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
 				// Main Menu button	 
 				game.stateMachine=stateTodayHighScore;	     
@@ -496,7 +496,7 @@ void Pointer::buttonA(int x, int y)
 		case stateTodayHighScore:
 		{
 			// Check if button is pressed on screen
-			if (buttons[0]->onSelect(x,y,true))
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
 				// Main Menu button	 
 				game.stateMachine=stateGlobalHighScore;	     
@@ -507,7 +507,7 @@ void Pointer::buttonA(int x, int y)
 		case stateGlobalHighScore:
 		{
 			// Check if button is pressed on screen
-			if (buttons[0]->onSelect(x,y,true))
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
 				// Main Menu button	 
 				game.stateMachine=stateMainMenu;	     
@@ -518,7 +518,7 @@ void Pointer::buttonA(int x, int y)
 		case stateSoundSettings:
 		{
 			// Check if button is pressed on screen
-			if (buttons[0]->onSelect(x,y,true))
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
 				// Main Menu button	 
 				game.stateMachine=stateMainMenu;	
@@ -527,37 +527,37 @@ void Pointer::buttonA(int x, int y)
 				settings->save(SETTING_FILENAME); 
 			}
 			
-			if (buttons[1]->onSelect(x,y,true))
+			if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))
 			{
 				// - music volume button event	           
 			    buttonMinus(3);   
 			}
 			
-			if (buttons[2]->onSelect(x,y,true))
+			if ((buttons[2]!=NULL) && (buttons[2]->onSelect(x,y,true)))
 			{
 				// + music volume button event	           
 			    buttonPlus(3); 
 			}
 				
-			if (buttons[3]->onSelect(x,y,true))
+			if ((buttons[3]!=NULL) && (buttons[3]->onSelect(x,y,true)))
 			{
 				// - effect volume button event	           
 			    buttonMinus(4);  
 			}
 			 
-			if (buttons[4]->onSelect(x,y,true))
+			if ((buttons[4]!=NULL) && (buttons[4]->onSelect(x,y,true)))
 			{
 				// + effect volume button event	           
 			    buttonPlus(4);
 			}
 			
-			if (buttons[5]->onSelect(x,y,true))
+			if ((buttons[5]!=NULL) && (buttons[5]->onSelect(x,y,true)))
 			{
 				// - music track button event	           
 			    buttonMinus(5); 
 			}
 
-			if (buttons[6]->onSelect(x,y,true))
+			if ((buttons[6]!=NULL) && (buttons[6]->onSelect(x,y,true)))
 			{			
 				// + music track  button event	           
 			    buttonPlus(5);
@@ -568,43 +568,43 @@ void Pointer::buttonA(int x, int y)
 		case stateUserSettings:
 		{ 
 			// Check if button is pressed on screen
-			if (buttons[0]->onSelect(x,y,true))
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
 				// + First Character button event           
 				buttonPlus(0);  
 			}
 		
-			if (buttons[1]->onSelect(x,y,true))
+			if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))
 			{
 				// - First Character button event           
 				buttonMinus(0);  
 			}
 						
-			if (buttons[2]->onSelect(x,y,true))
+			if ((buttons[2]!=NULL) && (buttons[2]->onSelect(x,y,true)))
 			{
 				// + Second Character button event           
 				buttonPlus(1);  
 			}
 		
-			if (buttons[3]->onSelect(x,y,true))
+			if ((buttons[3]!=NULL) && (buttons[3]->onSelect(x,y,true)))
 			{
 				// - Second Character button event           
 				buttonMinus(1); 
 			}
 					    
-			if (buttons[4]->onSelect(x,y,true))
+			if ((buttons[4]!=NULL) && (buttons[4]->onSelect(x,y,true)))
 			{
 				// + Third Character button event           
 				buttonPlus(2);  
 			}
 			
-			if (buttons[5]->onSelect(x,y,true))
+			if ((buttons[5]!=NULL) && (buttons[5]->onSelect(x,y,true)))
 			{
 				// - Third Character button event           
 				buttonMinus(2);  
 			}
 			
-			if (buttons[6]->onSelect(x,y,true))
+			if ((buttons[6]!=NULL) && (buttons[6]->onSelect(x,y,true)))
 			{
 				// Main Menu button	 
 				settings->save(SETTING_FILENAME); 
@@ -616,7 +616,7 @@ void Pointer::buttonA(int x, int y)
 		case stateCredits:
 		{
 			// Check if button is pressed on screen
-			if (buttons[0]->onSelect(x,y,true))
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
 				// Main Menu button	 	
 				game.stateMachine=stateMainMenu;	    
@@ -626,26 +626,26 @@ void Pointer::buttonA(int x, int y)
 			
 		case stateGame:
 		{	
-			if (buttons[0]->onSelect(x,y,true))
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
 				// Lanch button	(set lanch timer on 0 (24/25ste) second.
 				game.waveCountDown=24;
 			}
 			
-			if (buttons[4]->onSelect(x,y,true))
+			if ((buttons[4]!=NULL) && (buttons[4]->onSelect(x,y,true)))
 			{
 				// Select previous weapon	
 				game.event=eventNewWeaponPrevious;
 			}					
 				
-			if (buttons[5]->onSelect(x,y,true))
+			if ((buttons[5]!=NULL) && (buttons[5]->onSelect(x,y,true)))
 			{
 				// Select next weapon
 				game.event=eventNewWeaponNext;    		
 			}
 			
 			// New weapon is selected
-			if (buttons[6]->onSelect(x,y,true))
+			if ((buttons[6]!=NULL) && (buttons[6]->onSelect(x,y,true)))
 			{				
 				game.event=eventNewWeaponSelected;	
 				selectNewWeapon=true;

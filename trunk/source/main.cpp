@@ -32,6 +32,13 @@
 **  - Bugfix: Balance sound effect volume.
 **  - Improve scroll bar button design.
 **
+**  17/12/2009 Version 0.44
+**  - Bugfix: Protect button access against NULL pointers.
+**  - Added energy bar above monster.
+**  - Added reload bar move weapon.
+**  - Added remaining energy bar below the base.
+**  - Optimise game core to improve Frame-Per-Seconds.
+**
 **  16/12/2009 Version 0.43
 **  - Added help screen two. 
 **  - Added help screen screen. 
@@ -1827,7 +1834,7 @@ void drawGamePanel(void)
 {
 	// Draw background
 	//GRRLIB_DrawImg(game.panelXOffset,0, images.panel1, 0, 1, 1, IMAGE_COLOR3 );
-	GRRLIB_Rectangle(game.panelXOffset, 0, 100, 440, GRRLIB_BLACK, 1);
+	GRRLIB_Rectangle(game.panelXOffset, 0, 100, 440, GRRLIB_BLACK_TRANS, 1);
 }
 		
 // Draw Game panel Text on screen
@@ -1887,25 +1894,27 @@ void drawGamePanelText(void)
 		
 	// Set button label values
 	sprintf(tmp,"      %d", game.waveCountDown/25 );
-	buttons[0]->setLabel(tmp);	
-	buttons[1]->setLabel(power);
-	buttons[2]->setLabel(range);
-	buttons[3]->setLabel(rate);
+	if (buttons[0]!=NULL) buttons[0]->setLabel(tmp);	
+	if (buttons[1]!=NULL) buttons[1]->setLabel(power);
+	if (buttons[2]!=NULL) buttons[2]->setLabel(range);
+	if (buttons[3]!=NULL) buttons[3]->setLabel(rate);
 	
 	// Set button 
-	if (game.cash>=getWeaponPrice(game.weaponType))
+	if (buttons[6]!=NULL)
 	{
-		// Weapon normal
-		buttons[6]->setColor(IMAGE_COLOR);
+		if (game.cash>=getWeaponPrice(game.weaponType))
+		{
+			// Weapon normal
+			buttons[6]->setColor(IMAGE_COLOR);
+		}
+		else
+		{
+			// Weapon Transparent (Not for sale)
+			buttons[6]->setColor(IMAGE_COLOR3);
+		}
+		buttons[6]->setImageNormal(getNewWeaponImage(game.weaponType));
+		buttons[6]->setImageFocus(getNewWeaponImage(game.weaponType));
 	}
-	else
-	{
-		// Weapon Transparent (Not for sale)
-		buttons[6]->setColor(IMAGE_COLOR3);
-	}
-	buttons[6]->setImageNormal(getNewWeaponImage(game.weaponType));
-	buttons[6]->setImageFocus(getNewWeaponImage(game.weaponType));
-	  
 	sprintf(tmp,"%d fps", CalculateFrameRate()); 
 	drawText(20, 500, fontSpecial, tmp);
 }
@@ -2892,31 +2901,7 @@ void drawScreen(void)
 		  GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
-		
-		case stateGameQuit:
-		{
-		  drawGrid(); 
-		  drawMonsters();
-		  drawWeapons();
-		  drawButtons();
-	
-		  GRRLIB_Rectangle(210, 220, 220, 100, GRRLIB_BLACK, 1);
-	
-		  // Init text layer	  
-          GRRLIB_initTexture();
- 
-		  drawGridText();	
- 		  drawMonstersText();
-		  drawWeaponsText();
-		  drawButtonsText(-10);
-	
- 	      drawText(0, 230, fontParagraph, "Quit game?");	
-	     
-		  // Draw text layer on top of background 
-          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
-		}
-		break;
-		
+				
 		case stateGameOver:
 		{	  
 		  drawGrid(); 
@@ -2937,6 +2922,30 @@ void drawScreen(void)
 		  ypos+=210;	
 		  GRRLIB_Printf2(130, ypos, "GAME OVER", 80, GRRLIB_RED);
 		 
+		  // Draw text layer on top of background 
+          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
+		}
+		break;
+		
+		case stateGameQuit:
+		{
+		  drawGrid(); 
+		  drawMonsters();
+		  drawWeapons();
+		  drawButtons();
+	
+		  GRRLIB_Rectangle(210, 220, 220, 100, GRRLIB_BLACK_TRANS, 1);
+	
+		  // Init text layer	  
+          GRRLIB_initTexture();
+ 
+		  drawGridText();	
+ 		  drawMonstersText();
+		  drawWeaponsText();
+		  drawButtonsText(-10);
+	
+ 	      drawText(0, 230, fontParagraph, "Quit game?");	
+	     
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
@@ -3290,7 +3299,7 @@ void moveWeapons(void)
 // Check if game is over!
 void checkGameOver(void)
 {
-   if (game.monsterInBase>=10)
+   if (game.monsterInBase>=MAX_MONSTER_IN_BASE)
    {
 		// Too many monster in Base 
 		game.stateMachine=stateGameOver; 
@@ -3390,6 +3399,8 @@ void destroyImages(void)
    GRRLIB_FreeTexture(images.weapon5);
    GRRLIB_FreeTexture(images.weapon6);
    	
+   GRRLIB_FreeTexture(images.button1);
+   GRRLIB_FreeTexture(images.buttonFocus1);
    GRRLIB_FreeTexture(images.button2);
    GRRLIB_FreeTexture(images.buttonFocus2);
    GRRLIB_FreeTexture(images.button3);
