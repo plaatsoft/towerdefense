@@ -318,6 +318,23 @@ void Grid::draw(void)
 	// Workarround to set base image on correct place
 	if (index==2) baseX+=1;
 
+
+	// Draw remaining base energy bar
+	int proc = (game.monsterInBase / MAX_MONSTER_IN_BASE ) * 60;
+	GRRLIB_Rectangle((baseX*32)-16, (baseY*32)+71, 60, 4, GRRLIB_BLACK, 1);
+	if (proc>60)
+	{
+		GRRLIB_Rectangle((baseX*32)-15, (baseY*32)+72, proc, 2, GRRLIB_GREEN, 1);
+	}
+	else if (proc>30)
+	{
+		GRRLIB_Rectangle((baseX*32)-15, (baseY*32)+72, proc, 2, GRRLIB_YELLOW, 1);
+	}
+	else 
+	{	
+		GRRLIB_Rectangle((baseX*32)-15, (baseY*32)+72, proc, 2, GRRLIB_RED, 1);
+	}
+		
 	// Draw base
 	GRRLIB_DrawImg( (baseX*32)-16, (baseY*32)+5, imageBase, 0, 1.0, 1.0, IMAGE_COLOR );
 }
@@ -330,7 +347,7 @@ void Grid::text(void)
 	if (index==2) baseX+=1;
 	
     sprintf(tmp, "%d", game.monsterInBase);
-	GRRLIB_Printf2((baseX*32)-16, (baseY*32)+16, tmp, 12, GRRLIB_BLACK); 
+	GRRLIB_Printf2((baseX*32)-16, (baseY*32)+16, tmp, 12, GRRLIB_WHITESMOKE); 
 }
 	
 	

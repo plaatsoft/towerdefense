@@ -89,19 +89,36 @@ void Monster::draw(void)
 {
 	if (visible) 	
 	{	
+		// Draw monster icon
 		GRRLIB_DrawImg( x, y, image, 0, size, size, IMAGE_COLOR );	
+	
+		// Draw Remaining energy bar
+		int proc = (energy / maxEnergy ) * 26;
+		GRRLIB_Rectangle(x+2, y-13, 28, 4, GRRLIB_BLACK, 1);
+		if (proc>60)
+		{
+			GRRLIB_Rectangle(x+3, y-14, proc, 2, GRRLIB_GREEN, 1);
+		}
+		else if (proc>30)
+		{
+			GRRLIB_Rectangle(x+3, y-14, proc, 2, GRRLIB_YELLOW, 1);
+		}
+		else 
+		{	
+			GRRLIB_Rectangle(x+3, y-14, proc, 2, GRRLIB_RED, 1);
+		}
 	}
 }
 
 // Draw Monster text on screen
 void Monster::text(void)
 {
-    char tmp[50];
+    char tmp[5];
 	
 	if (visible) 
 	{
 		sprintf(tmp, "%d", energy);
-		GRRLIB_Printf2(x+8, y-14, tmp, 12, GRRLIB_BLACK); 
+		GRRLIB_Printf2(x+8, y-14, tmp, 12, GRRLIB_WHITESMOKE); 
 	}
 }
 
@@ -234,6 +251,7 @@ void Monster::setEnergy(int energy1)
     trace->event(s_fn,0,"%d",energy1);  
 	
 	energy=energy1;
+	maxEnergy=energy;
 }
 
 void Monster::setIndex(int index1)
@@ -266,6 +284,11 @@ int Monster::getAlfa(void)
 int Monster::getStep(void)
 {
    return step;
+}
+
+int Monster::getMaxEnergy(void)
+{
+   return maxEnergy;
 }
 
 // ------------------------------

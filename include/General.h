@@ -26,8 +26,8 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.43"
-#define RELEASE_DATE        	"16-12-2009" 
+#define PROGRAM_VERSION     	"0.44"
+#define RELEASE_DATE        	"17-12-2009" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -61,7 +61,8 @@
 
 #define GRRLIB_WHITESMOKE   	0xFFFFFFFF
 #define GRRLIB_LIGHTRED     	0x3333FFFF
-#define GRRLIB_BLACK   			0x00000044
+#define GRRLIB_BLACK 			0x000000FF
+#define GRRLIB_BLACK_TRANS		0x00000044
 #define GRRLIB_MAROON  			0x800000FF
 #define GRRLIB_GREEN   			0x008000FF
 #define GRRLIB_OLIVE   			0x808000FF
@@ -91,6 +92,7 @@
 #define MAX_GLOBAL_HIGHSCORE	50
 #define MAX_SETTINGS			5
 #define MAX_WEAPON_TYPE         6
+#define MAX_MONSTER_IN_BASE     10
 
 #define MAX_SOUND_VOLUME		10
 #define MAX_MUSIC_TRACK     	9

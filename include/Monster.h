@@ -32,6 +32,7 @@ class Monster
 	int y;	
 	int targetY;
 	int alfa;
+	int maxEnergy;
 	int energy;
 	float size;
 	GRRLIB_texImg *image;
@@ -67,6 +68,7 @@ class Monster
 	int getAlfa(void);
 	float getSize(void);
 	int getStep(void);
+	int getMaxEnergy(void);
 };
 
 #endif

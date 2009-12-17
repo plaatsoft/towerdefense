@@ -95,14 +95,32 @@ Weapon::~Weapon()
 	
 void Weapon::draw()
 {
+	// Draw weapon range circle
 	if (selected)
 	{	
 		GRRLIB_Circle(x+16, y+16, range, IMAGE_COLOR3, 1);
 	}
 	
+	// Draw fire trail 
 	if (--fireDelay>0)
 	{
 		GRRLIB_Line( x+16, y+16, monsterX+16, monsterY+16, GRRLIB_LIGHTRED);								
+	}
+	
+	// Draw reload time bar
+	int proc = ((rate-delay) / rate ) * 26;
+	GRRLIB_Rectangle(x+2, y-13, 28, 4, GRRLIB_BLACK, 1);
+	if (proc<10)
+	{
+		GRRLIB_Rectangle(x+3, y-14, proc, 2, GRRLIB_RED, 1);
+	}
+	else if (proc<26)
+	{
+		GRRLIB_Rectangle(x+3, y-14, proc, 2, GRRLIB_YELLOW, 1);
+	}
+	else
+	{
+		GRRLIB_Rectangle(x+3, y-14, proc, 2, GRRLIB_GREEN, 1);
 	}
 	
 	// Draw Weapon on screen
@@ -111,12 +129,12 @@ void Weapon::draw()
 
 void Weapon::text()
 {
-	char tmp[50];
+	char tmp[5];
 	int size=12;
 		
-	// Draw fire delay counter on screen
+	// Draw reload delay on screen
 	sprintf(tmp, "%d", (delay/10));
-	GRRLIB_Printf2(x+6, y-16, tmp, size, GRRLIB_BLACK); 		
+	GRRLIB_Printf2(x+6, y-16, tmp, size, GRRLIB_WHITESMOKE); 		
 }
 
 void Weapon::fire(Monster *monsters[MAX_MONSTERS])
@@ -165,7 +183,7 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 								sound->effect(SOUND_LASER);	
 								break;
 								
-						default: // Unknown (TODO)
+						default: // Nuck
 								sound->effect(SOUND_LASER);	
 								break;
 					}
