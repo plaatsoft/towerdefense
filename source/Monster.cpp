@@ -34,9 +34,8 @@
 // ------------------------------
 
 extern Trace *trace;
-extern Grid *grid;
+extern Grid *grids[MAX_GRIDS];
 extern Sound *sound;
-
 extern GXRModeObj *rmode;
 
 // ------------------------------
@@ -56,13 +55,14 @@ Monster::Monster()
    index=0;
    
    alfa=255;
-   energy=0;
+   energy=0.0;
+   maxEnergy=0.0;
    
    height=0;
    width=0;
    step=0;
    pos=0;
-   
+   grid=0;  
    visible=false;
    
    trace->event(s_fn,0,"leave");
@@ -85,28 +85,18 @@ Monster::~Monster()
 // ------------------------------
 	
 // Draw Monster on screen
-void Monster::draw(void)
+void Monster::draw(int xOffset, int yOffset, int size1)
 {
 	if (visible) 	
 	{	
-		// Draw monster icon
-		GRRLIB_DrawImg( x, y, image, 0, size, size, IMAGE_COLOR );	
+		// Draw monster on screen
+		GRRLIB_DrawImg( (x/size1)+xOffset, (y/size1)+yOffset, 
+			image, 0, (size/size1), (size/size1), IMAGE_COLOR );	
 	
-		// Draw Remaining energy bar
-		int proc = (energy / maxEnergy ) * 26;
-		GRRLIB_Rectangle(x+2, y-13, 28, 4, GRRLIB_BLACK, 1);
-		if (proc>60)
-		{
-			GRRLIB_Rectangle(x+3, y-14, proc, 2, GRRLIB_GREEN, 1);
-		}
-		else if (proc>30)
-		{
-			GRRLIB_Rectangle(x+3, y-14, proc, 2, GRRLIB_YELLOW, 1);
-		}
-		else 
-		{	
-			GRRLIB_Rectangle(x+3, y-14, proc, 2, GRRLIB_RED, 1);
-		}
+		// Draw Remaining energy bar (Not really nice on screen, disabled it again)
+		//int proc = (energy / maxEnergy ) * 19.0;
+		//GRRLIB_Rectangle(x+7, y-9, 20, 4, GRRLIB_BLACK, 0);
+		//GRRLIB_Rectangle(x+7, y-8, proc, 2, GRRLIB_YELLOW, 1);
 	}
 }
 
@@ -117,8 +107,8 @@ void Monster::text(void)
 	
 	if (visible) 
 	{
-		sprintf(tmp, "%d", energy);
-		GRRLIB_Printf2(x+8, y-14, tmp, 12, GRRLIB_WHITESMOKE); 
+		sprintf(tmp, "%2.0f", energy);
+		GRRLIB_Printf2(x+8, y-14, tmp, 12, 0x000000); 
 	}
 }
 
@@ -148,10 +138,10 @@ bool Monster::move(void)
 	if ((x==targetX) && (y==targetY))
 	{
 		// Get new target postion 
-		targetX=grid->getLocationX(pos);
-		targetY=grid->getLocationY(pos);
+		targetX=grids[grid]->getLocationX(pos);
+		targetY=grids[grid]->getLocationY(pos);
 		pos++;
-		if (pos>=grid->getMaxLocations())	
+		if (pos>=grids[grid]->getMaxLocations())	
 		{
 			trace->event(s_fn,0,"Monster %d has reach the final destination.", index);
 			visible=false;
@@ -215,18 +205,6 @@ void Monster::setImage(GRRLIB_texImg *image1)
    
    height=image->h;
    width=image->w;
-
-   pos = 0;
-   
-   x=grid->getLocationX(pos);
-   targetX=x;
-			
-   y=grid->getLocationY(pos);
-   targetY=y;
-
-   visible=false;
-   
-   pos++;
 }
 
 void Monster::setStep(int step1)
@@ -243,6 +221,7 @@ void Monster::setDelay(int delay1)
     trace->event(s_fn,0,"%d",delay1);   
 	
 	delay=delay1;
+	visible=false;
 }
 
 void Monster::setEnergy(int energy1)
@@ -260,6 +239,24 @@ void Monster::setIndex(int index1)
     trace->event(s_fn,0,"%d",index1);  
 	
 	index=index1;
+}
+
+void Monster::setGrid(int grid1)
+{
+	const char *s_fn="Monster::setGrid";
+    trace->event(s_fn,0,"%d",grid1);  
+	
+	grid=grid1;
+	
+	pos = 0;
+   
+    x=grids[grid]->getLocationX(pos);
+    targetX=x;
+			
+    y=grids[grid]->getLocationY(pos);
+    targetY=y;
+
+    pos++;
 }
 
 // ------------------------------
@@ -289,6 +286,11 @@ int Monster::getStep(void)
 int Monster::getMaxEnergy(void)
 {
    return maxEnergy;
+}
+
+int Monster::getGrid(void)
+{
+   return grid;
 }
 
 // ------------------------------

@@ -23,9 +23,33 @@
 
 #include "GRRLIB.h"
 
+typedef struct
+{
+	int filename;
+	bool road;
+	int angle;
+	GRRLIB_texImg *image;
+}
+GridMeta;
+
+typedef struct 
+{
+	int x;
+	int y;
+}
+location;
+
 class Grid
 {
   private:
+	GridMeta gridMeta;
+	location locationList[MAX_GRID_Y*MAX_GRID_X];
+	char gridData[MAX_GRID_Y][MAX_GRID_X];
+	int maxLines;
+	int maxLocations;
+	int baseX;
+	int baseY;
+
     int index;
 	GRRLIB_texImg *image1;
 	GRRLIB_texImg *image2;
@@ -35,6 +59,7 @@ class Grid
 	GRRLIB_texImg *imageBase;
 	GRRLIB_texImg *imageWater;
 	GRRLIB_texImg *imageBridge;
+
 	
 	void parseGrid(void);
 	void loadGrid(const char* filename);
@@ -45,7 +70,7 @@ class Grid
  	~Grid();
 
 	// Other
-	void draw(void);
+	void draw(int xOffset, int yOffset, int size);
 	void text(void);
 	void create(const char* filename);
 

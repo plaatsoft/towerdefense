@@ -39,7 +39,7 @@ class Weapon
 	GRRLIB_texImg *image;
 	int height;
 	int width;
-	int delay;
+	float delay;
 	int index;
 	int type;
 	
@@ -49,7 +49,7 @@ class Weapon
 	
 	bool selected;
 	
-	int rate;
+	float rate;
 	int range;
 	int power;
 
