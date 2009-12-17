@@ -21,11 +21,11 @@
 **
 **  NICE TO HAVE:
 **  - Load grid images for files.
-**  - Realtime rendering of map examples in map select page.
 **  - Realtime monsters animation on map select page.
 **  - Add map 4, 5, 6 and maybe more!
 **  - Improve weapon graphics
 **  - Snap weapon to grid!
+**  - Add rotating sound icon on sound setting screen.
 **  - Bugfix: Network thread (Google analistics call crash)
 ** 
 **  TODO:
@@ -34,10 +34,12 @@
 **
 **  17/12/2009 Version 0.44
 **  - Bugfix: Protect button access against NULL pointers.
-**  - Added energy bar above monster.
 **  - Added reload bar move weapon.
 **  - Added remaining energy bar below the base.
 **  - Optimise game core to improve Frame-Per-Seconds.
+**  - Cleanup not used images and source code.
+**  - BugFix: Solve crash when game is over.
+**  - Rendering realtime grid examples in map select page.
 **
 **  16/12/2009 Version 0.43
 **  - Added help screen two. 
@@ -178,17 +180,13 @@ typedef struct
   GRRLIB_texImg *intro2;
   GRRLIB_texImg *intro3;
   
-  GRRLIB_texImg *logo1;
+  GRRLIB_texImg *soundIcon;
+  
   GRRLIB_texImg *logo2;
-  GRRLIB_texImg *logo3;
-  GRRLIB_texImg *logo4;
-  GRRLIB_texImg *logo5;
-  GRRLIB_texImg *logo6;
   GRRLIB_texImg *logo;
   
   GRRLIB_texImg *background1;
   GRRLIB_texImg *background2;
-  GRRLIB_texImg *panel1;
   GRRLIB_texImg *bar;
   GRRLIB_texImg *barCursor;  
   GRRLIB_texImg *scrollbar;
@@ -258,9 +256,6 @@ typedef struct
   GRRLIB_texImg *pointer3; 
   GRRLIB_texImg *pointer4;
   
-  GRRLIB_texImg *map1;
-  GRRLIB_texImg *map2;
-  GRRLIB_texImg *map3;
   GRRLIB_texImg *map4;
 } 
 image;
@@ -283,25 +278,13 @@ topscore globalHighScore[MAX_GLOBAL_HIGHSCORE+1];
 // VARIABLES
 // -----------------------------------------------------------
 
+// sound Image
+extern const unsigned char     pic1data[];
+extern int      pic1length;
+
 // logo2 Image
 extern const unsigned char     pic5data[];
 extern int      pic5length;
-
-// logo3 Image
-extern const unsigned char     pic6data[];
-extern int      pic6length;
-
-// logo4 Image
-extern const unsigned char     pic7data[];
-extern int      pic7length;
-
-// logo5 Image
-extern const unsigned char     pic8data[];
-extern int      pic8length;
-
-// logo6 Image
-extern const unsigned char     pic9data[];
-extern int      pic9length;
 
 // Background1 Image
 extern const unsigned char     pic10data[];
@@ -310,10 +293,6 @@ extern int      pic10length;
 // Background2 Image
 extern const unsigned char     pic11data[];
 extern int      pic11length;
-
-// Panel1 Image
-extern const unsigned char     pic13data[];
-extern int      pic13length;
 
 // Bar Image
 extern const unsigned char     pic14data[];
@@ -577,21 +556,10 @@ extern int      pic607length;
 
 
 
-// Map1 Sample Image
-extern const unsigned char     pic700data[];
-extern int      pic700length;
-
-// Map2 Sample Image
-extern const unsigned char     pic701data[];
-extern int      pic701length;
-
-// Map3 Sample Image
-extern const unsigned char     pic702data[];
-extern int      pic702length;
-
 // Map4 Sample Image
 extern const unsigned char     pic703data[];
 extern int      pic703length;
+
 
 
 u32         *frameBuffer[1] 	= {NULL};
@@ -604,7 +572,7 @@ Game 		game;
 Trace     	*trace;
 Settings  	*settings;
 HighScore 	*highScore;
-Grid      	*grid;
+Grid      	*grids[MAX_GRIDS];
 Sound      	*sound;
 Monster   	*monsters[MAX_MONSTERS];
 Pointer   	*pointers[MAX_POINTERS];
@@ -658,20 +626,18 @@ void initImages(void)
    const char *s_fn="initImages";
    trace->event(s_fn,0,"enter");
 
+   images.soundIcon=GRRLIB_LoadTexture( pic1data );
+
    images.logo2=GRRLIB_LoadTexture( pic5data );
-   images.logo3=GRRLIB_LoadTexture( pic6data );
-   images.logo4=GRRLIB_LoadTexture( pic7data );
-   images.logo5=GRRLIB_LoadTexture( pic8data );
-   images.logo6=GRRLIB_LoadTexture( pic9data );
-   
    images.logo=GRRLIB_LoadTexture( pic5data );
    GRRLIB_InitTileSet(images.logo, images.logo->w, 1, 0);
    
    images.background1=GRRLIB_LoadTexture( pic10data );
    images.background2=GRRLIB_LoadTexture( pic11data );
-   images.panel1=GRRLIB_LoadTexture( pic13data );
+   
    images.bar=GRRLIB_LoadTexture( pic14data );
    images.barCursor=GRRLIB_LoadTexture( pic15data );
+   
    images.scrollbar=GRRLIB_LoadTexture(pic33data);
    images.scrollTop=GRRLIB_LoadTexture( pic34data);
    images.scrollMiddle=GRRLIB_LoadTexture( pic35data);
@@ -738,10 +704,7 @@ void initImages(void)
    images.buttonFocus3=GRRLIB_LoadTexture( pic605data );  
    images.button4=GRRLIB_LoadTexture( pic606data );
    images.buttonFocus4=GRRLIB_LoadTexture( pic607data );  
-   
-   images.map1=GRRLIB_LoadTexture( pic700data );  
-   images.map2=GRRLIB_LoadTexture( pic701data );  
-   images.map3=GRRLIB_LoadTexture( pic702data );  
+    
    images.map4=GRRLIB_LoadTexture( pic703data );  
    
    trace->event(s_fn,0,"leave [void]");
@@ -768,7 +731,7 @@ void initWeapons(void)
 }
 	
 // Init monster
-void initMonsters(void)
+void initMonsters(bool special)
 {
 	const char *s_fn="initMonsters";
 	trace->event(s_fn,0,"enter");
@@ -797,6 +760,18 @@ void initMonsters(void)
 		monsters[id]=new Monster();	  		
 		monsters[id]->setIndex(id);
 		monsters[id]->setDelay(delay);
+		
+		if (!special)
+		{
+			// Set monster in selected grid (Game screen behalvior)
+			monsters[id]->setGrid(game.selectedMap);
+		}
+		else
+		{
+		    // Move monster over random grids (Map Select screen behalvior)
+			int grid = (int) (rand() % MAX_GRIDS)+1;
+			monsters[id]->setGrid(grid);
+		}
 			  	  
 		// Calculate delay between two monsters.
 		int delayOffset=game.wave*3;
@@ -989,36 +964,38 @@ void initPointers(void)
 }
 
 // Init Grid
-void initGrid(int index)
+void initGrid(void)
 {
     const char *s_fn="initGrid";
-    trace->event(s_fn,0,"enter [index=%d]",index);
-   
-    grid = new Grid();
-	grid->setImageRoad1(images.road1);
-	grid->setImageRoad2(images.road2);
-	grid->setImageRoad3(images.road3);
-	grid->setImageRoad4(images.road4);
-	grid->setImageRoad5(images.road5);
-	grid->setImageWater(images.water1);
-	grid->setImageBridge(images.bridge1);
-	grid->setIndex(index);
-	
-	switch( index )
-	{
-		case 1: grid->setImageBase(images.base1);
-				grid->create(GRID1_FILENAME);
-				break;
-			
-		case 2: grid->setImageBase(images.base2);
-				grid->create(GRID2_FILENAME);
-				break;
-				
-		case 3: grid->setImageBase(images.base3);
-				grid->create(GRID3_FILENAME);
-				break;
-	}
+    trace->event(s_fn,0,"enter");
 
+	for (int i=0; i<MAX_GRIDS; i++)
+	{
+		grids[i] = new Grid();
+		grids[i]->setImageRoad1(images.road1);
+		grids[i]->setImageRoad2(images.road2);
+		grids[i]->setImageRoad3(images.road3);
+		grids[i]->setImageRoad4(images.road4);
+		grids[i]->setImageRoad5(images.road5);
+		grids[i]->setImageWater(images.water1);
+		grids[i]->setImageBridge(images.bridge1);
+		grids[i]->setIndex(i);
+	
+		switch( i )
+		{
+			case 0: grids[i]->setImageBase(images.base1);
+					grids[i]->create(GRID1_FILENAME);
+					break;
+			
+			case 1: grids[i]->setImageBase(images.base2);
+					grids[i]->create(GRID2_FILENAME);
+					break;
+				
+			case 2: grids[i]->setImageBase(images.base3);
+					grids[i]->create(GRID3_FILENAME);
+					break;
+		}
+	}
 	trace->event(s_fn,0,"leave [void]");
 }
 
@@ -1260,7 +1237,7 @@ void initButtons(void)
 		
 		case stateHelp1:
 		{
-			// Main Menu Button
+			// Next Button
 			buttons[0]=new Button();
 			buttons[0]->setX(240);
 			buttons[0]->setY(460);
@@ -1273,7 +1250,7 @@ void initButtons(void)
 		
 		case stateHelp2:
 		{
-			// Main Menu Button
+			// Next Button
 			buttons[0]=new Button();
 			buttons[0]->setX(240);
 			buttons[0]->setY(460);
@@ -1614,6 +1591,8 @@ void initGame(void)
 	game.wave1 = 0;
 	game.wave2 = 0;
 	game.panelXOffset=20;
+	game.angle = 0;
+	game.alfa = 0;
 				
    	// Init Images
 	initImages();
@@ -1641,6 +1620,9 @@ void initGame(void)
 	// Init network Thread
 	initNetwork();
 	
+	// Init Map
+	initGrid();
+	
 	trace->event(s_fn,0,"leave");
 }
 	
@@ -1649,16 +1631,36 @@ void initGame(void)
 // -----------------------------------
 
 // Draw grid on screen
-void drawGrid(void)
+void drawGrid()
 {
-   grid->draw();   
+    switch (game.selectedMap)
+    {
+		case 0: grids[0]->draw(0,0,1);   
+			    break;
+				
+		case 1: grids[1]->draw(0,0,1);   
+			    break;
+				
+		case 2: grids[2]->draw(0,0,1);   
+			    break;
+	}				
 }
 
 
 // Draw grid on screen
-void drawGridText(void)
+void drawGridText()
 {
-   grid->text();   
+    switch (game.selectedMap)
+    {
+		case 0: grids[0]->text();   
+				break;
+				
+		case 1: grids[1]->text();   
+				break;
+				
+		case 2: grids[2]->text();   
+				break;
+	}
 }
 
 // Draw pointers on screen
@@ -1681,7 +1683,7 @@ void drawMonsters(void)
    {
 	  if (monsters[i]!=NULL)
 	  {
-		monsters[i]->draw();
+		monsters[i]->draw(0,0,1);
 	  }
    }
 }
@@ -1927,8 +1929,8 @@ void drawScreen(void)
 		  
     switch( game.stateMachine )	
 	{		   
-	   case stateIntro1:
-	   {
+	    case stateIntro1:
+	    { 
 	      // Draw background
 		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR );
 		  
@@ -1951,11 +1953,11 @@ void drawScreen(void)
 		  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
-	   }	   
-	   break;
+	    }	   
+	    break;
 	   
-	   case stateIntro2:
-	   {
+	    case stateIntro2:
+	    {
 		  unsigned int j;
 		  
 	      // Draw background
@@ -1983,35 +1985,9 @@ void drawScreen(void)
 		  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
-	   }	   
-	   break;
+	    }	   
+	    break;
 	   	   
-	   case stateIntro3:
-	   {
-		  // Draw backg
-		  GRRLIB_DrawImg(0,0, images.logo3, 0, 0.95, 0.98, IMAGE_COLOR );
-		  GRRLIB_DrawImg(310,0, images.logo4, 0, 0.95, 0.98, IMAGE_COLOR );
-		  GRRLIB_DrawImg(0,240, images.logo5, 0, 0.95, 0.98, IMAGE_COLOR );
-		  GRRLIB_DrawImg(310,240, images.logo6, 0, 0.95, 0.98, IMAGE_COLOR );
-		  
-          GRRLIB_DrawImg(350, 240, images.logo2, 0, 0.5, 0.5, IMAGE_COLOR );
-
-		  // Init text layer	  
-          GRRLIB_initTexture();	
-		  
-		  ypos+=390;
-		  drawText(350, ypos, fontNormal,  "Some more Wii games developed"  );
-		  ypos+=20;
-		  drawText(400, ypos, fontNormal,  "by www.plaatsoft.nl"  );
-			 
-		  sprintf(tmp,"%d fps", CalculateFrameRate()); 
-		  drawText(590, 500, fontSpecial, tmp); 
- 
-		  // Draw text layer on top of background 
-          GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
-	   }	   
-	   break;
-	 
 		case stateMainMenu:
 		{
 		  char *version=NULL;
@@ -2069,21 +2045,43 @@ void drawScreen(void)
 		  drawButtons();
 		  
 		  // Draw samples maps
-		  GRRLIB_DrawImg(60,  135, images.map1, 0, 1, 1, IMAGE_COLOR );
-		  GRRLIB_DrawImg(255, 135, images.map2, 0, 1, 1, IMAGE_COLOR );
-		  GRRLIB_DrawImg(455, 135, images.map3, 0, 1, 1, IMAGE_COLOR );
+		  grids[0]->draw(60,135,5); 
+		  grids[1]->draw(260,135,5); 
+		  grids[2]->draw(460,135,5);		   
 		  
-		  GRRLIB_DrawImg(60,  295, images.map4, 0, 1, 1, IMAGE_COLOR );
-		  GRRLIB_DrawImg(255, 295, images.map4, 0, 1, 1, IMAGE_COLOR );
-		  GRRLIB_DrawImg(455, 295, images.map4, 0, 1, 1, IMAGE_COLOR );
-		  
+		  GRRLIB_DrawImg(60,  300, images.map4, 0, 1, 1, IMAGE_COLOR );
+		  GRRLIB_DrawImg(260, 300, images.map4, 0, 1, 1, IMAGE_COLOR );
+		  GRRLIB_DrawImg(460, 300, images.map4, 0, 1, 1, IMAGE_COLOR );
+	
+		  // Draw some moving monsters on the sample maps
+		  /*for( int i=0; i<MAX_MONSTERS; i++ ) 
+		  {
+			 if (monsters[i]!=NULL)
+			 {
+				switch (monsters[i]->getGrid())
+				{
+					case 0: monsters[i]->draw(60,300,5);
+							monsters[i]->move();
+							break;
+							
+					case 1: monsters[i]->draw(260,300,5);
+							monsters[i]->move();
+							break;
+							
+					case 2: monsters[i]->draw(460,300,5);
+							monsters[i]->move();
+							break;
+				}
+			 }
+		  }*/
+	  
 		  // Init text layer	  
           GRRLIB_initTexture();
 
 		  // Draw title
 	      drawText(120, ypos, fontTitle, "Choose Map");	
 
-		  drawText(75,  335, fontNormal, "Coming soon");
+		  drawText(70,  335, fontNormal, "Coming soon");
 		  drawText(270, 335, fontNormal, "Coming soon");
 		  drawText(470, 335, fontNormal, "Coming soon");
 
@@ -2108,11 +2106,11 @@ void drawScreen(void)
 		  if (highScore->getAmount()<15)
 		  {
 		    startEntry=0;
-			endEntry=maxTodayHighScore;
+			endEntry=highScore->getAmount();
 		  }
 		  else
 		  {
-			 startEntry=(((float) highScore->getAmount()-13.0)/26.0)*(float)game.scrollIndex;
+			 startEntry=(((float) highScore->getAmount()-15.0)/26.0)*(float)game.scrollIndex;
 			 endEntry=startEntry+15;
 		  }
 				   
@@ -2266,6 +2264,9 @@ void drawScreen(void)
           // Draw buttons
 	      drawButtons(); 
 		  
+		  // Draw Button Text labels
+		  drawButtonsText(0);
+		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
 		  drawText(20, 500, fontSpecial, tmp);
 		  
@@ -2352,6 +2353,9 @@ void drawScreen(void)
 			 
           // Draw buttons
 	      drawButtons(); 
+		  
+		  // Draw Button Text labels
+		  drawButtonsText(0);
 		  
 		  sprintf(tmp,"%d fps", CalculateFrameRate());
 		  drawText(20, 500, fontSpecial, tmp);
@@ -2694,7 +2698,8 @@ void drawScreen(void)
           GRRLIB_initTexture();
   
 	      // Draw Sound icon
-	      //GRRLIB_DrawImg((640/2)-128, ((480/2)-140)+yOffset, images.sound, angle, 1.4, 1.4, IMAGE_COLOR );
+	      //GRRLIB_DrawImg((640/2)-128, ((480/2)-140)+YOFFSET, images.soundIcon, game.angle, 1.4, 1.4, IMAGE_COLOR );
+		  if (game.angle<MAX_ANGLE) game.angle++; else game.angle=0;
 	
 		  // Show title
 		  drawText(100, ypos, fontTitle, "Sound Settings");
@@ -2891,9 +2896,9 @@ void drawScreen(void)
 			game.alfa-=5;
 		  }
 		  
-		  drawGridText();	
+		  //drawGridText();	
 		  drawMonstersText();
-		  drawWeaponsText();
+		  //drawWeaponsText();
 		  drawGamePanelText();
 		  drawButtonsText(-28);
 		  
@@ -2913,9 +2918,9 @@ void drawScreen(void)
 		  // Init text layer	  
           GRRLIB_initTexture();
  
-		  drawGridText();	
+		  //drawGridText();	
  		  drawMonstersText();
-		  drawWeaponsText();
+		  //drawWeaponsText();
 		  drawGamePanelText();
 		  drawButtonsText(-28);
 			  
@@ -2939,9 +2944,9 @@ void drawScreen(void)
 		  // Init text layer	  
           GRRLIB_initTexture();
  
-		  drawGridText();	
+		  //drawGridText();	
  		  drawMonstersText();
-		  drawWeaponsText();
+		  //drawWeaponsText();
 		  drawButtonsText(-10);
 	
  	      drawText(0, 230, fontParagraph, "Quit game?");	
@@ -3334,15 +3339,12 @@ void destroyImages(void)
    const char *s_fn="destroyImages";
    trace->event(s_fn,0,"enter");
    
+   GRRLIB_FreeTexture(images.soundIcon);
    GRRLIB_FreeTexture(images.logo2);
-   GRRLIB_FreeTexture(images.logo3);
-   GRRLIB_FreeTexture(images.logo4);
-   GRRLIB_FreeTexture(images.logo5);
-   GRRLIB_FreeTexture(images.logo6);
    
    GRRLIB_FreeTexture(images.background1);
    GRRLIB_FreeTexture(images.background2);
-   GRRLIB_FreeTexture(images.panel1);
+   
    GRRLIB_FreeTexture(images.bar);
    GRRLIB_FreeTexture(images.barCursor);
    
@@ -3408,9 +3410,6 @@ void destroyImages(void)
    GRRLIB_FreeTexture(images.button4);
    GRRLIB_FreeTexture(images.buttonFocus4);
    
-   GRRLIB_FreeTexture(images.map1);
-   GRRLIB_FreeTexture(images.map2);
-   GRRLIB_FreeTexture(images.map3);
    GRRLIB_FreeTexture(images.map4);
    
    trace->event(s_fn,0,"leave");
@@ -3459,9 +3458,12 @@ void destroyObjects()
 	}	
 	
 	// Destroy Grid
-	if (grid!=NULL)
+	for( int i=0; i<MAX_GRIDS; i++)
 	{
-		delete grid;
+		if (grids[i]!=NULL)
+		{
+			delete grids[i];
+		}
 	}
 	
 	// Destroy Trace
@@ -3613,6 +3615,7 @@ void processEvent()
 		{
 			trace->event(s_fn,0,"event=eventLanch");	
 			
+			// Check if there is room in monster array for new wave.
 			int count=0;
 			for(int i=0;i<MAX_MONSTERS;i++)
 			{
@@ -3626,7 +3629,7 @@ void processEvent()
 				if (game.waveDelay>500) game.waveDelay-=100;
 				game.waveCountDown=game.waveDelay;
 				game.wave++;
-				initMonsters();	
+				initMonsters(false);	
 				
 				// Get Bonus score and Bonus cash
 				game.score+=(game.wave*100);
@@ -3640,8 +3643,8 @@ void processEvent()
 			}
 			else
 			{
-				// If no room in monster array wait 24 cycles and try again!
-				game.waveCountDown=24;
+				// No room in monster array wait 250 cycles (+/- 10 sec.) and try again!
+				game.waveCountDown=250;
 			}				
 		}
 		break;
@@ -3727,12 +3730,6 @@ void processStateMachine()
 	}
 	break;
 	 
-	case stateIntro3:
-	{
-		trace->event(s_fn,0,"stateMachine=stateIntro3");
-	}
-	break;
-	 
 	case stateMainMenu:
 	{
 		trace->event(s_fn,0,"stateMachine=stateMainMenu");
@@ -3748,6 +3745,29 @@ void processStateMachine()
 		
 		// Init buttons
 		initButtons();	
+		
+		// Init game variables
+		/*game.score=0;
+		game.cash=2000;
+		game.weaponSelect=0;
+		game.weaponType=0;
+		game.panelXOffset=20;
+		game.panelYOffset=0;
+		game.wave=10;           // Set to 10 to have more monster on screen
+		game.monsterInBase=0;
+		game.waveDelay = 3000;  // Start delay between two waves
+		game.waveCountDown=game.waveDelay;
+		game.alfa=MAX_ALFA;     // Show New Wave text on screen
+		game.selectedMap=0;
+
+		// clear monster array (clean up previous game)
+		clearMonsters();
+
+		// Init Weapons
+		initWeapons();
+			
+		// Create monsters for the selected wave
+		initMonsters(true);	*/
 	}
 	break;
 	
@@ -3763,23 +3783,16 @@ void processStateMachine()
 			// Init game variables
 			game.score=0;
 			game.cash=2000;
-			game.wave=0;
-			game.monsterInBase=0;
 			game.weaponSelect=0;
 			game.weaponType=0;
 			game.panelXOffset=20;
 			game.panelYOffset=0;
-			
-			// Start delay between two waves
-			game.waveDelay = 3000;
+			game.wave=0;
+			game.monsterInBase=0;
+			game.waveDelay = 3000;  // Start delay between two waves
 			game.waveCountDown=game.waveDelay;
-
-			// Show New Wave text on screen
-			game.alfa=MAX_ALFA;
+			game.alfa=MAX_ALFA;     // Show New Wave text on screen
 		
-			// Init Map
-			initGrid(game.selectedMap);
-	
 			// clear monster array (clean up previous game)
 			clearMonsters();
 	

@@ -26,14 +26,13 @@
 class Monster
 {
   private:
-
 	int x;
 	int targetX;
 	int y;	
 	int targetY;
 	int alfa;
-	int maxEnergy;
-	int energy;
+	float maxEnergy;
+	float energy;
 	float size;
 	GRRLIB_texImg *image;
 	int height;
@@ -43,6 +42,7 @@ class Monster
 	int pos;
 	int index;
 	boolean visible;
+	int grid;
 	
   public:
 	// Constructor & Destructor
@@ -50,7 +50,7 @@ class Monster
  	~Monster();
 
 	// Other
-	void draw(void);
+	void draw(int xOffset, int yOffset, int size1);
 	void text(void);
 	bool move(void);
 	int hit(int hit);
@@ -61,6 +61,7 @@ class Monster
 	void setDelay(int delay);
 	void setEnergy(int energy);
 	void setIndex(int index);
+	void setGrid(int grid);
 		
 	// Getters
 	int getX(void);
@@ -69,6 +70,7 @@ class Monster
 	float getSize(void);
 	int getStep(void);
 	int getMaxEnergy(void);
+	int getGrid(void);
 };
 
 #endif

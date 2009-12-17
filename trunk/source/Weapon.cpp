@@ -54,7 +54,7 @@ Weapon::Weapon()
    alfa=255;   
    angle=0;
    targetAngle=0;
-   delay=0;
+   delay=0.0;
    selected=false;
    index=0;
    
@@ -64,7 +64,7 @@ Weapon::Weapon()
    
    power=0;
    range=0;   
-   rate=0;
+   rate=0.0;
    
    maxPower=0;
    maxRange=0;   
@@ -107,24 +107,13 @@ void Weapon::draw()
 		GRRLIB_Line( x+16, y+16, monsterX+16, monsterY+16, GRRLIB_LIGHTRED);								
 	}
 	
-	// Draw reload time bar
-	int proc = ((rate-delay) / rate ) * 26;
-	GRRLIB_Rectangle(x+2, y-13, 28, 4, GRRLIB_BLACK, 1);
-	if (proc<10)
-	{
-		GRRLIB_Rectangle(x+3, y-14, proc, 2, GRRLIB_RED, 1);
-	}
-	else if (proc<26)
-	{
-		GRRLIB_Rectangle(x+3, y-14, proc, 2, GRRLIB_YELLOW, 1);
-	}
-	else
-	{
-		GRRLIB_Rectangle(x+3, y-14, proc, 2, GRRLIB_GREEN, 1);
-	}
-	
 	// Draw Weapon on screen
-	GRRLIB_DrawImg( x, y, image, angle, 1, 1, IMAGE_COLOR );				
+	GRRLIB_DrawImg( x, y, image, angle, 1, 1, IMAGE_COLOR );		
+	
+	// Draw reload time bar
+	float proc = ((rate-delay) / rate) * 21.0;
+	GRRLIB_Rectangle(x+5, y+34, 20, 4, GRRLIB_BLACK, 0);
+	GRRLIB_Rectangle(x+5, y+35, proc, 2, GRRLIB_GREEN, 1);
 }
 
 void Weapon::text()
@@ -133,8 +122,8 @@ void Weapon::text()
 	int size=12;
 		
 	// Draw reload delay on screen
-	sprintf(tmp, "%d", (delay/10));
-	GRRLIB_Printf2(x+6, y-16, tmp, size, GRRLIB_WHITESMOKE); 		
+	sprintf(tmp, "%2.0f", (delay/10.0));
+	GRRLIB_Printf2(x+6, y-16, tmp, size, 0x000000); 		
 }
 
 void Weapon::fire(Monster *monsters[MAX_MONSTERS])

@@ -92,6 +92,7 @@
 #define MAX_GLOBAL_HIGHSCORE	50
 #define MAX_SETTINGS			5
 #define MAX_WEAPON_TYPE         6
+#define MAX_GRIDS  				3
 #define MAX_MONSTER_IN_BASE     10
 
 #define MAX_SOUND_VOLUME		10
@@ -122,16 +123,16 @@
 #define MUSIC_MULTIPLER			5
 #define EFFECT_MULTIPLER		20
 
-#define BUTTON_A            (WPAD_BUTTON_A     | WPAD_CLASSIC_BUTTON_A)
-#define BUTTON_HOME         (WPAD_BUTTON_HOME  | WPAD_CLASSIC_BUTTON_HOME)
-#define BUTTON_1            (WPAD_BUTTON_1     | WPAD_CLASSIC_BUTTON_X)
-#define BUTTON_2            (WPAD_BUTTON_2     | WPAD_CLASSIC_BUTTON_Y)
+#define BUTTON_A           	 	(WPAD_BUTTON_A     | WPAD_CLASSIC_BUTTON_A)
+#define BUTTON_HOME         	(WPAD_BUTTON_HOME  | WPAD_CLASSIC_BUTTON_HOME)
+#define BUTTON_1            	(WPAD_BUTTON_1     | WPAD_CLASSIC_BUTTON_X)
+#define BUTTON_2            	(WPAD_BUTTON_2     | WPAD_CLASSIC_BUTTON_Y)
 
-#define BUTTON_UP           (WPAD_BUTTON_UP    | WPAD_CLASSIC_BUTTON_UP)
-#define BUTTON_DOWN         (WPAD_BUTTON_DOWN  | WPAD_CLASSIC_BUTTON_DOWN)
-#define BUTTON_LEFT         (WPAD_BUTTON_LEFT  | WPAD_CLASSIC_BUTTON_LEFT)
-#define BUTTON_RIGHT        (WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT)
-#define BUTTON_PLUS         (WPAD_BUTTON_PLUS  | WPAD_CLASSIC_BUTTON_PLUS)
+#define BUTTON_UP           	(WPAD_BUTTON_UP    | WPAD_CLASSIC_BUTTON_UP)
+#define BUTTON_DOWN         	(WPAD_BUTTON_DOWN  | WPAD_CLASSIC_BUTTON_DOWN)
+#define BUTTON_LEFT         	(WPAD_BUTTON_LEFT  | WPAD_CLASSIC_BUTTON_LEFT)
+#define BUTTON_RIGHT        	(WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT)
+#define BUTTON_PLUS         	(WPAD_BUTTON_PLUS  | WPAD_CLASSIC_BUTTON_PLUS)
 
 // -----------------------------------------------------------
 // ENUMS
@@ -143,23 +144,22 @@ enum
 	stateNone=0,
 	stateIntro1=1,   
 	stateIntro2=2, 
-	stateIntro3=3, 
-	stateMainMenu=4,
-	stateMapSelectMenu=5,
-	stateGame=6,
-	stateGameOver=7,
-	stateGameQuit=8,
-	stateQuit=9,
-	stateLocalHighScore=10,
-	stateTodayHighScore=11,
-	stateGlobalHighScore=12,
-	stateHelp1=13,
-	stateHelp2=14,
-	stateHelp3=15,
-	stateCredits=16,
-	stateSoundSettings=17,
-	stateReleaseNotes=18,
-	stateUserSettings=19
+	stateMainMenu=3,
+	stateMapSelectMenu=4,
+	stateGame=5,
+	stateGameOver=6,
+	stateGameQuit=7,
+	stateLocalHighScore=8,
+	stateTodayHighScore=9,
+	stateGlobalHighScore=10,
+	stateHelp1=11,
+	stateHelp2=12,
+	stateHelp3=13,
+	stateCredits=14,
+	stateSoundSettings=15,
+	stateReleaseNotes=16,
+	stateUserSettings=17,
+	stateQuit=18
 };
 
 // Event machine events
@@ -219,6 +219,7 @@ typedef struct
 	
 	// Variables for graphical animations
 	int   alfa;
+	int   angle;
 	float wave1;
 	float wave2;
 	int   scrollIndex;

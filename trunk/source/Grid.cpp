@@ -27,33 +27,6 @@
 #include "Trace.h"
 #include "Grid.h"
 
-int maxLines;
-int maxLocations;
-int baseX=0;
-int baseY=0;
-
-typedef struct
-{
-	int filename;
-	bool road;
-	int angle;
-	GRRLIB_texImg *image;
-}
-GridMeta;
-
-GridMeta gridMeta;
-
-char gridData[MAX_GRID_Y][MAX_GRID_X];
-
-typedef struct 
-{
-	int x;
-	int y;
-}
-location;
-
-location locationList[MAX_GRID_Y*MAX_GRID_X];
-
 extern Trace *trace;
 extern Game  game; 
 
@@ -66,6 +39,9 @@ Grid::Grid()
 	const char *s_fn="Grid::Grid";
 	trace->event(s_fn,0,"enter");
   
+    baseX=0;
+	baseY=0;
+	
 	trace->event(s_fn,0,"leave [void]");  
 }
 	
@@ -203,7 +179,7 @@ void Grid::loadGrid(const char* filename)
    trace->event(s_fn,0,"leave [maxLines=%d]",maxLines);
 }
 
-void Grid::draw(void)
+void Grid::draw(int xOffset, int yOffset, int size)
 {
    int x;
    int y;
@@ -218,93 +194,141 @@ void Grid::draw(void)
 				case '*': 
 				case '0': 
 					// Draw Grass image
-					GRRLIB_DrawImg( x*32, y*32, image5, 0, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( 
+						(x*(32/size))+xOffset, 
+						(y*(32/size))+yOffset, 
+						image5, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;
 	
 				case 205:
 				case '1':
 					// Draw basic road
-					GRRLIB_DrawImg( (x*32)+32, y*32, image4, 90, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( 
+						(x*(32/size))+(32/size)+xOffset, 
+						(y*(32/size))+yOffset, 
+						image4, 90, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;	
 
 				case 186:
 				case '2':
 					// Draw basic road
-					GRRLIB_DrawImg( (x*32), (y*32), image4, 0, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( 
+						(x*(32/size))+xOffset, 
+						(y*(32/size))+yOffset, 
+						image4, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;	
 					
 				case 188:	
 				case '3':
 					// Draw angle road
-					GRRLIB_DrawImg( (x*32), (y*32), image3, 0, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( 
+						(x*(32/size))+xOffset, 
+						(y*(32/size))+yOffset, 
+						image3, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;	
 
 				case 200:
 				case '4':
 					// Draw angle road
-					GRRLIB_DrawImg( (x*32)+32, y*32, image3, 90, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( 
+						(x*(32/size))+(32/size)+xOffset, 
+						(y*(32/size))+yOffset, 
+						image3, 90, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;	
 					
 				case 201:
 				case '5':
 					// Draw angle road
-					GRRLIB_DrawImg( (x*32)+32, (y*32)+32, image3, 180, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( 
+						(x*(32/size))+(32/size)+xOffset, 
+						(y*(32/size))+(32/size)+yOffset,
+						image3, 180, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;	
 				
 				case 187:
 				case '6':
 					// Draw angle road
-					GRRLIB_DrawImg( (x*32), (y*32)+32, image3, 270, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( 
+						(x*(32/size))+xOffset, 
+						(y*(32/size))+(32/size)+yOffset, 
+						image3, 270, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;	
 			
 				case 206:
 				case '7':
 					// Draw Cross road
-					GRRLIB_DrawImg( (x*32), (y*32), image2, 0, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( 
+						(x*(32/size))+xOffset, 
+						(y*(32/size))+yOffset, 
+						image2, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;	
 			
 				case 204:
 				case '8':
 					// Draw T-section road
-					GRRLIB_DrawImg( (x*32), (y*32), image1, 0, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( 
+						(x*(32/size))+xOffset, 
+						(y*(32/size))+yOffset, 
+						image1, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;	
 
 				case 203:
 				case '9':
 					// Draw T-section road
-					GRRLIB_DrawImg( (x*32), (y*32), image1, 90, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( 
+						(x*(32/size))+xOffset, 
+						(y*(32/size))+yOffset, 
+						image1, 90, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;
 
 				case 185:
 				case 'A':
 					// Draw T-section road
-					GRRLIB_DrawImg( (x*32), (y*32), image1, 180, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( 
+						(x*(32/size))+xOffset, 
+						(y*(32/size))+yOffset,
+						image1, 180, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;
 
 				case 202:
 				case 'B':
 					// Draw T-section road
-					GRRLIB_DrawImg( (x*32), (y*32), image1, 270, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( 
+						(x*(32/size))+xOffset,
+						(y*(32/size))+yOffset,
+						image1, 270, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;
 		
 				case '~':
 					// Draw water image 
-					GRRLIB_DrawImg( (x*32), (y*32), imageWater, 0, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( 
+						(x*(32/size))+xOffset, 
+						(y*(32/size))+yOffset, 
+						imageWater, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;
 
 				case '=':
 					// Draw bridge image
-					GRRLIB_DrawImg( (x*32), (y*32), imageBridge, 0, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( 
+						(x*(32/size))+xOffset, 
+						(y*(32/size))+yOffset,
+						imageBridge, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;
 
 				case 'H':
 					// Draw bridge image
-					GRRLIB_DrawImg( (x*32)+32, (y*32), imageBridge, 90, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( 
+						(x*(32/size))+(32/size)+xOffset, 
+						(y*(32/size))+yOffset, 
+						imageBridge, 90, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;
 					
 				case '#':
 					// Draw grass image
-					GRRLIB_DrawImg( (x*32), (y*32), image5, 0, 1.0, 1.0, IMAGE_COLOR );
+					GRRLIB_DrawImg( 
+						(x*(32/size))+xOffset, 
+						(y*(32/size))+yOffset, 
+						image5, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
 					
 					// Store Base Position for later use!
 					baseX=x;
@@ -316,27 +340,21 @@ void Grid::draw(void)
 	}
 	
 	// Workarround to set base image on correct place
-	if (index==2) baseX+=1;
-
-
-	// Draw remaining base energy bar
-	int proc = (game.monsterInBase / MAX_MONSTER_IN_BASE ) * 60;
-	GRRLIB_Rectangle((baseX*32)-16, (baseY*32)+71, 60, 4, GRRLIB_BLACK, 1);
-	if (proc>60)
-	{
-		GRRLIB_Rectangle((baseX*32)-15, (baseY*32)+72, proc, 2, GRRLIB_GREEN, 1);
-	}
-	else if (proc>30)
-	{
-		GRRLIB_Rectangle((baseX*32)-15, (baseY*32)+72, proc, 2, GRRLIB_YELLOW, 1);
-	}
-	else 
-	{	
-		GRRLIB_Rectangle((baseX*32)-15, (baseY*32)+72, proc, 2, GRRLIB_RED, 1);
-	}
-		
+	if (index==1) baseX+=1;
+	
 	// Draw base
-	GRRLIB_DrawImg( (baseX*32)-16, (baseY*32)+5, imageBase, 0, 1.0, 1.0, IMAGE_COLOR );
+	GRRLIB_DrawImg( 
+			(baseX*(32/size))-(16/size)+xOffset,
+			(baseY*(32/size))+(5/size)+yOffset, 
+			imageBase, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+	
+	// Draw remaining base energy bar
+	if (size==1)
+	{
+		float proc = ( (MAX_MONSTER_IN_BASE-game.monsterInBase) / (float) MAX_MONSTER_IN_BASE ) * 21.0;
+		GRRLIB_Rectangle((baseX*32)+2, (baseY*32)+71, 20, 4, GRRLIB_BLACK, 0);
+		GRRLIB_Rectangle((baseX*32)+2, (baseY*32)+72, proc, 2, GRRLIB_GREEN, 1);
+	}
 }
 
 void Grid::text(void)
@@ -344,10 +362,10 @@ void Grid::text(void)
     char tmp[50];
 
 	// Workarround to set base image on correct place
-	if (index==2) baseX+=1;
+	if (index==1) baseX+=1;
 	
     sprintf(tmp, "%d", game.monsterInBase);
-	GRRLIB_Printf2((baseX*32)-16, (baseY*32)+16, tmp, 12, GRRLIB_WHITESMOKE); 
+	GRRLIB_Printf2((baseX*32)-16, (baseY*32)+16, tmp, 12, 0x000000); 
 }
 	
 	

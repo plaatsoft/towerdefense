@@ -316,14 +316,7 @@ void Pointer::buttonA(int x, int y)
 		}
 		break;
 	 
-		case stateIntro3:
-		{
-			// if A button is pressed continue to main menu screen
-			game.stateMachine=stateMainMenu;
-		}
-		break;
-	 
-		case stateMainMenu:
+	 	case stateMainMenu:
 		{	
 			// Check if button is pressed on screen
 			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
@@ -392,42 +385,42 @@ void Pointer::buttonA(int x, int y)
 			{
 				// Map1 button	      
 				game.stateMachine=stateGame;
-				game.selectedMap=1;
+				game.selectedMap=0;
 			}
 		
 			if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))
 			{
 				// Map2 button	      
 				game.stateMachine=stateGame;
-				game.selectedMap=2;
+				game.selectedMap=1;
 			}
 		
 			if ((buttons[2]!=NULL) && (buttons[2]->onSelect(x,y,true)))
 			{
 				// Map3 button	      
 				game.stateMachine=stateGame;
-				game.selectedMap=3;
+				game.selectedMap=2;
 			}
 			
 			if ((buttons[3]!=NULL) && (buttons[3]->onSelect(x,y,true)))
 			{
 				// Map4 button	      
 				//game.stateMachine=stateGame;
-				//game.selectedMap=1;
+				//game.selectedMap=3;
 			}
 		
 			if ((buttons[4]!=NULL) && (buttons[4]->onSelect(x,y,true)))
 			{
 				// Map5 button	      
 				//game.stateMachine=stateGame;
-				//game.selectedMap=2;
+				//game.selectedMap=4;
 			}
 		
 			if ((buttons[5]!=NULL) && (buttons[5]->onSelect(x,y,true)))
 			{
 				// Map3 button	      
 				//game.stateMachine=stateGame;
-				//game.selectedMap=3;
+				//game.selectedMap=5;
 			}
 			
 			if ((buttons[6]!=NULL) && (buttons[6]->onSelect(x,y,true)))
