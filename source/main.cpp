@@ -24,13 +24,13 @@
 **  - Realtime monsters animation on map select page.
 **  - Add map 4, 5, 6 and maybe more!
 **  - Improve weapon graphics
+**  - Improve fire effect!
 **  - Snap weapon to grid!
 **  - Add rotating sound icon on sound setting screen.
 **  - Bugfix: Network thread (Google analistics call crash)
-** 
-**  TODO:
 **  - Bugfix: Balance sound effect volume.
 **  - Improve scroll bar button design.
+**  - Show when weapon upgrade is not possible anymore!
 **
 **  17/12/2009 Version 0.44
 **  - Bugfix: Protect button access against NULL pointers.
@@ -39,7 +39,7 @@
 **  - Optimise game core to improve Frame-Per-Seconds.
 **  - Cleanup not used images and source code.
 **  - BugFix: Solve crash when game is over.
-**  - Rendering realtime grid examples in map select page.
+**  - Rendering realtime grid examples on map select screen.
 **
 **  16/12/2009 Version 0.43
 **  - Added help screen two. 
