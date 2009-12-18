@@ -405,22 +405,22 @@ void Pointer::buttonA(int x, int y)
 			if ((buttons[3]!=NULL) && (buttons[3]->onSelect(x,y,true)))
 			{
 				// Map4 button	      
-				//game.stateMachine=stateGame;
-				//game.selectedMap=3;
+				game.stateMachine=stateGame;
+				game.selectedMap=3;
 			}
 		
 			if ((buttons[4]!=NULL) && (buttons[4]->onSelect(x,y,true)))
 			{
 				// Map5 button	      
-				//game.stateMachine=stateGame;
-				//game.selectedMap=4;
+				game.stateMachine=stateGame;
+				game.selectedMap=4;
 			}
 		
 			if ((buttons[5]!=NULL) && (buttons[5]->onSelect(x,y,true)))
 			{
-				// Map3 button	      
-				//game.stateMachine=stateGame;
-				//game.selectedMap=5;
+				// Map6 button	      
+				game.stateMachine=stateGame;
+				game.selectedMap=5;
 			}
 			
 			if ((buttons[6]!=NULL) && (buttons[6]->onSelect(x,y,true)))

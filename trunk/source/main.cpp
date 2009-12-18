@@ -20,17 +20,19 @@
 **  ==============
 **
 **  NICE TO HAVE:
-**  - Load grid images for files.
 **  - Realtime monsters animation on map select page.
-**  - Add map 4, 5, 6 and maybe more!
 **  - Improve weapon graphics
 **  - Improve fire effect!
 **  - Snap weapon to grid!
 **  - Add rotating sound icon on sound setting screen.
-**  - Bugfix: Network thread (Google analistics call crash)
-**  - Bugfix: Balance sound effect volume.
 **  - Improve scroll bar button design.
 **  - Show when weapon upgrade is not possible anymore!
+**  - Bugfix: Network thread (Google analistics call crash)
+**  - Bugfix: Balance sound effect volume.
+**
+**  18/12/2009 Version 0.45
+**  - Added map 3, 4 and 6.
+**  - Load map images (sprites) directly from files.
 **
 **  17/12/2009 Version 0.44
 **  - Bugfix: Protect button access against NULL pointers.
@@ -219,22 +221,7 @@ typedef struct
   GRRLIB_texImg *monster23;
   GRRLIB_texImg *monster24;
   GRRLIB_texImg *monster25;
-  
-  GRRLIB_texImg *base1;
-  GRRLIB_texImg *base2;
-  GRRLIB_texImg *base3;
-  GRRLIB_texImg *base4;
-  GRRLIB_texImg *base5;
-  GRRLIB_texImg *base6;
-  
-  GRRLIB_texImg *road1;
-  GRRLIB_texImg *road2;
-  GRRLIB_texImg *road3;
-  GRRLIB_texImg *road4;
-  GRRLIB_texImg *road5;
-  GRRLIB_texImg *water1;
-  GRRLIB_texImg *bridge1;
-  
+    
   GRRLIB_texImg *weapon1;
   GRRLIB_texImg *weapon2;
   GRRLIB_texImg *weapon3;
@@ -442,60 +429,6 @@ extern int      pic203length;
 
 
 
-// Base1 Image
-extern const unsigned char     pic301data[];
-extern int      pic301length;
-
-// Base2 Image
-extern const unsigned char     pic302data[];
-extern int      pic302length;
-
-// Base3 Image
-extern const unsigned char     pic303data[];
-extern int      pic303length;
-
-// Base4 Image
-extern const unsigned char     pic304data[];
-extern int      pic304length;
-
-// Base5 Image
-extern const unsigned char     pic305data[];
-extern int      pic305length;
-
-// Base6 Image
-extern const unsigned char     pic306data[];
-extern int      pic306length;
-
-// Road1 Image
-extern const unsigned char     pic401data[];
-extern int      pic401length;
-
-// Road2 Image
-extern const unsigned char     pic402data[];
-extern int      pic402length;
-
-// Road3 Image
-extern const unsigned char     pic403data[];
-extern int      pic403length;
-
-// Road4 Image
-extern const unsigned char     pic404data[];
-extern int      pic404length;
-
-// Road5 Image
-extern const unsigned char     pic405data[];
-extern int      pic405length;
-
-// Water1 Image
-extern const unsigned char     pic406data[];
-extern int      pic406length;
-
-// Bridge1 Image
-extern const unsigned char     pic407data[];
-extern int      pic407length;
-
-
-
 // Weapon1 Image
 extern const unsigned char     pic500data[];
 extern int      pic500length;
@@ -674,21 +607,6 @@ void initImages(void)
    images.pointer3=GRRLIB_LoadTexture( pic202data);
    images.pointer4=GRRLIB_LoadTexture( pic203data);
    
-   images.base1=GRRLIB_LoadTexture( pic301data );	
-   images.base2=GRRLIB_LoadTexture( pic302data );	
-   images.base3=GRRLIB_LoadTexture( pic303data );	
-   images.base4=GRRLIB_LoadTexture( pic304data );	
-   images.base5=GRRLIB_LoadTexture( pic305data );	
-   images.base6=GRRLIB_LoadTexture( pic306data );	
-
-   images.road1=GRRLIB_LoadTexture( pic401data );	
-   images.road2=GRRLIB_LoadTexture( pic402data );	
-   images.road3=GRRLIB_LoadTexture( pic403data );	
-   images.road4=GRRLIB_LoadTexture( pic404data );	 
-   images.road5=GRRLIB_LoadTexture( pic405data );	
-   images.water1=GRRLIB_LoadTexture( pic406data );	
-   images.bridge1=GRRLIB_LoadTexture( pic407data );	
-
    images.weapon1=GRRLIB_LoadTexture( pic500data );
    images.weapon2=GRRLIB_LoadTexture( pic501data );
    images.weapon3=GRRLIB_LoadTexture( pic502data );
@@ -704,9 +622,7 @@ void initImages(void)
    images.buttonFocus3=GRRLIB_LoadTexture( pic605data );  
    images.button4=GRRLIB_LoadTexture( pic606data );
    images.buttonFocus4=GRRLIB_LoadTexture( pic607data );  
-    
-   images.map4=GRRLIB_LoadTexture( pic703data );  
-   
+     
    trace->event(s_fn,0,"leave [void]");
 }
 
@@ -972,27 +888,26 @@ void initGrid(void)
 	for (int i=0; i<MAX_GRIDS; i++)
 	{
 		grids[i] = new Grid();
-		grids[i]->setImageRoad1(images.road1);
-		grids[i]->setImageRoad2(images.road2);
-		grids[i]->setImageRoad3(images.road3);
-		grids[i]->setImageRoad4(images.road4);
-		grids[i]->setImageRoad5(images.road5);
-		grids[i]->setImageWater(images.water1);
-		grids[i]->setImageBridge(images.bridge1);
 		grids[i]->setIndex(i);
 	
 		switch( i )
 		{
-			case 0: grids[i]->setImageBase(images.base1);
-					grids[i]->create(GRID1_FILENAME);
+			case 0: grids[i]->create(GRID1_DIRECTORY);
 					break;
 			
-			case 1: grids[i]->setImageBase(images.base2);
-					grids[i]->create(GRID2_FILENAME);
+			case 1: grids[i]->create(GRID2_DIRECTORY);
 					break;
 				
-			case 2: grids[i]->setImageBase(images.base3);
-					grids[i]->create(GRID3_FILENAME);
+			case 2: grids[i]->create(GRID3_DIRECTORY);
+					break;
+			
+			case 3: grids[i]->create(GRID4_DIRECTORY);
+					break;
+					
+			case 4: grids[i]->create(GRID5_DIRECTORY);
+					break;
+					
+			case 5: grids[i]->create(GRID6_DIRECTORY);
 					break;
 		}
 	}
@@ -1643,6 +1558,15 @@ void drawGrid()
 				
 		case 2: grids[2]->draw(0,0,1);   
 			    break;
+				
+		case 3: grids[3]->draw(0,0,1);   
+			    break;
+				
+		case 4: grids[4]->draw(0,0,1);   
+			    break;
+				
+		case 5: grids[5]->draw(0,0,1);   
+			    break;
 	}				
 }
 
@@ -1659,6 +1583,15 @@ void drawGridText()
 				break;
 				
 		case 2: grids[2]->text();   
+				break;
+				
+		case 3: grids[3]->text();   
+				break;
+				
+		case 4: grids[4]->text();   
+				break;
+				
+		case 5: grids[5]->text();   
 				break;
 	}
 }
@@ -2047,12 +1980,12 @@ void drawScreen(void)
 		  // Draw samples maps
 		  grids[0]->draw(60,135,5); 
 		  grids[1]->draw(260,135,5); 
-		  grids[2]->draw(460,135,5);		   
-		  
-		  GRRLIB_DrawImg(60,  300, images.map4, 0, 1, 1, IMAGE_COLOR );
-		  GRRLIB_DrawImg(260, 300, images.map4, 0, 1, 1, IMAGE_COLOR );
-		  GRRLIB_DrawImg(460, 300, images.map4, 0, 1, 1, IMAGE_COLOR );
-	
+		  grids[2]->draw(460,135,5);
+			
+		  grids[3]->draw(60,300,5); 
+		  grids[4]->draw(260,300,5); 
+		  grids[5]->draw(460,300,5);
+		   
 		  // Draw some moving monsters on the sample maps
 		  /*for( int i=0; i<MAX_MONSTERS; i++ ) 
 		  {
@@ -2080,10 +2013,6 @@ void drawScreen(void)
 
 		  // Draw title
 	      drawText(120, ypos, fontTitle, "Choose Map");	
-
-		  drawText(70,  335, fontNormal, "Coming soon");
-		  drawText(270, 335, fontNormal, "Coming soon");
-		  drawText(470, 335, fontNormal, "Coming soon");
 
 		  // Draw Button Text labels
 		  drawButtonsText(0);
@@ -3378,22 +3307,7 @@ void destroyImages(void)
    GRRLIB_FreeTexture(images.pointer2);
    GRRLIB_FreeTexture(images.pointer3);
    GRRLIB_FreeTexture(images.pointer4);
-   
-   GRRLIB_FreeTexture(images.base1);
-   GRRLIB_FreeTexture(images.base2);
-   GRRLIB_FreeTexture(images.base3);
-   GRRLIB_FreeTexture(images.base4);
-   GRRLIB_FreeTexture(images.base5);
-   GRRLIB_FreeTexture(images.base6);
-   
-   GRRLIB_FreeTexture(images.road1);
-   GRRLIB_FreeTexture(images.road2);
-   GRRLIB_FreeTexture(images.road3);
-   GRRLIB_FreeTexture(images.road4);
-   GRRLIB_FreeTexture(images.road5);
-   GRRLIB_FreeTexture(images.water1);
-   GRRLIB_FreeTexture(images.bridge1);
-   
+      
    GRRLIB_FreeTexture(images.weapon1);
    GRRLIB_FreeTexture(images.weapon2);
    GRRLIB_FreeTexture(images.weapon3);

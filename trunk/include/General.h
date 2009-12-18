@@ -26,8 +26,8 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.44"
-#define RELEASE_DATE        	"17-12-2009" 
+#define PROGRAM_VERSION     	"0.45"
+#define RELEASE_DATE        	"18-12-2009" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -51,9 +51,12 @@
 #define TRACE_FILENAME      	"sd:/apps/TowerDefense/TowerDefense.trc"
 #define GAME_DIRECTORY      	"sd:/apps/TowerDefense/"
 
-#define GRID1_FILENAME    	  	"sd:/apps/TowerDefense/maps/map1.xml"
-#define GRID2_FILENAME    	  	"sd:/apps/TowerDefense/maps/map2.xml"
-#define GRID3_FILENAME    	  	"sd:/apps/TowerDefense/maps/map3.xml"
+#define GRID1_DIRECTORY    	  	"sd:/apps/TowerDefense/map1"
+#define GRID2_DIRECTORY    	  	"sd:/apps/TowerDefense/map2"
+#define GRID3_DIRECTORY   	  	"sd:/apps/TowerDefense/map3"
+#define GRID4_DIRECTORY   	  	"sd:/apps/TowerDefense/map4"
+#define GRID5_DIRECTORY   	  	"sd:/apps/TowerDefense/map5"
+#define GRID6_DIRECTORY   	  	"sd:/apps/TowerDefense/map6"
 
 #define YOFFSET					25
 #define WSP_POINTER_X      		200
@@ -92,7 +95,7 @@
 #define MAX_GLOBAL_HIGHSCORE	50
 #define MAX_SETTINGS			5
 #define MAX_WEAPON_TYPE         6
-#define MAX_GRIDS  				3
+#define MAX_GRIDS  				6
 #define MAX_MONSTER_IN_BASE     10
 
 #define MAX_SOUND_VOLUME		10

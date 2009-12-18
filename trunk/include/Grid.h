@@ -51,18 +51,20 @@ class Grid
 	int baseY;
 
     int index;
-	GRRLIB_texImg *image1;
-	GRRLIB_texImg *image2;
-	GRRLIB_texImg *image3;
-	GRRLIB_texImg *image4;
-	GRRLIB_texImg *image5;
-	GRRLIB_texImg *imageBase;
-	GRRLIB_texImg *imageWater;
+	GRRLIB_texImg *imageRoad1;
+	GRRLIB_texImg *imageRoad2;
+	GRRLIB_texImg *imageRoad3;
+	GRRLIB_texImg *imageRoad4;
+	GRRLIB_texImg *imageRoad5;
 	GRRLIB_texImg *imageBridge;
+	GRRLIB_texImg *imageBase;
+	GRRLIB_texImg *imageGeneral1;
+	GRRLIB_texImg *imageGeneral2;
 
 	
 	void parseGrid(void);
 	void loadGrid(const char* filename);
+	GRRLIB_texImg * loadImage(const char *filename);
 	
   public:
 	// Constructor & Destructor
@@ -72,17 +74,9 @@ class Grid
 	// Other
 	void draw(int xOffset, int yOffset, int size);
 	void text(void);
-	void create(const char* filename);
+	void create(const char* directory);
 
 	// Setters
-	void setImageRoad1(GRRLIB_texImg *image);
-	void setImageRoad2(GRRLIB_texImg *image);
-	void setImageRoad3(GRRLIB_texImg *image);
-	void setImageRoad4(GRRLIB_texImg *image);
-	void setImageRoad5(GRRLIB_texImg *image);
-	void setImageBase(GRRLIB_texImg *image);	
-	void setImageWater(GRRLIB_texImg *image);
-	void setImageBridge(GRRLIB_texImg *image);
 	void setIndex(int index);
 	
 	// Getters
