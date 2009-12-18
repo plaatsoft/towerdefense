@@ -42,6 +42,15 @@ Grid::Grid()
     baseX=0;
 	baseY=0;
 	
+	imageBase=NULL;
+	imageRoad1=NULL;
+	imageRoad2=NULL;
+	imageRoad3=NULL;
+	imageRoad4=NULL;
+	imageBridge=NULL;
+	imageGeneral1=NULL;
+	imageGeneral2=NULL;
+	
 	trace->event(s_fn,0,"leave [void]");  
 }
 	
@@ -54,6 +63,15 @@ Grid::~Grid()
 	const char *s_fn="Grid::~Grid";
 	trace->event(s_fn,0,"enter");
 
+    GRRLIB_FreeTexture(imageBase);
+    GRRLIB_FreeTexture(imageRoad1);
+    GRRLIB_FreeTexture(imageRoad2);
+    GRRLIB_FreeTexture(imageRoad3);
+    GRRLIB_FreeTexture(imageRoad4);
+    GRRLIB_FreeTexture(imageBridge);
+	GRRLIB_FreeTexture(imageGeneral1);
+    GRRLIB_FreeTexture(imageGeneral2);
+	
 	trace->event(s_fn,0,"leave [void]");  
 }
 
@@ -143,6 +161,24 @@ void Grid::parseGrid(void)
 	trace->event(s_fn,0,"leave [maxLocations=%d]",maxLocations);
 }
 
+GRRLIB_texImg * Grid::loadImage(const char *filename)
+{
+	u8 data[MAX_BUFFER_SIZE];
+   
+	FILE *fp = fopen(filename, "r");
+	if (fp!=NULL)
+	{  
+		int len = fread(&data, MAX_BUFFER_SIZE, MAX_BUFFER_SIZE, fp);
+		if (len > 0)
+		{
+			fclose(fp);
+			return GRRLIB_LoadTexture( data );
+		}
+	}  
+	fclose(fp);
+	return NULL;
+}
+
 void Grid::loadGrid(const char* filename)
 {
    const char *s_fn="Grid::initGrid";
@@ -197,7 +233,7 @@ void Grid::draw(int xOffset, int yOffset, int size)
 					GRRLIB_DrawImg( 
 						(x*(32/size))+xOffset, 
 						(y*(32/size))+yOffset, 
-						image5, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+						imageRoad5, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;
 	
 				case 205:
@@ -206,7 +242,7 @@ void Grid::draw(int xOffset, int yOffset, int size)
 					GRRLIB_DrawImg( 
 						(x*(32/size))+(32/size)+xOffset, 
 						(y*(32/size))+yOffset, 
-						image4, 90, (1.0/size), (1.0/size), IMAGE_COLOR );
+						imageRoad4, 90, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;	
 
 				case 186:
@@ -215,7 +251,7 @@ void Grid::draw(int xOffset, int yOffset, int size)
 					GRRLIB_DrawImg( 
 						(x*(32/size))+xOffset, 
 						(y*(32/size))+yOffset, 
-						image4, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+						imageRoad4, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;	
 					
 				case 188:	
@@ -224,7 +260,7 @@ void Grid::draw(int xOffset, int yOffset, int size)
 					GRRLIB_DrawImg( 
 						(x*(32/size))+xOffset, 
 						(y*(32/size))+yOffset, 
-						image3, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+						imageRoad3, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;	
 
 				case 200:
@@ -233,7 +269,7 @@ void Grid::draw(int xOffset, int yOffset, int size)
 					GRRLIB_DrawImg( 
 						(x*(32/size))+(32/size)+xOffset, 
 						(y*(32/size))+yOffset, 
-						image3, 90, (1.0/size), (1.0/size), IMAGE_COLOR );
+						imageRoad3, 90, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;	
 					
 				case 201:
@@ -242,7 +278,7 @@ void Grid::draw(int xOffset, int yOffset, int size)
 					GRRLIB_DrawImg( 
 						(x*(32/size))+(32/size)+xOffset, 
 						(y*(32/size))+(32/size)+yOffset,
-						image3, 180, (1.0/size), (1.0/size), IMAGE_COLOR );
+						imageRoad3, 180, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;	
 				
 				case 187:
@@ -251,7 +287,7 @@ void Grid::draw(int xOffset, int yOffset, int size)
 					GRRLIB_DrawImg( 
 						(x*(32/size))+xOffset, 
 						(y*(32/size))+(32/size)+yOffset, 
-						image3, 270, (1.0/size), (1.0/size), IMAGE_COLOR );
+						imageRoad3, 270, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;	
 			
 				case 206:
@@ -260,7 +296,7 @@ void Grid::draw(int xOffset, int yOffset, int size)
 					GRRLIB_DrawImg( 
 						(x*(32/size))+xOffset, 
 						(y*(32/size))+yOffset, 
-						image2, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+						imageRoad2, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;	
 			
 				case 204:
@@ -269,7 +305,7 @@ void Grid::draw(int xOffset, int yOffset, int size)
 					GRRLIB_DrawImg( 
 						(x*(32/size))+xOffset, 
 						(y*(32/size))+yOffset, 
-						image1, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+						imageRoad1, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;	
 
 				case 203:
@@ -278,7 +314,7 @@ void Grid::draw(int xOffset, int yOffset, int size)
 					GRRLIB_DrawImg( 
 						(x*(32/size))+xOffset, 
 						(y*(32/size))+yOffset, 
-						image1, 90, (1.0/size), (1.0/size), IMAGE_COLOR );
+						imageRoad1, 90, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;
 
 				case 185:
@@ -287,7 +323,7 @@ void Grid::draw(int xOffset, int yOffset, int size)
 					GRRLIB_DrawImg( 
 						(x*(32/size))+xOffset, 
 						(y*(32/size))+yOffset,
-						image1, 180, (1.0/size), (1.0/size), IMAGE_COLOR );
+						imageRoad1, 180, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;
 
 				case 202:
@@ -296,7 +332,7 @@ void Grid::draw(int xOffset, int yOffset, int size)
 					GRRLIB_DrawImg( 
 						(x*(32/size))+xOffset,
 						(y*(32/size))+yOffset,
-						image1, 270, (1.0/size), (1.0/size), IMAGE_COLOR );
+						imageRoad1, 270, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;
 		
 				case '~':
@@ -304,7 +340,7 @@ void Grid::draw(int xOffset, int yOffset, int size)
 					GRRLIB_DrawImg( 
 						(x*(32/size))+xOffset, 
 						(y*(32/size))+yOffset, 
-						imageWater, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+						imageGeneral2, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;
 
 				case '=':
@@ -328,7 +364,7 @@ void Grid::draw(int xOffset, int yOffset, int size)
 					GRRLIB_DrawImg( 
 						(x*(32/size))+xOffset, 
 						(y*(32/size))+yOffset, 
-						image5, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+						imageGeneral1, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
 					
 					// Store Base Position for later use!
 					baseX=x;
@@ -370,13 +406,40 @@ void Grid::text(void)
 	
 	
 // Load grid map and parse it for monster movement.
-void Grid::create(const char* filename)
+void Grid::create(const char* directory)
 {
 	const char *s_fn="Grid::render";
-	trace->event(s_fn,0,"enter [filename=%s]",filename);
+	trace->event(s_fn,0,"enter [directory=%s]",directory);
    
+    char filename[MAX_LEN];
+	sprintf(filename,"%s/map.xml",directory);
     loadGrid(filename);
 	parseGrid();
+	
+	// Load images
+	sprintf(filename,"%s/base.png",directory);
+    imageBase=loadImage(filename);
+	
+	sprintf(filename,"%s/road1.png",directory);
+    imageRoad1=loadImage(filename);
+
+	sprintf(filename,"%s/road2.png",directory);
+    imageRoad2=loadImage(filename);
+	
+	sprintf(filename,"%s/road3.png",directory);
+    imageRoad3=loadImage(filename);
+	
+	sprintf(filename,"%s/road4.png",directory);
+    imageRoad4=loadImage(filename);
+ 
+	sprintf(filename,"%s/general1.png",directory);
+    imageGeneral1=loadImage(filename);
+
+	sprintf(filename,"%s/general2.png",directory);
+    imageGeneral2=loadImage(filename);
+	
+	sprintf(filename,"%s/bridge.png",directory);
+    imageBridge=loadImage(filename);
 	
 	trace->event(s_fn,0,"leave [void]");  
 }
@@ -385,76 +448,12 @@ void Grid::create(const char* filename)
 // Setters
 // ------------------------------
 
-void Grid::setImageRoad1(GRRLIB_texImg *image)
-{
-   const char *s_fn="Pointer::setImageRoad1";
-   trace->event(s_fn,0,"data");
-   
-   image1 = image;
-}
-
-void Grid::setImageRoad2(GRRLIB_texImg *image)
-{
-   const char *s_fn="Pointer::setImageRoad2";
-   trace->event(s_fn,0,"data");
-   
-   image2 = image;
-}
-
-void Grid::setImageRoad3(GRRLIB_texImg *image)
-{
-   const char *s_fn="Pointer::setImageRoad3";
-   trace->event(s_fn,0,"data");
-   
-   image3 = image;
-}
-
-void Grid::setImageRoad4(GRRLIB_texImg *image)
-{
-   const char *s_fn="Pointer::setImageRoad4";
-   trace->event(s_fn,0,"data");
-   
-   image4 = image;
-}
-
-void Grid::setImageRoad5(GRRLIB_texImg *image)
-{
-   const char *s_fn="Pointer::setImageRoad5";
-   trace->event(s_fn,0,"data");
-   
-   image5 = image;
-}
-
-void Grid::setImageBase(GRRLIB_texImg *image)
-{
-   const char *s_fn="Pointer::setImageBase";
-   trace->event(s_fn,0,"data");
-   
-   imageBase = image;
-}
-
-void Grid::setImageWater(GRRLIB_texImg *image)
-{
-   const char *s_fn="Pointer::setImageWater";
-   trace->event(s_fn,0,"data");
-   
-   imageWater = image;
-}
-
-void Grid::setImageBridge(GRRLIB_texImg *image)
-{
-   const char *s_fn="Pointer::setImageBrige";
-   trace->event(s_fn,0,"data");
-   
-   imageBridge = image;
-}
-
 void Grid::setIndex(int index1)
 {
 	const char *s_fn="Grid::setIndex";
 	trace->event(s_fn,0,"%d",index1);
 	
-    index = index1;
+    index = index1;	
 }
 
 // ------------------------------
