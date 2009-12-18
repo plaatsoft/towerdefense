@@ -465,8 +465,8 @@ bool http_split_url(char **host, char **path, const char *url)
 		    return false;
 	    }
 
-        *host = strndup (p, c - p);
-        *path = strdup (c);
+        *host = strndup(p, c - p);
+        *path = strdup(c);
 
 		//trace->event(s_fn, 1,"leave [true]"); 	
         return true;
@@ -648,8 +648,7 @@ void http_googleAnalysicUrl(char *buffer, char *domain, char *url, char *id)
 	memset( tmp1,0x00,sizeof(tmp1));
     memset( tmp2,0x00,sizeof(tmp2));
 	
-	 /* URL EXAMPLE 
- 
+	 /* URL EXAMPLE  
     ?utmwv=1 				// Analytics version
     &utmn=634440486         // Random transaction number
 	&utmcs=URF-8    		//document encoding
@@ -696,8 +695,15 @@ void http_googleAnalysicUrl(char *buffer, char *domain, char *url, char *id)
 	// Document page URL
     http_encode_url(utmp, url );
 				
-    // screen size
-    sprintf(tmp1,"%dx%d", rmode->fbWidth, rmode->xfbHeight ); 	
+    // Get current screen size
+	if (rmode!=NULL)
+	{
+		sprintf(tmp1,"%dx%d", rmode->fbWidth, rmode->xfbHeight ); 	
+	}
+	else
+	{
+		sprintf(tmp1,"640x480" ); 	
+	}
     strcpy(utmsr, tmp1 );
 	
 	// color depth
@@ -771,46 +777,6 @@ void http_googleAnalysicUrl(char *buffer, char *domain, char *url, char *id)
 	//trace->event(s_fn,1,"buffer=%s",buffer); 
 	//trace->event(s_fn,1,"leave [void]"); 
 }
-
-// Google Analytic without JavaScript (php example)
-/*header("Content-type:image/gif");
-$var_utmac=$_REQUEST['t']?$_REQUEST['t']:'UA-5199105-1'; //enter the new urchin code
-$var_utmhn=$_REQUEST['d']?$_REQUEST['d']:'wap.metamobile.com.my'; //enter your domain
-$var_utmn=rand(  1000000000,9999999999);//random request number
-$var_cookie=rand(10000000,99999999);//random cookie number
-$var_random=rand(1000000000,2147483647); //number under 2147483647
-$var_today=time(); //today
-$var_referer=$_SERVER['HTTP_REFERER']; //referer url
-
-$var_uservar='-'; //enter your own user defined variable
-$var_utmp='/rss/'.$_SERVER['REMOTE_ADDR']; //this example adds a fake page request to the (fake) rss directory (the viewer IP to check for absolute unique RSS readers)
-$urchinUrl='http://www.google-analytics.com/__utm.gif?utmwv=1&utmn='.$var_utmn.'&utmsr=-&utmsc=-&utmul=-&utmje=0&utmfl=-&utmdt=-&utmhn='.$var_utmhn.'&utmr='.$var_referer.'&utmp='.$var_utmp.'&utmac='.$var_utmac.'&utmcc=__utma%3D'
-.$var_cookie.'.'.$var_random.'.'.$var_today.'.'.$var_today.'.'.$var_today.'.2%3B%2B__utmb%3D'.$var_cookie.'%3B%2B__utmc%3D'.$var_cookie.'%3B%2B__utmz%3D'.$var_cookie.'.'.$var_today.'.2.2.utmccn%3D(direct)%7Cutmcsr%3D(direct)
-                                                                                                                                            %7Cutmcmd%3D(none)%3B%2B__utmv%3D'.$var_cookie.'.'.$var_uservar.'%3B';
-
-$urchinUrl='http://www.google-analytics.com/__utm.gif';
- 
-echo Curl_to_GA($urchinUrl); 
-
-function Curl_to_GA($target,$post_vars=''){
-    while (list($k,$v) = each($_SERVER)) {
-        if (strstr ($k,"HTTP_") && $k != 'HTTP_HOST')    
-            $reqHeaders[] = str_replace(" ","-",ucwords(strtolower(str_replace("_"," ",str_replace("HTTP_","",$k))))) . ": " . $v;
-    }
-	$ch = curl_init(); //var_dump($reqHeaders);
-	curl_setopt($ch, CURLOPT_URL, $target);
-	curl_setopt($ch, CURLOPT_HEADER, 0);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-	if (count($reqHeaders) > 0) {
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $reqHeaders);
-	} 	if ($post_vars != '') { 
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $post_vars);
-	}
-	$response = curl_exec($ch);
-	curl_close($ch);
-    return $response;
-}*/
 
 extern bool http_request(char *url, const u32 max_size)
 {
@@ -1038,7 +1004,6 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
    return NULL;
 }
 
-
 // -----------------------------------------------------------
 // THREAD STUFF
 // -----------------------------------------------------------
@@ -1117,8 +1082,8 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 			 LWP_MutexUnlock(mutexversion);
 			 
 	         free(outbuf);			 
-			 //tcp_state=TCP_REQUEST1b;
-			 tcp_state=TCP_REQUEST2a;
+			 tcp_state=TCP_REQUEST1b;
+			 //tcp_state=TCP_REQUEST2a;
           } 	 
 		} 	
         break;	 
@@ -1136,8 +1101,10 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
           sprintf(url1,"/start/%s/%s",appl_name,appl_version);		    
 			
 		  if (!http_split_url(&appl_host, &appl_path, appl_url1)) return false;
-			
 		  http_googleAnalysicUrl(buffer,appl_host,url1,appl_id1);
+		  free (appl_host);
+          free (appl_path);	 
+		  
           retval = http_request(buffer, 1 << 31);
           if (!retval) 
           {
@@ -1153,8 +1120,6 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 			 free(outbuf);
 			 tcp_state=TCP_REQUEST2a;
           } 	
-		  free (appl_host);
-          free (appl_path);	 
 	    }
 		break;
 				
@@ -1181,8 +1146,8 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 			 //for (int i=0; i<strlen(appl_release_notes); i++) trace->eventRaw( appl_release_notes[i] ); 
 	
 			 free(outbuf);			 
-			 //tcp_state=TCP_REQUEST2b;			
-			 tcp_state=TCP_REQUEST3a;
+			 tcp_state=TCP_REQUEST2b;			
+			 //tcp_state=TCP_REQUEST3a;
           } 	
 		} 	
         break;	 
@@ -1196,8 +1161,10 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 		  //trace->event(s_fn, 1,"stateMachine=TCP_REQUEST2b"); 
 		 	  
 		  if (!http_split_url(&appl_host, &appl_path, appl_url2)) return false;
-			  		  		  		    
 		  http_googleAnalysicUrl(buffer, appl_host, appl_path, appl_id2);
+		  free (appl_host);
+          free (appl_path);
+		  
           retval = http_request(buffer, 1 << 31);
           if (!retval) 
           {
@@ -1213,8 +1180,7 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 			 free(outbuf);
 			 tcp_state=TCP_REQUEST3a;
           } 
-		  free (appl_host);
-          free (appl_path);	 
+	 
 		  // tcp_sleep(10);
 		} 	
         break;	 
@@ -1252,8 +1218,8 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 			    result[13]=0x00; 
     				// for (int i=0; i<strlen(appl_today_highscore); i++) trace->eventRaw(appl_today_highscore[i] ); 
 				   
-				//tcp_state=TCP_REQUEST3b;
-				tcp_state=TCP_REQUEST4a;
+				tcp_state=TCP_REQUEST3b;
+				//tcp_state=TCP_REQUEST4a;
 			 }
 			 else
 			 {
@@ -1280,9 +1246,11 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 		  
 		  //trace->event(s_fn, 1,"stateMachine=TCP_REQUEST3b"); 
 		 		  
-		  if (!http_split_url(&appl_host, &appl_path, appl_url3)) return false;
-		  		  
+		  if (!http_split_url(&appl_host, &appl_path, appl_url3)) return false;		  
 		  http_googleAnalysicUrl(buffer, appl_host, appl_path, appl_id3);
+		  free (appl_host);
+          free (appl_path);
+		  
           retval = http_request(buffer, 1 << 31);
           if (!retval) 
           {
@@ -1296,9 +1264,7 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 			 //for (int i=0; i<outlen; i++) trace->eventRaw( outbuf[i] ); 
 			 free(outbuf);
 			 tcp_state=TCP_REQUEST4a;
-          } 	
-		  free (appl_host);
-          free (appl_path); 
+          } 	 
 		} 	
         break;	
 		
@@ -1337,8 +1303,8 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 			    result[13]=0x00; 
     			//for (i=0; i<strlen(appl_global_highscore); i++) trace->eventRaw(appl_global_highscore[i] ); 
 				   
-				tcp_state=TCP_IDLE;
-				//tcp_state=TCP_REQUEST4b;
+				//tcp_state=TCP_IDLE;
+				tcp_state=TCP_REQUEST4b;
 			 }
 			 else
 			 {
@@ -1365,9 +1331,11 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 		  
 		  //trace->event(s_fn, 1,"stateMachine=TCP_REQUEST4b"); 
 		 		  
-		  if (!http_split_url(&appl_host, &appl_path, appl_url4)) return false;
-		  		  
+		  if (!http_split_url(&appl_host, &appl_path, appl_url4)) return false;		  
 		  http_googleAnalysicUrl(buffer, appl_host, appl_path, appl_id4);
+		  free (appl_host);
+          free (appl_path); 
+		  
           retval = http_request(buffer, 1 << 31);
           if (!retval) 
           {
@@ -1382,8 +1350,6 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 			 free(outbuf);
 			 tcp_state=TCP_IDLE;
           } 	
-		  free (appl_host);
-          free (appl_path); 
 		} 	
         break;	 
 		

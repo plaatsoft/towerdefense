@@ -87,7 +87,7 @@
 #define IMAGE_COLOR3        	0x44444444
 
 #define MAX_WEAPONS				100
-#define MAX_MONSTERS			200
+#define MAX_MONSTERS			250
 #define MAX_BUTTONS         	10
 #define MAX_POINTERS         	4
 #define MAX_LOCAL_HIGHSCORE 	50

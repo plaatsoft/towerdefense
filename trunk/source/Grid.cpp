@@ -47,7 +47,7 @@ Grid::Grid()
 	imageRoad2=NULL;
 	imageRoad3=NULL;
 	imageRoad4=NULL;
-	imageBridge=NULL;
+	imageRoad5=NULL;
 	imageGeneral1=NULL;
 	imageGeneral2=NULL;
 	
@@ -68,7 +68,7 @@ Grid::~Grid()
     GRRLIB_FreeTexture(imageRoad2);
     GRRLIB_FreeTexture(imageRoad3);
     GRRLIB_FreeTexture(imageRoad4);
-    GRRLIB_FreeTexture(imageBridge);
+    GRRLIB_FreeTexture(imageRoad5);
 	GRRLIB_FreeTexture(imageGeneral1);
     GRRLIB_FreeTexture(imageGeneral2);
 	
@@ -163,19 +163,21 @@ void Grid::parseGrid(void)
 
 GRRLIB_texImg * Grid::loadImage(const char *filename)
 {
+    const char *s_fn="Grid::loadImage";
+    trace->event(s_fn,0,"enter [filename=%s]",filename);
+   
 	u8 data[MAX_BUFFER_SIZE];
    
 	FILE *fp = fopen(filename, "r");
 	if (fp!=NULL)
 	{  
-		int len = fread(&data, MAX_BUFFER_SIZE, MAX_BUFFER_SIZE, fp);
-		if (len > 0)
-		{
-			fclose(fp);
-			return GRRLIB_LoadTexture( data );
-		}
+	    fread(&data, 1, MAX_BUFFER_SIZE, fp);
+		fclose(fp);
+		trace->event(s_fn,0,"leave [DATA]");
+		return GRRLIB_LoadTexture( data );
 	}  
 	fclose(fp);
+	trace->event(s_fn,0,"leave [NULL]");
 	return NULL;
 }
 
@@ -233,7 +235,15 @@ void Grid::draw(int xOffset, int yOffset, int size)
 					GRRLIB_DrawImg( 
 						(x*(32/size))+xOffset, 
 						(y*(32/size))+yOffset, 
-						imageRoad5, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+						imageGeneral1, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+					break;
+					
+				case '~':
+					// Draw water image 
+					GRRLIB_DrawImg( 
+						(x*(32/size))+xOffset, 
+						(y*(32/size))+yOffset, 
+						imageGeneral2, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;
 	
 				case 205:
@@ -334,21 +344,13 @@ void Grid::draw(int xOffset, int yOffset, int size)
 						(y*(32/size))+yOffset,
 						imageRoad1, 270, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;
-		
-				case '~':
-					// Draw water image 
-					GRRLIB_DrawImg( 
-						(x*(32/size))+xOffset, 
-						(y*(32/size))+yOffset, 
-						imageGeneral2, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
-					break;
-
+	
 				case '=':
 					// Draw bridge image
 					GRRLIB_DrawImg( 
 						(x*(32/size))+xOffset, 
 						(y*(32/size))+yOffset,
-						imageBridge, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+						imageRoad5, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;
 
 				case 'H':
@@ -356,7 +358,7 @@ void Grid::draw(int xOffset, int yOffset, int size)
 					GRRLIB_DrawImg( 
 						(x*(32/size))+(32/size)+xOffset, 
 						(y*(32/size))+yOffset, 
-						imageBridge, 90, (1.0/size), (1.0/size), IMAGE_COLOR );
+						imageRoad5, 90, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;
 					
 				case '#':
@@ -431,15 +433,15 @@ void Grid::create(const char* directory)
 	
 	sprintf(filename,"%s/road4.png",directory);
     imageRoad4=loadImage(filename);
+
+	sprintf(filename,"%s/road5.png",directory);
+    imageRoad5=loadImage(filename);
  
 	sprintf(filename,"%s/general1.png",directory);
     imageGeneral1=loadImage(filename);
 
 	sprintf(filename,"%s/general2.png",directory);
     imageGeneral2=loadImage(filename);
-	
-	sprintf(filename,"%s/bridge.png",directory);
-    imageBridge=loadImage(filename);
 	
 	trace->event(s_fn,0,"leave [void]");  
 }
@@ -477,7 +479,6 @@ int Grid::getLocationY(int pos)
 	}
 	return -1;
 }
-
 
 int Grid::getMaxLocations(void)
 {
