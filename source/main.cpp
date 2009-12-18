@@ -30,10 +30,11 @@
 **  - Balance sound effect volume.
 **
 **  18/12/2009 Version 0.45
-**  - Added map 3, 4 and 6.
+**  - Added map 4, 5 and 6.
 **  - Load map images (sprites) directly from SdCard.
 **  - Improve objects cleanup when stopping game.
-**  - Added network thread (Google analistics calls)
+**  - Added Google analistics network calls.
+**  - Build game with devkitPPC r19 compiler.
 **
 **  17/12/2009 Version 0.44
 **  - Bugfix: Protect button access against NULL pointers.
@@ -43,6 +44,7 @@
 **  - Cleanup not used images and source code.
 **  - BugFix: Solve crash when game is over.
 **  - Rendering realtime grid examples on map select screen.
+**  - Build game with devkitPPC r19 compiler.
 **
 **  16/12/2009 Version 0.43
 **  - Added help screen two. 
