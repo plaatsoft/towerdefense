@@ -414,6 +414,20 @@ int Weapon::getRatePrice(void)
 	return ratePrice;
 }
 	
+bool Weapon::isPowerUpgradeble(void)
+{
+	return power<maxPower;
+}
+
+bool Weapon::isRangeUpgradeble(void)
+{
+	return range<maxRange;
+}
+
+bool Weapon::isRateUpgradeble(void)
+{
+	return rate>maxRate;
+}
 // ------------------------------
 // The end
 // ------------------------------

@@ -27,12 +27,13 @@
 **  - Add rotating sound icon on sound setting screen.
 **  - Improve scroll bar button design.
 **  - Show when weapon upgrade is not possible anymore!
-**  - Bugfix: Network thread (Google analistics call crash)
-**  - Bugfix: Balance sound effect volume.
+**  - Balance sound effect volume.
 **
 **  18/12/2009 Version 0.45
 **  - Added map 3, 4 and 6.
-**  - Load map images (sprites) directly from files.
+**  - Load map images (sprites) directly from SdCard.
+**  - Improve objects cleanup when stopping game.
+**  - Added network thread (Google analistics calls)
 **
 **  17/12/2009 Version 0.44
 **  - Bugfix: Protect button access against NULL pointers.
@@ -488,13 +489,6 @@ extern const unsigned char     pic607data[];
 extern int      pic607length;
 
 
-
-// Map4 Sample Image
-extern const unsigned char     pic703data[];
-extern int      pic703length;
-
-
-
 u32         *frameBuffer[1] 	= {NULL};
 GXRModeObj  *rmode 				= NULL;
 Mtx         GXmodelView2D;
@@ -513,138 +507,268 @@ Weapon    	*weapons[MAX_WEAPONS];
 Button    	*buttons[MAX_BUTTONS];
 
 // -----------------------------------
+// Destroy METHODES
+// -----------------------------------
+
+void destroyWeapons(void)
+{
+	const char *s_fn="destroyWeapons";
+	trace->event(s_fn,0,"enter");
+	
+	// Destroy all Weapons
+	for( int i=0; i<MAX_WEAPONS; i++)
+    {
+		if (weapons[i]!=NULL)
+		{
+			delete weapons[i];
+			trace->event(s_fn,0,"delete weapon %d",i);
+			weapons[i]=NULL;
+		}
+    }
+	
+	trace->event(s_fn,0,"leave");
+}
+
+void destroyButtons(void)
+{
+	const char *s_fn="destroyButtons";
+	trace->event(s_fn,0,"enter");
+	
+	// Destroy all Buttons
+	for( int i=0; i<MAX_BUTTONS; i++)
+    {
+		if (buttons[i]!=NULL)
+		{
+			delete buttons[i];
+			trace->event(s_fn,0,"delete button %d",i);
+			buttons[i]=NULL;
+		}
+    }	
+	trace->event(s_fn,0,"leave");
+}
+
+void destroyMonsters()
+{
+	const char *s_fn="clearMonsters";
+	trace->event(s_fn,0,"enter");
+	
+	// Clear monster array
+	for( int i=0; i<MAX_MONSTERS; i++)	
+	{
+		if (monsters[i]!=NULL)
+		{
+			delete monsters[i];
+			trace->event(s_fn,0,"delete monster %d",i);
+			monsters[i]=NULL;
+		}
+	}
+	trace->event(s_fn,0,"leave");
+}
+
+void destroyPointers(void)
+{
+	const char *s_fn="destroyPointers";
+	trace->event(s_fn,0,"enter");
+	
+	// Destroy Pointers
+	for( int i=0; i<MAX_POINTERS; i++)
+	{
+		if (pointers[i]!=NULL)
+		{
+			delete pointers[i];
+			trace->event(s_fn,0,"delete pointer %d",i);
+			pointers[i]=NULL;
+		}
+	}	
+	
+	trace->event(s_fn,0,"leave");
+}
+
+void destroyGrids(void)
+{
+	const char *s_fn="destroyGrids";
+	trace->event(s_fn,0,"enter");
+	
+	// Destroy Grid
+	for( int i=0; i<MAX_GRIDS; i++)
+	{
+		if (grids[i]!=NULL)
+		{
+			delete grids[i];
+			trace->event(s_fn,0,"delete grid %d",i);
+			grids[i]=NULL;
+		}
+	}
+	
+	trace->event(s_fn,0,"leave");
+}
+
+void destroySound(void)
+{
+	const char *s_fn="destroySound";
+	trace->event(s_fn,0,"enter");
+  
+	// Destroy Sound
+	if (sound!=NULL)
+	{
+		delete sound;
+		trace->event(s_fn,0,"delete sound");
+		sound=NULL;
+	}	
+	trace->event(s_fn,0,"leave");
+}
+
+void destroyHighScore(void)
+{
+	const char *s_fn="destroyHighScore";
+	trace->event(s_fn,0,"enter");
+	
+	// Destroy Highscore
+	if (highScore!=NULL)
+	{
+		delete highScore;
+		trace->event(s_fn,0,"delete highScore");
+		highScore=NULL;
+	}
+	
+	trace->event(s_fn,0,"leave");
+}
+
+void destroySettings(void)
+{
+	const char *s_fn="destroySettings";
+	trace->event(s_fn,0,"enter");
+	
+	// Destroy Settings
+	if (settings!=NULL)
+	{
+		delete settings;
+		trace->event(s_fn,0,"delete settings");
+		settings=NULL;
+	}
+	
+	trace->event(s_fn,0,"leave");
+}
+
+void destroyTrace(void)
+{	
+	// Destroy Trace
+	if (trace!=NULL)
+	{
+		delete trace;
+		trace=NULL;
+	}
+}
+
+// -----------------------------------
 // INIT METHODES
 // -----------------------------------
 
 void initTodayHighScore(void)
 {
-   const char *s_fn="initTodayHighScore";
-   trace->event(s_fn,0,"enter");
+	const char *s_fn="initTodayHighScore";
+	trace->event(s_fn,0,"enter");
    
-  int i;   
-
-  // Clear today highscore memory
-  for(i=0; i<MAX_TODAY_HIGHSCORE; i++)
-  {
-  	todayHighScore[i].score[0]=0x00;
-	todayHighScore[i].dt=0;
-	todayHighScore[i].name[0]=0x00;
-	todayHighScore[i].location[0]=0x00;
-  } 
-  trace->event(s_fn,0,"leave [void]");
+	// Init today highscore memory
+	for(int i=0; i<MAX_TODAY_HIGHSCORE; i++)
+	{
+		todayHighScore[i].score[0]=0x00;
+		todayHighScore[i].dt=0;
+		todayHighScore[i].name[0]=0x00;
+		todayHighScore[i].location[0]=0x00;
+	} 
+	trace->event(s_fn,0,"leave [void]");
 }
 
 void initGlobalHighScore(void)
 {
-   const char *s_fn="initGlobalHighScore";
-   trace->event(s_fn,0,"enter");
-   
-  int i;   
-
-  // Clear global highscore memory
-  for(i=0; i<MAX_GLOBAL_HIGHSCORE; i++)
-  {
-  	globalHighScore[i].score[0]=0x00;
-	globalHighScore[i].dt=0;
-	globalHighScore[i].name[0]=0x00;
-	globalHighScore[i].location[0]=0x00;
-  } 
+	const char *s_fn="initGlobalHighScore";	
+	trace->event(s_fn,0,"enter");
+    
+	// Init global highscore memory
+	for(int i=0; i<MAX_GLOBAL_HIGHSCORE; i++)
+	{
+		globalHighScore[i].score[0]=0x00;
+		globalHighScore[i].dt=0;
+		globalHighScore[i].name[0]=0x00;
+		globalHighScore[i].location[0]=0x00;
+	} 
   
-  trace->event(s_fn,0,"leave [void]");
+	trace->event(s_fn,0,"leave [void]");
 }
-
 
 void initImages(void)
 {
-   const char *s_fn="initImages";
-   trace->event(s_fn,0,"enter");
+	const char *s_fn="initImages";
+	trace->event(s_fn,0,"enter");
 
-   images.soundIcon=GRRLIB_LoadTexture( pic1data );
+	images.soundIcon=GRRLIB_LoadTexture( pic1data );
 
-   images.logo2=GRRLIB_LoadTexture( pic5data );
-   images.logo=GRRLIB_LoadTexture( pic5data );
-   GRRLIB_InitTileSet(images.logo, images.logo->w, 1, 0);
+	images.logo2=GRRLIB_LoadTexture( pic5data );
+	images.logo=GRRLIB_LoadTexture( pic5data );
+	GRRLIB_InitTileSet(images.logo, images.logo->w, 1, 0);
    
-   images.background1=GRRLIB_LoadTexture( pic10data );
-   images.background2=GRRLIB_LoadTexture( pic11data );
+	images.background1=GRRLIB_LoadTexture( pic10data );
+	images.background2=GRRLIB_LoadTexture( pic11data );
    
-   images.bar=GRRLIB_LoadTexture( pic14data );
-   images.barCursor=GRRLIB_LoadTexture( pic15data );
+	images.bar=GRRLIB_LoadTexture( pic14data );
+	images.barCursor=GRRLIB_LoadTexture( pic15data );
    
-   images.scrollbar=GRRLIB_LoadTexture(pic33data);
-   images.scrollTop=GRRLIB_LoadTexture( pic34data);
-   images.scrollMiddle=GRRLIB_LoadTexture( pic35data);
-   images.scrollBottom=GRRLIB_LoadTexture( pic36data);
+	images.scrollbar=GRRLIB_LoadTexture(pic33data);
+	images.scrollTop=GRRLIB_LoadTexture( pic34data);
+	images.scrollMiddle=GRRLIB_LoadTexture( pic35data);
+	images.scrollBottom=GRRLIB_LoadTexture( pic36data);
    
-   images.monster1=GRRLIB_LoadTexture( pic101data );
-   images.monster2=GRRLIB_LoadTexture( pic102data );
-   images.monster3=GRRLIB_LoadTexture( pic103data );
-   images.monster4=GRRLIB_LoadTexture( pic104data );
-   images.monster5=GRRLIB_LoadTexture( pic105data );
-   images.monster6=GRRLIB_LoadTexture( pic106data );
-   images.monster7=GRRLIB_LoadTexture( pic107data );
-   images.monster8=GRRLIB_LoadTexture( pic108data );
-   images.monster9=GRRLIB_LoadTexture( pic109data );
-   images.monster10=GRRLIB_LoadTexture( pic110data );
-   images.monster11=GRRLIB_LoadTexture( pic111data );
-   images.monster12=GRRLIB_LoadTexture( pic112data );   
-   images.monster13=GRRLIB_LoadTexture( pic113data );
-   images.monster14=GRRLIB_LoadTexture( pic114data );
-   images.monster15=GRRLIB_LoadTexture( pic115data );
-   images.monster16=GRRLIB_LoadTexture( pic116data );
-   images.monster17=GRRLIB_LoadTexture( pic117data );
-   images.monster18=GRRLIB_LoadTexture( pic118data );
-   images.monster19=GRRLIB_LoadTexture( pic119data );
-   images.monster20=GRRLIB_LoadTexture( pic120data );
-   images.monster21=GRRLIB_LoadTexture( pic121data );
-   images.monster22=GRRLIB_LoadTexture( pic122data );
-   images.monster23=GRRLIB_LoadTexture( pic123data );
-   images.monster24=GRRLIB_LoadTexture( pic124data );
-   images.monster25=GRRLIB_LoadTexture( pic125data );		
+	images.monster1=GRRLIB_LoadTexture( pic101data );
+	images.monster2=GRRLIB_LoadTexture( pic102data );
+	images.monster3=GRRLIB_LoadTexture( pic103data );
+	images.monster4=GRRLIB_LoadTexture( pic104data );
+	images.monster5=GRRLIB_LoadTexture( pic105data );
+	images.monster6=GRRLIB_LoadTexture( pic106data );
+	images.monster7=GRRLIB_LoadTexture( pic107data );
+	images.monster8=GRRLIB_LoadTexture( pic108data );
+	images.monster9=GRRLIB_LoadTexture( pic109data );
+	images.monster10=GRRLIB_LoadTexture( pic110data );
+	images.monster11=GRRLIB_LoadTexture( pic111data );
+	images.monster12=GRRLIB_LoadTexture( pic112data );   
+	images.monster13=GRRLIB_LoadTexture( pic113data );
+	images.monster14=GRRLIB_LoadTexture( pic114data );
+	images.monster15=GRRLIB_LoadTexture( pic115data );
+	images.monster16=GRRLIB_LoadTexture( pic116data );
+	images.monster17=GRRLIB_LoadTexture( pic117data );
+	images.monster18=GRRLIB_LoadTexture( pic118data );
+	images.monster19=GRRLIB_LoadTexture( pic119data );
+	images.monster20=GRRLIB_LoadTexture( pic120data );
+	images.monster21=GRRLIB_LoadTexture( pic121data );
+	images.monster22=GRRLIB_LoadTexture( pic122data );
+	images.monster23=GRRLIB_LoadTexture( pic123data );
+	images.monster24=GRRLIB_LoadTexture( pic124data );
+	images.monster25=GRRLIB_LoadTexture( pic125data );		
 
-   images.pointer1=GRRLIB_LoadTexture( pic200data); 
-   images.pointer2=GRRLIB_LoadTexture( pic201data);
-   images.pointer3=GRRLIB_LoadTexture( pic202data);
-   images.pointer4=GRRLIB_LoadTexture( pic203data);
+	images.pointer1=GRRLIB_LoadTexture( pic200data); 
+	images.pointer2=GRRLIB_LoadTexture( pic201data);
+	images.pointer3=GRRLIB_LoadTexture( pic202data);
+	images.pointer4=GRRLIB_LoadTexture( pic203data);
    
-   images.weapon1=GRRLIB_LoadTexture( pic500data );
-   images.weapon2=GRRLIB_LoadTexture( pic501data );
-   images.weapon3=GRRLIB_LoadTexture( pic502data );
-   images.weapon4=GRRLIB_LoadTexture( pic503data );
-   images.weapon5=GRRLIB_LoadTexture( pic504data );
-   images.weapon6=GRRLIB_LoadTexture( pic505data );
+	images.weapon1=GRRLIB_LoadTexture( pic500data );
+	images.weapon2=GRRLIB_LoadTexture( pic501data );
+	images.weapon3=GRRLIB_LoadTexture( pic502data );
+	images.weapon4=GRRLIB_LoadTexture( pic503data );
+	images.weapon5=GRRLIB_LoadTexture( pic504data );
+	images.weapon6=GRRLIB_LoadTexture( pic505data );
    
-   images.button1=GRRLIB_LoadTexture( pic600data );
-   images.buttonFocus1=GRRLIB_LoadTexture( pic601data );  
-   images.button2=GRRLIB_LoadTexture( pic602data );
-   images.buttonFocus2=GRRLIB_LoadTexture( pic603data );  
-   images.button3=GRRLIB_LoadTexture( pic604data );
-   images.buttonFocus3=GRRLIB_LoadTexture( pic605data );  
-   images.button4=GRRLIB_LoadTexture( pic606data );
-   images.buttonFocus4=GRRLIB_LoadTexture( pic607data );  
+	images.button1=GRRLIB_LoadTexture( pic600data );
+	images.buttonFocus1=GRRLIB_LoadTexture( pic601data );  
+	images.button2=GRRLIB_LoadTexture( pic602data );
+	images.buttonFocus2=GRRLIB_LoadTexture( pic603data );  
+	images.button3=GRRLIB_LoadTexture( pic604data );
+	images.buttonFocus3=GRRLIB_LoadTexture( pic605data );  
+	images.button4=GRRLIB_LoadTexture( pic606data );
+	images.buttonFocus4=GRRLIB_LoadTexture( pic607data );  
      
-   trace->event(s_fn,0,"leave [void]");
-}
-
-// Init Weapons 
-void initWeapons(void)
-{
-    const char *s_fn="initWeapons";
-    trace->event(s_fn,0,"enter");
-
-    // Clear first array
-    for( int i=0; i<MAX_WEAPONS; i++)
-    {
-      if (weapons[i]!=NULL)
-	  {
-	    trace->event(s_fn,0,"delete weapon %d",i);
-		delete weapons[i];
-		weapons[i]=NULL;
-	  }
-    }
-    	
 	trace->event(s_fn,0,"leave [void]");
 }
+
 	
 // Init monster
 void initMonsters(bool special)
@@ -832,17 +956,6 @@ void initPointers(void)
 {
    const char *s_fn="initPointers";
    trace->event(s_fn,0,"enter");
-
-   // First clear array
-   for( int i=0; i<MAX_POINTERS; i++)
-   {
-      if (pointers[i]!=NULL)
-	  {
-		trace->event(s_fn,0,"delete pointer %d",i);
-		delete pointers[i];
-		pointers[i]=NULL;
-	  }
-   }
       
    pointers[0] = new Pointer();   
    pointers[0]->setIndex(0);
@@ -879,13 +992,13 @@ void initPointers(void)
    trace->event(s_fn,0,"leave [void]");
 }
 
-// Init Grid
-void initGrid(void)
+// Init Grid 1 until grid 3
+void initGrid1(void)
 {
     const char *s_fn="initGrid";
     trace->event(s_fn,0,"enter");
 
-	for (int i=0; i<MAX_GRIDS; i++)
+	for (int i=0; i<3; i++)
 	{
 		grids[i] = new Grid();
 		grids[i]->setIndex(i);
@@ -900,7 +1013,24 @@ void initGrid(void)
 				
 			case 2: grids[i]->create(GRID3_DIRECTORY);
 					break;
-			
+		}
+	}
+	trace->event(s_fn,0,"leave [void]");
+}
+
+// Init Grid 4 until Grid 6
+void initGrid2(void)
+{
+    const char *s_fn="initGrid";
+    trace->event(s_fn,0,"enter");
+
+	for (int i=3; i<MAX_GRIDS; i++)
+	{
+		grids[i] = new Grid();
+		grids[i]->setIndex(i);
+	
+		switch( i )
+		{
 			case 3: grids[i]->create(GRID4_DIRECTORY);
 					break;
 					
@@ -919,16 +1049,8 @@ void initButtons(void)
 	const char *s_fn="initButtons";
 	trace->event(s_fn,0,"enter");
 
-	// First clear array
-	for( int i=0; i<MAX_BUTTONS; i++)
-	{
-		if (buttons[i]!=NULL)
-		{
-			trace->event(s_fn,0,"delete button %d",i);
-			delete buttons[i];
-			buttons[i]=NULL;
-		}
-	}
+	// First destroy existing buttons
+	destroyButtons();
    
 	switch( game.stateMachine )	
 	{			
@@ -1527,17 +1649,13 @@ void initGame(void)
 	sound = new Sound();
 	sound->setMusicVolume(settings->getMusicVolume());
 	sound->setEffectVolume(settings->getEffectVolume());	
-	sound->play();
 	
 	initTodayHighScore();
 	initGlobalHighScore();
 	
 	// Init network Thread
 	initNetwork();
-	
-	// Init Map
-	initGrid();
-	
+		
 	trace->event(s_fn,0,"leave");
 }
 	
@@ -1768,7 +1886,6 @@ void drawText(int x, int y, int type, const char *text)
 void drawGamePanel(void)
 {
 	// Draw background
-	//GRRLIB_DrawImg(game.panelXOffset,0, images.panel1, 0, 1, 1, IMAGE_COLOR3 );
 	GRRLIB_Rectangle(game.panelXOffset, 0, 100, 440, GRRLIB_BLACK_TRANS, 1);
 }
 		
@@ -1815,9 +1932,32 @@ void drawGamePanelText(void)
 	if (weapons[game.weaponSelect]!=NULL)
 	{
 		// Get upgrade prices of selected weapon.
-		sprintf(power,"$%d", weapons[game.weaponSelect]->getPowerPrice() );		
-		sprintf(range,"$%d", weapons[game.weaponSelect]->getRangePrice() );		
-		sprintf(rate,"$%d", weapons[game.weaponSelect]->getRatePrice() );
+		if (weapons[game.weaponSelect]->isPowerUpgradeble())
+		{
+			sprintf(power,"$%d", weapons[game.weaponSelect]->getPowerPrice() );		
+		}
+		else
+		{
+			sprintf(power,"MAX");
+		}
+		
+		if (weapons[game.weaponSelect]->isRangeUpgradeble())
+		{
+			sprintf(range,"$%d", weapons[game.weaponSelect]->getRangePrice() );		
+		}
+		else
+		{
+			sprintf(range,"MAX");
+		}
+		
+		if (weapons[game.weaponSelect]->isRateUpgradeble())
+		{
+			sprintf(rate,"$%d", weapons[game.weaponSelect]->getRatePrice() );
+		}
+		else
+		{
+			sprintf(rate,"MAX");
+		}
 	}
 	else
 	{
@@ -2999,24 +3139,6 @@ void loadGlobalHighScore(char *buffer)
     trace->event(s_fn,0,"leave [void]");
 }
 
-
-void clearMonsters()
-{
-	const char *s_fn="clearMonsters";
-	trace->event(s_fn,0,"enter");
-	
-	// Clear monster array
-	for( int i=0; i<MAX_MONSTERS; i++)	
-	{
-		if (monsters[i]!=NULL)
-		{
-			delete monsters[i];
-			monsters[i]=NULL;
-		}
-	}
-	trace->event(s_fn,0,"leave");
-}
-
 // Create new weapon with correct game parameters
 void createWeapon(int x, int y, int id, int type)
 {
@@ -3328,70 +3450,6 @@ void destroyImages(void)
    
    trace->event(s_fn,0,"leave");
 }
-
-void destroyObjects()
-{
-	// Destroy Weapons
-	for( int i=0; i<MAX_WEAPONS; i++)
-    {
-		if (weapons[i]!=NULL)
-		{
-			delete weapons[i];
-			weapons[i]=NULL;
-		}
-    }
-	
-	// Destroy Buttons
-	for( int i=0; i<MAX_BUTTONS; i++)
-    {
-		if (buttons[i]!=NULL)
-		{
-			delete buttons[i];
-			buttons[i]=NULL;
-		}
-    }
-	
-	// Destroy Monsters
-	for( int i=0; i<MAX_MONSTERS; i++)
-	{
-		if (monsters[i]!=NULL)
-		{
-			delete monsters[i];
-			monsters[i]=NULL;
-		}
-	}  
-	
-	// Destroy Pointers
-	for( int i=0; i<MAX_POINTERS; i++)
-	{
-		if (pointers[i]!=NULL)
-		{
-			delete pointers[i];
-			pointers[i]=NULL;
-		}
-	}	
-	
-	// Destroy Grid
-	for( int i=0; i<MAX_GRIDS; i++)
-	{
-		if (grids[i]!=NULL)
-		{
-			delete grids[i];
-		}
-	}
-	
-	// Destroy Trace
-	if (trace!=NULL)
-	{
-		delete trace;
-	}
-	
-	// Destroy Sound
-	if (sound!=NULL)
-	{
-		delete sound;
-	}
-}
 	
 // Calculate Video Frame Rate (Indication how game engine performs)
 static u8 CalculateFrameRate(void) 
@@ -3635,12 +3693,21 @@ void processStateMachine()
     case stateIntro1:
 	{
 		trace->event(s_fn,0,"stateMachine=stateIntro1");
+	
+		// Start background music
+		sound->play();
+	
+		// Init Map1 until map3
+		initGrid1();
 	}
 	break;
 
 	case stateIntro2:
 	{
 		trace->event(s_fn,0,"stateMachine=stateIntro2");
+		
+		// Init Map4 until map6
+		initGrid2();
 	}
 	break;
 	 
@@ -3675,7 +3742,7 @@ void processStateMachine()
 		game.selectedMap=0;
 
 		// clear monster array (clean up previous game)
-		clearMonsters();
+		destroyMonsters();
 
 		// Init Weapons
 		initWeapons();
@@ -3708,10 +3775,10 @@ void processStateMachine()
 			game.alfa=MAX_ALFA;     // Show New Wave text on screen
 		
 			// clear monster array (clean up previous game)
-			clearMonsters();
+			destroyMonsters();
 	
-			// Init Weapons
-			initWeapons();
+			// Destroy Weapons
+			destroyWeapons();
 	
 			// Lanch first monster wave
 			game.event=eventLanch;
@@ -3892,12 +3959,6 @@ int main(void)
 	// Repeat forever
     while( game.stateMachine!=stateQuit )
 	{			
-		// Process state machine
-		processStateMachine();
-		
-		// Process event
-		processEvent();
-				
 		// draw Screen
 		drawScreen();
 
@@ -3906,27 +3967,41 @@ int main(void)
 			
 		// Render screen
 		GRRLIB_Render();
+		
+		// Process state machine
+		processStateMachine();
+		
+		// Process event
+		processEvent();
 	}
 		  
 	GRRLIB_Exit();
 	
 	// Stop network thread
-	//tcp_stop_thread();
+	tcp_stop_thread();
 	
 	// Stop rumble
 	WPAD_Rumble(0,0);
 		
-	// Destroy all Images
+	// Destroy all created objects
 	destroyImages();
+	destroyWeapons();
+	destroyButtons();
+	destroyMonsters();
+	destroyPointers();
+	destroySound();
+	destroyHighScore();
+	destroySettings();
+	destroyGrids();
 	
 	// Trace last line
 	trace->event(s_fn, 0,"%s %s Leaving", PROGRAM_NAME, PROGRAM_VERSION);
 	
 	// Close trace file.
 	trace->close();
-	
-	// Destroy all objects
-	destroyObjects();
+
+	// Destroy trace class
+	destroyTrace();
 	
 	// Exit to loader
 	exit(0);

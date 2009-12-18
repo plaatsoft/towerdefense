@@ -56,12 +56,10 @@ class Grid
 	GRRLIB_texImg *imageRoad3;
 	GRRLIB_texImg *imageRoad4;
 	GRRLIB_texImg *imageRoad5;
-	GRRLIB_texImg *imageBridge;
 	GRRLIB_texImg *imageBase;
 	GRRLIB_texImg *imageGeneral1;
 	GRRLIB_texImg *imageGeneral2;
 
-	
 	void parseGrid(void);
 	void loadGrid(const char* filename);
 	GRRLIB_texImg * loadImage(const char *filename);

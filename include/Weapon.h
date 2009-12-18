@@ -95,6 +95,9 @@ class Weapon
 	int getPowerPrice(void);
 	int getRangePrice(void);
 	int getRatePrice(void);
+	bool isPowerUpgradeble(void);
+	bool isRangeUpgradeble(void);
+	bool isRateUpgradeble(void);
 };
 
 #endif
