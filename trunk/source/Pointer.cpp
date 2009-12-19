@@ -83,58 +83,20 @@ Pointer::~Pointer()
 // Others
 // ------------------------------
 
-// Get Next of Previous letter & number or space character.
+// Get Next of Previous letter or number.
 char Pointer::getLetter(char letter, bool up)
 {
 	if (up)
 	{	
-		if ((letter>=65) && (letter<90))
-		{
-			return letter++;
-		}
-		else 
-		{
-			return '0';
-		}	
-		
-		if ((letter>=48) && (letter<57))
-		{
-			return letter++;
-		}
-		else 
-		{
-			return ' ';
-		}	
-		
-		if (letter==30)
-		{
-			return 'A';
-		}		
+		if (letter==90) return '0';
+		if (letter==57) return 'A';
+		return ++letter;				
 	}
 	else
 	{	
-		if ((letter>65) && (letter<=90))
-		{
-			return letter--;
-		}
-		else
-		{
-			return ' ';
-		}
-		
-		if ((letter>48) && (letter<=57))
-		{
-			return letter--;
-		}
-		else 
-		{
-			return 'Z';
-		}
-		
-		if (letter==30)
-		{
-			return '9';
-		}	
+		if (letter==65) return '9';
+		if (letter==48) return 'Z';
+		return --letter;					
 	}
 }
 
@@ -754,7 +716,7 @@ void Pointer::buttonA(int x, int y)
 			if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))
 			{
 				// Quit button
-				game.stateMachine=stateMainMenu;
+				game.stateMachine=stateMapSelectMenu;
 			}	
 		}
 		break;
