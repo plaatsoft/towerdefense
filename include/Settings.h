@@ -27,6 +27,9 @@ class Settings
     char firstChar;
 	char secondChar;
 	char thirdChar;
+	char fourthChar;
+	char fifthChar;
+	char sixthChar;
 	int  musicVolume;
 	int  effectVolume;
 	
@@ -43,6 +46,9 @@ class Settings
 	void setFirstChar(char letter);
 	void setSecondChar(char letter);
 	void setThirdChar(char letter);
+	void setFourthChar(char letter);
+	void setFifthChar(char letter);
+	void setSixthChar(char letter);
 	void setMusicVolume(int volume);
 	void setEffectVolume(int volume);
 
@@ -50,6 +56,9 @@ class Settings
 	char getFirstChar(void);
 	char getSecondChar(void);
 	char getThirdChar(void);
+	char getFourthChar(void);
+	char getFifthChar(void);
+	char getSixthChar(void);
 	int  getMusicVolume(void);
 	int  getEffectVolume(void);
 };

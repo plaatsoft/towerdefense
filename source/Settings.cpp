@@ -38,6 +38,9 @@ Settings::Settings()
    firstChar='A';
    secondChar='A';
    thirdChar='A'; 
+   fourthChar='A';
+   fifthChar='A';
+   sixthChar='A';
    musicVolume = 5;
    effectVolume = 9;
    	
@@ -106,6 +109,15 @@ void Settings::load(const char *filename)
 					   
 					case 4: effectVolume=atoi(value);
 							break;
+							
+					case 5: fourthChar=value[0];
+							break;
+							
+					case 6: fifthChar=value[0];
+							break;
+							
+					case 7: sixthChar=value[0];
+							break;
 				}							
 				trace->event(s_fn,0,"Store [id=%d|value=%s]",i,value);
 			}
@@ -162,6 +174,18 @@ void Settings::save( const char *filename)
 			case 4: sprintf(temp, "%d", effectVolume);
 					mxmlElementSetAttr(data, "value", temp);			  
 					break;
+					
+			case 5: sprintf(temp, "%c", fourthChar);
+					mxmlElementSetAttr(data, "value", temp);			  
+					break;
+					
+			case 6: sprintf(temp, "%c", fifthChar);
+					mxmlElementSetAttr(data, "value", temp);			  
+					break;
+					
+			case 7: sprintf(temp, "%c", sixthChar);
+					mxmlElementSetAttr(data, "value", temp);			  
+					break;
 		}
     }
   
@@ -208,6 +232,30 @@ void Settings::setThirdChar(char letter)
 	thirdChar=letter;
 }
 
+void Settings::setFourthChar(char letter)
+{
+	const char *s_fn="Settings::setFourthChar";
+    trace->event(s_fn,0,"enter [letter=%c]",letter);
+	
+	fourthChar=letter;
+}
+
+void Settings::setFifthChar(char letter)
+{
+	const char *s_fn="Settings::setFifthChar";
+    trace->event(s_fn,0,"enter [letter=%c]",letter);
+	
+	fifthChar=letter;
+}
+
+void Settings::setSixthChar(char letter)
+{
+	const char *s_fn="Settings::setSixthChar";
+    trace->event(s_fn,0,"enter [letter=%c]",letter);
+	
+	sixthChar=letter;
+}
+
 void Settings::setMusicVolume(int volume)
 {
 	const char *s_fn="Settings::setMusicVolume";
@@ -241,6 +289,21 @@ char Settings::getSecondChar(void)
 char Settings::getThirdChar(void)
 {
 	return thirdChar;
+};
+
+char Settings::getFourthChar(void)
+{
+	return fourthChar;
+};
+
+char Settings::getFifthChar(void)
+{
+	return fifthChar;
+};
+
+char Settings::getSixthChar(void)
+{
+	return sixthChar;
 };
 
 int Settings::getMusicVolume(void)
