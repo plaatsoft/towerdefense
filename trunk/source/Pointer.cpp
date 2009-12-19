@@ -83,16 +83,59 @@ Pointer::~Pointer()
 // Others
 // ------------------------------
 
-void Pointer::properties(void)
-{  
-	char tmp[50];
-	int size=12;
- 
-	sprintf(tmp, "x=%d", x);
-	GRRLIB_Printf2(10, 10, tmp, size, GRRLIB_WHITESMOKE); 
-	
-	sprintf(tmp, "y=%d", y);
-	GRRLIB_Printf2(10, 20, tmp, size, GRRLIB_WHITESMOKE);
+// Get Next of Previous letter & number or space character.
+char Pointer::getLetter(char letter, bool up)
+{
+	if (up)
+	{	
+		if ((letter>=65) && (letter<90))
+		{
+			return letter++;
+		}
+		else 
+		{
+			return '0';
+		}	
+		
+		if ((letter>=48) && (letter<57))
+		{
+			return letter++;
+		}
+		else 
+		{
+			return ' ';
+		}	
+		
+		if (letter==30)
+		{
+			return 'A';
+		}		
+	}
+	else
+	{	
+		if ((letter>65) && (letter<=90))
+		{
+			return letter--;
+		}
+		else
+		{
+			return ' ';
+		}
+		
+		if ((letter>48) && (letter<=57))
+		{
+			return letter--;
+		}
+		else 
+		{
+			return 'Z';
+		}
+		
+		if (letter==30)
+		{
+			return '9';
+		}	
+	}
 }
 
 void Pointer::button1x(void)
@@ -119,149 +162,105 @@ void Pointer::button2y(void)
 
 void Pointer::buttonPlus(int index)
 {
-   const char *s_fn="Pointer::buttonPlus";
-   trace->event(s_fn,0,"enter [index=%d]",index);
+	const char *s_fn="Pointer::buttonPlus";
+	trace->event(s_fn,0,"enter [index=%d]",index);
   
-   char letter;
+	int volume;
+	int track;
 
-   switch (index)
-   {	 
-	  case 0:
-		  // First Character
-		  letter=settings->getFirstChar();
-		  if (letter<90) 
-		  {
-			settings->setFirstChar(++letter);
-		  }
-		  else 
-		  {
-			settings->setFirstChar('A');
-		  }		
-		  break;
+	switch (index)
+	{	 
+		case 0:	// First Character
+				settings->setFirstChar(getLetter(settings->getFirstChar(),true));
+				break;
 		  
-	  case 1:
-		  // Second Character
-		  letter=settings->getSecondChar();
-		  if (letter<90) 
-		  {
-			settings->setSecondChar(++letter);
-		  }
-		  else 
-		  {
-			settings->setSecondChar('A');
-		  }		
-		  break;
+		case 1: // Second Character
+				settings->setSecondChar(getLetter(settings->getSecondChar(),true));	
+				break;
 		  
-	  case 2:
-		  // Third Character
-		  letter=settings->getThirdChar();
-		  if (letter<90) 
-		  {
-			settings->setThirdChar(++letter);
-		  }
-		  else 
-		  {
-			settings->setThirdChar('A');
-		  }		
-		  break;
+		case 2: // Third Character
+				settings->setThirdChar(getLetter(settings->getThirdChar(),true));	
+				break;
 		  
-	   case 3:
-	      // Music volume
-		  {
-			int volume=sound->getMusicVolume();
-			sound->setMusicVolume(++volume);   
-		  }
-		  break;
+		case 3:	// Music volume
+				volume=sound->getMusicVolume();
+				sound->setMusicVolume(++volume);   
+				break;
        
-	   case 4:
-          // Effect volume
-		  {
-			int volume=sound->getEffectVolume();
-			sound->setEffectVolume(++volume);  
-		  }
-		  break;
+		case 4:	// Effect volume
+				volume=sound->getEffectVolume();
+				sound->setEffectVolume(++volume);  
+				break;
 
-	   case 5:
-	      // Prev music track
-		  {
-			int track=sound->getMusicTrack();
-			sound->setMusicTrack(++track);   
-		  }
-		  break;
+		case 5:	// Prev music track
+				track=sound->getMusicTrack();
+				sound->setMusicTrack(++track);   
+				break;
+		  
+		case 6: // Fourth Character
+				settings->setFourthChar(getLetter(settings->getFourthChar(),true));	
+				break;
+				
+		case 7: // Fifth Character
+				settings->setFifthChar(getLetter(settings->getFifthChar(),true));
+				break;
+				
+		case 8: // Sixth Character
+				settings->setSixthChar(getLetter(settings->getSixthChar(),true));	
+				break;
    }
    trace->event(s_fn,0,"leave");
 }
+
 
 void Pointer::buttonMinus(int index)
 {
 	const char *s_fn="Pointer::buttonMinus";
 	trace->event(s_fn,0,"enter [index=%d]",index);
    
-	char letter;
+	int volume;
+	int track;
+	
 	switch (index)   
 	{
-	    case 0:
-		  // First Character		  
-		  letter=settings->getFirstChar();
-		  if (letter>65) 
-		  {
-			settings->setFirstChar(--letter);
-		  }
-		  else 
-		  {
-			settings->setFirstChar('Z');
-		  }		
-		  break;
-		   
-		case 1:
-		  // Second Character
-		  letter=settings->getSecondChar();
-		  if (letter>65) 
-		  {
-			settings->setSecondChar(--letter);
-		  }
-		  else 
-		  {
-			settings->setSecondChar('Z');
-		  }		
-		  break;
+	    case 0:  // First Character		  
+				settings->setFirstChar(getLetter(settings->getFirstChar(),false));		
+				break;
+			
+		case 1:	// Second Character
+				settings->setSecondChar(getLetter(settings->getSecondChar(),false));	
+				break;
 		  
-		case 2:
-		  // Third Character
-		  letter=settings->getThirdChar();
-		  if (letter>65) 
-		  {
-			settings->setThirdChar(--letter);
-		  }
-		  else 
-		  {
-			settings->setThirdChar('Z');
-		  }		
-		  break;   
+		case 2: // Third Character
+				settings->setThirdChar(getLetter(settings->getThirdChar(),false));
+				break;   
 		  
-	   case 3:
-	      // Music volume
-		  {
-			int volume=sound->getMusicVolume();
-			sound->setMusicVolume(--volume);   
-		  }
-		  break;
+		case 3:	// Music volume
+				volume=sound->getMusicVolume();
+				sound->setMusicVolume(--volume);   
+				break;
        
-	   case 4:
-          // Effect volume
-		  {
-			int volume=sound->getEffectVolume();
-			sound->setEffectVolume(--volume);  
-		  }
-		  break;
+		case 4: // Effect volume
+				volume=sound->getEffectVolume();
+				sound->setEffectVolume(--volume);  
+				break;
 
-	   case 5:
-	      // Music track
-		  {
-			int track=sound->getMusicTrack();
-			sound->setMusicTrack(--track);   
-		  }
-		  break;
+		case 5:  // Music track
+				track=sound->getMusicTrack();
+				sound->setMusicTrack(--track);   
+				break;
+				
+		case 6: // Fourth Character
+				settings->setFourthChar(getLetter(settings->getFourthChar(),false));	
+				break; 
+				
+		case 7: // Fifth Character
+				settings->setFifthChar(getLetter(settings->getFifthChar(),false));	
+				break; 
+
+		case 8: // Sixth Character
+				settings->setSixthChar(getLetter(settings->getSixthChar(),false));	
+				break;
 
 	}
 	trace->event(s_fn,0,"leave");
@@ -559,50 +558,87 @@ void Pointer::buttonA(int x, int y)
 		break;
 	 
 		case stateUserSettings:
-		{ 
-			// Check if button is pressed on screen
+		{ 			
 			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
-			{
-				// + First Character button event           
-				buttonPlus(0);  
-			}
-		
-			if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))
-			{
-				// - First Character button event           
-				buttonMinus(0);  
-			}
-						
-			if ((buttons[2]!=NULL) && (buttons[2]->onSelect(x,y,true)))
-			{
-				// + Second Character button event           
-				buttonPlus(1);  
-			}
-		
-			if ((buttons[3]!=NULL) && (buttons[3]->onSelect(x,y,true)))
-			{
-				// - Second Character button event           
-				buttonMinus(1); 
-			}
-					    
-			if ((buttons[4]!=NULL) && (buttons[4]->onSelect(x,y,true)))
-			{
-				// + Third Character button event           
-				buttonPlus(2);  
-			}
-			
-			if ((buttons[5]!=NULL) && (buttons[5]->onSelect(x,y,true)))
-			{
-				// - Third Character button event           
-				buttonMinus(2);  
-			}
-			
-			if ((buttons[6]!=NULL) && (buttons[6]->onSelect(x,y,true)))
 			{
 				// Main Menu button	 
 				settings->save(SETTING_FILENAME); 
 				game.stateMachine=stateMainMenu;	     
 			}
+			
+			// Check if button is pressed on screen
+			if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))
+			{
+				// + First Character button event           
+				buttonPlus(0);  
+			}
+		
+			if ((buttons[2]!=NULL) && (buttons[2]->onSelect(x,y,true)))
+			{
+				// - First Character button event           
+				buttonMinus(0);  
+			}
+						
+			if ((buttons[3]!=NULL) && (buttons[3]->onSelect(x,y,true)))
+			{
+				// + Second Character button event           
+				buttonPlus(1);  
+			}
+		
+			if ((buttons[4]!=NULL) && (buttons[4]->onSelect(x,y,true)))
+			{
+				// - Second Character button event           
+				buttonMinus(1); 
+			}
+					    
+			if ((buttons[5]!=NULL) && (buttons[5]->onSelect(x,y,true)))
+			{
+				// + Third Character button event           
+				buttonPlus(2);  
+			}
+			
+			if ((buttons[6]!=NULL) && (buttons[6]->onSelect(x,y,true)))
+			{
+				// - Third Character button event           
+				buttonMinus(2);  
+			}
+			
+			if ((buttons[7]!=NULL) && (buttons[7]->onSelect(x,y,true)))
+			{
+				// + Fourth Character button event           
+				buttonPlus(6);  
+			}
+			
+			if ((buttons[8]!=NULL) && (buttons[8]->onSelect(x,y,true)))
+			{
+				// - Fourth Character button event           
+				buttonMinus(6);  
+			}
+			
+			if ((buttons[9]!=NULL) && (buttons[9]->onSelect(x,y,true)))
+			{
+				// + Fifth Character button event           
+				buttonPlus(7);  
+			}
+			
+			if ((buttons[10]!=NULL) && (buttons[10]->onSelect(x,y,true)))
+			{
+				// - Fifth Character button event           
+				buttonMinus(7);  
+			}
+
+			if ((buttons[11]!=NULL) && (buttons[11]->onSelect(x,y,true)))
+			{
+				// + Sixth Character button event           
+				buttonPlus(8);  
+			}
+			
+			if ((buttons[12]!=NULL) && (buttons[12]->onSelect(x,y,true)))
+			{
+				// - Sixth Character button event           
+				buttonMinus(8);  
+			}
+			
 		}
 		break; 
 
@@ -703,6 +739,22 @@ void Pointer::buttonA(int x, int y)
 			{
 				// No button
 				game.stateMachine=stateGame;
+			}	
+		}
+		break;
+		
+		case stateGameOver:
+		{
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
+			{
+				// Retry button
+				game.stateMachine=stateGame;
+			}
+
+			if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))
+			{
+				// Quit button
+				game.stateMachine=stateMainMenu;
 			}	
 		}
 		break;

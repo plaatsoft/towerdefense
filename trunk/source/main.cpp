@@ -19,21 +19,28 @@
 **  Release Notes:
 **  ==============
 **
-**  NICE TO HAVE:
+**  WISHLIST:
 **  - Realtime monsters animation on map select page.
 **  - Improve weapon graphics
-**  - Improve fire effect!
-**  - Snap weapon to grid!
+**  - Improve graphical fire effect!
 **  - Add rotating sound icon on sound setting screen.
+**  - Snap weapons to (32x32) grid!
+**  - Multi language support
+**
+**  19/12/2009 Version 0.46
+**  - Improve "Game Over" screen. 
+**  - Improve game information panel on screen. 
+**  - Increase user initials for 3 to 6 digits. 
 **  - Improve scroll bar button design.
-**  - Show when weapon upgrade is not possible anymore!
 **  - Balance sound effect volume.
+**  - Build game with devkitPPC r19 compiler.
 **
 **  18/12/2009 Version 0.45
-**  - Added map 4, 5 and 6.
 **  - Load map images (sprites) directly from SdCard.
 **  - Improve objects cleanup when stopping game.
 **  - Added Google analistics network calls.
+**  - Added map 4, 5 and 6.
+**  - Show when weapon upgrade is not possible anymore!
 **  - Build game with devkitPPC r19 compiler.
 **
 **  17/12/2009 Version 0.44
@@ -47,8 +54,7 @@
 **  - Build game with devkitPPC r19 compiler.
 **
 **  16/12/2009 Version 0.43
-**  - Added help screen two. 
-**  - Added help screen screen. 
+**  - Added help screen two and three.
 **  - Limit weapon upgrade levels. 
 **  - Added WiiMote rumble support when pointer is on a button. 
 **  - Improve button pointer detection area. 
@@ -61,8 +67,8 @@
 **  	- Fetch latest available version information from internet.
 **  	- Fetch latest release notes information from internet.
 **      - Fetch Global and today highscore from internet
-**  	- Added Release Notes screen.
 **  	- Added functionality to store game score on internet.
+**  	- Added Release Notes screen.
 **  - Added today and global Highscore screen.
 **  - Added release notes screen.
 **  - Build game with devkitPPC r19 compiler.
@@ -1417,68 +1423,130 @@ void initButtons(void)
 				
 		case stateUserSettings:
 	    {
-			// First letter + button 
-			buttons[0]=new Button();
-			buttons[0]->setX(100);
-			buttons[0]->setY(150);
-			buttons[0]->setImageNormal(images.button1);
-			buttons[0]->setImageFocus(images.buttonFocus1);
-			buttons[0]->setLabel("+");	
-			buttons[0]->setColor(IMAGE_COLOR);
-
-			// First letter - button 
-			buttons[1]=new Button();
-			buttons[1]->setX(100);
-			buttons[1]->setY(295);
-			buttons[1]->setImageNormal(images.button1);
-			buttons[1]->setImageFocus(images.buttonFocus1);
-			buttons[1]->setLabel("-");	
-			buttons[1]->setColor(IMAGE_COLOR);
-
-			// Second letter + button 
-			buttons[2]=new Button();
-			buttons[2]->setX(280);
-			buttons[2]->setY(150);
-			buttons[2]->setImageNormal(images.button1);
-			buttons[2]->setImageFocus(images.buttonFocus1);
-			buttons[2]->setLabel("+");	
-			buttons[2]->setColor(IMAGE_COLOR);
-
-			// second letter - button 
-			buttons[3]=new Button();
-			buttons[3]->setX(280);
-			buttons[3]->setY(295);
-			buttons[3]->setImageNormal(images.button1);
-			buttons[3]->setImageFocus(images.buttonFocus1);
-			buttons[3]->setLabel("-");	
-			buttons[3]->setColor(IMAGE_COLOR);
-
-			// Third letter + button 
-			buttons[4]=new Button();
-			buttons[4]->setX(460);
-			buttons[4]->setY(150);
-			buttons[4]->setImageNormal(images.button1);
-			buttons[4]->setImageFocus(images.buttonFocus1);
-			buttons[4]->setLabel("+");	
-			buttons[4]->setColor(IMAGE_COLOR);
-
-			// Third letter - button 
-			buttons[5]=new Button();
-			buttons[5]->setX(460);
-			buttons[5]->setY(295);
-			buttons[5]->setImageNormal(images.button1);
-			buttons[5]->setImageFocus(images.buttonFocus1);
-			buttons[5]->setLabel("-");
-			buttons[5]->setColor(IMAGE_COLOR);
+			int xpos=35;
 			
 			// Main Menu Button
+			buttons[0]=new Button();
+			buttons[0]->setX(240);
+			buttons[0]->setY(460);
+			buttons[0]->setImageNormal(images.button2);
+			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setLabel("Main Menu");	
+			buttons[0]->setColor(IMAGE_COLOR);
+			
+			// First letter + button 
+			buttons[1]=new Button();
+			buttons[1]->setX(xpos);
+			buttons[1]->setY(150);
+			buttons[1]->setImageNormal(images.button1);
+			buttons[1]->setImageFocus(images.buttonFocus1);
+			buttons[1]->setLabel("+");	
+			buttons[1]->setColor(IMAGE_COLOR);
+
+			// First letter - button 
+			buttons[2]=new Button();
+			buttons[2]->setX(xpos);
+			buttons[2]->setY(295);
+			buttons[2]->setImageNormal(images.button1);
+			buttons[2]->setImageFocus(images.buttonFocus1);
+			buttons[2]->setLabel("-");	
+			buttons[2]->setColor(IMAGE_COLOR);
+
+			// Second letter + button 
+			xpos+=80;
+			buttons[3]=new Button();
+			buttons[3]->setX(xpos);
+			buttons[3]->setY(150);
+			buttons[3]->setImageNormal(images.button1);
+			buttons[3]->setImageFocus(images.buttonFocus1);
+			buttons[3]->setLabel("+");	
+			buttons[3]->setColor(IMAGE_COLOR);
+
+			// second letter - button 
+			buttons[4]=new Button();
+			buttons[4]->setX(xpos);
+			buttons[4]->setY(295);
+			buttons[4]->setImageNormal(images.button1);
+			buttons[4]->setImageFocus(images.buttonFocus1);
+			buttons[4]->setLabel("-");	
+			buttons[4]->setColor(IMAGE_COLOR);
+
+			// Third letter + button 
+			xpos+=80;
+			buttons[5]=new Button();
+			buttons[5]->setX(xpos);
+			buttons[5]->setY(150);
+			buttons[5]->setImageNormal(images.button1);
+			buttons[5]->setImageFocus(images.buttonFocus1);
+			buttons[5]->setLabel("+");	
+			buttons[5]->setColor(IMAGE_COLOR);
+
+			// Third letter - button 
 			buttons[6]=new Button();
-			buttons[6]->setX(240);
-			buttons[6]->setY(460);
-			buttons[6]->setImageNormal(images.button2);
-			buttons[6]->setImageFocus(images.buttonFocus2);
-			buttons[6]->setLabel("Main Menu");	
-			buttons[6]->setColor(IMAGE_COLOR);
+			buttons[6]->setX(xpos);
+			buttons[6]->setY(295);
+			buttons[6]->setImageNormal(images.button1);
+			buttons[6]->setImageFocus(images.buttonFocus1);
+			buttons[6]->setLabel("-");
+			buttons[6]->setColor(IMAGE_COLOR);		
+
+			// Fourth letter + button 
+			xpos+=80;
+			buttons[7]=new Button();
+			buttons[7]->setX(xpos);
+			buttons[7]->setY(150);
+			buttons[7]->setImageNormal(images.button1);
+			buttons[7]->setImageFocus(images.buttonFocus1);
+			buttons[7]->setLabel("+");	
+			buttons[7]->setColor(IMAGE_COLOR);
+
+			// Fourth letter - button 
+			buttons[8]=new Button();
+			buttons[8]->setX(xpos);
+			buttons[8]->setY(295);
+			buttons[8]->setImageNormal(images.button1);
+			buttons[8]->setImageFocus(images.buttonFocus1);
+			buttons[8]->setLabel("-");
+			buttons[8]->setColor(IMAGE_COLOR);		
+			
+			// Fifth letter + button 
+			xpos+=80;
+			buttons[9]=new Button();
+			buttons[9]->setX(xpos);
+			buttons[9]->setY(150);
+			buttons[9]->setImageNormal(images.button1);
+			buttons[9]->setImageFocus(images.buttonFocus1);
+			buttons[9]->setLabel("+");	
+			buttons[9]->setColor(IMAGE_COLOR);
+
+			// Fifth letter - button 
+			buttons[10]=new Button();
+			buttons[10]->setX(xpos);
+			buttons[10]->setY(295);
+			buttons[10]->setImageNormal(images.button1);
+			buttons[10]->setImageFocus(images.buttonFocus1);
+			buttons[10]->setLabel("-");
+			buttons[10]->setColor(IMAGE_COLOR);	
+			
+			// Sixth letter + button 
+			xpos+=80;
+			buttons[11]=new Button();
+			buttons[11]->setX(xpos);
+			buttons[11]->setY(150);
+			buttons[11]->setImageNormal(images.button1);
+			buttons[11]->setImageFocus(images.buttonFocus1);
+			buttons[11]->setLabel("+");	
+			buttons[11]->setColor(IMAGE_COLOR);
+
+			// Sixth letter - button 
+			buttons[12]=new Button();
+			buttons[12]->setX(xpos);
+			buttons[12]->setY(295);
+			buttons[12]->setImageNormal(images.button1);
+			buttons[12]->setImageFocus(images.buttonFocus1);
+			buttons[12]->setLabel("-");
+			buttons[12]->setColor(IMAGE_COLOR);
+			
 		}
 		break;	
 		
@@ -1573,6 +1641,28 @@ void initButtons(void)
 			buttons[1]->setImageNormal(images.button3);
 			buttons[1]->setImageFocus(images.buttonFocus3);
 			buttons[1]->setLabel("NO");	
+			buttons[1]->setColor(IMAGE_COLOR3);		
+		}
+		break;
+		
+		case stateGameOver:	
+		{
+			// Retry button 
+			buttons[0]=new Button();
+			buttons[0]->setX(230);
+			buttons[0]->setY(270);
+			buttons[0]->setImageNormal(images.button3);
+			buttons[0]->setImageFocus(images.buttonFocus3);
+			buttons[0]->setLabel("RETRY" );	
+			buttons[0]->setColor(IMAGE_COLOR3);
+			
+			// Quit button 
+			buttons[1]=new Button();
+			buttons[1]->setX(330);
+			buttons[1]->setY(270);
+			buttons[1]->setImageNormal(images.button3);
+			buttons[1]->setImageFocus(images.buttonFocus3);
+			buttons[1]->setLabel("QUIT");	
 			buttons[1]->setColor(IMAGE_COLOR3);		
 		}
 		break;
@@ -1884,21 +1974,32 @@ void drawText(int x, int y, int type, const char *text)
    }
 }
 				
-// Draw Game panel on screen
-void drawGamePanel(void)
+// Draw score panel on screen
+void drawGamePanel1(void)
 {
-	// Draw background
-	GRRLIB_Rectangle(game.panelXOffset, 0, 100, 440, GRRLIB_BLACK_TRANS, 1);
+	// Draw panel
+	GRRLIB_Rectangle(game.panelXOffset, 0, 100, 124, GRRLIB_BLACK_TRANS, 1);
 }
 		
-// Draw Game panel Text on screen
-void drawGamePanelText(void)
+// Draw Game panel on screen
+void drawGamePanel2(void)
+{
+	// Draw panel
+	GRRLIB_Rectangle(game.panelXOffset, 134, 100, 144, GRRLIB_BLACK_TRANS, 1);
+}
+
+// Draw weapon upgrade/build panel on screen
+void drawGamePanel3(void)
+{
+	// Draw panel
+	GRRLIB_Rectangle(game.panelXOffset, 290, 100, 182, GRRLIB_BLACK_TRANS, 1);
+}
+
+
+// Draw wave text panel on screen
+void drawGamePanelText1(void)
 {
 	char tmp[MAX_LEN];
-	char power[MAX_LEN];
-	char range[MAX_LEN];
-	char rate[MAX_LEN];
-	
 	int  ypos=10;
 	
 	// General info + control
@@ -1908,7 +2009,19 @@ void drawGamePanelText(void)
 	GRRLIB_Printf2(40+game.panelXOffset, ypos+game.panelYOffset, tmp, 16, GRRLIB_WHITESMOKE);	
 	ypos+=25;
 	GRRLIB_Printf2(22+game.panelXOffset, ypos+game.panelYOffset, "LANCH", 18, GRRLIB_WHITESMOKE);
-	ypos+=60;	
+	
+	// Set button label values
+	sprintf(tmp,"      %d", game.waveCountDown/25 );
+	if (buttons[0]!=NULL) buttons[0]->setLabel(tmp);	
+}
+
+
+// Draw score/cash text panel on screen
+void drawGamePanelText2(void)
+{
+	char tmp[MAX_LEN];
+	int  ypos=110;
+	
 	GRRLIB_Printf2(20+game.panelXOffset, ypos+game.panelYOffset,"SCORE", 18, GRRLIB_WHITESMOKE);	
 	ypos+=15;	
 	sprintf(tmp,"%06d", game.score); 
@@ -1918,9 +2031,19 @@ void drawGamePanelText(void)
 	ypos+=15;
 	sprintf(tmp,"$%04d", game.cash);
 	GRRLIB_Printf2(25+game.panelXOffset, ypos+game.panelYOffset, tmp, 16, GRRLIB_WHITESMOKE);
+}
 
+
+// Draw Weapon upgrade/build text game panel on screen
+void drawGamePanelText3(void)
+{
+	char power[MAX_LEN];
+	char range[MAX_LEN];
+	char rate[MAX_LEN];
+	
+	int  ypos=190;
+	
 	// Upgrade information + control
-	ypos+=35;
 	GRRLIB_Printf2(20+game.panelXOffset, ypos+game.panelYOffset, "POWER", 18, GRRLIB_WHITESMOKE);	
 	ypos+=60;
 	GRRLIB_Printf2(20+game.panelXOffset, ypos+game.panelYOffset, "RANGE", 18, GRRLIB_WHITESMOKE);
@@ -1969,9 +2092,7 @@ void drawGamePanelText(void)
 		strcpy(rate,"");
 	}
 		
-	// Set button label values
-	sprintf(tmp,"      %d", game.waveCountDown/25 );
-	if (buttons[0]!=NULL) buttons[0]->setLabel(tmp);	
+
 	if (buttons[1]!=NULL) buttons[1]->setLabel(power);
 	if (buttons[2]!=NULL) buttons[2]->setLabel(range);
 	if (buttons[3]!=NULL) buttons[3]->setLabel(rate);
@@ -1992,9 +2113,8 @@ void drawGamePanelText(void)
 		buttons[6]->setImageNormal(getNewWeaponImage(game.weaponType));
 		buttons[6]->setImageFocus(getNewWeaponImage(game.weaponType));
 	}
-	sprintf(tmp,"%d fps", CalculateFrameRate()); 
-	drawText(20, 500, fontSpecial, tmp);
 }
+
 
 // draw screens
 void drawScreen(void)
@@ -2919,14 +3039,32 @@ void drawScreen(void)
           drawText(150, ypos, fontTitle, "User Initials");
           ypos+=120;
 		        	  
-		  ypos+=50;		  
+
 		  // Draw initial characters
+		  ypos+=50;	
+		  int xpos=50;
 		  sprintf(tmp, "%c", settings->getFirstChar());
-		  drawText(110, ypos, fontTitle, tmp);
+		  drawText(xpos, ypos, fontTitle, tmp);
+		  
+		  xpos=+80;
 		  sprintf(tmp, "%c", settings->getSecondChar());
-		  drawText(300, ypos, fontTitle, tmp);
+		  drawText(xpos, ypos, fontTitle, tmp);
+		  
+		  xpos=+80;
 		  sprintf(tmp, "%c", settings->getThirdChar());
-		  drawText(480, ypos, fontTitle, tmp);
+		  drawText(xpos, ypos, fontTitle, tmp);
+
+		  xpos=+80;
+		  sprintf(tmp, "%c", settings->getFourthChar());
+		  drawText(xpos, ypos, fontTitle, tmp);
+		  
+  		  xpos=+80;
+		  sprintf(tmp, "%c", settings->getFifthChar());
+		  drawText(xpos, ypos, fontTitle, tmp);
+		  
+  		  xpos=+80;
+		  sprintf(tmp, "%c", settings->getSixthChar());
+		  drawText(xpos, ypos, fontTitle, tmp);
 
 		  ypos+=200;
 	  	  drawText(0, ypos, fontParagraph, "This initials are used in the highscore area.");	
@@ -2950,7 +3088,10 @@ void drawScreen(void)
 		  drawGrid();		  
 		  drawMonsters();
 		  drawWeapons();
-		  drawGamePanel();		  
+		  drawGamePanel1();		  
+		  drawGamePanel2();	
+		  drawGamePanel3();	
+		  
 		  drawButtons();
 		  
 		  checkGameOver();
@@ -2967,10 +3108,10 @@ void drawScreen(void)
 			game.alfa-=5;
 		  }
 		  
-		  //drawGridText();	
 		  drawMonstersText();
-		  //drawWeaponsText();
-		  drawGamePanelText();
+		  drawGamePanelText1();
+		  drawGamePanelText2();
+		  drawGamePanelText3();
 		  drawButtonsText(-28);
 		  
 		  // Draw text layer on top of background 
@@ -2983,20 +3124,20 @@ void drawScreen(void)
 		  drawGrid(); 
 		  drawMonsters();
 		  drawWeapons();
-		  drawGamePanel();
+		  drawGamePanel2();	
 	      drawButtons();
+			
+		  // Draw Transparent Box
+		  GRRLIB_Rectangle(210, 220, 220, 100, GRRLIB_BLACK_TRANS, 1);
 			 
 		  // Init text layer	  
           GRRLIB_initTexture();
  
-		  //drawGridText();	
  		  drawMonstersText();
-		  //drawWeaponsText();
-		  drawGamePanelText();
+		  drawGamePanelText2();
 		  drawButtonsText(-28);
 			  
-		  ypos+=210;	
-		  GRRLIB_Printf2(130, ypos, "GAME OVER", 80, GRRLIB_RED);
+		  drawText(0, 230, fontParagraph, "Game Over!");
 		 
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
@@ -3008,16 +3149,17 @@ void drawScreen(void)
 		  drawGrid(); 
 		  drawMonsters();
 		  drawWeapons();
+		  drawGamePanel2();	
 		  drawButtons();
 	
+		  // Draw Transparent Box
 		  GRRLIB_Rectangle(210, 220, 220, 100, GRRLIB_BLACK_TRANS, 1);
 	
 		  // Init text layer	  
           GRRLIB_initTexture();
  
-		  //drawGridText();	
  		  drawMonstersText();
-		  //drawWeaponsText();
+		  drawGamePanelText2();
 		  drawButtonsText(-10);
 	
  	      drawText(0, 230, fontParagraph, "Quit game?");	
@@ -3629,8 +3771,13 @@ void processEvent()
 			
 			// Store highscore local
 			char tmp[MAX_LEN];
-			sprintf(tmp,"%c%c%c",settings->getFirstChar(), 
-				settings->getSecondChar(), settings->getThirdChar());			
+			sprintf(tmp,"%c%c%c%c%c%c",
+				settings->getFirstChar(), 
+				settings->getSecondChar(), 
+				settings->getThirdChar(),
+				settings->getFourthChar(),
+				settings->getFifthChar(),
+				settings->getSixthChar());			
 			highScore->setScore(tmp, game.wave, game.score);
 			highScore->save(HIGHSCORE_FILENAME);
 			

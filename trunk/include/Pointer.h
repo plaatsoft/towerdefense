@@ -32,16 +32,14 @@ class Pointer
 	int y;	
 	int angle;
 	GRRLIB_texImg *image;
-	int index;
-	
+	int index;	
 	ir_t ir;
 	int xOffset;
 	int yOffset;
 	int rumble;
 	boolean rumbleGo;
   
-	void saveSettingFile(const char* filename);
-	
+	void saveSettingFile(const char* filename);	
 	void buttonScroll(int x,int y );
 	void buttonPlus(int index);
 	void buttonMinus(int index);
@@ -49,6 +47,7 @@ class Pointer
 	void buttonExit(int index);
 	void button1x(void);
 	void button2y(void);
+	char getLetter(char letter, bool up);
 	
   public:
   	// Constructor & Destructor
@@ -58,7 +57,6 @@ class Pointer
 	// Other
 	void draw(void);
 	void action();
-	void properties(void);
 
 	// Setters
 	void setIndex(int index);
