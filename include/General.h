@@ -137,6 +137,66 @@
 #define BUTTON_RIGHT        	(WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT)
 #define BUTTON_PLUS         	(WPAD_BUTTON_PLUS  | WPAD_CLASSIC_BUTTON_PLUS)
 
+#define AVERAGE_FPS			25
+
+#define POWER_UPGRADE_STEP  2
+#define RANGE_UPGRADE_STEP  5
+#define RATE_UPGRADE_STEP   1
+
+#define GUN_START_PRICE 	100
+#define GUN_UPGRADE_PRICE   10
+#define GUN_START_POWER 	2
+#define GUN_START_RANGE 	50
+#define GUN_START_RATE 		10
+#define GUN_END_POWER   	10
+#define GUN_END_RANGE   	75
+#define GUN_END_RATE    	6
+
+#define RIFLE_START_PRICE 	200
+#define RIFLE_UPGRADE_PRICE 25
+#define RIFLE_START_POWER 	4
+#define RIFLE_START_RANGE 	80
+#define RIFLE_START_RATE  	8
+#define RIFLE_END_POWER   	14
+#define RIFLE_END_RANGE   	100
+#define RIFLE_END_RATE   	4
+
+#define CANON_START_PRICE 	500
+#define CANON_UPGRADE_PRICE 50
+#define CANON_START_POWER 	12
+#define CANON_START_RANGE 	60
+#define CANON_START_RATE  	10
+#define CANON_END_POWER   	24
+#define CANON_END_RANGE   	80
+#define CANON_END_RATE    	6
+
+#define MISSLE_START_PRICE 	1000
+#define MISSLE_UPGRADE_PRICE 100
+#define MISSLE_START_POWER 	20
+#define MISSLE_START_RANGE 	80
+#define MISSLE_START_RATE  	8
+#define MISSLE_END_POWER   	34
+#define MISSLE_END_RANGE   	100
+#define MISSLE_END_RATE    	4
+
+#define LASER_START_PRICE 	2000
+#define LASER_UPGRADE_PRICE 100
+#define LASER_START_POWER 	30
+#define LASER_START_RANGE 	80
+#define LASER_START_RATE  	6
+#define LASER_END_POWER   	44
+#define LASER_END_RANGE   	100
+#define LASER_END_RATE    	2
+
+#define NUCK_START_PRICE 	4000
+#define NUCK_UPGRADE_PRICE  250
+#define NUCK_START_POWER 	100
+#define NUCK_START_RANGE 	80
+#define NUCK_START_RATE  	10
+#define NUCK_END_POWER   	114
+#define NUCK_END_RANGE   	100
+#define NUCK_END_RATE    	6
+
 // -----------------------------------------------------------
 // ENUMS
 // -----------------------------------------------------------

@@ -217,7 +217,7 @@ int Weapon::upgrade(int type)
 		// Power upgrade
 		case 0:	if ((game.cash>=powerPrice) && (power<maxPower))
 				{
-					power+=1;
+					power+=POWER_UPGRADE_STEP;
 					trace->event(s_fn,0,"Weapon %d upgrade power to %d",index, power);
 					game.cash-=powerPrice;
 					powerPrice=powerPrice*2;					
@@ -228,7 +228,7 @@ int Weapon::upgrade(int type)
 		// Range upgrade
 		case 1:	if ((game.cash>=rangePrice) && (range<maxRange))
 				{
-					range+=5;
+					range+=RANGE_UPGRADE_STEP;
 					trace->event(s_fn,0,"Weapon %d upgrade range to %d",index, range);
 					game.cash-=rangePrice;
 					rangePrice=rangePrice*2;
@@ -239,7 +239,7 @@ int Weapon::upgrade(int type)
 		// Rate upgrade		
 		case 2:	if ((game.cash>=ratePrice) && (rate>maxRate))
 				{
-					rate-=5;
+					rate-=(RATE_UPGRADE_STEP*AVERAGE_FPS);
 					trace->event(s_fn,0,"Weapon %d upgrade rate to %d",index, rate);
 					game.cash-=ratePrice;
 					ratePrice=ratePrice*2;
@@ -323,7 +323,7 @@ void Weapon::setRate(int rate1)
    const char *s_fn="Weapon::setRate";
    trace->event(s_fn,0,"%d",rate1);
    
-   rate=rate1;
+   rate=rate1*AVERAGE_FPS;
    delay=rate;
 }
 
@@ -349,9 +349,8 @@ void Weapon::setMaxRate(int maxRate1)
    const char *s_fn="Weapon::setMaxRate";
    trace->event(s_fn,0,"%d",maxRate1);
    
-   maxRate=maxRate1;
+   maxRate=maxRate1*AVERAGE_FPS;
 }
-
 
 void Weapon::setPowerPrice(int price)
 {

@@ -33,6 +33,8 @@
 **  - Increase user initials for 3 to 6 digits. 
 **  - Improve scroll bar button design.
 **  - Balance sound effect volume.
+**  - Improve weapons upgrade ranges.
+**  - Improve Help text.
 **  - Build game with devkitPPC r19 compiler.
 **
 **  18/12/2009 Version 0.45
@@ -666,6 +668,72 @@ void destroyTrace(void)
 		delete trace;
 		trace=NULL;
 	}
+}
+
+void destroyImages(void)
+{
+   const char *s_fn="destroyImages";
+   trace->event(s_fn,0,"enter");
+   
+   GRRLIB_FreeTexture(images.soundIcon);
+   GRRLIB_FreeTexture(images.logo2);
+   
+   GRRLIB_FreeTexture(images.background1);
+   GRRLIB_FreeTexture(images.background2);
+   
+   GRRLIB_FreeTexture(images.bar);
+   GRRLIB_FreeTexture(images.barCursor);
+   
+   GRRLIB_FreeTexture(images.monster1);
+   GRRLIB_FreeTexture(images.monster2);
+   GRRLIB_FreeTexture(images.monster3);
+   GRRLIB_FreeTexture(images.monster4);
+   GRRLIB_FreeTexture(images.monster5);
+   GRRLIB_FreeTexture(images.monster6);
+   GRRLIB_FreeTexture(images.monster7);
+   GRRLIB_FreeTexture(images.monster8);
+   GRRLIB_FreeTexture(images.monster9);
+   GRRLIB_FreeTexture(images.monster10);
+   GRRLIB_FreeTexture(images.monster11);
+   GRRLIB_FreeTexture(images.monster12);
+   GRRLIB_FreeTexture(images.monster13);
+   GRRLIB_FreeTexture(images.monster14);
+   GRRLIB_FreeTexture(images.monster15);
+   GRRLIB_FreeTexture(images.monster16);
+   GRRLIB_FreeTexture(images.monster17);
+   GRRLIB_FreeTexture(images.monster18);
+   GRRLIB_FreeTexture(images.monster19);
+   GRRLIB_FreeTexture(images.monster20);
+   GRRLIB_FreeTexture(images.monster21);
+   GRRLIB_FreeTexture(images.monster22);
+   GRRLIB_FreeTexture(images.monster23);
+   GRRLIB_FreeTexture(images.monster24);
+   GRRLIB_FreeTexture(images.monster25);
+   
+   GRRLIB_FreeTexture(images.pointer1);
+   GRRLIB_FreeTexture(images.pointer2);
+   GRRLIB_FreeTexture(images.pointer3);
+   GRRLIB_FreeTexture(images.pointer4);
+      
+   GRRLIB_FreeTexture(images.weapon1);
+   GRRLIB_FreeTexture(images.weapon2);
+   GRRLIB_FreeTexture(images.weapon3);
+   GRRLIB_FreeTexture(images.weapon4);
+   GRRLIB_FreeTexture(images.weapon5);
+   GRRLIB_FreeTexture(images.weapon6);
+   	
+   GRRLIB_FreeTexture(images.button1);
+   GRRLIB_FreeTexture(images.buttonFocus1);
+   GRRLIB_FreeTexture(images.button2);
+   GRRLIB_FreeTexture(images.buttonFocus2);
+   GRRLIB_FreeTexture(images.button3);
+   GRRLIB_FreeTexture(images.buttonFocus3);
+   GRRLIB_FreeTexture(images.button4);
+   GRRLIB_FreeTexture(images.buttonFocus4);
+   
+   GRRLIB_FreeTexture(images.map4);
+   
+   trace->event(s_fn,0,"leave");
 }
 
 // -----------------------------------
@@ -1453,7 +1521,7 @@ void initButtons(void)
 			buttons[2]->setColor(IMAGE_COLOR);
 
 			// Second letter + button 
-			xpos+=80;
+			xpos+=95;
 			buttons[3]=new Button();
 			buttons[3]->setX(xpos);
 			buttons[3]->setY(150);
@@ -1472,7 +1540,7 @@ void initButtons(void)
 			buttons[4]->setColor(IMAGE_COLOR);
 
 			// Third letter + button 
-			xpos+=80;
+			xpos+=95;
 			buttons[5]=new Button();
 			buttons[5]->setX(xpos);
 			buttons[5]->setY(150);
@@ -1491,7 +1559,7 @@ void initButtons(void)
 			buttons[6]->setColor(IMAGE_COLOR);		
 
 			// Fourth letter + button 
-			xpos+=80;
+			xpos+=95;
 			buttons[7]=new Button();
 			buttons[7]->setX(xpos);
 			buttons[7]->setY(150);
@@ -1510,7 +1578,7 @@ void initButtons(void)
 			buttons[8]->setColor(IMAGE_COLOR);		
 			
 			// Fifth letter + button 
-			xpos+=80;
+			xpos+=95;
 			buttons[9]=new Button();
 			buttons[9]->setX(xpos);
 			buttons[9]->setY(150);
@@ -1529,7 +1597,7 @@ void initButtons(void)
 			buttons[10]->setColor(IMAGE_COLOR);	
 			
 			// Sixth letter + button 
-			xpos+=80;
+			xpos+=95;
 			buttons[11]=new Button();
 			buttons[11]->setX(xpos);
 			buttons[11]->setY(150);
@@ -1564,7 +1632,7 @@ void initButtons(void)
 			buttons[0]->setColor(IMAGE_COLOR3);
 			
 			// Power Upgrade Button
-			ypos+=150;
+			ypos+=155;
 			buttons[1]=new Button();
 			buttons[1]->setX(10+game.panelXOffset);
 			buttons[1]->setY(ypos+game.panelYOffset);
@@ -1978,21 +2046,21 @@ void drawText(int x, int y, int type, const char *text)
 void drawGamePanel1(void)
 {
 	// Draw panel
-	GRRLIB_Rectangle(game.panelXOffset, 0, 100, 124, GRRLIB_BLACK_TRANS, 1);
+	GRRLIB_Rectangle(game.panelXOffset, 0, 100, 105, GRRLIB_BLACK_TRANS, 1);
 }
 		
 // Draw Game panel on screen
 void drawGamePanel2(void)
 {
 	// Draw panel
-	GRRLIB_Rectangle(game.panelXOffset, 134, 100, 144, GRRLIB_BLACK_TRANS, 1);
+	GRRLIB_Rectangle(game.panelXOffset, 110, 100, 80, GRRLIB_BLACK_TRANS, 1);
 }
 
 // Draw weapon upgrade/build panel on screen
 void drawGamePanel3(void)
 {
 	// Draw panel
-	GRRLIB_Rectangle(game.panelXOffset, 290, 100, 182, GRRLIB_BLACK_TRANS, 1);
+	GRRLIB_Rectangle(game.panelXOffset, 195, 100, 245, GRRLIB_BLACK_TRANS, 1);
 }
 
 
@@ -2020,13 +2088,13 @@ void drawGamePanelText1(void)
 void drawGamePanelText2(void)
 {
 	char tmp[MAX_LEN];
-	int  ypos=110;
 	
+	int  ypos=115;
 	GRRLIB_Printf2(20+game.panelXOffset, ypos+game.panelYOffset,"SCORE", 18, GRRLIB_WHITESMOKE);	
 	ypos+=15;	
 	sprintf(tmp,"%06d", game.score); 
 	GRRLIB_Printf2(20+game.panelXOffset, ypos+game.panelYOffset, tmp, 16, GRRLIB_WHITESMOKE);
-	ypos+=25;
+	ypos+=20;
 	GRRLIB_Printf2(25+game.panelXOffset, ypos+game.panelYOffset,"CASH", 18, GRRLIB_WHITESMOKE);	
 	ypos+=15;
 	sprintf(tmp,"$%04d", game.cash);
@@ -2041,9 +2109,8 @@ void drawGamePanelText3(void)
 	char range[MAX_LEN];
 	char rate[MAX_LEN];
 	
-	int  ypos=190;
-	
 	// Upgrade information + control
+	int  ypos=200;
 	GRRLIB_Printf2(20+game.panelXOffset, ypos+game.panelYOffset, "POWER", 18, GRRLIB_WHITESMOKE);	
 	ypos+=60;
 	GRRLIB_Printf2(20+game.panelXOffset, ypos+game.panelYOffset, "RANGE", 18, GRRLIB_WHITESMOKE);
@@ -2575,7 +2642,10 @@ void drawScreen(void)
 		  ypos+=25;
      	  drawText(0, ypos, fontParagraph, "your base with all kind of defense systems and kill");	
 		  ypos+=25;
-	      drawText(0, ypos, fontParagraph, "all the waves of enemies.");		
+	      drawText(0, ypos, fontParagraph, "all the waves of enemies. If ten enemies reach the");		
+		  ypos+=25;
+	      drawText(0, ypos, fontParagraph, "base the game is over. Good Luck!");		
+		
 		
           ypos+=60;
 	      drawText(0, ypos, fontParagraph, "Tip: You can control which music track is played during");
@@ -2620,56 +2690,80 @@ void drawScreen(void)
 		  drawText(155+xoffset, ypos, fontParagraph, "Price");
 		  drawText(240+xoffset, ypos, fontParagraph, "Power");
 		  drawText(340+xoffset, ypos, fontParagraph, "Range");
-		  drawText(440+xoffset, ypos, fontParagraph, "Rate");
+		  drawText(440+xoffset, ypos, fontParagraph, "Rate (sec.)");
 	
 		  ypos+=50;	  
 		  GRRLIB_DrawImg(30+xoffset,ypos, images.weapon1, 0, 1, 1, IMAGE_COLOR );
 		  drawText(80+xoffset, ypos, fontNormal, "Gun");
-		  drawText(155+xoffset, ypos, fontNormal, "$100");
-		  drawText(240+xoffset, ypos, fontNormal, "002-005");
-		  drawText(340+xoffset, ypos, fontNormal, "050-075");
-		  drawText(440+xoffset, ypos, fontNormal, "050-100");
-		  					
+		  sprintf(tmp,"$%d",GUN_START_PRICE);
+		  drawText(155+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",GUN_START_POWER, GUN_END_POWER);
+		  drawText(240+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",GUN_START_RANGE, GUN_END_RANGE);
+		  drawText(340+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",GUN_START_RATE, GUN_END_RATE);
+		  drawText(440+xoffset, ypos, fontNormal, tmp);
+  					
 		  ypos+=40;
 		  GRRLIB_DrawImg(30+xoffset,ypos, images.weapon2, 0, 1, 1, IMAGE_COLOR );
 		  drawText(80+xoffset, ypos, fontNormal, "Rifle");
-		  drawText(155+xoffset, ypos, fontNormal, "$200");
-		  drawText(240+xoffset, ypos, fontNormal, "004-010");
-		  drawText(340+xoffset, ypos, fontNormal, "090-100");
-		  drawText(440+xoffset, ypos, fontNormal, "045-080");
-					
+		  sprintf(tmp,"$%d",RIFLE_START_PRICE);
+		  drawText(155+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",RIFLE_START_POWER, RIFLE_END_POWER);
+		  drawText(240+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",RIFLE_START_RANGE, RIFLE_END_RANGE);
+		  drawText(340+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",RIFLE_START_RATE, RIFLE_END_RATE);
+		  drawText(440+xoffset, ypos, fontNormal, tmp);
+		  		
 		  ypos+=40;
 		  GRRLIB_DrawImg(30+xoffset,ypos, images.weapon3, 0, 1, 1, IMAGE_COLOR );
 		  drawText(80+xoffset, ypos, fontNormal, "Canon");
-		  drawText(155+xoffset, ypos, fontNormal, "$500");
-		  drawText(240+xoffset, ypos, fontNormal, "008-030");
-		  drawText(340+xoffset, ypos, fontNormal, "060-125");
-		  drawText(440+xoffset, ypos, fontNormal, "030-080");
+		  sprintf(tmp,"$%d",CANON_START_PRICE);
+		  drawText(155+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",CANON_START_POWER, CANON_END_POWER);
+		  drawText(240+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",CANON_START_RANGE, CANON_END_RANGE);
+		  drawText(340+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",CANON_START_RATE, CANON_END_RATE);
+		  drawText(440+xoffset, ypos, fontNormal, tmp);
 		
 		  ypos+=40;
 		  GRRLIB_DrawImg(30+xoffset,ypos, images.weapon4, 0, 1, 1, IMAGE_COLOR );
 		  drawText(80+xoffset, ypos, fontNormal, "Missle");
-		  drawText(155+xoffset, ypos, fontNormal, "$1000");
-		  drawText(240+xoffset, ypos, fontNormal, "015-040");
-		  drawText(340+xoffset, ypos, fontNormal, "080-125");
-		  drawText(440+xoffset, ypos, fontNormal, "040-080");
-					
+		  sprintf(tmp,"$%d",MISSLE_START_PRICE);
+		  drawText(155+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",MISSLE_START_POWER, MISSLE_END_POWER);
+		  drawText(240+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",MISSLE_START_RANGE, MISSLE_END_RANGE);
+		  drawText(340+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",MISSLE_START_RATE, MISSLE_END_RATE);
+		  drawText(440+xoffset, ypos, fontNormal, tmp);
+
 		  ypos+=40;
 		  GRRLIB_DrawImg(30+xoffset,ypos, images.weapon5, 0, 1, 1, IMAGE_COLOR );
-		  drawText(80+xoffset, ypos, fontNormal, "Laser");
-		  drawText(155+xoffset, ypos, fontNormal, "$2000");
-		  drawText(240+xoffset, ypos, fontNormal, "030-060");
-		  drawText(340+xoffset, ypos, fontNormal, "050-075");
-		  drawText(440+xoffset, ypos, fontNormal, "040-080");
-			
+		  drawText(80+xoffset, ypos, fontNormal, "laser");
+		  sprintf(tmp,"$%d",LASER_START_PRICE);
+		  drawText(155+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",LASER_START_POWER, LASER_END_POWER);
+		  drawText(240+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",LASER_START_RANGE, LASER_END_RANGE);
+		  drawText(340+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",LASER_START_RATE, LASER_END_RATE);
+		  drawText(440+xoffset, ypos, fontNormal, tmp);
+
 		  ypos+=40;
 		  GRRLIB_DrawImg(30+xoffset,ypos, images.weapon6, 0, 1, 1, IMAGE_COLOR );
 		  drawText(80+xoffset, ypos, fontNormal, "Nuck");
-		  drawText(155+xoffset, ypos, fontNormal, "$4000");
-		  drawText(240+xoffset, ypos, fontNormal, "100-200");
-		  drawText(340+xoffset, ypos, fontNormal, "080-100");
-		  drawText(440+xoffset, ypos, fontNormal, "100-200");			
-		
+		  sprintf(tmp,"$%d",NUCK_START_PRICE);
+		  drawText(155+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",NUCK_START_POWER, NUCK_END_POWER);
+		  drawText(240+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",NUCK_START_RANGE, NUCK_END_RANGE);
+		  drawText(340+xoffset, ypos, fontNormal, tmp);
+		  sprintf(tmp,"%03d-%03d",NUCK_START_RATE, NUCK_END_RATE);
+		  drawText(440+xoffset, ypos, fontNormal, tmp);			
+
 		  drawText(130, 420, fontNormal, "Overview of upgrade range of each weapon system.");	
 		
 		  // Draw Button Text labels
@@ -2695,7 +2789,7 @@ void drawScreen(void)
           GRRLIB_initTexture();
  
 		   // Show title
-		  drawText(0, ypos, fontTitle, "Monsters");
+		  drawText(0, ypos, fontTitle, "Enemies");
         
 		  ypos=130;
 		  int xpos=50;
@@ -2864,7 +2958,7 @@ void drawScreen(void)
 				  	  	
 												
 	      ypos+=30;
-	      drawText(0, ypos, fontNormal,"Greetings to everybody in the Wii homebrew scene");
+	      drawText(140, ypos, fontNormal,"Greetings to everybody in the Wii homebrew scene");
 		  
 		  // Draw Button Text labels
 		  drawButtonsText(0);
@@ -3046,27 +3140,27 @@ void drawScreen(void)
 		  sprintf(tmp, "%c", settings->getFirstChar());
 		  drawText(xpos, ypos, fontTitle, tmp);
 		  
-		  xpos=+80;
+		  xpos+=95;
 		  sprintf(tmp, "%c", settings->getSecondChar());
 		  drawText(xpos, ypos, fontTitle, tmp);
 		  
-		  xpos=+80;
+		  xpos+=95;
 		  sprintf(tmp, "%c", settings->getThirdChar());
 		  drawText(xpos, ypos, fontTitle, tmp);
 
-		  xpos=+80;
+		  xpos+=95;
 		  sprintf(tmp, "%c", settings->getFourthChar());
 		  drawText(xpos, ypos, fontTitle, tmp);
 		  
-  		  xpos=+80;
+  		  xpos+=95;
 		  sprintf(tmp, "%c", settings->getFifthChar());
 		  drawText(xpos, ypos, fontTitle, tmp);
 		  
-  		  xpos=+80;
+  		  xpos+=95;
 		  sprintf(tmp, "%c", settings->getSixthChar());
 		  drawText(xpos, ypos, fontTitle, tmp);
 
-		  ypos+=200;
+		  ypos+=180;
 	  	  drawText(0, ypos, fontParagraph, "This initials are used in the highscore area.");	
 	     		  
 		  // Draw Button Text labels
@@ -3114,6 +3208,9 @@ void drawScreen(void)
 		  drawGamePanelText3();
 		  drawButtonsText(-28);
 		  
+		  sprintf(tmp,"%d fps", CalculateFrameRate());
+		  drawText(20, 500, fontSpecial, tmp);
+		  
 		  // Draw text layer on top of background 
 		  GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
@@ -3128,17 +3225,20 @@ void drawScreen(void)
 	      drawButtons();
 			
 		  // Draw Transparent Box
-		  GRRLIB_Rectangle(210, 220, 220, 100, GRRLIB_BLACK_TRANS, 1);
+		  GRRLIB_Rectangle(210, 210, 220, 100, GRRLIB_BLACK_TRANS, 1);
 			 
 		  // Init text layer	  
           GRRLIB_initTexture();
  
  		  drawMonstersText();
 		  drawGamePanelText2();
-		  drawButtonsText(-28);
+		  drawButtonsText(-20);
 			  
-		  drawText(0, 230, fontParagraph, "Game Over!");
+		  drawText(260, 220, fontParagraph, "Game Over!");
 		 
+		  sprintf(tmp,"%d fps", CalculateFrameRate());
+		  drawText(20, 500, fontSpecial, tmp);
+		  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
@@ -3153,7 +3253,7 @@ void drawScreen(void)
 		  drawButtons();
 	
 		  // Draw Transparent Box
-		  GRRLIB_Rectangle(210, 220, 220, 100, GRRLIB_BLACK_TRANS, 1);
+		  GRRLIB_Rectangle(210, 210, 220, 100, GRRLIB_BLACK_TRANS, 1);
 	
 		  // Init text layer	  
           GRRLIB_initTexture();
@@ -3162,8 +3262,11 @@ void drawScreen(void)
 		  drawGamePanelText2();
 		  drawButtonsText(-10);
 	
- 	      drawText(0, 230, fontParagraph, "Quit game?");	
+ 	      drawText(0, 220, fontParagraph, "Quit game?");	
 	     
+		  sprintf(tmp,"%d fps", CalculateFrameRate());
+		  drawText(20, 500, fontSpecial, tmp);
+		  
 		  // Draw text layer on top of background 
           GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
@@ -3301,98 +3404,98 @@ void createWeapon(int x, int y, int id, int type)
 	{
 		case 0:	{
 					// Gun
-					weapons[id]->setPower(2);
-					weapons[id]->setRange(50);
-					weapons[id]->setRate(100);
+					weapons[id]->setPower(GUN_START_POWER);
+					weapons[id]->setRange(GUN_START_RANGE);
+					weapons[id]->setRate(GUN_START_RATE);
 					
-					weapons[id]->setMaxPower(5);
-					weapons[id]->setMaxRange(75);
-					weapons[id]->setMaxRate(50);
+					weapons[id]->setMaxPower(GUN_END_POWER);
+					weapons[id]->setMaxRange(GUN_END_RANGE);
+					weapons[id]->setMaxRate(GUN_END_RATE);
 					
-					weapons[id]->setPowerPrice(10);
-					weapons[id]->setRangePrice(10);
-					weapons[id]->setRatePrice(10);		
+					weapons[id]->setPowerPrice(GUN_UPGRADE_PRICE);
+					weapons[id]->setRangePrice(GUN_UPGRADE_PRICE);
+					weapons[id]->setRatePrice(GUN_UPGRADE_PRICE);		
 				}
 				break;
 				
 		case 1:	{
 					
 					// Rifle
-					weapons[id]->setPower(4);
-					weapons[id]->setRange(55);
-					weapons[id]->setRate(90);
+					weapons[id]->setPower(RIFLE_START_POWER);
+					weapons[id]->setRange(RIFLE_START_RANGE);
+					weapons[id]->setRate(RIFLE_START_RATE);
 					
-					weapons[id]->setMaxPower(10);
-					weapons[id]->setMaxRange(100);
-					weapons[id]->setMaxRate(50);
+					weapons[id]->setMaxPower(RIFLE_END_POWER);
+					weapons[id]->setMaxRange(RIFLE_END_RANGE);
+					weapons[id]->setMaxRate(RIFLE_END_RATE);
 					
-					weapons[id]->setPowerPrice(25);
-					weapons[id]->setRangePrice(25);
-					weapons[id]->setRatePrice(25);		
+					weapons[id]->setPowerPrice(RIFLE_UPGRADE_PRICE);
+					weapons[id]->setRangePrice(RIFLE_UPGRADE_PRICE);
+					weapons[id]->setRatePrice(RIFLE_UPGRADE_PRICE);		
 				}
 				break;
 				
 		case 2:	{
 					// Canon
-					weapons[id]->setPower(8);
-					weapons[id]->setRange(60);
-					weapons[id]->setRate(80);
+					weapons[id]->setPower(CANON_START_POWER);
+					weapons[id]->setRange(CANON_START_RANGE);
+					weapons[id]->setRate(CANON_START_RATE);
 					
-					weapons[id]->setMaxPower(20);
-					weapons[id]->setMaxRange(125);
-					weapons[id]->setMaxRate(40);
+					weapons[id]->setMaxPower(CANON_END_POWER);
+					weapons[id]->setMaxRange(CANON_END_RANGE);
+					weapons[id]->setMaxRate(CANON_END_RATE);
 					
-					weapons[id]->setPowerPrice(50);
-					weapons[id]->setRangePrice(50);
-					weapons[id]->setRatePrice(50);		
+					weapons[id]->setPowerPrice(CANON_UPGRADE_PRICE);
+					weapons[id]->setRangePrice(CANON_UPGRADE_PRICE);
+					weapons[id]->setRatePrice(CANON_UPGRADE_PRICE);		
 				}
 				break;
 				
 		case 3:	{
 					// Missle				
-					weapons[id]->setPower(15);
-					weapons[id]->setRange(80);
-					weapons[id]->setRate(80);
+					weapons[id]->setPower(MISSLE_START_POWER);
+					weapons[id]->setRange(MISSLE_START_RANGE);
+					weapons[id]->setRate(MISSLE_START_RATE);
 					
-					weapons[id]->setMaxPower(40);
-					weapons[id]->setMaxRange(125);
-					weapons[id]->setMaxRate(40);
+					weapons[id]->setMaxPower(MISSLE_END_POWER);
+					weapons[id]->setMaxRange(MISSLE_END_RANGE);
+					weapons[id]->setMaxRate(MISSLE_END_RATE);
 					
-					weapons[id]->setPowerPrice(75);
-					weapons[id]->setRangePrice(75);
-					weapons[id]->setRatePrice(75);		
+					weapons[id]->setPowerPrice(MISSLE_UPGRADE_PRICE);
+					weapons[id]->setRangePrice(MISSLE_UPGRADE_PRICE);
+					weapons[id]->setRatePrice(MISSLE_UPGRADE_PRICE);		
 				}
 				break;
 								
 		case 4:	{
 					// Laser
-					weapons[id]->setPower(30);
-					weapons[id]->setRange(50);
-					weapons[id]->setRate(80);
+					weapons[id]->setPower(LASER_START_POWER);
+					weapons[id]->setRange(LASER_START_RANGE);
+					weapons[id]->setRate(LASER_START_RATE);
 					
-					weapons[id]->setMaxPower(60);
-					weapons[id]->setMaxRange(75);
-					weapons[id]->setMaxRate(40);
+					weapons[id]->setMaxPower(LASER_END_POWER);
+					weapons[id]->setMaxRange(LASER_END_RANGE);
+					weapons[id]->setMaxRate(LASER_END_RATE);
 					
-					weapons[id]->setPowerPrice(100);
-					weapons[id]->setRangePrice(100);
-					weapons[id]->setRatePrice(100);		
+					weapons[id]->setPowerPrice(LASER_UPGRADE_PRICE);
+					weapons[id]->setRangePrice(LASER_UPGRADE_PRICE);
+					weapons[id]->setRatePrice(LASER_UPGRADE_PRICE);		
 				}
 				break;
 				
 		case 5:	{
 					// Nuck
-					weapons[id]->setPower(100);
-					weapons[id]->setRange(80);
-					weapons[id]->setRate(200);
+					weapons[id]->setPower(NUCK_START_POWER);
+					weapons[id]->setRange(NUCK_START_RANGE);
+					weapons[id]->setRate(NUCK_START_RATE);
 					
-					weapons[id]->setMaxPower(200);
-					weapons[id]->setMaxRange(100);
-					weapons[id]->setMaxRate(100);
+					weapons[id]->setMaxPower(NUCK_END_POWER);
+					weapons[id]->setMaxRange(NUCK_END_RANGE);
+					weapons[id]->setMaxRate(NUCK_END_RATE);
 					
-					weapons[id]->setPowerPrice(250);
-					weapons[id]->setRangePrice(250);
-					weapons[id]->setRatePrice(250);		
+					weapons[id]->setPowerPrice(NUCK_UPGRADE_PRICE);
+					weapons[id]->setRangePrice(NUCK_UPGRADE_PRICE);
+					weapons[id]->setRatePrice(NUCK_UPGRADE_PRICE);		
 				}
 				break;
 	}
@@ -3424,7 +3527,7 @@ GRRLIB_texImg *getNewWeaponImage(int type)
 				 return images.weapon5;
 				 break;
 				
-		default: // unknown (TODO)
+		default: // Nuck
 				 return images.weapon6;
 				 break;
 	}
@@ -3437,27 +3540,27 @@ int getWeaponPrice(int type)
 	switch (game.weaponType)
 	{
 		case 0:  // Gun
-				 return 100;
+				 return GUN_START_PRICE;
 				 break;
 				
 		case 1:  // Rifle
-				 return 200;
+				 return RIFLE_START_PRICE;
 				 break;
 				
 		case 2:  // Canon
-				 return 500;
+				 return CANON_START_PRICE;
 				 break;
 				
 		case 3:  // Missle
-				 return 1000;
+				 return MISSLE_START_PRICE;
 				 break;
 				
 		case 4:  // Laser
-				 return 2000;
+				 return LASER_START_PRICE;
 				 break;
 				
-		default: // unknown (TODO)
-				 return 3000;
+		default: // Nuck
+				 return NUCK_START_PRICE;
 				 break;
 	}
 }
@@ -3527,72 +3630,6 @@ void checkNextWave(void)
 		// Lanch new monster wave else wait one game cycle
 		game.event=eventLanch;
 	}
-}
-
-void destroyImages(void)
-{
-   const char *s_fn="destroyImages";
-   trace->event(s_fn,0,"enter");
-   
-   GRRLIB_FreeTexture(images.soundIcon);
-   GRRLIB_FreeTexture(images.logo2);
-   
-   GRRLIB_FreeTexture(images.background1);
-   GRRLIB_FreeTexture(images.background2);
-   
-   GRRLIB_FreeTexture(images.bar);
-   GRRLIB_FreeTexture(images.barCursor);
-   
-   GRRLIB_FreeTexture(images.monster1);
-   GRRLIB_FreeTexture(images.monster2);
-   GRRLIB_FreeTexture(images.monster3);
-   GRRLIB_FreeTexture(images.monster4);
-   GRRLIB_FreeTexture(images.monster5);
-   GRRLIB_FreeTexture(images.monster6);
-   GRRLIB_FreeTexture(images.monster7);
-   GRRLIB_FreeTexture(images.monster8);
-   GRRLIB_FreeTexture(images.monster9);
-   GRRLIB_FreeTexture(images.monster10);
-   GRRLIB_FreeTexture(images.monster11);
-   GRRLIB_FreeTexture(images.monster12);
-   GRRLIB_FreeTexture(images.monster13);
-   GRRLIB_FreeTexture(images.monster14);
-   GRRLIB_FreeTexture(images.monster15);
-   GRRLIB_FreeTexture(images.monster16);
-   GRRLIB_FreeTexture(images.monster17);
-   GRRLIB_FreeTexture(images.monster18);
-   GRRLIB_FreeTexture(images.monster19);
-   GRRLIB_FreeTexture(images.monster20);
-   GRRLIB_FreeTexture(images.monster21);
-   GRRLIB_FreeTexture(images.monster22);
-   GRRLIB_FreeTexture(images.monster23);
-   GRRLIB_FreeTexture(images.monster24);
-   GRRLIB_FreeTexture(images.monster25);
-   
-   GRRLIB_FreeTexture(images.pointer1);
-   GRRLIB_FreeTexture(images.pointer2);
-   GRRLIB_FreeTexture(images.pointer3);
-   GRRLIB_FreeTexture(images.pointer4);
-      
-   GRRLIB_FreeTexture(images.weapon1);
-   GRRLIB_FreeTexture(images.weapon2);
-   GRRLIB_FreeTexture(images.weapon3);
-   GRRLIB_FreeTexture(images.weapon4);
-   GRRLIB_FreeTexture(images.weapon5);
-   GRRLIB_FreeTexture(images.weapon6);
-   	
-   GRRLIB_FreeTexture(images.button1);
-   GRRLIB_FreeTexture(images.buttonFocus1);
-   GRRLIB_FreeTexture(images.button2);
-   GRRLIB_FreeTexture(images.buttonFocus2);
-   GRRLIB_FreeTexture(images.button3);
-   GRRLIB_FreeTexture(images.buttonFocus3);
-   GRRLIB_FreeTexture(images.button4);
-   GRRLIB_FreeTexture(images.buttonFocus4);
-   
-   GRRLIB_FreeTexture(images.map4);
-   
-   trace->event(s_fn,0,"leave");
 }
 	
 // Calculate Video Frame Rate (Indication how game engine performs)
