@@ -27,6 +27,12 @@
 **  - Snap weapons to (32x32) grid!
 **  - Multi language support
 **
+**  20/12/2009 Version 0.50
+**  - Second release for Beta testers.
+**  - Use GRRLib v4.2.0 as graphic engine.
+**  - Reduced amount of enemies in one wave.
+**  - Build game with devkitPPC r19 compiler.
+**
 **  19/12/2009 Version 0.46
 **  - Improve "Game Over" screen. 
 **  - Improve game information panel on screen. 
@@ -38,6 +44,7 @@
 **  - Build game with devkitPPC r19 compiler.
 **
 **  18/12/2009 Version 0.45
+**  - First release for Beta testers.
 **  - Load map images (sprites) directly from SdCard.
 **  - Improve objects cleanup when stopping game.
 **  - Added Google analistics network calls.
@@ -502,8 +509,7 @@ extern int      pic607length;
 u32         *frameBuffer[1] 	= {NULL};
 GXRModeObj  *rmode 				= NULL;
 Mtx         GXmodelView2D;
-int     	maxTodayHighScore  	= 0;
-int     	maxGlobalHighScore 	= 0;
+
 
 Game 		game;
 Trace     	*trace;
@@ -855,7 +861,7 @@ void initMonsters(bool special)
 	int delay=1;   
    
 	// Calculate how much monster will be in the wave
-	int amount=3+(game.wave*2);
+	int amount=4+game.wave;
 	if (amount>MAX_MONSTERS) amount=MAX_MONSTERS;
    
 	for( int i=0; i<amount; i++ ) 
@@ -1790,7 +1796,7 @@ void initGame(void)
 	game.panelXOffset=20;
 	game.angle = 0;
 	game.alfa = 0;
-				
+		
    	// Init Images
 	initImages();
    
@@ -2449,14 +2455,14 @@ void drawScreen(void)
 		  int startEntry;
 		  int endEntry;
 		  		  
-		  if (maxTodayHighScore<15)
+		  if (game.maxTodayHighScore<15)
 		  {
 		    startEntry=0;
-			endEntry=maxTodayHighScore;
+			endEntry=game.maxTodayHighScore;
 		  }
 		  else
 		  {
-			 startEntry=(((float) maxTodayHighScore-13.0)/26.0)*(float)game.scrollIndex;
+			 startEntry=(((float) game.maxTodayHighScore-13.0)/26.0)*(float)game.scrollIndex;
 			 endEntry=startEntry+15;
 		  }
 		  
@@ -2539,14 +2545,14 @@ void drawScreen(void)
 		  int startEntry;
 		  int endEntry;
 		  		  
-		  if (maxGlobalHighScore<13)
+		  if (game.maxGlobalHighScore<13)
 		  {
 		    startEntry=0;
-			endEntry=maxGlobalHighScore;
+			endEntry=game.maxGlobalHighScore;
 		  }
 		  else
 		  {
-			 startEntry=(((float) maxGlobalHighScore-13.0)/26.0)*(float)game.scrollIndex;
+			 startEntry=(((float) game.maxGlobalHighScore-13.0)/26.0)*(float)game.scrollIndex;
 			 endEntry=startEntry+13;
 		  }
 		  
@@ -2898,9 +2904,8 @@ void drawScreen(void)
 		  GRRLIB_DrawImg( xpos, ypos, images.monster25, 0, 1, 1, IMAGE_COLOR );
 		  drawText(xpos+40, ypos, fontNormal, "500");	
 
-   	      drawText(130, 420, fontNormal, "Overview of energy level of each monster type.");	
-		  	   		  \
-					  \
+   	      drawText(130, 420, fontNormal, "Overview of energy level of each enemy type.");	
+		  	   		  					  
 		  // Draw Button Text labels
 		  drawButtonsText(0);
 		  
@@ -2955,8 +2960,7 @@ void drawScreen(void)
 	      drawText(0, ypos, fontParagraph, "TESTERS");
 	      ypos+=20;
 	      drawText(0, ypos, fontNormal, "wplaat");	  
-				  	  	
-												
+				  	  													
 	      ypos+=30;
 	      drawText(140, ypos, fontNormal,"Greetings to everybody in the Wii homebrew scene");
 		  
@@ -3289,7 +3293,7 @@ void loadTodayHighScore(char *buffer)
    const char *tmp;
    char temp[MAX_LEN];
    
-   maxTodayHighScore=0;
+   game.maxTodayHighScore=0;
    
    // Clear memory
    for(i=0; i<MAX_TODAY_HIGHSCORE; i++)
@@ -3311,19 +3315,19 @@ void loadTodayHighScore(char *buffer)
         data = mxmlFindElement(tree, tree, temp, NULL, NULL, MXML_DESCEND);
 
         tmp=mxmlElementGetAttr(data,"dt");   
-        if (tmp!=NULL) todayHighScore[maxTodayHighScore].dt=atoi(tmp); else todayHighScore[maxTodayHighScore].dt=0; 
+        if (tmp!=NULL) todayHighScore[game.maxTodayHighScore].dt=atoi(tmp); else todayHighScore[game.maxTodayHighScore].dt=0; 
 		
 		tmp=mxmlElementGetAttr(data,"score");   
-        if (tmp!=NULL) strcpy(todayHighScore[maxTodayHighScore].score,tmp); else strcpy(todayHighScore[maxTodayHighScore].score,"");
+        if (tmp!=NULL) strcpy(todayHighScore[game.maxTodayHighScore].score,tmp); else strcpy(todayHighScore[game.maxTodayHighScore].score,"");
 		
         tmp=mxmlElementGetAttr(data,"name");   
-        if (tmp!=NULL) strcpy(todayHighScore[maxTodayHighScore].name,tmp); else strcpy(todayHighScore[maxTodayHighScore].name,"");
+        if (tmp!=NULL) strcpy(todayHighScore[game.maxTodayHighScore].name,tmp); else strcpy(todayHighScore[game.maxTodayHighScore].name,"");
 
 		tmp=mxmlElementGetAttr(data,"location");   
-        if (tmp!=NULL) strcpy(todayHighScore[maxTodayHighScore].location,tmp); else strcpy(todayHighScore[maxTodayHighScore].location,"");
+        if (tmp!=NULL) strcpy(todayHighScore[game.maxTodayHighScore].location,tmp); else strcpy(todayHighScore[game.maxTodayHighScore].location,"");
 		
 		// Entry is valid (Keep the inforamtion)
-        if (strlen(todayHighScore[maxTodayHighScore].score)>0) maxTodayHighScore++;	
+        if (strlen(todayHighScore[game.maxTodayHighScore].score)>0) game.maxTodayHighScore++;	
       }   
       mxmlDelete(data);
       mxmlDelete(tree);
@@ -3343,7 +3347,7 @@ void loadGlobalHighScore(char *buffer)
    const char *tmp;
    char temp[MAX_LEN];
    
-   maxGlobalHighScore=0;
+   game.maxGlobalHighScore=0;
    
    // Clear memory
    for(i=0; i<MAX_GLOBAL_HIGHSCORE; i++)
@@ -3365,19 +3369,19 @@ void loadGlobalHighScore(char *buffer)
         data = mxmlFindElement(tree, tree, temp, NULL, NULL, MXML_DESCEND);
 
         tmp=mxmlElementGetAttr(data,"dt");   
-        if (tmp!=NULL) globalHighScore[maxGlobalHighScore].dt=atoi(tmp); else globalHighScore[maxGlobalHighScore].dt=0; 
+        if (tmp!=NULL) globalHighScore[game.maxGlobalHighScore].dt=atoi(tmp); else globalHighScore[game.maxGlobalHighScore].dt=0; 
 		
 		tmp=mxmlElementGetAttr(data,"score");   
-        if (tmp!=NULL) strcpy(globalHighScore[maxGlobalHighScore].score,tmp); else strcpy(globalHighScore[maxGlobalHighScore].score,"");
+        if (tmp!=NULL) strcpy(globalHighScore[game.maxGlobalHighScore].score,tmp); else strcpy(globalHighScore[game.maxGlobalHighScore].score,"");
 		
         tmp=mxmlElementGetAttr(data,"name");   
-        if (tmp!=NULL) strcpy(globalHighScore[maxGlobalHighScore].name,tmp); else strcpy(globalHighScore[maxGlobalHighScore].name,"");
+        if (tmp!=NULL) strcpy(globalHighScore[game.maxGlobalHighScore].name,tmp); else strcpy(globalHighScore[game.maxGlobalHighScore].name,"");
 
 		tmp=mxmlElementGetAttr(data,"location");   
-        if (tmp!=NULL) strcpy(globalHighScore[maxGlobalHighScore].location,tmp); else strcpy(globalHighScore[maxGlobalHighScore].location,"");
+        if (tmp!=NULL) strcpy(globalHighScore[game.maxGlobalHighScore].location,tmp); else strcpy(globalHighScore[game.maxGlobalHighScore].location,"");
 		
 		// Entry is valid (Keep the inforamtion)
-        if (strlen(globalHighScore[maxGlobalHighScore].score)>0) maxGlobalHighScore++;	
+        if (strlen(globalHighScore[game.maxGlobalHighScore].score)>0) game.maxGlobalHighScore++;	
       }   
       mxmlDelete(data);
       mxmlDelete(tree);
@@ -3779,7 +3783,7 @@ void processEvent()
 			if (amount<count)
 			{
 				// Create next monster wave
-				if (game.waveDelay>500) game.waveDelay-=100;
+				if (game.waveDelay>500) game.waveDelay-=50;
 				game.waveCountDown=game.waveDelay;
 				game.wave++;
 				initMonsters(false);	

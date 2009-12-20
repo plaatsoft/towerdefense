@@ -81,3 +81,4 @@ INLINE
 bool  GRRLIB_GetAntiAliasing (void) {
     return GRRLIB_Settings.antialias;
 }
+

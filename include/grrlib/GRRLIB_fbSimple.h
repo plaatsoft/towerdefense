@@ -31,9 +31,7 @@ THE SOFTWARE.
  */
 INLINE
 void  GRRLIB_FillScreen (const u32 color) {
-    GRRLIB_Rectangle(-40, -40,
-                     rmode->fbWidth +80, rmode->xfbHeight +80,
-                     color, 1);
+    GRRLIB_Rectangle(-40, -40, rmode->fbWidth +80, rmode->xfbHeight +80, color, 1);
 }
 
 /**
@@ -44,7 +42,7 @@ void  GRRLIB_FillScreen (const u32 color) {
  * @author Jespa
  */
 INLINE
-void  GRRLIB_Plot (const f32 x,  const f32 y,  const u32 color) {
+void  GRRLIB_Plot (const f32 x,  const f32 y, const u32 color) {
     GX_Begin(GX_POINTS, GX_VTXFMT0, 1);
         GX_Position3f32(x, y, 0);
         GX_Color1u32(color);
@@ -83,7 +81,8 @@ void  GRRLIB_Line (const f32 x1, const f32 y1,
 INLINE
 void  GRRLIB_Rectangle (const f32 x,      const f32 y,
                         const f32 width,  const f32 height,
-                        const u32 color,  const u8 filled) {
+                        const u32 color, const u8 filled) {
+
     f32 x2 = x + width;
     f32 y2 = y + height;
 

@@ -26,8 +26,8 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.46"
-#define RELEASE_DATE        	"19-12-2009" 
+#define PROGRAM_VERSION     	"0.50"
+#define RELEASE_DATE        	"20-12-2009" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -264,6 +264,10 @@ typedef struct
 	int event;
 	int prevEvent;
 		
+	// Highscore markers
+	int	maxTodayHighScore;
+	int	maxGlobalHighScore;
+
 	// Game variables
 	char name[MAX_LEN];	
 	int selectedMap; 

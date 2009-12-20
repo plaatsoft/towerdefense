@@ -28,6 +28,11 @@ THE SOFTWARE.
 #ifndef __GRRLIB_H__
 #define __GRRLIB_H__
 
+/**
+ * Version information for GRRLIB.
+ */
+#define GRRLIB_VER_STRING "4.2.0"
+
 //==============================================================================
 // Includes
 //==============================================================================
@@ -65,14 +70,6 @@ typedef  unsigned int  uint;
 //==============================================================================
 // typedefs, enumerators & structs
 //==============================================================================
-/**
- * Compositions Modes.
- */
-typedef  enum Composition_Modes {
-    GRRLIB_COMPOSE_NORMAL,      /**< NORMAL : a-over-b alpha composition (normal) */
-} GRRLIB_ComposeMode;
-
-//------------------------------------------------------------------------------
 /**
  * GRRLIB Blending Modes.
  */
@@ -205,7 +202,6 @@ typedef struct tagRGBQUAD {
 GRR_EXTERN  GXRModeObj  *rmode;
 GRR_EXTERN  void        *xfb[2]  GRR_INITS(NULL, NULL);
 GRR_EXTERN  u32         fb       GRR_INIT(0);
-
 //==============================================================================
 // procedure and function prototypes
 // Inline function handling - http://www.greenend.org.uk/rjk/2003/03/inline.html
@@ -238,8 +234,13 @@ GRR_EXTERN  u32         fb       GRR_INIT(0);
  * Welcome to the GRRLIB documentation.
  *
  * @section Introduction
- * GRRLIB is a C/C++ 2D Graphics library for Wii application developers.
+ * GRRLIB is a C/C++ 2D/3D graphics library for Wii application developers.
  * It is essentially a wrapper which presents a friendly interface to the Nintendo GX core.
+ *
+ * @section Links
+ * Forum: http://grrlib.santo.fr/forum\n
+ * Code: http://code.google.com/p/grrlib\n
+ * IRC: <a href="irc://irc.efnet.net/grrlib">##GRRLIB</a> on EFnet
  *
  * @section Credits
  * Project Leader : NoNameNo\n
@@ -269,9 +270,8 @@ GRR_EXTERN  u32         fb       GRR_INIT(0);
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @example template/main.c
+ * @example template/source/main.c
  * This example shows the minimum code required to use GRRLIB.
  * It could be used as a template to start a new project.
  * More elaborate examples can be found inside the \e examples folder.
  */
- 
