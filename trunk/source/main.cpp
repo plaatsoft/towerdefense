@@ -28,7 +28,8 @@
 **  - Multi language support
 **
 **  20/12/2009 Version 0.50
-**  - Second release for Beta testers.
+**  - First official release for the homebrew Scene.
+**  - Process most of the comments of the Beta Testers.
 **  - Use GRRLib v4.2.0 as graphic engine.
 **  - Reduced amount of enemies in one wave.
 **  - Build game with devkitPPC r19 compiler.
