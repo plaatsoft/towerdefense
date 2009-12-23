@@ -88,7 +88,7 @@ Monster::~Monster()
 // ------------------------------
 	
 // Draw Monster on screen
-void Monster::draw(int xOffset, int yOffset, int size1)
+void Monster::draw(int xOffset, int yOffset, float size1)
 {
 	if (visible) 	
 	{	
@@ -126,7 +126,7 @@ bool Monster::move(void)
 		return false;
 	}
 
-	if ((abs(x-targetX)==step) && (abs(y-targetY)==step))
+	if ((abs(x-targetX)<=step) && (abs(y-targetY)<=step))
 	{
 		// Set monster on target position.
 		x=targetX;
@@ -183,10 +183,7 @@ int Monster::hit(int hit)
 // ------------------------------
 
 void Monster::setImage(GRRLIB_texImg *image1)
-{
-   const char *s_fn="Monster::setImage";
-   trace->event(s_fn,0,"data");
-   
+{   
    image = image1;
    
    height=image->h;

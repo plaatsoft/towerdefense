@@ -32,7 +32,7 @@
 #include "trace.h"
 
 // Enable / Disable trace file functionality
-bool traceOn = true;
+bool traceOn = false;
 
 // ------------------------------
 // Constructor

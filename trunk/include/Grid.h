@@ -71,7 +71,7 @@ class Grid
  	~Grid();
 
 	// Other
-	void draw(int xOffset, int yOffset, int size);
+	void draw(int xOffset, int yOffset, float size);
 	void create(const char* directory);
 	
 	void setBuild(int x, int y);
