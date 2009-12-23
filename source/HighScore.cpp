@@ -56,6 +56,8 @@ HighScore::~HighScore()
 	const char *s_fn="HighScore::~HighScore";
 	trace->event(s_fn,0,"enter");
   
+    trace->event(s_fn,0,"HighScore destroyed");
+	
 	trace->event(s_fn,0,"leave [void]");
 }
 

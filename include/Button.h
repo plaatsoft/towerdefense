@@ -37,6 +37,7 @@ class Button
 	bool focus;
 	u32 color;
 	bool rumble[MAX_POINTERS];
+	int index;
 	
   public:
 	// Constructor & Destructor
@@ -55,6 +56,7 @@ class Button
 	void setImageNormal(GRRLIB_texImg *imageNormal);
 	void setImageFocus(GRRLIB_texImg *imageFocus);
 	void setColor(u32 color);
+	void setIndex(int index);
 	
 	// Getters
 	int getX(void);

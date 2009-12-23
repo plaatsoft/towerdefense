@@ -42,6 +42,7 @@ class Weapon
 	float delay;
 	int index;
 	int type;
+	char name[MAX_LEN];
 	
 	int fireDelay;
 	int monsterX;
@@ -53,13 +54,17 @@ class Weapon
 	int range;
 	int power;
 
-    int maxPower;
-    int maxRange;   
-    int maxRate;
+   int maxPower;
+   int maxRange;   
+   int maxRate;
 	
 	int powerPrice;
 	int rangePrice;
 	int ratePrice;
+	
+	int powerStep;
+	int rangeStep;
+	int rateStep;
 	
   public:
   	// Constructor & Destructor
@@ -68,33 +73,54 @@ class Weapon
 
 	// Methodes
 	void draw();
-	void text();
 	void fire(Monster *monsters[MAX_MONSTERS]);
 	void move(void);
-	int  upgrade(int type);
 	bool onSelect(int x, int y);
+	
+	int  upgradePower(void);
+	int  upgradeRange(void);
+	int  upgradeRate(void);
 	
 	// Setters
 	void setX(int x);
 	void setY(int y);
 	void setImage(GRRLIB_texImg *image);
 	void setSelected(int selected);
+	void setIndex(int index);
+	void setType(int type);
+	void setName(const char *name, ...);
+	
 	void setPower(int power);	
 	void setRange(int range);
 	void setRate(int rate);
+	
 	void setMaxPower(int maxPower);	
 	void setMaxRange(int maxRange);
 	void setMaxRate(int maxRate);
-	void setPowerPrice(int price);
-    void setRangePrice(int price);
-    void setRatePrice(int price);
-	void setIndex(int index);
-	void setType(int type);
 	
+	void setPowerPrice(int price);
+   void setRangePrice(int price);
+   void setRatePrice(int price);
+	
+	void setPowerStep(int step);
+   void setRangeStep(int step);
+   void setRateStep(int step);
+
 	// Getters
+	const char *getName(void);
+	
 	int getPowerPrice(void);
 	int getRangePrice(void);
 	int getRatePrice(void);
+	
+	int getPower(void);	
+	int getRange(void);
+	int getRate(void);
+	
+	int getMaxPower(void);	
+	int getMaxRange(void);
+	int getMaxRate(void);
+	
 	bool isPowerUpgradeble(void);
 	bool isRangeUpgradeble(void);
 	bool isRateUpgradeble(void);

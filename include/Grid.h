@@ -45,6 +45,7 @@ class Grid
 	GridMeta gridMeta;
 	location locationList[MAX_GRID_Y*MAX_GRID_X];
 	char gridData[MAX_GRID_Y][MAX_GRID_X];
+	char gridBuild[MAX_GRID_Y][MAX_GRID_X];
 	int maxLines;
 	int maxLocations;
 	int baseX;
@@ -71,8 +72,10 @@ class Grid
 
 	// Other
 	void draw(int xOffset, int yOffset, int size);
-	void text(void);
 	void create(const char* directory);
+	
+	void setBuild(int x, int y);
+	bool isBuild(int x, int y);
 
 	// Setters
 	void setIndex(int index);

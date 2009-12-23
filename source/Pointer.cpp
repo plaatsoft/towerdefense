@@ -29,23 +29,18 @@
 #include "Weapon.h"
 #include "Sound.h"
   
-extern  Game 		game;
-extern 	Settings	*settings;
-extern 	Sound		*sound;
-extern 	Trace 		*trace;
-extern 	Button 		*buttons[MAX_BUTTONS];
-extern  Weapon    	*weapons[MAX_WEAPONS];
-
-bool selected1;
-bool selected2;
-bool selectedA;
-bool selectNewWeapon;
+extern Game 		game;
+extern Settings	*settings;
+extern Sound		*sound;
+extern Trace 		*trace;
+extern Button 		*buttons[MAX_BUTTONS];
+extern Weapon    	*weapons[MAX_WEAPONS];
 
 // ------------------------------
 // Constructor 
 // ------------------------------
 
-Pointer::Pointer()
+Pointer::Pointer(void)
 {
    const char *s_fn="Pointer::Pointer";
    trace->event(s_fn,0,"enter");
@@ -57,12 +52,10 @@ Pointer::Pointer()
    angle=0;
    index=0;
    rumble=0;
-   rumbleGo=false;
    
    selectedA=false;   
    selected1=false;
    selected2=false;
-   selectNewWeapon=false;
    
    trace->event(s_fn,0,"leave [void]");
 }
@@ -71,10 +64,15 @@ Pointer::Pointer()
 // Destructor
 // ------------------------------
 
-Pointer::~Pointer()
+Pointer::~Pointer(void)
 {
   const char *s_fn="Pointer::~Pointer";
   trace->event(s_fn,0,"enter");
+
+  // Stop rumble
+  WPAD_Rumble(index,0);  
+  
+  trace->event(s_fn,0,"Pointer [%d] destroyed", index);
   
   trace->event(s_fn,0,"leave [void]");
 }
@@ -231,23 +229,23 @@ void Pointer::buttonMinus(int index)
 
 void Pointer::buttonScroll(int x,int y )
 { 
-  switch (game.stateMachine)
-  {
-     case stateLocalHighScore:
-	 case stateTodayHighScore:
-	 case stateGlobalHighScore:
-	 case stateReleaseNotes:
-	 {     
-  	    if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,false)))
-		{
-			if ((y-40)>SCROLLBAR_Y_MIN && (y-40)<SCROLLBAR_Y_MAX) 
+	switch (game.stateMachine)
+	{
+		case stateLocalHighScore:
+		case stateTodayHighScore:
+		case stateGlobalHighScore:
+		case stateReleaseNotes:
+		{	     
+			if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,false)))
 			{
-			    buttons[1]->setY(y-40);	
-			    game.scrollIndex=(buttons[1]->getY()-SCROLLBAR_Y_MIN)/6;
+				if ((y-40)>SCROLLBAR_Y_MIN && (y-40)<SCROLLBAR_Y_MAX) 
+				{
+					buttons[1]->setY(y-40);	
+					game.scrollIndex=(buttons[1]->getY()-SCROLLBAR_Y_MIN)/6;
+				}
 			}
-        }
-	 }
-  }
+		}
+	}
 }
 
 void Pointer::buttonA(int x, int y)
@@ -257,7 +255,7 @@ void Pointer::buttonA(int x, int y)
 	if (selectedA) return;
 	selectedA=true;
 	  
-    trace->event(s_fn,0,"enter [x=%d|y=%d]",x,y);
+   trace->event(s_fn,0,"enter [x=%d|y=%d]",x,y);
 	 
 	switch (game.stateMachine)
 	{
@@ -331,7 +329,7 @@ void Pointer::buttonA(int x, int y)
 			if ((buttons[8]!=NULL) && (buttons[8]->onSelect(x,y,true)))
 			{
 				// Stop rumble
-				WPAD_Rumble(0,0);
+				WPAD_Rumble(index,0);
 			
 				// Reset Wii
 				SYS_ResetSystem(SYS_RESTART,0,0);		   
@@ -635,11 +633,12 @@ void Pointer::buttonA(int x, int y)
 				game.event=eventNewWeaponNext;    		
 			}
 			
-			// New weapon is selected
+			// Build new weapon is selected
 			if ((buttons[6]!=NULL) && (buttons[6]->onSelect(x,y,true)))
 			{				
 				game.event=eventNewWeaponSelected;	
-				selectNewWeapon=true;
+				game.selectedNewWeapon=true;
+				game.selectedWeapon=-1;
 			}
 			
 			// Check if weapon is selected on screen
@@ -657,13 +656,13 @@ void Pointer::buttonA(int x, int y)
 					}
 				
 					// Selected new weapons
-					game.weaponSelect=i;
+					game.selectedWeapon=i;
 					weapons[i]->setSelected(true);
 				}
 			}
 				
 			// Check if weapon upgrade button is pressed on screen
-			if (weapons[game.weaponSelect]!=NULL)
+			if ((game.selectedWeapon!=-1) && (weapons[game.selectedWeapon]!=NULL))
 			{
 				if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))
 				{
@@ -758,9 +757,9 @@ void Pointer::action(void)
 		if (wpadup & BUTTON_A) 
 		{
 			selectedA=false;
-			if (selectNewWeapon) 
+			if (game.selectedNewWeapon) 
 			{
-				selectNewWeapon=false;
+				game.selectedNewWeapon=false;
 				game.event=eventNewweaponDeployed;
 			}
 		}
@@ -821,16 +820,18 @@ void Pointer::action(void)
 			sprintf(filename,"%sTowerDefense-%04d%02d%02d%02d%02d%02d.png", GAME_DIRECTORY, level->tm_year+1900,level->tm_mon+1, level->tm_mday,  level->tm_hour, level->tm_min, level->tm_sec);		  
 			GRRLIB_ScrShot(filename);	
 		}
-
-		if (rumble>0) 
-		{
-			rumble--;
-			WPAD_Rumble(index,1); 
-		}
-		else 
-		{
-			WPAD_Rumble(index,0);
-		}
+	}
+	
+	if (rumble>0) 
+	{
+		// Enable rumble
+		rumble--;
+		WPAD_Rumble(index,1); 
+	}
+	else 
+	{
+		// Disable rumble
+		WPAD_Rumble(index,0);
 	}
 }
 
@@ -905,23 +906,22 @@ void Pointer::setRumble(int rumble1)
 // Getters
 // ------------------------------
 
-int Pointer::getX()
+int Pointer::getX(void)
 {
 	return x;
 }
 
-int Pointer::getY()
+int Pointer::getY(void)
 {
 	return y;
 }
 	
-
-int Pointer::getXOffset()
+int Pointer::getXOffset(void)
 {
 	return xOffset;
 }
 
-int Pointer::getYOffset()
+int Pointer::getYOffset(void)
 {
 	return yOffset;
 }

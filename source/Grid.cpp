@@ -63,14 +63,16 @@ Grid::~Grid()
 	const char *s_fn="Grid::~Grid";
 	trace->event(s_fn,0,"enter");
 
-    GRRLIB_FreeTexture(imageBase);
-    GRRLIB_FreeTexture(imageRoad1);
-    GRRLIB_FreeTexture(imageRoad2);
-    GRRLIB_FreeTexture(imageRoad3);
-    GRRLIB_FreeTexture(imageRoad4);
-    GRRLIB_FreeTexture(imageRoad5);
+   trace->event(s_fn,0,"Grid [%d] destroyed", index);
+
+   GRRLIB_FreeTexture(imageBase);
+   GRRLIB_FreeTexture(imageRoad1);
+   GRRLIB_FreeTexture(imageRoad2);
+   GRRLIB_FreeTexture(imageRoad3);
+   GRRLIB_FreeTexture(imageRoad4);
+   GRRLIB_FreeTexture(imageRoad5);
 	GRRLIB_FreeTexture(imageGeneral1);
-    GRRLIB_FreeTexture(imageGeneral2);
+   GRRLIB_FreeTexture(imageGeneral2);
 	
 	trace->event(s_fn,0,"leave [void]");  
 }
@@ -96,7 +98,7 @@ void Grid::parseGrid(void)
 		{
 			if (gridData[y][x]=='~') 
 			{
-				// Replace water element with glass element
+				// Replace water element with grass element
 				// else monsters walk over water.
 				temp[y][x]='0';
 			}
@@ -167,6 +169,7 @@ GRRLIB_texImg * Grid::loadImage(const char *filename)
     trace->event(s_fn,0,"enter [filename=%s]",filename);
    
 	u8 data[MAX_BUFFER_SIZE];
+	memset(data,0x00,MAX_BUFFER_SIZE);
    
 	FILE *fp = fopen(filename, "r");
 	if (fp!=NULL)
@@ -207,9 +210,13 @@ void Grid::loadGrid(const char* filename)
         group = mxmlFindElement(group, tree, "line", NULL, NULL, MXML_DESCEND))
    {		 	  	  
       pointer=mxmlElementGetAttr(group,"data");
-      if (pointer!=NULL) strcpy(gridData[maxLines],pointer);  
+      if (pointer!=NULL) 
+		{
+			strcpy(gridData[maxLines],pointer); 
+			strcpy(gridBuild[maxLines],pointer);  
+		}
 	  
-	  maxLines++;
+		maxLines++;
    }
    
    mxmlDelete(group);
@@ -394,18 +401,6 @@ void Grid::draw(int xOffset, int yOffset, int size)
 		GRRLIB_Rectangle((baseX*32)+2, (baseY*32)+72, proc, 2, GRRLIB_GREEN, 1);
 	}
 }
-
-void Grid::text(void)
-{
-    char tmp[50];
-
-	// Workarround to set base image on correct place
-	if (index==1) baseX+=1;
-	
-    sprintf(tmp, "%d", game.monsterInBase);
-	GRRLIB_Printf2((baseX*32)-16, (baseY*32)+16, tmp, 12, 0x000000); 
-}
-	
 	
 // Load grid map and parse it for monster movement.
 void Grid::create(const char* directory)
@@ -458,6 +453,11 @@ void Grid::setIndex(int index1)
     index = index1;	
 }
 
+void Grid::setBuild(int x, int y)
+{
+	gridBuild[x][y]='F';
+}
+
 // ------------------------------
 // Getters
 // ------------------------------
@@ -483,6 +483,11 @@ int Grid::getLocationY(int pos)
 int Grid::getMaxLocations(void)
 {
    return maxLocations;
+}
+
+bool Grid::isBuild(int x, int y)
+{
+	return (gridBuild[x][y]!='0');
 }
 
 // ------------------------------
