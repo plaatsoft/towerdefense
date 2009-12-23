@@ -2688,7 +2688,7 @@ void drawScreen(void)
 	      ypos+=20;
 	      drawText(0, ypos, fontNormal, "wplaat");	  
 			ypos+=20;
-	      drawText(0, ypos, fontNormal, "Qault");	  
+	      drawText(0, ypos, fontNormal, "quali");	  
 			
 	      ypos+=30;
 	      drawText(140, ypos, fontNormal,"Greetings to everybody in the Wii homebrew scene");
