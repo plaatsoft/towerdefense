@@ -56,6 +56,8 @@ Settings::~Settings()
 	const char *s_fn="Settings::~Settings";
 	trace->event(s_fn,0,"enter");
   
+    trace->event(s_fn,0,"Settings destroyed");
+	
 	trace->event(s_fn,0,"leave [void]");
 }
 

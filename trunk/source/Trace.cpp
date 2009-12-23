@@ -32,7 +32,7 @@
 #include "trace.h"
 
 // Enable / Disable trace file functionality
-bool traceOn = false;
+bool traceOn = true;
 
 // ------------------------------
 // Constructor
@@ -49,7 +49,7 @@ Trace::Trace()
 
 Trace::~Trace()
 {
-  
+  close();
 }
 
 // ------------------------------
@@ -113,20 +113,17 @@ char * Trace::getDate()
 int Trace::event( const char *functionName, int threadNr, const char *event, ...)
 {
    int returnValue=0;
-   
-   if (!traceOn) return -1;
-   
-   // create and start the va_list
-   va_list listPointer ;
-   va_start( listPointer, event ) ;
-
    char buf[ MAX_LEN ];
    
    // Clear memory  
    memset(buf, MAX_LEN, 0x00);
-  
-   // Build string
-   vsprintf( buf, event, listPointer ) ;
+   
+   if (!traceOn) return -1;
+   
+   // Expend event string
+   va_list list;
+   va_start(list, event );
+   vsprintf(buf, event, list);
    
    if (fp!=NULL)
    {

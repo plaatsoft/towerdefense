@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdarg.h>
 #include <math.h>
 
 #include "Weapon.h" 
@@ -31,10 +32,9 @@
 // Variables
 // ------------------------------
 
-extern GXRModeObj   *rmode;
-extern Game 		game; 
-extern Trace    	*trace;
-extern Sound    	*sound;
+extern Game  game; 
+extern Trace *trace;
+extern Sound *sound;
 
 // ------------------------------
 // Constructor 
@@ -85,6 +85,8 @@ Weapon::~Weapon()
 {
    const char *s_fn="Weapon::~Weapon";
    trace->event(s_fn,0,"enter");
+
+   trace->event(s_fn,0,"Weapon [%d] destroyed", index);
   
    trace->event(s_fn,0,"leave");
 }
@@ -114,16 +116,6 @@ void Weapon::draw()
 	float proc = ((rate-delay) / rate) * 21.0;
 	GRRLIB_Rectangle(x+5, y+34, 20, 4, GRRLIB_BLACK, 0);
 	GRRLIB_Rectangle(x+5, y+35, proc, 2, GRRLIB_GREEN, 1);
-}
-
-void Weapon::text()
-{
-	char tmp[5];
-	int size=12;
-		
-	// Draw reload delay on screen
-	sprintf(tmp, "%2.0f", (delay/10.0));
-	GRRLIB_Printf2(x+6, y-16, tmp, size, 0x000000); 		
 }
 
 void Weapon::fire(Monster *monsters[MAX_MONSTERS])
@@ -207,49 +199,61 @@ void Weapon::move(void)
 	if (angle>MAX_ANGLE) angle=0;
 }
 
-int Weapon::upgrade(int type)
+int Weapon::upgradePower(void)
 {
-	const char *s_fn="Weapon::upgrade";
-	trace->event(s_fn,0,"enter [type=%d]",type);
+	const char *s_fn="Weapon::upgradePower";
+	trace->event(s_fn,0,"enter");
 	
-	switch (type)
+	if ((game.cash>=powerPrice) && (power<maxPower))
 	{
-		// Power upgrade
-		case 0:	if ((game.cash>=powerPrice) && (power<maxPower))
-				{
-					power+=POWER_UPGRADE_STEP;
-					trace->event(s_fn,0,"Weapon %d upgrade power to %d",index, power);
-					game.cash-=powerPrice;
-					powerPrice=powerPrice*2;					
-					sound->effect(SOUND_UPGRADE);
-				}
-				break;
-
-		// Range upgrade
-		case 1:	if ((game.cash>=rangePrice) && (range<maxRange))
-				{
-					range+=RANGE_UPGRADE_STEP;
-					trace->event(s_fn,0,"Weapon %d upgrade range to %d",index, range);
-					game.cash-=rangePrice;
-					rangePrice=rangePrice*2;
-					sound->effect(SOUND_UPGRADE);
-				}
-				break;
-
-		// Rate upgrade		
-		case 2:	if ((game.cash>=ratePrice) && (rate>maxRate))
-				{
-					rate-=(RATE_UPGRADE_STEP*AVERAGE_FPS);
-					trace->event(s_fn,0,"Weapon %d upgrade rate to %d",index, rate);
-					game.cash-=ratePrice;
-					ratePrice=ratePrice*2;
-					sound->effect(SOUND_UPGRADE);
-				}
-				break;
-	}	
+		power+=powerStep;
+		trace->event(s_fn,0,"Weapon %d upgrade power to %d",index, power);
+		game.cash-=powerPrice;
+		powerPrice=powerPrice*2;					
+		sound->effect(SOUND_UPGRADE);
+	}
+	
 	trace->event(s_fn,0,"leave [0]");
 	return 0;
 }
+
+int Weapon::upgradeRange(void)
+{
+	const char *s_fn="Weapon::upgradeRange";
+	trace->event(s_fn,0,"enter");
+	
+	if ((game.cash>=rangePrice) && (range<maxRange))
+	{
+		range+=rangeStep;
+		trace->event(s_fn,0,"Weapon %d upgrade range to %d",index, range);
+		game.cash-=rangePrice;
+		rangePrice=rangePrice*2;
+		sound->effect(SOUND_UPGRADE);
+	}
+	
+	trace->event(s_fn,0,"leave [0]");
+	return 0;
+}
+
+
+int Weapon::upgradeRate(void)
+{
+	const char *s_fn="Weapon::upgradeRate";
+	trace->event(s_fn,0,"enter");
+	
+	if ((game.cash>=ratePrice) && (rate>maxRate))
+	{
+		rate-=(rateStep*AVERAGE_FPS);
+		trace->event(s_fn,0,"Weapon %d upgrade rate to %d",index, rate);
+		game.cash-=ratePrice;
+		ratePrice=ratePrice*2;
+		sound->effect(SOUND_UPGRADE);
+	}
+		
+	trace->event(s_fn,0,"leave [0]");
+	return 0;
+}
+
 
 bool Weapon::onSelect(int x1, int y1)
 {   
@@ -274,21 +278,15 @@ void Weapon::setX(int x1)
 	const char *s_fn="Weapon::setX";
 	trace->event(s_fn,0,"%d",x1);
    
-	if ((x1>=0) && (x1<=MAX_HORZ_PIXELS))
-	{
-		x = x1;
-	}
+	x = x1;
 }
 
 void Weapon::setY(int y1)
 {
    const char *s_fn="Weapon::setY";
    trace->event(s_fn,0,"%d",y1);
-   
-   if ((y1>=0) && (y1<=rmode->xfbHeight))
-   {
-      y = y1;
-   }
+  
+   y = y1;
 }
 				
 void Weapon::setImage(GRRLIB_texImg *image1)
@@ -394,6 +392,34 @@ void Weapon::setType(int type1)
 	type=type1;
 }
 
+void Weapon::setPowerStep(int step1)
+{
+	powerStep=step1;
+}
+
+void Weapon::setRangeStep(int step1)
+{
+	rangeStep=step1;
+}
+
+void Weapon::setRateStep(int step1)
+{
+	rateStep=step1;
+}
+
+void Weapon::setName(const char *name1, ...)
+{
+	char buf[MAX_LEN];
+	memset(buf,0x00,sizeof(buf));
+	
+	// Expend event string
+	va_list list;
+	va_start(list, name1 );
+	vsprintf(buf, name1, list);
+		
+	strcpy(name,buf);
+}
+
 // ------------------------------
 // Getters 
 // ------------------------------
@@ -412,6 +438,11 @@ int Weapon::getRatePrice(void)
 {
 	return ratePrice;
 }
+
+const char *Weapon::getName(void)
+{
+	return name;
+}
 	
 bool Weapon::isPowerUpgradeble(void)
 {
@@ -427,6 +458,37 @@ bool Weapon::isRateUpgradeble(void)
 {
 	return rate>maxRate;
 }
+
+int Weapon::getPower(void)
+{
+	return power;
+}
+
+int Weapon::getRange(void)
+{
+	return range;
+}
+
+int Weapon::getRate(void)
+{
+	return rate;
+}
+
+int Weapon::getMaxPower(void)
+{
+	return maxPower;
+}
+
+int Weapon::getMaxRange(void)
+{
+	return maxRange;
+}
+
+int Weapon::getMaxRate(void)
+{
+	return maxRate;
+}
+	
 // ------------------------------
 // The end
 // ------------------------------

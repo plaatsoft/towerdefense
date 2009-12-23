@@ -45,6 +45,7 @@ Button::Button()
 	y=0;	
 	height=0;
 	width=0;
+	index=0;
    
 	for (int i=0; i<MAX_POINTERS; i++)
 	{
@@ -63,6 +64,8 @@ Button::~Button()
    const char *s_fn="Button::~Button";
    trace->event(s_fn,0,"enter");
 
+   trace->event(s_fn,0,"Button [%d] destroyed", index);
+   
    trace->event(s_fn,0,"leave [void]");  
 }
 
@@ -129,7 +132,7 @@ bool Button::onSelect(int x1, int y1, bool clickEffect)
    boolean selected=false;
    if ( (x1>=(x-3)) && (x1<=(x+width+3)) && (y1>=(y-3) && (y1<=(y+height+3))) )
    {      
-	  trace->event(s_fn,0,"Button selected");
+	  trace->event(s_fn,0,"Selected");
 	  
 	  // Click sound
 	  if (clickEffect) sound->effect(SOUND_CLICK);
@@ -137,7 +140,7 @@ bool Button::onSelect(int x1, int y1, bool clickEffect)
    }
    else
    {
-	  trace->event(s_fn,0,"No button selected");
+	  trace->event(s_fn,0,"No selected");
 	  selected=false;
    }
    trace->event(s_fn,0,"leave");
@@ -148,24 +151,6 @@ bool Button::onSelect(int x1, int y1, bool clickEffect)
 // ------------------------------
 // Setters
 // ------------------------------
-
-void Button::setImageNormal(GRRLIB_texImg *imageNormal1)
-{
-	const char *s_fn="Button::setImageNormal";
-	trace->event(s_fn,0,"image");
-
-	imageNormal=imageNormal1;
-	height=imageNormal->h;
-	width=imageNormal->w;
-}
-
-void Button::setImageFocus(GRRLIB_texImg *imageFocus1)
-{
-	const char *s_fn="Button::setImageSelect";
-	trace->event(s_fn,0,"image");
-	
-	imageFocus=imageFocus1;
-}
 		
 void Button::setX(int x1)
 {
@@ -189,6 +174,14 @@ void Button::setY(int y1)
 	}
 }
 
+void Button::setIndex(int index1)
+{
+	const char *s_fn="Button::setIndex";
+	trace->event(s_fn,0,"%s",index1);
+	
+    index=index1;
+}
+
 void Button::setLabel(const char *label1)
 {
 	//const char *s_fn="Button::setLabel";
@@ -203,6 +196,24 @@ void Button::setColor(u32 color1)
 	//trace->event(s_fn,0,"%s",color1);
 	
     color=color1;
+}
+
+void Button::setImageNormal(GRRLIB_texImg *imageNormal1)
+{
+	//const char *s_fn="Button::setImageNormal";
+	//trace->event(s_fn,0,"image");
+
+	imageNormal=imageNormal1;
+	height=imageNormal->h;
+	width=imageNormal->w;
+}
+
+void Button::setImageFocus(GRRLIB_texImg *imageFocus1)
+{
+	//const char *s_fn="Button::setImageSelect";
+	//trace->event(s_fn,0,"image");
+	
+	imageFocus=imageFocus1;
 }
 
 // ------------------------------

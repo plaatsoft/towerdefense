@@ -115,6 +115,7 @@ char appl_userData3[MAX_LEN];
 char var_cookie[MAX_LEN];
 
 extern GXRModeObj *rmode;
+
 int  tcp_state;
 int  tcp_state_prev;
 

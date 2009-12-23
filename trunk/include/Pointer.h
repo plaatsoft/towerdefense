@@ -28,16 +28,18 @@
 class Pointer
 {
   private:
-	int x;
-	int y;	
-	int angle;
-	GRRLIB_texImg *image;
-	int index;	
+	int  x;
+	int  y;	
+	int  angle;
+	int  index;	
+	int  xOffset;
+	int  yOffset;
+	int  rumble;
 	ir_t ir;
-	int xOffset;
-	int yOffset;
-	int rumble;
-	boolean rumbleGo;
+	GRRLIB_texImg *image;
+	bool selected1;
+	bool selected2;
+	bool selectedA;	
   
 	void saveSettingFile(const char* filename);	
 	void buttonScroll(int x,int y );
@@ -56,7 +58,7 @@ class Pointer
 
 	// Other
 	void draw(void);
-	void action();
+	void action(void);
 
 	// Setters
 	void setIndex(int index);
@@ -67,10 +69,10 @@ class Pointer
 	void setRumble(int rumble);
 		
 	// Getters
-	int getX();
-	int getY();
-	int getXOffset();
-	int getYOffset();
+	int getX(void);
+	int getY(void);
+	int getXOffset(void);
+	int getYOffset(void);
 };
 
 #endif

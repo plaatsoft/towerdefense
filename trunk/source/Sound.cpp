@@ -2,7 +2,7 @@
 **  Created by wplaat (www.plaatsoft.nl)
 **
 **  Copyright (C) 2009
-**  ==================
+**  ==2================
 **
 **  This program is free software; you can redistribute it and/or modify
 **  it under the terms of the GNU General Public License as published by
@@ -77,6 +77,8 @@ Sound::~Sound()
   const char *s_fn="Sound::~Sound";
   trace->event(s_fn,0,"enter");
   
+  trace->event(s_fn,0,"Sound destroyed");
+		
   // Stop music
   MODPlay_Stop(&snd1);
    

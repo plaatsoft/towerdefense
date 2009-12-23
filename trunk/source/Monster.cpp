@@ -33,6 +33,7 @@
 // Variables
 // ------------------------------
 
+extern Game game;
 extern Trace *trace;
 extern Grid *grids[MAX_GRIDS];
 extern Sound *sound;
@@ -77,6 +78,8 @@ Monster::~Monster()
    const char *s_fn="Monster::~Monster";
    trace->event(s_fn,0,"enter");
   
+   trace->event(s_fn,0,"Monster [%d] destroyed", index);
+  
    trace->event(s_fn,0,"leave");
 }
 
@@ -91,19 +94,14 @@ void Monster::draw(int xOffset, int yOffset, int size1)
 	{	
 		// Draw monster on screen
 		GRRLIB_DrawImg( (x/size1)+xOffset, (y/size1)+yOffset, 
-			image, 0, (size/size1), (size/size1), IMAGE_COLOR );	
-	
-		// Draw Remaining energy bar (Not really nice on screen, disabled it again)
-		//int proc = (energy / maxEnergy ) * 19.0;
-		//GRRLIB_Rectangle(x+7, y-9, 20, 4, GRRLIB_BLACK, 0);
-		//GRRLIB_Rectangle(x+7, y-8, proc, 2, GRRLIB_YELLOW, 1);
+			image, 0, (size/size1), (size/size1), IMAGE_COLOR );
 	}
 }
 
 // Draw Monster text on screen
 void Monster::text(void)
 {
-    char tmp[5];
+   char tmp[5];
 	
 	if (visible) 
 	{
@@ -122,22 +120,19 @@ bool Monster::move(void)
 		delay--;
 		if (delay==0)
 		{
-			//trace->event(s_fn,0,"Monster %d start moving!", index);
-			visible=true;
-			
-			// Start
-			sound->effect(SOUND_START);	
-		}
-		else
-		{
-			//trace->event(s_fn,0,"Monster %d is waiting %d", index, delay);
+			visible=true;			
+			if (game.stateMachine==stateGame) sound->effect(SOUND_START);	
 		}
 		return false;
 	}
 
-	if ((x==targetX) && (y==targetY))
+	if ((abs(x-targetX)==step) && (abs(y-targetY)==step))
 	{
-		// Get new target postion 
+		// Set monster on target position.
+		x=targetX;
+		y=targetY;
+		
+		// and get new target position 
 		targetX=grids[grid]->getLocationX(pos);
 		targetY=grids[grid]->getLocationY(pos);
 		pos++;
@@ -146,14 +141,8 @@ bool Monster::move(void)
 			trace->event(s_fn,0,"Monster %d has reach the final destination.", index);
 			visible=false;
 			
-			// Finish
-			sound->effect(SOUND_FINISH);	
-			
+			if (game.stateMachine==stateGame) sound->effect(SOUND_FINISH);	
 			return true;
-		}
-		else
-		{
-			//trace->event(s_fn,0,"Monster %d has new target.", index);
 		}
 	}
 	else if (x<targetX)
@@ -171,10 +160,7 @@ bool Monster::move(void)
 	else if (y>targetY)
 	{
 		y=y-step;	
-	}
-	
-	//trace->event(s_fn,0,"Monster %d has moved", index);
-		
+	}	
 	return false;
 }
 
@@ -244,19 +230,19 @@ void Monster::setIndex(int index1)
 void Monster::setGrid(int grid1)
 {
 	const char *s_fn="Monster::setGrid";
-    trace->event(s_fn,0,"%d",grid1);  
+   trace->event(s_fn,0,"%d",grid1);  
 	
 	grid=grid1;
 	
 	pos = 0;
    
-    x=grids[grid]->getLocationX(pos);
-    targetX=x;
+   x=grids[grid]->getLocationX(pos);
+   targetX=x;
 			
-    y=grids[grid]->getLocationY(pos);
-    targetY=y;
+   y=grids[grid]->getLocationY(pos);
+   targetY=y;
 
-    pos++;
+   pos++;
 }
 
 // ------------------------------
