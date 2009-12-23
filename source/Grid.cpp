@@ -39,7 +39,7 @@ Grid::Grid()
 	const char *s_fn="Grid::Grid";
 	trace->event(s_fn,0,"enter");
   
-    baseX=0;
+   baseX=0;
 	baseY=0;
 	
 	imageBase=NULL;
@@ -224,7 +224,7 @@ void Grid::loadGrid(const char* filename)
    trace->event(s_fn,0,"leave [maxLines=%d]",maxLines);
 }
 
-void Grid::draw(int xOffset, int yOffset, int size)
+void Grid::draw(int xOffset, int yOffset, float size)
 {
    int x;
    int y;

@@ -109,8 +109,8 @@
 // Extern variables
 // ------------------------------
 
-extern Game 		game; 
-extern Trace    	*trace;
+extern Game	game; 
+extern Trace *trace;
 
 // Weapon1 Image
 extern const unsigned char     pic500data[];
@@ -166,7 +166,7 @@ WeaponSpecs::~WeaponSpecs()
    const char *s_fn="WeaponSpecs::~WeaponSpecs";
    trace->event(s_fn,0,"enter");
 
-   trace->event(s_fn,0,"WeaponSpecs destroyed", index);
+   trace->event(s_fn,0,"WeaponSpecs destroyed");
 	
 	// Free memory
    GRRLIB_FreeTexture(weapon1);

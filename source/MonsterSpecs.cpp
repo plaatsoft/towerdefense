@@ -182,7 +182,7 @@ MonsterSpecs::~MonsterSpecs()
    const char *s_fn="MonsterSpecs::~MonsterSpecs";
    trace->event(s_fn,0,"enter");
 
-   trace->event(s_fn,0,"MonsterSpecs destroyed", index);
+   trace->event(s_fn,0,"MonsterSpecs destroyed");
 	
 	// Free memory
    GRRLIB_FreeTexture(monster1);

@@ -50,7 +50,7 @@ class Monster
  	~Monster();
 
 	// Other
-	void draw(int xOffset, int yOffset, int size1);
+	void draw(int xOffset, int yOffset, float size);
 	void text(void);
 	bool move(void);
 	int hit(int hit);

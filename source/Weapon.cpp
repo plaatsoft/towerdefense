@@ -290,10 +290,7 @@ void Weapon::setY(int y1)
 }
 				
 void Weapon::setImage(GRRLIB_texImg *image1)
-{
-   const char *s_fn="Weapon::setImage";
-   trace->event(s_fn,0,"data");
-   
+{   
    image = image1;
    
    height=image->h;

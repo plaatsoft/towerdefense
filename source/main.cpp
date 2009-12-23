@@ -25,16 +25,19 @@
 **  - Multi language support.
 **
 **  23/12/2009 Version 0.60
-**  - BugfiX: The rumble is now working for all the four WiiMotes.
-**  - Optimise screen layout for 60Hz (640x480 pixels) TV Mode.
-**  - Show mini enemies moving on map select screen.
-**  - Increase enemy walk speed after each 25 waves.
+**  TESTED. OK!
+**  - BugfiX: The rumble is now working for all the four WiiMotes. 
+**  - Increase enemy walk speed after each 25 waves. 
+**  - Show mini enemies moving on map select screen. 
+**  - Update credit screen. 
 **  - Improve game information panel design.
 **  	- Show price and strengh information about new weapons.
 **		- Show detail information about selected weapon.
+**
+**  NOT TESTED YET!
 **  - Snap weapons to 32x32 grid!
 **  - Only allow to build weapons on land (not bridges or road)
-**  - Update credit screen.
+**  - Optimise screen layout for 60Hz (640x480 pixels) TV Mode.
 **  - Build game with devkitPPC r19 compiler.
 **
 **  20/12/2009 Version 0.50
@@ -686,7 +689,7 @@ void initMonsters(bool special)
 		
 		// Increase monster speed after every 25 waves for easy type.
 		monsters[id]->setStep((game.wave/25)+1);	
-				
+			
 		if (special)
 		{
 		    // Set monster in random grid (Map Select behalvior)
@@ -1360,7 +1363,7 @@ void initButtons(void)
 		
 		case stateGame:
 	    {									
-			int ypos=70;
+			int ypos=55;
 			
 			// New Wave lanch Button
 			buttons[0]=new Button();
@@ -1373,7 +1376,7 @@ void initButtons(void)
 			buttons[0]->setIndex(0);
 			
 			// Power Upgrade Button
-			ypos+=155;
+			ypos+=165;
 			buttons[1]=new Button();
 			buttons[1]->setX(10+game.panelXOffset);
 			buttons[1]->setY(ypos+game.panelYOffset);
@@ -1384,7 +1387,7 @@ void initButtons(void)
 			buttons[1]->setIndex(1);
 			
 			// Range Upgrade Button
-			ypos+=55;
+			ypos+=45;
 			buttons[2]=new Button();
 			buttons[2]->setX(10+game.panelXOffset);
 			buttons[2]->setY(ypos+game.panelYOffset);
@@ -1395,7 +1398,7 @@ void initButtons(void)
 			buttons[2]->setIndex(2);
 
 			// Rate Upgrade Button
-			ypos+=55;
+			ypos+=45;
 			buttons[3]=new Button();
 			buttons[3]->setX(10+game.panelXOffset);
 			buttons[3]->setY(ypos+game.panelYOffset);
@@ -1406,7 +1409,7 @@ void initButtons(void)
 			buttons[3]->setIndex(3);
 								
 			// Select previous weapon Button
-			ypos+=55;
+			ypos+=45;
 			buttons[4]=new Button();
 			buttons[4]->setX(10+game.panelXOffset);
 			buttons[4]->setY(ypos+game.panelYOffset);
@@ -1620,22 +1623,22 @@ void drawGrid()
 {
     switch (game.selectedMap)
     {
-		case 0: 	grids[0]->draw(0,0,1);   
+		case 0: 	grids[0]->draw(0,0,1.0);   
 					break;
 				
-		case 1: 	grids[1]->draw(0,0,1);   
+		case 1: 	grids[1]->draw(0,0,1.0);   
 					break;
 				
-		case 2: 	grids[2]->draw(0,0,1);   
+		case 2: 	grids[2]->draw(0,0,1.0);   
 					break;
 				
-		case 3: 	grids[3]->draw(0,0,1);   
+		case 3: 	grids[3]->draw(0,0,1.0);   
 					break;
 				
-		case 4: 	grids[4]->draw(0,0,1);   
+		case 4: 	grids[4]->draw(0,0,1.0);   
 					break;
 				
-		case 5: 	grids[5]->draw(0,0,1);   
+		case 5: 	grids[5]->draw(0,0,1.0);   
 					break;
 	}				
 }
@@ -1673,22 +1676,22 @@ void drawMonsters(bool special)
 				// Draw mini size monsters
 				switch (monsters[i]->getGrid())
 				{
-					case 0: 	monsters[i]->draw(60,135,5);
+					case 0: 	monsters[i]->draw(55,135,5.0);
 								break;
 							
-					case 1: 	monsters[i]->draw(260,135,5);
+					case 1: 	monsters[i]->draw(255,135,5.0);
 								break;
 							
-					case 2: 	monsters[i]->draw(460,135,5);
+					case 2: 	monsters[i]->draw(455,135,5.0);
 								break;
 							
-					case 3: 	monsters[i]->draw(60,300,5);
+					case 3: 	monsters[i]->draw(55,295,5.0);
 								break;
 							
-					case 4: 	monsters[i]->draw(260,300,5);
+					case 4: 	monsters[i]->draw(255,295,5.0);
 								break;
 							
-					case 5: 	monsters[i]->draw(460,300,5);
+					case 5: 	monsters[i]->draw(455,295,5.0);
 								break;
 				}			
 			}
@@ -1823,37 +1826,37 @@ void drawGamePanel1(void)
 	int ypos = game.panelYOffset;
 	
 	// Draw panel
-	GRRLIB_Rectangle(xpos, ypos, 100, 105, GRRLIB_BLACK_TRANS, 1);
+	GRRLIB_Rectangle(xpos, ypos, 100, 90, GRRLIB_BLACK_TRANS, 1);
 }
 
 // Draw game panel2
 void drawGamePanel2(void)
 {
 	int xpos = game.panelXOffset;
-	int ypos = game.panelYOffset+110;
+	int ypos = game.panelYOffset+100;
 
 	// Draw panel
-	GRRLIB_Rectangle(xpos, ypos, 100, 80, GRRLIB_BLACK_TRANS, 1);
+	GRRLIB_Rectangle(xpos, ypos, 100, 70, GRRLIB_BLACK_TRANS, 1);
 }
 
 // Draw game panel3
 void drawGamePanel3(void)
 {
 	int xpos = game.panelXOffset;
-	int ypos = game.panelYOffset+200;
+	int ypos = game.panelYOffset+180;
 
 	// Draw panel
-	GRRLIB_Rectangle(xpos, ypos, 100, 245, GRRLIB_BLACK_TRANS, 1);
+	GRRLIB_Rectangle(xpos, ypos, 100, 215, GRRLIB_BLACK_TRANS, 1);
 }
 
 // Draw game panel4
 void drawGamePanel4(void)
 {
 	int xpos = game.panelXOffset;
-	int ypos = game.panelYOffset+455;
+	int ypos = game.panelYOffset+405;
 
 	// Draw panel
-	GRRLIB_Rectangle(xpos, ypos, 100, 50, GRRLIB_BLACK_TRANS, 1);
+	GRRLIB_Rectangle(xpos, ypos, 100, 90, GRRLIB_BLACK_TRANS, 1);
 }
 				
 // Draw wave text panel on screen
@@ -1864,14 +1867,14 @@ void drawGamePanelText1(void)
 	int ypos = game.panelYOffset;
 
 	// General info + control
-	ypos+=10;	
-	drawText(xpos+25,ypos,fontPanel,"WAVE");	
+	ypos+=5;	
+	drawText(xpos+30,ypos,fontPanel,"WAVE");	
 	
-	ypos+=15;
-	drawText(xpos+40,ypos,fontPanel,"%02d", game.wave);	
+	ypos+=12;
+	drawText(xpos+35,ypos,fontPanel,"%03d", game.wave);	
 	
-	ypos+=25;
-	drawText(xpos+10,ypos,fontSmall,"LANCH");
+	ypos+=22;
+	drawText(xpos+25,ypos,fontPanel,"LANCH");
 	
 	// Set button label values
 	sprintf(tmp,"      %d", game.waveCountDown/25 );
@@ -1883,21 +1886,21 @@ void drawGamePanelText1(void)
 void drawGamePanelText2(void)
 {
 	int xpos = game.panelXOffset;
-	int ypos = game.panelYOffset+110;
+	int ypos = game.panelYOffset+100;
 	
 	// Score info
 	ypos+=5;
-	drawText(xpos+18,ypos,fontPanel,"SCORE");
+	drawText(xpos+28,ypos,fontPanel,"SCORE");
 	
-	ypos+=15;	
-	drawText(xpos+15,ypos,fontPanel,"%07d", game.score);
+	ypos+=12;	
+	drawText(xpos+20,ypos,fontPanel,"%07d", game.score);
 	
 	// Cash info
-	ypos+=20;
-	drawText(xpos+25,ypos,fontPanel,"CASH");
+	ypos+=17;
+	drawText(xpos+30,ypos,fontPanel,"CASH");
 	
-	ypos+=15;
-	drawText(xpos+25,ypos,fontPanel,"$%04d", game.cash);
+	ypos+=12;
+	drawText(xpos+27,ypos,fontPanel,"$%04d", game.cash);
 }
 
 
@@ -1905,28 +1908,28 @@ void drawGamePanelText2(void)
 void drawGamePanelText3(void)
 {
 	int xpos = game.panelXOffset;
-	int ypos = game.panelYOffset+200;
+	int ypos = game.panelYOffset+180;
 	
 	char power[MAX_LEN];
 	char range[MAX_LEN];
 	char rate[MAX_LEN];
 	
 	// Upgrade information + control
-	ypos+=15;
+	ypos+=5;
 	drawText(xpos+18,ypos,fontPanel,"UPGRADE");
 
-	ypos+=55;
-	drawText(xpos+10,ypos,fontSmall,"POWER");
+	ypos+=18;
+	drawText(xpos+25,ypos,fontPanel,"POWER");
 	
-	ypos+=55;
-	drawText(xpos+10,ypos,fontSmall,"RANGE");
+	ypos+=45;
+	drawText(xpos+25,ypos,fontPanel,"RANGE");
 	
-	ypos+=55;
-	drawText(xpos+10,ypos,fontSmall,"RATE");
+	ypos+=45;
+	drawText(xpos+32,ypos,fontPanel,"RATE");
 	
 	// Build information + control
-	ypos+=55;
-	drawText(xpos+18,ypos,fontPanel,"BUILD");
+	ypos+=45;
+	drawText(xpos+30,ypos,fontPanel,"BUILD");
 		
 	if ((game.selectedWeapon!=-1) && (weapons[game.selectedWeapon]!=NULL))
 	{
@@ -1973,14 +1976,7 @@ void drawGamePanelText3(void)
 	// Set build button color depending on amount of cash
 	if (buttons[6]!=NULL)
 	{ 
-		if	(
-			 (game.cash<weaponSpecs->getPrice(game.weaponType)) ||
-			 (pointers[0]->getXOffset()%32>3) ||
-			 (pointers[0]->getYOffset()%32>3) ||
-			 (grids[game.selectedMap]->isBuild(
-				(pointers[0]->getXOffset()/32),
-				(pointers[0]->getYOffset()/32)))
-			)
+		if	(game.cash<weaponSpecs->getPrice(game.weaponType))
 		{
 			// Weapon Transparent (Disable build)
 			buttons[6]->setColor(IMAGE_COLOR3);
@@ -1993,61 +1989,68 @@ void drawGamePanelText3(void)
 	}
 }
 
-
 // Draw Weapon information
 void drawGamePanelText4(void)
 {	
 	int xpos = game.panelXOffset;
-	int ypos = game.panelYOffset+455;
+	int ypos = game.panelYOffset+405;
 	
-	xpos+=10;
-	ypos+=10;
-	drawText(xpos, ypos, fontParagraph, "INFORMATION");
+	ypos+=5;
+	drawText(xpos+30, ypos, fontPanel, "INFO");
 			
 	if ( (game.selectedWeapon!=-1) && 
 		  (weapons[game.selectedWeapon]!=NULL) )
 	{
-		ypos+=30;
-		drawText(xpos,ypos,fontSmall,"Name = %s",
+		ypos+=15;
+		drawText(xpos+10,ypos,fontPanel,"%s",
 			weapons[game.selectedWeapon]->getName());
 		
-		ypos+=30;
-		drawText(xpos,ypos,fontSmall, "Power = %03d - %03d",
+		ypos+=15;
+		drawText(xpos+10,ypos,fontPanel, "Power");
+
+		drawText(xpos+50,ypos,fontSmall,"%03d-%03d",
 			weapons[game.selectedWeapon]->getPower(),
 			weapons[game.selectedWeapon]->getMaxPower());
 			
 		ypos+=15;
-		drawText(xpos,ypos,fontSmall, "Range = %03d - %03d",
+		drawText(xpos+10,ypos,fontPanel, "Range");
+
+		drawText(xpos+50,ypos,fontSmall, "%03d-%03d",
 			weapons[game.selectedWeapon]->getRange(),
 			weapons[game.selectedWeapon]->getMaxRange());
 			
 		ypos+=15;
-		drawText(xpos,ypos,fontSmall, "Rate  = %03d - %03d",
+		drawText(xpos+10,ypos,fontPanel, "Rate");
+		
+		drawText(xpos+50,ypos,fontSmall, "%03d-%03d",
 			weapons[game.selectedWeapon]->getRate(),
 			weapons[game.selectedWeapon]->getMaxRate());
 	}
 	else
 	{	
-		ypos+=30;
-		drawText(xpos,ypos,fontSmall,"Name = %s", 
-			weaponSpecs->getName(game.weaponType));
+		ypos+=15;
+		drawText(xpos+10,ypos,fontPanel,"%s $%d", 
+			weaponSpecs->getName(game.weaponType), 
+			weaponSpecs->getPrice(game.weaponType));
 			
 		ypos+=15;
-		drawText(xpos,ypos,fontSmall, "Price = %d ",
-			weaponSpecs->getPrice(game.weaponType));
-		
-		ypos+=15;
-		drawText(xpos,ypos,fontSmall, "Power = %03d - %03d",
+		drawText(xpos+10,ypos,fontPanel, "Power");
+				
+		drawText(xpos+50,ypos,fontSmall, "%03d-%03d",
 			weaponSpecs->getMinPower(game.weaponType),
 			weaponSpecs->getMaxPower(game.weaponType));
 			
 		ypos+=15;
-		drawText(xpos,ypos,fontSmall, "Range = %03d - %03d",
+		drawText(xpos+10,ypos,fontPanel, "Range");
+		
+		drawText(xpos+50,ypos,fontSmall, "%03d-%03d",
 			weaponSpecs->getMinRange(game.weaponType),
 			weaponSpecs->getMaxRange(game.weaponType));
 			
 		ypos+=15;
-		drawText(xpos,ypos,fontSmall, "Rate  = %03d - %03d",
+		drawText(xpos+10,ypos,fontPanel, "Rate");
+		
+		drawText(xpos+50,ypos,fontSmall, "%03d-%03d",
 			weaponSpecs->getMinRate(game.weaponType),
 			weaponSpecs->getMaxRate(game.weaponType));
 	}
@@ -2147,12 +2150,12 @@ void drawScreen(void)
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 			  
 			// Draw samples maps
-			grids[0]->draw(60,135,5); 
-			grids[1]->draw(260,135,5); 
-			grids[2]->draw(460,135,5);
-			grids[3]->draw(60,300,5); 
-			grids[4]->draw(260,300,5); 
-			grids[5]->draw(460,300,5);
+			grids[0]->draw(55,135,5.0); 
+			grids[1]->draw(255,135,5.0); 
+			grids[2]->draw(455,135,5.0);
+			grids[3]->draw(55,295,5.0); 
+			grids[4]->draw(255,295,5.0); 
+			grids[5]->draw(455,295,5.0);
 		
 			// Move elements
 			moveMonsters();  
@@ -2612,7 +2615,7 @@ void drawScreen(void)
          GRRLIB_initTexture();
  
 		   // Show title
-			drawText(210, ypos, fontTitle, "Enemies");
+			drawText(185, ypos, fontTitle, "Enemies");
         
 			ypos=130;
 			int xpos=90;
@@ -3365,7 +3368,7 @@ void processStateMachine()
 		initButtons();	
 		
 		// Init game variables
-		initGame(100);
+		initGame(50);
 	}
 	break;
 	

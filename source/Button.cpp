@@ -177,42 +177,30 @@ void Button::setY(int y1)
 void Button::setIndex(int index1)
 {
 	const char *s_fn="Button::setIndex";
-	trace->event(s_fn,0,"%s",index1);
+	trace->event(s_fn,0,"%d",index1);
 	
     index=index1;
 }
 
 void Button::setLabel(const char *label1)
-{
-	//const char *s_fn="Button::setLabel";
-	//trace->event(s_fn,0,"%s",label1);
-	
+{	
     strcpy(label,label1);
 }
 
 void Button::setColor(u32 color1)
-{
-	//const char *s_fn="Button::setColor";
-	//trace->event(s_fn,0,"%s",color1);
-	
+{	
     color=color1;
 }
 
 void Button::setImageNormal(GRRLIB_texImg *imageNormal1)
 {
-	//const char *s_fn="Button::setImageNormal";
-	//trace->event(s_fn,0,"image");
-
 	imageNormal=imageNormal1;
 	height=imageNormal->h;
 	width=imageNormal->w;
 }
 
 void Button::setImageFocus(GRRLIB_texImg *imageFocus1)
-{
-	//const char *s_fn="Button::setImageSelect";
-	//trace->event(s_fn,0,"image");
-	
+{	
 	imageFocus=imageFocus1;
 }
 
