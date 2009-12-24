@@ -51,7 +51,7 @@ class Grid
 	int baseX;
 	int baseY;
 
-    int index;
+   int index;
 	GRRLIB_texImg *imageRoad1;
 	GRRLIB_texImg *imageRoad2;
 	GRRLIB_texImg *imageRoad3;
@@ -73,14 +73,14 @@ class Grid
 	// Other
 	void draw(int xOffset, int yOffset, float size);
 	void create(const char* directory);
+	void initBuild(void);
 	
-	void setBuild(int x, int y);
-	bool isBuild(int x, int y);
-
 	// Setters
+	void setBuild(int x, int y);
 	void setIndex(int index);
 	
 	// Getters
+	bool isBuild(int x, int y);
 	int getLocationX(int pos);
 	int getLocationY(int pos);
 	int getMaxLocations(void);
