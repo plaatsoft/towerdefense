@@ -837,8 +837,17 @@ void Pointer::action(void)
 
 void Pointer::draw(void)
 {   	
-    // Draw Pointer on screen
-    GRRLIB_DrawImg( x, y, image, angle, 1.0, 1.0, IMAGE_COLOR );		
+	if (game.selectedNewWeapon)
+	{
+		int x1=x/32;
+		int y1=y/32;
+		GRRLIB_DrawImg( x1*32, y1*32, image, angle, 1.0, 1.0, color );	
+   }
+	else
+	{
+		// Draw Pointer on screen
+		GRRLIB_DrawImg( x, y, image, angle, 1.0, 1.0, color );		
+	}
 }
 
 // ------------------------------
@@ -896,10 +905,12 @@ void Pointer::setImage(GRRLIB_texImg *image1)
 
 void Pointer::setRumble(int rumble1)
 {
-   const char *s_fn="Pointer::setRumble";
-   trace->event(s_fn,0,"%d",rumble1);
-   
    rumble=rumble1;
+}
+
+void Pointer::setColor(int color1)
+{   
+   color=color1;
 }
 
 // ------------------------------

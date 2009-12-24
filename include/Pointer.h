@@ -35,6 +35,7 @@ class Pointer
 	int  xOffset;
 	int  yOffset;
 	int  rumble;
+	int  color;
 	ir_t ir;
 	GRRLIB_texImg *image;
 	bool selected1;
@@ -67,7 +68,8 @@ class Pointer
 	void setAngle(int angle);
 	void setImage(GRRLIB_texImg *image);
 	void setRumble(int rumble);
-		
+	void setColor(int color);
+	
 	// Getters
 	int getX(void);
 	int getY(void);
