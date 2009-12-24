@@ -320,6 +320,9 @@ void Pointer::buttonA(int x, int y)
 			{
 				// SelectMapMenu button	      
 				game.stateMachine=stateMapSelectMenu;
+				
+				// No map selected
+				game.selectedMap=-1;
 			}
 			
 			if ((buttons[7]!=NULL) && (buttons[7]->onSelect(x,y,true)))
@@ -698,6 +701,9 @@ void Pointer::buttonA(int x, int y)
 				
 				// Score current score;
 				game.event=eventSaveHighScore;
+				
+				// No map selected
+				game.selectedMap=-1;
 			}
 
 			if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))
@@ -720,6 +726,9 @@ void Pointer::buttonA(int x, int y)
 			{
 				// Quit button
 				game.stateMachine=stateMapSelectMenu;
+				
+				// No map selected
+				game.selectedMap=-1;
 			}	
 		}
 		break;

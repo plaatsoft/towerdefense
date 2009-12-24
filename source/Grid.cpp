@@ -440,9 +440,12 @@ void Grid::initBuild(void)
    const char *s_fn="Grid::initBuild";
    trace->event(s_fn,0,"enter");
 	
-	for (int i=0; i<MAX_GRID_Y; i++)
+	for (int y=0; y<MAX_GRID_Y; y++)
    {	
-		strcpy(gridBuild[i], gridData[i]); 
+		for (int x=0; x<MAX_GRID_X; x++)
+		{	
+			gridBuild[y][x]=gridData[y][x]; 
+		}
 	}
 			
 	// Find Base
@@ -450,7 +453,7 @@ void Grid::initBuild(void)
    {	
 		for (int x=0; x<MAX_GRID_X; x++)
 		{
-			switch (gridBuild[y][x])
+			switch (gridData[y][x])
 			{				
 				 case '#':	// Disabled area arround base 
 								gridBuild[y][x-1]='#';
@@ -463,6 +466,16 @@ void Grid::initBuild(void)
 			}
 		}
 	}
+	
+	// Not allowed to build under control panel.
+	for (int y=0; y<MAX_GRID_Y; y++)
+   {	
+		gridBuild[y][0]='P';
+		gridBuild[y][1]='P';
+		gridBuild[y][2]='P';
+		gridBuild[y][3]='P';
+	}
+		
 	trace->event(s_fn,0,"leave [void]"); 
 }
 
