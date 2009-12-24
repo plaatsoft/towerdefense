@@ -699,7 +699,10 @@ void initMonsters(bool special)
 		else
 		{
 			// Set monster in selected grid (Game behalvior)
-			monsters[id]->setGrid(game.selectedMap);
+			if (game.selectedMap!=-1)
+			{
+				monsters[id]->setGrid(game.selectedMap);
+			}
 		}
 			  	  
 		// Calculate delay between two monsters.
@@ -1560,7 +1563,7 @@ void initGame(int wave)
 	destroyWeapons();
 	
 	// Init build grid
-	if (grids[game.selectedMap] != NULL)
+	if ((game.selectedMap!=-1) && (grids[game.selectedMap]!=NULL))
 	{
 		grids[game.selectedMap]->initBuild();
 	}
@@ -1633,8 +1636,10 @@ void initApplication(void)
 // Draw grid on screen
 void drawGrid()
 {
-    switch (game.selectedMap)
-    {
+   if (game.selectedMap==-1) return;
+	
+	switch (game.selectedMap)
+   {
 		case 0: 	grids[0]->draw(0,0,1.0);   
 					break;
 				
@@ -3034,9 +3039,7 @@ void checkPointer(void)
 		   int x1=(float) pointers[0]->getX()/32.0;
 			int y1=(float) pointers[0]->getY()/32.0;
 			
-			if ((pointers[0]->getX()>=115 ) &&
-			    (pointers[0]->getX()<=640 ) &&
-			    (!grids[game.selectedMap]->isBuild(x1,y1)) )
+			if ((game.selectedMap!=-1) && (!grids[game.selectedMap]->isBuild(x1,y1))) 
 			{
 				pointers[0]->setColor(IMAGE_COLOR);
 			}
@@ -3150,9 +3153,8 @@ void processEvent()
 				
 			if ( 
 				  (game.cash>=weaponSpecs->getPrice(game.weaponType)) &&
-				  ( pointers[0]->getX()>=115 ) &&
-				  ( pointers[0]->getX()<=640 ) &&
-				  ( !grids[game.selectedMap]->isBuild(x1,y1) )
+				  (game.selectedMap!=-1) &&
+				  (!grids[game.selectedMap]->isBuild(x1,y1) )
 				)
 			{
 				// Find first empty place in weapons array.
@@ -3176,7 +3178,7 @@ void processEvent()
 					}
 				}
 				
-				if (grids[game.selectedMap]!=NULL)
+				if ((game.selectedMap!=-1) && (grids[game.selectedMap]!=NULL))
 				{
 					// Set new location as build full.
 					grids[game.selectedMap]->setBuild(x1,y1);
@@ -3420,7 +3422,7 @@ void processStateMachine()
 		
 		// Init buttons
 		initButtons();	
-		
+					
 		// Init game variables
 		initGame(50);
 	}
