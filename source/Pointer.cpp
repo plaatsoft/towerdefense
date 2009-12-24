@@ -27,14 +27,16 @@
 #include "Trace.h"
 #include "Button.h"
 #include "Weapon.h"
+#include "WeaponSpecs.h"
 #include "Sound.h"
   
-extern Game 		game;
-extern Settings	*settings;
-extern Sound		*sound;
-extern Trace 		*trace;
-extern Button 		*buttons[MAX_BUTTONS];
-extern Weapon    	*weapons[MAX_WEAPONS];
+extern Game 		 game;
+extern Settings	 *settings;
+extern Sound		 *sound;
+extern Trace 		 *trace;
+extern Button 		 *buttons[MAX_BUTTONS];
+extern Weapon    	 *weapons[MAX_WEAPONS];
+extern WeaponSpecs *weaponSpecs;
 
 // ------------------------------
 // Constructor 
@@ -636,9 +638,11 @@ void Pointer::buttonA(int x, int y)
 			// Build new weapon is selected
 			if ((buttons[6]!=NULL) && (buttons[6]->onSelect(x,y,true)))
 			{				
-				game.event=eventNewWeaponSelected;	
-				game.selectedNewWeapon=true;
-				game.selectedWeapon=-1;
+				if (game.cash>=weaponSpecs->getPrice(game.weaponType)) 
+				{	
+					game.event=eventNewWeaponSelected;	
+					game.selectedNewWeapon=true;
+				}
 			}
 			
 			// Check if weapon is selected on screen

@@ -85,7 +85,7 @@ class Weapon
 	void setX(int x);
 	void setY(int y);
 	void setImage(GRRLIB_texImg *image);
-	void setSelected(int selected);
+	void setSelected(bool selected);
 	void setIndex(int index);
 	void setType(int type);
 	void setName(const char *name, ...);

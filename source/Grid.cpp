@@ -159,7 +159,6 @@ void Grid::parseGrid(void)
 			if (temp[y-1][x]!='7') temp[y-1][x]='0';
 		}
 	}
-	
 	trace->event(s_fn,0,"leave [maxLocations=%d]",maxLocations);
 }
 
@@ -212,10 +211,8 @@ void Grid::loadGrid(const char* filename)
       pointer=mxmlElementGetAttr(group,"data");
       if (pointer!=NULL) 
 		{
-			strcpy(gridData[maxLines],pointer); 
-			strcpy(gridBuild[maxLines],pointer);  
+			strcpy(gridData[maxLines],pointer);  
 		}
-	  
 		maxLines++;
    }
    
@@ -226,19 +223,16 @@ void Grid::loadGrid(const char* filename)
 
 void Grid::draw(int xOffset, int yOffset, float size)
 {
-   int x;
-   int y;
-   
-   // Parse
-   for (y=0; y<MAX_GRID_Y; y++)
+   // Parse grid show correct images 
+   for (int y=0; y<MAX_GRID_Y; y++)
    {	
-		for (x=0; x<MAX_GRID_X; x++)
+		for (int x=0; x<MAX_GRID_X; x++)
 		{
 			switch (gridData[y][x])
 			{				
 				case '*': 
 				case '0': 
-					// Draw Grass image
+					// Start point - Draw Grass image
 					GRRLIB_DrawImg( 
 						(x*(32/size))+xOffset, 
 						(y*(32/size))+yOffset, 
@@ -369,7 +363,7 @@ void Grid::draw(int xOffset, int yOffset, float size)
 					break;
 					
 				case '#':
-					// Draw grass image
+					// end (base) point - Draw grass image
 					GRRLIB_DrawImg( 
 						(x*(32/size))+xOffset, 
 						(y*(32/size))+yOffset, 
@@ -381,7 +375,6 @@ void Grid::draw(int xOffset, int yOffset, float size)
 					break;
 			}
 		}
-		
 	}
 	
 	// Workarround to set base image on correct place
@@ -392,7 +385,7 @@ void Grid::draw(int xOffset, int yOffset, float size)
 			(baseX*(32/size))-(16/size)+xOffset,
 			(baseY*(32/size))+(5/size)+yOffset, 
 			imageBase, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
-	
+				
 	// Draw remaining base energy bar
 	if (size==1)
 	{
@@ -408,39 +401,71 @@ void Grid::create(const char* directory)
 	const char *s_fn="Grid::render";
 	trace->event(s_fn,0,"enter [directory=%s]",directory);
    
-    char filename[MAX_LEN];
+   char filename[MAX_LEN];
 	sprintf(filename,"%s/map.xml",directory);
-    loadGrid(filename);
+   loadGrid(filename);
 	parseGrid();
 	
 	// Load images
-	sprintf(filename,"%s/base.png",directory);
-    imageBase=loadImage(filename);
-	
-	sprintf(filename,"%s/road1.png",directory);
-    imageRoad1=loadImage(filename);
-
-	sprintf(filename,"%s/road2.png",directory);
-    imageRoad2=loadImage(filename);
-	
-	sprintf(filename,"%s/road3.png",directory);
-    imageRoad3=loadImage(filename);
-	
-	sprintf(filename,"%s/road4.png",directory);
-    imageRoad4=loadImage(filename);
-
-	sprintf(filename,"%s/road5.png",directory);
-    imageRoad5=loadImage(filename);
- 
 	sprintf(filename,"%s/general1.png",directory);
-    imageGeneral1=loadImage(filename);
+   imageGeneral1=loadImage(filename);
 
 	sprintf(filename,"%s/general2.png",directory);
-    imageGeneral2=loadImage(filename);
+   imageGeneral2=loadImage(filename);
+	 	
+	sprintf(filename,"%s/road1.png",directory);
+   imageRoad1=loadImage(filename);
+
+	sprintf(filename,"%s/road2.png",directory);
+   imageRoad2=loadImage(filename);
 	
+	sprintf(filename,"%s/road3.png",directory);
+   imageRoad3=loadImage(filename);
+	
+	sprintf(filename,"%s/road4.png",directory);
+   imageRoad4=loadImage(filename);
+
+	sprintf(filename,"%s/road5.png",directory);
+   imageRoad5=loadImage(filename);
+ 	
+	sprintf(filename,"%s/base.png",directory);
+   imageBase=loadImage(filename);
+	 
 	trace->event(s_fn,0,"leave [void]");  
 }
 			
+// Init Build grid with original build information.
+void Grid::initBuild(void)
+{
+   const char *s_fn="Grid::initBuild";
+   trace->event(s_fn,0,"enter");
+	
+	for (int i=0; i<MAX_GRID_Y; i++)
+   {	
+		strcpy(gridBuild[i], gridData[i]); 
+	}
+			
+	// Find Base
+	for (int y=0; y<MAX_GRID_Y; y++)
+   {	
+		for (int x=0; x<MAX_GRID_X; x++)
+		{
+			switch (gridBuild[y][x])
+			{				
+				 case '#':	// Disabled area arround base 
+								gridBuild[y][x-1]='#';
+								gridBuild[y][x]='#';
+								gridBuild[y][x+1]='#';
+								gridBuild[y+1][x-1]='#';	
+								gridBuild[y+1][x]='#';
+								gridBuild[y+1][x+1]='#';
+								break;
+			}
+		}
+	}
+	trace->event(s_fn,0,"leave [void]"); 
+}
+
 // ------------------------------
 // Setters
 // ------------------------------
@@ -450,12 +475,15 @@ void Grid::setIndex(int index1)
 	const char *s_fn="Grid::setIndex";
 	trace->event(s_fn,0,"%d",index1);
 	
-    index = index1;	
+   index = index1;	
 }
 
 void Grid::setBuild(int x, int y)
 {
-	gridBuild[x][y]='F';
+	const char *s_fn="Grid::setBuild";
+	trace->event(s_fn,0,"x=%d,y=%d",x,y);
+	
+	gridBuild[y][x]='F';
 }
 
 // ------------------------------
@@ -487,7 +515,7 @@ int Grid::getMaxLocations(void)
 
 bool Grid::isBuild(int x, int y)
 {
-	return (gridBuild[x][y]!='0');
+	return (gridBuild[y][x]!='0');
 }
 
 // ------------------------------

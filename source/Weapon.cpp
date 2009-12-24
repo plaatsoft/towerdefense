@@ -115,7 +115,7 @@ void Weapon::draw()
 	// Draw reload time bar
 	float proc = ((rate-delay) / rate) * 18.0;
 	GRRLIB_Rectangle(x+5, y+28, 20, 4, GRRLIB_BLACK, 0);
-	GRRLIB_Rectangle(x+6, y+29, proc, 2, GRRLIB_YELLOW, 1);
+	GRRLIB_Rectangle(x+6, y+29, proc, 2, GRRLIB_RED, 1);
 }
 
 void Weapon::fire(Monster *monsters[MAX_MONSTERS])
@@ -379,7 +379,7 @@ void Weapon::setIndex(int index1)
 	index=index1;
 }
 
-void Weapon::setSelected(int selected1)
+void Weapon::setSelected(bool selected1)
 {
 	selected=selected1;
 }

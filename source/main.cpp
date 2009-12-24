@@ -24,22 +24,21 @@
 **  - Improve graphical fire effect!
 **  - Multi language support.
 **
-**  23/12/2009 Version 0.60
-**  TESTED. OK!
-**  - BugfiX: The rumble is now working for all the four WiiMotes. 
+**  24/12/2009 Version 0.60
 **  - Increase enemy walk speed after each 25 waves. 
 **  - Show mini enemies moving on map select screen. 
 **  - Update credit screen. 
 **  - Improve game information panel design.
 **  	- Show price and strengh information about new weapons.
 **		- Show detail information about selected weapon.
-**
-**  NOT TESTED YET!
 **  - Snap weapons to 32x32 grid!
 **  - Only allow to build weapons on land (not bridges or road)
+**  - Not allowed anymore to stack weapons on same place.
 **  - Optimise screen layout for 60Hz (640x480 pixels) TV Mode.
+**  - BugfiX: The rumble is now working for all the four WiiMotes. 
+**  - Bugfix: Map six background images are now showed correct.
 **  - Build game with devkitPPC r19 compiler.
-**
+**  
 **  20/12/2009 Version 0.50
 **  - First official release for the Wii Homebrew Scene.
 **  - Process most of the comments of the Beta testers.
@@ -351,7 +350,7 @@ u32          *frameBuffer[1] 	= {NULL};
 GXRModeObj   *rmode 				= NULL;
 Mtx          GXmodelView2D;
 
-Game 		    game;
+Game 			 game;
 Trace     	 *trace;
 Settings  	 *settings;
 HighScore 	 *highScore;
@@ -381,8 +380,8 @@ void destroyWeapons(void)
 			delete weapons[i];
 			weapons[i]=NULL;
 		}
-    }
-	
+   }
+
 	trace->event(s_fn,0,"leave");
 }
 
@@ -393,13 +392,13 @@ void destroyButtons(void)
 	
 	// Destroy all Buttons
 	for( int i=0; i<MAX_BUTTONS; i++)
-    {
+   {
 		if (buttons[i]!=NULL)
 		{
 			delete buttons[i];
 			buttons[i]=NULL;
 		}
-    }	
+   }	
 	trace->event(s_fn,0,"leave");
 }
 
@@ -688,8 +687,9 @@ void initMonsters(bool special)
 		monsters[id]->setImage(monsterSpecs->getImage(type));
 		monsters[id]->setEnergy(monsterSpecs->getEnergy(type));
 		
-		// Increase monster speed after every 25 waves for easy type.
-		monsters[id]->setStep((game.wave/25)+1);	
+		// Increase monster speed after every 25 waves;
+		int step = (game.wave/25)+1;
+		monsters[id]->setStep(step);	
 			
 		if (special)
 		{
@@ -754,8 +754,8 @@ void initPointers(void)
 // Init Grid
 void initGrid(int index)
 {
-    const char *s_fn="initGrid";
-    trace->event(s_fn,0,"enter [index=%d]",index);
+   const char *s_fn="initGrid";
+   trace->event(s_fn,0,"enter [index=%d]",index);
 
 	grids[index] = new Grid();
 	grids[index]->setIndex(index);
@@ -814,9 +814,10 @@ void initWeapon(int x, int y, int id, int type)
    weapons[id]->setRangeStep(weaponSpecs->getStepRange(type));
    weapons[id]->setRateStep(weaponSpecs->getStepRate(type));
 	
-	weapons[id]->setName("%s [%d]", weaponSpecs->getName(type), 
+	weapons[id]->setName("%s [%d]", 
+		weaponSpecs->getName(type), 
 		weaponSpecs->getCounter(type));
-					
+		
 	trace->event(s_fn,0,"leave");
 }
 
@@ -831,7 +832,7 @@ void initButtons(void)
 	switch( game.stateMachine )	
 	{			
 		case stateMainMenu:
-		{						
+		{
 			// HighScore Button 
 			buttons[0]=new Button();
 			buttons[0]->setX(440);
@@ -1506,7 +1507,7 @@ void initNetwork(void)
    char userData1[MAX_LEN];
    char userData2[MAX_LEN];
 
-   // Set userData1   		 
+   // Set userData1
    memset(userData1,0x00, MAX_LEN);
    sprintf(userData1,"%s=%s",PROGRAM_NAME,PROGRAM_VERSION);
 		
@@ -1557,6 +1558,12 @@ void initGame(int wave)
 	// Cleanup previous game variables
 	destroyMonsters();
 	destroyWeapons();
+	
+	// Init build grid
+	if (grids[game.selectedMap] != NULL)
+	{
+		grids[game.selectedMap]->initBuild();
+	}
 	
 	// Lanch first monster wave
 	game.event=eventLanch;
@@ -1882,7 +1889,7 @@ void drawPanelText1(void)
 	drawText(xpos+25,ypos,fontPanel,"LANCH");
 	
 	// Set button label values
-	sprintf(tmp,"    %d", game.waveCountDown/25 );
+	sprintf(tmp,"    %03d", game.waveCountDown/25 );
 	if (buttons[0]!=NULL) buttons[0]->setLabel(tmp);	
 }
 
@@ -2482,75 +2489,74 @@ void drawScreen(void)
 			{
             for (int i=startEntry; i<endEntry; i++)
             {
-  	          ypos+=20;  
+					ypos+=20;  
 	    
-		      drawText(20, ypos, fontNormal, "%02d", i+1);
+					drawText(20, ypos, fontNormal, "%02d", i+1);
 			  			  
-	          local = localtime(&globalHighScore[i].dt);
-	          sprintf(tmp,"%02d-%02d-%04d %02d:%02d:%02d", 
-			     local->tm_mday, local->tm_mon+1, local->tm_year+1900, 
-			     local->tm_hour, local->tm_min, local->tm_sec);
-		      drawText(80, ypos, fontNormal, tmp);
+					local = localtime(&globalHighScore[i].dt);
+					sprintf(tmp,"%02d-%02d-%04d %02d:%02d:%02d", 
+						local->tm_mday, local->tm_mon+1, local->tm_year+1900, 
+						local->tm_hour, local->tm_min, local->tm_sec);
+					drawText(80, ypos, fontNormal, tmp);
 	   
-		      drawText(270, ypos, fontNormal, globalHighScore[i].score);			  
-			  drawText(350, ypos, fontNormal, globalHighScore[i].name);			  
-			  drawText(430, ypos, fontNormal, globalHighScore[i].location);
-		    }			
-		  }
-		  else
-		  {
+					drawText(270, ypos, fontNormal, globalHighScore[i].score);			  
+					drawText(350, ypos, fontNormal, globalHighScore[i].name);			  
+					drawText(430, ypos, fontNormal, globalHighScore[i].location);
+				}			
+			}
+			else
+			{
 		      ypos+=120;
 		      drawText(0, ypos, fontParagraph, "No information available!");
-			  ypos+=20;
-			  drawText(0, ypos, fontParagraph, "Information could not be fetch from internet.");
-		  }
+				ypos+=20;
+				drawText(0, ypos, fontParagraph, "Information could not be fetch from internet.");
+			}
 			 
-          // Draw buttons
+         // Draw buttons
 	      drawButtons(); 
 		  
-		  // Draw Button Text labels
-		  drawButtonsText(0);	   
-	    }
-	    break;
+			// Draw Button Text labels
+			drawButtonsText(0);	   
+	   }
+	   break;
 
-	    case stateHelp1:
-	    {	  
-	      // Draw background
-		  GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+	   case stateHelp1:
+	   {	  
+			// Draw background
+			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 		 
-		  // Draw buttons
+			// Draw buttons
 	      drawButtons(); 
-		  
-		  // Init text layer	  
-          GRRLIB_initTexture();
- 
-		   // Show title
-		  drawText(0, ypos, fontTitle, "Help");
-          ypos+=100;
-		  
-		  drawText(0, ypos, fontParagraph, "Wii TowerDefense is an classic 2D action game. Protect ");
-		  ypos+=25;
-     	  drawText(0, ypos, fontParagraph, "your base with all kind of defense systems and kill");	
-		  ypos+=25;
-	      drawText(0, ypos, fontParagraph, "all the waves of enemies. If ten enemies reach the");		
-		  ypos+=25;
-	      drawText(0, ypos, fontParagraph, "base the game is over. Good Luck!");		
-		
-		
-          ypos+=60;
-	      drawText(0, ypos, fontParagraph, "Tip: You can control which music track is played during");
-		  ypos+=25;
-	      drawText(0, ypos, fontParagraph, "the game with the 1 and 2 button on your WiiMote!");
-		  
-		  ypos+=60;
-	      drawText(0, ypos, fontParagraph, "Note: The global highscore contains the Top 40 of best");
-		  ypos+=25;
-	      drawText(0, ypos, fontParagraph, "internet players. Only one entry per player is showed.");	  
 
-		  // Draw Button Text labels
-		  drawButtonsText(0);
-	    }
-	    break;
+			// Init text layer
+			GRRLIB_initTexture();
+ 
+			// Show title
+			drawText(0, ypos, fontTitle, "Help");
+			ypos+=100;
+		  
+			drawText(0, ypos, fontParagraph, "Wii TowerDefense is an classic 2D action game. Protect ");
+			ypos+=25;
+			drawText(0, ypos, fontParagraph, "your base with all kind of defense systems and kill");	
+			ypos+=25;
+			drawText(0, ypos, fontParagraph, "all the waves of enemies. If ten enemies reach the");		
+			ypos+=25;
+			drawText(0, ypos, fontParagraph, "base the game is over. Good Luck!");		
+
+			ypos+=60;
+			drawText(0, ypos, fontParagraph, "Tip: You can control which music track is played during");
+			ypos+=25;
+			drawText(0, ypos, fontParagraph, "the game with the 1 and 2 button on your WiiMote!");
+
+			ypos+=60;
+			drawText(0, ypos, fontParagraph, "Note: The global highscore contains the Top 40 of best");
+			ypos+=25;
+			drawText(0, ypos, fontParagraph, "internet players. Only one entry per player is showed.");	  
+
+			// Draw Button Text labels
+			drawButtonsText(0);
+		}
+		break;
 
 		case stateHelp2:
 	   {	  
@@ -2687,11 +2693,11 @@ void drawScreen(void)
 	      drawText(0, ypos, fontNormal, "wplaat");
   
   	      ypos+=30;
-	      drawText(0, ypos, fontParagraph, "TESTERS");
-	      ypos+=20;
-	      drawText(0, ypos, fontNormal, "wplaat");	  
+	      drawText(0, ypos, fontParagraph, "TESTERS");	  
 			ypos+=20;
 	      drawText(0, ypos, fontNormal, "quali");	  
+			ypos+=20;
+	      drawText(0, ypos, fontNormal, "Wiiman360");
 			
 	      ypos+=30;
 	      drawText(140, ypos, fontNormal,"Greetings to everybody in the Wii homebrew scene");
@@ -2808,10 +2814,10 @@ void drawScreen(void)
 						// Show only 19 lines on screen
 						if ((lineCount++)>endEntry) break;
 						if (lineCount>startEntry) 
-						{				   
+						{
 							ypos+=15;
 							drawText(40, ypos, fontNormal, text+startpos);	
-						}		
+						}
 						startpos=i+1;
 					}
 				}
@@ -2839,11 +2845,10 @@ void drawScreen(void)
 		  
 	      // Init text layer	  
          GRRLIB_initTexture();
-	
-	      // Draw Title	
-         drawText(150, ypos, fontTitle, "User Initials");
-         ypos+=120;
-		        	  
+
+			// Draw Title	
+			drawText(150, ypos, fontTitle, "User Initials");
+			ypos+=120;
 
 			// Draw initial characters
 			ypos+=50;	
@@ -2862,7 +2867,7 @@ void drawScreen(void)
 
 			ypos+=180;
 			drawText(0, ypos, fontParagraph, "This initials are used in the highscore area.");	
-	     		  
+
 			// Draw Button Text labels
 			drawButtonsText(0);	
 	   }
@@ -3026,8 +3031,8 @@ void checkPointer(void)
 	{
 		if (pointers[0]!=NULL)
 		{ 
-		   int x1=pointers[0]->getX()/32;
-			int y1=pointers[0]->getY()/32;
+		   int x1=(float) pointers[0]->getX()/32.0;
+			int y1=(float) pointers[0]->getY()/32.0;
 			
 			if ((pointers[0]->getX()>=115 ) &&
 			    (pointers[0]->getX()<=640 ) &&
@@ -3040,15 +3045,15 @@ void checkPointer(void)
 				pointers[0]->setColor(IMAGE_COLOR3);
 			}
 		}
-	}
 	
-	for (int x=0; x<MAX_GRID_X; x=x+32)
-	{
-		GRRLIB_Line( x, 0, x, 528, GRRLIB_WHITESMOKE);								
-	}
-	for (int y=0; y<MAX_GRID_Y; y=y+32)
-	{
-		GRRLIB_Line( 0, y, 640, y, GRRLIB_WHITESMOKE);								
+		for (int x=4; x<MAX_GRID_X; x++)
+		{
+			GRRLIB_Line( x*32, 0, x*32, 528, GRRLIB_WHITE_TRANS);								
+		}
+		for (int y=0; y<MAX_GRID_Y; y++)
+		{
+			GRRLIB_Line( 128, y*32, 640, y*32, GRRLIB_WHITE_TRANS);								
+		}
 	}
 }
 
@@ -3119,9 +3124,15 @@ void processEvent()
 			
 			if (game.cash>=weaponSpecs->getPrice(game.weaponType))
 			{
-				// Change pointer image to weapon image (For location defination)
+				// Change pointer image to weapon image (For location definition)
 				pointers[0]->setImage(weaponSpecs->getImage(game.weaponType));
-				game.selectedWeapon=-1;
+				
+				// Deselected other weapon, if any
+				if (game.selectedWeapon!=-1)
+				{
+					weapons[game.selectedWeapon]->setSelected(false);
+					game.selectedWeapon=-1;
+				}
 			}
 		}
 		break;
@@ -3134,8 +3145,8 @@ void processEvent()
 			pointers[0]->setImage(images.pointer1);
 			pointers[0]->setColor(IMAGE_COLOR);
 				
-			int x1=pointers[0]->getX()/32;
-			int y1=pointers[0]->getY()/32;
+			int x1=(float) pointers[0]->getX()/32.0;
+			int y1=(float) pointers[0]->getY()/32.0;
 				
 			if ( 
 				  (game.cash>=weaponSpecs->getPrice(game.weaponType)) &&
@@ -3187,6 +3198,13 @@ void processEvent()
 		{
 			trace->event(s_fn,0,"event=eventNewWeaponNext");
 			
+			// Deselected other weapon, if any
+			if (game.selectedWeapon!=-1)
+			{
+				weapons[game.selectedWeapon]->setSelected(false);
+				game.selectedWeapon=-1;
+			}
+				
 			if (game.weaponType<(MAX_WEAPON_TYPE-1)) 
 			{
 				game.weaponType++; 
@@ -3212,6 +3230,13 @@ void processEvent()
 		case eventNewWeaponPrevious:		
 		{
 			trace->event(s_fn,0,"event=eventNewWeaponPrevious");
+
+			// Deselected other weapon, if any
+			if (game.selectedWeapon!=-1)
+			{
+				weapons[game.selectedWeapon]->setSelected(false);
+				game.selectedWeapon=-1;
+			}
 			
 			if (game.weaponType>0) 
 			{
@@ -3292,7 +3317,7 @@ void processEvent()
 				settings->getThirdChar(),
 				settings->getFourthChar(),
 				settings->getFifthChar(),
-				settings->getSixthChar());			
+				settings->getSixthChar());
 			highScore->setScore(tmp, game.wave, game.score);
 			highScore->save(HIGHSCORE_FILENAME);
 			
@@ -3403,13 +3428,13 @@ void processStateMachine()
 	
 	case stateGame:
 	{
+		trace->event(s_fn,0,"stateMachine=stateGame");
+
 		// Init buttons
 		initButtons();	
-			
+
 		if (game.prevStateMachine!=stateGameQuit)
 		{
-			trace->event(s_fn,0,"stateMachine=stateGame");
-	 
 			// Init game variables
 			initGame(0);
 		}
@@ -3450,7 +3475,7 @@ void processStateMachine()
 		game.scrollIndex=0;
 		
 		// Init buttons
-		initButtons();		
+		initButtons();
 	}
 	break;
 	
@@ -3477,10 +3502,10 @@ void processStateMachine()
 		// Fetch data for network thread
 		char *buffer=NULL;
 		buffer=tcp_get_global_highscore();
-		loadGlobalHighScore(buffer);		     
+		loadGlobalHighScore(buffer);
 			  
 		// Init buttons
-		initButtons();		
+		initButtons();
 	}
 	break;
 			
@@ -3507,7 +3532,7 @@ void processStateMachine()
 		trace->event(s_fn,0,"stateMachine=stateHelp1");
 		
 		// Init buttons
-		initButtons();		
+		initButtons();
 	}
 	break;
 
@@ -3516,7 +3541,7 @@ void processStateMachine()
 		trace->event(s_fn,0,"stateMachine=stateHelp2");
 		
 		// Init buttons
-		initButtons();		
+		initButtons();
 	}
 	break;
 	
@@ -3525,7 +3550,7 @@ void processStateMachine()
 		trace->event(s_fn,0,"stateMachine=stateHelp3");
 		
 		// Init buttons
-		initButtons();		
+		initButtons();
 	}
 	break;
 	   	
@@ -3534,9 +3559,9 @@ void processStateMachine()
 		trace->event(s_fn,0,"stateMachine=stateUserSettings");
 		
 		// Init buttons
-		initButtons();	
+		initButtons();
 	}
-	break;	 
+	break;
   
 	}
   
@@ -3562,10 +3587,10 @@ int main(void)
    WPAD_SetIdleTimeout(60); 
    WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
   
-   // Obtain the preferred video mode from the system
+	// Obtain the preferred video mode from the system
 	// This will correspond to the settings in the Wii menu
 	rmode = VIDEO_GetPreferredMode(NULL);
-		
+	
 	// Set up the video registers with the chosen mode
 	VIDEO_Configure(rmode);
 	

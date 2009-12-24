@@ -27,7 +27,7 @@
 
 #define PROGRAM_NAME	   		"TowerDefense"
 #define PROGRAM_VERSION     	"0.60"
-#define RELEASE_DATE        	"23-12-2009" 
+#define RELEASE_DATE        	"24-12-2009" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -63,6 +63,7 @@
 #define WSP_POINTER_Y      		250
 
 #define GRRLIB_WHITESMOKE   	0xFFFFFFFF
+#define GRRLIB_WHITE_TRANS   	0xFFFFFF44
 #define GRRLIB_LIGHTRED     	0x3333FFFF
 #define GRRLIB_BLACK 			0x000000FF
 #define GRRLIB_BLACK_TRANS		0x00000044
@@ -86,7 +87,7 @@
 #define IMAGE_COLOR2        	0x66666666
 #define IMAGE_COLOR3        	0x44444444
 
-#define MAX_WEAPONS				100
+#define MAX_WEAPONS				200
 #define MAX_MONSTERS				250
 #define MAX_BUTTONS         	15
 #define MAX_POINTERS         	4
