@@ -195,6 +195,7 @@
 static u8 calculateFrameRate();
 void checkGameOver(void);
 void checkNextWave(void);
+void checkPointer(void);
 void moveMonsters(void);
 void moveWeapons(void);
 GRRLIB_texImg *getNewWeaponImage(int type);
@@ -721,6 +722,7 @@ void initPointers(void)
    pointers[0]->setAngle(0);
    pointers[0]->setImage(images.pointer1);
    pointers[0]->setIndex(0);
+	pointers[0]->setColor(IMAGE_COLOR);
 
    pointers[1] = new Pointer(); 
    pointers[1]->setX(320);
@@ -728,6 +730,7 @@ void initPointers(void)
    pointers[1]->setAngle(0);
    pointers[1]->setImage(images.pointer2);
    pointers[1]->setIndex(1);
+	pointers[1]->setColor(IMAGE_COLOR);
 
    pointers[2] = new Pointer(); 
    pointers[2]->setX(320);
@@ -735,6 +738,7 @@ void initPointers(void)
    pointers[2]->setAngle(0);
    pointers[2]->setImage(images.pointer3);
    pointers[2]->setIndex(2);
+	pointers[2]->setColor(IMAGE_COLOR);
 
    pointers[3] = new Pointer(); 
    pointers[3]->setX(340);
@@ -742,6 +746,7 @@ void initPointers(void)
    pointers[3]->setAngle(0);
    pointers[3]->setImage(images.pointer4);	
    pointers[3]->setIndex(3);
+	pointers[3]->setColor(IMAGE_COLOR);
       
    trace->event(s_fn,0,"leave [void]");
 }
@@ -1376,7 +1381,7 @@ void initButtons(void)
 			buttons[0]->setIndex(0);
 			
 			// Power Upgrade Button
-			ypos+=165;
+			ypos+=155;
 			buttons[1]=new Button();
 			buttons[1]->setX(10+game.panelXOffset);
 			buttons[1]->setY(ypos+game.panelYOffset);
@@ -1820,7 +1825,7 @@ void drawText(int x, int y, int type, const char *text, ...)
 }
 
 // Draw game panel1
-void drawGamePanel1(void)
+void drawPanel1(void)
 {
 	int xpos = game.panelXOffset;
 	int ypos = game.panelYOffset;
@@ -1830,37 +1835,37 @@ void drawGamePanel1(void)
 }
 
 // Draw game panel2
-void drawGamePanel2(void)
+void drawPanel2(void)
 {
 	int xpos = game.panelXOffset;
-	int ypos = game.panelYOffset+100;
+	int ypos = game.panelYOffset+95;
 
 	// Draw panel
 	GRRLIB_Rectangle(xpos, ypos, 100, 70, GRRLIB_BLACK_TRANS, 1);
 }
 
 // Draw game panel3
-void drawGamePanel3(void)
+void drawPanel3(void)
 {
 	int xpos = game.panelXOffset;
-	int ypos = game.panelYOffset+180;
+	int ypos = game.panelYOffset+170;
 
 	// Draw panel
-	GRRLIB_Rectangle(xpos, ypos, 100, 215, GRRLIB_BLACK_TRANS, 1);
+	GRRLIB_Rectangle(xpos, ypos, 100, 210, GRRLIB_BLACK_TRANS, 1);
 }
 
 // Draw game panel4
-void drawGamePanel4(void)
+void drawPanel4(void)
 {
 	int xpos = game.panelXOffset;
-	int ypos = game.panelYOffset+405;
+	int ypos = game.panelYOffset+385;
 
 	// Draw panel
-	GRRLIB_Rectangle(xpos, ypos, 100, 90, GRRLIB_BLACK_TRANS, 1);
+	GRRLIB_Rectangle(xpos, ypos, 100, 80, GRRLIB_BLACK_TRANS, 1);
 }
 				
 // Draw wave text panel on screen
-void drawGamePanelText1(void)
+void drawPanelText1(void)
 {
 	char tmp[MAX_LEN];
 	int xpos = game.panelXOffset;
@@ -1877,16 +1882,16 @@ void drawGamePanelText1(void)
 	drawText(xpos+25,ypos,fontPanel,"LANCH");
 	
 	// Set button label values
-	sprintf(tmp,"      %d", game.waveCountDown/25 );
+	sprintf(tmp,"    %d", game.waveCountDown/25 );
 	if (buttons[0]!=NULL) buttons[0]->setLabel(tmp);	
 }
 
 
 // Draw score/cash text panel on screen
-void drawGamePanelText2(void)
+void drawPanelText2(void)
 {
 	int xpos = game.panelXOffset;
-	int ypos = game.panelYOffset+100;
+	int ypos = game.panelYOffset+95;
 	
 	// Score info
 	ypos+=5;
@@ -1905,10 +1910,10 @@ void drawGamePanelText2(void)
 
 
 // Draw Weapon upgrade/build text game panel on screen
-void drawGamePanelText3(void)
+void drawPanelText3(void)
 {
 	int xpos = game.panelXOffset;
-	int ypos = game.panelYOffset+180;
+	int ypos = game.panelYOffset+170;
 	
 	char power[MAX_LEN];
 	char range[MAX_LEN];
@@ -1990,67 +1995,64 @@ void drawGamePanelText3(void)
 }
 
 // Draw Weapon information
-void drawGamePanelText4(void)
+void drawPanelText4(void)
 {	
 	int xpos = game.panelXOffset;
-	int ypos = game.panelYOffset+405;
+	int ypos = game.panelYOffset+385;
 	
 	ypos+=5;
-	drawText(xpos+30, ypos, fontPanel, "INFO");
 			
 	if ( (game.selectedWeapon!=-1) && 
 		  (weapons[game.selectedWeapon]!=NULL) )
 	{
-		ypos+=15;
-		drawText(xpos+10,ypos,fontPanel,"%s",
+		drawText(xpos+8,ypos,fontPanel,"%s",
 			weapons[game.selectedWeapon]->getName());
 		
-		ypos+=15;
-		drawText(xpos+10,ypos,fontPanel, "Power");
+		ypos+=20;
+		drawText(xpos+8,ypos,fontPanel, "Power");
 
-		drawText(xpos+50,ypos,fontSmall,"%03d-%03d",
+		drawText(xpos+52,ypos+3,fontSmall,"%03d-%03d",
 			weapons[game.selectedWeapon]->getPower(),
 			weapons[game.selectedWeapon]->getMaxPower());
 			
 		ypos+=15;
-		drawText(xpos+10,ypos,fontPanel, "Range");
+		drawText(xpos+8,ypos,fontPanel, "Range");
 
-		drawText(xpos+50,ypos,fontSmall, "%03d-%03d",
+		drawText(xpos+52,ypos+3,fontSmall, "%03d-%03d",
 			weapons[game.selectedWeapon]->getRange(),
 			weapons[game.selectedWeapon]->getMaxRange());
 			
 		ypos+=15;
-		drawText(xpos+10,ypos,fontPanel, "Rate");
+		drawText(xpos+8,ypos,fontPanel, "Rate");
 		
-		drawText(xpos+50,ypos,fontSmall, "%03d-%03d",
+		drawText(xpos+52,ypos+3,fontSmall, "%03d-%03d",
 			weapons[game.selectedWeapon]->getRate(),
 			weapons[game.selectedWeapon]->getMaxRate());
 	}
 	else
 	{	
-		ypos+=15;
-		drawText(xpos+10,ypos,fontPanel,"%s $%d", 
+		drawText(xpos+8,ypos,fontPanel,"%s $%d", 
 			weaponSpecs->getName(game.weaponType), 
 			weaponSpecs->getPrice(game.weaponType));
 			
-		ypos+=15;
-		drawText(xpos+10,ypos,fontPanel, "Power");
+		ypos+=20;
+		drawText(xpos+8,ypos,fontPanel, "Power");
 				
-		drawText(xpos+50,ypos,fontSmall, "%03d-%03d",
+		drawText(xpos+52,ypos+3,fontSmall, "%03d-%03d",
 			weaponSpecs->getMinPower(game.weaponType),
 			weaponSpecs->getMaxPower(game.weaponType));
 			
 		ypos+=15;
-		drawText(xpos+10,ypos,fontPanel, "Range");
+		drawText(xpos+8,ypos,fontPanel, "Range");
 		
-		drawText(xpos+50,ypos,fontSmall, "%03d-%03d",
+		drawText(xpos+52,ypos+3,fontSmall, "%03d-%03d",
 			weaponSpecs->getMinRange(game.weaponType),
 			weaponSpecs->getMaxRange(game.weaponType));
 			
 		ypos+=15;
-		drawText(xpos+10,ypos,fontPanel, "Rate");
+		drawText(xpos+8,ypos,fontPanel, "Rate");
 		
-		drawText(xpos+50,ypos,fontSmall, "%03d-%03d",
+		drawText(xpos+52,ypos+3,fontSmall, "%03d-%03d",
 			weaponSpecs->getMinRate(game.weaponType),
 			weaponSpecs->getMaxRate(game.weaponType));
 	}
@@ -2190,15 +2192,16 @@ void drawScreen(void)
 			drawGrid();		  
 			drawMonsters(false);
 			drawWeapons();
-			drawGamePanel1();		  
-			drawGamePanel2();	
-			drawGamePanel3();
-			drawGamePanel4();	
+			drawPanel1();		  
+			drawPanel2();	
+			drawPanel3();
+			drawPanel4();	
 			drawButtons();
 		  
 			// Check Game parameters
 			checkGameOver();
 			checkNextWave();
+			checkPointer();
 		  
 			// Init text layer	  
          GRRLIB_initTexture();
@@ -2214,10 +2217,10 @@ void drawScreen(void)
 		  
 			// Draw Text elements
 			drawMonstersText();
-			drawGamePanelText1();
-			drawGamePanelText2();
-			drawGamePanelText3();
-			drawGamePanelText4();
+			drawPanelText1();
+			drawPanelText2();
+			drawPanelText3();
+			drawPanelText4();
 			drawButtonsText(-28);
 		}
 		break;
@@ -2228,7 +2231,7 @@ void drawScreen(void)
 			drawGrid(); 
 			drawMonsters(false);
 			drawWeapons();
-			drawGamePanel2();	
+			drawPanel2();	
 	      drawButtons();
 			
 			// Draw Transparent Box
@@ -2239,7 +2242,7 @@ void drawScreen(void)
  
 			// Draw text elements
 			drawMonstersText();
-			drawGamePanelText2();
+			drawPanelText2();
 			drawButtonsText(-20);
 			  
 			drawText(260, 220, fontParagraph, "Game Over!");
@@ -2252,18 +2255,18 @@ void drawScreen(void)
 			drawGrid(); 
 			drawMonsters(false);
 			drawWeapons();
-			drawGamePanel2();	
+			drawPanel2();	
 			drawButtons();
 	
 			// Draw Transparent Box
 			GRRLIB_Rectangle(210, 210, 220, 100, GRRLIB_BLACK_TRANS, 1);
 	
-			// Init text layer	  
+			// Init text layer
          GRRLIB_initTexture();
  
 			// Draw Text elements
 			drawMonstersText();
-			drawGamePanelText2();
+			drawPanelText2();
 			drawButtonsText(-10);
 	
  	      drawText(0, 220, fontParagraph, "Quit game?");	
@@ -3017,6 +3020,38 @@ void moveWeapons(void)
 	}
 }
 
+void checkPointer(void)
+{
+	if (game.selectedNewWeapon)
+	{
+		if (pointers[0]!=NULL)
+		{ 
+		   int x1=pointers[0]->getX()/32;
+			int y1=pointers[0]->getY()/32;
+			
+			if ((pointers[0]->getX()>=115 ) &&
+			    (pointers[0]->getX()<=640 ) &&
+			    (!grids[game.selectedMap]->isBuild(x1,y1)) )
+			{
+				pointers[0]->setColor(IMAGE_COLOR);
+			}
+			else
+			{
+				pointers[0]->setColor(IMAGE_COLOR3);
+			}
+		}
+	}
+	
+	for (int x=0; x<MAX_GRID_X; x=x+32)
+	{
+		GRRLIB_Line( x, 0, x, 528, GRRLIB_WHITESMOKE);								
+	}
+	for (int y=0; y<MAX_GRID_Y; y=y+32)
+	{
+		GRRLIB_Line( 0, y, 640, y, GRRLIB_WHITESMOKE);								
+	}
+}
+
 // Check if game is over!
 void checkGameOver(void)
 {
@@ -3097,17 +3132,16 @@ void processEvent()
 
 			// First restore pointer image
 			pointers[0]->setImage(images.pointer1);
-								
-			if (
-					(game.cash>=weaponSpecs->getPrice(game.weaponType)) &&
-					( pointers[0]->getXOffset()%32<=3 ) &&
-					( pointers[0]->getYOffset()%32<=3 ) &&
-					( pointers[0]->getX()>=115 ) &&
-					( pointers[0]->getX()<=600 ) &&
-					( grids[game.selectedMap]->isBuild(
-					   (pointers[0]->getXOffset()/32),(pointers[0]->getYOffset()/32)
-						                               )
-				   )
+			pointers[0]->setColor(IMAGE_COLOR);
+				
+			int x1=pointers[0]->getX()/32;
+			int y1=pointers[0]->getY()/32;
+				
+			if ( 
+				  (game.cash>=weaponSpecs->getPrice(game.weaponType)) &&
+				  ( pointers[0]->getX()>=115 ) &&
+				  ( pointers[0]->getX()<=640 ) &&
+				  ( !grids[game.selectedMap]->isBuild(x1,y1) )
 				)
 			{
 				// Find first empty place in weapons array.
@@ -3131,27 +3165,22 @@ void processEvent()
 					}
 				}
 				
-				
-				// Snap build location to 32x32 bits grid
-				int x = (pointers[0]->getXOffset()/32)*32;
-				int y = (pointers[0]->getYOffset()/32)*32;
-				
 				if (grids[game.selectedMap]!=NULL)
 				{
 					// Set new location as build full.
-					grids[game.selectedMap]->setBuild(x,y);
+					grids[game.selectedMap]->setBuild(x1,y1);
 				}
 				
 				// Create new weapon
-				initWeapon(x,y,id, game.weaponType);
-							
+				initWeapon(x1*32,y1*32,id, game.weaponType);
+				
 				// Selected new weapon
 				game.selectedWeapon=id;	
 
 				// Pay for the weapon
 				game.cash-=weaponSpecs->getPrice(game.weaponType);
 			}
-		}		
+		}
 		break;
 		
 		case eventNewWeaponNext:		
@@ -3173,7 +3202,7 @@ void processEvent()
 			{
 				// Weapon Transparent (Not for sale)
 				buttons[6]->setColor(IMAGE_COLOR3);
-			}		
+			}
 	
 			buttons[6]->setImageNormal(weaponSpecs->getImage(game.weaponType));
 			buttons[6]->setImageFocus(weaponSpecs->getImage(game.weaponType));

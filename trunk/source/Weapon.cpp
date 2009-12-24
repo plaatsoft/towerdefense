@@ -113,9 +113,9 @@ void Weapon::draw()
 	GRRLIB_DrawImg( x, y, image, angle, 1, 1, IMAGE_COLOR );		
 	
 	// Draw reload time bar
-	float proc = ((rate-delay) / rate) * 21.0;
-	GRRLIB_Rectangle(x+5, y+34, 20, 4, GRRLIB_BLACK, 0);
-	GRRLIB_Rectangle(x+5, y+35, proc, 2, GRRLIB_GREEN, 1);
+	float proc = ((rate-delay) / rate) * 18.0;
+	GRRLIB_Rectangle(x+5, y+28, 20, 4, GRRLIB_BLACK, 0);
+	GRRLIB_Rectangle(x+6, y+29, proc, 2, GRRLIB_YELLOW, 1);
 }
 
 void Weapon::fire(Monster *monsters[MAX_MONSTERS])
