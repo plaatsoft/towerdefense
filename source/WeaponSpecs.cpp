@@ -49,7 +49,7 @@
 #define CANON_MIN_POWER 		20
 #define MISSLE_MIN_POWER		30
 #define LASER_MIN_POWER 		40
-#define NUCK_MIN_POWER 			100
+#define NUCK_MIN_POWER 			60
 
 #define GUN_STEP_POWER  		1
 #define RIFLE_STEP_POWER  		2

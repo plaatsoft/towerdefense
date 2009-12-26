@@ -32,6 +32,7 @@
 **  - Adapted weapon specifications (Weapons are more powerfull).
 **  - Adapted enemy specifications (enemies are less powerfull).
 **  - Adapted six easy maps to be more easy. 
+**  - Increase enemy walk speed after each 20 waves. 
 **  - BugFix: Highscore screens now show correct amount of entries!
 **  - Build game with devkitPPC r19 compiler.
 **
@@ -719,8 +720,8 @@ void initMonsters(bool special)
 		monsters[id]->setImage(monsterSpecs->getImage(type));
 		monsters[id]->setEnergy(monsterSpecs->getEnergy(type));
 		
-		// Increase monster speed after every 25 waves;
-		int step = (game.wave/25)+1;
+		// Increase monster speed after every 20 waves;
+		int step = (game.wave/20)+1;
 		monsters[id]->setStep(step);	
 			
 		if (special)
@@ -739,7 +740,7 @@ void initMonsters(bool special)
 			  	  
 		// Calculate delay between two monsters.
 		int delayOffset=game.wave*3;
-		if (delayOffset>90) delayOffset=90;
+		if (delayOffset>95) delayOffset=95;
 		delay+=(100-delayOffset);
 	}
 	trace->event(s_fn,0,"leave [void]");
@@ -2048,7 +2049,7 @@ void drawPanelText2(void)
 	drawText(xpos+30,ypos,fontPanel,"CASH");
 	
 	ypos+=12;
-	drawText(xpos+27,ypos,fontPanel,"$%04d", game.cash);
+	drawText(xpos+20,ypos,fontPanel,"$%06d", game.cash);
 }
 
 
@@ -3450,7 +3451,7 @@ void processEvent()
 			if (amount<count)
 			{
 				// Create next monster wave
-				if (game.waveDelay>500) game.waveDelay-=50;
+				if (game.waveDelay>300) game.waveDelay-=50;
 				game.waveCountDown=game.waveDelay;
 				game.wave++;
 				
