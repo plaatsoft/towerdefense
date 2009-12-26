@@ -23,6 +23,14 @@
 **  - Improve weapon graphics.
 **  - Improve graphical fire effect!
 **  - Multi language support.
+**  - BugFix: Highscore shows sometimes 42 entries!
+**  - Bugfix: Webservices multi inserting of same values is filter out!
+**
+**  26/12/2009 Version 0.70
+**  - Decrease monster energy levels.
+**  - Added "Easy, Medium, Hard" level select screen.
+**  - Added six medium maps.
+**  - Added six hard maps.
 **
 **  24/12/2009 Version 0.60
 **  - Increase enemy walk speed after each 25 waves. 
@@ -219,6 +227,11 @@ typedef struct
   GRRLIB_texImg *background2;
   GRRLIB_texImg *bar;
   GRRLIB_texImg *barCursor;  
+  
+  GRRLIB_texImg *panelEasy;  
+  GRRLIB_texImg *panelMedium;  
+  GRRLIB_texImg *panelHard;  
+  
   GRRLIB_texImg *scrollbar;
   GRRLIB_texImg *scrollTop;
   GRRLIB_texImg *scrollMiddle;
@@ -258,10 +271,6 @@ topscore globalHighScore[MAX_GLOBAL_HIGHSCORE+1];
 // VARIABLES
 // -----------------------------------------------------------
 
-// sound Image
-extern const unsigned char     pic1data[];
-extern int      pic1length;
-
 // logo2 Image
 extern const unsigned char     pic5data[];
 extern int      pic5length;
@@ -281,6 +290,18 @@ extern int      pic14length;
 // Bar_cursor Image
 extern const unsigned char     pic15data[];
 extern int      pic15length;
+
+// panel Easy Image
+extern const unsigned char     pic20data[];
+extern int      pic20length;
+
+// panel Medium Image
+extern const unsigned char     pic21data[];
+extern int      pic21length;
+
+// panel Hard Image
+extern const unsigned char     pic22data[];
+extern int      pic22length;
 
 // Scrollbar image
 extern const unsigned char     pic33data[];
@@ -552,6 +573,10 @@ void destroyImages(void)
    GRRLIB_FreeTexture(images.bar);
    GRRLIB_FreeTexture(images.barCursor);
       
+	GRRLIB_FreeTexture(images.panelEasy);
+   GRRLIB_FreeTexture(images.panelMedium);
+	GRRLIB_FreeTexture(images.panelHard);
+	
    GRRLIB_FreeTexture(images.pointer1);
    GRRLIB_FreeTexture(images.pointer2);
    GRRLIB_FreeTexture(images.pointer3);
@@ -620,6 +645,10 @@ void initImages(void)
    
 	images.bar=GRRLIB_LoadTexture( pic14data );
 	images.barCursor=GRRLIB_LoadTexture( pic15data );
+	
+	images.panelEasy=GRRLIB_LoadTexture( pic20data );
+	images.panelMedium=GRRLIB_LoadTexture( pic21data );
+	images.panelHard=GRRLIB_LoadTexture( pic22data );
    
 	images.scrollbar=GRRLIB_LoadTexture(pic33data);
 	images.scrollTop=GRRLIB_LoadTexture( pic34data);
@@ -754,34 +783,98 @@ void initPointers(void)
    trace->event(s_fn,0,"leave [void]");
 }
 
-// Init Grid
-void initGrid(int index)
+// Init Grids
+void initGrids(int level)
 {
-   const char *s_fn="initGrid";
-   trace->event(s_fn,0,"enter [index=%d]",index);
+   const char *s_fn="initGrids";
+   trace->event(s_fn,0,"enter [level=%d]",level);
 
-	grids[index] = new Grid();
-	grids[index]->setIndex(index);
+	// Create destroy all grids, if any
+   destroyGrids();
 	
-	switch( index )
+	switch( level )
 	{
-		case 0: grids[index]->create(GRID1_DIRECTORY);
-				break;
+		// Easy levels
+		case eventInitEasyLevels:
 		
-		case 1: grids[index]->create(GRID2_DIRECTORY);
-				break;
-			
-		case 2: grids[index]->create(GRID3_DIRECTORY);
-				break;
-				
-		case 3: grids[index]->create(GRID4_DIRECTORY);
-				break;
-				
-		case 4: grids[index]->create(GRID5_DIRECTORY);
-				break;
-				
-		case 5: grids[index]->create(GRID6_DIRECTORY);
-				break;
+				  grids[0] = new Grid();
+				  grids[0]->setIndex(0);
+				  grids[0]->create(GRID1_DIRECTORY);
+
+				  grids[1] = new Grid();
+				  grids[1]->setIndex(0);
+				  grids[1]->create(GRID2_DIRECTORY);
+
+				  grids[2] = new Grid();
+				  grids[2]->setIndex(0);
+				  grids[2]->create(GRID3_DIRECTORY);
+
+				  grids[3] = new Grid();
+				  grids[3]->setIndex(0);
+				  grids[3]->create(GRID4_DIRECTORY);
+
+				  grids[4] = new Grid();
+				  grids[4]->setIndex(0);
+				  grids[4]->create(GRID5_DIRECTORY);
+
+				  grids[5] = new Grid();
+				  grids[5]->setIndex(0);
+				  grids[5]->create(GRID6_DIRECTORY);				  
+				  break;
+				  				  
+		case eventInitMediumLevels: 
+		
+				  grids[0] = new Grid();
+				  grids[0]->setIndex(0);
+				  grids[0]->create(GRID7_DIRECTORY);
+
+				  grids[1] = new Grid();
+				  grids[1]->setIndex(0);
+				  grids[1]->create(GRID8_DIRECTORY);
+
+				  grids[2] = new Grid();
+				  grids[2]->setIndex(0);
+				  grids[2]->create(GRID9_DIRECTORY);
+
+				  grids[3] = new Grid();
+				  grids[3]->setIndex(0);
+				  grids[3]->create(GRID10_DIRECTORY);
+
+				  grids[4] = new Grid();
+				  grids[4]->setIndex(0);
+				  grids[4]->create(GRID11_DIRECTORY);
+
+				  grids[5] = new Grid();
+				  grids[5]->setIndex(0);
+				  grids[5]->create(GRID12_DIRECTORY);				  
+				  break;
+				  				  
+		case eventInitHardLevels: 
+		
+				  grids[0] = new Grid();
+				  grids[0]->setIndex(0);
+				  grids[0]->create(GRID13_DIRECTORY);
+
+				  grids[1] = new Grid();
+				  grids[1]->setIndex(0);
+				  grids[1]->create(GRID14_DIRECTORY);
+
+				  grids[2] = new Grid();
+				  grids[2]->setIndex(0);
+				  grids[2]->create(GRID15_DIRECTORY);
+
+				  grids[3] = new Grid();
+				  grids[3]->setIndex(0);
+				  grids[3]->create(GRID16_DIRECTORY);
+
+				  grids[4] = new Grid();
+				  grids[4]->setIndex(0);
+				  grids[4]->create(GRID17_DIRECTORY);
+
+				  grids[5] = new Grid();
+				  grids[5]->setIndex(0);
+				  grids[5]->create(GRID18_DIRECTORY);				  
+				  break;
 	}
 	trace->event(s_fn,0,"leave [void]");
 }
@@ -836,80 +929,89 @@ void initButtons(void)
 	{			
 		case stateMainMenu:
 		{
-			// HighScore Button 
+			int ypos=40;
+			
+			// Play Button 
 			buttons[0]=new Button();
 			buttons[0]->setX(440);
-			buttons[0]->setY(80);
+			buttons[0]->setY(ypos);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
-			buttons[0]->setLabel("High Score");
+			buttons[0]->setLabel("Play");
 			buttons[0]->setColor(IMAGE_COLOR);
-			buttons[0]->setIndex(0);
+			buttons[0]->setIndex(6);
 			
-			// Help Button 
+			// HighScore Button 
+			ypos+=40;
 			buttons[1]=new Button();
 			buttons[1]->setX(440);
-			buttons[1]->setY(120);
+			buttons[1]->setY(ypos);
 			buttons[1]->setImageNormal(images.button2);
 			buttons[1]->setImageFocus(images.buttonFocus2);
-			buttons[1]->setLabel("Help");			
+			buttons[1]->setLabel("High Score");
 			buttons[1]->setColor(IMAGE_COLOR);
-			buttons[1]->setIndex(1);
-
-			// Credits Button 
+			buttons[1]->setIndex(0);
+			
+			// Help Button 
+			ypos+=40;
 			buttons[2]=new Button();
 			buttons[2]->setX(440);
-			buttons[2]->setY(160);
+			buttons[2]->setY(ypos);
 			buttons[2]->setImageNormal(images.button2);
 			buttons[2]->setImageFocus(images.buttonFocus2);
-			buttons[2]->setLabel("Credits");	
+			buttons[2]->setLabel("Help");			
 			buttons[2]->setColor(IMAGE_COLOR);
-			buttons[2]->setIndex(2);
-			
-			// Sound Settings Button 
+			buttons[2]->setIndex(1);
+
+			// Credits Button 
+			ypos+=40;
 			buttons[3]=new Button();
 			buttons[3]->setX(440);
-			buttons[3]->setY(240);
+			buttons[3]->setY(ypos);
 			buttons[3]->setImageNormal(images.button2);
 			buttons[3]->setImageFocus(images.buttonFocus2);
-			buttons[3]->setLabel("Sound Settings");	
+			buttons[3]->setLabel("Credits");	
 			buttons[3]->setColor(IMAGE_COLOR);
-			buttons[3]->setIndex(3);
+			buttons[3]->setIndex(2);
 			
-			// Release Notes Button 
+			// Sound Settings Button 
+			ypos+=40;
 			buttons[4]=new Button();
 			buttons[4]->setX(440);
-			buttons[4]->setY(200);
+			buttons[4]->setY(ypos);
 			buttons[4]->setImageNormal(images.button2);
 			buttons[4]->setImageFocus(images.buttonFocus2);
-			buttons[4]->setLabel("Release Notes");	
+			buttons[4]->setLabel("Sound Settings");	
 			buttons[4]->setColor(IMAGE_COLOR);
-			buttons[4]->setIndex(4);
+			buttons[4]->setIndex(3);
 			
-			// User initials Button 
+			// Release Notes Button 
+			ypos+=40;
 			buttons[5]=new Button();
 			buttons[5]->setX(440);
-			buttons[5]->setY(280);
+			buttons[5]->setY(ypos);
 			buttons[5]->setImageNormal(images.button2);
 			buttons[5]->setImageFocus(images.buttonFocus2);
-			buttons[5]->setLabel("User initials");	
+			buttons[5]->setLabel("Release Notes");	
 			buttons[5]->setColor(IMAGE_COLOR);
-			buttons[5]->setIndex(5);
-					
-			// Play Button 
+			buttons[5]->setIndex(4);
+			
+			// User initials Button 
+			ypos+=40;
 			buttons[6]=new Button();
 			buttons[6]->setX(440);
-			buttons[6]->setY(40);
+			buttons[6]->setY(ypos);
 			buttons[6]->setImageNormal(images.button2);
 			buttons[6]->setImageFocus(images.buttonFocus2);
-			buttons[6]->setLabel("Play");
+			buttons[6]->setLabel("User initials");	
 			buttons[6]->setColor(IMAGE_COLOR);
-			buttons[6]->setIndex(6);
-	
+			buttons[6]->setIndex(5);
+								
 			// Exit HBC Button 
+			ypos=400;
 			buttons[7]=new Button();
 			buttons[7]->setX(440);
-			buttons[7]->setY(400);
+			buttons[7]->setY(ypos);
 			buttons[7]->setImageNormal(images.button2);
 			buttons[7]->setImageFocus(images.buttonFocus2);
 			buttons[7]->setLabel("Exit HBC");	
@@ -917,9 +1019,10 @@ void initButtons(void)
 			buttons[7]->setIndex(7);
 	 
 			// Reset Wii Button 
+			ypos+=40;
 			buttons[8]=new Button();
 			buttons[8]->setX(440);
-			buttons[8]->setY(440);
+			buttons[8]->setY(ypos);
 			buttons[8]->setImageNormal(images.button2);
 			buttons[8]->setImageFocus(images.buttonFocus2);
 			buttons[8]->setLabel("Reset Wii");	
@@ -927,10 +1030,55 @@ void initButtons(void)
 			buttons[8]->setIndex(8);
 		}
 		break;
-				
+		
+		
+		case stateLevelMenu:
+		{
+			// Easy Button 
+			buttons[0]=new Button();
+			buttons[0]->setX(40);
+			buttons[0]->setY(410);
+			buttons[0]->setImageNormal(images.button2);
+			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setLabel("Easy");
+			buttons[0]->setColor(IMAGE_COLOR);
+			buttons[0]->setIndex(6);
+			
+			// Medium Button 
+			buttons[1]=new Button();
+			buttons[1]->setX(240);
+			buttons[1]->setY(410);
+			buttons[1]->setImageNormal(images.button2);
+			buttons[1]->setImageFocus(images.buttonFocus2);
+			buttons[1]->setLabel("Medium");
+			buttons[1]->setColor(IMAGE_COLOR);
+			buttons[1]->setIndex(0);
+			
+			// Hard Button 
+			buttons[2]=new Button();
+			buttons[2]->setX(440);
+			buttons[2]->setY(410);
+			buttons[2]->setImageNormal(images.button2);
+			buttons[2]->setImageFocus(images.buttonFocus2);
+			buttons[2]->setLabel("Hard");			
+			buttons[2]->setColor(IMAGE_COLOR);
+			buttons[2]->setIndex(1);
+			
+			// Back Button 
+			buttons[3]=new Button();
+			buttons[3]->setX(240);
+			buttons[3]->setY(460);
+			buttons[3]->setImageNormal(images.button2);
+			buttons[3]->setImageFocus(images.buttonFocus2);
+			buttons[3]->setLabel("Back" );
+			buttons[3]->setColor(IMAGE_COLOR);
+			buttons[3]->setIndex(6);
+		}
+		break;
+		
 		case stateMapSelectMenu:
 		{	
-			// Button (Play Map1)
+			// Map1 Button
 			buttons[0]=new Button();
 			buttons[0]->setX(40);
 			buttons[0]->setY(250);
@@ -940,7 +1088,7 @@ void initButtons(void)
 			buttons[0]->setColor(IMAGE_COLOR);
 			buttons[0]->setIndex(0);
 						
-			// Button (Play Map2)
+			// Map2 Button 
 			buttons[1]=new Button();
 			buttons[1]->setX(240);
 			buttons[1]->setY(250);
@@ -950,7 +1098,7 @@ void initButtons(void)
 			buttons[1]->setColor(IMAGE_COLOR);
 			buttons[1]->setIndex(1);
 				
-			// Button (Play Map3)
+			// Map3 Button 
 			buttons[2]=new Button();
 			buttons[2]->setX(440);
 			buttons[2]->setY(250);
@@ -960,7 +1108,7 @@ void initButtons(void)
 			buttons[2]->setColor(IMAGE_COLOR);
 			buttons[2]->setIndex(2);
 			
-			// Button (Play Map4)
+			// Map4 Button 
 			buttons[3]=new Button();
 			buttons[3]->setX(40);
 			buttons[3]->setY(410);
@@ -970,7 +1118,7 @@ void initButtons(void)
 			buttons[3]->setColor(IMAGE_COLOR);
 			buttons[3]->setIndex(3);
 			
-			// Button (Play Map5)
+			// Map5 Button 
 			buttons[4]=new Button();
 			buttons[4]->setX(240);
 			buttons[4]->setY(410);
@@ -980,7 +1128,7 @@ void initButtons(void)
 			buttons[4]->setColor(IMAGE_COLOR);
 			buttons[4]->setIndex(4);
 			
-			// Button (Play Map6)
+			// Map6 Button
 			buttons[5]=new Button();
 			buttons[5]->setX(440);
 			buttons[5]->setY(410);
@@ -990,13 +1138,13 @@ void initButtons(void)
 			buttons[5]->setColor(IMAGE_COLOR);
 			buttons[5]->setIndex(5);
 			
-			// Button (Main Menu)
+			// Back Button 
 			buttons[6]=new Button();
 			buttons[6]->setX(240);
 			buttons[6]->setY(460);
 			buttons[6]->setImageNormal(images.button2);
 			buttons[6]->setImageFocus(images.buttonFocus2);
-			buttons[6]->setLabel("Main Menu");
+			buttons[6]->setLabel("Back" );
 			buttons[6]->setColor(IMAGE_COLOR);
 			buttons[6]->setIndex(6);
 		}
@@ -2158,6 +2306,29 @@ void drawScreen(void)
 		}
 		break;
 		
+		case stateLevelMenu:
+		{
+			// Draw background
+			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+			  	
+			GRRLIB_DrawImg(55,135, images.panelEasy, 0, 1, 1, IMAGE_COLOR );						
+			GRRLIB_DrawImg(255,135, images.panelMedium, 0, 1, 1, IMAGE_COLOR );
+			GRRLIB_DrawImg(455,135, images.panelHard, 0, 1, 1, IMAGE_COLOR );		
+			
+			// Draw Buttons
+			drawButtons();
+		  		  
+			// Init text layer	  
+         GRRLIB_initTexture();
+
+			// Draw title
+	      drawText(110, ypos, fontTitle, "Level Select");	
+
+			// Draw Button Text labels
+			drawButtonsText(0);
+		}
+		break;
+		
 		case stateMapSelectMenu:
 		{
 			// Draw background
@@ -3121,6 +3292,21 @@ void processEvent()
 	// Event state
 	switch (game.event)
 	{
+		case eventInitEasyLevels:
+			trace->event(s_fn,0,"event=eventInitEasyLevels");
+			initGrids(eventInitEasyLevels);
+			break;
+
+		case eventInitMediumLevels:
+			trace->event(s_fn,0,"event=eventInitMediumLevels");
+			initGrids(eventInitMediumLevels);
+			break;
+
+		case eventInitHardLevels:
+		   trace->event(s_fn,0,"event=eventInitHardLevels");
+			initGrids(eventInitHardLevels);			
+			break;
+			
 		case eventNewWeaponSelected:		
 		{
 			trace->event(s_fn,0,"event=eventNewWeaponSelected");
@@ -3382,189 +3568,187 @@ void processStateMachine()
 	switch (game.stateMachine)
 	{
    
-	case stateIntro1:
-	{
-		trace->event(s_fn,0,"stateMachine=stateIntro1");
-	
-		// Start background music
-		sound->play();
-	
-		// Workaround: Split loadings maps else startup too slow
-		initGrid(0);
-		initGrid(1);
-		initGrid(2);
-	}
-	break;
-
-	case stateIntro2:
-	{
-		trace->event(s_fn,0,"stateMachine=stateIntro2");
-		
-		// Workaround: Split loadings maps else startup too slow
-		initGrid(3);
-		initGrid(4);
-		initGrid(5);
-	}
-	break;
-	 
-	case stateMainMenu:
-	{
-		trace->event(s_fn,0,"stateMachine=stateMainMenu");
-		
-		// Init buttons
-		initButtons();
-	}
-	break;
-
-	case stateMapSelectMenu:
-	{
-		trace->event(s_fn,0,"stateMachine=stateMapSelectMenu");
-		
-		// Init buttons
-		initButtons();	
-					
-		// Init game variables
-		initGame(50);
-	}
-	break;
-	
-	case stateGame:
-	{
-		trace->event(s_fn,0,"stateMachine=stateGame");
-
-		// Init buttons
-		initButtons();	
-
-		if (game.prevStateMachine!=stateGameQuit)
+		case stateIntro1:
 		{
-			// Init game variables
-			initGame(0);
+			trace->event(s_fn,0,"stateMachine=stateIntro1");
+		
+			// Start background music
+			sound->play();
 		}
-	}
-	break;
-	
-	case stateGameQuit:	
-	{
-		trace->event(s_fn,0,"stateMachine=stateGameQuit");
-		
-		// Init buttons
-		initButtons();	
-	}
-	break;
-	
-	case stateGameOver:
-	{
-		trace->event(s_fn,0,"stateMachine=stateGameOver");
-		
-		// Init buttons
-		initButtons();	
-	}
-	break;
-	
-	case stateReleaseNotes:
-	{
-		trace->event(s_fn,0,"stateMachine=stateReleaseNotes");
-		game.scrollIndex=0;
-	
-		// Init buttons
-		initButtons();		
-	}
-	break;
-	
-	case stateLocalHighScore:
-	{
-		trace->event(s_fn,0,"stateMachine=stateLocalHighScore");
-		game.scrollIndex=0;
-		
-		// Init buttons
-		initButtons();
-	}
-	break;
-	
-	case stateTodayHighScore:
-	{
-		trace->event(s_fn,0,"stateMachine=stateTodayHighScore");
-		game.scrollIndex=0;
-		
-		// Fetch data for network thread
-		char *buffer=NULL;
-		buffer=tcp_get_today_highscore();
-		loadTodayHighScore(buffer);		     
-			  
-		// Init buttons
-		initButtons();		
-	}
-	break;
-	
-	case stateGlobalHighScore:
-	{
-		trace->event(s_fn,0,"stateMachine=stateGlobalHighScore");
-		game.scrollIndex=0;
-		
-		// Fetch data for network thread
-		char *buffer=NULL;
-		buffer=tcp_get_global_highscore();
-		loadGlobalHighScore(buffer);
-			  
-		// Init buttons
-		initButtons();
-	}
-	break;
-			
-	case stateCredits:
-	{
-		trace->event(s_fn,0,"stateMachine=stateCredits");
-		
-		// Init buttons
-		initButtons();	
-	}
-	break;
-	 
-	case stateSoundSettings:
-	{
-		trace->event(s_fn,0,"stateMachine=stateSoundSettings");
-		
-		// Init buttons
-		initButtons();	
-	}
-	break;
-	
-	case stateHelp1:
-	{
-		trace->event(s_fn,0,"stateMachine=stateHelp1");
-		
-		// Init buttons
-		initButtons();
-	}
-	break;
+		break;
 
-	case stateHelp2:
-	{
-		trace->event(s_fn,0,"stateMachine=stateHelp2");
+		case stateIntro2:
+		{
+			trace->event(s_fn,0,"stateMachine=stateIntro2");
+		}
+		break;
 		
-		// Init buttons
-		initButtons();
-	}
-	break;
+		case stateMainMenu:
+		{
+			trace->event(s_fn,0,"stateMachine=stateMainMenu");
+		
+			// Init buttons
+			initButtons();
+		}
+		break;
+
+		case stateLevelMenu:
+		{
+			trace->event(s_fn,0,"stateMachine=stateLevelMenu");
+			
+			// Init buttons
+			initButtons();	
+		}
+		break;
+		
+		case stateMapSelectMenu:
+		{
+			trace->event(s_fn,0,"stateMachine=stateMapSelectMenu");
+			
+			// Init buttons
+			initButtons();	
+						
+			// Init game variables
+			initGame(50);
+		}
+		break;
 	
-	case stateHelp3:
-	{
-		trace->event(s_fn,0,"stateMachine=stateHelp3");
+		case stateGame:
+		{
+			trace->event(s_fn,0,"stateMachine=stateGame");
+	
+			// Init buttons
+			initButtons();	
+	
+			if (game.prevStateMachine!=stateGameQuit)
+			{
+				// Init game variables
+				initGame(0);
+			}
+		}
+		break;
+	
+		case stateGameQuit:	
+		{
+			trace->event(s_fn,0,"stateMachine=stateGameQuit");
 		
-		// Init buttons
-		initButtons();
-	}
-	break;
+			// Init buttons
+			initButtons();	
+		}
+		break;
+	
+		case stateGameOver:
+		{
+			trace->event(s_fn,0,"stateMachine=stateGameOver");
+			
+			// Init buttons
+			initButtons();	
+		}
+		break;
+	
+		case stateReleaseNotes:
+		{
+			trace->event(s_fn,0,"stateMachine=stateReleaseNotes");
+			game.scrollIndex=0;
+		
+			// Init buttons
+			initButtons();		
+		}
+		break;
+	
+		case stateLocalHighScore:
+		{
+			trace->event(s_fn,0,"stateMachine=stateLocalHighScore");
+			game.scrollIndex=0;
+			
+			// Init buttons
+			initButtons();
+		}
+		break;
+	
+		case stateTodayHighScore:
+		{
+			trace->event(s_fn,0,"stateMachine=stateTodayHighScore");
+			game.scrollIndex=0;
+			
+			// Fetch data for network thread
+			char *buffer=NULL;
+			buffer=tcp_get_today_highscore();
+			loadTodayHighScore(buffer);		     
+				
+			// Init buttons
+			initButtons();		
+		}
+		break;
+	
+		case stateGlobalHighScore:
+		{
+			trace->event(s_fn,0,"stateMachine=stateGlobalHighScore");
+			game.scrollIndex=0;
+			
+			// Fetch data for network thread
+			char *buffer=NULL;
+			buffer=tcp_get_global_highscore();
+			loadGlobalHighScore(buffer);
+				
+			// Init buttons
+			initButtons();
+		}
+		break;
+			
+		case stateCredits:
+		{
+			trace->event(s_fn,0,"stateMachine=stateCredits");
+			
+			// Init buttons
+			initButtons();	
+		}
+		break;
+	 
+		case stateSoundSettings:
+		{
+			trace->event(s_fn,0,"stateMachine=stateSoundSettings");
+			
+			// Init buttons
+			initButtons();	
+		}
+		break;
+		
+		case stateHelp1:
+		{
+			trace->event(s_fn,0,"stateMachine=stateHelp1");
+		
+			// Init buttons
+			initButtons();
+		}
+		break;
+	
+		case stateHelp2:
+		{
+			trace->event(s_fn,0,"stateMachine=stateHelp2");
+			
+			// Init buttons
+			initButtons();
+		}
+		break;
+		
+		case stateHelp3:
+		{
+			trace->event(s_fn,0,"stateMachine=stateHelp3");
+			
+			// Init buttons
+			initButtons();
+		}
+		break;
 	   	
-	case stateUserSettings:
-	{
-		trace->event(s_fn,0,"stateMachine=stateUserSettings");
-		
-		// Init buttons
-		initButtons();
-	}
-	break;
-  
+		case stateUserSettings:
+		{
+			trace->event(s_fn,0,"stateMachine=stateUserSettings");
+			
+			// Init buttons
+			initButtons();
+		}
+		break;
 	}
   
 	// Store state

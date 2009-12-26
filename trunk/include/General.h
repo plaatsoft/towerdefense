@@ -26,8 +26,8 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.60"
-#define RELEASE_DATE        	"24-12-2009" 
+#define PROGRAM_VERSION     	"0.70"
+#define RELEASE_DATE        	"26-12-2009" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -51,6 +51,7 @@
 #define TRACE_FILENAME      	"sd:/apps/TowerDefense/TowerDefense.trc"
 #define GAME_DIRECTORY      	"sd:/apps/TowerDefense/"
 
+// Easy Maps
 #define GRID1_DIRECTORY			"sd:/apps/TowerDefense/map1"
 #define GRID2_DIRECTORY			"sd:/apps/TowerDefense/map2"
 #define GRID3_DIRECTORY   	  	"sd:/apps/TowerDefense/map3"
@@ -58,9 +59,25 @@
 #define GRID5_DIRECTORY   	  	"sd:/apps/TowerDefense/map5"
 #define GRID6_DIRECTORY   	  	"sd:/apps/TowerDefense/map6"
 
+// Medium Maps
+#define GRID7_DIRECTORY   	  	"sd:/apps/TowerDefense/map7"
+#define GRID8_DIRECTORY   	  	"sd:/apps/TowerDefense/map8"
+#define GRID9_DIRECTORY   	  	"sd:/apps/TowerDefense/map9"
+#define GRID10_DIRECTORY   	"sd:/apps/TowerDefense/map10"
+#define GRID11_DIRECTORY   	"sd:/apps/TowerDefense/map11"
+#define GRID12_DIRECTORY   	"sd:/apps/TowerDefense/map12"
+
+// Hard Maps
+#define GRID13_DIRECTORY		"sd:/apps/TowerDefense/map13"
+#define GRID14_DIRECTORY   	"sd:/apps/TowerDefense/map14"
+#define GRID15_DIRECTORY   	"sd:/apps/TowerDefense/map15"
+#define GRID16_DIRECTORY   	"sd:/apps/TowerDefense/map16"
+#define GRID17_DIRECTORY   	"sd:/apps/TowerDefense/map17"
+#define GRID18_DIRECTORY   	"sd:/apps/TowerDefense/map18"
+
 #define YOFFSET					25
-#define WSP_POINTER_X      		200
-#define WSP_POINTER_Y      		250
+#define WSP_POINTER_X      	200
+#define WSP_POINTER_Y      	250
 
 #define GRRLIB_WHITESMOKE   	0xFFFFFFFF
 #define GRRLIB_WHITE_TRANS   	0xFFFFFF44
@@ -151,21 +168,22 @@ enum
 	stateIntro1=1,   
 	stateIntro2=2, 
 	stateMainMenu=3,
-	stateMapSelectMenu=4,
-	stateGame=5,
-	stateGameOver=6,
-	stateGameQuit=7,
-	stateLocalHighScore=8,
-	stateTodayHighScore=9,
-	stateGlobalHighScore=10,
-	stateHelp1=11,
-	stateHelp2=12,
-	stateHelp3=13,
-	stateCredits=14,
-	stateSoundSettings=15,
-	stateReleaseNotes=16,
-	stateUserSettings=17,
-	stateQuit=18
+	stateLevelMenu=4,
+	stateMapSelectMenu=5,
+	stateGame=6,
+	stateGameOver=7,
+	stateGameQuit=8,
+	stateLocalHighScore=9,
+	stateTodayHighScore=10,
+	stateGlobalHighScore=11,
+	stateHelp1=12,
+	stateHelp2=13,
+	stateHelp3=14,
+	stateCredits=15,
+	stateSoundSettings=16,
+	stateReleaseNotes=17,
+	stateUserSettings=18,
+	stateQuit=19
 };
 
 // Event machine events
@@ -174,6 +192,7 @@ enum
 	eventNone=0,
 	eventLanch=1,  
 	eventSaveHighScore=2,
+	
 	eventWeaponPowerUpgrade=3,
 	eventWeaponRangeUpgrade=4,
 	eventWeaponRateUpgrade=5,
@@ -181,7 +200,11 @@ enum
 	eventNewWeaponNext=6,
 	eventNewWeaponPrevious=7,
 	eventNewWeaponSelected=8,
-	eventNewweaponDeployed=9
+	eventNewweaponDeployed=9,
+	
+	eventInitEasyLevels=10,
+	eventInitMediumLevels=11,
+	eventInitHardLevels=12
 };
 
 enum
@@ -195,6 +218,13 @@ enum
    fontSmall=6,
    fontButton=7,
    fontWelcome=8
+};
+
+enum
+{
+   gameEasy=0,
+	gameMedium=1,
+   gameHard=2
 };
 
 typedef struct 
@@ -218,6 +248,7 @@ typedef struct
 	int selectedWeapon;	
 	bool selectedNewWeapon;
 	int waveDelay;
+	int mode;
 		
 	// game panel variables
 	int panelXOffset;
