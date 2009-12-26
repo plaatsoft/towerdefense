@@ -41,6 +41,7 @@ Grid::Grid()
   
    baseX=0;
 	baseY=0;
+	maxLocations=0;
 	
 	imageBase=NULL;
 	imageRoad1=NULL;
@@ -51,6 +52,15 @@ Grid::Grid()
 	imageGeneral1=NULL;
 	imageGeneral2=NULL;
 	
+	// Clear grid data
+	for (int y=0;y<MAX_GRID_Y;y++)
+	{
+		for (int x=0;x<MAX_GRID_X;x++)
+		{
+			gridData[y][x]=0x00;
+		}
+	}
+			
 	trace->event(s_fn,0,"leave [void]");  
 }
 	
@@ -164,8 +174,8 @@ void Grid::parseGrid(void)
 
 GRRLIB_texImg * Grid::loadImage(const char *filename)
 {
-    const char *s_fn="Grid::loadImage";
-    trace->event(s_fn,0,"enter [filename=%s]",filename);
+   const char *s_fn="Grid::loadImage";
+   trace->event(s_fn,0,"enter [filename=%s]",filename);
    
 	u8 data[MAX_BUFFER_SIZE];
 	memset(data,0x00,MAX_BUFFER_SIZE);
@@ -173,17 +183,21 @@ GRRLIB_texImg * Grid::loadImage(const char *filename)
 	FILE *fp = fopen(filename, "r");
 	if (fp!=NULL)
 	{  
-	    fread(&data, 1, MAX_BUFFER_SIZE, fp);
+	   fread(&data, 1, MAX_BUFFER_SIZE, fp);
 		fclose(fp);
 		trace->event(s_fn,0,"leave [DATA]");
 		return GRRLIB_LoadTexture( data );
 	}  
+	else
+	{
+		trace->event(s_fn,0,"file %s not found!",filename);
+	}
 	fclose(fp);
 	trace->event(s_fn,0,"leave [NULL]");
 	return NULL;
 }
 
-void Grid::loadGrid(const char* filename)
+bool Grid::loadGrid(const char* filename)
 {
    const char *s_fn="Grid::initGrid";
    trace->event(s_fn,0,"enter [filename=%s]",filename);
@@ -192,7 +206,8 @@ void Grid::loadGrid(const char* filename)
    mxml_node_t *tree =NULL;
    mxml_node_t *group;   
    const char  *pointer;
-
+   bool error=false;
+	
    maxLines=0;
    
    /* Load our xml file! */
@@ -201,24 +216,30 @@ void Grid::loadGrid(const char* filename)
    {   
       tree = mxmlLoadFile(NULL, fp, MXML_NO_CALLBACK);
       fclose(fp);
-   }
     
-   // Read Grid Lines
-   for (group = mxmlFindElement(tree, tree, "line", NULL, NULL, MXML_DESCEND);
+		// Read Grid Lines
+		for (group = mxmlFindElement(tree, tree, "line", NULL, NULL, MXML_DESCEND);
         group != NULL;
         group = mxmlFindElement(group, tree, "line", NULL, NULL, MXML_DESCEND))
-   {		 	  	  
-      pointer=mxmlElementGetAttr(group,"data");
-      if (pointer!=NULL) 
-		{
-			strcpy(gridData[maxLines],pointer);  
+		{		 	  	  
+			pointer=mxmlElementGetAttr(group,"data");
+			if (pointer!=NULL) 
+			{
+				strcpy(gridData[maxLines],pointer);  
+			}
+			maxLines++;
 		}
-		maxLines++;
-   }
    
-   mxmlDelete(group);
-   mxmlDelete(tree);
-   trace->event(s_fn,0,"leave [maxLines=%d]",maxLines);
+		mxmlDelete(group);
+		mxmlDelete(tree);
+	}
+	else
+	{
+		trace->event(s_fn,0,"file %s not found!",filename);
+		error=true;
+	}
+   trace->event(s_fn,0,"leave [error=%d|maxLines=%d]",error, maxLines);
+	return error;
 }
 
 void Grid::draw(int xOffset, int yOffset, float size)
@@ -403,8 +424,10 @@ void Grid::create(const char* directory)
    
    char filename[MAX_LEN];
 	sprintf(filename,"%s/map.xml",directory);
-   loadGrid(filename);
-	parseGrid();
+   if (!loadGrid(filename))
+	{
+		parseGrid();
+	}
 	
 	// Load images
 	sprintf(filename,"%s/general1.png",directory);

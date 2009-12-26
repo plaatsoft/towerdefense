@@ -468,7 +468,7 @@ int Weapon::getRange(void)
 
 int Weapon::getRate(void)
 {
-	return rate;
+	return (rate/AVERAGE_FPS);
 }
 
 int Weapon::getMaxPower(void)
@@ -483,7 +483,7 @@ int Weapon::getMaxRange(void)
 
 int Weapon::getMaxRate(void)
 {
-	return maxRate;
+	return (maxRate/AVERAGE_FPS);
 }
 	
 // ------------------------------

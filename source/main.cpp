@@ -23,14 +23,17 @@
 **  - Improve weapon graphics.
 **  - Improve graphical fire effect!
 **  - Multi language support.
-**  - BugFix: Highscore shows sometimes 42 entries!
 **  - Bugfix: Webservices multi inserting of same values is filter out!
 **
 **  26/12/2009 Version 0.70
-**  - Decrease monster energy levels.
 **  - Added "Easy, Medium, Hard" level select screen.
-**  - Added six medium maps.
-**  - Added six hard maps.
+**  - Added six medium level and six hard level maps.
+**  - Added version information is webservice call.
+**  - Adapted weapon specifications (Weapons are more powerfull).
+**  - Adapted enemy specifications (enemies are less powerfull).
+**  - Adapted six easy maps to be more easy. 
+**  - BugFix: Highscore screens now show correct amount of entries!
+**  - Build game with devkitPPC r19 compiler.
 **
 **  24/12/2009 Version 0.60
 **  - Increase enemy walk speed after each 25 waves. 
@@ -789,7 +792,7 @@ void initGrids(int level)
    const char *s_fn="initGrids";
    trace->event(s_fn,0,"enter [level=%d]",level);
 
-	// Create destroy all grids, if any
+	// First destroy all loaded grids, if any
    destroyGrids();
 	
 	switch( level )
@@ -797,84 +800,84 @@ void initGrids(int level)
 		// Easy levels
 		case eventInitEasyLevels:
 		
-				  grids[0] = new Grid();
-				  grids[0]->setIndex(0);
-				  grids[0]->create(GRID1_DIRECTORY);
+			grids[0] = new Grid();
+			grids[0]->setIndex(0);
+			grids[0]->create(GRID1_DIRECTORY);
 
-				  grids[1] = new Grid();
-				  grids[1]->setIndex(0);
-				  grids[1]->create(GRID2_DIRECTORY);
+			grids[1] = new Grid();
+			grids[1]->setIndex(1);
+			grids[1]->create(GRID2_DIRECTORY);
 
-				  grids[2] = new Grid();
-				  grids[2]->setIndex(0);
-				  grids[2]->create(GRID3_DIRECTORY);
+			grids[2] = new Grid();
+			grids[2]->setIndex(2);
+			grids[2]->create(GRID3_DIRECTORY);
 
-				  grids[3] = new Grid();
-				  grids[3]->setIndex(0);
-				  grids[3]->create(GRID4_DIRECTORY);
+			grids[3] = new Grid();
+			grids[3]->setIndex(3);
+			grids[3]->create(GRID4_DIRECTORY);
 
-				  grids[4] = new Grid();
-				  grids[4]->setIndex(0);
-				  grids[4]->create(GRID5_DIRECTORY);
+			grids[4] = new Grid();
+			grids[4]->setIndex(4);
+			grids[4]->create(GRID5_DIRECTORY);
 
-				  grids[5] = new Grid();
-				  grids[5]->setIndex(0);
-				  grids[5]->create(GRID6_DIRECTORY);				  
-				  break;
+			grids[5] = new Grid();
+			grids[5]->setIndex(5);
+			grids[5]->create(GRID6_DIRECTORY);				  
+			break;
 				  				  
 		case eventInitMediumLevels: 
 		
-				  grids[0] = new Grid();
-				  grids[0]->setIndex(0);
-				  grids[0]->create(GRID7_DIRECTORY);
+			grids[0] = new Grid();
+			grids[0]->setIndex(0);
+			grids[0]->create(GRID7_DIRECTORY);
 
-				  grids[1] = new Grid();
-				  grids[1]->setIndex(0);
-				  grids[1]->create(GRID8_DIRECTORY);
+			grids[1] = new Grid();
+			grids[1]->setIndex(1);
+			grids[1]->create(GRID8_DIRECTORY);
 
-				  grids[2] = new Grid();
-				  grids[2]->setIndex(0);
-				  grids[2]->create(GRID9_DIRECTORY);
+			grids[2] = new Grid();
+			grids[2]->setIndex(2);
+			grids[2]->create(GRID9_DIRECTORY);
 
-				  grids[3] = new Grid();
-				  grids[3]->setIndex(0);
-				  grids[3]->create(GRID10_DIRECTORY);
+			grids[3] = new Grid();
+			grids[3]->setIndex(3);
+			grids[3]->create(GRID10_DIRECTORY);
 
-				  grids[4] = new Grid();
-				  grids[4]->setIndex(0);
-				  grids[4]->create(GRID11_DIRECTORY);
+			grids[4] = new Grid();
+			grids[4]->setIndex(4);
+			grids[4]->create(GRID11_DIRECTORY);
 
-				  grids[5] = new Grid();
-				  grids[5]->setIndex(0);
-				  grids[5]->create(GRID12_DIRECTORY);				  
-				  break;
+			grids[5] = new Grid();
+			grids[5]->setIndex(5);
+			grids[5]->create(GRID12_DIRECTORY);				  
+			break;
 				  				  
 		case eventInitHardLevels: 
 		
-				  grids[0] = new Grid();
-				  grids[0]->setIndex(0);
-				  grids[0]->create(GRID13_DIRECTORY);
+			grids[0] = new Grid();
+			grids[0]->setIndex(0);
+			grids[0]->create(GRID13_DIRECTORY);
 
-				  grids[1] = new Grid();
-				  grids[1]->setIndex(0);
-				  grids[1]->create(GRID14_DIRECTORY);
+			grids[1] = new Grid();
+			grids[1]->setIndex(1);
+			grids[1]->create(GRID14_DIRECTORY);
 
-				  grids[2] = new Grid();
-				  grids[2]->setIndex(0);
-				  grids[2]->create(GRID15_DIRECTORY);
+			grids[2] = new Grid();
+			grids[2]->setIndex(2);
+			grids[2]->create(GRID15_DIRECTORY);
 
-				  grids[3] = new Grid();
-				  grids[3]->setIndex(0);
-				  grids[3]->create(GRID16_DIRECTORY);
+			grids[3] = new Grid();
+			grids[3]->setIndex(3);
+			grids[3]->create(GRID16_DIRECTORY);
 
-				  grids[4] = new Grid();
-				  grids[4]->setIndex(0);
-				  grids[4]->create(GRID17_DIRECTORY);
+			grids[4] = new Grid();
+			grids[4]->setIndex(4);
+			grids[4]->create(GRID17_DIRECTORY);
 
-				  grids[5] = new Grid();
-				  grids[5]->setIndex(0);
-				  grids[5]->create(GRID18_DIRECTORY);				  
-				  break;
+			grids[5] = new Grid();
+			grids[5]->setIndex(5);
+			grids[5]->create(GRID18_DIRECTORY);				  
+			break;
 	}
 	trace->event(s_fn,0,"leave [void]");
 }
@@ -911,8 +914,7 @@ void initWeapon(int x, int y, int id, int type)
    weapons[id]->setRateStep(weaponSpecs->getStepRate(type));
 	
 	weapons[id]->setName("%s [%d]", 
-		weaponSpecs->getName(type), 
-		weaponSpecs->getCounter(type));
+		weaponSpecs->getName(type), weaponSpecs->getCounter(type));
 		
 	trace->event(s_fn,0,"leave");
 }
@@ -1040,7 +1042,7 @@ void initButtons(void)
 			buttons[0]->setY(410);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
-			buttons[0]->setLabel("Easy");
+			buttons[0]->setLabel("Easy Play");
 			buttons[0]->setColor(IMAGE_COLOR);
 			buttons[0]->setIndex(6);
 			
@@ -1050,7 +1052,7 @@ void initButtons(void)
 			buttons[1]->setY(410);
 			buttons[1]->setImageNormal(images.button2);
 			buttons[1]->setImageFocus(images.buttonFocus2);
-			buttons[1]->setLabel("Medium");
+			buttons[1]->setLabel("Medium Play");
 			buttons[1]->setColor(IMAGE_COLOR);
 			buttons[1]->setIndex(0);
 			
@@ -1060,7 +1062,7 @@ void initButtons(void)
 			buttons[2]->setY(410);
 			buttons[2]->setImageNormal(images.button2);
 			buttons[2]->setImageFocus(images.buttonFocus2);
-			buttons[2]->setLabel("Hard");			
+			buttons[2]->setLabel("Hard Play");			
 			buttons[2]->setColor(IMAGE_COLOR);
 			buttons[2]->setIndex(1);
 			
@@ -1514,7 +1516,6 @@ void initButtons(void)
 			buttons[12]->setLabel("-");
 			buttons[12]->setColor(IMAGE_COLOR);
 			buttons[12]->setIndex(12);
-			
 		}
 		break;	
 		
@@ -1784,27 +1785,9 @@ void initApplication(void)
 // Draw grid on screen
 void drawGrid()
 {
-   if (game.selectedMap==-1) return;
-	
-	switch (game.selectedMap)
-   {
-		case 0: 	grids[0]->draw(0,0,1.0);   
-					break;
-				
-		case 1: 	grids[1]->draw(0,0,1.0);   
-					break;
-				
-		case 2: 	grids[2]->draw(0,0,1.0);   
-					break;
-				
-		case 3: 	grids[3]->draw(0,0,1.0);   
-					break;
-				
-		case 4: 	grids[4]->draw(0,0,1.0);   
-					break;
-				
-		case 5: 	grids[5]->draw(0,0,1.0);   
-					break;
+	if ((game.selectedMap!=-1) && (grids[game.selectedMap]!=NULL))
+	{
+		grids[game.selectedMap]->draw(0,0,1.0);   
 	}				
 }
 
@@ -2311,9 +2294,9 @@ void drawScreen(void)
 			// Draw background
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 			  	
-			GRRLIB_DrawImg(55,135, images.panelEasy, 0, 1, 1, IMAGE_COLOR );						
-			GRRLIB_DrawImg(255,135, images.panelMedium, 0, 1, 1, IMAGE_COLOR );
-			GRRLIB_DrawImg(455,135, images.panelHard, 0, 1, 1, IMAGE_COLOR );		
+			GRRLIB_DrawImg(65,125, images.panelEasy, 0, 1, 1, IMAGE_COLOR );						
+			GRRLIB_DrawImg(265,125, images.panelMedium, 0, 1, 1, IMAGE_COLOR );
+			GRRLIB_DrawImg(465,125, images.panelHard, 0, 1, 1, IMAGE_COLOR );		
 			
 			// Draw Buttons
 			drawButtons();
@@ -2322,7 +2305,7 @@ void drawScreen(void)
          GRRLIB_initTexture();
 
 			// Draw title
-	      drawText(110, ypos, fontTitle, "Level Select");	
+	      drawText(130, ypos, fontTitle, "Level Select");	
 
 			// Draw Button Text labels
 			drawButtonsText(0);
@@ -2335,12 +2318,12 @@ void drawScreen(void)
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 			  
 			// Draw samples maps
-			grids[0]->draw(55,135,5.0); 
-			grids[1]->draw(255,135,5.0); 
-			grids[2]->draw(455,135,5.0);
-			grids[3]->draw(55,295,5.0); 
-			grids[4]->draw(255,295,5.0); 
-			grids[5]->draw(455,295,5.0);
+			if (grids[0]!=NULL) grids[0]->draw(55,135,5.0); 
+			if (grids[1]!=NULL) grids[1]->draw(255,135,5.0); 
+			if (grids[2]!=NULL) grids[2]->draw(455,135,5.0);
+			if (grids[3]!=NULL) grids[3]->draw(55,295,5.0); 
+			if (grids[4]!=NULL) grids[4]->draw(255,295,5.0); 
+			if (grids[5]!=NULL) grids[5]->draw(455,295,5.0);
 		
 			// Move elements
 			moveMonsters();  
@@ -2381,10 +2364,10 @@ void drawScreen(void)
 			drawPanel4();	
 			drawButtons();
 		  
-			// Check Game parameters
-			checkGameOver();
-			checkNextWave();
+			// Check for game events
 			checkPointer();
+			checkNextWave();
+		   checkGameOver();
 		  
 			// Init text layer	  
          GRRLIB_initTexture();
@@ -2543,7 +2526,7 @@ void drawScreen(void)
 			}
 			else
 			{
-				startEntry=(((float) game.maxTodayHighScore-13.0)/26.0)*(float)game.scrollIndex;
+				startEntry=(((float) game.maxTodayHighScore-15.0)/26.0)*(float)game.scrollIndex;
 				endEntry=startEntry+15;
 			}
 		  
@@ -2626,7 +2609,7 @@ void drawScreen(void)
 			}
 			else
 			{
-				startEntry=(((float) game.maxGlobalHighScore-13.0)/26.0)*(float)game.scrollIndex;
+				startEntry=(((float) game.maxGlobalHighScore-15.0)/26.0)*(float)game.scrollIndex;
 				endEntry=startEntry+15;
 			}
 		  
@@ -3210,7 +3193,9 @@ void checkPointer(void)
 		   int x1=(float) pointers[0]->getX()/32.0;
 			int y1=(float) pointers[0]->getY()/32.0;
 			
-			if ((game.selectedMap!=-1) && (!grids[game.selectedMap]->isBuild(x1,y1))) 
+			if ( (game.selectedMap!=-1) && 
+				  (grids[game.selectedMap]!=NULL) &&
+				  (!grids[game.selectedMap]->isBuild(x1,y1)) ) 
 			{
 				pointers[0]->setColor(IMAGE_COLOR);
 			}
@@ -3340,6 +3325,7 @@ void processEvent()
 			if ( 
 				  (game.cash>=weaponSpecs->getPrice(game.weaponType)) &&
 				  (game.selectedMap!=-1) &&
+				  (grids[game.selectedMap]!=NULL) &&
 				  (!grids[game.selectedMap]->isBuild(x1,y1) )
 				)
 			{
@@ -3364,7 +3350,8 @@ void processEvent()
 					}
 				}
 				
-				if ((game.selectedMap!=-1) && (grids[game.selectedMap]!=NULL))
+				if ( (game.selectedMap!=-1) && 
+					  (grids[game.selectedMap]!=NULL))
 				{
 					// Set new location as build full.
 					grids[game.selectedMap]->setBuild(x1,y1);
@@ -3442,6 +3429,7 @@ void processEvent()
 				// Weapon Transparent (Not for sale)
 				buttons[6]->setColor(IMAGE_COLOR3);
 			}
+
 			buttons[6]->setImageNormal(weaponSpecs->getImage(game.weaponType));
 			buttons[6]->setImageFocus(weaponSpecs->getImage(game.weaponType));
 		}
@@ -3498,21 +3486,26 @@ void processEvent()
 			trace->event(s_fn,0,"event=eventSaveHighScore");
 			
 			// Store highscore local
-			char tmp[MAX_LEN];
-			sprintf(tmp,"%c%c%c%c%c%c",
+			char name[MAX_LEN];
+			sprintf(name,"%c%c%c%c%c%c",
 				settings->getFirstChar(), 
 				settings->getSecondChar(), 
 				settings->getThirdChar(),
 				settings->getFourthChar(),
 				settings->getFifthChar(),
 				settings->getSixthChar());
-			highScore->setScore(tmp, game.wave, game.score);
+			highScore->setScore(name, game.wave, game.score);
 			highScore->save(HIGHSCORE_FILENAME);
 			
 			// Store highscore on internet
 			char tmp2[MAX_LEN];
-			sprintf(tmp2,"appl=%s&level=%d&score=%d&name=%s&dt=%d",
-				PROGRAM_NAME, game.wave, game.score, tmp, (int)time(NULL));
+			sprintf(tmp2,"appl=%s&version=%s&level=%d&score=%d&name=%s&dt=%d",
+				PROGRAM_NAME, 
+				PROGRAM_VERSION,
+				game.wave, 
+				game.score, 
+				name, 
+				(int)time(NULL));
 			tcp_set_state(TCP_REQUEST3a, tmp2);	
 		}
 		break;
@@ -3808,11 +3801,11 @@ int main(void)
 		// Render screen
 		GRRLIB_Render();
 		
-		// Process state machine
-		processStateMachine();
-		
 		// Process event
 		processEvent();
+		
+		// Process state machine
+		processStateMachine();
 	}
 		  
 	GRRLIB_Exit();

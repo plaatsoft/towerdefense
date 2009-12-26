@@ -28,6 +28,8 @@
 // defines
 // ------------------------------
 
+#define UPGRADE_STEPS			5
+	
 #define GUN_PRICE 				100
 #define RIFLE_PRICE 				200
 #define CANON_PRICE 				500
@@ -43,18 +45,18 @@
 #define NUCK_UPGRADE_PRICE  	250
 
 #define GUN_MIN_POWER 			2
-#define RIFLE_MIN_POWER 		4
-#define CANON_MIN_POWER 		12
-#define MISSLE_MIN_POWER		20
-#define LASER_MIN_POWER 		30
+#define RIFLE_MIN_POWER 		10
+#define CANON_MIN_POWER 		20
+#define MISSLE_MIN_POWER		30
+#define LASER_MIN_POWER 		40
 #define NUCK_MIN_POWER 			100
 
-#define GUN_MAX_POWER   		10
-#define RIFLE_MAX_POWER   		14
-#define CANON_MAX_POWER   		24
-#define MISSLE_MAX_POWER   	34
-#define LASER_MAX_POWER   		44
-#define NUCK_MAX_POWER   		114
+#define GUN_STEP_POWER  		1
+#define RIFLE_STEP_POWER  		2
+#define CANON_STEP_POWER  		3
+#define MISSLE_STEP_POWER 		4
+#define LASER_STEP_POWER 		5
+#define NUCK_STEP_POWER 		10	
 
 #define GUN_MIN_RANGE 			50
 #define RIFLE_MIN_RANGE 		80
@@ -63,40 +65,19 @@
 #define LASER_MIN_RANGE 		80
 #define NUCK_MIN_RANGE 			80
 
-#define GUN_MAX_RANGE   		75
-#define RIFLE_MAX_RANGE   		100
-#define CANON_MAX_RANGE   		80
-#define MISSLE_MAX_RANGE   	100
-#define LASER_MAX_RANGE   		100
-#define NUCK_MAX_RANGE   		100
-
-#define GUN_MIN_RATE 			10
-#define RIFLE_MIN_RATE  		8
-#define CANON_MIN_RATE  		10
-#define MISSLE_MIN_RATE  		8
-#define LASER_MIN_RATE  		6
-#define NUCK_MIN_RATE  			10
-
-#define GUN_MAX_RATE    		6
-#define RIFLE_MAX_RATE   		4
-#define CANON_MAX_RATE    		6
-#define MISSLE_MAX_RATE    	4
-#define LASER_MAX_RATE    		2
-#define NUCK_MAX_RATE    		6
-
-#define GUN_STEP_POWER  		2
-#define RIFLE_STEP_POWER  		2
-#define CANON_STEP_POWER  		2
-#define MISSLE_STEP_POWER 		2
-#define LASER_STEP_POWER 		2
-#define NUCK_STEP_POWER 		2	
-
 #define GUN_STEP_RANGE  		5
 #define RIFLE_STEP_RANGE  		5
 #define CANON_STEP_RANGE  		5
 #define MISSLE_STEP_RANGE 		5
 #define LASER_STEP_RANGE 		5
 #define NUCK_STEP_RANGE 		5
+
+#define GUN_MIN_RATE 			10
+#define RIFLE_MIN_RATE  		10
+#define CANON_MIN_RATE  		10
+#define MISSLE_MIN_RATE  		9
+#define LASER_MIN_RATE  		8
+#define NUCK_MIN_RATE  			7
 
 #define GUN_STEP_RATE   		1
 #define RIFLE_STEP_RATE   		1
@@ -426,27 +407,27 @@ int WeaponSpecs::getMaxPower(int type)
 	switch (type)
 	{
 		case 0:  // Gun
-				 return GUN_MAX_POWER;
+				 return GUN_MIN_POWER+(GUN_STEP_POWER*UPGRADE_STEPS);
 				 break;
 				
 		case 1:  // Rifle
-				 return RIFLE_MAX_POWER;
+				 return RIFLE_MIN_POWER+(RIFLE_STEP_POWER*UPGRADE_STEPS);
 				 break;
 				
 		case 2:  // Canon
-				 return CANON_MAX_POWER;
+				 return CANON_MIN_POWER+(CANON_STEP_POWER*UPGRADE_STEPS);
 				 break;
 				
 		case 3:  // Missle
-				 return MISSLE_MAX_POWER;
+				 return MISSLE_MIN_POWER+(MISSLE_STEP_POWER*UPGRADE_STEPS);
 				 break;
 				
 		case 4:  // Laser
-				 return LASER_MAX_POWER;
+				 return LASER_MIN_POWER+(LASER_STEP_POWER*UPGRADE_STEPS);
 				 break;
 				
 		default: // Nuck
-				 return NUCK_MAX_POWER;
+				 return NUCK_MIN_POWER+(NUCK_STEP_POWER*UPGRADE_STEPS);
 				 break;
 	}
 }
@@ -458,27 +439,27 @@ int WeaponSpecs::getMaxRange(int type)
 	switch (type)
 	{
 		case 0:  // Gun
-				 return GUN_MAX_RANGE;
+				 return GUN_MIN_RANGE+(GUN_STEP_RANGE*UPGRADE_STEPS);
 				 break;
 				
 		case 1:  // Rifle
-				 return RIFLE_MAX_RANGE;
+				 return RIFLE_MIN_RANGE+(RIFLE_STEP_RANGE*UPGRADE_STEPS);
 				 break;
 				
 		case 2:  // Canon
-				 return CANON_MAX_RANGE;
+				 return CANON_MIN_RANGE+(CANON_STEP_RANGE*UPGRADE_STEPS);
 				 break;
 				
 		case 3:  // Missle
-				 return MISSLE_MAX_RANGE;
+				 return MISSLE_MIN_RANGE+(MISSLE_STEP_RANGE*UPGRADE_STEPS);
 				 break;
 				
 		case 4:  // Laser
-				 return LASER_MAX_RANGE;
+				 return LASER_MIN_RANGE+(LASER_STEP_RANGE*UPGRADE_STEPS);
 				 break;
 				
 		default: // Nuck
-				 return NUCK_MAX_RANGE;
+				 return NUCK_MIN_RANGE+(NUCK_STEP_RANGE*UPGRADE_STEPS);
 				 break;
 	}
 }
@@ -489,27 +470,27 @@ int WeaponSpecs::getMaxRate(int type)
 	switch (type)
 	{
 		case 0:  // Gun
-				 return GUN_MAX_RATE;
+				 return GUN_MIN_RATE-(GUN_STEP_RATE*UPGRADE_STEPS);
 				 break;
 				
 		case 1:  // Rifle
-				 return RIFLE_MAX_RATE;
+				 return RIFLE_MIN_RATE-(GUN_STEP_RATE*UPGRADE_STEPS);
 				 break;
 				
 		case 2:  // Canon
-				 return CANON_MAX_RATE;
+				 return CANON_MIN_RATE-(GUN_STEP_RATE*UPGRADE_STEPS);
 				 break;
 				
 		case 3:  // Missle
-				 return MISSLE_MAX_RATE;
+				 return MISSLE_MIN_RATE-(GUN_STEP_RATE*UPGRADE_STEPS);
 				 break;
 				
 		case 4:  // Laser
-				 return LASER_MAX_RATE;
+				 return LASER_MIN_RATE-(GUN_STEP_RATE*UPGRADE_STEPS);
 				 break;
 				
 		default: // Nuck
-				 return NUCK_MAX_RATE;
+				 return NUCK_MIN_RATE-(GUN_STEP_RATE*UPGRADE_STEPS);
 				 break;
 	}
 }
