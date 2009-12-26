@@ -279,50 +279,47 @@ void Pointer::buttonA(int x, int y)
 	 
 	 	case stateMainMenu:
 		{	
-			// Check if button is pressed on screen
 			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
+			{   
+				// Play button	 	
+				game.stateMachine=stateLevelMenu;
+			}
+							
+			// Check if button is pressed on screen
+			if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))
 			{
 				// Highscore button	      
 				game.stateMachine=stateLocalHighScore;
 			}
 		
-			if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))
+			if ((buttons[2]!=NULL) && (buttons[2]->onSelect(x,y,true)))
 			{
 				// Credits button	      
 				game.stateMachine=stateHelp1;
 			}
 		
-			if ((buttons[2]!=NULL) && (buttons[2]->onSelect(x,y,true)))
+			if ((buttons[3]!=NULL) && (buttons[3]->onSelect(x,y,true)))
 			{
 				// Credits button	      
 				game.stateMachine=stateCredits;
 			}
 		
-			if ((buttons[3]!=NULL) && (buttons[3]->onSelect(x,y,true)))
+			if ((buttons[4]!=NULL) && (buttons[4]->onSelect(x,y,true)))
 			{
 				// Sound Settings button	      
 				game.stateMachine=stateSoundSettings;
 			}
 		
-			if ((buttons[4]!=NULL) && (buttons[4]->onSelect(x,y,true)))
+			if ((buttons[5]!=NULL) && (buttons[5]->onSelect(x,y,true)))
 			{
 				// Release Notes button	      
 				game.stateMachine=stateReleaseNotes;
 			}
 		
-			if ((buttons[5]!=NULL) && (buttons[5]->onSelect(x,y,true)))
+			if ((buttons[6]!=NULL) && (buttons[6]->onSelect(x,y,true)))
 			{
 				// User Initials button	      
 				game.stateMachine=stateUserSettings;
-			}
-			
-			if ((buttons[6]!=NULL) && (buttons[6]->onSelect(x,y,true)))
-			{
-				// SelectMapMenu button	      
-				game.stateMachine=stateMapSelectMenu;
-				
-				// No map selected
-				game.selectedMap=-1;
 			}
 			
 			if ((buttons[7]!=NULL) && (buttons[7]->onSelect(x,y,true)))
@@ -342,6 +339,49 @@ void Pointer::buttonA(int x, int y)
 		}
 		break;
    
+	 	case stateLevelMenu:
+		{	
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
+			{   
+				// Easy Play button	 	
+				game.stateMachine=stateMapSelectMenu;
+				
+				// No map selected
+				game.selectedMap=-1;
+							
+				game.event=eventInitEasyLevels;
+			}
+			
+			if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))
+			{   
+				// Easy Play button	 	
+				game.stateMachine=stateMapSelectMenu;
+				
+				// No map selected
+				game.selectedMap=-1;
+				
+				game.event=eventInitMediumLevels;
+			}
+			
+			if ((buttons[2]!=NULL) && (buttons[2]->onSelect(x,y,true)))
+			{   
+				// Easy Play button	 	
+				game.stateMachine=stateMapSelectMenu;
+				
+				// No map selected
+				game.selectedMap=-1;
+				
+				game.event=eventInitHardLevels;
+			}
+			
+			if ((buttons[3]!=NULL) && (buttons[3]->onSelect(x,y,true)))
+			{
+				// Main Menu button	      
+				game.stateMachine=stateMainMenu;
+			}
+			
+		}
+			
 		case stateMapSelectMenu:
 		{	
 			// Check if button is pressed on screen
@@ -390,7 +430,7 @@ void Pointer::buttonA(int x, int y)
 			if ((buttons[6]!=NULL) && (buttons[6]->onSelect(x,y,true)))
 			{
 				// Main Menu button	      
-				game.stateMachine=stateMainMenu;
+				game.stateMachine=stateLevelMenu;
 			}
 		}
 		break;

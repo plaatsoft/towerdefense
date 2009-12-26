@@ -269,17 +269,17 @@ int MonsterSpecs::getEnergy(int type)
 		case 10: return 60;
 		case 11: return 80;
 		case 12: return 100;
-		case 13: return 120;
-		case 14: return 140;
-		case 15: return 160;
-		case 16: return 190;
-		case 17: return 230;
-		case 18: return 250;
-		case 19: return 280;
-		case 20: return 300;
-		case 21: return 350;
-		case 22: return 400;
-		case 23: return 450;
-		default: return 500;		
+		case 13: return 110;
+		case 14: return 120;
+		case 15: return 130;
+		case 16: return 140;
+		case 17: return 160;
+		case 18: return 180;
+		case 19: return 200;
+		case 20: return 220;
+		case 21: return 240;
+		case 22: return 260;
+		case 23: return 280;
+		default: return 300;		
 	}
 }
