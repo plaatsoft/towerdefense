@@ -354,7 +354,7 @@ void Pointer::buttonA(int x, int y)
 			
 			if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))
 			{   
-				// Easy Play button	 	
+				// Medium Play button	 	
 				game.stateMachine=stateMapSelectMenu;
 				
 				// No map selected
@@ -365,7 +365,7 @@ void Pointer::buttonA(int x, int y)
 			
 			if ((buttons[2]!=NULL) && (buttons[2]->onSelect(x,y,true)))
 			{   
-				// Easy Play button	 	
+				// Hard Play button	 	
 				game.stateMachine=stateMapSelectMenu;
 				
 				// No map selected
@@ -378,10 +378,10 @@ void Pointer::buttonA(int x, int y)
 			{
 				// Main Menu button	      
 				game.stateMachine=stateMainMenu;
-			}
-			
+			}	
 		}
-			
+		break;
+		
 		case stateMapSelectMenu:
 		{	
 			// Check if button is pressed on screen
