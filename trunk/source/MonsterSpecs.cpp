@@ -279,7 +279,7 @@ int MonsterSpecs::getEnergy(int type)
 		case 20: return 220;
 		case 21: return 240;
 		case 22: return 260;
-		case 23: return 280;
-		default: return 300;		
+		case 23: return 300;
+		default: return 400;		
 	}
 }
