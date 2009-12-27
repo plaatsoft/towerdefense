@@ -120,6 +120,8 @@ void Weapon::draw()
 
 void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 {
+   const char *s_fn="Weapon::fire";
+
 	if (delay>0) 
 	{
 		delay--;
@@ -133,7 +135,7 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 			{
 				float distance= 
 					sqrt( ( (monsters[i]->getX()-x) * (monsters[i]->getX()-x) ) + 
-						  ( (monsters[i]->getY()-y) * (monsters[i]->getY()-y) ) );
+						   ( (monsters[i]->getY()-y) * (monsters[i]->getY()-y) ) );
 						  				
 				if (distance<range)
 				{					
@@ -169,20 +171,27 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 								break;
 					}
 								
-					int energyLeft=monsters[i]->hit(power);
-										
-					if (energyLeft==0)
-					{						
+					int energy=monsters[i]->getEnergy();
+					if (energy<=power)
+					{
+						// Receive score and cash for shooting the monster
+						game.score+=energy;
+						game.cash+=energy;
+		
+						// Monster is dead
+						trace->event(s_fn,0,"Monster %d is dead!", monsters[i]->getIndex());				
 						delete monsters[i];
 						monsters[i]=NULL;
-						
-						// Dead
 						sound->effect(SOUND_DEAD);	
 					}
-					
-					// Receive score and cash for shooting the monster
-					game.score+=power;
-					game.cash+=power;
+					else
+					{
+						monsters[i]->setEnergy(energy-power);
+			
+						// Receive score and cash for shooting the monster
+						game.score+=power;
+						game.cash+=power;
+					}
 					
 					// Reset delay counter;
 					delay=rate;

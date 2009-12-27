@@ -52,17 +52,17 @@
 #define GAME_DIRECTORY      	"sd:/apps/TowerDefense/"
 
 // Easy Maps
-#define GRID1_DIRECTORY			"sd:/apps/TowerDefense/map1"
-#define GRID2_DIRECTORY			"sd:/apps/TowerDefense/map2"
-#define GRID3_DIRECTORY   	  	"sd:/apps/TowerDefense/map3"
-#define GRID4_DIRECTORY   	  	"sd:/apps/TowerDefense/map4"
-#define GRID5_DIRECTORY   	  	"sd:/apps/TowerDefense/map5"
-#define GRID6_DIRECTORY   	  	"sd:/apps/TowerDefense/map6"
+#define GRID1_DIRECTORY			"sd:/apps/TowerDefense/map01"
+#define GRID2_DIRECTORY			"sd:/apps/TowerDefense/map02"
+#define GRID3_DIRECTORY   	  	"sd:/apps/TowerDefense/map03"
+#define GRID4_DIRECTORY   	  	"sd:/apps/TowerDefense/map04"
+#define GRID5_DIRECTORY   	  	"sd:/apps/TowerDefense/map05"
+#define GRID6_DIRECTORY   	  	"sd:/apps/TowerDefense/map06"
 
 // Medium Maps
-#define GRID7_DIRECTORY   	  	"sd:/apps/TowerDefense/map7"
-#define GRID8_DIRECTORY   	  	"sd:/apps/TowerDefense/map8"
-#define GRID9_DIRECTORY   	  	"sd:/apps/TowerDefense/map9"
+#define GRID7_DIRECTORY   	  	"sd:/apps/TowerDefense/map07"
+#define GRID8_DIRECTORY   	  	"sd:/apps/TowerDefense/map08"
+#define GRID9_DIRECTORY   	  	"sd:/apps/TowerDefense/map09"
 #define GRID10_DIRECTORY   	"sd:/apps/TowerDefense/map10"
 #define GRID11_DIRECTORY   	"sd:/apps/TowerDefense/map11"
 #define GRID12_DIRECTORY   	"sd:/apps/TowerDefense/map12"

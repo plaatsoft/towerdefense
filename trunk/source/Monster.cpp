@@ -57,7 +57,6 @@ Monster::Monster()
    
    alfa=255;
    energy=0.0;
-   maxEnergy=0.0;
    
    height=0;
    width=0;
@@ -164,20 +163,6 @@ bool Monster::move(void)
 	return false;
 }
 
-int Monster::hit(int hit)
-{
-	const char *s_fn="Monster::hit";
-	
-	energy-=hit;
-	if (energy<=0) 
-	{
-		trace->event(s_fn,0,"Monster %d is dead!", index);
-		energy=0;
-	}
-	
-	return energy;
-}
-
 // ------------------------------
 // Setters 
 // ------------------------------
@@ -208,12 +193,8 @@ void Monster::setDelay(int delay1)
 }
 
 void Monster::setEnergy(int energy1)
-{
-	const char *s_fn="Monster::setEnergy";
-    trace->event(s_fn,0,"%d",energy1);  
-	
+{	
 	energy=energy1;
-	maxEnergy=energy;
 }
 
 void Monster::setIndex(int index1)
@@ -266,14 +247,19 @@ int Monster::getStep(void)
    return step;
 }
 
-int Monster::getMaxEnergy(void)
+int Monster::getEnergy(void)
 {
-   return maxEnergy;
+   return energy;
 }
 
 int Monster::getGrid(void)
 {
    return grid;
+}
+
+int Monster::getIndex(void)
+{
+	return index;
 }
 
 // ------------------------------
