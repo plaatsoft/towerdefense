@@ -25,7 +25,7 @@
 **  - Multi language support.
 **  - Bugfix: Webservices multi inserting of same values is filter out!
 **
-**  26/12/2009 Version 0.70
+**  27/12/2009 Version 0.70
 **  - Added "Easy, Medium, Hard" level select screen.
 **  - Added six medium level and six hard level maps.
 **  - Added version information is webservice call.
