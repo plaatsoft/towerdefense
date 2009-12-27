@@ -31,7 +31,6 @@ class Monster
 	int y;	
 	int targetY;
 	int alfa;
-	float maxEnergy;
 	float energy;
 	float size;
 	GRRLIB_texImg *image;
@@ -53,7 +52,6 @@ class Monster
 	void draw(int xOffset, int yOffset, float size);
 	void text(void);
 	bool move(void);
-	int hit(int hit);
 	
 	// Setters
 	void setImage(GRRLIB_texImg *image);	
@@ -69,8 +67,9 @@ class Monster
 	int getAlfa(void);
 	float getSize(void);
 	int getStep(void);
-	int getMaxEnergy(void);
+	int getEnergy(void);
 	int getGrid(void);
+	int getIndex(void);
 };
 
 #endif

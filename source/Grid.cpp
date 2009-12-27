@@ -129,7 +129,7 @@ void Grid::parseGrid(void)
 		}
 	}
    
-	// Create walking plan for monsters
+	// Create walking plan for enemies
 	while (!ready)
 	{
 		ready=true;
@@ -138,36 +138,38 @@ void Grid::parseGrid(void)
 		
 		if (temp[y][x+1]!='0')
 		{
+			ready=false;
 			locationList[maxLocations].x=(x+1);
 			locationList[maxLocations].y=y;
 			maxLocations++;
-			if (temp[y][x+1]!='#') ready=false; else ready=true;
 			if (temp[y][x+1]!='7') temp[y][x+1]='0';
 		}
 		else if (temp[y][x-1]!='0')
 		{
+			ready=false;
 			locationList[maxLocations].x=(x-1);
 			locationList[maxLocations].y=y;
 			maxLocations++;
-			if (temp[y][x-1]!='#') ready=false; else ready=true;
 			if (temp[y][x-1]!='7') temp[y][x-1]='0';
 		}
 		else if (temp[y+1][x]!='0')
 		{
+			ready=false;
 			locationList[maxLocations].x=x;
 			locationList[maxLocations].y=(y+1);
 			maxLocations++;
-			if (temp[y+1][x]!='#') ready=false; else ready=true;
 			if (temp[y+1][x]!='7') temp[y+1][x]='0';
 		}
 		else if (temp[y-1][x]!='0')
 		{
+			ready=false;
 			locationList[maxLocations].x=x;
 			locationList[maxLocations].y=(y-1);
 			maxLocations++;
-			if (temp[y-1][x]!='#') ready=false; else ready=true;
-			if (temp[y-1][x]!='7') temp[y-1][x]='0';
+			if (temp[y+1][x]!='7') temp[y-1][x]='0';
 		}
+		
+		if (maxLocations>=((MAX_GRID_Y*MAX_GRID_X)-1)) break;
 	}
 	trace->event(s_fn,0,"leave [maxLocations=%d]",maxLocations);
 }
@@ -397,9 +399,6 @@ void Grid::draw(int xOffset, int yOffset, float size)
 			}
 		}
 	}
-	
-	// Workarround to set base image on correct place
-	if (index==1) baseX+=1;
 	
 	// Draw base
 	GRRLIB_DrawImg( 
