@@ -355,8 +355,8 @@ void Grid::draw(int xOffset, int yOffset, float size)
 				case 'A':
 					// Draw T-section road
 					GRRLIB_DrawImg( 
-						(x*(32/size))+xOffset, 
-						(y*(32/size))+yOffset,
+						(x*(32/size))+(32/size)+xOffset, 
+						(y*(32/size))+(32/size)+yOffset,
 						imageRoad1, 180, (1.0/size), (1.0/size), IMAGE_COLOR );
 					break;
 
@@ -411,7 +411,7 @@ void Grid::draw(int xOffset, int yOffset, float size)
 	{
 		float proc = ( (MAX_MONSTER_IN_BASE-game.monsterInBase) / (float) MAX_MONSTER_IN_BASE ) * 21.0;
 		GRRLIB_Rectangle((baseX*32)+2, (baseY*32)+71, 20, 4, GRRLIB_BLACK, 0);
-		GRRLIB_Rectangle((baseX*32)+2, (baseY*32)+72, proc, 2, GRRLIB_GREEN, 1);
+		GRRLIB_Rectangle((baseX*32)+2, (baseY*32)+72, proc, 2, GRRLIB_RED, 1);
 	}
 }
 	
