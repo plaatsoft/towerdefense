@@ -35,56 +35,56 @@
 #define CANON_PRICE 				500
 #define MISSLE_PRICE 			1000
 #define LASER_PRICE 				2000
-#define NUCK_PRICE 				4000
+#define NUKE_PRICE 				4000
 
 #define GUN_UPGRADE_PRICE  	10
 #define RIFLE_UPGRADE_PRICE 	25
 #define CANON_UPGRADE_PRICE 	50
 #define LASER_UPGRADE_PRICE 	100
 #define MISSLE_UPGRADE_PRICE 	100
-#define NUCK_UPGRADE_PRICE  	250
+#define NUKE_UPGRADE_PRICE  	250
 
 #define GUN_MIN_POWER 			2
 #define RIFLE_MIN_POWER 		10
 #define CANON_MIN_POWER 		20
 #define MISSLE_MIN_POWER		30
 #define LASER_MIN_POWER 		40
-#define NUCK_MIN_POWER 			60
+#define NUKE_MIN_POWER 			80
 
 #define GUN_STEP_POWER  		1
 #define RIFLE_STEP_POWER  		2
 #define CANON_STEP_POWER  		3
 #define MISSLE_STEP_POWER 		4
 #define LASER_STEP_POWER 		5
-#define NUCK_STEP_POWER 		10	
+#define NUKE_STEP_POWER 		10	
 
 #define GUN_MIN_RANGE 			50
 #define RIFLE_MIN_RANGE 		80
 #define CANON_MIN_RANGE 		60
 #define MISSLE_MIN_RANGE 		80
 #define LASER_MIN_RANGE 		80
-#define NUCK_MIN_RANGE 			80
+#define NUKE_MIN_RANGE 			100
 
 #define GUN_STEP_RANGE  		5
 #define RIFLE_STEP_RANGE  		5
 #define CANON_STEP_RANGE  		5
 #define MISSLE_STEP_RANGE 		5
 #define LASER_STEP_RANGE 		5
-#define NUCK_STEP_RANGE 		5
+#define NUKE_STEP_RANGE 		5
 
 #define GUN_MIN_RATE 			10
 #define RIFLE_MIN_RATE  		10
 #define CANON_MIN_RATE  		10
 #define MISSLE_MIN_RATE  		9
 #define LASER_MIN_RATE  		8
-#define NUCK_MIN_RATE  			7
+#define NUKE_MIN_RATE  			7
 
 #define GUN_STEP_RATE   		1
 #define RIFLE_STEP_RATE   		1
 #define CANON_STEP_RATE   		1
 #define MISSLE_STEP_RATE  		1
 #define LASER_STEP_RATE  		1
-#define NUCK_STEP_RATE  		1
+#define NUKE_STEP_RATE  		1
 
 // ------------------------------
 // Extern variables
@@ -174,7 +174,7 @@ void WeaponSpecs::resetCounter(void)
 	canonCounter=0;
 	missleCounter=0;
 	laserCounter=0;
-	nuckCounter=0;
+	nukeCounter=0;
 	
 	trace->event(s_fn,0,"leave");
 }
@@ -208,7 +208,7 @@ GRRLIB_texImg * WeaponSpecs::getImage(int type)
 				 return weapon5;
 				 break;
 				
-		default: // Nuck
+		default: // Nuke
 				 return weapon6;
 				 break;
 	}
@@ -239,8 +239,8 @@ const char *WeaponSpecs::getName(int type)
 				 return "Laser";
 				 break;
 				
-		default: // Nuck
-				 return "Nuck";
+		default: // Nuke
+				 return "Nuke";
 				 break;
 	}
 }
@@ -271,8 +271,8 @@ int WeaponSpecs::getPrice(int type)
 				 return LASER_PRICE;
 				 break;
 				
-		default: // Nuck
-				 return NUCK_PRICE;
+		default: // Nuke
+				 return NUKE_PRICE;
 				 break;
 	}
 }
@@ -302,8 +302,8 @@ int WeaponSpecs::getUpgradePrice(int type)
 				 return LASER_UPGRADE_PRICE;
 				 break;
 				
-		default: // Nuck
-				 return NUCK_UPGRADE_PRICE;
+		default: // Nuke
+				 return NUKE_UPGRADE_PRICE;
 				 break;
 	}
 }
@@ -333,8 +333,8 @@ int WeaponSpecs::getMinPower(int type)
 				 return LASER_MIN_POWER;
 				 break;
 				
-		default: // Nuck
-				 return NUCK_MIN_POWER;
+		default: // Nuke
+				 return NUKE_MIN_POWER;
 				 break;
 	}
 }
@@ -364,8 +364,8 @@ int WeaponSpecs::getMinRange(int type)
 				 return LASER_MIN_RANGE;
 				 break;
 				
-		default: // Nuck
-				 return NUCK_MIN_RANGE;
+		default: // Nuke
+				 return NUKE_MIN_RANGE;
 				 break;
 	}
 }
@@ -395,8 +395,8 @@ int WeaponSpecs::getMinRate(int type)
 				 return LASER_MIN_RATE;
 				 break;
 				
-		default: // Nuck
-				 return NUCK_MIN_RATE;
+		default: // Nuke
+				 return NUKE_MIN_RATE;
 				 break;
 	}
 }
@@ -426,8 +426,8 @@ int WeaponSpecs::getMaxPower(int type)
 				 return LASER_MIN_POWER+(LASER_STEP_POWER*UPGRADE_STEPS);
 				 break;
 				
-		default: // Nuck
-				 return NUCK_MIN_POWER+(NUCK_STEP_POWER*UPGRADE_STEPS);
+		default: // Nuke
+				 return NUKE_MIN_POWER+(NUKE_STEP_POWER*UPGRADE_STEPS);
 				 break;
 	}
 }
@@ -458,8 +458,8 @@ int WeaponSpecs::getMaxRange(int type)
 				 return LASER_MIN_RANGE+(LASER_STEP_RANGE*UPGRADE_STEPS);
 				 break;
 				
-		default: // Nuck
-				 return NUCK_MIN_RANGE+(NUCK_STEP_RANGE*UPGRADE_STEPS);
+		default: // Nuke
+				 return NUKE_MIN_RANGE+(NUKE_STEP_RANGE*UPGRADE_STEPS);
 				 break;
 	}
 }
@@ -489,8 +489,8 @@ int WeaponSpecs::getMaxRate(int type)
 				 return LASER_MIN_RATE-(GUN_STEP_RATE*UPGRADE_STEPS);
 				 break;
 				
-		default: // Nuck
-				 return NUCK_MIN_RATE-(GUN_STEP_RATE*UPGRADE_STEPS);
+		default: // Nuke
+				 return NUKE_MIN_RATE-(GUN_STEP_RATE*UPGRADE_STEPS);
 				 break;
 	}
 }
@@ -519,8 +519,8 @@ int WeaponSpecs::getStepPower(int type)
 				 return LASER_STEP_POWER;
 				 break;
 				
-		default: // Nuck
-				 return NUCK_STEP_POWER;
+		default: // Nuk
+				 return NUKE_STEP_POWER;
 				 break;
 	}
 }
@@ -549,8 +549,8 @@ int WeaponSpecs::getStepRange(int type)
 				 return LASER_STEP_RANGE;
 				 break;
 				
-		default: // Nuck
-				 return NUCK_STEP_RANGE;
+		default: // Nuke
+				 return NUKE_STEP_RANGE;
 				 break;
 	}
 }
@@ -579,8 +579,8 @@ int WeaponSpecs::getStepRate(int type)
 				 return LASER_STEP_RATE;
 				 break;
 				
-		default: // Nuck
-				 return NUCK_STEP_RATE;
+		default: // Nuke
+				 return NUKE_STEP_RATE;
 				 break;
 	}
 }
@@ -610,8 +610,8 @@ int WeaponSpecs::getCounter(int type)
 				 return ++laserCounter;
 				 break;
 				
-		default: // Nuck
-				 return ++nuckCounter;
+		default: // Nuke
+				 return ++nukeCounter;
 				 break;
 	}
 }

@@ -26,8 +26,8 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.70"
-#define RELEASE_DATE        	"27-12-2009" 
+#define PROGRAM_VERSION     	"0.80"
+#define RELEASE_DATE        	"28-12-2009" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -249,6 +249,7 @@ typedef struct
 	bool selectedNewWeapon;
 	int waveDelay;
 	int mode;
+	int level;
 		
 	// game panel variables
 	int panelXOffset;

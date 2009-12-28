@@ -40,7 +40,7 @@ class WeaponSpecs
 	int canonCounter;
 	int missleCounter;
 	int laserCounter;
-	int nuckCounter;
+	int nukeCounter;
 	
   public:
   	// Constructor & Destructor
