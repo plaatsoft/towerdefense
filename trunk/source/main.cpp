@@ -23,7 +23,13 @@
 **  - Improve weapon graphics.
 **  - Improve graphical fire effect!
 **  - Multi language support.
-**  - Bugfix: Webservices multi inserting of same values is filter out!
+**
+**  28/12/2009 Version 0.80
+**  - Adapt game parameters to make the game play easier.
+**  - Adapt start cash depanding on game level.
+**  - Enemy increase walk speed is now a randomized value. 
+**  - Remove typo nuck is nuke.
+**  - Build game with devkitPPC r19 compiler.
 **
 **  27/12/2009 Version 0.70
 **  - Added "Easy, Medium, Hard" level select screen.
@@ -721,7 +727,7 @@ void initMonsters(bool special)
 		monsters[id]->setEnergy(monsterSpecs->getEnergy(type));
 		
 		// Increase monster speed after every 20 waves;
-		int step = (game.wave/20)+1;
+		int step = (int) (rand() % ((game.wave/20)+1))+1;
 		monsters[id]->setStep(step);	
 			
 		if (special)
@@ -739,7 +745,8 @@ void initMonsters(bool special)
 		}
 			  	  
 		// Calculate delay between two monsters.
-		int delayOffset=game.wave*3;
+		int delayOffset=(game.wave*3);
+		if (delayOffset>90) delayOffset=90+(game.wave/20);
 		if (delayOffset>95) delayOffset=95;
 		delay+=(100-delayOffset);
 	}
@@ -799,7 +806,7 @@ void initGrids(int level)
 	switch( level )
 	{
 		// Easy levels
-		case eventInitEasyLevels:
+		case gameEasy:
 		
 			grids[0] = new Grid();
 			grids[0]->setIndex(0);
@@ -826,7 +833,7 @@ void initGrids(int level)
 			grids[5]->create(GRID6_DIRECTORY);				  
 			break;
 				  				  
-		case eventInitMediumLevels: 
+		case gameMedium: 
 		
 			grids[0] = new Grid();
 			grids[0]->setIndex(0);
@@ -853,7 +860,7 @@ void initGrids(int level)
 			grids[5]->create(GRID12_DIRECTORY);				  
 			break;
 				  				  
-		case eventInitHardLevels: 
+		case gameHard: 
 		
 			grids[0] = new Grid();
 			grids[0]->setIndex(0);
@@ -1685,8 +1692,19 @@ void initGame(int wave)
 {
 	// Init game variables
 	game.score=0;
-	game.cash=2000;
 	
+	switch (game.level)
+	{
+		case gameEasy:   game.cash=3000;
+							  break;
+
+		case gameMedium: game.cash=6000;
+							  break;							
+							  
+		case gameHard:   game.cash=9000;
+							  break;	
+	}
+							  
 	game.selectedWeapon=-1;
 	game.selectedNewWeapon=false;	
 	game.weaponType=0;
@@ -3280,17 +3298,20 @@ void processEvent()
 	{
 		case eventInitEasyLevels:
 			trace->event(s_fn,0,"event=eventInitEasyLevels");
-			initGrids(eventInitEasyLevels);
+			game.level=gameEasy;
+			initGrids(game.level);
 			break;
 
 		case eventInitMediumLevels:
 			trace->event(s_fn,0,"event=eventInitMediumLevels");
-			initGrids(eventInitMediumLevels);
+			game.level=gameMedium;
+			initGrids(game.level);
 			break;
 
 		case eventInitHardLevels:
 		   trace->event(s_fn,0,"event=eventInitHardLevels");
-			initGrids(eventInitHardLevels);			
+			game.level=gameHard;
+			initGrids(game.level);			
 			break;
 			
 		case eventNewWeaponSelected:		
@@ -3465,8 +3486,8 @@ void processEvent()
 				}
 				
 				// Get Bonus score and Bonus cash
-				game.score+=(game.wave*100);
-				game.cash+=(game.wave*100);
+				game.score+=(game.wave*200);
+				game.cash+=(game.wave*200);
 
 				// Show WAVE text on screen
 				game.alfa=MAX_ALFA;
