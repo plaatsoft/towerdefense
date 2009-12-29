@@ -25,11 +25,11 @@ void GRRLIB_InitFreetype();
 
 void GRRLIB_initTexture(void);
 
-void GRRLIB_Printf2(int x, 
-					int y, 
-					const char *string, 
-					unsigned int fontSize, 
-					int color); 
+void GRRLIB_Printf2(	int x, 
+							int y, 
+							const char *string, 
+							unsigned int fontSize, 
+							int color); 
 
 GRRLIB_texImg* GRRLIB_GetTexture(void);
 

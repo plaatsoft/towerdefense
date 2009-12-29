@@ -23,19 +23,19 @@
 **  - Improve weapon graphics.
 **  - Improve graphical fire effect!
 **  - Multi language support.
-**  - Added 60Hz TV Mode support
 **
 **  29/12/2009 Version 0.80
-**  - Adapt game parameters to make game play easier:
+**  - Adapt game parameters to make game play better:
 **		  - Increase start money depending on game level.
 **  	  - Enemy walk speed is now a randomized value. 
-**  - Added Map Id column to Local Highscore screen.
+**  - Added map id column to local highscore screen.
 **  - Improve background images.
 **  - Remove typo (nuck->nuke).
 **  - Improve network thread:
-**  	  - Map Id information is added to webservice call.
+**  	  - Map id information is added to webservice call.
 **  	  - Only scores above 20.000 points are send to webservice.
 **  - Store the best 100 entries in the local highscore.
+**  - Added 60Hz (640x480 pixel) TV Mode support 
 **  - Build game with devkitPPC r19 compiler.
 **
 **  27/12/2009 Version 0.70
@@ -947,6 +947,7 @@ void initButtons(void)
 		case stateMainMenu:
 		{
 			int ypos=40;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=15;
 			
 			// Play Button 
 			buttons[0]=new Button();
@@ -1026,6 +1027,8 @@ void initButtons(void)
 								
 			// Exit HBC Button 
 			ypos=400;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=38;
+			
 			buttons[7]=new Button();
 			buttons[7]->setX(440);
 			buttons[7]->setY(ypos);
@@ -1051,10 +1054,13 @@ void initButtons(void)
 		
 		case stateLevelMenu:
 		{
+			int ypos=415;
+	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
 			// Easy Button 
 			buttons[0]=new Button();
 			buttons[0]->setX(40);
-			buttons[0]->setY(410);
+			buttons[0]->setY(ypos);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Easy Play");
@@ -1064,7 +1070,7 @@ void initButtons(void)
 			// Medium Button 
 			buttons[1]=new Button();
 			buttons[1]->setX(240);
-			buttons[1]->setY(410);
+			buttons[1]->setY(ypos);
 			buttons[1]->setImageNormal(images.button2);
 			buttons[1]->setImageFocus(images.buttonFocus2);
 			buttons[1]->setLabel("Medium Play");
@@ -1074,7 +1080,7 @@ void initButtons(void)
 			// Hard Button 
 			buttons[2]=new Button();
 			buttons[2]->setX(440);
-			buttons[2]->setY(410);
+			buttons[2]->setY(ypos);
 			buttons[2]->setImageNormal(images.button2);
 			buttons[2]->setImageFocus(images.buttonFocus2);
 			buttons[2]->setLabel("Hard Play");			
@@ -1082,9 +1088,12 @@ void initButtons(void)
 			buttons[2]->setIndex(1);
 			
 			// Back Button 
+			ypos=460;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
 			buttons[3]=new Button();
 			buttons[3]->setX(240);
-			buttons[3]->setY(460);
+			buttons[3]->setY(ypos);
 			buttons[3]->setImageNormal(images.button2);
 			buttons[3]->setImageFocus(images.buttonFocus2);
 			buttons[3]->setLabel("Back" );
@@ -1095,10 +1104,13 @@ void initButtons(void)
 		
 		case stateMapSelectMenu:
 		{	
+			int ypos=255;
+	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
 			// Map1 Button
-			buttons[0]=new Button();
+   		buttons[0]=new Button();
 			buttons[0]->setX(40);
-			buttons[0]->setY(250);
+			buttons[0]->setY(ypos);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Map1");
@@ -1108,7 +1120,7 @@ void initButtons(void)
 			// Map2 Button 
 			buttons[1]=new Button();
 			buttons[1]->setX(240);
-			buttons[1]->setY(250);
+			buttons[1]->setY(ypos);
 			buttons[1]->setImageNormal(images.button2);
 			buttons[1]->setImageFocus(images.buttonFocus2);
 			buttons[1]->setLabel("Map2");
@@ -1118,17 +1130,18 @@ void initButtons(void)
 			// Map3 Button 
 			buttons[2]=new Button();
 			buttons[2]->setX(440);
-			buttons[2]->setY(250);
+			buttons[2]->setY(ypos);
 			buttons[2]->setImageNormal(images.button2);
 			buttons[2]->setImageFocus(images.buttonFocus2);
 			buttons[2]->setLabel("Map3");
 			buttons[2]->setColor(IMAGE_COLOR);
 			buttons[2]->setIndex(2);
 			
+			ypos+=150;
 			// Map4 Button 
 			buttons[3]=new Button();
 			buttons[3]->setX(40);
-			buttons[3]->setY(410);
+			buttons[3]->setY(ypos);
 			buttons[3]->setImageNormal(images.button2);
 			buttons[3]->setImageFocus(images.buttonFocus2);
 			buttons[3]->setLabel("Map4");
@@ -1138,7 +1151,7 @@ void initButtons(void)
 			// Map5 Button 
 			buttons[4]=new Button();
 			buttons[4]->setX(240);
-			buttons[4]->setY(410);
+			buttons[4]->setY(ypos);
 			buttons[4]->setImageNormal(images.button2);
 			buttons[4]->setImageFocus(images.buttonFocus2);
 			buttons[4]->setLabel("Map5");
@@ -1148,17 +1161,20 @@ void initButtons(void)
 			// Map6 Button
 			buttons[5]=new Button();
 			buttons[5]->setX(440);
-			buttons[5]->setY(410);
+			buttons[5]->setY(ypos);
 			buttons[5]->setImageNormal(images.button2);
 			buttons[5]->setImageFocus(images.buttonFocus2);
 			buttons[5]->setLabel("Map6");
 			buttons[5]->setColor(IMAGE_COLOR);
 			buttons[5]->setIndex(5);
 			
+			ypos=460;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
 			// Back Button 
 			buttons[6]=new Button();
 			buttons[6]->setX(240);
-			buttons[6]->setY(460);
+			buttons[6]->setY(ypos);
 			buttons[6]->setImageNormal(images.button2);
 			buttons[6]->setImageFocus(images.buttonFocus2);
 			buttons[6]->setLabel("Back" );
@@ -1169,10 +1185,13 @@ void initButtons(void)
 				
 		case stateLocalHighScore:
 	    {
+			int ypos=460;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
 			// Next Button
 			buttons[0]=new Button();
 			buttons[0]->setX(225);
-			buttons[0]->setY(460);
+			buttons[0]->setY(ypos);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Next");	
@@ -1192,11 +1211,14 @@ void initButtons(void)
 		break;
 		
 		case stateTodayHighScore:
-	    {
+	   {
+		   int ypos=460;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
 			// Next Button
 			buttons[0]=new Button();
 			buttons[0]->setX(225);
-			buttons[0]->setY(460);
+			buttons[0]->setY(ypos);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Next");	
@@ -1216,11 +1238,14 @@ void initButtons(void)
 		break;
 		
 		case stateGlobalHighScore:
-	    {
+	   {
+		   int ypos=460;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
 			// Next Button
 			buttons[0]=new Button();
 			buttons[0]->setX(225);
-			buttons[0]->setY(460);
+			buttons[0]->setY(ypos);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Main Menu");	
@@ -1241,10 +1266,13 @@ void initButtons(void)
 		
 		case stateHelp1:
 		{
+		   int ypos=460;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
 			// Next Button
 			buttons[0]=new Button();
 			buttons[0]->setX(240);
-			buttons[0]->setY(460);
+			buttons[0]->setY(ypos);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Next");	
@@ -1255,10 +1283,13 @@ void initButtons(void)
 		
 		case stateHelp2:
 		{
+	    	int ypos=460;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
 			// Next Button
 			buttons[0]=new Button();
 			buttons[0]->setX(240);
-			buttons[0]->setY(460);
+			buttons[0]->setY(ypos);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Next");	
@@ -1269,10 +1300,13 @@ void initButtons(void)
 		
 		case stateHelp3:
 		{
+		   int ypos=460;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
 			// Main Menu Button
 			buttons[0]=new Button();
 			buttons[0]->setX(240);
-			buttons[0]->setY(460);
+			buttons[0]->setY(ypos);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Main Menu");	
@@ -1283,10 +1317,13 @@ void initButtons(void)
 		
 		case stateCredits:
 		{
+		   int ypos=460;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
 			// Main Menu Button
 			buttons[0]=new Button();
 			buttons[0]->setX(240);
-			buttons[0]->setY(460);
+			buttons[0]->setY(ypos);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Main Menu");	
@@ -1297,10 +1334,13 @@ void initButtons(void)
 
 		case stateReleaseNotes:
 		{
+		   int ypos=460;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
 			// Main Menu Button
 			buttons[0]=new Button();
 			buttons[0]->setX(240);
-			buttons[0]->setY(460);
+			buttons[0]->setY(ypos);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Main Menu");		
@@ -1321,20 +1361,13 @@ void initButtons(void)
 		
 		case stateSoundSettings:
 		{
-			// Main Menu Button
-			buttons[0]=new Button();
-			buttons[0]->setX(240);
-			buttons[0]->setY(460);
-			buttons[0]->setImageNormal(images.button2);
-			buttons[0]->setImageFocus(images.buttonFocus2);
-			buttons[0]->setLabel("Main Menu");	
-			buttons[0]->setColor(IMAGE_COLOR);
-			buttons[0]->setIndex(0);
-			
+			int ypos=195;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=35; 
+	
 			// Music Volume - button 
 			buttons[1]=new Button();
 			buttons[1]->setX(20);
-			buttons[1]->setY(135+YOFFSET);
+			buttons[1]->setY(ypos);
 			buttons[1]->setImageNormal(images.button1);
 			buttons[1]->setImageFocus(images.buttonFocus1);
 			buttons[1]->setLabel("-");	
@@ -1344,17 +1377,18 @@ void initButtons(void)
 			// Music Volume + button 
 			buttons[2]=new Button();
 			buttons[2]->setX(540);
-			buttons[2]->setY(130+YOFFSET);
+			buttons[2]->setY(ypos);
 			buttons[2]->setImageNormal(images.button1);
 			buttons[2]->setImageFocus(images.buttonFocus1);
 			buttons[2]->setLabel("+");	
 			buttons[2]->setColor(IMAGE_COLOR);
 			buttons[2]->setIndex(2);
 			
+			ypos+=105;
 			// Effect Volume - button 
 			buttons[3]=new Button();
 			buttons[3]->setX(20);
-			buttons[3]->setY(230+YOFFSET);
+			buttons[3]->setY(ypos);
 			buttons[3]->setImageNormal(images.button1);
 			buttons[3]->setImageFocus(images.buttonFocus1);
 			buttons[3]->setLabel("-");	
@@ -1364,17 +1398,18 @@ void initButtons(void)
 			// Effect Volume + button 
 			buttons[4]=new Button();
 			buttons[4]->setX(540);
-			buttons[4]->setY(230+YOFFSET);
+			buttons[4]->setY(ypos);
 			buttons[4]->setImageNormal(images.button1);
 			buttons[4]->setImageFocus(images.buttonFocus1);
 			buttons[4]->setLabel("+");	
 			buttons[4]->setColor(IMAGE_COLOR);
 			buttons[4]->setIndex(4);
 			
+			ypos+=80;
 			// Music track - button 
 			buttons[5]=new Button();
 			buttons[5]->setX(140);
-			buttons[5]->setY(310+YOFFSET);
+			buttons[5]->setY(ypos);
 			buttons[5]->setImageNormal(images.button1);
 			buttons[5]->setImageFocus(images.buttonFocus1);
 			buttons[5]->setLabel("-");	
@@ -1384,33 +1419,37 @@ void initButtons(void)
 			// Music track + button 
 			buttons[6]=new Button();
 			buttons[6]->setX(420);
-			buttons[6]->setY(310+YOFFSET);
+			buttons[6]->setY(ypos);
 			buttons[6]->setImageNormal(images.button1);
 			buttons[6]->setImageFocus(images.buttonFocus1);
 			buttons[6]->setLabel("+");	
 			buttons[6]->setColor(IMAGE_COLOR);
 			buttons[6]->setIndex(6);
-		}
-		break;
-				
-		case stateUserSettings:
-	    {
-			int xpos=35;
+			
+			ypos=460;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
 			
 			// Main Menu Button
 			buttons[0]=new Button();
 			buttons[0]->setX(240);
-			buttons[0]->setY(460);
+			buttons[0]->setY(ypos);
 			buttons[0]->setImageNormal(images.button2);
 			buttons[0]->setImageFocus(images.buttonFocus2);
 			buttons[0]->setLabel("Main Menu");	
 			buttons[0]->setColor(IMAGE_COLOR);
 			buttons[0]->setIndex(0);
+		}
+		break;
+				
+		case stateUserSettings:
+	    {
+			int xpos=35;			
+			int ypos=150;
 			
 			// First letter + button 
 			buttons[1]=new Button();
 			buttons[1]->setX(xpos);
-			buttons[1]->setY(150);
+			buttons[1]->setY(ypos);
 			buttons[1]->setImageNormal(images.button1);
 			buttons[1]->setImageFocus(images.buttonFocus1);
 			buttons[1]->setLabel("+");	
@@ -1420,7 +1459,7 @@ void initButtons(void)
 			// First letter - button 
 			buttons[2]=new Button();
 			buttons[2]->setX(xpos);
-			buttons[2]->setY(295);
+			buttons[2]->setY(ypos+145);
 			buttons[2]->setImageNormal(images.button1);
 			buttons[2]->setImageFocus(images.buttonFocus1);
 			buttons[2]->setLabel("-");	
@@ -1431,7 +1470,7 @@ void initButtons(void)
 			xpos+=95;
 			buttons[3]=new Button();
 			buttons[3]->setX(xpos);
-			buttons[3]->setY(150);
+			buttons[3]->setY(ypos);
 			buttons[3]->setImageNormal(images.button1);
 			buttons[3]->setImageFocus(images.buttonFocus1);
 			buttons[3]->setLabel("+");	
@@ -1441,7 +1480,7 @@ void initButtons(void)
 			// second letter - button 
 			buttons[4]=new Button();
 			buttons[4]->setX(xpos);
-			buttons[4]->setY(295);
+			buttons[4]->setY(ypos+145);
 			buttons[4]->setImageNormal(images.button1);
 			buttons[4]->setImageFocus(images.buttonFocus1);
 			buttons[4]->setLabel("-");	
@@ -1452,7 +1491,7 @@ void initButtons(void)
 			xpos+=95;
 			buttons[5]=new Button();
 			buttons[5]->setX(xpos);
-			buttons[5]->setY(150);
+			buttons[5]->setY(ypos);
 			buttons[5]->setImageNormal(images.button1);
 			buttons[5]->setImageFocus(images.buttonFocus1);
 			buttons[5]->setLabel("+");	
@@ -1462,7 +1501,7 @@ void initButtons(void)
 			// Third letter - button 
 			buttons[6]=new Button();
 			buttons[6]->setX(xpos);
-			buttons[6]->setY(295);
+			buttons[6]->setY(ypos+145);
 			buttons[6]->setImageNormal(images.button1);
 			buttons[6]->setImageFocus(images.buttonFocus1);
 			buttons[6]->setLabel("-");
@@ -1473,7 +1512,7 @@ void initButtons(void)
 			xpos+=95;
 			buttons[7]=new Button();
 			buttons[7]->setX(xpos);
-			buttons[7]->setY(150);
+			buttons[7]->setY(ypos);
 			buttons[7]->setImageNormal(images.button1);
 			buttons[7]->setImageFocus(images.buttonFocus1);
 			buttons[7]->setLabel("+");	
@@ -1483,7 +1522,7 @@ void initButtons(void)
 			// Fourth letter - button 
 			buttons[8]=new Button();
 			buttons[8]->setX(xpos);
-			buttons[8]->setY(295);
+			buttons[8]->setY(ypos+145);
 			buttons[8]->setImageNormal(images.button1);
 			buttons[8]->setImageFocus(images.buttonFocus1);
 			buttons[8]->setLabel("-");
@@ -1494,7 +1533,7 @@ void initButtons(void)
 			xpos+=95;
 			buttons[9]=new Button();
 			buttons[9]->setX(xpos);
-			buttons[9]->setY(150);
+			buttons[9]->setY(ypos);
 			buttons[9]->setImageNormal(images.button1);
 			buttons[9]->setImageFocus(images.buttonFocus1);
 			buttons[9]->setLabel("+");	
@@ -1504,7 +1543,7 @@ void initButtons(void)
 			// Fifth letter - button 
 			buttons[10]=new Button();
 			buttons[10]->setX(xpos);
-			buttons[10]->setY(295);
+			buttons[10]->setY(ypos+145);
 			buttons[10]->setImageNormal(images.button1);
 			buttons[10]->setImageFocus(images.buttonFocus1);
 			buttons[10]->setLabel("-");
@@ -1515,7 +1554,7 @@ void initButtons(void)
 			xpos+=95;
 			buttons[11]=new Button();
 			buttons[11]->setX(xpos);
-			buttons[11]->setY(150);
+			buttons[11]->setY(ypos);
 			buttons[11]->setImageNormal(images.button1);
 			buttons[11]->setImageFocus(images.buttonFocus1);
 			buttons[11]->setLabel("+");	
@@ -1525,12 +1564,25 @@ void initButtons(void)
 			// Sixth letter - button 
 			buttons[12]=new Button();
 			buttons[12]->setX(xpos);
-			buttons[12]->setY(295);
+			buttons[12]->setY(ypos+145);
 			buttons[12]->setImageNormal(images.button1);
 			buttons[12]->setImageFocus(images.buttonFocus1);
 			buttons[12]->setLabel("-");
 			buttons[12]->setColor(IMAGE_COLOR);
 			buttons[12]->setIndex(12);
+			
+			ypos=460;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
+			// Main Menu Button
+			buttons[0]=new Button();
+			buttons[0]->setX(240);
+			buttons[0]->setY(ypos);
+			buttons[0]->setImageNormal(images.button2);
+			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setLabel("Main Menu");	
+			buttons[0]->setColor(IMAGE_COLOR);
+			buttons[0]->setIndex(0);
 		}
 		break;	
 		
@@ -1847,25 +1899,28 @@ void drawMonsters(bool special)
 		{
 			if (special)
 			{
+			   int ypos=140;
+	         if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
 				// Draw mini size monsters
 				switch (monsters[i]->getGrid())
 				{
-					case 0: 	monsters[i]->draw(55,135,5.0);
+					case 0: 	monsters[i]->draw(55,ypos,5.0);
 								break;
 							
-					case 1: 	monsters[i]->draw(255,135,5.0);
+					case 1: 	monsters[i]->draw(255,ypos,5.0);
 								break;
 							
-					case 2: 	monsters[i]->draw(455,135,5.0);
+					case 2: 	monsters[i]->draw(455,ypos,5.0);
 								break;
 							
-					case 3: 	monsters[i]->draw(55,295,5.0);
+					case 3: 	monsters[i]->draw(55,ypos+150,5.0);
 								break;
 							
-					case 4: 	monsters[i]->draw(255,295,5.0);
+					case 4: 	monsters[i]->draw(255,ypos+150,5.0);
 								break;
 							
-					case 5: 	monsters[i]->draw(455,295,5.0);
+					case 5: 	monsters[i]->draw(455,ypos+150,5.0);
 								break;
 				}			
 			}
@@ -1989,6 +2044,11 @@ void drawText(int x, int y, int type, const char *text, ...)
 					GRRLIB_Printf2(x+20, y, buf, 24, GRRLIB_WHITESMOKE);    
 				}		   
 				break;
+				
+			case fontBanner:
+				GRRLIB_Printf2(x, y, buf, 80, GRRLIB_RED);
+				break;
+			
 		}
 	}
 }
@@ -2030,7 +2090,7 @@ void drawPanel4(void)
 	int ypos = game.panelYOffset+385;
 
 	// Draw panel
-	GRRLIB_Rectangle(xpos, ypos, 100, 80, GRRLIB_BLACK_TRANS, 1);
+	GRRLIB_Rectangle(xpos, ypos, 100, 67, GRRLIB_BLACK_TRANS, 1);
 }
 				
 // Draw wave text panel on screen
@@ -2041,13 +2101,13 @@ void drawPanelText1(void)
 	int ypos = game.panelYOffset;
 
 	// General info + control
-	ypos+=5;	
+	ypos+=7;	
 	drawText(xpos+30,ypos,fontPanel,"WAVE");	
 	
 	ypos+=12;
 	drawText(xpos+35,ypos,fontPanel,"%03d", game.wave);	
 	
-	ypos+=22;
+	ypos+=20;
 	drawText(xpos+25,ypos,fontPanel,"LANCH");
 	
 	// Set button label values
@@ -2169,7 +2229,7 @@ void drawPanelText4(void)
 	int xpos = game.panelXOffset;
 	int ypos = game.panelYOffset+385;
 	
-	ypos+=5;
+	ypos+=4;
 			
 	if ( (game.selectedWeapon!=-1) && 
 		  (weapons[game.selectedWeapon]!=NULL) )
@@ -2177,21 +2237,21 @@ void drawPanelText4(void)
 		drawText(xpos+8,ypos,fontPanel,"%s",
 			weapons[game.selectedWeapon]->getName());
 		
-		ypos+=20;
+		ypos+=15;
 		drawText(xpos+8,ypos,fontPanel, "Power");
 
 		drawText(xpos+52,ypos+3,fontSmall,"%03d-%03d",
 			weapons[game.selectedWeapon]->getPower(),
 			weapons[game.selectedWeapon]->getMaxPower());
 			
-		ypos+=15;
+		ypos+=12;
 		drawText(xpos+8,ypos,fontPanel, "Range");
 
 		drawText(xpos+52,ypos+3,fontSmall, "%03d-%03d",
 			weapons[game.selectedWeapon]->getRange(),
 			weapons[game.selectedWeapon]->getMaxRange());
 			
-		ypos+=15;
+		ypos+=12;
 		drawText(xpos+8,ypos,fontPanel, "Rate");
 		
 		drawText(xpos+52,ypos+3,fontSmall, "%03d-%03d",
@@ -2204,21 +2264,21 @@ void drawPanelText4(void)
 			weaponSpecs->getName(game.weaponType), 
 			weaponSpecs->getPrice(game.weaponType));
 			
-		ypos+=20;
+		ypos+=15;
 		drawText(xpos+8,ypos,fontPanel, "Power");
 				
 		drawText(xpos+52,ypos+3,fontSmall, "%03d-%03d",
 			weaponSpecs->getMinPower(game.weaponType),
 			weaponSpecs->getMaxPower(game.weaponType));
 			
-		ypos+=15;
+		ypos+=12;
 		drawText(xpos+8,ypos,fontPanel, "Range");
 		
 		drawText(xpos+52,ypos+3,fontSmall, "%03d-%03d",
 			weaponSpecs->getMinRange(game.weaponType),
 			weaponSpecs->getMaxRange(game.weaponType));
 			
-		ypos+=15;
+		ypos+=12;
 		drawText(xpos+8,ypos,fontPanel, "Rate");
 		
 		drawText(xpos+52,ypos+3,fontSmall, "%03d-%03d",
@@ -2231,7 +2291,9 @@ void drawPanelText4(void)
 void drawScreen(void)
 { 	   	
 	char tmp[MAX_LEN];
-	int  ypos=YOFFSET;
+	
+	int  ypos;
+	if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos=10; else ypos=25;
 		  
    switch( game.stateMachine )	
 	{		   
@@ -2248,7 +2310,10 @@ void drawScreen(void)
 			drawText(20, ypos, fontNormal,  "Created by wplaat"  );
 			ypos+=20;
 			drawText(20, ypos, fontNormal,  "http://www.plaatsoft.nl"  );
+			
 			ypos+=350;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=28;
+			
 			drawText(40, ypos, fontNormal,  "This software is open source and may be copied, distributed or modified"  );
 			ypos+=20;
 			drawText(60, ypos, fontNormal,  "under the terms of the GNU General Public License (GPL) version 2" );
@@ -2320,9 +2385,12 @@ void drawScreen(void)
 			// Draw background
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 			  	
-			GRRLIB_DrawImg(65,125, images.panelEasy, 0, 1, 1, IMAGE_COLOR );						
-			GRRLIB_DrawImg(265,125, images.panelMedium, 0, 1, 1, IMAGE_COLOR );
-			GRRLIB_DrawImg(465,125, images.panelHard, 0, 1, 1, IMAGE_COLOR );		
+			ypos=130;
+	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
+			GRRLIB_DrawImg(65,ypos, images.panelEasy, 0, 1, 1, IMAGE_COLOR );						
+			GRRLIB_DrawImg(265,ypos, images.panelMedium, 0, 1, 1, IMAGE_COLOR );
+			GRRLIB_DrawImg(465,ypos, images.panelHard, 0, 1, 1, IMAGE_COLOR );		
 			
 			// Draw Buttons
 			drawButtons();
@@ -2331,6 +2399,7 @@ void drawScreen(void)
          GRRLIB_initTexture();
 
 			// Draw title
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos=10; else ypos=25;
 	      drawText(130, ypos, fontTitle, "Level Select");	
 
 			// Draw Button Text labels
@@ -2344,12 +2413,16 @@ void drawScreen(void)
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 			  
 			// Draw samples maps
-			if (grids[0]!=NULL) grids[0]->draw(55,135,5.0); 
-			if (grids[1]!=NULL) grids[1]->draw(255,135,5.0); 
-			if (grids[2]!=NULL) grids[2]->draw(455,135,5.0);
-			if (grids[3]!=NULL) grids[3]->draw(55,295,5.0); 
-			if (grids[4]!=NULL) grids[4]->draw(255,295,5.0); 
-			if (grids[5]!=NULL) grids[5]->draw(455,295,5.0);
+			ypos=140;
+	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
+			if (grids[0]!=NULL) grids[0]->draw(55,ypos,5.0); 
+			if (grids[1]!=NULL) grids[1]->draw(255,ypos,5.0); 
+			if (grids[2]!=NULL) grids[2]->draw(455,ypos,5.0);
+			ypos+=150;
+			if (grids[3]!=NULL) grids[3]->draw(55,ypos,5.0); 
+			if (grids[4]!=NULL) grids[4]->draw(255,ypos,5.0); 
+			if (grids[5]!=NULL) grids[5]->draw(455,ypos,5.0);
 		
 			// Move elements
 			moveMonsters();  
@@ -2367,6 +2440,7 @@ void drawScreen(void)
          GRRLIB_initTexture();
 
 			// Draw title
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos=10; else ypos=25;
 	      drawText(120, ypos, fontTitle, "Choose Map");	
 
 			// Draw Button Text labels
@@ -2401,9 +2475,7 @@ void drawScreen(void)
 			// Show Next Wave text
 			if (game.alfa>0)
 			{
-				ypos=210;	
-				sprintf(tmp,"WAVE %02d", game.wave);
-				GRRLIB_Printf2(180, ypos, tmp, 80, GRRLIB_RED);
+				drawText(180, 210, fontBanner, "WAVE %02d", game.wave);
 				game.alfa-=5;
 			}
 		  
@@ -2486,15 +2558,15 @@ void drawScreen(void)
          GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 		  
 			// Draw scrollbar
-			ypos=SCROLLBAR_Y_MIN;
-         GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
+			int y=SCROLLBAR_Y_MIN;
+         GRRLIB_DrawImg(SCROLLBAR_x,y, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
 			for (int i=0; i<10; i++) 
 			{
-				ypos+=24;
-				GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
+				y+=24;
+				GRRLIB_DrawImg(SCROLLBAR_x,y, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
 			}
-			ypos+=24;
-			GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
+			y+=24;
+			GRRLIB_DrawImg(SCROLLBAR_x,y, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
 		  		  
 			// Draw buttons
 	      drawButtons(); 
@@ -2503,7 +2575,6 @@ void drawScreen(void)
          GRRLIB_initTexture();
  
 	      // Draw title
-			ypos=YOFFSET;
 	      drawText(80, ypos, fontTitle, "Local High Score");	
 
          // Show Content
@@ -2565,18 +2636,17 @@ void drawScreen(void)
          GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
       	     	
 			// Draw scrollbar
-			ypos=SCROLLBAR_Y_MIN;
-         GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
+			int y=SCROLLBAR_Y_MIN;
+         GRRLIB_DrawImg(SCROLLBAR_x,y, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
 			for (int i=0; i<10; i++) 
 			{
-				ypos+=24;
-				GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
+				y+=24;
+				GRRLIB_DrawImg(SCROLLBAR_x,y, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
 			}
-			ypos+=24;
-			GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
+			y+=24;
+			GRRLIB_DrawImg(SCROLLBAR_x,y, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
 		  		  
 	      // Draw title
-			ypos=YOFFSET;
 	      drawText(0, ypos, fontTitle, "   Today High Score");	
 
          // Show Content
@@ -2648,18 +2718,17 @@ void drawScreen(void)
          GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
       	     	
 			// Draw scrollbar
-			ypos=SCROLLBAR_Y_MIN;
-         GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
+			int y=SCROLLBAR_Y_MIN;
+         GRRLIB_DrawImg(SCROLLBAR_x,y, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
 			for (int i=0; i<10; i++) 
 			{
-				ypos+=24;
-				GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
+				y+=24;
+				GRRLIB_DrawImg(SCROLLBAR_x,y, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
 			}
-			ypos+=24;
-			GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
+			y+=24;
+			GRRLIB_DrawImg(SCROLLBAR_x,y, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
 		  		  
 	      // Draw title
-			ypos=YOFFSET;
 	      drawText(0, ypos, fontTitle, "   Global High Score");	
 
          // Show Content
@@ -2792,7 +2861,10 @@ void drawScreen(void)
 					weaponSpecs->getMinRate(i), weaponSpecs->getMaxRate(i));
   			}
 		  
-			drawText(130, 420, fontNormal, "Overview of upgrade range of each weapon system.");	
+		   ypos=420;
+	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+	
+			drawText(130, ypos, fontNormal, "Overview of upgrade range of each weapon system.");	
 		
 			// Draw Button Text labels
 			drawButtonsText(0);
@@ -2813,7 +2885,7 @@ void drawScreen(void)
 		   // Show title
 			drawText(185, ypos, fontTitle, "Enemies");
         
-			ypos=130;
+			ypos=120;
 			int xpos=90;
 		  
 			for (int i=0; i<25; i++)
@@ -2828,12 +2900,15 @@ void drawScreen(void)
 				
 				if (((i+1) % 7) == 0)
 				{
-					ypos=130;
+					ypos=120;
 					xpos+=120;
 				}
 			}
-				
-   	   drawText(130, 420, fontNormal, "Overview of energy level of each enemy type.");	
+			
+			ypos=420;
+	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+	
+   	   drawText(130, ypos, fontNormal, "Overview of energy level of each enemy type.");	
 		  	   		  					  
 			// Draw Button Text labels
 			drawButtonsText(0);
@@ -2907,8 +2982,10 @@ void drawScreen(void)
   	
 			// Show title
 			drawText(100, ypos, fontTitle, "Sound Settings");
-         ypos+=100;
-		  
+        
+		   ypos+=140;
+	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
          // Draw content	
          drawText(0, ypos, fontParagraph, "Music Volume");	
 	      ypos+=20;
@@ -2974,18 +3051,17 @@ void drawScreen(void)
          GRRLIB_initTexture();
 		  
          // Draw scrollbar
-			ypos=SCROLLBAR_Y_MIN;
-         GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
+			int y=SCROLLBAR_Y_MIN;
+         GRRLIB_DrawImg(SCROLLBAR_x,y, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
 			for (i=0; i<10; i++) 
 			{
-				ypos+=24;
-				GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
+				y+=24;
+				GRRLIB_DrawImg(SCROLLBAR_x,y, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
 			}
-			ypos+=24;
-			GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
+			y+=24;
+			GRRLIB_DrawImg(SCROLLBAR_x,y, images.scrollBottom, 0, 1, 1, IMAGE_COLOR );
 		  		 
 	      // Draw Title	
-			ypos=YOFFSET;
          drawText(100, ypos, fontTitle, "Release Notes");
          ypos+=80;
 	      
@@ -3038,7 +3114,7 @@ void drawScreen(void)
 			ypos+=120;
 
 			// Draw initial characters
-			ypos+=50;	
+			ypos+=60;	
 			int xpos=50;
 			drawText(xpos, ypos, fontTitle, "%c", settings->getFirstChar());
 			xpos+=95;
@@ -3545,9 +3621,6 @@ void processEvent()
 					(int)time(NULL));
 				tcp_set_state(TCP_REQUEST3a, tmp2);	
 			}
-			
-			// No map selected
-			game.selectedMap=-1;
 		}
 		break;
 		

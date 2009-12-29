@@ -75,7 +75,6 @@
 #define GRID17_DIRECTORY   	"sd:/apps/TowerDefense/map17"
 #define GRID18_DIRECTORY   	"sd:/apps/TowerDefense/map18"
 
-#define YOFFSET					25
 #define WSP_POINTER_X      	200
 #define WSP_POINTER_Y      	250
 
@@ -217,7 +216,8 @@ enum
    fontNormal=5,
    fontSmall=6,
    fontButton=7,
-   fontWelcome=8
+   fontWelcome=8,
+	fontBanner=9
 };
 
 enum
