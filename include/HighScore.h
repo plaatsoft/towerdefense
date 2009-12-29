@@ -26,6 +26,7 @@ typedef struct
    time_t localTime;
    int    wave;
    int    score; 
+	int    map;
    char   name[MAX_LEN];
 }
 Score;
@@ -46,13 +47,14 @@ class HighScore
 	void save( const char *filename);
 	
 	// Setters
-	void setScore(const char *name, int wave, int score);
+	void setScore(const char *name, int wave, int map, int score);
 	
 	// Getters
 	char *getName(int index);
 	time_t *getDate(int index);
 	int  getWave(int index);
 	int  getScore(int index);
+	int  getMap(int index);
 	int  getAmount();
 };
 

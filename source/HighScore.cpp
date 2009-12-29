@@ -40,6 +40,7 @@ HighScore::HighScore()
 	{
 		scores[i].localTime=0;
 		scores[i].wave=0;
+		scores[i].map=0;
 		scores[i].score=0;
 		memset(scores[i].name,0x00,MAX_LEN);
 	} 
@@ -122,6 +123,16 @@ void HighScore::load(const char *filename)
 				scores[maxdata].wave=0;
 			}
 		
+		   tmp=mxmlElementGetAttr(data,"map"); 
+			if (tmp!=NULL) 
+			{
+				scores[maxdata].map=atoi(tmp); 
+			}
+			else 
+			{
+				scores[maxdata].map=0;
+			}
+			
 			tmp=mxmlElementGetAttr(data,"name"); 
 			if (tmp!=NULL) 
 			{
@@ -135,11 +146,12 @@ void HighScore::load(const char *filename)
 			// Entry is valid (Keep the information)
 			if (scores[maxdata].score>0)
 			{
-				trace->event(s_fn,0,"load highscore [id=%d|score=%d|localTime=%d|wave=%d|name=%s]"
+				trace->event(s_fn,0,"load highscore [id=%d|score=%d|localTime=%d|wave=%d|map=%d|name=%s]"
 					,maxdata, 
 					scores[maxdata].score, 
 					scores[maxdata].localTime,
 					scores[maxdata].wave, 
+					scores[maxdata].map, 
 					scores[maxdata].name );
 					
 				maxdata++;		
@@ -169,26 +181,30 @@ void HighScore::save( const char *filename)
    
 	for(i=0; i<MAX_LOCAL_HIGHSCORE; i++)
 	{
-		trace->event(s_fn,0,"save highscore [id=%d|score=%d|localTime=%d|wave=%d|name=%s]"
+		trace->event(s_fn,0,"save highscore [id=%d|score=%d|localTime=%d|wave=%d|map=%d|name=%s]"
 					,i, 
 					scores[i].score, 
 					scores[i].localTime,
 					scores[i].wave, 
+					scores[i].map, 
 					scores[i].name );
 					
 		sprintf(tmp, "entry%d", i);
         data = mxmlNewElement(group, tmp);
   
-	    sprintf(tmp, "%d", (int) scores[i].localTime);
-        mxmlElementSetAttr(data, "localTime", tmp);
+	   sprintf(tmp, "%d", (int) scores[i].localTime);
+      mxmlElementSetAttr(data, "localTime", tmp);
 	  
-	    sprintf(tmp, "%d", scores[i].score);
-	    mxmlElementSetAttr(data, "score", tmp);
+	   sprintf(tmp, "%d", scores[i].score);
+	   mxmlElementSetAttr(data, "score", tmp);
 
 		sprintf(tmp, "%d", scores[i].wave);
-	    mxmlElementSetAttr(data, "wave", tmp);
+	   mxmlElementSetAttr(data, "wave", tmp);
 		 
-	    mxmlElementSetAttr(data, "name", scores[i].name); 
+		sprintf(tmp, "%d", scores[i].map);
+	   mxmlElementSetAttr(data, "map", tmp);
+		
+	   mxmlElementSetAttr(data, "name", scores[i].name); 
 	}
   
 	/* now lets save the xml file to a file! */
@@ -213,10 +229,10 @@ void HighScore::save( const char *filename)
 // ------------------------------
 
 // Insert new score on the ready place in the list.
-void HighScore::setScore(const char *name, int wave, int score)
+void HighScore::setScore(const char *name, int wave, int map, int score)
 {
 	const char *s_fn="HighScore::setScore";
-	trace->event(s_fn,0,"enter [name=%s|wave=%d|score=%d)", name, wave, score);
+	trace->event(s_fn,0,"enter [name=%s|wave=%d|map=%d|score=%d)", name, wave, map, score);
 	
 	int marker=-1;
 	
@@ -238,7 +254,8 @@ void HighScore::setScore(const char *name, int wave, int score)
 	{
 		int offset=i+1;
 		scores[offset].score = scores[i].score;
-		scores[offset].wave =  scores[i].wave;
+		scores[offset].wave = scores[i].wave;
+		scores[offset].map = scores[i].map;
 		scores[offset].localTime = scores[i].localTime;
 		strcpy(scores[offset].name,scores[i].name);
 	}
@@ -246,6 +263,7 @@ void HighScore::setScore(const char *name, int wave, int score)
 	// Insert now entry.
 	scores[marker].score=score;
 	scores[marker].wave=wave;
+	scores[marker].map=map;
 	scores[marker].localTime=time(NULL);
 	strcpy(scores[marker].name,name);
 	
@@ -275,6 +293,11 @@ int HighScore::getScore(int index)
 int HighScore::getWave(int index)
 {
 	return scores[index].wave;
+}
+
+int HighScore::getMap(int index)
+{
+	return scores[index].map;
 }
 
 int HighScore::getAmount(void)

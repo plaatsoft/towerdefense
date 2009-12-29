@@ -484,6 +484,7 @@ void Grid::initBuild(void)
 								gridBuild[y+1][x-1]='#';	
 								gridBuild[y+1][x]='#';
 								gridBuild[y+1][x+1]='#';
+								gridBuild[y+2][x]='#';
 								break;
 			}
 		}

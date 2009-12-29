@@ -741,9 +741,6 @@ void Pointer::buttonA(int x, int y)
 				
 				// Score current score;
 				game.event=eventSaveHighScore;
-				
-				// No map selected
-				game.selectedMap=-1;
 			}
 
 			if ((buttons[1]!=NULL) && (buttons[1]->onSelect(x,y,true)))

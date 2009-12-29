@@ -23,12 +23,19 @@
 **  - Improve weapon graphics.
 **  - Improve graphical fire effect!
 **  - Multi language support.
+**  - Added 60Hz TV Mode support
 **
-**  28/12/2009 Version 0.80
-**  - Adapt game parameters to make the game play easier.
-**  - Adapt start cash depanding on game level.
-**  - Enemy increase walk speed is now a randomized value. 
-**  - Remove typo nuck is nuke.
+**  29/12/2009 Version 0.80
+**  - Adapt game parameters to make game play easier:
+**		  - Increase start money depending on game level.
+**  	  - Enemy walk speed is now a randomized value. 
+**  - Added Map Id column to Local Highscore screen.
+**  - Improve background images.
+**  - Remove typo (nuck->nuke).
+**  - Improve network thread:
+**  	  - Map Id information is added to webservice call.
+**  	  - Only scores above 20.000 points are send to webservice.
+**  - Store the best 100 entries in the local highscore.
 **  - Build game with devkitPPC r19 compiler.
 **
 **  27/12/2009 Version 0.70
@@ -2471,7 +2478,7 @@ void drawScreen(void)
 			}
 			else
 			{
-				startEntry=(((float) highScore->getAmount()-15.0)/26.0)*(float)game.scrollIndex;
+				startEntry=(((float) highScore->getAmount()-15.0)/30.0)*(float)game.scrollIndex;
 				endEntry=startEntry+15;
 			}
 				   
@@ -2481,7 +2488,7 @@ void drawScreen(void)
 			// Draw scrollbar
 			ypos=SCROLLBAR_Y_MIN;
          GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
-			for (int i=0; i<9; i++) 
+			for (int i=0; i<10; i++) 
 			{
 				ypos+=24;
 				GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
@@ -2501,11 +2508,12 @@ void drawScreen(void)
 
          // Show Content
          ypos+=90;
-			drawText(60, ypos, fontParagraph, "TOP"  );
-	      drawText(130, ypos, fontParagraph, "DATE"  );
-	      drawText(320, ypos, fontParagraph, "SCORE" );
-			drawText(410, ypos, fontParagraph, "NAME"  );
-			drawText(500, ypos, fontParagraph, "WAVE" );
+			drawText(20, ypos, fontParagraph, "TOP"  );
+	      drawText(80, ypos, fontParagraph, "DATE"  );
+	      drawText(270, ypos, fontParagraph, "SCORE" );
+			drawText(350, ypos, fontParagraph, "NAME"  );
+			drawText(440, ypos, fontParagraph, "WAVE" );
+			drawText(520, ypos, fontParagraph, "MAP" );
 			ypos+=10;
 		  
 			for (int i=startEntry; i<endEntry; i++)
@@ -2514,16 +2522,17 @@ void drawScreen(void)
 				if (highScore->getDate(i)!=0)
 				{
 					ypos+=20;  
-					drawText(60, ypos, fontNormal, "%02d", i+1);
+					drawText(20, ypos, fontNormal, "%02d", i+1);
 			  
 					local = localtime(highScore->getDate(i));
 					sprintf(tmp,"%02d-%02d-%04d %02d:%02d:%02d", 
 						local->tm_mday, local->tm_mon+1, local->tm_year+1900, 
 						local->tm_hour, local->tm_min, local->tm_sec);
-					drawText(130, ypos, fontNormal, tmp);
-					drawText(320, ypos, fontNormal, "%05d", highScore->getScore(i));
-					drawText(410, ypos, fontNormal, highScore->getName(i));
-					drawText(500, ypos, fontNormal, "%02d", highScore->getWave(i));
+					drawText(80, ypos, fontNormal, tmp);
+					drawText(270, ypos, fontNormal, "%05d", highScore->getScore(i));
+					drawText(350, ypos, fontNormal, highScore->getName(i));
+					drawText(440, ypos, fontNormal, "%02d", highScore->getWave(i));
+					drawText(520, ypos, fontNormal, "%02d", highScore->getMap(i));
 				}
 			}	
 		  
@@ -2545,7 +2554,7 @@ void drawScreen(void)
 			}
 			else
 			{
-				startEntry=(((float) game.maxTodayHighScore-15.0)/26.0)*(float)game.scrollIndex;
+				startEntry=(((float) game.maxTodayHighScore-15.0)/30.0)*(float)game.scrollIndex;
 				endEntry=startEntry+15;
 			}
 		  
@@ -2558,7 +2567,7 @@ void drawScreen(void)
 			// Draw scrollbar
 			ypos=SCROLLBAR_Y_MIN;
          GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
-			for (int i=0; i<9; i++) 
+			for (int i=0; i<10; i++) 
 			{
 				ypos+=24;
 				GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
@@ -2628,7 +2637,7 @@ void drawScreen(void)
 			}
 			else
 			{
-				startEntry=(((float) game.maxGlobalHighScore-15.0)/26.0)*(float)game.scrollIndex;
+				startEntry=(((float) game.maxGlobalHighScore-15.0)/30.0)*(float)game.scrollIndex;
 				endEntry=startEntry+15;
 			}
 		  
@@ -2641,7 +2650,7 @@ void drawScreen(void)
 			// Draw scrollbar
 			ypos=SCROLLBAR_Y_MIN;
          GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
-			for (int i=0; i<9; i++) 
+			for (int i=0; i<10; i++) 
 			{
 				ypos+=24;
 				GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
@@ -2951,7 +2960,7 @@ void drawScreen(void)
 			}
 			else
 			{
-				startEntry=(((float) maxLines-18.0)/26.0)*(float)game.scrollIndex;
+				startEntry=(((float) maxLines-18.0)/30.0)*(float)game.scrollIndex;
 				endEntry=startEntry+20;
 			}
 		   
@@ -2967,7 +2976,7 @@ void drawScreen(void)
          // Draw scrollbar
 			ypos=SCROLLBAR_Y_MIN;
          GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
-			for (i=0; i<9; i++) 
+			for (i=0; i<10; i++) 
 			{
 				ypos+=24;
 				GRRLIB_DrawImg(SCROLLBAR_x,ypos, images.scrollMiddle, 0, 1, 1, IMAGE_COLOR );
@@ -3504,10 +3513,13 @@ void processEvent()
 		break;
 		
 		case eventSaveHighScore:
-		{				
+		{
+			// Calculate played mapId;
+			int mapId=(game.level+1)*(game.selectedMap+1);
+			
 			trace->event(s_fn,0,"event=eventSaveHighScore");
 			
-			// Store highscore local
+			// Store highscore local in file.
 			char name[MAX_LEN];
 			sprintf(name,"%c%c%c%c%c%c",
 				settings->getFirstChar(), 
@@ -3516,19 +3528,26 @@ void processEvent()
 				settings->getFourthChar(),
 				settings->getFifthChar(),
 				settings->getSixthChar());
-			highScore->setScore(name, game.wave, game.score);
+			highScore->setScore(name, game.wave, mapId, game.score);
 			highScore->save(HIGHSCORE_FILENAME);
 			
-			// Store highscore on internet
-			char tmp2[MAX_LEN];
-			sprintf(tmp2,"appl=%s&version=%s&level=%d&score=%d&name=%s&dt=%d",
-				PROGRAM_NAME, 
-				PROGRAM_VERSION,
-				game.wave, 
-				game.score, 
-				name, 
-				(int)time(NULL));
-			tcp_set_state(TCP_REQUEST3a, tmp2);	
+			// Store highscore on internet if higher then 20.000 points
+			if (game.score>20000)
+			{
+				char tmp2[MAX_LEN];
+				sprintf(tmp2,"appl=%s&version=%s&level=%d&score=%d&name=%s&map=%d&dt=%d",
+					PROGRAM_NAME, 
+					PROGRAM_VERSION,
+					game.wave, 
+					game.score, 
+					name, 
+					mapId,
+					(int)time(NULL));
+				tcp_set_state(TCP_REQUEST3a, tmp2);	
+			}
+			
+			// No map selected
+			game.selectedMap=-1;
 		}
 		break;
 		
