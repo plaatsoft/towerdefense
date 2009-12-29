@@ -1446,6 +1446,8 @@ void initButtons(void)
 			int xpos=35;			
 			int ypos=150;
 			
+			if (rmode->xfbHeight!=MAX_VERT_PIXELS) ypos+=15; 
+			
 			// First letter + button 
 			buttons[1]=new Button();
 			buttons[1]->setX(xpos);
@@ -3115,6 +3117,7 @@ void drawScreen(void)
 
 			// Draw initial characters
 			ypos+=60;	
+			
 			int xpos=50;
 			drawText(xpos, ypos, fontTitle, "%c", settings->getFirstChar());
 			xpos+=95;
