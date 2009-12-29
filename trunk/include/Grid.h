@@ -60,7 +60,7 @@ class Grid
 	GRRLIB_texImg *imageBase;
 	GRRLIB_texImg *imageGeneral1;
 	GRRLIB_texImg *imageGeneral2;
-
+	
 	void parseGrid(void);
 	bool loadGrid(const char* filename);
 	GRRLIB_texImg * loadImage(const char *filename);
