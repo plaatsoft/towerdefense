@@ -24,7 +24,7 @@
 **  - Improve graphical fire effect!
 **  - Multi language support.
 **
-**  29/12/2009 Version 0.80
+**  30/12/2009 Version 0.80
 **  - Adapt game parameters to make game play better:
 **		  - Increase start money depending on game level.
 **  	  - Enemy walk speed is now a randomized value. 
@@ -36,6 +36,8 @@
 **  	  - Only scores above 20.000 points are send to webservice.
 **  - Store the best 100 entries in the local highscore.
 **  - Added 60Hz (640x480 pixel) TV Mode support 
+**  - Improve sound setting screen.
+**  - Optimised enemy images.
 **  - Build game with devkitPPC r19 compiler.
 **
 **  27/12/2009 Version 0.70
@@ -237,6 +239,8 @@ typedef struct
   GRRLIB_texImg *intro2;
   GRRLIB_texImg *intro3;
   
+  GRRLIB_texImg *soundicon;
+  
   GRRLIB_texImg *logo2;
   GRRLIB_texImg *logo;
   
@@ -307,6 +311,10 @@ extern int      pic14length;
 // Bar_cursor Image
 extern const unsigned char     pic15data[];
 extern int      pic15length;
+
+// Sound Icon Image
+extern const unsigned char     pic16data[];
+extern int      pic16length;
 
 // panel Easy Image
 extern const unsigned char     pic20data[];
@@ -589,7 +597,8 @@ void destroyImages(void)
    
    GRRLIB_FreeTexture(images.bar);
    GRRLIB_FreeTexture(images.barCursor);
-      
+   GRRLIB_FreeTexture(images.soundicon);
+		
 	GRRLIB_FreeTexture(images.panelEasy);
    GRRLIB_FreeTexture(images.panelMedium);
 	GRRLIB_FreeTexture(images.panelHard);
@@ -662,6 +671,9 @@ void initImages(void)
    
 	images.bar=GRRLIB_LoadTexture( pic14data );
 	images.barCursor=GRRLIB_LoadTexture( pic15data );
+	
+	images.soundicon=GRRLIB_LoadTexture( pic16data );
+	GRRLIB_SetMidHandle( images.soundicon, true ); 	
 	
 	images.panelEasy=GRRLIB_LoadTexture( pic20data );
 	images.panelMedium=GRRLIB_LoadTexture( pic21data );
@@ -2976,6 +2988,12 @@ void drawScreen(void)
 	      // Draw background
 			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
 		
+		   // Draw Sound icon
+			int yoffset=20;
+	      if (rmode->xfbHeight==MAX_VERT_PIXELS) yoffset-=20;
+	      GRRLIB_DrawImg((640/2), ((480/2))+yoffset, images.soundicon, game.angle, 1.4, 1.4, IMAGE_COLOR );
+			if (game.angle<MAX_ANGLE) game.angle++; else game.angle=0;
+			
 			// Draw buttons
 	      drawButtons(); 
 		  		  
