@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<app version="1">
+  <name>TowerDefense</name>
+  <coder>wplaat</coder>
+  <version>0.80</version>
+  <short_description>TowerDefense for Wii</short_description> 
+  <long_description>Wii TowerDefense is an classic 2D action game. Protect your base with all kind of defense systems and kill all the waves of enemies. If ten enemies reach the base the game is over. Good Luck!
+
+Special thanks to my family for there support during the development</long_description>
+</app>
+
