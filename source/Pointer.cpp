@@ -56,6 +56,7 @@ Pointer::Pointer(void)
    rumble=0;
    
    selectedA=false;   
+	selectedB=false; 
    selected1=false;
    selected2=false;
    
@@ -801,17 +802,81 @@ void Pointer::action(void)
 
 		if (wpaddown & BUTTON_A) 
 		{
-			buttonA(xOffset,yOffset); 
+			if (!selectedB) 
+			{
+				buttonA(xOffset,yOffset); 
+			}
 		}
 		
 		if (wpadup & BUTTON_A) 
 		{
-			selectedA=false;
-			if (game.selectedNewWeapon) 
+			if (!selectedB) 
 			{
-				game.selectedNewWeapon=false;
-				game.event=eventNewweaponDeployed;
+				selectedA=false;
+				if (game.selectedNewWeapon) 
+				{
+					game.selectedNewWeapon=false;
+					game.event=eventNewweaponDeployed;
+				}
 			}
+		}
+		
+		if (wpaddown & BUTTON_B) 
+		{
+			if (selectedB) return;
+			selectedB=true;
+	
+			// Start fast weapon	select
+			if ((!selectedA) && (game.stateMachine==stateGame))
+			{	
+				if (game.cash>=weaponSpecs->getPrice(game.weaponType)) 
+				{	
+					game.event=eventNewWeaponSelected;	
+					game.selectedNewWeapon=true;
+					
+					// Click sound
+				   sound->effect(SOUND_CLICK);
+				}
+			}
+		}
+		
+		if (wpadup & BUTTON_B) 
+		{
+			selectedB=false;
+			
+			if ((!selectedA) && (game.stateMachine==stateGame))
+			{	
+				// Deploy fast weapon
+				if (game.selectedNewWeapon) 
+				{
+					game.selectedNewWeapon=false;
+					game.event=eventNewweaponDeployed;
+				}
+			}
+		}
+		
+		// Select fast previous weapon
+		if (wpaddown & BUTTON_LEFT ) 
+		{	
+			if ((!selectedA) && (!selectedB) && (game.stateMachine==stateGame))
+			{		
+				game.event=eventNewWeaponPrevious;
+				
+				// Click sound
+				sound->effect(SOUND_CLICK);
+			}
+		}					
+				
+		// Select fast next weapon
+		if (wpaddown & BUTTON_RIGHT)
+		{
+			if ((!selectedA) && (!selectedB) && (game.stateMachine==stateGame))
+			{
+				game.event=eventNewWeaponNext;    		
+				
+				// Click sound
+				sound->effect(SOUND_CLICK);
+			}	
 		}
 			
 		if (wpaddown & BUTTON_1 ) 

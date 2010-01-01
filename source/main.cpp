@@ -24,6 +24,14 @@
 **  - Improve graphical fire effect!
 **  - Multi language support.
 **
+**  01/01/2010 Version 0.81
+**  - Adapted game play (make it harder).
+**  - Replace menu background image.
+**  - Improve background music.
+**  - Remove some english typos. Thanks ShadowXVII.
+**  - Enable B button for fast building. 
+**  - Enable left and right button for fast weapon type selection.
+**
 **  30/12/2009 Version 0.80
 **  - Adapt game parameters to make game play better:
 **		  - Increase start money depending on game level.
@@ -54,6 +62,7 @@
 **  24/12/2009 Version 0.60
 **  - Increase enemy walk speed after each 25 waves. 
 **  - Show mini enemies moving on map select screen. 
+**  - Update credit screen. 
 **  - Update credit screen. 
 **  - Improve game information panel design.
 **  	- Show price and strengh information about new weapons.
@@ -133,7 +142,7 @@
 **  - Added music & effect control screen.
 **  	- Added nigh tracks background music.
 **  	- Added game sound effects.
-**  - Added wave lanch button on game board.
+**  - Added wave launch button on game board.
 **  - Added game information panel.
 **		- Added functionality to upgrade power, range and rate of weapon.
 **  - Added continues monster wave principle.
@@ -408,6 +417,95 @@ Monster   	 *monsters[MAX_MONSTERS];
 Pointer   	 *pointers[MAX_POINTERS];
 Weapon    	 *weapons[MAX_WEAPONS];
 Button    	 *buttons[MAX_BUTTONS];
+
+// -----------------------------------
+// Plasma effect by NoNameNo
+// -----------------------------------
+
+int offset1, offset2, offset3, offset4;
+int periode1, periode2, periode3, periode4 ;
+int length1, length2, length3, length4;
+int amp1, amp2, amp3, amp4;
+int origine1, origine2, origine3, origine4;
+int adc1, adc2, adc3, adc4;
+float old1, old2, old3, old4;
+float siny1, siny2, siny3, siny4;
+int x;
+float pas1, pas2, pas3, pas4;
+
+void initPlasma()
+{
+	adc1=0;
+   offset1=0;
+   origine1=0;
+   length1=1280;
+   amp1=100;
+   periode1=1;
+   pas1=(periode1*360.0F)/length1;
+   siny1 = offset1*pas1;
+
+   adc2=1;
+   offset2=0;
+   origine2=0;
+   length2=1280;
+   amp2=40;
+   periode2=2;
+   pas2=(periode2*360.0F)/length2;
+   siny2 = offset2*pas2;
+
+   adc3=-3;
+   offset3=0;
+   origine3=0;
+   length3=1280;
+   amp3=30;
+   periode3=1;
+   pas3=(periode3*360.0F)/length3;
+   siny3 = offset3*pas3;
+
+   adc4=-7;
+   offset4=0;
+   origine4=0;
+   length4=1280;
+   amp4=70;
+   periode4=1;
+   pas4=(periode4*360.0F)/length4;
+   siny4 = offset4*pas4;
+}
+
+void drawPlasma()
+{
+	old1=siny1;
+	old2=siny2;
+	old3=siny3;
+	old4=siny4;
+	
+   for(x=0;x<=640;x++) 
+	{
+      siny1+=pas1;
+      siny2+=pas2;
+      siny3+=pas3;
+      siny4+=pas4;
+
+      GX_Begin(GX_LINES, GX_VTXFMT0, 2);
+                GX_Position3f32(x, 0, 0);
+                GX_Color1u32(0x000000FF);
+                GX_Position3f32(x, (sin(DegToRad(siny1))*amp1+origine1)+(sin(DegToRad(siny2))*amp2+origine2)+(sin(DegToRad(siny3))*amp3+origine3)+(sin(DegToRad(siny4))*amp4+origine4)+240,  0);
+                GX_Color1u32(0x0000FF7F);
+      GX_End();
+      
+		GX_Begin(GX_LINES, GX_VTXFMT0, 2);
+                GX_Position3f32(x, (sin(DegToRad(siny1))*amp1+origine1)+(sin(DegToRad(siny2))*amp2+origine2)+(sin(DegToRad(siny3))*amp3+origine3)+(sin(DegToRad(siny4))*amp4+origine4)+240,  0);
+                GX_Color1u32(0x0000FF7F);
+                GX_Position3f32(x, 480, 0);
+                GX_Color1u32(0x000000FF);
+      GX_End();
+
+   }
+   siny1=old1+(adc1*pas1);
+   siny2=old2+(adc2*pas2);
+   siny3=old3+(adc3*pas3);
+   siny4=old4+(adc4*pas4);
+}
 
 // -----------------------------------
 // Destroy METHODES
@@ -719,7 +817,7 @@ void initMonsters(bool special)
    
 	// Calculate how much monster will be in the wave
 	int amount=4+game.wave;
-	if (amount>MAX_MONSTERS) amount=MAX_MONSTERS;
+	if (amount>90) amount=90;
    
 	for( int i=0; i<amount; i++ ) 
 	{		
@@ -747,6 +845,7 @@ void initMonsters(bool special)
 		
 		// Increase monster speed after every 20 waves;
 		int step = (int) (rand() % ((game.wave/20)+1))+1;
+		if (game.level>100) step++;
 		monsters[id]->setStep(step);	
 			
 		if (special)
@@ -1604,7 +1703,7 @@ void initButtons(void)
 	    {									
 			int ypos=55;
 			
-			// New Wave lanch Button
+			// New Wave launch Button
 			buttons[0]=new Button();
 			buttons[0]->setX(10+game.panelXOffset);
 			buttons[0]->setY(ypos+game.panelYOffset);
@@ -1809,8 +1908,8 @@ void initGame(int wave)
 		grids[game.selectedMap]->initBuild();
 	}
 	
-	// Lanch first monster wave
-	game.event=eventLanch;
+	// Launch first monster wave
+	game.event=eventLaunch;
 }		
 
 // Init application parameters
@@ -1866,6 +1965,8 @@ void initApplication(void)
 	
 	// Init network Thread
 	initNetwork();
+	
+	initPlasma();
 		
 	trace->event(s_fn,0,"leave");
 }
@@ -2122,7 +2223,7 @@ void drawPanelText1(void)
 	drawText(xpos+35,ypos,fontPanel,"%03d", game.wave);	
 	
 	ypos+=20;
-	drawText(xpos+25,ypos,fontPanel,"LANCH");
+	drawText(xpos+25,ypos,fontPanel,"LAUNCH");
 	
 	// Set button label values
 	sprintf(tmp,"    %03d", game.waveCountDown/25 );
@@ -2313,8 +2414,12 @@ void drawScreen(void)
 	{		   
 	   case stateIntro1:
 	   { 
+		   // Fade in effect!
+		   //if (game.alfa<(MAX_ALFA-2)) game.alfa+=2;
+			game.alfa=MAX_ALFA;
+			
 			// Draw background
-			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR );
+			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR1 );
 		  
 			// Init text layer	  
          GRRLIB_initTexture();	
@@ -2331,20 +2436,30 @@ void drawScreen(void)
 			drawText(40, ypos, fontNormal,  "This software is open source and may be copied, distributed or modified"  );
 			ypos+=20;
 			drawText(60, ypos, fontNormal,  "under the terms of the GNU General Public License (GPL) version 2" );
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, 0xFFFFFF00|game.alfa);
 	   }	   
 	   break;
 	   
 	   case stateIntro2:
 	   {
 			unsigned int j;
+		   game.alfa=MAX_ALFA;
 		  
 	      // Draw background
-			GRRLIB_DrawImg(0,0, images.background2, 0, 1, 1, IMAGE_COLOR );
+			GRRLIB_DrawImg(0,0, images.background2, 0, 1, 1, 0xFFFFFF00|game.alfa );
 
 			// Draw Plaatsoft logo		 
    	   for(j=0;j<images.logo->h;j++)
 			{
-            GRRLIB_DrawTile(((640-images.logo2->w)/2)+sin(game.wave1)*50, (((480-images.logo2->h)/2)-50)+j, images.logo, 0, 1, 1, IMAGE_COLOR,j );
+            GRRLIB_DrawTile(
+					((640-images.logo2->w)/2)+sin(game.wave1)*50, 
+					(((480-images.logo2->h)/2)-50)+j, 
+					images.logo, 0, 1, 1, 0xFFFFFF00|game.alfa, j );
             game.wave1+=0.02;
          }
 			game.wave2+=0.02;
@@ -2357,6 +2472,12 @@ void drawScreen(void)
 			drawText(0, ypos, fontParagraph,  "Please visit my website for more information." );
 			ypos+=40;
 			drawText(0, ypos, fontParagraph,  "http://www.plaatsoft.nl" );
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, 0xFFFFFF00|game.alfa);
 	   }	   
 	   break;
 	   	   
@@ -2365,7 +2486,9 @@ void drawScreen(void)
 			char *version=NULL;
 
 			// Draw background
+			//GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, 0xFFFFFF00|game.alfa );
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+		   //drawPlasma();
 		  
 			// Draw Buttons
 			drawButtons();
@@ -2391,6 +2514,12 @@ void drawScreen(void)
 			
 			// Draw Button Text labels
 			drawButtonsText(0);
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 		
@@ -2398,9 +2527,14 @@ void drawScreen(void)
 		{
 			// Draw background
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
-			  	
+			//drawPlasma();
+  	
 			ypos=130;
 	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
+			//GRRLIB_Rectangle(65, ypos, 120, 280, 0xffff80ff, 1);
+			//GRRLIB_Rectangle(265, ypos, 120, 280, 0xff8040ff, 1);
+			//GRRLIB_Rectangle(465, ypos, 120, 280, 0x93ff93ff, 1);
 			
 			GRRLIB_DrawImg(65,ypos, images.panelEasy, 0, 1, 1, IMAGE_COLOR );						
 			GRRLIB_DrawImg(265,ypos, images.panelMedium, 0, 1, 1, IMAGE_COLOR );
@@ -2418,6 +2552,12 @@ void drawScreen(void)
 
 			// Draw Button Text labels
 			drawButtonsText(0);
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 		
@@ -2425,7 +2565,8 @@ void drawScreen(void)
 		{
 			// Draw background
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
-			  
+			//drawPlasma();
+  
 			// Draw samples maps
 			ypos=140;
 	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
@@ -2459,6 +2600,12 @@ void drawScreen(void)
 
 			// Draw Button Text labels
 			drawButtonsText(0);
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 	
@@ -2500,6 +2647,12 @@ void drawScreen(void)
 			drawPanelText3();
 			drawPanelText4();
 			drawButtonsText(-28);
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 				
@@ -2524,6 +2677,12 @@ void drawScreen(void)
 			drawButtonsText(-20);
 			  
 			drawText(260, 220, fontParagraph, "Game Over!");
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 		
@@ -2548,6 +2707,12 @@ void drawScreen(void)
 			drawButtonsText(-10);
 	
  	      drawText(0, 220, fontParagraph, "Quit game?");	
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 		
@@ -2570,6 +2735,7 @@ void drawScreen(void)
 				   
          // Draw background
          GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+		   //drawPlasma();
 		  
 			// Draw scrollbar
 			int y=SCROLLBAR_Y_MIN;
@@ -2623,6 +2789,12 @@ void drawScreen(void)
 		  
 			// Draw Button Text labels
 			drawButtonsText(0); 	   
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }
 	   break;
 
@@ -2648,6 +2820,7 @@ void drawScreen(void)
 		   
          // Draw background
          GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+			//drawPlasma();
       	     	
 			// Draw scrollbar
 			int y=SCROLLBAR_Y_MIN;
@@ -2705,6 +2878,12 @@ void drawScreen(void)
 		  
 			// Draw Button Text labels
 			drawButtonsText(0);	   
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }
 	   break;
 	   
@@ -2730,6 +2909,7 @@ void drawScreen(void)
 		   
          // Draw background
          GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+			//drawPlasma();
       	     	
 			// Draw scrollbar
 			int y=SCROLLBAR_Y_MIN;
@@ -2787,6 +2967,12 @@ void drawScreen(void)
 		  
 			// Draw Button Text labels
 			drawButtonsText(0);	   
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }
 	   break;
 
@@ -2794,6 +2980,7 @@ void drawScreen(void)
 	   {	  
 			// Draw background
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+		   //drawPlasma();
 		 
 			// Draw buttons
 	      drawButtons(); 
@@ -2825,6 +3012,12 @@ void drawScreen(void)
 
 			// Draw Button Text labels
 			drawButtonsText(0);
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 
@@ -2832,6 +3025,7 @@ void drawScreen(void)
 	   {	  
 			// Draw background
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+		   //drawPlasma();
 		 
 			// Draw buttons
 	      drawButtons(); 
@@ -2882,6 +3076,12 @@ void drawScreen(void)
 		
 			// Draw Button Text labels
 			drawButtonsText(0);
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 		
@@ -2889,6 +3089,7 @@ void drawScreen(void)
 	   {	  
 	      // Draw background
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+		   //drawPlasma();
 		 
 			// Draw buttons
 	      drawButtons(); 
@@ -2926,6 +3127,12 @@ void drawScreen(void)
 		  	   		  					  
 			// Draw Button Text labels
 			drawButtonsText(0);
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 		  
@@ -2933,6 +3140,7 @@ void drawScreen(void)
 	   {  
 	      // Draw background
 			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
+		   //drawPlasma();
 		  
 			// Draw buttons
 	      drawButtons(); 
@@ -2980,6 +3188,12 @@ void drawScreen(void)
 		  
 			// Draw Button Text labels
 			drawButtonsText(0);
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }
 	   break;
 	   	   
@@ -2987,6 +3201,7 @@ void drawScreen(void)
 	   { 
 	      // Draw background
 			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
+		   //drawPlasma();
 		
 		   // Draw Sound icon
 			int yoffset=20;
@@ -3025,6 +3240,12 @@ void drawScreen(void)
 		  		  		
 		   // Draw Button Text labels
 		   drawButtonsText(0);
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }
 	   break;
 	   
@@ -3063,6 +3284,7 @@ void drawScreen(void)
 		   
 			// Draw background
 			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
+		   //drawPlasma();
 
 			// Draw buttons
 	      drawButtons(); 
@@ -3115,6 +3337,12 @@ void drawScreen(void)
 		  
 			// Draw Button Text labels
 			drawButtonsText(0);
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }
 	   break;
 
@@ -3122,7 +3350,8 @@ void drawScreen(void)
 	   {         	
 			// Draw background
 			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
-      	
+      	//drawPlasma();
+			
 			// Draw buttons
 	      drawButtons(); 
 		  
@@ -3154,15 +3383,15 @@ void drawScreen(void)
 
 			// Draw Button Text labels
 			drawButtonsText(0);	
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }
 	   break;
 	}
-	
-	// Show FPS information on screen.
-	drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-	// Draw text layer on top of background.
-   GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 }
 
 // -----------------------------------
@@ -3369,8 +3598,8 @@ void checkNextWave(void)
 	// If event is idle
 	if (game.event==eventNone)
 	{	
-		// Lanch new monster wave else wait one game cycle and try again
-		game.event=eventLanch;
+		// Launch new monster wave else wait one game cycle and try again
+		game.event=eventLaunch;
 	}
 }
 	
@@ -3563,9 +3792,9 @@ void processEvent()
 		}
 		break;
 				
-		case eventLanch:
+		case eventLaunch:
 		{
-			trace->event(s_fn,0,"event=eventLanch");	
+			trace->event(s_fn,0,"event=eventLaunch");	
 			
 			// Check if there is room in monster array for new wave.
 			int count=0;
@@ -3598,8 +3827,8 @@ void processEvent()
 				// Show WAVE text on screen
 				game.alfa=MAX_ALFA;
 
-				// Lanch sound effect
-				if (game.stateMachine==stateGame) sound->effect(SOUND_LANCH);	
+				// Launch sound effect
+				if (game.stateMachine==stateGame) sound->effect(SOUND_LAUNCH);	
 			}
 			else
 			{
@@ -3702,12 +3931,14 @@ void processStateMachine()
 		
 			// Start background music
 			sound->play();
+			game.alfa=0;
 		}
 		break;
 
 		case stateIntro2:
 		{
 			trace->event(s_fn,0,"stateMachine=stateIntro2");
+			game.alfa=0;
 		}
 		break;
 		

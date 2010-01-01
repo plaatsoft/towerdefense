@@ -228,11 +228,11 @@ const char *WeaponSpecs::getName(int type)
 				 break;
 				
 		case 2:  // Canon
-				 return "Canon";
+				 return "Cannon";
 				 break;
 				
 		case 3:  // Missle
-				 return "Missle";
+				 return "Missile";
 				 break;
 				
 		case 4:  // Laser
