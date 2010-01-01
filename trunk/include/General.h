@@ -26,8 +26,8 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.80"
-#define RELEASE_DATE        	"30-12-2009" 
+#define PROGRAM_VERSION     	"0.81"
+#define RELEASE_DATE        	"01-01-2010" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -100,7 +100,8 @@
 #define GRRLIB_WHITE   			0xFFFFFFFF
 
 #define IMAGE_COLOR				0xFFFFFFFF
-#define IMAGE_COLOR2        	0x66666666
+#define IMAGE_COLOR1        	0xEEEEEEEE
+#define IMAGE_COLOR2        	0x88888888
 #define IMAGE_COLOR3        	0x44444444
 
 #define MAX_WEAPONS				200
@@ -146,6 +147,7 @@
 #define AVERAGE_FPS				25
 
 #define BUTTON_A           	(WPAD_BUTTON_A     | WPAD_CLASSIC_BUTTON_A)
+#define BUTTON_B           	(WPAD_BUTTON_B     | WPAD_CLASSIC_BUTTON_B)
 #define BUTTON_HOME         	(WPAD_BUTTON_HOME  | WPAD_CLASSIC_BUTTON_HOME)
 #define BUTTON_1            	(WPAD_BUTTON_1     | WPAD_CLASSIC_BUTTON_X)
 #define BUTTON_2            	(WPAD_BUTTON_2     | WPAD_CLASSIC_BUTTON_Y)
@@ -189,7 +191,7 @@ enum
 enum
 {
 	eventNone=0,
-	eventLanch=1,  
+	eventLaunch=1,  
 	eventSaveHighScore=2,
 	
 	eventWeaponPowerUpgrade=3,

@@ -41,6 +41,7 @@ class Pointer
 	bool selected1;
 	bool selected2;
 	bool selectedA;	
+	bool selectedB;	
   
 	void saveSettingFile(const char* filename);	
 	void buttonScroll(int x,int y );

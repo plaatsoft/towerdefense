@@ -2,7 +2,7 @@
 **  Created by wplaat (www.plaatsoft.nl)
 **
 **  Copyright (C) 2009
-**  ==2================
+**  ===================
 **
 **  This program is free software; you can redistribute it and/or modify
 **  it under the terms of the GNU General Public License as published by
@@ -220,8 +220,8 @@ void Sound::effect(int type)
 				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
  	        break;	
 			
-		// Lanch
-		case SOUND_LANCH:
+		// Launch
+		case SOUND_LAUNCH:
             SND_SetVoice(SND_GetFirstUnusedVoice(), VOICE_MONO_16BIT, 22050, 
 				0, (char *) lanch_pcm, lanch_pcm_size, 
 				effectVolume*EFFECT_MULTIPLER, effectVolume*EFFECT_MULTIPLER, NULL);
