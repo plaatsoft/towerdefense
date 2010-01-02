@@ -1,7 +1,8 @@
 /* 
 **  TowerDefense for Wii - Created by wplaat (www.plaatsoft.nl)
 **
-**  ==================
+**  Copyright (C) 2009-2010
+**  =======================
 **
 **  This program is free software; you can redistribute it and/or modify
 **  it under the terms of the GNU General Public License as published by
@@ -24,15 +25,15 @@
 **  - Improve graphical fire effect!
 **  - Multi language support.
 **
-**  02/01/2010 Version 0.82
-**  - Adapted game play (make it harder, 0.70 was to easy).
-**  - Improve background menu images.
-**  - Improve background music.
-**  - Enable B button for fast building. 
-**  - Enable left and right button for fast weapon type selection.
+**  02/01/2010 Version 0.90
+**  - Adapted game play it harder. Previous release was to easy!
+**  - Improve background image.
+**  - Improve first music track.
 **  - Improve first intro screen.
 **  - Added WiiMote control help screen.
-**  - Remove some english typos. Thanks ShadowXVII.
+**  - Enable B button for faster building. 
+**  - Enable left and right button for faster weapon type selection.
+**  - Remove some english typo's.
 **  - Build game with devkitPPC r19 compiler.
 **
 **  30/12/2009 Version 0.80
@@ -261,10 +262,6 @@ typedef struct
   GRRLIB_texImg *background2;
   GRRLIB_texImg *bar;
   GRRLIB_texImg *barCursor;  
-  
-  GRRLIB_texImg *panelEasy;  
-  GRRLIB_texImg *panelMedium;  
-  GRRLIB_texImg *panelHard;  
   
   GRRLIB_texImg *scrollbar;
   GRRLIB_texImg *scrollTop;
@@ -617,10 +614,6 @@ void destroyImages(void)
    GRRLIB_FreeTexture(images.barCursor);
    GRRLIB_FreeTexture(images.soundicon);
 		
-	GRRLIB_FreeTexture(images.panelEasy);
-   GRRLIB_FreeTexture(images.panelMedium);
-	GRRLIB_FreeTexture(images.panelHard);
-	
    GRRLIB_FreeTexture(images.pointer1);
    GRRLIB_FreeTexture(images.pointer2);
    GRRLIB_FreeTexture(images.pointer3);
@@ -680,7 +673,9 @@ void initImages(void)
 	const char *s_fn="initImages";
 	trace->event(s_fn,0,"enter");
 
-   images.logo1=GRRLIB_LoadTexture( pic5data );
+   images.logo1=GRRLIB_LoadTexture( pic4data );
+	GRRLIB_SetMidHandle( images.logo1, true );
+	
 	images.logo2=GRRLIB_LoadTexture( pic5data );
 	images.logo=GRRLIB_LoadTexture( pic5data );
 	GRRLIB_InitTileSet(images.logo, images.logo->w, 1, 0);
@@ -694,10 +689,6 @@ void initImages(void)
 	images.soundicon=GRRLIB_LoadTexture( pic16data );
 	GRRLIB_SetMidHandle( images.soundicon, true ); 	
 	
-	images.panelEasy=GRRLIB_LoadTexture( pic20data );
-	images.panelMedium=GRRLIB_LoadTexture( pic21data );
-	images.panelHard=GRRLIB_LoadTexture( pic22data );
-   
 	images.scrollbar=GRRLIB_LoadTexture(pic33data);
 	images.scrollTop=GRRLIB_LoadTexture( pic34data);
 	images.scrollMiddle=GRRLIB_LoadTexture( pic35data);
@@ -1086,7 +1077,7 @@ void initButtons(void)
 		
 		case stateLevelMenu:
 		{
-			int ypos=415;
+			int ypos=405;
 	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
 			
 			// Easy Button 
@@ -1903,7 +1894,6 @@ void initApplication(void)
 	
 	// Init network Thread
 	initNetwork();
-	initNetwork();
 			
 	trace->event(s_fn,0,"leave");
 }
@@ -2160,7 +2150,7 @@ void drawPanelText1(void)
 	drawText(xpos+35,ypos,fontPanel,"%03d", game.wave);	
 	
 	ypos+=20;
-	drawText(xpos+25,ypos,fontPanel,"LAUNCH");
+	drawText(xpos+20,ypos,fontPanel,"LAUNCH");
 	
 	// Set button label values
 	sprintf(tmp,"    %03d", game.waveCountDown/25 );
@@ -2352,10 +2342,10 @@ void drawScreen(void)
 	   case stateIntro1:
 	   { 		
 			// Draw background
-			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR1 );
+			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR );
 		  
 		   // Draw game logo
-		   GRRLIB_DrawImg(((640-images.logo1->w)/2) , ((rmode->xfbHeight-images.logo1->h)/2)-20, 
+		   GRRLIB_DrawImg(320, (rmode->xfbHeight/2), 
 				images.logo1, 0, game.size, game.size, IMAGE_COLOR );
 		   if (game.size<=MAX_SIZE) game.size+=0.05;
 
@@ -2366,12 +2356,15 @@ void drawScreen(void)
 			ypos+=20;
 			drawText(0, ypos, fontParagraph,  "http://www.plaatsoft.nl"  );
 			
-			ypos+=350;
+			ypos+=380;
 			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=28;
 			
 			drawText(40, ypos, fontNormal,  "This software is open source and may be copied, distributed or modified"  );
 			ypos+=20;
 			drawText(60, ypos, fontNormal,  "under the terms of the GNU General Public License (GPL) version 2" );
+
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
@@ -2384,10 +2377,9 @@ void drawScreen(void)
 	   case stateIntro2:
 	   {
 			unsigned int j;
-		   game.alfa=MAX_ALFA;
 		  
 	      // Draw background
-			GRRLIB_DrawImg(0,0, images.background2, 0, 1, 1, 0xFFFFFF00|game.alfa );
+			GRRLIB_DrawImg(0,0, images.background2, 0, 1, 1, IMAGE_COLOR );
 
 			// Draw Plaatsoft logo		 
    	   for(j=0;j<images.logo->h;j++)
@@ -2395,7 +2387,7 @@ void drawScreen(void)
             GRRLIB_DrawTile(
 					((640-images.logo2->w)/2)+sin(game.wave1)*50, 
 					(((480-images.logo2->h)/2)-50)+j, 
-					images.logo, 0, 1, 1, 0xFFFFFF00|game.alfa, j );
+					images.logo, 0, 1, 1, IMAGE_COLOR, j );
             game.wave1+=0.02;
          }
 			game.wave2+=0.02;
@@ -2408,12 +2400,15 @@ void drawScreen(void)
 			drawText(0, ypos, fontParagraph,  "Please visit my website for more information." );
 			ypos+=40;
 			drawText(0, ypos, fontParagraph,  "http://www.plaatsoft.nl" );
+
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
 		  
 			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, 0xFFFFFF00|game.alfa);
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }	   
 	   break;
 	   	   
@@ -2422,8 +2417,7 @@ void drawScreen(void)
 			char *version=NULL;
 
 			// Draw background
-			//GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, 0xFFFFFF00|game.alfa );
-			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR );
 		  
 			// Draw Buttons
 			drawButtons();
@@ -2432,23 +2426,24 @@ void drawScreen(void)
          GRRLIB_initTexture();
 		  
 			drawText(20, ypos, fontWelcome, "%s v%s", PROGRAM_NAME, PROGRAM_VERSION );
-			ypos+=60;
+			ypos+=40;
 			drawText(20, ypos, fontParagraph, RELEASE_DATE );
 	
 			version=tcp_get_version();
          if ( (version!=NULL) && (strlen(version)>0) && (strcmp(version,PROGRAM_VERSION)!=0) )
          {    
-				ypos+=235;
+				ypos+=255;
 	         drawText(20, ypos, fontNew, "New version [v%s] is available.",version);
 				 	
 				ypos+=20;	 			 
 	         drawText(20, ypos, fontNew, "Check the release notes.");			 
          }  
-		  
-			drawText(20, rmode->xfbHeight-48, fontSmall, "NETWORK THREAD: %s",tcp_get_state());
-			
+		  	
 			// Draw Button Text labels
 			drawButtonsText(0);
+						
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
@@ -2461,19 +2456,54 @@ void drawScreen(void)
 		case stateLevelMenu:
 		{
 			// Draw background
-			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR );
 	  	
-			ypos=130;
+			// Draw samples maps
+			ypos=140;
 	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
 			
-			//GRRLIB_Rectangle(65, ypos, 120, 280, 0xffff80ff, 1);
-			//GRRLIB_Rectangle(265, ypos, 120, 280, 0xff8040ff, 1);
-			//GRRLIB_Rectangle(465, ypos, 120, 280, 0x93ff93ff, 1);
+			// Draw Transparent Panel
+			GRRLIB_Rectangle(30, ypos-20, 580, ypos+185, GRRLIB_BLACK_TRANS_2, 1);
+	
+			GRRLIB_Rectangle(65, ypos, 120, 255, 0x93ff93ff, 1);
+			GRRLIB_Rectangle(265, ypos, 120, 255, 0xffff80ff, 1);
+			GRRLIB_Rectangle(465, ypos, 120, 255, 0xff8040ff, 1);
 			
-			GRRLIB_DrawImg(65,ypos, images.panelEasy, 0, 1, 1, IMAGE_COLOR );						
-			GRRLIB_DrawImg(265,ypos, images.panelMedium, 0, 1, 1, IMAGE_COLOR );
-			GRRLIB_DrawImg(465,ypos, images.panelHard, 0, 1, 1, IMAGE_COLOR );		
+			// Draw some roads
+			GRRLIB_Rectangle(110, ypos, 32, 255, GRRLIB_GRAY, 1);
+			GRRLIB_Line(110+3, ypos, 110+3, ypos+255, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(110+5, ypos, 110+5, ypos+255, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(110+32-3, ypos, 110+32-3, ypos+255, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(110+32-5, ypos, 110+32-5, ypos+255, GRRLIB_WHITESMOKE);
+
+			GRRLIB_Rectangle(310, ypos, 32, 255, GRRLIB_GRAY, 1);
+			GRRLIB_Line(310+3, ypos, 310+3, ypos+255, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(310+5, ypos, 310+5, ypos+255, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(310+32-3, ypos, 310+32-3, ypos+255, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(310+32-5, ypos, 310+32-5, ypos+255, GRRLIB_WHITESMOKE);
+						
+			GRRLIB_Rectangle(510, ypos, 32, 255, GRRLIB_GRAY, 1);
+			GRRLIB_Line(510+3, ypos, 510+3, ypos+255, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(510+5, ypos, 510+5, ypos+255, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(510+32-3, ypos, 510+32-3, ypos+255, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(510+32-5, ypos, 510+32-5, ypos+255, GRRLIB_WHITESMOKE);
 			
+			// Draw Some enemies
+			GRRLIB_DrawImg( 110, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR );	
+			GRRLIB_DrawImg( 110, ypos+50, monsterSpecs->getImage(1), 0, 1, 1, IMAGE_COLOR );
+
+			GRRLIB_DrawImg( 310, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR );
+	      GRRLIB_DrawImg( 310, ypos+50, monsterSpecs->getImage(1), 0, 1, 1, IMAGE_COLOR );
+	      GRRLIB_DrawImg( 310, ypos+90, monsterSpecs->getImage(2), 0, 1, 1, IMAGE_COLOR );
+	      GRRLIB_DrawImg( 310, ypos+130, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR );
+
+			GRRLIB_DrawImg( 510, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR );
+	      GRRLIB_DrawImg( 510, ypos+50, monsterSpecs->getImage(1), 0, 1, 1, IMAGE_COLOR );
+	      GRRLIB_DrawImg( 510, ypos+90, monsterSpecs->getImage(2), 0, 1, 1, IMAGE_COLOR );
+			GRRLIB_DrawImg( 510, ypos+130, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR );
+			GRRLIB_DrawImg( 510, ypos+170, monsterSpecs->getImage(4), 0, 1, 1, IMAGE_COLOR );
+			GRRLIB_DrawImg( 510, ypos+210, monsterSpecs->getImage(5), 0, 1, 1, IMAGE_COLOR );
+				
 			// Draw Buttons
 			drawButtons();
 		  		  
@@ -2486,6 +2516,9 @@ void drawScreen(void)
 
 			// Draw Button Text labels
 			drawButtonsText(0);
+
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
@@ -2498,12 +2531,15 @@ void drawScreen(void)
 		case stateMapSelectMenu:
 		{
 			// Draw background
-			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR );
   
 			// Draw samples maps
 			ypos=140;
 	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
-			
+	
+			// Draw Transparent Panel
+			GRRLIB_Rectangle(30, ypos-20, 580, ypos+185, GRRLIB_BLACK_TRANS_2, 1);
+	
 			if (grids[0]!=NULL) grids[0]->draw(55,ypos,5.0); 
 			if (grids[1]!=NULL) grids[1]->draw(255,ypos,5.0); 
 			if (grids[2]!=NULL) grids[2]->draw(455,ypos,5.0);
@@ -2533,6 +2569,9 @@ void drawScreen(void)
 
 			// Draw Button Text labels
 			drawButtonsText(0);
+
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
@@ -2721,6 +2760,9 @@ void drawScreen(void)
 		  
 			// Draw Button Text labels
 			drawButtonsText(0); 	   
+
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
@@ -2809,6 +2851,9 @@ void drawScreen(void)
 		  
 			// Draw Button Text labels
 			drawButtonsText(0);	   
+
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
@@ -2897,6 +2942,9 @@ void drawScreen(void)
 		  
 			// Draw Button Text labels
 			drawButtonsText(0);	   
+
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
@@ -2936,7 +2984,10 @@ void drawScreen(void)
 
 			// Draw Button Text labels
 			drawButtonsText(0);
-			
+	
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
+	
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
 		  
@@ -2963,38 +3014,41 @@ void drawScreen(void)
 	
          ypos+=100;
 			drawText(60+xoffset, ypos,  fontParagraph, "Button");
-			drawText(120+xoffset, ypos,  fontParagraph, "Action");
+			drawText(180+xoffset, ypos,  fontParagraph, "Action");
 	
-			ypos+=40;	  
-			drawText(60+xoffset, ypos, fontNormal, "A");
-			drawText(120+xoffset, ypos, fontNormal, "Select button on screen" ); 
+			ypos+=60;	  
+			drawText(60+xoffset, ypos, fontParagraph, "A");
+			drawText(180+xoffset, ypos, fontParagraph, "Select button on screen" ); 
 
-			ypos+=40;	  
-			drawText(60+xoffset, ypos, fontNormal, "B");
-			drawText(120+xoffset, ypos, fontNormal, "Build new weapon" ); 
+			ypos+=30;	  
+			drawText(60+xoffset, ypos, fontParagraph, "B");
+			drawText(180+xoffset, ypos, fontParagraph, "Build new weapon" ); 
 
-			ypos+=40;	  
-			drawText(60+xoffset, ypos, fontNormal, "<");
-			drawText(120+xoffset, ypos, fontNormal, "Select previous weapon type" ); 
+			ypos+=30;	  
+			drawText(60+xoffset, ypos, fontParagraph, "<");
+			drawText(180+xoffset, ypos, fontParagraph, "Select previous weapon type" ); 
 
-			ypos+=40;	  
-			drawText(60+xoffset, ypos, fontNormal, ">");
-			drawText(120+xoffset, ypos, fontNormal, "Select next weapon type" ); 	
+			ypos+=30;	  
+			drawText(60+xoffset, ypos, fontParagraph, ">");
+			drawText(180+xoffset, ypos, fontParagraph, "Select next weapon type" ); 	
 
-			ypos+=40;	  
-			drawText(60+xoffset, ypos, fontNormal, "1");
-			drawText(120+xoffset, ypos, fontNormal, "Play next music track" ); 
+			ypos+=30;	  
+			drawText(60+xoffset, ypos, fontParagraph, "1");
+			drawText(180+xoffset, ypos, fontParagraph, "Play next music track" ); 
 
-			ypos+=40;	  
-			drawText(60+xoffset, ypos, fontNormal, "2");
-			drawText(120+xoffset, ypos, fontNormal, "Play previous music track" ); 	
+			ypos+=30;	  
+			drawText(60+xoffset, ypos, fontParagraph, "2");
+			drawText(180+xoffset, ypos, fontParagraph, "Play previous music track" ); 	
 
-			ypos+=80;	  
-			drawText(60+xoffset, ypos, fontNormal, "+");
-			drawText(120+xoffset, ypos, fontNormal, "Make screenshot to SdCard" ); 		
+			ypos+=30;	  
+			drawText(60+xoffset, ypos, fontParagraph, "+");
+			drawText(180+xoffset, ypos, fontParagraph, "Make screenshot" ); 		
 		  
 			// Draw Button Text labels
 			drawButtonsText(0);
+
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
@@ -3058,6 +3112,9 @@ void drawScreen(void)
 		
 			// Draw Button Text labels
 			drawButtonsText(0);
+
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
@@ -3108,6 +3165,9 @@ void drawScreen(void)
 		  	   		  					  
 			// Draw Button Text labels
 			drawButtonsText(0);
+
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
@@ -3120,7 +3180,7 @@ void drawScreen(void)
 	   case stateCredits:
 	   {  
 	      // Draw background
-			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
+			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR );
 		  
 			// Draw buttons
 	      drawButtons(); 
@@ -3144,7 +3204,7 @@ void drawScreen(void)
 			ypos+=20;
 	      drawText(0, ypos, fontNormal, "MLtm");
 			ypos+=20;
-	      drawText(0, ypos, fontNormal, "shango64");
+	      drawText(0, ypos, fontNormal, "shang64");
 		  
 	      ypos+=30;
 	      drawText(0, ypos, fontParagraph, "MUSIC ");
@@ -3168,6 +3228,9 @@ void drawScreen(void)
 		  
 			// Draw Button Text labels
 			drawButtonsText(0);
+
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
@@ -3180,7 +3243,7 @@ void drawScreen(void)
 	   case stateSoundSettings:
 	   { 
 	      // Draw background
-			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
+			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR );
 		
 		   // Draw Sound icon
 			int yoffset=20;
@@ -3222,6 +3285,9 @@ void drawScreen(void)
 		  		  		
 		   // Draw Button Text labels
 		   drawButtonsText(0);
+
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
@@ -3318,6 +3384,9 @@ void drawScreen(void)
 		  
 			// Draw Button Text labels
 			drawButtonsText(0);
+
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
@@ -3330,7 +3399,10 @@ void drawScreen(void)
 	   case stateUserSettings:
 	   {         	
 			// Draw background
-			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
+			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR );
+
+			// Draw Transparent Panel
+			GRRLIB_Rectangle(30, ypos+120, 570, ypos+180, GRRLIB_BLACK_TRANS_2, 1);
 			
 			// Draw buttons
 	      drawButtons(); 
@@ -3341,7 +3413,7 @@ void drawScreen(void)
 			// Draw Title	
 			drawText(150, ypos, fontTitle, "User Initials");
 			ypos+=120;
-
+			
 			// Draw initial characters
 			ypos+=60;	
 			
@@ -3363,6 +3435,9 @@ void drawScreen(void)
 
 			// Draw Button Text labels
 			drawButtonsText(0);	
+
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());

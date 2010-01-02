@@ -1,8 +1,8 @@
 /*  
 **  Created by wplaat (www.plaatsoft.nl)
 **
-**  Copyright (C) 2009
-**  ==================
+**  Copyright (C) 2009-2010
+**  =======================
 **
 **  This program is free software; you can redistribute it and/or modify
 **  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.82"
+#define PROGRAM_VERSION     	"0.90"
 #define RELEASE_DATE        	"02-01-2010" 
 
 // Check latest available version 
@@ -83,6 +83,7 @@
 #define GRRLIB_LIGHTRED     	0x3333FFFF
 #define GRRLIB_BLACK 			0x000000FF
 #define GRRLIB_BLACK_TRANS		0x00000044
+#define GRRLIB_BLACK_TRANS_2	0x000000AA
 #define GRRLIB_MAROON  			0x800000FF
 #define GRRLIB_GREEN   			0x008000FF
 #define GRRLIB_OLIVE   			0x808000FF
@@ -101,7 +102,7 @@
 
 #define IMAGE_COLOR				0xFFFFFFFF
 #define IMAGE_COLOR1        	0xEEEEEEEE
-#define IMAGE_COLOR2        	0x88888888
+#define IMAGE_COLOR2        	0xDDDDDDDD
 #define IMAGE_COLOR3        	0x44444444
 
 #define MAX_WEAPONS				200
@@ -119,13 +120,13 @@
 #define MAX_SOUND_VOLUME		10
 #define MAX_MUSIC_TRACK     	9
 
-#define MAX_RUMBLE				2
+#define MAX_RUMBLE				1
 #define MAX_HORZ_PIXELS			640
 #define MAX_VERT_PIXELS			480
 #define MAX_LEN			    	256
 #define MAX_ANGLE					360
 #define MAX_ALFA					255
-#define MAX_SIZE					40
+#define MAX_SIZE					1
 
 #define MAX_LINES		    		200
 #define MAX_BUFFER_SIZE			8192
@@ -272,7 +273,7 @@ typedef struct
 	// Variables for graphical animations
 	int alfa;
 	int angle;
-	int size;
+	float size;
 	float wave1;
 	float wave2;
 	int scrollIndex;
