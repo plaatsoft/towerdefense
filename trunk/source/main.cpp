@@ -27,13 +27,13 @@
 **
 **  02/01/2010 Version 0.90
 **  - Adapted game play it harder. Previous release was to easy!
-**  - Improve background image.
+**  - Improve background images.
 **  - Improve first music track.
 **  - Improve first intro screen.
 **  - Added WiiMote control help screen.
 **  - Enable B button for faster building. 
 **  - Enable left and right button for faster weapon type selection.
-**  - Remove some english typo's.
+**  - Remove some english typos.
 **  - Build game with devkitPPC r19 compiler.
 **
 **  30/12/2009 Version 0.80
