@@ -464,6 +464,17 @@ void Pointer::buttonA(int x, int y)
 			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
 				// Main Menu button	 
+				game.stateMachine=stateHelp4;	     
+			}
+		}
+		break;
+		
+		case stateHelp4:
+		{
+			// Check if button is pressed on screen
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
+			{
+				// Main Menu button	 
 				game.stateMachine=stateMainMenu;	     
 			}
 		}

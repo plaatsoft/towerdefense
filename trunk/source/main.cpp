@@ -24,13 +24,16 @@
 **  - Improve graphical fire effect!
 **  - Multi language support.
 **
-**  01/01/2010 Version 0.81
-**  - Adapted game play (make it harder).
-**  - Replace menu background image.
+**  02/01/2010 Version 0.82
+**  - Adapted game play (make it harder, 0.70 was to easy).
+**  - Improve background menu images.
 **  - Improve background music.
-**  - Remove some english typos. Thanks ShadowXVII.
 **  - Enable B button for fast building. 
 **  - Enable left and right button for fast weapon type selection.
+**  - Improve first intro screen.
+**  - Added WiiMote control help screen.
+**  - Remove some english typos. Thanks ShadowXVII.
+**  - Build game with devkitPPC r19 compiler.
 **
 **  30/12/2009 Version 0.80
 **  - Adapt game parameters to make game play better:
@@ -250,6 +253,7 @@ typedef struct
   
   GRRLIB_texImg *soundicon;
   
+  GRRLIB_texImg *logo1;
   GRRLIB_texImg *logo2;
   GRRLIB_texImg *logo;
   
@@ -300,6 +304,10 @@ topscore globalHighScore[MAX_GLOBAL_HIGHSCORE+1];
 // -----------------------------------------------------------
 // VARIABLES
 // -----------------------------------------------------------
+
+// logo1 Image
+extern const unsigned char     pic4data[];
+extern int      pic4length;
 
 // logo2 Image
 extern const unsigned char     pic5data[];
@@ -417,95 +425,6 @@ Monster   	 *monsters[MAX_MONSTERS];
 Pointer   	 *pointers[MAX_POINTERS];
 Weapon    	 *weapons[MAX_WEAPONS];
 Button    	 *buttons[MAX_BUTTONS];
-
-// -----------------------------------
-// Plasma effect by NoNameNo
-// -----------------------------------
-
-int offset1, offset2, offset3, offset4;
-int periode1, periode2, periode3, periode4 ;
-int length1, length2, length3, length4;
-int amp1, amp2, amp3, amp4;
-int origine1, origine2, origine3, origine4;
-int adc1, adc2, adc3, adc4;
-float old1, old2, old3, old4;
-float siny1, siny2, siny3, siny4;
-int x;
-float pas1, pas2, pas3, pas4;
-
-void initPlasma()
-{
-	adc1=0;
-   offset1=0;
-   origine1=0;
-   length1=1280;
-   amp1=100;
-   periode1=1;
-   pas1=(periode1*360.0F)/length1;
-   siny1 = offset1*pas1;
-
-   adc2=1;
-   offset2=0;
-   origine2=0;
-   length2=1280;
-   amp2=40;
-   periode2=2;
-   pas2=(periode2*360.0F)/length2;
-   siny2 = offset2*pas2;
-
-   adc3=-3;
-   offset3=0;
-   origine3=0;
-   length3=1280;
-   amp3=30;
-   periode3=1;
-   pas3=(periode3*360.0F)/length3;
-   siny3 = offset3*pas3;
-
-   adc4=-7;
-   offset4=0;
-   origine4=0;
-   length4=1280;
-   amp4=70;
-   periode4=1;
-   pas4=(periode4*360.0F)/length4;
-   siny4 = offset4*pas4;
-}
-
-void drawPlasma()
-{
-	old1=siny1;
-	old2=siny2;
-	old3=siny3;
-	old4=siny4;
-	
-   for(x=0;x<=640;x++) 
-	{
-      siny1+=pas1;
-      siny2+=pas2;
-      siny3+=pas3;
-      siny4+=pas4;
-
-      GX_Begin(GX_LINES, GX_VTXFMT0, 2);
-                GX_Position3f32(x, 0, 0);
-                GX_Color1u32(0x000000FF);
-                GX_Position3f32(x, (sin(DegToRad(siny1))*amp1+origine1)+(sin(DegToRad(siny2))*amp2+origine2)+(sin(DegToRad(siny3))*amp3+origine3)+(sin(DegToRad(siny4))*amp4+origine4)+240,  0);
-                GX_Color1u32(0x0000FF7F);
-      GX_End();
-      
-		GX_Begin(GX_LINES, GX_VTXFMT0, 2);
-                GX_Position3f32(x, (sin(DegToRad(siny1))*amp1+origine1)+(sin(DegToRad(siny2))*amp2+origine2)+(sin(DegToRad(siny3))*amp3+origine3)+(sin(DegToRad(siny4))*amp4+origine4)+240,  0);
-                GX_Color1u32(0x0000FF7F);
-                GX_Position3f32(x, 480, 0);
-                GX_Color1u32(0x000000FF);
-      GX_End();
-
-   }
-   siny1=old1+(adc1*pas1);
-   siny2=old2+(adc2*pas2);
-   siny3=old3+(adc3*pas3);
-   siny4=old4+(adc4*pas4);
-}
 
 // -----------------------------------
 // Destroy METHODES
@@ -688,6 +607,7 @@ void destroyImages(void)
    const char *s_fn="destroyImages";
    trace->event(s_fn,0,"enter");
 
+   GRRLIB_FreeTexture(images.logo1);
    GRRLIB_FreeTexture(images.logo2);
    
    GRRLIB_FreeTexture(images.background1);
@@ -760,6 +680,7 @@ void initImages(void)
 	const char *s_fn="initImages";
 	trace->event(s_fn,0,"enter");
 
+   images.logo1=GRRLIB_LoadTexture( pic5data );
 	images.logo2=GRRLIB_LoadTexture( pic5data );
 	images.logo=GRRLIB_LoadTexture( pic5data );
 	GRRLIB_InitTileSet(images.logo, images.logo->w, 1, 0);
@@ -1414,6 +1335,23 @@ void initButtons(void)
 		   int ypos=460;
 			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
 			
+			// Next Button
+			buttons[0]=new Button();
+			buttons[0]->setX(240);
+			buttons[0]->setY(ypos);
+			buttons[0]->setImageNormal(images.button2);
+			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setLabel("Next");	
+			buttons[0]->setColor(IMAGE_COLOR);	
+			buttons[0]->setIndex(0);
+		}
+		break;
+		
+		case stateHelp4:
+		{
+		   int ypos=460;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
 			// Main Menu Button
 			buttons[0]=new Button();
 			buttons[0]->setX(240);
@@ -1965,9 +1903,8 @@ void initApplication(void)
 	
 	// Init network Thread
 	initNetwork();
-	
-	initPlasma();
-		
+	initNetwork();
+			
 	trace->event(s_fn,0,"leave");
 }
 				
@@ -2413,22 +2350,21 @@ void drawScreen(void)
    switch( game.stateMachine )	
 	{		   
 	   case stateIntro1:
-	   { 
-		   // Fade in effect!
-		   //if (game.alfa<(MAX_ALFA-2)) game.alfa+=2;
-			game.alfa=MAX_ALFA;
-			
+	   { 		
 			// Draw background
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR1 );
 		  
+		   // Draw game logo
+		   GRRLIB_DrawImg(((640-images.logo1->w)/2) , ((rmode->xfbHeight-images.logo1->h)/2)-20, 
+				images.logo1, 0, game.size, game.size, IMAGE_COLOR );
+		   if (game.size<=MAX_SIZE) game.size+=0.05;
+
 			// Init text layer	  
          GRRLIB_initTexture();	
 		  
-			drawText(20, ypos, fontWelcome,  PROGRAM_NAME );
-			ypos+=60;
-			drawText(20, ypos, fontNormal,  "Created by wplaat"  );
+			drawText(0, ypos, fontParagraph,  "Created by wplaat"  );
 			ypos+=20;
-			drawText(20, ypos, fontNormal,  "http://www.plaatsoft.nl"  );
+			drawText(0, ypos, fontParagraph,  "http://www.plaatsoft.nl"  );
 			
 			ypos+=350;
 			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=28;
@@ -2441,7 +2377,7 @@ void drawScreen(void)
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
 		  
 			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, 0xFFFFFF00|game.alfa);
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }	   
 	   break;
 	   
@@ -2488,7 +2424,6 @@ void drawScreen(void)
 			// Draw background
 			//GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, 0xFFFFFF00|game.alfa );
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
-		   //drawPlasma();
 		  
 			// Draw Buttons
 			drawButtons();
@@ -2527,8 +2462,7 @@ void drawScreen(void)
 		{
 			// Draw background
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
-			//drawPlasma();
-  	
+	  	
 			ypos=130;
 	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
 			
@@ -2565,7 +2499,6 @@ void drawScreen(void)
 		{
 			// Draw background
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
-			//drawPlasma();
   
 			// Draw samples maps
 			ypos=140;
@@ -2735,7 +2668,6 @@ void drawScreen(void)
 				   
          // Draw background
          GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
-		   //drawPlasma();
 		  
 			// Draw scrollbar
 			int y=SCROLLBAR_Y_MIN;
@@ -2820,7 +2752,6 @@ void drawScreen(void)
 		   
          // Draw background
          GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
-			//drawPlasma();
       	     	
 			// Draw scrollbar
 			int y=SCROLLBAR_Y_MIN;
@@ -2909,8 +2840,7 @@ void drawScreen(void)
 		   
          // Draw background
          GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
-			//drawPlasma();
-      	     	
+	      	     	
 			// Draw scrollbar
 			int y=SCROLLBAR_Y_MIN;
          GRRLIB_DrawImg(SCROLLBAR_x,y, images.scrollTop, 0, 1, 1, IMAGE_COLOR );
@@ -2980,7 +2910,6 @@ void drawScreen(void)
 	   {	  
 			// Draw background
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
-		   //drawPlasma();
 		 
 			// Draw buttons
 	      drawButtons(); 
@@ -3001,11 +2930,6 @@ void drawScreen(void)
 			drawText(0, ypos, fontParagraph, "base the game is over. Good Luck!");		
 
 			ypos+=60;
-			drawText(0, ypos, fontParagraph, "Tip: You can control which music track is played during");
-			ypos+=25;
-			drawText(0, ypos, fontParagraph, "the game with the 1 and 2 button on your WiiMote!");
-
-			ypos+=60;
 			drawText(0, ypos, fontParagraph, "Note: The global highscore contains the Top 40 of best");
 			ypos+=25;
 			drawText(0, ypos, fontParagraph, "internet players. Only one entry per player is showed.");	  
@@ -3020,13 +2944,71 @@ void drawScreen(void)
 			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
-
+		
 		case stateHelp2:
 	   {	  
 			// Draw background
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
-		   //drawPlasma();
-		 
+			 
+			// Draw buttons
+	      drawButtons(); 
+		  
+			// Init text layer	  
+         GRRLIB_initTexture();
+ 
+			// Show title
+			drawText(0, ypos, fontTitle, "WiiMote Control");
+		  
+			int xoffset=50;
+	
+         ypos+=100;
+			drawText(60+xoffset, ypos,  fontParagraph, "Button");
+			drawText(120+xoffset, ypos,  fontParagraph, "Action");
+	
+			ypos+=40;	  
+			drawText(60+xoffset, ypos, fontNormal, "A");
+			drawText(120+xoffset, ypos, fontNormal, "Select button on screen" ); 
+
+			ypos+=40;	  
+			drawText(60+xoffset, ypos, fontNormal, "B");
+			drawText(120+xoffset, ypos, fontNormal, "Build new weapon" ); 
+
+			ypos+=40;	  
+			drawText(60+xoffset, ypos, fontNormal, "<");
+			drawText(120+xoffset, ypos, fontNormal, "Select previous weapon type" ); 
+
+			ypos+=40;	  
+			drawText(60+xoffset, ypos, fontNormal, ">");
+			drawText(120+xoffset, ypos, fontNormal, "Select next weapon type" ); 	
+
+			ypos+=40;	  
+			drawText(60+xoffset, ypos, fontNormal, "1");
+			drawText(120+xoffset, ypos, fontNormal, "Play next music track" ); 
+
+			ypos+=40;	  
+			drawText(60+xoffset, ypos, fontNormal, "2");
+			drawText(120+xoffset, ypos, fontNormal, "Play previous music track" ); 	
+
+			ypos+=80;	  
+			drawText(60+xoffset, ypos, fontNormal, "+");
+			drawText(120+xoffset, ypos, fontNormal, "Make screenshot to SdCard" ); 		
+		  
+			// Draw Button Text labels
+			drawButtonsText(0);
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
+		}
+		break;
+
+		case stateHelp3:
+	   {	  
+			// Draw background
+			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+			 
 			// Draw buttons
 	      drawButtons(); 
 		  
@@ -3085,11 +3067,10 @@ void drawScreen(void)
 		}
 		break;
 		
-		case stateHelp3:
+		case stateHelp4:
 	   {	  
 	      // Draw background
 			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
-		   //drawPlasma();
 		 
 			// Draw buttons
 	      drawButtons(); 
@@ -3140,7 +3121,6 @@ void drawScreen(void)
 	   {  
 	      // Draw background
 			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
-		   //drawPlasma();
 		  
 			// Draw buttons
 	      drawButtons(); 
@@ -3201,12 +3181,12 @@ void drawScreen(void)
 	   { 
 	      // Draw background
 			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
-		   //drawPlasma();
 		
 		   // Draw Sound icon
 			int yoffset=20;
 	      if (rmode->xfbHeight==MAX_VERT_PIXELS) yoffset-=20;
-	      GRRLIB_DrawImg((640/2), ((480/2))+yoffset, images.soundicon, game.angle, 1.4, 1.4, IMAGE_COLOR );
+	      GRRLIB_DrawImg((640/2), ((480/2))+yoffset, images.soundicon, 
+				game.angle, 1.4, 1.4, IMAGE_COLOR );
 			if (game.angle<MAX_ANGLE) game.angle++; else game.angle=0;
 			
 			// Draw buttons
@@ -3226,14 +3206,16 @@ void drawScreen(void)
 	      ypos+=20;
          GRRLIB_DrawImg(104,ypos,images.bar, 0, 1, 1, IMAGE_COLOR );
 	      ypos+=10;
-	      GRRLIB_DrawImg(115+(sound->getMusicVolume()*40),ypos, images.barCursor, 0, 1, 1, IMAGE_COLOR );
+	      GRRLIB_DrawImg(115+(sound->getMusicVolume()*40),ypos, 
+				images.barCursor, 0, 1, 1, IMAGE_COLOR );
   
          ypos+=80;
          drawText(0, ypos, fontParagraph, "Effects Volume" );
 	      ypos+=20;	
 	      GRRLIB_DrawImg(104,ypos, images.bar, 0, 1, 1, IMAGE_COLOR );
 	      ypos+=10;
-	      GRRLIB_DrawImg(115+(sound->getEffectVolume()*40),ypos,images.barCursor, 0, 1, 1, IMAGE_COLOR );
+	      GRRLIB_DrawImg(115+(sound->getEffectVolume()*40),ypos,
+				images.barCursor, 0, 1, 1, IMAGE_COLOR );
 	
 	      ypos+=70;
 	      drawText(0, ypos, fontParagraph, "  Music track [%d]", sound->getMusicTrack());	
@@ -3284,7 +3266,6 @@ void drawScreen(void)
 		   
 			// Draw background
 			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
-		   //drawPlasma();
 
 			// Draw buttons
 	      drawButtons(); 
@@ -3350,7 +3331,6 @@ void drawScreen(void)
 	   {         	
 			// Draw background
 			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
-      	//drawPlasma();
 			
 			// Draw buttons
 	      drawButtons(); 
@@ -3931,6 +3911,8 @@ void processStateMachine()
 		
 			// Start background music
 			sound->play();
+			
+			game.size=0;
 			game.alfa=0;
 		}
 		break;
@@ -4094,6 +4076,15 @@ void processStateMachine()
 		case stateHelp3:
 		{
 			trace->event(s_fn,0,"stateMachine=stateHelp3");
+			
+			// Init buttons
+			initButtons();
+		}
+		break;
+		
+		case stateHelp4:
+		{
+			trace->event(s_fn,0,"stateMachine=stateHelp4");
 			
 			// Init buttons
 			initButtons();
