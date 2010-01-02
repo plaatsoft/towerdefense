@@ -26,8 +26,8 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.81"
-#define RELEASE_DATE        	"01-01-2010" 
+#define PROGRAM_VERSION     	"0.82"
+#define RELEASE_DATE        	"02-01-2010" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -166,25 +166,32 @@
 enum
 {
 	stateNone=0,
+	
 	stateIntro1=1,   
 	stateIntro2=2, 
+	
 	stateMainMenu=3,
 	stateLevelMenu=4,
 	stateMapSelectMenu=5,
+	
 	stateGame=6,
 	stateGameOver=7,
 	stateGameQuit=8,
+	
 	stateLocalHighScore=9,
 	stateTodayHighScore=10,
 	stateGlobalHighScore=11,
+	
 	stateHelp1=12,
 	stateHelp2=13,
 	stateHelp3=14,
-	stateCredits=15,
-	stateSoundSettings=16,
-	stateReleaseNotes=17,
-	stateUserSettings=18,
-	stateQuit=19
+	stateHelp4=15,
+	
+	stateCredits=16,
+	stateSoundSettings=17,
+	stateReleaseNotes=18,
+	stateUserSettings=19,
+	stateQuit=20
 };
 
 // Event machine events
@@ -265,6 +272,7 @@ typedef struct
 	// Variables for graphical animations
 	int alfa;
 	int angle;
+	int size;
 	float wave1;
 	float wave2;
 	int scrollIndex;
