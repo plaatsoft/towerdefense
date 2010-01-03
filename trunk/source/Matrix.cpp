@@ -89,69 +89,69 @@ void Matrix::calculateMatrix(void)
    trace->event(s_fn,0,"enter");
 	
    // Determine new stepFactor
-	if ((wave>=0) && (wave<20)) 
+	if ((wave>=0) && (wave<10)) 
 	{
 		stepFactor = 1;
 		minStep = 1;
 	}
-	if ((wave>=20) && (wave<40)) 
+	if ((wave>=10) && (wave<20)) 
 	{
 		stepFactor = 2;
 		minStep = 1;
 	}
 	
-	if ((wave>=40) && (wave<55)) 
+	if ((wave>=20) && (wave<35)) 
 	{
-		stepFactor = 3;
-		minStep = 1;
+		stepFactor = 2;
+		minStep = 2;
 	}
 	
-	if ((wave>=55) && (wave<75)) 
+	if ((wave>=35) && (wave<45)) 
 	{
 		stepFactor = 3;
 		minStep = 2;
 	}
 	
-	if ((wave>=75) && (wave<90)) 
+	if ((wave>=45) && (wave<55)) 
 	{
 		stepFactor = 4;
 		minStep = 2;
 	}
 	
-	if ((wave>=90) && (wave<100)) 
+	if ((wave>=55) && (wave<70)) 
 	{
-		stepFactor = 5;
-		minStep = 2;
+		stepFactor = 4;
+		minStep = 3;
 	}
 	
-	if ((wave>=100) && (wave<110)) 
-	{
-		stepFactor = 6;
-		minStep = 2;
-	}
-	
-	if ((wave>=110) && (wave<120)) 
+	if ((wave>=70) && (wave<90)) 
 	{
 		stepFactor = 5;
 		minStep = 3;
 	}
 	
-	if ((wave>=120) && (wave<130)) 
+	if ((wave>=90) && (wave<110)) 
 	{
-		stepFactor = 6;
-		minStep = 3;
-	}
-	
-	if ((wave>=130) && (wave<140)) 
-	{
-		stepFactor = 7;
-		minStep = 3;
-	}
-	
-	if (wave>=140) 
-	{
-		stepFactor = 8;
+		stepFactor = 4;
 		minStep = 4;
+	}
+	
+	if ((wave>=110) && (wave<130)) 
+	{
+		stepFactor = 5;
+		minStep = 4;
+	}
+	
+	if ((wave>=130) && (wave<150)) 
+	{
+		stepFactor = 6;
+		minStep = 4;
+	}
+	
+	if (wave>=150) 
+	{
+		stepFactor = 5;
+		minStep = 5;
 	}
 
 	// Calculate how much enemies will be in the wave
@@ -162,7 +162,7 @@ void Matrix::calculateMatrix(void)
 	}
 
 	// Calculate delay between two enemies
-	enemyDelay=MAX_DELAY_BETWEEN_ENEMIES-(wave*3);
+	enemyDelay=MAX_DELAY_BETWEEN_ENEMIES-((wave+minStep)*3);
 	if (enemyDelay<MIN_DELAY_BETWEEN_ENEMIES) 
 	{
 		enemyDelay=MIN_DELAY_BETWEEN_ENEMIES;
