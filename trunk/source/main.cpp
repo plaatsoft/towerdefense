@@ -1044,7 +1044,7 @@ void initButtons(void)
 			buttons[6]->setY(ypos);
 			buttons[6]->setImageNormal(images.button2);
 			buttons[6]->setImageFocus(images.buttonFocus2);
-			buttons[6]->setLabel("User initials");	
+			buttons[6]->setLabel("User Initials");	
 			buttons[6]->setColor(IMAGE_COLOR);
 			buttons[6]->setIndex(5);
 								
@@ -1057,7 +1057,7 @@ void initButtons(void)
 			buttons[7]->setY(ypos);
 			buttons[7]->setImageNormal(images.button2);
 			buttons[7]->setImageFocus(images.buttonFocus2);
-			buttons[7]->setLabel("Exit HBC");	
+			buttons[7]->setLabel("Exit to HBC");	
 			buttons[7]->setColor(IMAGE_COLOR);
 			buttons[7]->setIndex(7);
 	 
