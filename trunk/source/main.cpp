@@ -232,6 +232,7 @@
 #include "Button.h"
 #include "Pointer.h"
 #include "Grid.h"
+#include "Matrix.h"
 #include "http.h"
 
 // -----------------------------------------------------------
@@ -429,6 +430,7 @@ Monster   	 *monsters[MAX_MONSTERS];
 Pointer   	 *pointers[MAX_POINTERS];
 Weapon    	 *weapons[MAX_WEAPONS];
 Button    	 *buttons[MAX_BUTTONS];
+Matrix		 *matrix;
 
 // -----------------------------------
 // Destroy METHODES
@@ -496,6 +498,21 @@ void destroyMonsterSpecs(void)
 	{
 		delete monsterSpecs;
 		monsterSpecs=NULL;
+	}
+	
+	trace->event(s_fn,0,"leave");
+}
+
+void destroyMatrix(void)
+{
+	const char *s_fn="destroyMatrx";
+	trace->event(s_fn,0,"enter");
+	
+	// Destroy Settings
+	if (matrix!=NULL)
+	{
+		delete matrix;
+		matrix=NULL;
 	}
 	
 	trace->event(s_fn,0,"leave");
@@ -734,10 +751,9 @@ void initMonsters(bool special)
    
 	int delay=1;   
    
-	// Calculate how much monster will be in the wave
-	int amount=4+game.wave;
-	if (amount>90) amount=90;
-   
+	// Get amount of monster
+	int amount=matrix->getEnemyAmount();
+	  
 	for( int i=0; i<amount; i++ ) 
 	{		
 		trace->event(s_fn,0,"Init monster [%d]",i);
@@ -755,17 +771,16 @@ void initMonsters(bool special)
 		
 		monsters[id]=new Monster();	  		
 		monsters[id]->setIndex(id);
-		monsters[id]->setDelay(delay);
+		
+		// Set delay between two monsters.	
+		monsters[id]->setDelay(delay);		
+		delay+=matrix->getEnemyDelay();
 		
 		// Choose randon monster type depending on wave index.
 		int type = (int) (rand() % game.wave);
 		monsters[id]->setImage(monsterSpecs->getImage(type));
 		monsters[id]->setEnergy(monsterSpecs->getEnergy(type));
-		
-		// Increase monster speed after every 20 waves;
-		int step = (int) (rand() % ((game.wave/20)+1))+1;
-		if (game.level>100) step++;
-		monsters[id]->setStep(step);	
+		monsters[id]->setStep(matrix->getEnemyStep());	
 			
 		if (special)
 		{
@@ -780,12 +795,6 @@ void initMonsters(bool special)
 				monsters[id]->setGrid(game.selectedMap);
 			}
 		}
-			  	  
-		// Calculate delay between two monsters.
-		int delayOffset=(game.wave*3);
-		if (delayOffset>90) delayOffset=90+(game.wave/20);
-		if (delayOffset>95) delayOffset=95;
-		delay+=(100-delayOffset);
 	}
 	trace->event(s_fn,0,"leave [void]");
 }
@@ -1892,6 +1901,10 @@ void initApplication(void)
 
 	// Init monster Specifications
 	monsterSpecs = new MonsterSpecs();
+	
+	// Init matrix
+	matrix = new Matrix();
+	matrix->setWave(0);
 	
 	// Init Today HighScore
 	initTodayHighScore();
@@ -3873,15 +3886,18 @@ void processEvent()
 			{
 				if (monsters[i]==NULL) count++;
 			}
-			int amount=3+(game.wave*2);
-			
-			if (amount<count)
+						
+			if ((matrix->getEnemyAmount()+1)<(MAX_MONSTERS-count))
 			{
 				// Create next monster wave
+				
+				game.wave++;
+				matrix->setWave(game.wave);
+				
 				if (game.waveDelay>300) game.waveDelay-=50;
 				game.waveCountDown=game.waveDelay;
-				game.wave++;
 				
+							
 				if (game.stateMachine==stateMapSelectMenu)
 				{
 					initMonsters(true);	
@@ -4268,6 +4284,7 @@ int main(void)
 	destroyButtons();
 	destroyMonsters();
 	destroyMonsterSpecs();
+	destroyMatrix();
 	destroyPointers();
 	destroySound();
 	destroyHighScore();
