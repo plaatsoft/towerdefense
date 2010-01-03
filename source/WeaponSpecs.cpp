@@ -34,15 +34,15 @@
 #define RIFLE_PRICE 				200
 #define CANON_PRICE 				500
 #define MISSLE_PRICE 			1000
-#define LASER_PRICE 				2000
-#define NUKE_PRICE 				4000
+#define LASER_PRICE 				4000
+#define NUKE_PRICE 				8000
 
 #define GUN_UPGRADE_PRICE  	10
 #define RIFLE_UPGRADE_PRICE 	25
 #define CANON_UPGRADE_PRICE 	50
 #define LASER_UPGRADE_PRICE 	100
-#define MISSLE_UPGRADE_PRICE 	100
-#define NUKE_UPGRADE_PRICE  	250
+#define MISSLE_UPGRADE_PRICE 	250
+#define NUKE_UPGRADE_PRICE  	500
 
 #define GUN_MIN_POWER 			2
 #define RIFLE_MIN_POWER 		10
@@ -55,15 +55,15 @@
 #define RIFLE_STEP_POWER  		2
 #define CANON_STEP_POWER  		3
 #define MISSLE_STEP_POWER 		4
-#define LASER_STEP_POWER 		5
+#define LASER_STEP_POWER 		8
 #define NUKE_STEP_POWER 		10	
 
-#define GUN_MIN_RANGE 			50
-#define RIFLE_MIN_RANGE 		80
-#define CANON_MIN_RANGE 		60
-#define MISSLE_MIN_RANGE 		80
-#define LASER_MIN_RANGE 		80
-#define NUKE_MIN_RANGE 			100
+#define GUN_MIN_RANGE 			40
+#define RIFLE_MIN_RANGE 		45
+#define CANON_MIN_RANGE 		50
+#define MISSLE_MIN_RANGE 		55
+#define LASER_MIN_RANGE 		60
+#define NUKE_MIN_RANGE 			65
 
 #define GUN_STEP_RANGE  		5
 #define RIFLE_STEP_RANGE  		5

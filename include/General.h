@@ -106,7 +106,7 @@
 #define IMAGE_COLOR3        	0x44444444
 
 #define MAX_WEAPONS				200
-#define MAX_MONSTERS				250
+#define MAX_MONSTERS				400
 #define MAX_BUTTONS         	15
 #define MAX_POINTERS         	4
 #define MAX_LOCAL_HIGHSCORE 	100
@@ -257,7 +257,6 @@ typedef struct
 	int monsterInBase;	
 	int selectedWeapon;	
 	bool selectedNewWeapon;
-	int waveDelay;
 	int mode;
 	int level;
 		
