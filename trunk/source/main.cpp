@@ -26,13 +26,18 @@
 **  - Multi language support.
 **
 **  03/01/2010 Version 0.91
-**  - Improve winter theme maps.
-**  - Added more information on the first page.
-**  - Improve main menu text.
+**  - Adapted game play. Make it harder.
+**  	- Less start money.
+**  	- Increase enemy speed from wave 55.
+**    - Increase laser and nuke price.
+**    - Increase maximum concurrent monsters in action.
+**    - Decrease weapon effect ranges.
+**  - Improve winter theme sprites.
+**  - Expand first help screen text.
+**  - Improve main menu button labels.
 **  - Build game with devkitPPC r19 compiler.
 **
 **  02/01/2010 Version 0.90
-**  - Adapted game play it harder. Previous release was to easy!
 **  - Improve background images.
 **  - Improve first music track.
 **  - Improve first intro screen.
@@ -1806,44 +1811,31 @@ void initNetwork(void)
 
 // Init game parameters
 void initGame(int wave)
-{
+{	
 	// Init game variables
 	game.score=0;
-	
-	switch (game.level)
-	{
-		case gameEasy:   game.cash=3000;
-							  break;
-
-		case gameMedium: game.cash=6000;
-							  break;							
-							  
-		case gameHard:   game.cash=9000;
-							  break;	
-	}
-							  
+	game.cash=matrix->getStartCash();							  
 	game.selectedWeapon=-1;
 	game.selectedNewWeapon=false;	
 	game.weaponType=0;
 	
-	game.panelXOffset=20;
-	game.panelYOffset=0;
-
-	// Init Wave 
 	game.wave=wave;
+	matrix->init();
+	matrix->setWave(game.wave);
+	
 	game.monsterInBase=0;
 	
-	// Start delay between two waves
-	game.waveDelay = 3000;  
-	game.waveCountDown=game.waveDelay;
-
+	// Panel position
+	game.panelXOffset=20;
+	game.panelYOffset=0;
+	
 	// Reset weapon type counter
 	weaponSpecs->resetCounter();
 	
 	// Show New Wave text on screen
 	game.alfa=MAX_ALFA;     
 	
-	// Cleanup previous game variables
+	// Cleanup previous game variables, if any....
 	destroyMonsters();
 	destroyWeapons();
 	
@@ -1904,7 +1896,6 @@ void initApplication(void)
 	
 	// Init matrix
 	matrix = new Matrix();
-	matrix->setWave(0);
 	
 	// Init Today HighScore
 	initTodayHighScore();
@@ -3718,18 +3709,21 @@ void processEvent()
 		case eventInitEasyLevels:
 			trace->event(s_fn,0,"event=eventInitEasyLevels");
 			game.level=gameEasy;
+			matrix->setLevel(game.level);
 			initGrids(game.level);
 			break;
 
 		case eventInitMediumLevels:
 			trace->event(s_fn,0,"event=eventInitMediumLevels");
 			game.level=gameMedium;
+			matrix->setLevel(game.level);
 			initGrids(game.level);
 			break;
 
 		case eventInitHardLevels:
 		   trace->event(s_fn,0,"event=eventInitHardLevels");
 			game.level=gameHard;
+			matrix->setLevel(game.level);
 			initGrids(game.level);			
 			break;
 			
@@ -3880,24 +3874,22 @@ void processEvent()
 		{
 			trace->event(s_fn,0,"event=eventLaunch");	
 			
-			// Check if there is room in monster array for new wave.
+			// Count amount of empty places in enemies array.
 			int count=0;
 			for(int i=0;i<MAX_MONSTERS;i++)
 			{
 				if (monsters[i]==NULL) count++;
 			}
-						
-			if ((matrix->getEnemyAmount()+1)<(MAX_MONSTERS-count))
-			{
-				// Create next monster wave
+			
+			// Increase wave level
+			game.wave++;
+			matrix->setWave(game.wave);
+										
+			if ((matrix->getEnemyAmount())<count)
+			{				
+				// There is enough room in enemy array so add next wave
+				game.waveCountDown=matrix->getWaveDelay();
 				
-				game.wave++;
-				matrix->setWave(game.wave);
-				
-				if (game.waveDelay>300) game.waveDelay-=50;
-				game.waveCountDown=game.waveDelay;
-				
-							
 				if (game.stateMachine==stateMapSelectMenu)
 				{
 					initMonsters(true);	
@@ -3918,9 +3910,13 @@ void processEvent()
 				if (game.stateMachine==stateGame) sound->effect(SOUND_LAUNCH);	
 			}
 			else
-			{
-				// No room in monster array wait 250 cycles (+/- 10 sec.) and try again!
-				game.waveCountDown=250;
+			{	
+				trace->event(s_fn,0,"No room in enemy array wait 2 seconds and try again");
+				game.waveCountDown=(2 * AVERAGE_FPS);			
+				
+				// Decrease wave again.
+				game.wave--;
+				matrix->setWave(game.wave);
 			}				
 		}
 		break;
@@ -4057,7 +4053,7 @@ void processStateMachine()
 			initButtons();	
 						
 			// Init game variables
-			initGame(50);
+			initGame(100);
 		}
 		break;
 	

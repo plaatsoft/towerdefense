@@ -25,23 +25,33 @@ class Matrix
 {
   private:
 	int wave;
+	int level;
+	int waveDelay;
+	int enemyDelay;
+	int minStep;
+	int stepFactor;
+	int enemiesInWave;
+	
+	void calculateMatrix(void);
 
   public:
   	// Constructor & Destructor
 	Matrix();
  	~Matrix();
 	
-	// Methode
-
-	// Setters
-	void setWave(int wave);
-
+	// Method
+	void init(void);
+	
 	// Getters
 	int getEnemyAmount( void );
 	int getEnemyStep( void );
 	int getEnemyDelay( void );
-	
+	int getStartCash( void );
 	int getWaveDelay( void );
+
+	// Setters
+	void setWave(int wave);
+	void setLevel( int level );
 };
 
 
