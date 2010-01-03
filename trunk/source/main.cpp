@@ -25,6 +25,12 @@
 **  - Improve graphical fire effect!
 **  - Multi language support.
 **
+**  03/01/2010 Version 0.91
+**  - Improve winter theme maps.
+**  - Added more information on the first page.
+**  - Improve main menu text.
+**  - Build game with devkitPPC r19 compiler.
+**
 **  02/01/2010 Version 0.90
 **  - Adapted game play it harder. Previous release was to easy!
 **  - Improve background images.
@@ -191,6 +197,7 @@
 **  - Finding free graphics for game.
 **  - Setup basic directory structure for new project.
 **  - Store source code in Google code SVN repository.
+**  - Build game with devkitPPC r19 compiler.
 */
 
 #include <stdio.h>
@@ -2977,6 +2984,11 @@ void drawScreen(void)
 			ypos+=25;
 			drawText(0, ypos, fontParagraph, "base the game is over. Good Luck!");		
 
+		   ypos+=60;
+			drawText(0, ypos, fontParagraph, "You can only build weapons on land. It is not allowed");
+			ypos+=25;
+			drawText(0, ypos, fontParagraph, "to build on water, roads or other deployed weapons.");		
+		
 			ypos+=60;
 			drawText(0, ypos, fontParagraph, "Note: The global highscore contains the Top 40 of best");
 			ypos+=25;
@@ -3016,7 +3028,7 @@ void drawScreen(void)
 			drawText(60+xoffset, ypos,  fontParagraph, "Button");
 			drawText(180+xoffset, ypos,  fontParagraph, "Action");
 	
-			ypos+=60;	  
+			ypos+=50;	  
 			drawText(60+xoffset, ypos, fontParagraph, "A");
 			drawText(180+xoffset, ypos, fontParagraph, "Select button on screen" ); 
 
@@ -3043,6 +3055,10 @@ void drawScreen(void)
 			ypos+=30;	  
 			drawText(60+xoffset, ypos, fontParagraph, "+");
 			drawText(180+xoffset, ypos, fontParagraph, "Make screenshot" ); 		
+
+			ypos+=30;	  
+			drawText(60+xoffset, ypos, fontParagraph, "Home");
+			drawText(180+xoffset, ypos, fontParagraph, "Quit the game" );
 		  
 			// Draw Button Text labels
 			drawButtonsText(0);
