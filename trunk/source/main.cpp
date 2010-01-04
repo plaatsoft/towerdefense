@@ -25,10 +25,10 @@
 **  - Improve graphical fire effect!
 **  - Multi language support.
 **
-**  03/01/2010 Version 0.91
+**  04/01/2010 Version 0.91
 **  - Adapted game play. Make it harder.
 **  	- Less start money.
-**  	- Increase enemy speed from wave 55.
+**  	- Enemy speed depending on wave number.
 **    - Increase laser and nuke price.
 **    - Increase maximum concurrent monsters in action.
 **    - Decrease weapon effect ranges.

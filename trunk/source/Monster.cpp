@@ -92,8 +92,11 @@ void Monster::draw(int xOffset, int yOffset, float size1)
 	if (visible) 	
 	{	
 		// Draw monster on screen
-		GRRLIB_DrawImg( (x/size1)+xOffset, (y/size1)+yOffset, 
-			image, 0, (size/size1), (size/size1), IMAGE_COLOR );
+		//GRRLIB_DrawImg( (x/size1)+xOffset, (y/size1)+yOffset, 
+		//	image, 0, (size/size1), (size/size1), IMAGE_COLOR );
+			
+		GRRLIB_DrawTile(  (x/size)+xOffset, (y/size1)+yOffset, 
+			image , 0, (size/size1), (size/size1), IMAGE_COLOR, 1);
 	}
 }
 
