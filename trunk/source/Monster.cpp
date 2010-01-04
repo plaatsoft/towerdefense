@@ -54,7 +54,15 @@ Monster::Monster()
    targetY=0;
    size=1;
    index=0;
+	frameCounter=0;
+	frameStep=0;
    
+	moveUp=false;
+	moveDown=false;
+	moveRight=false;
+	moveLeft=false;
+	dead=false;
+	
    alfa=255;
    energy=0.0;
    
@@ -86,6 +94,119 @@ Monster::~Monster()
 // Others
 // ------------------------------
 	
+//n1 	e1 	s1 	w1
+//n2 	e2 	s2 	w2
+//n3 	e3 	s3 	w3
+//d1 	d2 	d3 	d4 
+
+int Monster::getFrame(void)
+{	
+	if (frameCounter!=0) 
+	{
+		frameCounter--; 
+		
+		// return previous frame
+		return frame;
+	}
+	
+	frameCounter=3;
+	
+	if (moveUp)
+	{
+		switch (frameStep)
+		{
+			case 0:  frame=0;
+						frameStep++;
+					   break;
+					  
+			case 1:  frame=4;
+						frameStep++;
+					   break;
+						
+			case 2:  frame=8;
+						frameStep=0;
+						break;
+		}
+	}
+					
+	if (moveDown)
+	{
+		switch (frameStep)
+		{
+			case 0:  frame=2;
+						frameStep++;
+					   break;
+					  
+			case 1:  frame=6;
+						frameStep++;
+					   break;
+						
+			case 2:  frame=10;
+						frameStep=0;
+						break;
+		}
+	}
+	
+	if (moveRight)
+	{
+		switch (frameStep)
+		{
+			case 0:  frame=1;
+						frameStep++;
+					   break;
+					  
+			case 1:  frame=5;
+						frameStep++;
+					   break;
+						
+			case 2:  frame=9;
+						frameStep=0;
+						break;
+		}		
+	}
+	
+	if (moveLeft)
+	{
+		switch (frameStep)
+		{
+			case 0:  frame=3;
+						frameStep++;
+					   break;
+					  
+			case 1:  frame=7;
+						frameStep++;
+					   break;
+						
+			case 2:  frame=11;
+						frameStep=0;
+						break;
+		}
+	}
+	
+	if (dead)
+	{
+	  switch (frameStep)
+		{
+			case 0:  frame=12;
+						frameStep++;
+					   break;
+					  
+			case 1:  frame=13;
+						frameStep++;
+					   break;
+						
+			case 2:  frame=14;
+						frameStep++;
+						break;
+						
+			case 3:  frame=15;
+						frameStep=0;
+						break;
+		} 
+	}
+	return frame;
+}
+
 // Draw Monster on screen
 void Monster::draw(int xOffset, int yOffset, float size1)
 {
@@ -96,7 +217,7 @@ void Monster::draw(int xOffset, int yOffset, float size1)
 		//	image, 0, (size/size1), (size/size1), IMAGE_COLOR );
 			
 		GRRLIB_DrawTile(  (x/size)+xOffset, (y/size1)+yOffset, 
-			image , 0, (size/size1), (size/size1), IMAGE_COLOR, 1);
+			image , 0, (size/size1), (size/size1), IMAGE_COLOR, getFrame());
 	}
 }
 
@@ -150,18 +271,42 @@ bool Monster::move(void)
 	else if (x<targetX)
 	{
 		x=x+step;
+		
+		if (!moveRight) frameCounter=0;
+		moveUp=false;
+		moveDown=false;
+		moveRight=true;
+		moveLeft=false;
 	}
 	else if (x>targetX)
 	{
 		x=x-step;	
+		
+		if (!moveLeft) frameCounter=0;
+		moveUp=false;
+		moveDown=false;
+		moveRight=false;
+		moveLeft=true;
 	}	
 	else if (y<targetY)
 	{
 		y=y+step;
+		
+		if (!moveDown) frameCounter=0;
+		moveUp=false;
+		moveDown=true;
+		moveRight=false;
+		moveLeft=false;
 	}
 	else if (y>targetY)
 	{
 		y=y-step;	
+
+		if (!moveUp) frameCounter=0;
+		moveUp=true;
+		moveDown=false;
+		moveRight=false;
+		moveLeft=false;
 	}	
 	return false;
 }
@@ -173,9 +318,9 @@ bool Monster::move(void)
 void Monster::setImage(GRRLIB_texImg *image1)
 {   
    image = image1;
-   
-   height=image->h;
-   width=image->w;
+
+   height=32;
+   width=32;
 }
 
 void Monster::setStep(int step1)

@@ -40,8 +40,19 @@ class Monster
 	int delay;
 	int pos;
 	int index;
-	boolean visible;
+	bool visible;
 	int grid;
+	
+	int frame;
+	int frameCounter;
+	int frameStep;
+	bool moveUp;
+	bool moveDown;
+	bool moveRight;
+	bool moveLeft;
+	bool dead;
+	
+	int getFrame();
 	
   public:
 	// Constructor & Destructor
