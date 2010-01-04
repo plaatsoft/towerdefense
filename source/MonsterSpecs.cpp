@@ -131,6 +131,10 @@ extern int      pic124length;
 extern const unsigned char     pic125data[];
 extern int      pic125length;
 
+// Monster1a Image
+extern const unsigned char     pic151data[];
+extern int      pic151length;
+
 
 // ------------------------------
 // Constructor 
@@ -167,6 +171,9 @@ MonsterSpecs::MonsterSpecs()
 	monster23=GRRLIB_LoadTexture( pic123data );
 	monster24=GRRLIB_LoadTexture( pic124data );
 	monster25=GRRLIB_LoadTexture( pic125data );		
+	
+	monster1a=GRRLIB_LoadTexture( pic151data );	
+	GRRLIB_InitTileSet(monster1a, 32, 32, 0);
       
    trace->event(s_fn,0,"leave");
 }
@@ -210,6 +217,8 @@ MonsterSpecs::~MonsterSpecs()
    GRRLIB_FreeTexture(monster23);
    GRRLIB_FreeTexture(monster24);
    GRRLIB_FreeTexture(monster25);
+	
+	GRRLIB_FreeTexture(monster1a);
 	  
    trace->event(s_fn,0,"leave");
 }
