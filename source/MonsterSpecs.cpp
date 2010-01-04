@@ -135,6 +135,50 @@ extern int      pic125length;
 extern const unsigned char     pic151data[];
 extern int      pic151length;
 
+// Monster2a Image
+extern const unsigned char     pic152data[];
+extern int      pic152length;
+
+// Monster3a Image
+extern const unsigned char     pic153data[];
+extern int      pic153length;
+
+// Monster4a Image
+extern const unsigned char     pic154data[];
+extern int      pic154length;
+
+// Monster5a Image
+extern const unsigned char     pic155data[];
+extern int      pic155length;
+
+// Monster6a Image
+extern const unsigned char     pic156data[];
+extern int      pic156length;
+
+// Monster7a Image
+extern const unsigned char     pic157data[];
+extern int      pic157length;
+
+// Monster8a Image
+extern const unsigned char     pic158data[];
+extern int      pic158length;
+
+// Monster9a Image
+extern const unsigned char     pic159data[];
+extern int      pic159length;
+
+// Monster10a Image
+extern const unsigned char     pic160data[];
+extern int      pic160length;
+
+// Monster11a Image
+extern const unsigned char     pic161data[];
+extern int      pic161length;
+
+// Monster12a Image
+extern const unsigned char     pic162data[];
+extern int      pic162length;
+
 
 // ------------------------------
 // Constructor 
@@ -147,33 +191,115 @@ MonsterSpecs::MonsterSpecs()
    trace->event(s_fn,0,"enter");
    
 	monster1=GRRLIB_LoadTexture( pic101data );
+	GRRLIB_InitTileSet(monster1, 32, 32, 0);
+	
 	monster2=GRRLIB_LoadTexture( pic102data );
+	GRRLIB_InitTileSet(monster2, 32, 32, 0);
+	
 	monster3=GRRLIB_LoadTexture( pic103data );
+	GRRLIB_InitTileSet(monster3, 32, 32, 0);
+	
 	monster4=GRRLIB_LoadTexture( pic104data );
+	GRRLIB_InitTileSet(monster4, 32, 32, 0);
+	
 	monster5=GRRLIB_LoadTexture( pic105data );
+	GRRLIB_InitTileSet(monster5, 32, 32, 0);
+	
 	monster6=GRRLIB_LoadTexture( pic106data );
+	GRRLIB_InitTileSet(monster6, 32, 32, 0);
+	
 	monster7=GRRLIB_LoadTexture( pic107data );
+	GRRLIB_InitTileSet(monster7, 32, 32, 0);
+	
 	monster8=GRRLIB_LoadTexture( pic108data );
+	GRRLIB_InitTileSet(monster8, 32, 32, 0);
+	
 	monster9=GRRLIB_LoadTexture( pic109data );
+	GRRLIB_InitTileSet(monster9, 32, 32, 0);
+	
 	monster10=GRRLIB_LoadTexture( pic110data );
+	GRRLIB_InitTileSet(monster10, 32, 32, 0);
+	
 	monster11=GRRLIB_LoadTexture( pic111data );
+	GRRLIB_InitTileSet(monster11, 32, 32, 0);
+	
 	monster12=GRRLIB_LoadTexture( pic112data );   
+	GRRLIB_InitTileSet(monster12, 32, 32, 0);
+	
 	monster13=GRRLIB_LoadTexture( pic113data );
+	GRRLIB_InitTileSet(monster13, 32, 32, 0);
+	
 	monster14=GRRLIB_LoadTexture( pic114data );
+	GRRLIB_InitTileSet(monster14, 32, 32, 0);
+	
 	monster15=GRRLIB_LoadTexture( pic115data );
+	GRRLIB_InitTileSet(monster15, 32, 32, 0);
+	
 	monster16=GRRLIB_LoadTexture( pic116data );
+	GRRLIB_InitTileSet(monster16, 32, 32, 0);
+	
 	monster17=GRRLIB_LoadTexture( pic117data );
+	GRRLIB_InitTileSet(monster17, 32, 32, 0);
+	
 	monster18=GRRLIB_LoadTexture( pic118data );
+	GRRLIB_InitTileSet(monster18, 32, 32, 0);
+	
 	monster19=GRRLIB_LoadTexture( pic119data );
+	GRRLIB_InitTileSet(monster19, 32, 32, 0);
+	
 	monster20=GRRLIB_LoadTexture( pic120data );
+	GRRLIB_InitTileSet(monster20, 32, 32, 0);
+	
 	monster21=GRRLIB_LoadTexture( pic121data );
+	GRRLIB_InitTileSet(monster21, 32, 32, 0);
+	
 	monster22=GRRLIB_LoadTexture( pic122data );
+	GRRLIB_InitTileSet(monster22, 32, 32, 0);
+	
 	monster23=GRRLIB_LoadTexture( pic123data );
+	GRRLIB_InitTileSet(monster23, 32, 32, 0);
+	
 	monster24=GRRLIB_LoadTexture( pic124data );
+	GRRLIB_InitTileSet(monster24, 32, 32, 0);
+	
 	monster25=GRRLIB_LoadTexture( pic125data );		
+	GRRLIB_InitTileSet(monster25, 32, 32, 0);
 	
 	monster1a=GRRLIB_LoadTexture( pic151data );	
 	GRRLIB_InitTileSet(monster1a, 32, 32, 0);
+	
+	monster2a=GRRLIB_LoadTexture( pic152data );	
+	GRRLIB_InitTileSet(monster2a, 32, 32, 0);
+	
+	monster3a=GRRLIB_LoadTexture( pic153data );	
+	GRRLIB_InitTileSet(monster3a, 32, 32, 0);
+	
+	monster4a=GRRLIB_LoadTexture( pic154data );	
+	GRRLIB_InitTileSet(monster4a, 32, 32, 0);
+	
+	monster5a=GRRLIB_LoadTexture( pic155data );	
+	GRRLIB_InitTileSet(monster5a, 32, 32, 0);
+	
+	monster6a=GRRLIB_LoadTexture( pic156data );	
+	GRRLIB_InitTileSet(monster6a, 32, 32, 0);
+	
+	monster7a=GRRLIB_LoadTexture( pic157data );	
+	GRRLIB_InitTileSet(monster7a, 32, 32, 0);
+	
+	monster8a=GRRLIB_LoadTexture( pic158data );	
+	GRRLIB_InitTileSet(monster8a, 32, 32, 0);
+	
+	monster9a=GRRLIB_LoadTexture( pic159data );	
+	GRRLIB_InitTileSet(monster9a, 32, 32, 0);
+	
+	monster10a=GRRLIB_LoadTexture( pic160data );	
+	GRRLIB_InitTileSet(monster10a, 32, 32, 0);
+	
+	monster11a=GRRLIB_LoadTexture( pic161data );	
+	GRRLIB_InitTileSet(monster11a, 32, 32, 0);
+	
+	monster12a=GRRLIB_LoadTexture( pic162data );	
+	GRRLIB_InitTileSet(monster12a, 32, 32, 0);
       
    trace->event(s_fn,0,"leave");
 }
@@ -219,6 +345,17 @@ MonsterSpecs::~MonsterSpecs()
    GRRLIB_FreeTexture(monster25);
 	
 	GRRLIB_FreeTexture(monster1a);
+	GRRLIB_FreeTexture(monster2a);
+	GRRLIB_FreeTexture(monster3a);
+	GRRLIB_FreeTexture(monster4a);
+	GRRLIB_FreeTexture(monster5a);
+	GRRLIB_FreeTexture(monster6a);
+	GRRLIB_FreeTexture(monster7a);
+	GRRLIB_FreeTexture(monster8a);
+	GRRLIB_FreeTexture(monster9a);
+	GRRLIB_FreeTexture(monster10a);
+	GRRLIB_FreeTexture(monster11a);
+	GRRLIB_FreeTexture(monster12a);
 	  
    trace->event(s_fn,0,"leave");
 }
@@ -232,18 +369,18 @@ GRRLIB_texImg * MonsterSpecs::getImage(int type)
 {
 	switch (type)
 	{
-		case  0: return monster1;		
-		case  1: return monster2;
-		case  2: return monster3;
-		case  3: return monster4;
-		case  4: return monster5;
-		case  5: return monster6;
-		case  6: return monster7;
-		case  7: return monster8;
-		case  8: return monster9;
-		case  9: return monster10;
-		case 10: return monster11;
-		case 11: return monster12;
+		case  0: return monster1a;		
+		case  1: return monster2a;
+		case  2: return monster3a;
+		case  3: return monster4a;
+		case  4: return monster5a;
+		case  5: return monster6a;
+		case  6: return monster7a;
+		case  7: return monster8a;
+		case  8: return monster9a;
+		case  9: return monster10a;
+		case 10: return monster11a;
+		case 11: return monster12a;
 		case 12: return monster13;
 		case 13: return monster14;
 		case 14: return monster15;

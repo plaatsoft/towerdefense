@@ -26,6 +26,8 @@
 class MonsterSpecs
 {
   private:
+  
+   // Basic Images
 	GRRLIB_texImg *monster1;
 	GRRLIB_texImg *monster2;
 	GRRLIB_texImg *monster3;
@@ -52,7 +54,19 @@ class MonsterSpecs
 	GRRLIB_texImg *monster24;
 	GRRLIB_texImg *monster25;
 	
+	// Animated images.
 	GRRLIB_texImg *monster1a;
+	GRRLIB_texImg *monster2a;
+	GRRLIB_texImg *monster3a;
+	GRRLIB_texImg *monster4a;
+	GRRLIB_texImg *monster5a;
+	GRRLIB_texImg *monster6a;
+	GRRLIB_texImg *monster7a;
+	GRRLIB_texImg *monster8a;
+	GRRLIB_texImg *monster9a;
+	GRRLIB_texImg *monster10a;
+	GRRLIB_texImg *monster11a;
+	GRRLIB_texImg *monster12a;
 	
   public:
   	// Constructor & Destructor
