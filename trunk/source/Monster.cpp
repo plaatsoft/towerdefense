@@ -62,6 +62,7 @@ Monster::Monster()
 	moveRight=false;
 	moveLeft=false;
 	dead=false;
+	moveStop=false;
 	
    alfa=255;
    energy=0.0;
@@ -101,10 +102,16 @@ Monster::~Monster()
 
 int Monster::getFrame(void)
 {	
-	if (height==32)
+	if (height==32) 
 	{
 		// No animation sprite available;
 		return 0;
+	}
+	
+	// Freece animation
+	if (moveStop)
+	{
+	   return frame;
 	}
 	
 	if (frameCounter!=0) 
@@ -218,7 +225,7 @@ void Monster::draw(int xOffset, int yOffset, float size1)
 {
 	if (visible) 	
 	{				
-		GRRLIB_DrawTile(  (x/size)+xOffset, (y/size1)+yOffset, 
+		GRRLIB_DrawTile(  (x/size1)+xOffset, (y/size1)+yOffset, 
 			image , 0, (size/size1), (size/size1), IMAGE_COLOR, getFrame());
 	}
 }
@@ -320,7 +327,6 @@ bool Monster::move(void)
 void Monster::setImage(GRRLIB_texImg *image1)
 {   
    image = image1;
-
 	height=image->h;
    width=image->w;
 }
@@ -346,6 +352,14 @@ void Monster::setEnergy(int energy1)
 {	
 	energy=energy1;
 }
+
+
+void Monster::setMoveStop(int moveStop1)
+{	
+	moveStop=moveStop1;
+}
+
+
 
 void Monster::setIndex(int index1)
 {

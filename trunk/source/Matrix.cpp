@@ -100,58 +100,64 @@ void Matrix::calculateMatrix(void)
 		minStep = 1;
 	}
 	
-	if ((wave>=20) && (wave<35)) 
+	if ((wave>=20) && (wave<30)) 
 	{
 		stepFactor = 2;
 		minStep = 2;
 	}
 	
-	if ((wave>=35) && (wave<45)) 
+	if ((wave>=30) && (wave<40)) 
 	{
 		stepFactor = 3;
 		minStep = 2;
 	}
 	
-	if ((wave>=45) && (wave<55)) 
+	if ((wave>=40) && (wave<50)) 
 	{
 		stepFactor = 4;
 		minStep = 2;
 	}
 	
-	if ((wave>=55) && (wave<70)) 
+	if ((wave>=50) && (wave<60)) 
 	{
 		stepFactor = 4;
 		minStep = 3;
 	}
 	
-	if ((wave>=70) && (wave<90)) 
+	if ((wave>=60) && (wave<70)) 
 	{
 		stepFactor = 5;
 		minStep = 3;
 	}
 	
-	if ((wave>=90) && (wave<110)) 
+	if ((wave>=70) && (wave<80)) 
 	{
 		stepFactor = 4;
 		minStep = 4;
 	}
 	
-	if ((wave>=110) && (wave<130)) 
+	if ((wave>=90) && (wave<100)) 
 	{
 		stepFactor = 5;
 		minStep = 4;
 	}
 	
-	if ((wave>=130) && (wave<150)) 
+	if ((wave>=100) && (wave<120)) 
 	{
 		stepFactor = 6;
 		minStep = 4;
 	}
 	
-	if (wave>=150) 
+	if ((wave>=120) && (wave<140)) 
 	{
-		stepFactor = 5;
+		stepFactor = 6;
 		minStep = 5;
+	}
+	
+	if (wave>=120) 
+	{
+		stepFactor = 7;
+		minStep = 6;
 	}
 
 	// Calculate how much enemies will be in the wave
@@ -162,7 +168,7 @@ void Matrix::calculateMatrix(void)
 	}
 
 	// Calculate delay between two enemies
-	enemyDelay=MAX_DELAY_BETWEEN_ENEMIES-((wave+minStep)*3);
+	enemyDelay=MAX_DELAY_BETWEEN_ENEMIES-(wave*3);
 	if (enemyDelay<MIN_DELAY_BETWEEN_ENEMIES) 
 	{
 		enemyDelay=MIN_DELAY_BETWEEN_ENEMIES;

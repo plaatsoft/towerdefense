@@ -203,7 +203,7 @@ MonsterSpecs::MonsterSpecs()
    const char *s_fn="MonsterSpecs::MonsterSpecs";
    trace->event(s_fn,0,"enter");
    
-	// Classic enemies	
+	// Load classic enemies	
 	monster1=GRRLIB_LoadTexture( pic101data );
 	GRRLIB_InitTileSet(monster1, 32, 32, 0);
 	
@@ -280,7 +280,7 @@ MonsterSpecs::MonsterSpecs()
 	GRRLIB_InitTileSet(monster25, 32, 32, 0);
 	
 	
-	// Animated enemies
+	// Load animated enemies
 	monster1a=GRRLIB_LoadTexture( pic151data );	
 	GRRLIB_InitTileSet(monster1a, 32, 32, 0);
 	
@@ -326,7 +326,6 @@ MonsterSpecs::MonsterSpecs()
 	monster15a=GRRLIB_LoadTexture( pic165data );	
 	GRRLIB_InitTileSet(monster15a, 32, 32, 0);
 	
-  
    trace->event(s_fn,0,"leave");
 }
 
@@ -397,7 +396,7 @@ MonsterSpecs::~MonsterSpecs()
 // Return Monster Image per Type		
 GRRLIB_texImg * MonsterSpecs::getImage(int type)
 {
-	if (settings->getclassicSprites())
+	if (settings->getClassicSprites())
 	{
 		switch (type)
 		{

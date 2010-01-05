@@ -758,7 +758,7 @@ void Pointer::buttonA(int x, int y)
 		}
 		break;
 		
-		case stateGameQuit:
+		case stateQuitGame:
 		{
 			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
@@ -941,9 +941,9 @@ void Pointer::action(void)
 			{
 				if (game.stateMachine==stateGame)
 				{
-					game.stateMachine=stateGameQuit;
+					game.stateMachine=stateQuitGame;
 				}
-				else if (game.stateMachine!=stateGameQuit)
+				else if (game.stateMachine!=stateQuitGame)
 				{
 					game.stateMachine=stateMainMenu;
 				}
