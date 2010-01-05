@@ -23,6 +23,7 @@
 #include "General.h" 
 #include "MonsterSpecs.h" 
 #include "Trace.h" 
+#include "Settings.h"
 
 // ------------------------------
 // Extern variables
@@ -30,6 +31,7 @@
 
 extern Game 		game; 
 extern Trace    	*trace;
+extern Settings	 *settings;
 
 // Monster1 Image
 extern const unsigned char     pic101data[];
@@ -179,6 +181,17 @@ extern int      pic161length;
 extern const unsigned char     pic162data[];
 extern int      pic162length;
 
+// Monster13a Image
+extern const unsigned char     pic163data[];
+extern int      pic163length;
+
+// Monster14a Image
+extern const unsigned char     pic164data[];
+extern int      pic164length;
+
+// Monster15a Image
+extern const unsigned char     pic165data[];
+extern int      pic165length;
 
 // ------------------------------
 // Constructor 
@@ -190,6 +203,7 @@ MonsterSpecs::MonsterSpecs()
    const char *s_fn="MonsterSpecs::MonsterSpecs";
    trace->event(s_fn,0,"enter");
    
+	// Classic enemies	
 	monster1=GRRLIB_LoadTexture( pic101data );
 	GRRLIB_InitTileSet(monster1, 32, 32, 0);
 	
@@ -265,6 +279,8 @@ MonsterSpecs::MonsterSpecs()
 	monster25=GRRLIB_LoadTexture( pic125data );		
 	GRRLIB_InitTileSet(monster25, 32, 32, 0);
 	
+	
+	// Animated enemies
 	monster1a=GRRLIB_LoadTexture( pic151data );	
 	GRRLIB_InitTileSet(monster1a, 32, 32, 0);
 	
@@ -300,7 +316,17 @@ MonsterSpecs::MonsterSpecs()
 	
 	monster12a=GRRLIB_LoadTexture( pic162data );	
 	GRRLIB_InitTileSet(monster12a, 32, 32, 0);
-      
+	
+	monster13a=GRRLIB_LoadTexture( pic163data );	
+	GRRLIB_InitTileSet(monster13a, 32, 32, 0);
+	
+	monster14a=GRRLIB_LoadTexture( pic164data );	
+	GRRLIB_InitTileSet(monster14a, 32, 32, 0);
+	
+	monster15a=GRRLIB_LoadTexture( pic165data );	
+	GRRLIB_InitTileSet(monster15a, 32, 32, 0);
+	
+  
    trace->event(s_fn,0,"leave");
 }
 
@@ -317,7 +343,7 @@ MonsterSpecs::~MonsterSpecs()
 
    trace->event(s_fn,0,"MonsterSpecs destroyed");
 	
-	// Free memory
+	// Free classic enemies
    GRRLIB_FreeTexture(monster1);
    GRRLIB_FreeTexture(monster2);
    GRRLIB_FreeTexture(monster3);
@@ -344,6 +370,7 @@ MonsterSpecs::~MonsterSpecs()
    GRRLIB_FreeTexture(monster24);
    GRRLIB_FreeTexture(monster25);
 	
+	// Free animated enemies
 	GRRLIB_FreeTexture(monster1a);
 	GRRLIB_FreeTexture(monster2a);
 	GRRLIB_FreeTexture(monster3a);
@@ -356,6 +383,9 @@ MonsterSpecs::~MonsterSpecs()
 	GRRLIB_FreeTexture(monster10a);
 	GRRLIB_FreeTexture(monster11a);
 	GRRLIB_FreeTexture(monster12a);
+	GRRLIB_FreeTexture(monster13a);
+	GRRLIB_FreeTexture(monster14a);
+	GRRLIB_FreeTexture(monster15a);
 	  
    trace->event(s_fn,0,"leave");
 }
@@ -367,33 +397,67 @@ MonsterSpecs::~MonsterSpecs()
 // Return Monster Image per Type		
 GRRLIB_texImg * MonsterSpecs::getImage(int type)
 {
-	switch (type)
+	if (settings->getclassicSprites())
 	{
-		case  0: return monster1a;		
-		case  1: return monster2a;
-		case  2: return monster3a;
-		case  3: return monster4a;
-		case  4: return monster5a;
-		case  5: return monster6a;
-		case  6: return monster7a;
-		case  7: return monster8a;
-		case  8: return monster9a;
-		case  9: return monster10a;
-		case 10: return monster11a;
-		case 11: return monster12a;
-		case 12: return monster13;
-		case 13: return monster14;
-		case 14: return monster15;
-		case 15: return monster16;
-		case 16: return monster17;
-		case 17: return monster18;
-		case 18: return monster19;
-		case 19: return monster20;
-		case 20: return monster21;
-		case 21: return monster22;
-		case 22: return monster23;
-		case 23: return monster24;
-		default: return monster25;		
+		switch (type)
+		{
+			case  0: return monster1;		
+			case  1: return monster2;
+			case  2: return monster3;
+			case  3: return monster4;
+			case  4: return monster5;
+			case  5: return monster6;
+			case  6: return monster7;
+			case  7: return monster8;
+			case  8: return monster9;
+			case  9: return monster10;
+			case 10: return monster11;
+			case 11: return monster12;
+			case 12: return monster13;
+			case 13: return monster14;
+			case 14: return monster15;
+			case 15: return monster16;
+			case 16: return monster17;
+			case 17: return monster18;
+			case 18: return monster19;
+			case 19: return monster20;
+			case 20: return monster21;
+			case 21: return monster22;
+			case 22: return monster23;
+			case 23: return monster24;
+			default: return monster25;		
+		}
+	}
+	else
+	{
+		switch (type)
+		{
+			case  0: return monster1a;		
+			case  1: return monster2a;
+			case  2: return monster3a;
+			case  3: return monster4a;
+			case  4: return monster5a;
+			case  5: return monster6a;
+			case  6: return monster7a;
+			case  7: return monster8a;
+			case  8: return monster9a;
+			case  9: return monster10a;
+			case 10: return monster11a;
+			case 11: return monster12a;
+			case 12: return monster13a;
+			case 13: return monster14a;
+			case 14: return monster15a;
+			case 15: return monster16;
+			case 16: return monster17;
+			case 17: return monster18;
+			case 18: return monster19;
+			case 19: return monster20;
+			case 20: return monster21;
+			case 21: return monster22;
+			case 22: return monster23;
+			case 23: return monster24;
+			default: return monster25;		
+		}
 	}
 }
 

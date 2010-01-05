@@ -320,7 +320,7 @@ void Pointer::buttonA(int x, int y)
 			if ((buttons[6]!=NULL) && (buttons[6]->onSelect(x,y,true)))
 			{
 				// User Initials button	      
-				game.stateMachine=stateUserSettings;
+				game.stateMachine=stateGameSettings;
 			}
 			
 			if ((buttons[7]!=NULL) && (buttons[7]->onSelect(x,y,true)))
@@ -574,7 +574,7 @@ void Pointer::buttonA(int x, int y)
 		}
 		break;
 	 
-		case stateUserSettings:
+		case stateGameSettings:
 		{ 			
 			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
@@ -654,6 +654,20 @@ void Pointer::buttonA(int x, int y)
 			{
 				// - Sixth Character button event           
 				buttonMinus(8);  
+			}
+			
+			if ((buttons[13]!=NULL) && (buttons[13]->onSelect(x,y,true)))
+			{
+				if (settings->getClassicSprites())
+				{
+					settings->setClassicSprites(false);
+					buttons[13]->setLabel("Disabled");
+				}
+				else
+				{
+					settings->setClassicSprites(true);
+					buttons[13]->setLabel("Enabled");
+				} 
 			}
 			
 		}

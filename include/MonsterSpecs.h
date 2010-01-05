@@ -27,7 +27,7 @@ class MonsterSpecs
 {
   private:
   
-   // Basic Images
+   // Classic emenies images
 	GRRLIB_texImg *monster1;
 	GRRLIB_texImg *monster2;
 	GRRLIB_texImg *monster3;
@@ -67,7 +67,10 @@ class MonsterSpecs
 	GRRLIB_texImg *monster10a;
 	GRRLIB_texImg *monster11a;
 	GRRLIB_texImg *monster12a;
-	
+	GRRLIB_texImg *monster13a;
+	GRRLIB_texImg *monster14a;
+	GRRLIB_texImg *monster15a;
+		
   public:
   	// Constructor & Destructor
 	MonsterSpecs();
