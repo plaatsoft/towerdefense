@@ -50,6 +50,7 @@ class Monster
 	bool moveDown;
 	bool moveRight;
 	bool moveLeft;
+	bool moveStop;
 	bool dead;
 	
 	int getFrame();
@@ -70,8 +71,9 @@ class Monster
 	void setDelay(int delay);
 	void setEnergy(int energy);
 	void setIndex(int index);
-	void setGrid(int grid);
-		
+	void setGrid(int grid);	
+	void setMoveStop(int moveStop1);
+
 	// Getters
 	int getX(void);
 	int getY(void);

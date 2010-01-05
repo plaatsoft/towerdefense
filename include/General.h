@@ -177,7 +177,7 @@ enum
 	
 	stateGame=6,
 	stateGameOver=7,
-	stateGameQuit=8,
+	stateQuitGame=8,
 	
 	stateLocalHighScore=9,
 	stateTodayHighScore=10,

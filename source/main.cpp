@@ -36,7 +36,8 @@
 **  - Improve winter theme sprites.
 **  - Improve first help screen.
 **  - Improve main menu screen.
-**  - Improve Game Settings (old User Initials) screen.
+**  - Improve Game Settings screen.
+**     - Add classic enemy sprite option.
 **  - Build game with devkitPPC r19 compiler.
 **
 **  02/01/2010 Version 0.90
@@ -1628,11 +1629,11 @@ void initButtons(void)
 			
 			if (settings->getClassicSprites())
 			{
-				buttons[13]->setLabel("Disabled");
+				buttons[13]->setLabel("Enabled");
 			}
 			else
 			{
-				buttons[13]->setLabel("Enabled");
+				buttons[13]->setLabel("Disabled");
 			} 	
 			buttons[13]->setColor(IMAGE_COLOR);
 			buttons[13]->setIndex(0);
@@ -1732,7 +1733,7 @@ void initButtons(void)
 		}
 		break;
 	
-		case stateGameQuit:	
+		case stateQuitGame:	
 		{
 			// Yes button 
 			buttons[0]=new Button();
@@ -2672,7 +2673,7 @@ void drawScreen(void)
 		}
 		break;
 		
-		case stateGameQuit:
+		case stateQuitGame:
 		{
 			// Draw elements
 			drawGrid(); 
@@ -3225,9 +3226,9 @@ void drawScreen(void)
   	      ypos+=20;
 	      drawText(0, ypos, fontNormal, "wplaat");
 			ypos+=20;
-	      drawText(0, ypos, fontNormal, "MLtm");
+	      drawText(0, ypos, fontNormal, "MLtm and shang64");
 			ypos+=20;
-	      drawText(0, ypos, fontNormal, "shang64");
+	      drawText(0, ypos, fontNormal, "Appliciant (Thanks for the great animated sprites)");
 		  
 	      ypos+=30;
 	      drawText(0, ypos, fontParagraph, "MUSIC ");
@@ -3434,15 +3435,15 @@ void drawScreen(void)
          GRRLIB_initTexture();
 
 			// Draw Title	
-			drawText(150, ypos, fontTitle, "Game Settings");
-			ypos+=120;
+			drawText(100, ypos, fontTitle, "Game Settings");
+			ypos+=90;
 			
-			drawText(150, ypos, fontParagraph, "User Initials");
+			drawText(0, ypos, fontParagraph, "User Initials");
 			
 			// Draw initial characters
-			ypos+=60;	
-			
+			ypos+=90;	
 			int xpos=50;
+			
 			drawText(xpos, ypos, fontTitle, "%c", settings->getFirstChar());
 			xpos+=95;
 			drawText(xpos, ypos, fontTitle, "%c", settings->getSecondChar());
@@ -3455,11 +3456,11 @@ void drawScreen(void)
 			xpos+=95;
 			drawText(xpos, ypos, fontTitle, "%c", settings->getSixthChar());
 
-			ypos+=100;
+			ypos+=145;
 			drawText(0, ypos, fontParagraph, "This initials are used in the highscore area.");	
 			
-			ypos+=60;
-			drawText(10, ypos, fontParagraph, "Classic sprites");
+			ypos+=35;
+			drawText(65, ypos, fontParagraph, "Classic Enemies");
 
 			// Draw Button Text labels
 			drawButtonsText(0);	
@@ -3480,6 +3481,28 @@ void drawScreen(void)
 // -----------------------------------
 // SUPPORT METHODES
 // -----------------------------------
+
+void stopMonsters(void)
+{
+	for (int i=0; i<MAX_MONSTERS; i++)
+	{
+		if (monsters[i]!=NULL)
+		{
+			monsters[i]->setMoveStop(true);
+		}
+	}
+}
+
+void startMonsters(void)
+{
+	for (int i=0; i<MAX_MONSTERS; i++)
+	{
+		if (monsters[i]!=NULL)
+		{
+			monsters[i]->setMoveStop(false);
+		}
+	}
+}
 
 void loadTodayHighScore(char *buffer)
 {
@@ -4071,8 +4094,11 @@ void processStateMachine()
 	
 			// Init buttons
 			initButtons();	
+			
+			// Start monster movement
+			startMonsters();
 	
-			if (game.prevStateMachine!=stateGameQuit)
+			if (game.prevStateMachine!=stateQuitGame)
 			{
 				// Init game variables
 				initGame(0);
@@ -4080,12 +4106,15 @@ void processStateMachine()
 		}
 		break;
 	
-		case stateGameQuit:	
+		case stateQuitGame:	
 		{
-			trace->event(s_fn,0,"stateMachine=stateGameQuit");
+			trace->event(s_fn,0,"stateMachine=stateQuitGame");
 		
 			// Init buttons
 			initButtons();	
+			
+			// Stop monster movement
+			stopMonsters();
 		}
 		break;
 	
@@ -4095,6 +4124,9 @@ void processStateMachine()
 			
 			// Init buttons
 			initButtons();	
+			
+			// Stop monster movement
+			stopMonsters();
 		}
 		break;
 	
