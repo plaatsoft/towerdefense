@@ -24,15 +24,17 @@
 class Settings
 {
   private:
-    char firstChar;
+   char firstChar;
 	char secondChar;
 	char thirdChar;
 	char fourthChar;
 	char fifthChar;
 	char sixthChar;
+	
 	int  musicVolume;
 	int  effectVolume;
-	
+	bool classicSprites;
+
   public:
   	// Constructor & Destructor
 	Settings();
@@ -51,6 +53,7 @@ class Settings
 	void setSixthChar(char letter);
 	void setMusicVolume(int volume);
 	void setEffectVolume(int volume);
+	void setClassicSprites(bool enabled);
 
 	// Getters
 	char getFirstChar(void);
@@ -61,6 +64,7 @@ class Settings
 	char getSixthChar(void);
 	int  getMusicVolume(void);
 	int  getEffectVolume(void);
+	bool getClassicSprites(void);
 };
 
 #endif

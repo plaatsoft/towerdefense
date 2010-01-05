@@ -41,8 +41,10 @@ Settings::Settings()
    fourthChar='A';
    fifthChar='A';
    sixthChar='A';
+	
    musicVolume = 5;
    effectVolume = 9;
+	classicSprites=false;
    	
    trace->event(s_fn,0,"leave [void]");
 }
@@ -97,29 +99,39 @@ void Settings::load(const char *filename)
 			
 				switch (i)
 				{
-					case 0: firstChar=value[0];
-							break;
+					case 0: 	firstChar=value[0];
+								break;
 
-					case 1: secondChar=value[0];
-							break;
+					case 1: 	secondChar=value[0];
+								break;
 
-					case 2: thirdChar=value[0];
-							break;
+					case 2: 	thirdChar=value[0];
+								break;
 	
-					case 3: musicVolume=atoi(value);
-							break;
+					case 3: 	musicVolume=atoi(value);
+								break;
 					   
-					case 4: effectVolume=atoi(value);
-							break;
+					case 4: 	effectVolume=atoi(value);
+								break;
 							
-					case 5: fourthChar=value[0];
-							break;
+					case 5: 	fourthChar=value[0];
+								break;
 							
-					case 6: fifthChar=value[0];
-							break;
+					case 6: 	fifthChar=value[0];
+								break;
 							
-					case 7: sixthChar=value[0];
-							break;
+					case 7: 	sixthChar=value[0];
+								break;
+								
+					case 8: 	if (atoi(value)==0)
+								{
+									classicSprites=false;
+								}
+								else
+								{
+									classicSprites=true;
+								}
+								break;
 				}							
 				trace->event(s_fn,0,"Store [id=%d|value=%s]",i,value);
 			}
@@ -186,6 +198,10 @@ void Settings::save( const char *filename)
 					break;
 					
 			case 7: sprintf(temp, "%c", sixthChar);
+					mxmlElementSetAttr(data, "value", temp);			  
+					break;
+					
+			case 8: sprintf(temp, "%d", classicSprites);
 					mxmlElementSetAttr(data, "value", temp);			  
 					break;
 		}
@@ -269,9 +285,17 @@ void Settings::setMusicVolume(int volume)
 void Settings::setEffectVolume(int volume)
 {
 	const char *s_fn="Settings::setEffectVolume";
-    trace->event(s_fn,0,"%d", volume);
+   trace->event(s_fn,0,"%d", volume);
 	
 	effectVolume=volume;
+}
+
+void Settings::setClassicSprites(bool enabled)
+{
+   const char *s_fn="Settings::setClassicSprites";
+   trace->event(s_fn,0,"%d", enabled);
+	
+	classicSprites=enabled;
 }
 		
 // ------------------------------
@@ -316,6 +340,11 @@ int Settings::getMusicVolume(void)
 int Settings::getEffectVolume(void)
 {
 	return effectVolume;
+}
+
+bool Settings::getClassicSprites(void)
+{
+	return classicSprites;	
 }
 
 // ------------------------------

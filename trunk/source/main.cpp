@@ -25,7 +25,8 @@
 **  - Improve graphical fire effect!
 **  - Multi language support.
 **
-**  04/01/2010 Version 0.91
+**  05/01/2010 Version 0.92
+**  - Added animated enemy sprites.
 **  - Adapted game play. Make it harder.
 **  	- Less start money.
 **  	- Enemy speed depending on wave number.
@@ -33,8 +34,9 @@
 **    - Increase maximum concurrent monsters in action.
 **    - Decrease weapon effect ranges.
 **  - Improve winter theme sprites.
-**  - Expand first help screen text.
-**  - Improve main menu button labels.
+**  - Improve first help screen.
+**  - Improve main menu screen.
+**  - Improve Game Settings (old User Initials) screen.
 **  - Build game with devkitPPC r19 compiler.
 **
 **  02/01/2010 Version 0.90
@@ -106,49 +108,32 @@
 **
 **  18/12/2009 Version 0.45
 **  - First release for Beta testers.
-**  - Load map images (sprites) directly from SdCard.
-**  - Improve objects cleanup when stopping game.
-**  - Added Google analistics network calls.
-**  - Added map 4, 5 and 6.
-**  - Show when weapon upgrade is not possible anymore!
-**  - Build game with devkitPPC r19 compiler.
-**
-**  17/12/2009 Version 0.44
-**  - Bugfix: Protect button access against NULL pointers.
-**  - Added reload bar move weapon.
-**  - Added remaining energy bar below the base.
-**  - Optimise game core to improve Frame-Per-Seconds.
-**  - Cleanup not used images and source code.
-**  - BugFix: Solve crash when game is over.
-**  - Rendering realtime grid examples on map select screen.
-**  - Build game with devkitPPC r19 compiler.
-**
-**  16/12/2009 Version 0.43
-**  - Added help screen two and three.
-**  - Limit weapon upgrade levels. 
-**  - Added WiiMote rumble support when pointer is on a button. 
-**  - Improve button pointer detection area. 
-**  - Added "Quit Game" screen. 
-**  - Bugfix: Placing weapons under the information panel is not allowed anymore.
-**  - Build game with devkitPPC r19 compiler.
-**
-**  15/12/2009 Version 0.42
-**  - Added Network thread.
+**  - GUI:
+**		- Added game map 4, 5 and 6.
+**  	- Show when weapon upgrade is not possible anymore!
+**  	- Added reload bar move weapon.
+**  	- Added remaining energy bar below the base.
+**  	- Rendering realtime grid examples on map select screen.
+**  	- Added help screen two and three.
+**  	- Added "Quit Game" screen. 
+**  	- Placing weapons under the information panel is not allowed anymore.
+**  	- Added today and global Highscore screen.
+**  	- Added release notes screen.
+**  	- Added dynamic weapon placement on the gameboard
+**  - General:
+**  	- Load map images (sprites) directly from SdCard.
+**  	- Improve objects cleanup when stopping game.
+**  	- Limit weapon upgrade levels. 
+**  	- Added WiiMote rumble support when pointer is on a button. 
+**  	- Improve button pointer detection area. 
+**  	- Added bonus cash (score) when wave is cleared
+**  - Added network thread:
 **  	- Fetch latest available version information from internet.
 **  	- Fetch latest release notes information from internet.
-**      - Fetch Global and today highscore from internet
+**    - Fetch Global and today highscore from internet
 **  	- Added functionality to store game score on internet.
 **  	- Added Release Notes screen.
-**  - Added today and global Highscore screen.
-**  - Added release notes screen.
-**  - Build game with devkitPPC r19 compiler.
-**
-**  14/12/2009 Version 0.41
-**  - Added dynamic weapon placement on the gameboard
-**  - Added bonus cash (score) when wave is cleared
-**  - Improve Game Over and Next Wave information on screen
-**  - Added "coming soon" teaser for Map 4, 5 and 6.
-**  - Improve map2 base location.
+**    - Added Google analistics network calls.
 **  - Build game with devkitPPC r19 compiler.
 **
 **  13/12/2009 Version 0.40
@@ -1036,17 +1021,6 @@ void initButtons(void)
 			buttons[3]->setColor(IMAGE_COLOR);
 			buttons[3]->setIndex(2);
 			
-			// Sound Settings Button 
-			ypos+=40;
-			buttons[4]=new Button();
-			buttons[4]->setX(440);
-			buttons[4]->setY(ypos);
-			buttons[4]->setImageNormal(images.button2);
-			buttons[4]->setImageFocus(images.buttonFocus2);
-			buttons[4]->setLabel("Sound Settings");	
-			buttons[4]->setColor(IMAGE_COLOR);
-			buttons[4]->setIndex(3);
-			
 			// Release Notes Button 
 			ypos+=40;
 			buttons[5]=new Button();
@@ -1058,14 +1032,25 @@ void initButtons(void)
 			buttons[5]->setColor(IMAGE_COLOR);
 			buttons[5]->setIndex(4);
 			
-			// User initials Button 
+			// Sound Settings Button 
+			ypos+=40;
+			buttons[4]=new Button();
+			buttons[4]->setX(440);
+			buttons[4]->setY(ypos);
+			buttons[4]->setImageNormal(images.button2);
+			buttons[4]->setImageFocus(images.buttonFocus2);
+			buttons[4]->setLabel("Sound Settings");	
+			buttons[4]->setColor(IMAGE_COLOR);
+			buttons[4]->setIndex(3);
+			
+			// Game Settings Button 
 			ypos+=40;
 			buttons[6]=new Button();
 			buttons[6]->setX(440);
 			buttons[6]->setY(ypos);
 			buttons[6]->setImageNormal(images.button2);
 			buttons[6]->setImageFocus(images.buttonFocus2);
-			buttons[6]->setLabel("User Initials");	
+			buttons[6]->setLabel("Game Settings");	
 			buttons[6]->setColor(IMAGE_COLOR);
 			buttons[6]->setIndex(5);
 								
@@ -1502,7 +1487,7 @@ void initButtons(void)
 		}
 		break;
 				
-		case stateUserSettings:
+		case stateGameSettings:
 	    {
 			int xpos=35;			
 			int ypos=150;
@@ -1633,6 +1618,24 @@ void initButtons(void)
 			buttons[12]->setLabel("-");
 			buttons[12]->setColor(IMAGE_COLOR);
 			buttons[12]->setIndex(12);
+			
+			// Classic Sprites Button
+			buttons[13]=new Button();
+			buttons[13]->setX(60);
+			buttons[13]->setY(ypos+250);
+			buttons[13]->setImageNormal(images.button2);
+			buttons[13]->setImageFocus(images.buttonFocus2);
+			
+			if (settings->getClassicSprites())
+			{
+				buttons[13]->setLabel("Disabled");
+			}
+			else
+			{
+				buttons[13]->setLabel("Enabled");
+			} 	
+			buttons[13]->setColor(IMAGE_COLOR);
+			buttons[13]->setIndex(0);
 			
 			ypos=460;
 			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
@@ -2499,21 +2502,21 @@ void drawScreen(void)
 			GRRLIB_Line(510+32-3, ypos, 510+32-3, ypos+255, GRRLIB_WHITESMOKE);
 			GRRLIB_Line(510+32-5, ypos, 510+32-5, ypos+255, GRRLIB_WHITESMOKE);
 			
-			// Draw Some enemies
-			GRRLIB_DrawImg( 110, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR );	
-			GRRLIB_DrawImg( 110, ypos+50, monsterSpecs->getImage(1), 0, 1, 1, IMAGE_COLOR );
+			// Draw Some enemies		
+			GRRLIB_DrawTile( 110, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR,0 );	
+			GRRLIB_DrawTile( 110, ypos+50, monsterSpecs->getImage(1), 0, 1, 1, IMAGE_COLOR,0 );
 
-			GRRLIB_DrawImg( 310, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR );
-	      GRRLIB_DrawImg( 310, ypos+50, monsterSpecs->getImage(1), 0, 1, 1, IMAGE_COLOR );
-	      GRRLIB_DrawImg( 310, ypos+90, monsterSpecs->getImage(2), 0, 1, 1, IMAGE_COLOR );
-	      GRRLIB_DrawImg( 310, ypos+130, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR );
+			GRRLIB_DrawTile( 310, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR,0 );
+	      GRRLIB_DrawTile( 310, ypos+50, monsterSpecs->getImage(1), 0, 1, 1, IMAGE_COLOR,0 );
+	      GRRLIB_DrawTile( 310, ypos+90, monsterSpecs->getImage(2), 0, 1, 1, IMAGE_COLOR,0 );
+	      GRRLIB_DrawTile( 310, ypos+130, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR,0 );
 
-			GRRLIB_DrawImg( 510, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR );
-	      GRRLIB_DrawImg( 510, ypos+50, monsterSpecs->getImage(1), 0, 1, 1, IMAGE_COLOR );
-	      GRRLIB_DrawImg( 510, ypos+90, monsterSpecs->getImage(2), 0, 1, 1, IMAGE_COLOR );
-			GRRLIB_DrawImg( 510, ypos+130, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR );
-			GRRLIB_DrawImg( 510, ypos+170, monsterSpecs->getImage(4), 0, 1, 1, IMAGE_COLOR );
-			GRRLIB_DrawImg( 510, ypos+210, monsterSpecs->getImage(5), 0, 1, 1, IMAGE_COLOR );
+			GRRLIB_DrawTile( 510, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR,0 );
+	      GRRLIB_DrawTile( 510, ypos+50, monsterSpecs->getImage(1), 0, 1, 1, IMAGE_COLOR,0 );
+	      GRRLIB_DrawTile( 510, ypos+90, monsterSpecs->getImage(2), 0, 1, 1, IMAGE_COLOR,0 );
+			GRRLIB_DrawTile( 510, ypos+130, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR,0 );
+			GRRLIB_DrawTile( 510, ypos+170, monsterSpecs->getImage(4), 0, 1, 1, IMAGE_COLOR,0 );
+			GRRLIB_DrawTile( 510, ypos+210, monsterSpecs->getImage(5), 0, 1, 1, IMAGE_COLOR,0 );
 				
 			// Draw Buttons
 			drawButtons();
@@ -3163,9 +3166,9 @@ void drawScreen(void)
 		  
 			for (int i=0; i<25; i++)
 			{
-				GRRLIB_DrawImg( xpos, ypos, 
-					monsterSpecs->getImage(i), 0, 1, 1, IMAGE_COLOR );
-					
+				GRRLIB_DrawTile(  xpos, ypos, monsterSpecs->getImage(i), 
+					0, 1, 1, IMAGE_COLOR, 0);
+			
 			   drawText(xpos+42, ypos, fontNormal, "%d", 
 					monsterSpecs->getEnergy(i));
 				
@@ -3416,7 +3419,7 @@ void drawScreen(void)
 	   }
 	   break;
 
-	   case stateUserSettings:
+	   case stateGameSettings:
 	   {         	
 			// Draw background
 			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR );
@@ -3431,8 +3434,10 @@ void drawScreen(void)
          GRRLIB_initTexture();
 
 			// Draw Title	
-			drawText(150, ypos, fontTitle, "User Initials");
+			drawText(150, ypos, fontTitle, "Game Settings");
 			ypos+=120;
+			
+			drawText(150, ypos, fontParagraph, "User Initials");
 			
 			// Draw initial characters
 			ypos+=60;	
@@ -3450,8 +3455,11 @@ void drawScreen(void)
 			xpos+=95;
 			drawText(xpos, ypos, fontTitle, "%c", settings->getSixthChar());
 
-			ypos+=180;
+			ypos+=100;
 			drawText(0, ypos, fontParagraph, "This initials are used in the highscore area.");	
+			
+			ypos+=60;
+			drawText(10, ypos, fontParagraph, "Classic sprites");
 
 			// Draw Button Text labels
 			drawButtonsText(0);	
@@ -4194,9 +4202,9 @@ void processStateMachine()
 		}
 		break;
 	   	
-		case stateUserSettings:
+		case stateGameSettings:
 		{
-			trace->event(s_fn,0,"stateMachine=stateUserSettings");
+			trace->event(s_fn,0,"stateMachine=stateGameSettings");
 			
 			// Init buttons
 			initButtons();
