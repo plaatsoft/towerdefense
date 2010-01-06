@@ -24,9 +24,8 @@
 **  - Improve weapon graphics including fire effect.
 **  - Multi language support.
 **  - Dragable game info panels.
-**  - Added Intro screen 3 (other game logo's)
 **  
-**  06/01/2010 Version 0.93
+**  06/01/2010 Version 0.91
 **  - Added animated enemy sprites.
 **  - Adapted game play. Make it much harder.
 **  	- Less start money.
@@ -39,6 +38,7 @@
 **  - Improve main menu screen.
 **  - Improve Game Settings screen.
 **     - Added classic enemy sprite option.
+**  - Added Intro screen 3
 **  - Build game with devkitPPC r19 compiler.
 **
 **  02/01/2010 Version 0.90
@@ -256,6 +256,10 @@ typedef struct
   
   GRRLIB_texImg *logo1;
   GRRLIB_texImg *logo2;
+  GRRLIB_texImg *logo3;
+  GRRLIB_texImg *logo4;
+  GRRLIB_texImg *logo5;
+  GRRLIB_texImg *logo6;		
   GRRLIB_texImg *logo;
   
   GRRLIB_texImg *background1;
@@ -309,6 +313,22 @@ extern int      pic4length;
 // logo2 Image
 extern const unsigned char     pic5data[];
 extern int      pic5length;
+
+// logo3 Image
+extern const unsigned char     pic6data[];
+extern int      pic6length;
+
+// logo4 Image
+extern const unsigned char     pic7data[];
+extern int      pic7length;
+
+// logo5 Image
+extern const unsigned char     pic8data[];
+extern int      pic8length;
+
+// logo6 Image
+extern const unsigned char     pic9data[];
+extern int      pic9length;
 
 // Background1 Image
 extern const unsigned char     pic10data[];
@@ -622,7 +642,11 @@ void destroyImages(void)
 
    GRRLIB_FreeTexture(images.logo1);
    GRRLIB_FreeTexture(images.logo2);
-   
+	GRRLIB_FreeTexture(images.logo3);
+	GRRLIB_FreeTexture(images.logo4);
+	GRRLIB_FreeTexture(images.logo5);
+	GRRLIB_FreeTexture(images.logo6);
+		
    GRRLIB_FreeTexture(images.background1);
    GRRLIB_FreeTexture(images.background2);
    
@@ -695,6 +719,11 @@ void initImages(void)
 	images.logo2=GRRLIB_LoadTexture( pic5data );
 	images.logo=GRRLIB_LoadTexture( pic5data );
 	GRRLIB_InitTileSet(images.logo, images.logo->w, 1, 0);
+	
+	images.logo3=GRRLIB_LoadTexture( pic6data );
+	images.logo4=GRRLIB_LoadTexture( pic7data );
+	images.logo5=GRRLIB_LoadTexture( pic8data );
+	images.logo6=GRRLIB_LoadTexture( pic9data );
    
 	images.background1=GRRLIB_LoadTexture( pic10data );
 	images.background2=GRRLIB_LoadTexture( pic11data );
@@ -2427,6 +2456,60 @@ void drawScreen(void)
 	   }	   
 	   break;
 	   	   
+		case stateIntro3:
+	   { 
+	      int xpos, xpos2;
+			
+			// Draw background
+			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR );
+
+		   // Let the logo's slided in the screen
+			if (game.location<640) game.location+=4;
+			
+			// Init text layer	  
+         GRRLIB_initTexture();	
+			
+			drawText(95, ypos, fontParagraph,  "Some more Wii games developed by PlaatSoft" );
+
+			// Draw Space Bubble logo
+			ypos+=40;
+			xpos=(images.logo3->w*-1)+game.location;
+			xpos2=40;
+			if (xpos>xpos2) xpos=xpos2;
+   	   GRRLIB_DrawImg(xpos, ypos, images.logo3, 	0, 0.9, 0.9, IMAGE_COLOR );		
+				
+			// Draw RedSquare logo
+			ypos+=images.logo3->h-5;
+			xpos=640-game.location;
+			xpos2=635-images.logo4->w;
+			if (xpos<xpos2) xpos=xpos2;			
+   	   GRRLIB_DrawImg(xpos, ypos, images.logo4, 0, 0.9, 0.9, IMAGE_COLOR );
+		
+			// Draw BibleQuiz logo
+			ypos+=images.logo5->h-10;
+			xpos=(images.logo5->w*-1)+game.location;
+			xpos2=30;
+			if (xpos>xpos2) xpos=xpos2;		
+   	   GRRLIB_DrawImg(xpos, ypos, images.logo5, 	0, 0.9, 0.9, IMAGE_COLOR );
+			
+			// Draw Pong2 logo
+			ypos+=images.logo5->h-10;	
+			xpos=640-game.location;
+			xpos2=630-images.logo6->w;
+			if (xpos<xpos2) xpos=xpos2;			
+   	   GRRLIB_DrawImg(xpos, ypos, images.logo6, 0, 0.9, 0.9, IMAGE_COLOR );
+				
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
+	   }	   
+	   break;
+		
 		case stateMainMenu:
 		{
 			char *version=NULL;
@@ -2471,14 +2554,14 @@ void drawScreen(void)
 		case stateLevelMenu:
 		{
 			// Draw background
-			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR );
+			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR4 );
 	  	
 			// Draw samples maps
 			ypos=140;
 	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
 			
 			// Draw Transparent Panel
-			GRRLIB_Rectangle(30, ypos-20, 580, ypos+185, GRRLIB_BLACK_TRANS_2, 1);
+			//GRRLIB_Rectangle(30, ypos-20, 580, ypos+185, GRRLIB_BLACK_TRANS_2, 1);
 	
 			GRRLIB_Rectangle(65, ypos, 120, 255, 0x93ff93ff, 1);
 			GRRLIB_Rectangle(265, ypos, 120, 255, 0xffff80ff, 1);
@@ -2546,14 +2629,14 @@ void drawScreen(void)
 		case stateMapSelectMenu:
 		{
 			// Draw background
-			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR );
+			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR4 );
   
 			// Draw samples maps
 			ypos=140;
 	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
 	
 			// Draw Transparent Panel
-			GRRLIB_Rectangle(30, ypos-20, 580, ypos+185, GRRLIB_BLACK_TRANS_2, 1);
+			//GRRLIB_Rectangle(30, ypos-20, 580, ypos+185, GRRLIB_BLACK_TRANS_2, 1);
 	
 			if (grids[0]!=NULL) grids[0]->draw(55,ypos,5.0); 
 			if (grids[1]!=NULL) grids[1]->draw(255,ypos,5.0); 
@@ -3089,7 +3172,7 @@ void drawScreen(void)
 		case stateHelp3:
 	   {	  
 			// Draw background
-			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR4 );
 			 
 			// Draw buttons
 	      drawButtons(); 
@@ -3100,6 +3183,9 @@ void drawScreen(void)
 			// Show title
 			drawText(170, ypos, fontTitle, "Weapons");
 		  
+		   // Draw Transparent Panel
+			//GRRLIB_Rectangle(55, 110, 540, 290, GRRLIB_BLACK_TRANS_2, 1);
+			
 			int xoffset=50;
 	
          ypos+=100;
@@ -3108,7 +3194,7 @@ void drawScreen(void)
 			drawText(155+xoffset, ypos, fontParagraph, "Price");
 			drawText(240+xoffset, ypos, fontParagraph, "Power");
 			drawText(340+xoffset, ypos, fontParagraph, "Range");
-			drawText(440+xoffset, ypos, fontParagraph, "Rate (sec.)");
+			drawText(440+xoffset, ypos, fontParagraph, "Rate");
 	
 			ypos+=10;
 			for (int i=0; i<6; i++)
@@ -3155,11 +3241,14 @@ void drawScreen(void)
 		case stateHelp4:
 	   {	  
 	      // Draw background
-			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR4 );
 		 
 			// Draw buttons
 	      drawButtons(); 
-		  
+		  		
+			// Draw Transparent Panel
+			//GRRLIB_Rectangle(55, 110, 540, 290, GRRLIB_BLACK_TRANS_2, 1);
+			
 			// Init text layer	  
          GRRLIB_initTexture();
  
@@ -3208,7 +3297,7 @@ void drawScreen(void)
 	   case stateCredits:
 	   {  
 	      // Draw background
-			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR );
+			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
 		  
 			// Draw buttons
 	      drawButtons(); 
@@ -3442,7 +3531,7 @@ void drawScreen(void)
 			drawText(100, ypos, fontTitle, "Game Settings");
 			ypos+=90;
 			
-			drawText(0, ypos, fontParagraph, "USer initials are used in the highscore area.");	
+			drawText(0, ypos, fontParagraph, "User initials are used in the highscore area.");	
 
 			// Draw initial characters
 			ypos+=90;	
@@ -3620,11 +3709,7 @@ void moveMonsters(void)
 	{
 		if (monsters[i]!=NULL)
 		{		
-			if (monsters[i]->move())
-			{
-				// Monster has reach the final destination. Destroy it!
-				game.monsterInBase++;
-			}
+			monsters[i]->move();
 		}
 	}
 }
@@ -4069,6 +4154,13 @@ void processStateMachine()
 		}
 		break;
 		
+		case stateIntro3:
+		{
+			trace->event(s_fn,0,"stateMachine=stateIntro3");
+			game.location=0;
+		}
+		break;
+		
 		case stateMainMenu:
 		{
 			trace->event(s_fn,0,"stateMachine=stateMainMenu");
@@ -4095,7 +4187,7 @@ void processStateMachine()
 			initButtons();	
 						
 			// Init game variables
-			initGame(100);
+			initGame(150);
 		}
 		break;
 	

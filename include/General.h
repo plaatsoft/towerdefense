@@ -26,7 +26,7 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.93"
+#define PROGRAM_VERSION     	"0.91"
 #define RELEASE_DATE        	"06-01-2010" 
 
 // Check latest available version 
@@ -104,6 +104,7 @@
 #define IMAGE_COLOR1        	0xEEEEEEEE
 #define IMAGE_COLOR2        	0xDDDDDDDD
 #define IMAGE_COLOR3        	0x44444444
+#define IMAGE_COLOR4        	0xAAAAAAAA
 
 #define MAX_WEAPONS				200
 #define MAX_MONSTERS				300
@@ -170,29 +171,30 @@ enum
 	
 	stateIntro1=1,   
 	stateIntro2=2, 
+	stateIntro3=3,
 	
-	stateMainMenu=3,
-	stateLevelMenu=4,
-	stateMapSelectMenu=5,
+	stateMainMenu=4,
+	stateLevelMenu=5,
+	stateMapSelectMenu=6,
 	
-	stateGame=6,
-	stateGameOver=7,
-	stateQuitGame=8,
+	stateGame=7,
+	stateGameOver=8,
+	stateQuitGame=9,
 	
-	stateLocalHighScore=9,
-	stateTodayHighScore=10,
-	stateGlobalHighScore=11,
+	stateLocalHighScore=10,
+	stateTodayHighScore=11,
+	stateGlobalHighScore=12,
 	
-	stateHelp1=12,
-	stateHelp2=13,
-	stateHelp3=14,
-	stateHelp4=15,
+	stateHelp1=13,
+	stateHelp2=14,
+	stateHelp3=15,
+	stateHelp4=16,
 	
-	stateCredits=16,
-	stateReleaseNotes=17,
-	stateSoundSettings=18,
-	stateGameSettings=19,
-	stateQuit=20
+	stateCredits=17,
+	stateReleaseNotes=18,
+	stateSoundSettings=19,
+	stateGameSettings=20,
+	stateQuit=21
 };
 
 // Event machine events
@@ -272,6 +274,7 @@ typedef struct
 	// Variables for graphical animations
 	int alfa;
 	int angle;
+	int location;
 	float size;
 	float wave1;
 	float wave2;

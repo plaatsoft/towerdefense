@@ -70,6 +70,9 @@ class MonsterSpecs
 	GRRLIB_texImg *monster13a;
 	GRRLIB_texImg *monster14a;
 	GRRLIB_texImg *monster15a;
+	GRRLIB_texImg *monster16a;
+	GRRLIB_texImg *monster17a;
+	GRRLIB_texImg *monster18a;
 		
   public:
   	// Constructor & Destructor

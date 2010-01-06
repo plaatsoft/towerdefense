@@ -254,12 +254,12 @@ void Monster::text(void)
 		  (state==stateEnemyDying) )
 	{
 		sprintf(tmp, "%2.0f", energy);
-		GRRLIB_Printf2(x+8, y-14, tmp, 12, 0x000000); 
+		GRRLIB_Printf2(x+8, y-14, tmp, 12, GRRLIB_RED); 
 	}
 }
 
 // Move Monster
-bool Monster::move(void)
+void Monster::move(void)
 {  	
 	const char *s_fn="Monster::move";
 		
@@ -271,9 +271,12 @@ bool Monster::move(void)
 			state=stateEnemyMoving;			
 			if (game.stateMachine==stateGame) sound->effect(SOUND_START);	
 		}
-		return false;
+		return;
 	}
 
+	// If not moving return 
+	if (state!=stateEnemyMoving) return;
+	
 	if ((abs(x-targetX)<=step) && (abs(y-targetY)<=step))
 	{
 		// Set monster on target position.
@@ -288,9 +291,11 @@ bool Monster::move(void)
 		{
 			trace->event(s_fn,0,"Monster %d has reach the final destination.", index);
 			state=stateEnemyDead;
-			
+	
+			// Monster has reach the final destination. Destroy it!
+			game.monsterInBase++;
+		
 			if (game.stateMachine==stateGame) sound->effect(SOUND_FINISH);	
-			return true;
 		}
 	}
 	else if (x<targetX)
@@ -333,7 +338,6 @@ bool Monster::move(void)
 		moveRight=false;
 		moveLeft=false;
 	}	
-	return false;
 }
 
 // ------------------------------

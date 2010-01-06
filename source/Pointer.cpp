@@ -271,13 +271,18 @@ void Pointer::buttonA(int x, int y)
 
 		case stateIntro2:
 		{
-			// if A button is pressed continue to next intro screen
-			//game.stateMachine=stateIntro3;
-						
-			game.stateMachine=stateMainMenu;
+			// if A button is pressed continue to next intro scree
+			game.stateMachine=stateIntro3;
 		}
 		break;
 	 
+		case stateIntro3:
+		{
+			// if A button is pressed continue to main menu
+			game.stateMachine=stateMainMenu;
+		}
+		break;
+		
 	 	case stateMainMenu:
 		{	
 			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))

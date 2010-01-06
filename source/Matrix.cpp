@@ -136,7 +136,7 @@ void Matrix::calculateMatrix(void)
 		minStep = 3;
 	}
 	
-	if ((wave>=90) && (wave<100)) 
+	if ((wave>=80) && (wave<100)) 
 	{
 		stepFactor = 3;
 		minStep = 4;
@@ -154,7 +154,7 @@ void Matrix::calculateMatrix(void)
 		minStep = 4;
 	}
 	
-	if (wave>=120) 
+	if (wave>=140) 
 	{
 		stepFactor = 6;
 		minStep = 4;
