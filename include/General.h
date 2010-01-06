@@ -26,8 +26,8 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.92"
-#define RELEASE_DATE        	"05-01-2010" 
+#define PROGRAM_VERSION     	"0.93"
+#define RELEASE_DATE        	"06-01-2010" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -106,7 +106,7 @@
 #define IMAGE_COLOR3        	0x44444444
 
 #define MAX_WEAPONS				200
-#define MAX_MONSTERS				400
+#define MAX_MONSTERS				300
 #define MAX_BUTTONS         	15
 #define MAX_POINTERS         	4
 #define MAX_LOCAL_HIGHSCORE 	100
@@ -189,8 +189,8 @@ enum
 	stateHelp4=15,
 	
 	stateCredits=16,
-	stateSoundSettings=17,
-	stateReleaseNotes=18,
+	stateReleaseNotes=17,
+	stateSoundSettings=18,
 	stateGameSettings=19,
 	stateQuit=20
 };

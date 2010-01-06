@@ -23,6 +23,16 @@
 
 #include "GRRLIB.h"
 
+enum
+{
+	stateEnemyNone=0,
+	stateEnemyWaiting=1,
+	stateEnemyMoving=2,
+	stateEnemyStopped=3,
+	stateEnemyDying=4,
+	stateEnemyDead=5
+};
+	
 class Monster
 {
   private:
@@ -42,7 +52,10 @@ class Monster
 	int index;
 	bool visible;
 	int grid;
+	int state;
+	int prevState;
 	
+	// Animation variables
 	int frame;
 	int frameCounter;
 	int frameStep;
@@ -51,7 +64,6 @@ class Monster
 	bool moveRight;
 	bool moveLeft;
 	bool moveStop;
-	bool dead;
 	
 	int getFrame();
 	
@@ -72,7 +84,8 @@ class Monster
 	void setEnergy(int energy);
 	void setIndex(int index);
 	void setGrid(int grid);	
-	void setMoveStop(int moveStop1);
+	void setState(int state);
+	void setMove(bool enabled);
 
 	// Getters
 	int getX(void);
@@ -83,6 +96,7 @@ class Monster
 	int getEnergy(void);
 	int getGrid(void);
 	int getIndex(void);
+	int getState(void);
 };
 
 #endif

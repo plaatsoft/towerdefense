@@ -56,13 +56,13 @@ Monster::Monster()
    index=0;
 	frameCounter=0;
 	frameStep=0;
+	state=stateEnemyNone;
+	prevState=stateEnemyNone;
    
 	moveUp=false;
 	moveDown=false;
 	moveRight=false;
 	moveLeft=false;
-	dead=false;
-	moveStop=false;
 	
    alfa=255;
    energy=0.0;
@@ -72,7 +72,6 @@ Monster::Monster()
    step=0;
    pos=0;
    grid=0;  
-   visible=false;
    
    trace->event(s_fn,0,"leave");
 }
@@ -104,16 +103,21 @@ int Monster::getFrame(void)
 {	
 	if (height==32) 
 	{
-		// No animation sprite available;
+		// No animation sprite available, direct dead!;
+		if (state==stateEnemyDying)
+		{
+			state=stateEnemyDead;
+		}
 		return 0;
 	}
 	
-	// Freece animation
-	if (moveStop)
+	// Enemy stopped freece animation
+	if (state==stateEnemyStopped)
 	{
 	   return frame;
 	}
 	
+	// Check framecounter every X screen frames the sprite change.
 	if (frameCounter!=0) 
 	{
 		frameCounter--; 
@@ -122,83 +126,88 @@ int Monster::getFrame(void)
 		return frame;
 	}
 	
-	frameCounter=3;
-	
-	if (moveUp)
+	if (state==stateEnemyMoving)
 	{
-		switch (frameStep)
+		frameCounter=3;
+	
+		if (moveUp)
 		{
-			case 0:  frame=0;
-						frameStep++;
-					   break;
+			switch (frameStep)
+			{
+				case 0:  frame=0;
+							frameStep++;
+							break;
 					  
-			case 1:  frame=4;
-						frameStep++;
-					   break;
+				case 1:  frame=4;
+							frameStep++;
+							break;
 						
-			case 2:  frame=8;
-						frameStep=0;
-						break;
+				case 2:  frame=8;
+							frameStep=0;
+							break;
+			}
 		}
-	}
 					
-	if (moveDown)
-	{
-		switch (frameStep)
+		if (moveDown)
 		{
-			case 0:  frame=2;
-						frameStep++;
-					   break;
+			switch (frameStep)
+			{
+				case 0:  frame=2;
+							frameStep++;
+							break;
 					  
-			case 1:  frame=6;
-						frameStep++;
-					   break;
+				case 1:  frame=6;
+							frameStep++;
+							break;
 						
-			case 2:  frame=10;
-						frameStep=0;
-						break;
+				case 2:  frame=10;
+							frameStep=0;
+							break;
+			}
+		}
+	
+		if (moveRight)
+		{
+			switch (frameStep)
+			{
+				case 0:  frame=1;
+							frameStep++;
+							break;
+					  
+				case 1:  frame=5;
+							frameStep++;
+							break;
+						
+				case 2:  frame=9;
+							frameStep=0;
+							break;
+			}		
+		}
+	
+		if (moveLeft)
+		{
+			switch (frameStep)
+			{
+				case 0:  frame=3;
+							frameStep++;
+							break;
+					  
+				case 1:  frame=7;
+							frameStep++;
+							break;
+						
+				case 2:  frame=11;
+							frameStep=0;
+							break;
+			}
 		}
 	}
 	
-	if (moveRight)
+	if (state==stateEnemyDying)
 	{
-		switch (frameStep)
-		{
-			case 0:  frame=1;
-						frameStep++;
-					   break;
-					  
-			case 1:  frame=5;
-						frameStep++;
-					   break;
-						
-			case 2:  frame=9;
-						frameStep=0;
-						break;
-		}		
-	}
+		frameCounter=3;
 	
-	if (moveLeft)
-	{
 		switch (frameStep)
-		{
-			case 0:  frame=3;
-						frameStep++;
-					   break;
-					  
-			case 1:  frame=7;
-						frameStep++;
-					   break;
-						
-			case 2:  frame=11;
-						frameStep=0;
-						break;
-		}
-	}
-	
-	if (dead)
-	{
-	  switch (frameStep)
 		{
 			case 0:  frame=12;
 						frameStep++;
@@ -213,7 +222,10 @@ int Monster::getFrame(void)
 						break;
 						
 			case 3:  frame=15;
-						frameStep=0;
+						frameStep++;
+						break;
+						
+			case 4:  state=stateEnemyDead;
 						break;
 		} 
 	}
@@ -223,7 +235,9 @@ int Monster::getFrame(void)
 // Draw Monster on screen
 void Monster::draw(int xOffset, int yOffset, float size1)
 {
-	if (visible) 	
+	if ( (state==stateEnemyMoving) || 
+		  (state==stateEnemyStopped) || 
+		  (state==stateEnemyDying) )
 	{				
 		GRRLIB_DrawTile(  (x/size1)+xOffset, (y/size1)+yOffset, 
 			image , 0, (size/size1), (size/size1), IMAGE_COLOR, getFrame());
@@ -235,7 +249,9 @@ void Monster::text(void)
 {
    char tmp[5];
 	
-	if (visible) 
+	if ( (state==stateEnemyMoving) || 
+		  (state==stateEnemyStopped) || 
+		  (state==stateEnemyDying) )
 	{
 		sprintf(tmp, "%2.0f", energy);
 		GRRLIB_Printf2(x+8, y-14, tmp, 12, 0x000000); 
@@ -252,7 +268,7 @@ bool Monster::move(void)
 		delay--;
 		if (delay==0)
 		{
-			visible=true;			
+			state=stateEnemyMoving;			
 			if (game.stateMachine==stateGame) sound->effect(SOUND_START);	
 		}
 		return false;
@@ -271,7 +287,7 @@ bool Monster::move(void)
 		if (pos>=grids[grid]->getMaxLocations())	
 		{
 			trace->event(s_fn,0,"Monster %d has reach the final destination.", index);
-			visible=false;
+			state=stateEnemyDead;
 			
 			if (game.stateMachine==stateGame) sound->effect(SOUND_FINISH);	
 			return true;
@@ -345,21 +361,13 @@ void Monster::setDelay(int delay1)
     trace->event(s_fn,0,"%d",delay1);   
 	
 	delay=delay1;
-	visible=false;
+	state=stateEnemyWaiting;
 }
 
 void Monster::setEnergy(int energy1)
 {	
 	energy=energy1;
 }
-
-
-void Monster::setMoveStop(int moveStop1)
-{	
-	moveStop=moveStop1;
-}
-
-
 
 void Monster::setIndex(int index1)
 {
@@ -385,6 +393,30 @@ void Monster::setGrid(int grid1)
    targetY=y;
 
    pos++;
+}
+
+void Monster::setState(int state1)
+{
+	prevState=state;
+	state=state1;
+}
+
+void Monster::setMove(bool enabled)
+{
+	if (enabled)
+	{
+		if (state==stateEnemyStopped)
+		{
+			state=stateEnemyMoving;
+		}
+	}
+	else
+	{
+		if (state==stateEnemyMoving)
+		{
+			state=stateEnemyStopped;
+		}
+	}
 }
 
 // ------------------------------
@@ -424,6 +456,11 @@ int Monster::getGrid(void)
 int Monster::getIndex(void)
 {
 	return index;
+}
+
+int Monster::getState(void)
+{
+	return state;
 }
 
 // ------------------------------
