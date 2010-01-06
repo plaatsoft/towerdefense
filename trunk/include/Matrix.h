@@ -38,10 +38,7 @@ class Matrix
   	// Constructor & Destructor
 	Matrix();
  	~Matrix();
-	
-	// Method
-	void init(void);
-	
+		
 	// Getters
 	int getEnemyAmount( void );
 	int getEnemyStep( void );

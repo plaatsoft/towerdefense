@@ -21,23 +21,24 @@
 **  ==============
 **
 **  WISHLIST:
-**  - Improve weapon graphics.
-**  - Improve graphical fire effect!
+**  - Improve weapon graphics including fire effect.
 **  - Multi language support.
-**
-**  05/01/2010 Version 0.92
+**  - Dragable game info panels.
+**  - Added Intro screen 3 (other game logo's)
+**  
+**  06/01/2010 Version 0.93
 **  - Added animated enemy sprites.
-**  - Adapted game play. Make it harder.
+**  - Adapted game play. Make it much harder.
 **  	- Less start money.
-**  	- Enemy speed depending on wave number.
+**  	- Enemy minimum / maximum speed depend on wave nr.
 **    - Increase laser and nuke price.
 **    - Increase maximum concurrent monsters in action.
-**    - Decrease weapon effect ranges.
+**    - Decrease weapons effective range.
 **  - Improve winter theme sprites.
 **  - Improve first help screen.
 **  - Improve main menu screen.
 **  - Improve Game Settings screen.
-**     - Add classic enemy sprite option.
+**     - Added classic enemy sprite option.
 **  - Build game with devkitPPC r19 compiler.
 **
 **  02/01/2010 Version 0.90
@@ -80,7 +81,6 @@
 **  24/12/2009 Version 0.60
 **  - Increase enemy walk speed after each 25 waves. 
 **  - Show mini enemies moving on map select screen. 
-**  - Update credit screen. 
 **  - Update credit screen. 
 **  - Improve game information panel design.
 **  	- Show price and strengh information about new weapons.
@@ -234,6 +234,7 @@ static u8 calculateFrameRate();
 void checkGameOver(void);
 void checkNextWave(void);
 void checkPointer(void);
+void checkDeadMonsters(void);
 void moveMonsters(void);
 void moveWeapons(void);
 GRRLIB_texImg *getNewWeaponImage(int type);
@@ -416,12 +417,12 @@ HighScore 	 *highScore;
 Sound      	 *sound;
 WeaponSpecs  *weaponSpecs;
 MonsterSpecs *monsterSpecs;
+Matrix		 *matrix;
 Grid      	 *grids[MAX_GRIDS];
 Monster   	 *monsters[MAX_MONSTERS];
 Pointer   	 *pointers[MAX_POINTERS];
 Weapon    	 *weapons[MAX_WEAPONS];
 Button    	 *buttons[MAX_BUTTONS];
-Matrix		 *matrix;
 
 // -----------------------------------
 // Destroy METHODES
@@ -1623,7 +1624,7 @@ void initButtons(void)
 			// Classic Sprites Button
 			buttons[13]=new Button();
 			buttons[13]->setX(60);
-			buttons[13]->setY(ypos+250);
+			buttons[13]->setY(ypos+240);
 			buttons[13]->setImageNormal(images.button2);
 			buttons[13]->setImageFocus(images.buttonFocus2);
 			
@@ -1824,7 +1825,6 @@ void initGame(int wave)
 	game.weaponType=0;
 	
 	game.wave=wave;
-	matrix->init();
 	matrix->setWave(game.wave);
 	
 	game.monsterInBase=0;
@@ -2574,6 +2574,9 @@ void drawScreen(void)
 		  
 			// Check Game parameters
 			checkNextWave();
+			
+			// cleanup dead monsters
+			checkDeadMonsters();
 		  
 			// Init text layer	  
          GRRLIB_initTexture();
@@ -2614,9 +2617,10 @@ void drawScreen(void)
 		  
 			// Check for game events
 			checkPointer();
+			checkDeadMonsters();
 			checkNextWave();
 		   checkGameOver();
-		  
+			
 			// Init text layer	  
          GRRLIB_initTexture();
 		  
@@ -3438,8 +3442,8 @@ void drawScreen(void)
 			drawText(100, ypos, fontTitle, "Game Settings");
 			ypos+=90;
 			
-			drawText(0, ypos, fontParagraph, "User Initials");
-			
+			drawText(0, ypos, fontParagraph, "USer initials are used in the highscore area.");	
+
 			// Draw initial characters
 			ypos+=90;	
 			int xpos=50;
@@ -3456,10 +3460,7 @@ void drawScreen(void)
 			xpos+=95;
 			drawText(xpos, ypos, fontTitle, "%c", settings->getSixthChar());
 
-			ypos+=145;
-			drawText(0, ypos, fontParagraph, "This initials are used in the highscore area.");	
-			
-			ypos+=35;
+			ypos+=170;
 			drawText(65, ypos, fontParagraph, "Classic Enemies");
 
 			// Draw Button Text labels
@@ -3488,7 +3489,7 @@ void stopMonsters(void)
 	{
 		if (monsters[i]!=NULL)
 		{
-			monsters[i]->setMoveStop(true);
+			monsters[i]->setMove(false);
 		}
 	}
 }
@@ -3499,7 +3500,7 @@ void startMonsters(void)
 	{
 		if (monsters[i]!=NULL)
 		{
-			monsters[i]->setMoveStop(false);
+			monsters[i]->setMove(true);
 		}
 	}
 }
@@ -3623,9 +3624,6 @@ void moveMonsters(void)
 			{
 				// Monster has reach the final destination. Destroy it!
 				game.monsterInBase++;
-			
-				delete monsters[i];
-				monsters[i]=NULL;
 			}
 		}
 	}
@@ -3687,6 +3685,19 @@ void checkGameOver(void)
 	}
 }
 
+// Check enemy is real dead, if soo, destroy object
+void checkDeadMonsters(void)
+{
+	for (int i=0;i<MAX_MONSTERS;i++)
+	{
+		if ((monsters[i]!=NULL) && (monsters[i]->getState()==stateEnemyDead))
+		{
+			delete monsters[i];
+			monsters[i]=NULL;
+		}
+	}
+}
+	
 void checkNextWave(void)
 {		
 	if (--game.waveCountDown>0)

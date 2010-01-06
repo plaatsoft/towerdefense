@@ -121,7 +121,7 @@ void Weapon::draw()
 void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 {
    const char *s_fn="Weapon::fire";
-
+	
 	if (delay>0) 
 	{
 		delay--;
@@ -179,9 +179,8 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 						game.cash+=energy;
 		
 						// Monster is dead
-						trace->event(s_fn,0,"Monster %d is dead!", monsters[i]->getIndex());				
-						delete monsters[i];
-						monsters[i]=NULL;
+						trace->event(s_fn,0,"Monster %d is dying!", monsters[i]->getIndex());				
+						monsters[i]->setState(stateEnemyDying);
 						sound->effect(SOUND_DEAD);	
 					}
 					else

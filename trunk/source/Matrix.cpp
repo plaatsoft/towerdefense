@@ -102,62 +102,62 @@ void Matrix::calculateMatrix(void)
 	
 	if ((wave>=20) && (wave<30)) 
 	{
-		stepFactor = 2;
-		minStep = 2;
+		stepFactor = 3;
+		minStep = 1;
 	}
 	
 	if ((wave>=30) && (wave<40)) 
 	{
-		stepFactor = 3;
+		stepFactor = 2;
 		minStep = 2;
 	}
 	
 	if ((wave>=40) && (wave<50)) 
 	{
-		stepFactor = 4;
+		stepFactor = 3;
 		minStep = 2;
 	}
 	
 	if ((wave>=50) && (wave<60)) 
 	{
-		stepFactor = 4;
+		stepFactor = 2;
 		minStep = 3;
 	}
 	
 	if ((wave>=60) && (wave<70)) 
 	{
-		stepFactor = 5;
+		stepFactor = 3;
 		minStep = 3;
 	}
 	
 	if ((wave>=70) && (wave<80)) 
 	{
 		stepFactor = 4;
-		minStep = 4;
+		minStep = 3;
 	}
 	
 	if ((wave>=90) && (wave<100)) 
 	{
-		stepFactor = 5;
+		stepFactor = 3;
 		minStep = 4;
 	}
 	
 	if ((wave>=100) && (wave<120)) 
 	{
-		stepFactor = 6;
+		stepFactor = 4;
 		minStep = 4;
 	}
 	
 	if ((wave>=120) && (wave<140)) 
 	{
-		stepFactor = 6;
-		minStep = 5;
+		stepFactor = 5;
+		minStep = 4;
 	}
 	
 	if (wave>=120) 
 	{
-		stepFactor = 7;
-		minStep = 6;
+		stepFactor = 6;
+		minStep = 4;
 	}
 
 	// Calculate how much enemies will be in the wave
@@ -180,23 +180,6 @@ void Matrix::calculateMatrix(void)
 	{
 		waveDelay=MIN_DELAY_BETWEEN_WAVES;
 	}
-	
-	trace->event(s_fn,0,"leave");
-}
-
-
-void Matrix::init(void)
-{
-	const char *s_fn="Matrix:init";
-   trace->event(s_fn,0,"enter");
-	
-	wave=0;
-	level=0;
-	waveDelay = MAX_DELAY_BETWEEN_WAVES; 
-	enemyDelay = MAX_DELAY_BETWEEN_ENEMIES;
-	stepFactor = 1;
-	minStep = 1;
-	enemiesInWave=MIN_AMOUNT_OF_ENEMIES_IN_WAVE;
 	
 	trace->event(s_fn,0,"leave");
 }
