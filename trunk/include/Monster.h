@@ -75,7 +75,7 @@ class Monster
 	// Other
 	void draw(int xOffset, int yOffset, float size);
 	void text(void);
-	bool move(void);
+	void move(void);
 	
 	// Setters
 	void setImage(GRRLIB_texImg *image);	
