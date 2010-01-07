@@ -100,61 +100,61 @@ void Matrix::calculateMatrix(void)
 		minStep = 1;
 	}
 	
-	if ((wave>=20) && (wave<30)) 
+	if ((wave>=20) && (wave<35)) 
 	{
 		stepFactor = 3;
 		minStep = 1;
 	}
 	
-	if ((wave>=30) && (wave<40)) 
+	if ((wave>=35) && (wave<50)) 
 	{
 		stepFactor = 2;
-		minStep = 2;
-	}
-	
-	if ((wave>=40) && (wave<50)) 
-	{
-		stepFactor = 3;
 		minStep = 2;
 	}
 	
 	if ((wave>=50) && (wave<60)) 
 	{
-		stepFactor = 2;
-		minStep = 3;
+		stepFactor = 3;
+		minStep = 2;
 	}
 	
 	if ((wave>=60) && (wave<70)) 
 	{
-		stepFactor = 3;
+		stepFactor = 2;
 		minStep = 3;
 	}
 	
 	if ((wave>=70) && (wave<80)) 
 	{
+		stepFactor = 3;
+		minStep = 3;
+	}
+	
+	if ((wave>=80) && (wave<90)) 
+	{
 		stepFactor = 4;
 		minStep = 3;
 	}
 	
-	if ((wave>=80) && (wave<100)) 
+	if ((wave>=90) && (wave<110)) 
 	{
 		stepFactor = 3;
 		minStep = 4;
 	}
 	
-	if ((wave>=100) && (wave<120)) 
+	if ((wave>=110) && (wave<130)) 
 	{
 		stepFactor = 4;
 		minStep = 4;
 	}
 	
-	if ((wave>=120) && (wave<140)) 
+	if ((wave>=130) && (wave<150)) 
 	{
 		stepFactor = 5;
 		minStep = 4;
 	}
 	
-	if (wave>=140) 
+	if (wave>=150) 
 	{
 		stepFactor = 6;
 		minStep = 4;

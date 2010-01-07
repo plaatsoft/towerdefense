@@ -22,23 +22,23 @@
 **
 **  WISHLIST:
 **  - Improve weapon graphics including fire effect.
+**  - Improve base graphics
 **  - Multi language support.
 **  - Dragable game info panels.
 **  
-**  06/01/2010 Version 0.91
+**  07/01/2010 Version 0.91
 **  - Added animated enemy sprites.
-**  - Adapted game play. Make it much harder.
+**  - Added Game Setting screen.
+**  - Added Intro screen 3
+**  - Adapted game play. Make it harder.
 **  	- Less start money.
 **  	- Enemy minimum / maximum speed depend on wave nr.
-**    - Increase laser and nuke price.
+**    - Increase weapon prices.
 **    - Increase maximum concurrent monsters in action.
 **    - Decrease weapons effective range.
 **  - Improve winter theme sprites.
 **  - Improve first help screen.
 **  - Improve main menu screen.
-**  - Improve Game Settings screen.
-**     - Added classic enemy sprite option.
-**  - Added Intro screen 3
 **  - Build game with devkitPPC r19 compiler.
 **
 **  02/01/2010 Version 0.90
