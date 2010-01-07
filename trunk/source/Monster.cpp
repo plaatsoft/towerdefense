@@ -254,7 +254,7 @@ void Monster::text(void)
 		  (state==stateEnemyDying) )
 	{
 		sprintf(tmp, "%2.0f", energy);
-		GRRLIB_Printf2(x+8, y-14, tmp, 12, GRRLIB_RED); 
+		GRRLIB_Printf2(x+8, y-14, tmp, 12, GRRLIB_BLACK); 
 	}
 }
 

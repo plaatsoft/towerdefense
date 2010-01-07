@@ -35,7 +35,7 @@
 #define CANON_PRICE 				500
 #define MISSLE_PRICE 			1000
 #define LASER_PRICE 				4000
-#define NUKE_PRICE 				8000
+#define NUKE_PRICE 				6000
 
 #define GUN_UPGRADE_PRICE  	10
 #define RIFLE_UPGRADE_PRICE 	25
