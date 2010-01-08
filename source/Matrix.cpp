@@ -156,8 +156,8 @@ void Matrix::calculateMatrix(void)
 	
 	if (wave>=150) 
 	{
-		stepFactor = 6;
-		minStep = 4;
+		stepFactor = 4;
+		minStep = 5;
 	}
 
 	// Calculate how much enemies will be in the wave

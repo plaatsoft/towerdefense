@@ -27,9 +27,9 @@
 **  - Dragable game info panels.
 **  
 **  07/01/2010 Version 0.91
-**  - Added animated enemy sprites.
-**  - Added Game Setting screen.
-**  - Added Intro screen 3
+**  - Added 18 animated enemy sprites.
+**  - Added game setting screen.
+**  - Added intro screen 3
 **  - Adapted game play. Make it harder.
 **  	- Less start money.
 **  	- Enemy minimum / maximum speed depend on wave nr.
@@ -39,6 +39,7 @@
 **  - Improve winter theme sprites.
 **  - Improve first help screen.
 **  - Improve main menu screen.
+**  - Lots of other small GUI changes.
 **  - Build game with devkitPPC r19 compiler.
 **
 **  02/01/2010 Version 0.90
@@ -994,6 +995,7 @@ void initWeapon(int x, int y, int id, int type)
 	trace->event(s_fn,0,"leave");
 }
 
+// Init screen buttons
 void initButtons(void)
 {
 	const char *s_fn="initButtons";
@@ -1975,7 +1977,7 @@ void drawPointers(void)
 **
 ** @Input: 
 **    special  false   drawMonster in selected grid
-** 			   true    drawMonster on several grids at wants
+** 			   true    drawMonster on several grids concurrent
 */
 void drawMonsters(bool special)
 {
@@ -3336,9 +3338,9 @@ void drawScreen(void)
   	      ypos+=30;
 	      drawText(0, ypos, fontParagraph, "TESTERS");	  
 			ypos+=20;
-	      drawText(0, ypos, fontNormal, "quali");	  
+	      drawText(0, ypos, fontNormal, "wplaat");	  
 			ypos+=20;
-	      drawText(0, ypos, fontNormal, "Wiiman360");
+	      drawText(0, ypos, fontNormal, "quali and Wiiman360");
 			
 	      ypos+=30;
 	      drawText(140, ypos, fontNormal,"Greetings to everybody in the Wii homebrew scene");
@@ -3827,7 +3829,7 @@ void processEvent()
 {
 	const char *s_fn="processEvent";
 	    
-    // If event is none return directly!
+    // If no event return directly!
     if (game.event==eventNone) return;
   
 	// Event state
@@ -3958,7 +3960,6 @@ void processEvent()
 				// Weapon Transparent (Not for sale)
 				buttons[6]->setColor(IMAGE_COLOR3);
 			}
-	
 			buttons[6]->setImageNormal(weaponSpecs->getImage(game.weaponType));
 			buttons[6]->setImageFocus(weaponSpecs->getImage(game.weaponType));
 		}
@@ -3991,7 +3992,6 @@ void processEvent()
 				// Weapon Transparent (Not for sale)
 				buttons[6]->setColor(IMAGE_COLOR3);
 			}
-
 			buttons[6]->setImageNormal(weaponSpecs->getImage(game.weaponType));
 			buttons[6]->setImageFocus(weaponSpecs->getImage(game.weaponType));
 		}
