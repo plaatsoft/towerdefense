@@ -205,6 +205,18 @@ extern int      pic167length;
 extern const unsigned char     pic168data[];
 extern int      pic168length;
 
+// Monster19a Image
+extern const unsigned char     pic169data[];
+extern int      pic169length;
+
+// Monster20a Image
+extern const unsigned char     pic170data[];
+extern int      pic170length;
+
+// Monster21a Image
+extern const unsigned char     pic171data[];
+extern int      pic171length;
+
 // ------------------------------
 // Constructor 
 // ------------------------------
@@ -346,6 +358,15 @@ MonsterSpecs::MonsterSpecs()
 	
 	monster18a=GRRLIB_LoadTexture( pic168data );	
 	GRRLIB_InitTileSet(monster18a, 32, 32, 0);
+
+	monster19a=GRRLIB_LoadTexture( pic169data );	
+	GRRLIB_InitTileSet(monster19a, 32, 32, 0);
+
+	monster20a=GRRLIB_LoadTexture( pic170data );	
+	GRRLIB_InitTileSet(monster20a, 32, 32, 0);
+
+	monster21a=GRRLIB_LoadTexture( pic171data );	
+	GRRLIB_InitTileSet(monster21a, 32, 32, 0);
 	
    trace->event(s_fn,0,"leave");
 }
@@ -409,6 +430,9 @@ MonsterSpecs::~MonsterSpecs()
 	GRRLIB_FreeTexture(monster16a);
 	GRRLIB_FreeTexture(monster17a);
 	GRRLIB_FreeTexture(monster18a);
+	GRRLIB_FreeTexture(monster19a);
+	GRRLIB_FreeTexture(monster20a);
+	GRRLIB_FreeTexture(monster21a);
 	
    trace->event(s_fn,0,"leave");
 }
@@ -473,9 +497,9 @@ GRRLIB_texImg * MonsterSpecs::getImage(int type)
 			case 15: return monster16a;
 			case 16: return monster17a;
 			case 17: return monster18a;
-			case 18: return monster19;
-			case 19: return monster20;
-			case 20: return monster21;
+			case 18: return monster19a;
+			case 19: return monster20a;
+			case 20: return monster21a;
 			case 21: return monster22;
 			case 22: return monster23;
 			case 23: return monster24;
