@@ -26,8 +26,8 @@
 **  - Multi language support.
 **  - Dragable game info panels.
 **  
-**  07/01/2010 Version 0.91
-**  - Added 18 animated enemy sprites.
+**  09/01/2010 Version 0.91
+**  - Added 25 animated enemy sprites. Thanks Applicant!
 **  - Added game setting screen.
 **  - Added intro screen 3
 **  - Adapted game play. Make it harder.
@@ -2590,19 +2590,19 @@ void drawScreen(void)
 			
 			// Draw Some enemies		
 			GRRLIB_DrawTile( 110, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR,0 );	
-			GRRLIB_DrawTile( 110, ypos+50, monsterSpecs->getImage(1), 0, 1, 1, IMAGE_COLOR,0 );
+			GRRLIB_DrawTile( 110, ypos+50, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR,0 );
 
 			GRRLIB_DrawTile( 310, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR,0 );
-	      GRRLIB_DrawTile( 310, ypos+50, monsterSpecs->getImage(1), 0, 1, 1, IMAGE_COLOR,0 );
-	      GRRLIB_DrawTile( 310, ypos+90, monsterSpecs->getImage(2), 0, 1, 1, IMAGE_COLOR,0 );
-	      GRRLIB_DrawTile( 310, ypos+130, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR,0 );
+	      GRRLIB_DrawTile( 310, ypos+50, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR,0 );
+	      GRRLIB_DrawTile( 310, ypos+90, monsterSpecs->getImage(6), 0, 1, 1, IMAGE_COLOR,0 );
+	      GRRLIB_DrawTile( 310, ypos+130, monsterSpecs->getImage(9), 0, 1, 1, IMAGE_COLOR,0 );
 
 			GRRLIB_DrawTile( 510, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR,0 );
-	      GRRLIB_DrawTile( 510, ypos+50, monsterSpecs->getImage(1), 0, 1, 1, IMAGE_COLOR,0 );
-	      GRRLIB_DrawTile( 510, ypos+90, monsterSpecs->getImage(2), 0, 1, 1, IMAGE_COLOR,0 );
-			GRRLIB_DrawTile( 510, ypos+130, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR,0 );
-			GRRLIB_DrawTile( 510, ypos+170, monsterSpecs->getImage(4), 0, 1, 1, IMAGE_COLOR,0 );
-			GRRLIB_DrawTile( 510, ypos+210, monsterSpecs->getImage(5), 0, 1, 1, IMAGE_COLOR,0 );
+	      GRRLIB_DrawTile( 510, ypos+50, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR,0 );
+	      GRRLIB_DrawTile( 510, ypos+90, monsterSpecs->getImage(6), 0, 1, 1, IMAGE_COLOR,0 );
+			GRRLIB_DrawTile( 510, ypos+130, monsterSpecs->getImage(9), 0, 1, 1, IMAGE_COLOR,0 );
+			GRRLIB_DrawTile( 510, ypos+170, monsterSpecs->getImage(12), 0, 1, 1, IMAGE_COLOR,0 );
+			GRRLIB_DrawTile( 510, ypos+210, monsterSpecs->getImage(15), 0, 1, 1, IMAGE_COLOR,0 );
 				
 			// Draw Buttons
 			drawButtons();

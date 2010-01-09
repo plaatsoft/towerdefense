@@ -217,6 +217,22 @@ extern int      pic170length;
 extern const unsigned char     pic171data[];
 extern int      pic171length;
 
+// Monster22a Image
+extern const unsigned char     pic172data[];
+extern int      pic172length;
+
+// Monster23a Image
+extern const unsigned char     pic173data[];
+extern int      pic173length;
+
+// Monster24a Image
+extern const unsigned char     pic174data[];
+extern int      pic174length;
+
+// Monster25a Image
+extern const unsigned char     pic175data[];
+extern int      pic175length;
+
 // ------------------------------
 // Constructor 
 // ------------------------------
@@ -368,6 +384,18 @@ MonsterSpecs::MonsterSpecs()
 	monster21a=GRRLIB_LoadTexture( pic171data );	
 	GRRLIB_InitTileSet(monster21a, 32, 32, 0);
 	
+	monster22a=GRRLIB_LoadTexture( pic172data );	
+	GRRLIB_InitTileSet(monster22a, 32, 32, 0);
+	
+	monster23a=GRRLIB_LoadTexture( pic173data );	
+	GRRLIB_InitTileSet(monster23a, 32, 32, 0);
+	
+	monster24a=GRRLIB_LoadTexture( pic174data );	
+	GRRLIB_InitTileSet(monster24a, 32, 32, 0);
+	
+	monster25a=GRRLIB_LoadTexture( pic175data );	
+	GRRLIB_InitTileSet(monster25a, 32, 32, 0);
+	
    trace->event(s_fn,0,"leave");
 }
 
@@ -433,6 +461,10 @@ MonsterSpecs::~MonsterSpecs()
 	GRRLIB_FreeTexture(monster19a);
 	GRRLIB_FreeTexture(monster20a);
 	GRRLIB_FreeTexture(monster21a);
+	GRRLIB_FreeTexture(monster22a);
+	GRRLIB_FreeTexture(monster23a);
+	GRRLIB_FreeTexture(monster24a);
+	GRRLIB_FreeTexture(monster25a);
 	
    trace->event(s_fn,0,"leave");
 }
@@ -500,10 +532,10 @@ GRRLIB_texImg * MonsterSpecs::getImage(int type)
 			case 18: return monster19a;
 			case 19: return monster20a;
 			case 20: return monster21a;
-			case 21: return monster22;
-			case 22: return monster23;
-			case 23: return monster24;
-			default: return monster25;		
+			case 21: return monster22a;
+			case 22: return monster23a;
+			case 23: return monster24a;
+			default: return monster25a;		
 		}
 	}
 }
