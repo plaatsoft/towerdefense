@@ -31,6 +31,7 @@ class Matrix
 	int minStep;
 	int stepFactor;
 	int enemiesInWave;
+	int bonusDelay;
 	
 	void calculateMatrix(void);
 
