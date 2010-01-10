@@ -56,8 +56,8 @@ Monster::Monster()
    index=0;
 	frameCounter=0;
 	frameStep=0;
-	state=stateEnemyNone;
-	prevState=stateEnemyNone;
+	state=stateEnemyWaiting;
+	prevState=stateEnemyWaiting;
    
 	moveUp=false;
 	moveDown=false;
@@ -142,7 +142,11 @@ int Monster::getFrame(void)
 							frameStep++;
 							break;
 						
-				case 2:  frame=8;
+				case 2:  frame=0;
+							frameStep++;
+							break;
+							
+				case 3:  frame=8;
 							frameStep=0;
 							break;
 			}
@@ -160,7 +164,11 @@ int Monster::getFrame(void)
 							frameStep++;
 							break;
 						
-				case 2:  frame=10;
+				case 2:  frame=2;
+							frameStep++;
+							break;
+							
+				case 3:  frame=10;
 							frameStep=0;
 							break;
 			}
@@ -177,8 +185,12 @@ int Monster::getFrame(void)
 				case 1:  frame=5;
 							frameStep++;
 							break;
+							
+				case 2:  frame=1;
+							frameStep++;
+							break;
 						
-				case 2:  frame=9;
+				case 3:  frame=9;
 							frameStep=0;
 							break;
 			}		
@@ -196,9 +208,13 @@ int Monster::getFrame(void)
 							frameStep++;
 							break;
 						
-				case 2:  frame=11;
-							frameStep=0;
+				case 2:  frame=3;
+							frameStep++;
 							break;
+							
+				case 3:  frame=11;
+							frameStep=0;
+							break;	
 			}
 		}
 	}
@@ -262,21 +278,25 @@ void Monster::text(void)
 void Monster::move(void)
 {  	
 	const char *s_fn="Monster::move";
-		
-	if (delay>0)
-	{
+
+   // If stopping state return direct
+	if ((state==stateEnemyStopped) || (state==stateEnemyDying)) return;
+	
+	// waiting state check if delay time is zero!
+	if (state==stateEnemyWaiting) 
+	{	
 		delay--;
 		if (delay==0)
 		{
 			state=stateEnemyMoving;			
-			if (game.stateMachine==stateGame) sound->effect(SOUND_START);	
+			if (game.stateMachine==stateGame) 
+			{
+				sound->effect(SOUND_START);				
+			}
 		}
 		return;
 	}
 
-	// If not moving return 
-	if (state!=stateEnemyMoving) return;
-	
 	if ((abs(x-targetX)<=step) && (abs(y-targetY)<=step))
 	{
 		// Set monster on target position.
@@ -295,7 +315,10 @@ void Monster::move(void)
 			// Monster has reach the final destination. Destroy it!
 			game.monsterInBase++;
 		
-			if (game.stateMachine==stateGame) sound->effect(SOUND_FINISH);	
+			if (game.stateMachine==stateGame) 
+			{
+				sound->effect(SOUND_FINISH);	
+			}
 		}
 	}
 	else if (x<targetX)
@@ -365,7 +388,6 @@ void Monster::setDelay(int delay1)
     trace->event(s_fn,0,"%d",delay1);   
 	
 	delay=delay1;
-	state=stateEnemyWaiting;
 }
 
 void Monster::setEnergy(int energy1)

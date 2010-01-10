@@ -25,12 +25,11 @@
 
 enum
 {
-	stateEnemyNone=0,
-	stateEnemyWaiting=1,
-	stateEnemyMoving=2,
-	stateEnemyStopped=3,
-	stateEnemyDying=4,
-	stateEnemyDead=5
+	stateEnemyWaiting=0,
+	stateEnemyMoving=1,
+	stateEnemyStopped=2,
+	stateEnemyDying=3,
+	stateEnemyDead=4
 };
 	
 class Monster
