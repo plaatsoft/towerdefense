@@ -131,7 +131,7 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 		// fire
 		for (int i=0; i<MAX_MONSTERS; i++)
 		{			
-			if (monsters[i]!=NULL)
+			if ((monsters[i]!=NULL) && (monsters[i]->getState()==stateEnemyMoving))
 			{
 				float distance= 
 					sqrt( ( (monsters[i]->getX()-x) * (monsters[i]->getX()-x) ) + 

@@ -26,6 +26,11 @@
 **  - Multi language support.
 **  - Dragable game info panels.
 **  
+**  10/01/2010 Version 0.92
+**  - Bugfix: Monster can not to shooted before they are moving.
+**  - Improve animated sprite frame sequence.
+**  - Lots of other small GUI changes.
+**
 **  09/01/2010 Version 0.91
 **  - Added 25 animated enemy sprites. Thanks Applicant!
 **  - Added game setting screen.
@@ -2589,21 +2594,26 @@ void drawScreen(void)
 			GRRLIB_Line(510+32-5, ypos, 510+32-5, ypos+255, GRRLIB_WHITESMOKE);
 			
 			// Draw Some enemies		
-			GRRLIB_DrawTile( 110, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR,0 );	
-			GRRLIB_DrawTile( 110, ypos+50, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR,0 );
+			
+			// Get front sprite of animated image.
+			int index=2;
+			if (monsterSpecs->getImage(0)->h==32) index=0;
+			
+			GRRLIB_DrawTile( 110, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR, index );	
+			GRRLIB_DrawTile( 110, ypos+50, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR, index );
 
-			GRRLIB_DrawTile( 310, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR,0 );
-	      GRRLIB_DrawTile( 310, ypos+50, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR,0 );
-	      GRRLIB_DrawTile( 310, ypos+90, monsterSpecs->getImage(6), 0, 1, 1, IMAGE_COLOR,0 );
-	      GRRLIB_DrawTile( 310, ypos+130, monsterSpecs->getImage(9), 0, 1, 1, IMAGE_COLOR,0 );
+			GRRLIB_DrawTile( 310, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR, index );
+			GRRLIB_DrawTile( 310, ypos+50, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR, index );
+			GRRLIB_DrawTile( 310, ypos+90, monsterSpecs->getImage(6), 0, 1, 1, IMAGE_COLOR, index );
+			GRRLIB_DrawTile( 310, ypos+130, monsterSpecs->getImage(9), 0, 1, 1, IMAGE_COLOR, index );
 
-			GRRLIB_DrawTile( 510, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR,0 );
-	      GRRLIB_DrawTile( 510, ypos+50, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR,0 );
-	      GRRLIB_DrawTile( 510, ypos+90, monsterSpecs->getImage(6), 0, 1, 1, IMAGE_COLOR,0 );
-			GRRLIB_DrawTile( 510, ypos+130, monsterSpecs->getImage(9), 0, 1, 1, IMAGE_COLOR,0 );
-			GRRLIB_DrawTile( 510, ypos+170, monsterSpecs->getImage(12), 0, 1, 1, IMAGE_COLOR,0 );
-			GRRLIB_DrawTile( 510, ypos+210, monsterSpecs->getImage(15), 0, 1, 1, IMAGE_COLOR,0 );
-				
+			GRRLIB_DrawTile( 510, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR, index );
+			GRRLIB_DrawTile( 510, ypos+50, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR, index );
+			GRRLIB_DrawTile( 510, ypos+90, monsterSpecs->getImage(6), 0, 1, 1, IMAGE_COLOR, index );
+			GRRLIB_DrawTile( 510, ypos+130, monsterSpecs->getImage(9), 0, 1, 1, IMAGE_COLOR, index );
+			GRRLIB_DrawTile( 510, ypos+170, monsterSpecs->getImage(12), 0, 1, 1, IMAGE_COLOR,index );
+			GRRLIB_DrawTile( 510, ypos+210, monsterSpecs->getImage(15), 0, 1, 1, IMAGE_COLOR,index );
+			
 			// Draw Buttons
 			drawButtons();
 		  		  
@@ -3184,9 +3194,6 @@ void drawScreen(void)
  
 			// Show title
 			drawText(170, ypos, fontTitle, "Weapons");
-		  
-		   // Draw Transparent Panel
-			//GRRLIB_Rectangle(55, 110, 540, 290, GRRLIB_BLACK_TRANS_2, 1);
 			
 			int xoffset=50;
 	
@@ -3248,9 +3255,6 @@ void drawScreen(void)
 			// Draw buttons
 	      drawButtons(); 
 		  		
-			// Draw Transparent Panel
-			//GRRLIB_Rectangle(55, 110, 540, 290, GRRLIB_BLACK_TRANS_2, 1);
-			
 			// Init text layer	  
          GRRLIB_initTexture();
  
@@ -3262,8 +3266,16 @@ void drawScreen(void)
 		  
 			for (int i=0; i<25; i++)
 			{
-				GRRLIB_DrawTile(  xpos, ypos, monsterSpecs->getImage(i), 
-					0, 1, 1, IMAGE_COLOR, 0);
+				if (monsterSpecs->getImage(i)->h==32)
+				{
+					GRRLIB_DrawTile(  xpos, ypos, monsterSpecs->getImage(i), 
+						0, 1, 1, IMAGE_COLOR, 0);
+				}
+				else
+				{
+					GRRLIB_DrawTile(  xpos, ypos, monsterSpecs->getImage(i), 
+						0, 1, 1, IMAGE_COLOR, 2);
+				}
 			
 			   drawText(xpos+42, ypos, fontNormal, "%d", 
 					monsterSpecs->getEnergy(i));
@@ -4187,7 +4199,7 @@ void processStateMachine()
 			initButtons();	
 						
 			// Init game variables
-			initGame(150);
+			initGame(75);
 		}
 		break;
 	

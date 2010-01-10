@@ -26,8 +26,8 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.91"
-#define RELEASE_DATE        	"09-01-2010" 
+#define PROGRAM_VERSION     	"0.92"
+#define RELEASE_DATE        	"10-01-2010" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
