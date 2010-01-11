@@ -2566,9 +2566,6 @@ void drawScreen(void)
 			// Draw samples maps
 			ypos=140;
 	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
-			
-			// Draw Transparent Panel
-			//GRRLIB_Rectangle(30, ypos-20, 580, ypos+185, GRRLIB_BLACK_TRANS_2, 1);
 	
 			GRRLIB_Rectangle(65, ypos, 120, 255, 0x93ff93ff, 1);
 			GRRLIB_Rectangle(265, ypos, 120, 255, 0xffff80ff, 1);
@@ -2593,8 +2590,7 @@ void drawScreen(void)
 			GRRLIB_Line(510+32-3, ypos, 510+32-3, ypos+255, GRRLIB_WHITESMOKE);
 			GRRLIB_Line(510+32-5, ypos, 510+32-5, ypos+255, GRRLIB_WHITESMOKE);
 			
-			// Draw Some enemies		
-			
+			// Draw some enemies		
 			// Get front sprite of animated image.
 			int index=2;
 			if (monsterSpecs->getImage(0)->h==32) index=0;
@@ -2646,9 +2642,6 @@ void drawScreen(void)
 			// Draw samples maps
 			ypos=140;
 	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
-	
-			// Draw Transparent Panel
-			//GRRLIB_Rectangle(30, ypos-20, 580, ypos+185, GRRLIB_BLACK_TRANS_2, 1);
 	
 			if (grids[0]!=NULL) grids[0]->draw(55,ypos,5.0); 
 			if (grids[1]!=NULL) grids[1]->draw(255,ypos,5.0); 
@@ -3268,11 +3261,13 @@ void drawScreen(void)
 			{
 				if (monsterSpecs->getImage(i)->h==32)
 				{
+					// Normal sprite
 					GRRLIB_DrawTile(  xpos, ypos, monsterSpecs->getImage(i), 
 						0, 1, 1, IMAGE_COLOR, 0);
 				}
 				else
 				{
+					// Animated sprite
 					GRRLIB_DrawTile(  xpos, ypos, monsterSpecs->getImage(i), 
 						0, 1, 1, IMAGE_COLOR, 2);
 				}
@@ -3359,63 +3354,6 @@ void drawScreen(void)
 		  
 			// Draw Button Text labels
 			drawButtonsText(0);
-
-			// Draw network thread status on screen
-			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
-			
-			// Show FPS information on screen.
-			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
-	   }
-	   break;
-	   	   
-	   case stateSoundSettings:
-	   { 
-	      // Draw background
-			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR );
-		
-		   // Draw Sound icon
-			int yoffset=20;
-	      if (rmode->xfbHeight==MAX_VERT_PIXELS) yoffset-=20;
-	      GRRLIB_DrawImg((640/2), ((480/2))+yoffset, images.soundicon, 
-				game.angle, 1.4, 1.4, IMAGE_COLOR );
-			if (game.angle<MAX_ANGLE) game.angle++; else game.angle=0;
-			
-			// Draw buttons
-	      drawButtons(); 
-		  		  
-			// Init text layer	  
-         GRRLIB_initTexture();
-  	
-			// Show title
-			drawText(100, ypos, fontTitle, "Sound Settings");
-        
-		   ypos+=140;
-	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
-			
-         // Draw content	
-         drawText(0, ypos, fontParagraph, "Music Volume");	
-	      ypos+=20;
-         GRRLIB_DrawImg(104,ypos,images.bar, 0, 1, 1, IMAGE_COLOR );
-	      ypos+=10;
-	      GRRLIB_DrawImg(115+(sound->getMusicVolume()*40),ypos, 
-				images.barCursor, 0, 1, 1, IMAGE_COLOR );
-  
-         ypos+=80;
-         drawText(0, ypos, fontParagraph, "Effects Volume" );
-	      ypos+=20;	
-	      GRRLIB_DrawImg(104,ypos, images.bar, 0, 1, 1, IMAGE_COLOR );
-	      ypos+=10;
-	      GRRLIB_DrawImg(115+(sound->getEffectVolume()*40),ypos,
-				images.barCursor, 0, 1, 1, IMAGE_COLOR );
-	
-	      ypos+=70;
-	      drawText(0, ypos, fontParagraph, "  Music track [%d]", sound->getMusicTrack());	
-		  		  		
-		   // Draw Button Text labels
-		   drawButtonsText(0);
 
 			// Draw network thread status on screen
 			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
@@ -3526,7 +3464,64 @@ void drawScreen(void)
 			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }
 	   break;
+	   
+	   case stateSoundSettings:
+	   { 
+	      // Draw background
+			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR );
+		
+		   // Draw Sound icon
+			int yoffset=20;
+	      if (rmode->xfbHeight==MAX_VERT_PIXELS) yoffset-=20;
+	      GRRLIB_DrawImg((640/2), ((480/2))+yoffset, images.soundicon, 
+				game.angle, 1.4, 1.4, IMAGE_COLOR );
+			if (game.angle<MAX_ANGLE) game.angle++; else game.angle=0;
+			
+			// Draw buttons
+	      drawButtons(); 
+		  		  
+			// Init text layer	  
+         GRRLIB_initTexture();
+  	
+			// Show title
+			drawText(100, ypos, fontTitle, "Sound Settings");
+        
+		   ypos+=140;
+	      if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
+         // Draw content	
+         drawText(0, ypos, fontParagraph, "Music Volume");	
+	      ypos+=20;
+         GRRLIB_DrawImg(104,ypos,images.bar, 0, 1, 1, IMAGE_COLOR );
+	      ypos+=10;
+	      GRRLIB_DrawImg(115+(sound->getMusicVolume()*40),ypos, 
+				images.barCursor, 0, 1, 1, IMAGE_COLOR );
+  
+         ypos+=80;
+         drawText(0, ypos, fontParagraph, "Effects Volume" );
+	      ypos+=20;	
+	      GRRLIB_DrawImg(104,ypos, images.bar, 0, 1, 1, IMAGE_COLOR );
+	      ypos+=10;
+	      GRRLIB_DrawImg(115+(sound->getEffectVolume()*40),ypos,
+				images.barCursor, 0, 1, 1, IMAGE_COLOR );
+	
+	      ypos+=70;
+	      drawText(0, ypos, fontParagraph, "  Music track [%d]", sound->getMusicTrack());	
+		  		  		
+		   // Draw Button Text labels
+		   drawButtonsText(0);
 
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
+	   }
+	   break;
+	   
 	   case stateGameSettings:
 	   {         	
 			// Draw background
@@ -3745,6 +3740,7 @@ void checkPointer(void)
 {
 	if (game.selectedNewWeapon)
 	{
+	   // Draw pointer image
 		if (pointers[0]!=NULL)
 		{ 
 		   int x1=(float) pointers[0]->getX()/32.0;
@@ -3761,7 +3757,8 @@ void checkPointer(void)
 				pointers[0]->setColor(IMAGE_COLOR3);
 			}
 		}
-	
+
+		// Draw matrix on grid
 		for (int x=4; x<MAX_GRID_X; x++)
 		{
 			GRRLIB_Line( x*32, 0, x*32, 528, GRRLIB_WHITE_TRANS);								
