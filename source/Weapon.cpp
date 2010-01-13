@@ -73,6 +73,11 @@ Weapon::Weapon()
    powerPrice=0;
    rangePrice=0;
    ratePrice=0;
+
+   totalPrice=0;
+	
+	frameStep=0;
+	frameDelay=0;
       
    trace->event(s_fn,0,"leave");
 }
@@ -91,6 +96,28 @@ Weapon::~Weapon()
    trace->event(s_fn,0,"leave");
 }
 
+int Weapon::getFrame()
+{
+	if (height==32) 
+	{
+		// No animation sprite available
+		return 0;
+	}
+		
+		
+	if (frameDelay>2)
+	{
+		frameStep++;
+		if (frameStep>15) frameStep=0;
+		frameDelay=0;
+	}
+	else
+	{
+		frameDelay++;
+	}
+	return frameStep;
+}
+
 // ------------------------------
 // Others
 // ------------------------------
@@ -100,22 +127,22 @@ void Weapon::draw()
 	// Draw weapon range circle
 	if (selected)
 	{	
-		GRRLIB_Circle(x+16, y+16, range, IMAGE_COLOR3, 1);
+		GRRLIB_Circle((x*32)+16, (y*32)+16, range, IMAGE_COLOR3, 1);
 	}
 	
 	// Draw fire trail 
 	if (--fireDelay>0)
 	{
-		GRRLIB_Line( x+16, y+16, monsterX+16, monsterY+16, GRRLIB_LIGHTRED);								
+		GRRLIB_Line( (x*32)+16, (y*32)+16, monsterX+16, monsterY+16, GRRLIB_LIGHTRED);								
 	}
 	
 	// Draw Weapon on screen
-	GRRLIB_DrawImg( x, y, image, angle, 1, 1, IMAGE_COLOR );		
-	
+	GRRLIB_DrawTile(  (x*32), (y*32), image, 0, 1, 1, IMAGE_COLOR, getFrame());
+					
 	// Draw reload time bar
 	float proc = ((rate-delay) / rate) * 18.0;
-	GRRLIB_Rectangle(x+5, y+28, 20, 4, GRRLIB_BLACK, 0);
-	GRRLIB_Rectangle(x+6, y+29, proc, 2, GRRLIB_RED, 1);
+	GRRLIB_Rectangle((x*32)+5, (y*32)+28, 20, 4, GRRLIB_BLACK, 0);
+	GRRLIB_Rectangle((x*32)+6, (y*32)+29, proc, 2, GRRLIB_RED, 1);
 }
 
 void Weapon::fire(Monster *monsters[MAX_MONSTERS])
@@ -134,8 +161,8 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 			if ((monsters[i]!=NULL) && (monsters[i]->getState()==stateEnemyMoving))
 			{
 				float distance= 
-					sqrt( ( (monsters[i]->getX()-x) * (monsters[i]->getX()-x) ) + 
-						   ( (monsters[i]->getY()-y) * (monsters[i]->getY()-y) ) );
+					sqrt( ( (monsters[i]->getX()-(x*32)) * (monsters[i]->getX()-(x*32)) ) + 
+						   ( (monsters[i]->getY()-(y*32)) * (monsters[i]->getY()-(y*32)) ) );
 						  				
 				if (distance<range)
 				{					
@@ -217,6 +244,7 @@ int Weapon::upgradePower(void)
 		power+=powerStep;
 		trace->event(s_fn,0,"Weapon %d upgrade power to %d",index, power);
 		game.cash-=powerPrice;
+		totalPrice+=powerPrice;
 		powerPrice=powerPrice*2;					
 		sound->effect(SOUND_UPGRADE);
 	}
@@ -235,6 +263,7 @@ int Weapon::upgradeRange(void)
 		range+=rangeStep;
 		trace->event(s_fn,0,"Weapon %d upgrade range to %d",index, range);
 		game.cash-=rangePrice;
+		totalPrice+=rangePrice;
 		rangePrice=rangePrice*2;
 		sound->effect(SOUND_UPGRADE);
 	}
@@ -254,6 +283,7 @@ int Weapon::upgradeRate(void)
 		rate-=(rateStep*AVERAGE_FPS);
 		trace->event(s_fn,0,"Weapon %d upgrade rate to %d",index, rate);
 		game.cash-=ratePrice;
+		totalPrice+=ratePrice;
 		ratePrice=ratePrice*2;
 		sound->effect(SOUND_UPGRADE);
 	}
@@ -266,7 +296,10 @@ int Weapon::upgradeRate(void)
 bool Weapon::onSelect(int x1, int y1)
 {   
 	const char *s_fn="Weapon::onSelect";
-	if ( (x1>=x) && (x1<=(x+width)) && (y1>=y) && (y1<=(y+height)) )
+	if ( 	(x1>=(x*32)) && 
+			(x1<=((x*32)+32)) && 
+			(y1>=(y*32)) && 
+			(y1<=((y*32)+32)) )
 	{      	 	
 		trace->event(s_fn,0,"Weapon %d selected", index);
 		
@@ -425,9 +458,24 @@ void Weapon::setName(const char *name1, ...)
 	strcpy(name,buf);
 }
 
+void Weapon::setTotalPrice(int totalPrice1)
+{
+	totalPrice=totalPrice1;
+}
+
 // ------------------------------
 // Getters 
 // ------------------------------
+
+int Weapon::getX(void)
+{
+	return x;
+}
+
+int Weapon::getY(void)
+{
+	return y;
+}
 
 int Weapon::getPowerPrice(void)
 {
@@ -492,6 +540,11 @@ int Weapon::getMaxRange(void)
 int Weapon::getMaxRate(void)
 {
 	return (maxRate/AVERAGE_FPS);
+}
+
+int Weapon::getTotalPrice(void)
+{
+	return totalPrice;
 }
 	
 // ------------------------------

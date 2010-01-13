@@ -42,6 +42,8 @@ Settings::Settings()
    fifthChar='A';
    sixthChar='A';
 	
+	//CONF_GetNickName;
+	
    musicVolume = 5;
    effectVolume = 9;
 	classicSprites=false;

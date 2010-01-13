@@ -77,6 +77,7 @@ class Grid
 	
 	// Setters
 	void setBuild(int x, int y);
+	void setUnBuild(int x, int y);
 	void setIndex(int index);
 	
 	// Getters
