@@ -159,6 +159,7 @@
 #define BUTTON_LEFT         	(WPAD_BUTTON_LEFT  | WPAD_CLASSIC_BUTTON_LEFT)
 #define BUTTON_RIGHT        	(WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT)
 #define BUTTON_PLUS         	(WPAD_BUTTON_PLUS  | WPAD_CLASSIC_BUTTON_PLUS)
+#define BUTTON_MINUS         	(WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS)
 
 // -----------------------------------------------------------
 // ENUMS
@@ -208,14 +209,15 @@ enum
 	eventWeaponRangeUpgrade=4,
 	eventWeaponRateUpgrade=5,
 	
-	eventNewWeaponNext=6,
-	eventNewWeaponPrevious=7,
-	eventNewWeaponSelected=8,
-	eventNewweaponDeployed=9,
+	eventWeaponNext=6,
+	eventWeaponPrevious=7,
+	eventWeaponSelected=8,
+	eventweaponDeployed=9,
+	eventWeaponSell=10,
 	
-	eventInitEasyLevels=10,
-	eventInitMediumLevels=11,
-	eventInitHardLevels=12
+	eventInitEasyLevels=11,
+	eventInitMediumLevels=12,
+	eventInitHardLevels=13
 };
 
 enum
@@ -279,6 +281,9 @@ typedef struct
 	float wave1;
 	float wave2;
 	int scrollIndex;
+	int frameCounter;
+	int frameDelay;
+	int frame;
 }
 Game;
 

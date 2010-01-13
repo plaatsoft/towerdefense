@@ -30,19 +30,20 @@
 class Weapon
 {
   private:
-	int x;
-	int y;	
-	int alfa;
+	int   x;
+	int   y;	
+	int   alfa;
 	float size;
-	int angle;
-	int targetAngle;
+	int   angle;
+	int   targetAngle;
 	GRRLIB_texImg *image;
-	int height;
-	int width;
+	int   height;
+	int   width;
 	float delay;
-	int index;
-	int type;
-	char name[MAX_LEN];
+	int   index;
+	int   type;
+	char  name[MAX_LEN];
+   int   totalPrice;
 	
 	int fireDelay;
 	int monsterX;
@@ -65,6 +66,10 @@ class Weapon
 	int powerStep;
 	int rangeStep;
 	int rateStep;
+
+	int frameStep;
+	int frameDelay;
+	int getFrame();
 	
   public:
   	// Constructor & Destructor
@@ -105,9 +110,16 @@ class Weapon
 	void setPowerStep(int step);
    void setRangeStep(int step);
    void setRateStep(int step);
+	
+	void setTotalPrice(int totalPrice);
 
 	// Getters
+	
+	int getX(void);
+	int getY(void);
+	
 	const char *getName(void);
+	int getTotalPrice(void);
 	
 	int getPowerPrice(void);
 	int getRangePrice(void);

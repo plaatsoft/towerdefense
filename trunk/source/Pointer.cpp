@@ -700,13 +700,13 @@ void Pointer::buttonA(int x, int y)
 			if ((buttons[4]!=NULL) && (buttons[4]->onSelect(x,y,true)))
 			{
 				// Select previous weapon	
-				game.event=eventNewWeaponPrevious;
+				game.event=eventWeaponPrevious;
 			}					
 				
 			if ((buttons[5]!=NULL) && (buttons[5]->onSelect(x,y,true)))
 			{
 				// Select next weapon
-				game.event=eventNewWeaponNext;    		
+				game.event=eventWeaponNext;    		
 			}
 			
 			// Build new weapon is selected
@@ -714,7 +714,7 @@ void Pointer::buttonA(int x, int y)
 			{				
 				if (game.cash>=weaponSpecs->getPrice(game.weaponType)) 
 				{	
-					game.event=eventNewWeaponSelected;	
+					game.event=eventWeaponSelected;	
 					game.selectedNewWeapon=true;
 				}
 			}
@@ -846,7 +846,7 @@ void Pointer::action(void)
 				if (game.selectedNewWeapon) 
 				{
 					game.selectedNewWeapon=false;
-					game.event=eventNewweaponDeployed;
+					game.event=eventweaponDeployed;
 				}
 			}
 		}
@@ -861,7 +861,7 @@ void Pointer::action(void)
 			{	
 				if (game.cash>=weaponSpecs->getPrice(game.weaponType)) 
 				{	
-					game.event=eventNewWeaponSelected;	
+					game.event=eventWeaponSelected;	
 					game.selectedNewWeapon=true;
 					
 					// Click sound
@@ -880,7 +880,7 @@ void Pointer::action(void)
 				if (game.selectedNewWeapon) 
 				{
 					game.selectedNewWeapon=false;
-					game.event=eventNewweaponDeployed;
+					game.event=eventweaponDeployed;
 				}
 			}
 		}
@@ -890,7 +890,7 @@ void Pointer::action(void)
 		{	
 			if ((!selectedA) && (!selectedB) && (game.stateMachine==stateGame))
 			{		
-				game.event=eventNewWeaponPrevious;
+				game.event=eventWeaponPrevious;
 				
 				// Click sound
 				sound->effect(SOUND_CLICK);
@@ -902,7 +902,7 @@ void Pointer::action(void)
 		{
 			if ((!selectedA) && (!selectedB) && (game.stateMachine==stateGame))
 			{
-				game.event=eventNewWeaponNext;    		
+				game.event=eventWeaponNext;    		
 				
 				// Click sound
 				sound->effect(SOUND_CLICK);
@@ -964,6 +964,18 @@ void Pointer::action(void)
 			level = localtime(&dt);
 			sprintf(filename,"%sTowerDefense-%04d%02d%02d%02d%02d%02d.png", GAME_DIRECTORY, level->tm_year+1900,level->tm_mon+1, level->tm_mday,  level->tm_hour, level->tm_min, level->tm_sec);		  
 			GRRLIB_ScrShot(filename);	
+		}
+		
+		// Sell selected weapon
+		if (wpaddown& BUTTON_MINUS) 
+		{	
+			if (	(!selectedA) && 
+					(!selectedB) && 
+					(game.stateMachine==stateGame) &&  
+				   (game.selectedWeapon!=-1) )
+			{
+					game.event=eventWeaponSell;
+			}
 		}
 	}
 	

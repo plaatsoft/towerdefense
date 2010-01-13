@@ -34,6 +34,13 @@ class WeaponSpecs
 	GRRLIB_texImg *weapon5;
 	GRRLIB_texImg *weapon6;
 
+	GRRLIB_texImg *weapon1a;
+	GRRLIB_texImg *weapon2a;
+	GRRLIB_texImg *weapon3a;
+	GRRLIB_texImg *weapon4a;
+	GRRLIB_texImg *weapon5a;
+	GRRLIB_texImg *weapon6a;
+	
 	// Weapon build counter;
 	int gunCounter;
 	int rifleCounter;
@@ -51,7 +58,13 @@ class WeaponSpecs
 	void resetCounter(void);
 		
 	// Getters
+	
+	// Return Weapon Image (16x4 animation of 32x32 pixels)
 	GRRLIB_texImg * getImage(int type);
+	
+	// Return Weapon Image (32x32 pixels) per Type		
+	GRRLIB_texImg * getImageSpecial(int type);
+
 	const char *getName(int type);
 	int getPrice(int type);
 	int getUpgradePrice(int type);

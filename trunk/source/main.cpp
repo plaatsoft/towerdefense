@@ -25,11 +25,15 @@
 **  - Improve base graphics
 **  - Multi language support.
 **  - Dragable game info panels.
+**  - Point weapon to enemy.
 **  
 **  10/01/2010 Version 0.92
-**  - Bugfix: Monster can not to shooted before they are moving.
+**  - Added 3 animated weapons. Thanks Applicant! (Still buggy)
+**  - Added weapon sell functionality with minus button. (Still buggy)
 **  - Improve animated sprite frame sequence.
 **  - Lots of other small GUI changes.
+**  - Increase bonus money when wave is cleared.
+**  - Bugfix: Monster can not to shooted before they are moving.
 **
 **  09/01/2010 Version 0.91
 **  - Added 25 animated enemy sprites. Thanks Applicant!
@@ -1762,8 +1766,8 @@ void initButtons(void)
 			buttons[6]=new Button();
 			buttons[6]->setX(33+game.panelXOffset);
 			buttons[6]->setY(ypos+game.panelYOffset);
-			buttons[6]->setImageNormal(weaponSpecs->getImage(game.weaponType));
-			buttons[6]->setImageFocus(weaponSpecs->getImage(game.weaponType));
+			buttons[6]->setImageNormal(weaponSpecs->getImageSpecial(game.weaponType));
+			buttons[6]->setImageFocus(weaponSpecs->getImageSpecial(game.weaponType));
 			buttons[6]->setLabel("");			
 			buttons[6]->setColor(IMAGE_COLOR);
 			buttons[6]->setIndex(6);
@@ -2590,25 +2594,69 @@ void drawScreen(void)
 			GRRLIB_Line(510+32-3, ypos, 510+32-3, ypos+255, GRRLIB_WHITESMOKE);
 			GRRLIB_Line(510+32-5, ypos, 510+32-5, ypos+255, GRRLIB_WHITESMOKE);
 			
-			// Draw some enemies		
-			// Get front sprite of animated image.
-			int index=2;
-			if (monsterSpecs->getImage(0)->h==32) index=0;
+			// Calculate frame of enemy animation
+			if (monsterSpecs->getImage(0)->h==32) 
+			{
+				// No animation available
+				game.frame=0;
+			}
+			else
+			{
+				if (game.frameDelay==5)
+				{
+					switch (game.frameCounter)
+					{
+						case 0:  game.frame=2;
+									game.frameCounter++;
+									break;
+				  
+						case 1:  game.frame=6;
+									game.frameCounter++;
+									break;
+					
+						case 2:  game.frame=2;
+									game.frameCounter++;
+									break;
+						
+						case 3:  game.frame=10;
+									game.frameCounter=0;
+									break;
+					}
+					game.frameDelay=0;
+				}
+				else
+				{
+					game.frameDelay++;
+				}
+			}
 			
-			GRRLIB_DrawTile( 110, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR, index );	
-			GRRLIB_DrawTile( 110, ypos+50, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR, index );
+			// Draw	some enemies
+			GRRLIB_DrawTile( 110, ypos+10, monsterSpecs->getImage(0), 
+				0, 1, 1, IMAGE_COLOR, game.frame );	
+			GRRLIB_DrawTile( 110, ypos+50, monsterSpecs->getImage(3), 
+				0, 1, 1, IMAGE_COLOR, game.frame );
 
-			GRRLIB_DrawTile( 310, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR, index );
-			GRRLIB_DrawTile( 310, ypos+50, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR, index );
-			GRRLIB_DrawTile( 310, ypos+90, monsterSpecs->getImage(6), 0, 1, 1, IMAGE_COLOR, index );
-			GRRLIB_DrawTile( 310, ypos+130, monsterSpecs->getImage(9), 0, 1, 1, IMAGE_COLOR, index );
+			GRRLIB_DrawTile( 310, ypos+10, monsterSpecs->getImage(0),
+				0, 1, 1, IMAGE_COLOR, game.frame );
+			GRRLIB_DrawTile( 310, ypos+50, monsterSpecs->getImage(3), 
+				0, 1, 1, IMAGE_COLOR, game.frame );
+			GRRLIB_DrawTile( 310, ypos+90, monsterSpecs->getImage(6), 
+				0, 1, 1, IMAGE_COLOR, game.frame );
+			GRRLIB_DrawTile( 310, ypos+130, monsterSpecs->getImage(9), 
+				0, 1, 1, IMAGE_COLOR, game.frame );
 
-			GRRLIB_DrawTile( 510, ypos+10, monsterSpecs->getImage(0), 0, 1, 1, IMAGE_COLOR, index );
-			GRRLIB_DrawTile( 510, ypos+50, monsterSpecs->getImage(3), 0, 1, 1, IMAGE_COLOR, index );
-			GRRLIB_DrawTile( 510, ypos+90, monsterSpecs->getImage(6), 0, 1, 1, IMAGE_COLOR, index );
-			GRRLIB_DrawTile( 510, ypos+130, monsterSpecs->getImage(9), 0, 1, 1, IMAGE_COLOR, index );
-			GRRLIB_DrawTile( 510, ypos+170, monsterSpecs->getImage(12), 0, 1, 1, IMAGE_COLOR,index );
-			GRRLIB_DrawTile( 510, ypos+210, monsterSpecs->getImage(15), 0, 1, 1, IMAGE_COLOR,index );
+			GRRLIB_DrawTile( 510, ypos+10, monsterSpecs->getImage(0), 
+				0, 1, 1, IMAGE_COLOR, game.frame );
+			GRRLIB_DrawTile( 510, ypos+50, monsterSpecs->getImage(3), 
+				0, 1, 1, IMAGE_COLOR, game.frame );
+			GRRLIB_DrawTile( 510, ypos+90, monsterSpecs->getImage(6), 
+				0, 1, 1, IMAGE_COLOR, game.frame );
+			GRRLIB_DrawTile( 510, ypos+130, monsterSpecs->getImage(9), 
+				0, 1, 1, IMAGE_COLOR, game.frame );
+			GRRLIB_DrawTile( 510, ypos+170, monsterSpecs->getImage(12),
+				0, 1, 1, IMAGE_COLOR,game.frame );
+			GRRLIB_DrawTile( 510, ypos+210, monsterSpecs->getImage(15), 
+				0, 1, 1, IMAGE_COLOR,game.frame );
 			
 			// Draw Buttons
 			drawButtons();
@@ -3132,31 +3180,35 @@ void drawScreen(void)
 			drawText(60+xoffset, ypos, fontParagraph, "A");
 			drawText(180+xoffset, ypos, fontParagraph, "Select button on screen" ); 
 
-			ypos+=30;	  
+			ypos+=25;	  
 			drawText(60+xoffset, ypos, fontParagraph, "B");
 			drawText(180+xoffset, ypos, fontParagraph, "Build new weapon" ); 
 
-			ypos+=30;	  
+			ypos+=25;	  
 			drawText(60+xoffset, ypos, fontParagraph, "<");
 			drawText(180+xoffset, ypos, fontParagraph, "Select previous weapon type" ); 
 
-			ypos+=30;	  
+			ypos+=25;	  
 			drawText(60+xoffset, ypos, fontParagraph, ">");
 			drawText(180+xoffset, ypos, fontParagraph, "Select next weapon type" ); 	
 
-			ypos+=30;	  
+			ypos+=25;	  
 			drawText(60+xoffset, ypos, fontParagraph, "1");
 			drawText(180+xoffset, ypos, fontParagraph, "Play next music track" ); 
 
-			ypos+=30;	  
+			ypos+=25;	  
 			drawText(60+xoffset, ypos, fontParagraph, "2");
 			drawText(180+xoffset, ypos, fontParagraph, "Play previous music track" ); 	
 
-			ypos+=30;	  
+			ypos+=25;	  
 			drawText(60+xoffset, ypos, fontParagraph, "+");
 			drawText(180+xoffset, ypos, fontParagraph, "Make screenshot" ); 		
 
-			ypos+=30;	  
+			ypos+=25;	  
+			drawText(60+xoffset, ypos, fontParagraph, "-");
+			drawText(180+xoffset, ypos, fontParagraph, "Sell selected weapon" ); 	
+			
+			ypos+=25;	  
 			drawText(60+xoffset, ypos, fontParagraph, "Home");
 			drawText(180+xoffset, ypos, fontParagraph, "Quit the game" );
 		  
@@ -3197,14 +3249,36 @@ void drawScreen(void)
 			drawText(240+xoffset, ypos, fontParagraph, "Power");
 			drawText(340+xoffset, ypos, fontParagraph, "Range");
 			drawText(440+xoffset, ypos, fontParagraph, "Rate");
-	
+		
 			ypos+=10;
 			for (int i=0; i<6; i++)
 			{
 				ypos+=40;	  
-				GRRLIB_DrawImg(30+xoffset,ypos, 
-					weaponSpecs->getImage(i), 0, 1, 1, IMAGE_COLOR );
-				
+	
+				// Calculate frame of weapon animation
+				if (weaponSpecs->getImage(i)->h==32) 
+				{
+					// No animation available
+					game.frame=0;
+				}
+				else
+				{
+					if (game.frameDelay>5)
+					{
+						game.frameCounter++;
+						if (game.frameCounter>64) game.frameCounter=0;
+						game.frame=game.frameCounter;
+						game.frameDelay=0;
+					}
+					else
+					{
+						game.frameDelay++;
+					}
+				}
+		
+				GRRLIB_DrawTile(30+xoffset,ypos, 
+					weaponSpecs->getImage(i), 0, 1, 1, IMAGE_COLOR, game.frame );
+					
 				drawText(80+xoffset, ypos, fontNormal, 
 					weaponSpecs->getName(i));
 					
@@ -3256,21 +3330,47 @@ void drawScreen(void)
         
 			ypos=120;
 			int xpos=90;
-		  
+		  	
 			for (int i=0; i<25; i++)
 			{
-				if (monsterSpecs->getImage(i)->h==32)
+				// Calculate frame of enemy animation
+				if (monsterSpecs->getImage(0)->h==32) 
 				{
-					// Normal sprite
-					GRRLIB_DrawTile(  xpos, ypos, monsterSpecs->getImage(i), 
-						0, 1, 1, IMAGE_COLOR, 0);
+					// No animation available
+					game.frame=0;
 				}
 				else
 				{
-					// Animated sprite
-					GRRLIB_DrawTile(  xpos, ypos, monsterSpecs->getImage(i), 
-						0, 1, 1, IMAGE_COLOR, 2);
+					if (game.frameDelay==75)
+					{
+						switch (game.frameCounter)
+						{
+							case 0:  game.frame=2;
+										game.frameCounter++;
+										break;
+					  
+							case 1:  game.frame=6;
+										game.frameCounter++;
+										break;
+						
+							case 2:  game.frame=2;
+										game.frameCounter++;
+										break;
+							
+							case 3:  game.frame=10;
+										game.frameCounter=0;
+										break;
+						}
+						game.frameDelay=0;
+					}
+					else
+					{
+						game.frameDelay++;
+					}
 				}
+			
+				GRRLIB_DrawTile( xpos, ypos, 
+					monsterSpecs->getImage(i), 0, 1, 1, IMAGE_COLOR, game.frame);
 			
 			   drawText(xpos+42, ypos, fontNormal, "%d", 
 					monsterSpecs->getEnergy(i));
@@ -3865,17 +3965,17 @@ void processEvent()
 			initGrids(game.level);			
 			break;
 			
-		case eventNewWeaponSelected:		
+		case eventWeaponSelected:		
 		{
-			trace->event(s_fn,0,"event=eventNewWeaponSelected");
+			trace->event(s_fn,0,"event=eventWeaponSelected");
 			
 			if (game.cash>=weaponSpecs->getPrice(game.weaponType))
 			{
 				// Change pointer image to weapon image (For location definition)
-				pointers[0]->setImage(weaponSpecs->getImage(game.weaponType));
+				pointers[0]->setImage(weaponSpecs->getImageSpecial(game.weaponType));
 				
 				// Deselected other weapon, if any
-				if (game.selectedWeapon!=-1)
+				if ((game.selectedWeapon!=-1) && (weapons[game.selectedWeapon]!=NULL)) 
 				{
 					weapons[game.selectedWeapon]->setSelected(false);
 					game.selectedWeapon=-1;
@@ -3884,9 +3984,9 @@ void processEvent()
 		}
 		break;
 		
-		case eventNewweaponDeployed:
+		case eventweaponDeployed:
 		{
-			trace->event(s_fn,0,"event=eventNewweaponDeployed");
+			trace->event(s_fn,0,"event=eventweaponDeployed");
 
 			// First restore pointer image
 			pointers[0]->setImage(images.pointer1);
@@ -3895,8 +3995,7 @@ void processEvent()
 			int x1=(float) pointers[0]->getX()/32.0;
 			int y1=(float) pointers[0]->getY()/32.0;
 				
-			if ( 
-				  (game.cash>=weaponSpecs->getPrice(game.weaponType)) &&
+			if ( (game.cash>=weaponSpecs->getPrice(game.weaponType)) &&
 				  (game.selectedMap!=-1) &&
 				  (grids[game.selectedMap]!=NULL) &&
 				  (!grids[game.selectedMap]->isBuild(x1,y1) )
@@ -3931,23 +4030,26 @@ void processEvent()
 				}
 				
 				// Create new weapon
-				initWeapon(x1*32,y1*32,id, game.weaponType);
+				initWeapon(x1,y1,id, game.weaponType);
 				
 				// Selected new weapon
 				game.selectedWeapon=id;	
 
 				// Pay for the weapon
 				game.cash-=weaponSpecs->getPrice(game.weaponType);
+				
+				// Stored payed money in weapon calls
+				weapons[id]->setTotalPrice(weaponSpecs->getPrice(game.weaponType));
 			}
 		}
 		break;
 		
-		case eventNewWeaponNext:		
+		case eventWeaponNext:		
 		{
-			trace->event(s_fn,0,"event=eventNewWeaponNext");
+			trace->event(s_fn,0,"event=eventWeaponNext");
 			
 			// Deselected other weapon, if any
-			if (game.selectedWeapon!=-1)
+			if ((game.selectedWeapon!=-1) && (weapons[game.selectedWeapon]!=NULL))
 			{
 				weapons[game.selectedWeapon]->setSelected(false);
 				game.selectedWeapon=-1;
@@ -3969,17 +4071,17 @@ void processEvent()
 				// Weapon Transparent (Not for sale)
 				buttons[6]->setColor(IMAGE_COLOR3);
 			}
-			buttons[6]->setImageNormal(weaponSpecs->getImage(game.weaponType));
-			buttons[6]->setImageFocus(weaponSpecs->getImage(game.weaponType));
+			buttons[6]->setImageNormal(weaponSpecs->getImageSpecial(game.weaponType));
+			buttons[6]->setImageFocus(weaponSpecs->getImageSpecial(game.weaponType));
 		}
 		break;
 
-		case eventNewWeaponPrevious:		
+		case eventWeaponPrevious:		
 		{
-			trace->event(s_fn,0,"event=eventNewWeaponPrevious");
+			trace->event(s_fn,0,"event=eventWeaponPrevious");
 
 			// Deselected other weapon, if any
-			if (game.selectedWeapon!=-1)
+			if ((game.selectedWeapon!=-1) && (weapons[game.selectedWeapon]!=NULL))
 			{
 				weapons[game.selectedWeapon]->setSelected(false);
 				game.selectedWeapon=-1;
@@ -4001,11 +4103,26 @@ void processEvent()
 				// Weapon Transparent (Not for sale)
 				buttons[6]->setColor(IMAGE_COLOR3);
 			}
-			buttons[6]->setImageNormal(weaponSpecs->getImage(game.weaponType));
-			buttons[6]->setImageFocus(weaponSpecs->getImage(game.weaponType));
+			buttons[6]->setImageNormal(weaponSpecs->getImageSpecial(game.weaponType));
+			buttons[6]->setImageFocus(weaponSpecs->getImageSpecial(game.weaponType));
 		}
 		break;
-				
+	
+		case eventWeaponSell:		
+		{
+			trace->event(s_fn,0,"event=eventWeaponSell");
+			if ((game.selectedWeapon!=-1) && (weapons[game.selectedWeapon]!=NULL))
+			{
+				 game.cash+=weapons[game.selectedWeapon]->getTotalPrice();
+				 grids[game.selectedMap]->setUnBuild(
+					weapons[game.selectedWeapon]->getX(),
+					weapons[game.selectedWeapon]->getY());
+				 delete weapons[game.selectedWeapon];
+				 weapons[game.selectedWeapon]=NULL;
+			}
+		}
+		break;
+		
 		case eventLaunch:
 		{
 			trace->event(s_fn,0,"event=eventLaunch");	
@@ -4036,8 +4153,8 @@ void processEvent()
 				}
 				
 				// Get Bonus score and Bonus cash
-				game.score+=(game.wave*200);
-				game.cash+=(game.wave*200);
+				game.score+=(game.wave*250);
+				game.cash+=(game.wave*250);
 
 				// Show WAVE text on screen
 				game.alfa=MAX_ALFA;
@@ -4182,6 +4299,9 @@ void processStateMachine()
 		case stateLevelMenu:
 		{
 			trace->event(s_fn,0,"stateMachine=stateLevelMenu");
+			
+			game.frameCounter=0;
+			game.frameDelay=0;
 			
 			// Init buttons
 			initButtons();	
@@ -4332,6 +4452,9 @@ void processStateMachine()
 		{
 			trace->event(s_fn,0,"stateMachine=stateHelp3");
 			
+			game.frameCounter=0;
+			game.frameDelay=0;
+	
 			// Init buttons
 			initButtons();
 		}
@@ -4340,6 +4463,9 @@ void processStateMachine()
 		case stateHelp4:
 		{
 			trace->event(s_fn,0,"stateMachine=stateHelp4");
+			
+			game.frameCounter=0;
+			game.frameDelay=0;
 			
 			// Init buttons
 			initButtons();

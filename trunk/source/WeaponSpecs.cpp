@@ -117,6 +117,30 @@ extern int      pic504length;
 extern const unsigned char     pic505data[];
 extern int      pic505length;
 
+// Weapon1a Image
+extern const unsigned char     pic506data[];
+extern int      pic506length;
+
+// Weapon2a Image
+extern const unsigned char     pic507data[];
+extern int      pic507length;
+
+// Weapon3a Image
+extern const unsigned char     pic508data[];
+extern int      pic508length;
+
+// Weapon4a Image
+extern const unsigned char     pic509data[];
+extern int      pic509length;
+
+// Weapon5a Image
+extern const unsigned char     pic510data[];
+extern int      pic510length;
+
+// Weapon6a Image
+extern const unsigned char     pic511data[];
+extern int      pic511length;
+
 // ------------------------------
 // Constructor 
 // ------------------------------
@@ -127,12 +151,30 @@ WeaponSpecs::WeaponSpecs()
    trace->event(s_fn,0,"enter");
    
 	weapon1=GRRLIB_LoadTexture( pic500data );
+	GRRLIB_InitTileSet(weapon1, 32, 32, 0);
+
 	weapon2=GRRLIB_LoadTexture( pic501data );
+	GRRLIB_InitTileSet(weapon2, 32, 32, 0);
+
 	weapon3=GRRLIB_LoadTexture( pic502data );
+	GRRLIB_InitTileSet(weapon3, 32, 32, 0);
+	
 	weapon4=GRRLIB_LoadTexture( pic503data );
+	GRRLIB_InitTileSet(weapon4, 32, 32, 0);
+	
 	weapon5=GRRLIB_LoadTexture( pic504data );
+	GRRLIB_InitTileSet(weapon5, 32, 32, 0);
+	
 	weapon6=GRRLIB_LoadTexture( pic505data );
-      
+	GRRLIB_InitTileSet(weapon6, 32, 32, 0);
+	
+	weapon1a=GRRLIB_LoadTexture( pic506data );
+	weapon2a=GRRLIB_LoadTexture( pic507data );
+	weapon3a=GRRLIB_LoadTexture( pic508data );
+	weapon4a=GRRLIB_LoadTexture( pic509data );
+	weapon5a=GRRLIB_LoadTexture( pic510data );
+	weapon6a=GRRLIB_LoadTexture( pic511data );
+	
 	resetCounter();
 		
    trace->event(s_fn,0,"leave");
@@ -156,6 +198,13 @@ WeaponSpecs::~WeaponSpecs()
    GRRLIB_FreeTexture(weapon4);
    GRRLIB_FreeTexture(weapon5);
    GRRLIB_FreeTexture(weapon6);
+	
+	GRRLIB_FreeTexture(weapon1a);
+   GRRLIB_FreeTexture(weapon2a);
+   GRRLIB_FreeTexture(weapon3a);
+   GRRLIB_FreeTexture(weapon4a);
+   GRRLIB_FreeTexture(weapon5a);
+   GRRLIB_FreeTexture(weapon6a);
 	  
    trace->event(s_fn,0,"leave");
 }
@@ -210,6 +259,37 @@ GRRLIB_texImg * WeaponSpecs::getImage(int type)
 				
 		default: // Nuke
 				 return weapon6;
+				 break;
+	}
+}
+
+// Return Weapon Image (32x32 pixels) per Type		
+GRRLIB_texImg * WeaponSpecs::getImageSpecial(int type)
+{
+	switch (type)
+	{
+		case 0:  // Gun
+				 return weapon1a;
+				 break;
+				
+		case 1:  // Rifle
+				 return weapon2a;
+				 break;
+				
+		case 2:  // Canon
+				 return weapon3a;
+				 break;
+				
+		case 3:  // Missle
+				 return weapon4a;
+				 break;
+				
+		case 4:  // Laser
+				 return weapon5a;
+				 break;
+				
+		default: // Nuke
+				 return weapon6a;
 				 break;
 	}
 }

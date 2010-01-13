@@ -522,6 +522,14 @@ void Grid::setBuild(int x, int y)
 	gridBuild[y][x]='F';
 }
 
+void Grid::setUnBuild(int x, int y)
+{
+	const char *s_fn="Grid::setUnBuild";
+	trace->event(s_fn,0,"x=%d,y=%d",x,y);
+	
+	gridBuild[y][x]='0';
+}
+
 // ------------------------------
 // Getters
 // ------------------------------
