@@ -27,161 +27,177 @@
 **  - Dragable game info panels.
 **  - Point weapon to enemy.
 **  
-**  10/01/2010 Version 0.92
-**  - Added 3 animated weapons. Thanks Applicant! (Still buggy)
-**  - Added weapon sell functionality with minus button. (Still buggy)
-**  - Improve animated sprite frame sequence.
-**  - Lots of other small GUI changes.
+**  14-01-2010 Version 0.92
+**  GUI:
+**  - Added 3 animated weapons. Thanks Applicant!
+**  - Improve enemy animated sprite frame sequence.
+**  - Improve Help3, Help4 and level select screen.
+**  Core:
 **  - Increase bonus money when wave is cleared.
-**  - Bugfix: Monster can not to shooted before they are moving.
+**  - Increase initial weapon power.
+**  - Added weapon sell functionality with minus button.
+**  - Bugfix: Monsters can not be shooted before launch.
+**  - Build game with devkitPPC r19 compiler.
 **
-**  09/01/2010 Version 0.91
+**  09-01-2010 Version 0.91
+**  GUI:
 **  - Added 25 animated enemy sprites. Thanks Applicant!
 **  - Added game setting screen.
-**  - Added intro screen 3
-**  - Adapted game play. Make it harder.
-**  	- Less start money.
-**  	- Enemy minimum / maximum speed depend on wave nr.
-**    - Increase weapon prices.
-**    - Increase maximum concurrent monsters in action.
-**    - Decrease weapons effective range.
+**  - Added intro screen 3.
 **  - Improve winter theme sprites.
 **  - Improve first help screen.
 **  - Improve main menu screen.
 **  - Lots of other small GUI changes.
+**  Core:
+**  - Less start money.
+**  - Enemy minimum / maximum speed depend on wave nr.
+**  - Increase weapon prices.
+**  - Increase maximum concurrent monsters in action.
+**  - Decrease weapons effective range.
 **  - Build game with devkitPPC r19 compiler.
 **
-**  02/01/2010 Version 0.90
+**  02-01-2010 Version 0.90
+**  GUI:
 **  - Improve background images.
-**  - Improve first music track.
+**  - Remove some english typos.
 **  - Improve first intro screen.
 **  - Added WiiMote control help screen.
+**  Core:
+**  - Improve first music track.
 **  - Enable B button for faster building. 
 **  - Enable left and right button for faster weapon type selection.
-**  - Remove some english typos.
 **  - Build game with devkitPPC r19 compiler.
 **
-**  30/12/2009 Version 0.80
-**  - Adapt game parameters to make game play better:
-**		  - Increase start money depending on game level.
-**  	  - Enemy walk speed is now a randomized value. 
+**  30-12-2009 Version 0.80
+**  GUI:
 **  - Added map id column to local highscore screen.
 **  - Improve background images.
 **  - Remove typo (nuck->nuke).
-**  - Improve network thread:
-**  	  - Map id information is added to webservice call.
-**  	  - Only scores above 20.000 points are send to webservice.
-**  - Store the best 100 entries in the local highscore.
 **  - Added 60Hz (640x480 pixel) TV Mode support 
 **  - Improve sound setting screen.
 **  - Optimised enemy images.
+**  Core:
+**  - Adapt game parameters to make game play better.
+**	 - Increase start money depending on game level.
+**  - Enemy walk speed is now a randomized value. 
+**  - Map id information is added to webservice call.
+**  - Only scores above 20.000 points are send to webservice.
+**  - Store the best 100 entries in the local highscore.
 **  - Build game with devkitPPC r19 compiler.
 **
-**  27/12/2009 Version 0.70
+**  27-12-2009 Version 0.70
+**  GUI:
 **  - Added "Easy, Medium, Hard" level select screen.
 **  - Added six medium level and six hard level maps.
 **  - Added version information is webservice call.
+**  - BugFix: Highscore screens now show correct amount of entries!
+**  Core:
 **  - Adapted weapon specifications (Weapons are more powerfull).
 **  - Adapted enemy specifications (enemies are less powerfull).
 **  - Adapted six easy maps to be more easy. 
 **  - Increase enemy walk speed after each 20 waves. 
-**  - BugFix: Highscore screens now show correct amount of entries!
 **  - Build game with devkitPPC r19 compiler.
 **
-**  24/12/2009 Version 0.60
-**  - Increase enemy walk speed after each 25 waves. 
-**  - Show mini enemies moving on map select screen. 
+**  24-12-2009 Version 0.60
+**  GUI:
 **  - Update credit screen. 
 **  - Improve game information panel design.
-**  	- Show price and strengh information about new weapons.
-**		- Show detail information about selected weapon.
+**  - Show price and strengh information about new weapons.
+**	 - Show detail information about selected weapon.
+**  - Show mini enemies moving on map select screen.
+**  - Bugfix: Map six background images are now showed correct.
 **  - Snap weapons to 32x32 grid!
+**  Core:
+**  - Increase enemy walk speed after each 25 waves.  
 **  - Only allow to build weapons on land (not bridges or road)
 **  - Not allowed anymore to stack weapons on same place.
-**  - Optimise screen layout for 60Hz (640x480 pixels) TV Mode.
 **  - BugfiX: The rumble is now working for all the four WiiMotes. 
-**  - Bugfix: Map six background images are now showed correct.
 **  - Build game with devkitPPC r19 compiler.
 **  
-**  20/12/2009 Version 0.50
+**  20-12-2009 Version 0.50
 **  - First official release for the Wii Homebrew Scene.
 **  - Process most of the comments of the Beta testers.
-**  - Reduced amount of enemies in one wave.
+**  GUI:
 **  - Improve "Game Over" screen. 
 **  - Improve game information panel on screen. 
-**  - Increase user initials for 3 to 6 digits. 
 **  - Improve scroll bar button design.
+**  - Improve Help text.
+**  Core:
+**  - Reduced amount of enemies in one wave.
+**  - Increase user initials for 3 to 6 digits. 
 **  - Balance sound effect volume.
 **  - Improve weapons upgrade ranges.
-**  - Improve Help text.
 **  - Use GRRLib v4.2.0 as graphic engine.
 **  - Build game with devkitPPC r19 compiler.
 **
-**  18/12/2009 Version 0.45
-**  - First release for Beta testers.
-**  - GUI:
-**		- Added game map 4, 5 and 6.
-**  	- Show when weapon upgrade is not possible anymore!
-**  	- Added reload bar move weapon.
-**  	- Added remaining energy bar below the base.
-**  	- Rendering realtime grid examples on map select screen.
-**  	- Added help screen two and three.
-**  	- Added "Quit Game" screen. 
-**  	- Placing weapons under the information panel is not allowed anymore.
-**  	- Added today and global Highscore screen.
-**  	- Added release notes screen.
-**  	- Added dynamic weapon placement on the gameboard
-**  - General:
-**  	- Load map images (sprites) directly from SdCard.
-**  	- Improve objects cleanup when stopping game.
-**  	- Limit weapon upgrade levels. 
-**  	- Added WiiMote rumble support when pointer is on a button. 
-**  	- Improve button pointer detection area. 
-**  	- Added bonus cash (score) when wave is cleared
-**  - Added network thread:
-**  	- Fetch latest available version information from internet.
-**  	- Fetch latest release notes information from internet.
-**    - Fetch Global and today highscore from internet
-**  	- Added functionality to store game score on internet.
-**  	- Added Release Notes screen.
-**    - Added Google analistics network calls.
+**  18-12-2009 Version 0.45
+**  - Beta release for testers.
+**  GUI:
+**	 - Added game map 4, 5 and 6.
+**  - Show when weapon upgrade is not possible anymore!
+**  - Added reload bar move weapon.
+**  - Added remaining energy bar below the base.
+**  - Rendering realtime grid examples on map select screen.
+**  - Added help screen two and three.
+**  - Added "Quit Game" screen. 
+**  - Placing weapons under the information panel is not allowed anymore.
+**  - Added today and global Highscore screen.
+**  - Added release notes screen.
+**  - Added dynamic weapon placement on the gameboard
+**  - Added Release Notes screen.
+**  Core:
+**  - Load map images (sprites) directly from SdCard.
+**  - Improve objects cleanup when stopping game.
+**  - Limit weapon upgrade levels. 
+**  - Added WiiMote rumble support when pointer is on a button. 
+**  - Improve button pointer detection area. 
+**  - Added bonus cash (score) when wave is cleared
+**  - Fetch latest available version information from internet.
+**  - Fetch latest release notes information from internet.
+**  - Fetch Global and today highscore from internet
+**  - Added functionality to store game score on internet.
+**  - Added Google analistics network calls.
 **  - Build game with devkitPPC r19 compiler.
 **
-**  13/12/2009 Version 0.40
-**  - Added basic weapon fire graphic effect 
-**  - Added event engine.
+**  13-12-2009 Version 0.40
+**  GUI:
 **  - Added music & effect control screen.
-**  	- Added nigh tracks background music.
-**  	- Added game sound effects.
 **  - Added wave launch button on game board.
 **  - Added game information panel.
-**		- Added functionality to upgrade power, range and rate of weapon.
-**  - Added continues monster wave principle.
+**	 - Added functionality to upgrade power, range and rate of weapon.
 **  - Added Map Select menu screen.
-**  - Added Local highscore page.
-**		- Added functionality to load/save local highscore from/to SD card.
+**  - Added Local highscore screen.
 **  - Added User Initials screen.
-**		- Added functionality to load/save game settings from/to SD card.
 **  - Added Credits screen.
 **  - Added Help screen.
 **  - Improve main menu screen.
+**  Core:
+**  - Added basic weapon fire graphic effect 
+**  - Added event engine.
+**  - Added nigh tracks background music.
+**  - Added game sound effects.
+**  - Added continues monster wave principle.
+**	 - Added functionality to load/save local highscore from/to SD card
+**	 - Added functionality to load/save game settings from/to SD card.
 **  - Added functionality to make screenshots (Press + button).
 **  - Build game with devkitPPC r19 compiler.
 **
-**  06/12/2009 Version 0.30
+**  06-12-2009 Version 0.30
+**  GUI:
+**  - Added third game map.
+**  - Added water and bridge map component.
+**  - Added very basic main menu screen.
+**  Core:
 **  - Added gameOver detection
 **  - Improve memory usage (load classes dynamicly when needed)
 **  - Added functionality that weapons can fire.
 **  - Added more comment to source code.
 **  - Added state machine functionality
-**  - Added third game map.
-**  - Added water and bridge map component.
-**  - Added very basic main menu screen.
 **  - Align monster movement on grid.
 **  - Use libogc 1.8.1 library as Wii interface engine.
 **  - Build game with devkitPPC r19 compiler.
 **
-**  29/11/2009 Version 0.20
+**  29-11-2009 Version 0.20
 **  - Added four WiiMote controllers support
 **  - Added two game maps
 **  - Added functionality to load a map from a xml file.
@@ -193,7 +209,7 @@
 **  - Use libogc v1.8.0 library as Wii interface engine
 **  - Build game with devkitPPC r19 compiler.
 **
-**  21/11/2009 Version 0.10 
+**  21-11-2009 Version 0.10 
 **  - Started programming in C++.
 **  - Finding free graphics for game.
 **  - Setup basic directory structure for new project.
@@ -3253,7 +3269,7 @@ void drawScreen(void)
 			ypos+=10;
 			for (int i=0; i<6; i++)
 			{
-				ypos+=40;	  
+				ypos+=40;
 	
 				// Calculate frame of weapon animation
 				if (weaponSpecs->getImage(i)->h==32) 
@@ -3263,12 +3279,28 @@ void drawScreen(void)
 				}
 				else
 				{
-					if (game.frameDelay>5)
+					// Select correct frame;
+					switch (game.frameCounter)
 					{
-						game.frameCounter++;
-						if (game.frameCounter>64) game.frameCounter=0;
-						game.frame=game.frameCounter;
+						case 0:  game.frame=4+(16*0);
+									break;
+					 
+						case 1:  game.frame=4+(16*1);
+									break;
+					
+						case 2:  game.frame=4+(16*2);
+									break;
+						
+						case 3:  game.frame=4+(16*3);
+									break;
+					}
+					
+					// Check if next frame must be selected
+					if (game.frameDelay>7) 
+					{
 						game.frameDelay=0;
+						game.frameCounter++;
+						if (game.frameCounter>3) game.frameCounter=0;
 					}
 					else
 					{
@@ -3317,7 +3349,7 @@ void drawScreen(void)
 		case stateHelp4:
 	   {	  
 	      // Draw background
-			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR4 );
+			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 		 
 			// Draw buttons
 	      drawButtons(); 
@@ -3331,6 +3363,25 @@ void drawScreen(void)
 			ypos=120;
 			int xpos=90;
 		  	
+			// Draw some roads
+			GRRLIB_Rectangle(xpos, ypos, 32, 280, GRRLIB_GRAY, 1);
+			GRRLIB_Line(xpos+3, ypos, 110+3, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+5, ypos, 110+5, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+32-3, ypos, 110+32-3, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+32-5, ypos, 110+32-5, ypos+280, GRRLIB_WHITESMOKE);
+
+			GRRLIB_Rectangle(xpos+120, ypos, 32, 280, GRRLIB_GRAY, 1);
+			GRRLIB_Line(xpos+120+3, ypos, 310+3, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+120+5, ypos, 310+5, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+120+32-3, ypos, 310+32-3, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+120+32-5, ypos, 310+32-5, ypos+280, GRRLIB_WHITESMOKE);
+						
+			GRRLIB_Rectangle(xpos+240, ypos, 32, 280, GRRLIB_GRAY, 1);
+			GRRLIB_Line(xpos+240+3, ypos, 510+3, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+240+5, ypos, 510+5, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+240+32-3, ypos, 510+32-3, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+240+32-5, ypos, 510+32-5, ypos+280, GRRLIB_WHITESMOKE);
+			
 			for (int i=0; i<25; i++)
 			{
 				// Calculate frame of enemy animation
@@ -3341,7 +3392,7 @@ void drawScreen(void)
 				}
 				else
 				{
-					if (game.frameDelay==75)
+					if (game.frameDelay>74)
 					{
 						switch (game.frameCounter)
 						{

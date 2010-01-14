@@ -32,57 +32,57 @@
 	
 #define GUN_PRICE 				100
 #define RIFLE_PRICE 				200
-#define CANON_PRICE 				500
-#define MISSLE_PRICE 			1000
+#define CANNON_PRICE 			500
+#define MISSILE_PRICE 			1000
 #define LASER_PRICE 				4000
 #define NUKE_PRICE 				6000
 
 #define GUN_UPGRADE_PRICE  	10
 #define RIFLE_UPGRADE_PRICE 	25
-#define CANON_UPGRADE_PRICE 	50
+#define CANNON_UPGRADE_PRICE 	50
 #define LASER_UPGRADE_PRICE 	100
-#define MISSLE_UPGRADE_PRICE 	250
+#define MISSILE_UPGRADE_PRICE 250
 #define NUKE_UPGRADE_PRICE  	500
 
 #define GUN_MIN_POWER 			2
 #define RIFLE_MIN_POWER 		10
-#define CANON_MIN_POWER 		20
-#define MISSLE_MIN_POWER		30
-#define LASER_MIN_POWER 		40
+#define CANNON_MIN_POWER 		20
+#define MISSILE_MIN_POWER		40
+#define LASER_MIN_POWER 		60
 #define NUKE_MIN_POWER 			80
 
 #define GUN_STEP_POWER  		1
 #define RIFLE_STEP_POWER  		2
-#define CANON_STEP_POWER  		3
-#define MISSLE_STEP_POWER 		4
+#define CANNON_STEP_POWER  	3
+#define MISSILE_STEP_POWER 	4
 #define LASER_STEP_POWER 		8
 #define NUKE_STEP_POWER 		10	
 
 #define GUN_MIN_RANGE 			40
 #define RIFLE_MIN_RANGE 		45
-#define CANON_MIN_RANGE 		50
-#define MISSLE_MIN_RANGE 		55
+#define CANNON_MIN_RANGE 		50
+#define MISSILE_MIN_RANGE 		55
 #define LASER_MIN_RANGE 		60
 #define NUKE_MIN_RANGE 			65
 
 #define GUN_STEP_RANGE  		5
 #define RIFLE_STEP_RANGE  		5
-#define CANON_STEP_RANGE  		5
-#define MISSLE_STEP_RANGE 		5
-#define LASER_STEP_RANGE 		5
-#define NUKE_STEP_RANGE 		5
+#define CANNON_STEP_RANGE  	5
+#define MISSILE_STEP_RANGE 	6
+#define LASER_STEP_RANGE 		6
+#define NUKE_STEP_RANGE 		7
 
 #define GUN_MIN_RATE 			10
 #define RIFLE_MIN_RATE  		10
-#define CANON_MIN_RATE  		10
-#define MISSLE_MIN_RATE  		9
+#define CANNON_MIN_RATE  		10
+#define MISSILE_MIN_RATE  		9
 #define LASER_MIN_RATE  		8
 #define NUKE_MIN_RATE  			7
 
 #define GUN_STEP_RATE   		1
 #define RIFLE_STEP_RATE   		1
-#define CANON_STEP_RATE   		1
-#define MISSLE_STEP_RATE  		1
+#define CANNON_STEP_RATE   	1
+#define MISSILE_STEP_RATE  	1
 #define LASER_STEP_RATE  		1
 #define NUKE_STEP_RATE  		1
 
@@ -169,11 +169,22 @@ WeaponSpecs::WeaponSpecs()
 	GRRLIB_InitTileSet(weapon6, 32, 32, 0);
 	
 	weapon1a=GRRLIB_LoadTexture( pic506data );
+	GRRLIB_InitTileSet(weapon1a, 32, 32, 0);
+	
 	weapon2a=GRRLIB_LoadTexture( pic507data );
+	GRRLIB_InitTileSet(weapon2a, 32, 32, 0);
+	
 	weapon3a=GRRLIB_LoadTexture( pic508data );
+	GRRLIB_InitTileSet(weapon3a, 32, 32, 0);
+	
 	weapon4a=GRRLIB_LoadTexture( pic509data );
+	GRRLIB_InitTileSet(weapon4a, 32, 32, 0);
+	
 	weapon5a=GRRLIB_LoadTexture( pic510data );
+	GRRLIB_InitTileSet(weapon5a, 32, 32, 0);
+	
 	weapon6a=GRRLIB_LoadTexture( pic511data );
+	GRRLIB_InitTileSet(weapon6a, 32, 32, 0);
 	
 	resetCounter();
 		
@@ -232,7 +243,7 @@ void WeaponSpecs::resetCounter(void)
 // Getters
 // ------------------------------
 
-// Return Weapon Image per Type		
+// Return Weapon Image (with 16x4 frames) per Type		
 GRRLIB_texImg * WeaponSpecs::getImage(int type)
 {
 	switch (type)
@@ -245,11 +256,11 @@ GRRLIB_texImg * WeaponSpecs::getImage(int type)
 				 return weapon2;
 				 break;
 				
-		case 2:  // Canon
+		case 2:  // Cannon
 				 return weapon3;
 				 break;
 				
-		case 3:  // Missle
+		case 3:  // Missile
 				 return weapon4;
 				 break;
 				
@@ -263,7 +274,7 @@ GRRLIB_texImg * WeaponSpecs::getImage(int type)
 	}
 }
 
-// Return Weapon Image (32x32 pixels) per Type		
+// Return Weapon Image (1 frame) per Type		
 GRRLIB_texImg * WeaponSpecs::getImageSpecial(int type)
 {
 	switch (type)
@@ -276,11 +287,11 @@ GRRLIB_texImg * WeaponSpecs::getImageSpecial(int type)
 				 return weapon2a;
 				 break;
 				
-		case 2:  // Canon
+		case 2:  // Cannon
 				 return weapon3a;
 				 break;
 				
-		case 3:  // Missle
+		case 3:  // Missile
 				 return weapon4a;
 				 break;
 				
@@ -307,11 +318,11 @@ const char *WeaponSpecs::getName(int type)
 				 return "Rifle";
 				 break;
 				
-		case 2:  // Canon
+		case 2:  // Cannon
 				 return "Cannon";
 				 break;
 				
-		case 3:  // Missle
+		case 3:  // Missile
 				 return "Missile";
 				 break;
 				
@@ -339,12 +350,12 @@ int WeaponSpecs::getPrice(int type)
 				 return RIFLE_PRICE;
 				 break;
 				
-		case 2:  // Canon
-				 return CANON_PRICE;
+		case 2:  // Cannon
+				 return CANNON_PRICE;
 				 break;
 				
-		case 3:  // Missle
-				 return MISSLE_PRICE;
+		case 3:  // Missile
+				 return MISSILE_PRICE;
 				 break;
 				
 		case 4:  // Laser
@@ -370,12 +381,12 @@ int WeaponSpecs::getUpgradePrice(int type)
 				 return RIFLE_UPGRADE_PRICE;
 				 break;
 				
-		case 2:  // Canon
-				 return CANON_UPGRADE_PRICE;
+		case 2:  // Cannon
+				 return CANNON_UPGRADE_PRICE;
 				 break;
 				
-		case 3:  // Missle
-				 return MISSLE_UPGRADE_PRICE;
+		case 3:  // Missile
+				 return MISSILE_UPGRADE_PRICE;
 				 break;
 				
 		case 4:  // Laser
@@ -401,12 +412,12 @@ int WeaponSpecs::getMinPower(int type)
 				 return RIFLE_MIN_POWER;
 				 break;
 				
-		case 2:  // Canon
-				 return CANON_MIN_POWER;
+		case 2:  // Cannon
+				 return CANNON_MIN_POWER;
 				 break;
 				
-		case 3:  // Missle
-				 return MISSLE_MIN_POWER;
+		case 3:  // Missile
+				 return MISSILE_MIN_POWER;
 				 break;
 				
 		case 4:  // Laser
@@ -432,12 +443,12 @@ int WeaponSpecs::getMinRange(int type)
 				 return RIFLE_MIN_RANGE;
 				 break;
 				
-		case 2:  // Canon
-				 return CANON_MIN_RANGE;
+		case 2:  // Cannon
+				 return CANNON_MIN_RANGE;
 				 break;
 				
-		case 3:  // Missle
-				 return MISSLE_MIN_RANGE;
+		case 3:  // Missile
+				 return MISSILE_MIN_RANGE;
 				 break;
 				
 		case 4:  // Laser
@@ -463,12 +474,12 @@ int WeaponSpecs::getMinRate(int type)
 				 return RIFLE_MIN_RATE;
 				 break;
 				
-		case 2:  // Canon
-				 return CANON_MIN_RATE;
+		case 2:  // Cannon
+				 return CANNON_MIN_RATE;
 				 break;
 				
-		case 3:  // Missle
-				 return MISSLE_MIN_RATE;
+		case 3:  // Missile
+				 return MISSILE_MIN_RATE;
 				 break;
 				
 		case 4:  // Laser
@@ -494,12 +505,12 @@ int WeaponSpecs::getMaxPower(int type)
 				 return RIFLE_MIN_POWER+(RIFLE_STEP_POWER*UPGRADE_STEPS);
 				 break;
 				
-		case 2:  // Canon
-				 return CANON_MIN_POWER+(CANON_STEP_POWER*UPGRADE_STEPS);
+		case 2:  // Cannon
+				 return CANNON_MIN_POWER+(CANNON_STEP_POWER*UPGRADE_STEPS);
 				 break;
 				
-		case 3:  // Missle
-				 return MISSLE_MIN_POWER+(MISSLE_STEP_POWER*UPGRADE_STEPS);
+		case 3:  // Missile
+				 return MISSILE_MIN_POWER+(MISSILE_STEP_POWER*UPGRADE_STEPS);
 				 break;
 				
 		case 4:  // Laser
@@ -526,12 +537,12 @@ int WeaponSpecs::getMaxRange(int type)
 				 return RIFLE_MIN_RANGE+(RIFLE_STEP_RANGE*UPGRADE_STEPS);
 				 break;
 				
-		case 2:  // Canon
-				 return CANON_MIN_RANGE+(CANON_STEP_RANGE*UPGRADE_STEPS);
+		case 2:  // Cannon
+				 return CANNON_MIN_RANGE+(CANNON_STEP_RANGE*UPGRADE_STEPS);
 				 break;
 				
-		case 3:  // Missle
-				 return MISSLE_MIN_RANGE+(MISSLE_STEP_RANGE*UPGRADE_STEPS);
+		case 3:  // Missile
+				 return MISSILE_MIN_RANGE+(MISSILE_STEP_RANGE*UPGRADE_STEPS);
 				 break;
 				
 		case 4:  // Laser
@@ -557,12 +568,12 @@ int WeaponSpecs::getMaxRate(int type)
 				 return RIFLE_MIN_RATE-(GUN_STEP_RATE*UPGRADE_STEPS);
 				 break;
 				
-		case 2:  // Canon
-				 return CANON_MIN_RATE-(GUN_STEP_RATE*UPGRADE_STEPS);
+		case 2:  // Cannon
+				 return CANNON_MIN_RATE-(GUN_STEP_RATE*UPGRADE_STEPS);
 				 break;
 				
-		case 3:  // Missle
-				 return MISSLE_MIN_RATE-(GUN_STEP_RATE*UPGRADE_STEPS);
+		case 3:  // Missile
+				 return MISSILE_MIN_RATE-(GUN_STEP_RATE*UPGRADE_STEPS);
 				 break;
 				
 		case 4:  // Laser
@@ -587,12 +598,12 @@ int WeaponSpecs::getStepPower(int type)
 				 return RIFLE_STEP_POWER;
 				 break;
 				
-		case 2:  // Canon
-				 return CANON_STEP_POWER;
+		case 2:  // Cannon
+				 return CANNON_STEP_POWER;
 				 break;
 				
-		case 3:  // Missle
-				 return MISSLE_STEP_POWER;
+		case 3:  // Missile
+				 return MISSILE_STEP_POWER;
 				 break;
 				
 		case 4:  // Laser
@@ -617,12 +628,12 @@ int WeaponSpecs::getStepRange(int type)
 				 return RIFLE_STEP_RANGE;
 				 break;
 				
-		case 2:  // Canon
-				 return CANON_STEP_RANGE;
+		case 2:  // Cannon
+				 return CANNON_STEP_RANGE;
 				 break;
 				
-		case 3:  // Missle
-				 return MISSLE_STEP_RANGE;
+		case 3:  // Missile
+				 return MISSILE_STEP_RANGE;
 				 break;
 				
 		case 4:  // Laser
@@ -647,12 +658,12 @@ int WeaponSpecs::getStepRate(int type)
 				 return RIFLE_STEP_RATE;
 				 break;
 				
-		case 2:  // Canon
-				 return CANON_STEP_RATE;
+		case 2:  // Cannon
+				 return CANNON_STEP_RATE;
 				 break;
 				
-		case 3:  // Missle
-				 return MISSLE_STEP_RATE;
+		case 3:  // Missile
+				 return MISSILE_STEP_RATE;
 				 break;
 				
 		case 4:  // Laser
@@ -678,11 +689,11 @@ int WeaponSpecs::getCounter(int type)
 				 return ++rifleCounter;
 				 break;
 				
-		case 2:  // Canon
+		case 2:  // Cannon
 				 return ++canonCounter;
 				 break;
 				
-		case 3:  // Missle
+		case 3:  // Missile
 				 return ++missleCounter;
 				 break;
 				
