@@ -35,6 +35,7 @@
 extern Game  game; 
 extern Trace *trace;
 extern Sound *sound;
+extern Monster *monsters[MAX_MONSTERS];
 
 // ------------------------------
 // Constructor 
@@ -48,13 +49,10 @@ Weapon::Weapon()
    x=0;
    y=0;
    
-   height=0;
-   width=0;
-   
-   alfa=255;   
-   angle=0;
+	angle=0;
    targetAngle=0;
-   delay=0.0;
+   
+	delay=0.0;
    selected=false;
    index=0;
    
@@ -76,7 +74,7 @@ Weapon::Weapon()
 
    totalPrice=0;
 	
-	frameStep=0;
+	frame=0;
 	frameDelay=0;
       
    trace->event(s_fn,0,"leave");
@@ -96,30 +94,144 @@ Weapon::~Weapon()
    trace->event(s_fn,0,"leave");
 }
 
-int Weapon::getFrame()
+// ------------------------------
+// private methods
+// ------------------------------
+
+// Find monster in range with the highest energy level
+int Weapon::findMonster(void)
 {
-	if (height==32) 
+	const char *s_fn="Weapon::findMonster";
+ 
+   int id=-1;
+	int energy=0;
+	trace->event(s_fn,0,"enter");
+	
+	for (int i=0; i<MAX_MONSTERS; i++)
+	{			
+		if ((monsters[i]!=NULL) && (monsters[i]->getState()==stateEnemyMoving))
+		{
+			float distance= 
+				sqrt( ( (monsters[i]->getX()-(x*32)) * 
+							(monsters[i]->getX()-(x*32)) ) + 
+					   ( (monsters[i]->getY()-(y*32)) * 
+						  (monsters[i]->getY()-(y*32)) ) );
+			
+			if (distance<=range)
+			{			  		
+				if (energy < monsters[i]->getEnergy())
+				{
+					id=i;
+					energy=monsters[i]->getEnergy();
+					trace->event(s_fn,0,"Monster [%d] energy=%d in range", id, energy);
+				}
+			}
+		}
+	}
+	
+	trace->event(s_fn,0,"leave [id=%d]", id);
+	return id;
+}
+
+// Play fire sound 
+void Weapon::playFireSound(void)
+{
+	const char *s_fn="Weapon::playFireSound";
+	trace->event(s_fn,0,"enter");
+	
+	switch(type)
 	{
-		// No animation sprite available
+		case 0: 	// Gun
+					sound->effect(SOUND_GUN);	
+					break;
+			
+		case 1: 	// Rifle
+					sound->effect(SOUND_RIFLE);	
+					break;
+								
+		case 2: 	// Cannon
+					sound->effect(SOUND_CANON);	
+					break;
+					
+		case 3: 	// Missle
+					sound->effect(SOUND_MISSLE);	
+					break;
+								
+		case 4: 	// Laser
+					sound->effect(SOUND_LASER);	
+					break;
+								
+		default: // Nuck
+					sound->effect(SOUND_LASER);	
+					break;
+	}
+	trace->event(s_fn,0,"leave");
+}
+
+int Weapon::calculateAngle(int id)
+{
+   int angle;
+	if (monsters[id]!=NULL)
+	{
+		//int x1= monsters[id]->getX();
+		//int y1= monsters[id]->getY();
+		//int x2= x*32;
+		//int y2= y*32;
+		
+		// TODO: angle calculation
+		angle=4;
+	}
+	return angle;
+}
+
+// Get weapon sprite frame 
+int Weapon::getFrame()
+{	
+	if (image->h==32) 
+	{
+		// No animation sprite available, return direct;
 		return 0;
 	}
 		
-		
+	// Frame sequence available
 	if (frameDelay>2)
 	{
-		frameStep++;
-		if (frameStep>15) frameStep=0;
+		if (fireDelay>0)
+		{
+			// Fire sprite sequece 
+			switch (game.frameCounter)
+			{
+				case 0:  frame=15+angle;
+							game.frameCounter++;
+							break;
+					  
+				case 1:  frame=31+angle;
+							game.frameCounter++;
+							break;
+						
+				case 2:  frame=47+angle;
+							game.frameCounter++;
+							break;
+							
+				case 3:  frame=angle;
+							break;
+			}
+		}
+		else
+		{
+			frame=angle;
+		}
 		frameDelay=0;
 	}
 	else
 	{
 		frameDelay++;
 	}
-	return frameStep;
+	return frame;
 }
 
 // ------------------------------
-// Others
+// public methods
 // ------------------------------
 	
 void Weapon::draw()
@@ -144,10 +256,10 @@ void Weapon::draw()
 	GRRLIB_Rectangle((x*32)+5, (y*32)+28, 20, 4, GRRLIB_BLACK, 0);
 	GRRLIB_Rectangle((x*32)+6, (y*32)+29, proc, 2, GRRLIB_RED, 1);
 }
-
-void Weapon::fire(Monster *monsters[MAX_MONSTERS])
+				
+void Weapon::move(void)
 {
-   const char *s_fn="Weapon::fire";
+   const char *s_fn="Weapon::move";
 	
 	if (delay>0) 
 	{
@@ -155,83 +267,47 @@ void Weapon::fire(Monster *monsters[MAX_MONSTERS])
 	}
 	else
 	{
-		// fire
-		for (int i=0; i<MAX_MONSTERS; i++)
-		{			
-			if ((monsters[i]!=NULL) && (monsters[i]->getState()==stateEnemyMoving))
-			{
-				float distance= 
-					sqrt( ( (monsters[i]->getX()-(x*32)) * (monsters[i]->getX()-(x*32)) ) + 
-						   ( (monsters[i]->getY()-(y*32)) * (monsters[i]->getY()-(y*32)) ) );
-						  				
-				if (distance<range)
-				{					
-					// Store monster position were fired on!
-					monsterX=monsters[i]->getX();
-					monsterY=monsters[i]->getY();
-					fireDelay=15;
-					
-					switch(type)
-					{
-						case 0: // Gun
-								sound->effect(SOUND_GUN);	
-								break;
-			
-						case 1: // Rifle
-								sound->effect(SOUND_RIFLE);	
-								break;
-								
-						case 2: // Canon
-								sound->effect(SOUND_CANON);	
-								break;
-					
-						case 3: // Missle
-								sound->effect(SOUND_MISSLE);	
-								break;
-								
-						case 4: // Laser
-								sound->effect(SOUND_LASER);	
-								break;
-								
-						default: // Nuck
-								sound->effect(SOUND_LASER);	
-								break;
-					}
-								
-					int energy=monsters[i]->getEnergy();
-					if (energy<=power)
-					{
-						// Receive score and cash for shooting the monster
-						game.score+=energy;
-						game.cash+=energy;
+		// fire weapon, if enemy in range
+		int id=findMonster();
+		targetAngle=calculateAngle(id);
 		
-						// Monster is dead
-						trace->event(s_fn,0,"Monster %d is dying!", monsters[i]->getIndex());				
-						monsters[i]->setState(stateEnemyDying);
-						sound->effect(SOUND_DEAD);	
-					}
-					else
-					{
-						monsters[i]->setEnergy(energy-power);
+		if (id!=-1)
+		{					
+			// Target enemy found
 			
-						// Receive score and cash for shooting the monster
-						game.score+=power;
-						game.cash+=power;
-					}
-					
-					// Reset delay counter;
-					delay=rate;
-					break;
-				}
+			// Store enemy position for fired effect!
+			monsterX=monsters[id]->getX();
+			monsterY=monsters[id]->getY();
+			fireDelay=15;		
+			
+			// Play fire sound
+			playFireSound();
+								
+			int energy=monsters[id]->getEnergy();
+			if (energy<=power)
+			{
+				// Receive score and cash for shooting the monster
+				game.score+=energy;
+				game.cash+=energy;
+		
+				// Monster is dead
+				trace->event(s_fn,0,"Monster %d is dying!", monsters[id]->getIndex());				
+				monsters[id]->setState(stateEnemyDying);
+				sound->effect(SOUND_DEAD);	
 			}
+			else
+			{
+				monsters[id]->setEnergy(energy-power);
+			
+				// Receive score and cash for shooting the monster
+				game.score+=power;
+				game.cash+=power;
+			}
+					
+			// Reset delay counter;
+			delay=rate;
 		}
 	}
-}
-
-void Weapon::move(void)
-{  
-	angle++;
-	if (angle>MAX_ANGLE) angle=0;
 }
 
 int Weapon::upgradePower(void)
@@ -333,9 +409,6 @@ void Weapon::setY(int y1)
 void Weapon::setImage(GRRLIB_texImg *image1)
 {   
    image = image1;
-   
-   height=image->h;
-   width=image->w;
 }
 
 void Weapon::setPower(int power1)

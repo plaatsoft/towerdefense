@@ -33,6 +33,7 @@
 **  - Improve enemy animated sprite frame sequence.
 **  - Improve Help3, Help4 and level select screen.
 **  Core:
+**  - Weapon fires on strongest enemy in range.
 **  - Increase bonus money when wave is cleared.
 **  - Increase initial weapon power.
 **  - Added weapon sell functionality with minus button.
@@ -3365,23 +3366,30 @@ void drawScreen(void)
 		  	
 			// Draw some roads
 			GRRLIB_Rectangle(xpos, ypos, 32, 280, GRRLIB_GRAY, 1);
-			GRRLIB_Line(xpos+3, ypos, 110+3, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+5, ypos, 110+5, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+32-3, ypos, 110+32-3, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+32-5, ypos, 110+32-5, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+3, ypos, xpos+3, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+5, ypos, xpos+5, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+32-3, ypos, xpos+32-3, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+32-5, ypos, xpos+32-5, ypos+280, GRRLIB_WHITESMOKE);
 
 			GRRLIB_Rectangle(xpos+120, ypos, 32, 280, GRRLIB_GRAY, 1);
-			GRRLIB_Line(xpos+120+3, ypos, 310+3, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+120+5, ypos, 310+5, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+120+32-3, ypos, 310+32-3, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+120+32-5, ypos, 310+32-5, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+120+3, ypos, xpos+120+3, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+120+5, ypos, xpos+120+5, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+120+32-3, ypos, xpos+120+32-3, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+120+32-5, ypos, xpos+120+32-5, ypos+280, GRRLIB_WHITESMOKE);
 						
-			GRRLIB_Rectangle(xpos+240, ypos, 32, 280, GRRLIB_GRAY, 1);
-			GRRLIB_Line(xpos+240+3, ypos, 510+3, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+240+5, ypos, 510+5, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+240+32-3, ypos, 510+32-3, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+240+32-5, ypos, 510+32-5, ypos+280, GRRLIB_WHITESMOKE);
-			
+			GRRLIB_Rectangle(xpos+240, ypos,32, 280, GRRLIB_GRAY, 1);
+			GRRLIB_Line(xpos+240+3, ypos, xpos+240+3, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+240+5, ypos, xpos+240+5, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+240+32-3, ypos, xpos+240+32-3, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+240+32-5, ypos, xpos+240+32-5, ypos+280, GRRLIB_WHITESMOKE);
+		
+			GRRLIB_Rectangle(xpos+360, ypos,32, 280, GRRLIB_GRAY, 1);
+			GRRLIB_Line(xpos+360+3, ypos, xpos+360+3, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+360+5, ypos, xpos+360+5, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+360+32-3, ypos, xpos+360+32-3, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+360+32-5, ypos, xpos+360+32-5, ypos+280, GRRLIB_WHITESMOKE);
+		
+	
 			for (int i=0; i<25; i++)
 			{
 				// Calculate frame of enemy animation
@@ -3881,8 +3889,7 @@ void moveWeapons(void)
 	{
 		if (weapons[i]!=NULL)
 		{
-			//weapons[i]->move();
-			weapons[i]->fire(monsters);
+			weapons[i]->move();
 		}
 	}
 }
