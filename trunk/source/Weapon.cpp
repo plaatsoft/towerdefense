@@ -49,8 +49,7 @@ Weapon::Weapon()
    x=0;
    y=0;
    
-	angle=0;
-   targetAngle=0;
+	angle=6;
    
 	delay=0.0;
    selected=false;
@@ -168,18 +167,91 @@ void Weapon::playFireSound(void)
 	trace->event(s_fn,0,"leave");
 }
 
+
 int Weapon::calculateAngle(int id)
 {
-   int angle;
 	if (monsters[id]!=NULL)
 	{
-		//int x1= monsters[id]->getX();
-		//int y1= monsters[id]->getY();
-		//int x2= x*32;
-		//int y2= y*32;
+		int x1= monsters[id]->getX();
+		int y1= monsters[id]->getY();
+		int x2= x*32;
+		int y2= y*32;
 		
-		// TODO: angle calculation
-		angle=4;
+		double a_x = x2 - x1;
+		double a_y = y2 - y1;
+
+		double b_x = 1.0;
+		double b_y = 0.0;
+
+		double angle1 = atan2(a_x,a_y);
+		//double angle1 = acos((a_x*b_x+a_y*b_y)/sqrt(a_x*a_x+a_y*a_y));
+		int angle2 = ( 2* angle1 * 180 ) / 3.14159265F;
+		
+		if ((angle2>0) && (angle2<=22))
+		{
+			angle=8;
+		}
+		if ((angle2>22) && (angle2<=44))
+		{
+			angle=7;
+		}
+		if ((angle2>44) && (angle2<=66))
+		{
+			angle=6;
+		}
+		if ((angle2>66) && (angle2<=88))
+		{
+			angle=5;
+		}
+		if ((angle2>88) && (angle2<=110))
+		{
+			angle=4;
+		}
+		if ((angle2>110) && (angle2<=136))
+		{
+			angle=3;
+		}
+		if ((angle2>137) && (angle2<=154))
+		{
+			angle=2;
+		}
+		if ((angle2>154) && (angle2<=176))
+		{
+			angle=1;
+		}
+		if ((angle2>176) && (angle2<=198))
+		{
+			angle=0;
+		}
+		if ((angle2>198) && (angle2<=220))
+		{
+			angle=15;
+		}
+		if ((angle2>220) && (angle2<=242))
+		{
+			angle=14;
+		}
+		if ((angle2>242) && (angle2<=264))
+		{
+			angle=13;
+		}
+		if ((angle2>264) && (angle2<=286))
+		{
+			angle=12;
+		}
+		if ((angle2>286) && (angle2<=308))
+		{
+			angle=11;
+		}
+		if ((angle2>308) && (angle2<=330))
+		{
+			angle=10;
+		}
+		if ((angle2>330) && (angle2<=360))
+		{
+			angle=9;
+		}
+		
 	}
 	return angle;
 }
@@ -269,16 +341,17 @@ void Weapon::move(void)
 	{
 		// fire weapon, if enemy in range
 		int id=findMonster();
-		targetAngle=calculateAngle(id);
 		
 		if (id!=-1)
 		{					
 			// Target enemy found
+			calculateAngle(id);
 			
 			// Store enemy position for fired effect!
 			monsterX=monsters[id]->getX();
 			monsterY=monsters[id]->getY();
 			fireDelay=15;		
+			game.frameCounter=0;
 			
 			// Play fire sound
 			playFireSound();
