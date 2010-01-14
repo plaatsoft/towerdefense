@@ -32,13 +32,11 @@ class Weapon
   private:
 	int   x;
 	int   y;	
-	int   alfa;
 	float size;
 	int   angle;
 	int   targetAngle;
+	
 	GRRLIB_texImg *image;
-	int   height;
-	int   width;
 	float delay;
 	int   index;
 	int   type;
@@ -67,18 +65,23 @@ class Weapon
 	int rangeStep;
 	int rateStep;
 
-	int frameStep;
+	int frame;
 	int frameDelay;
-	int getFrame();
+	
+	// private methodes
+	int  findMonster(void);
+	void playFireSound(void);
+	int  getFrame(void);
+	int  calculateAngle(int id);
 	
   public:
   	// Constructor & Destructor
 	Weapon();
  	~Weapon();
 
-	// Methodes
-	void draw();
-	void fire(Monster *monsters[MAX_MONSTERS]);
+	// public methodes
+	void draw(void);
+	void fire(void);
 	void move(void);
 	bool onSelect(int x, int y);
 	
