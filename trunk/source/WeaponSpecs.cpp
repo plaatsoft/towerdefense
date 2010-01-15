@@ -34,8 +34,8 @@
 #define RIFLE_PRICE 				200
 #define CANNON_PRICE 			500
 #define MISSILE_PRICE 			1000
-#define LASER_PRICE 				4000
-#define NUKE_PRICE 				6000
+#define LASER_PRICE 				2000  // 4000
+#define NUKE_PRICE 				4000  // 6000
 
 #define GUN_UPGRADE_PRICE  	10
 #define RIFLE_UPGRADE_PRICE 	25
@@ -231,8 +231,8 @@ void WeaponSpecs::resetCounter(void)
 	
 	gunCounter=0;
 	rifleCounter=0;
-	canonCounter=0;
-	missleCounter=0;
+	cannonCounter=0;
+	missileCounter=0;
 	laserCounter=0;
 	nukeCounter=0;
 	
@@ -336,7 +336,6 @@ const char *WeaponSpecs::getName(int type)
 	}
 }
 
-
 // Return Weapon price per type
 int WeaponSpecs::getPrice(int type)
 {
@@ -368,7 +367,7 @@ int WeaponSpecs::getPrice(int type)
 	}
 }
 
-
+// Get Upgrade Price
 int WeaponSpecs::getUpgradePrice(int type)
 {
 	switch (type)
@@ -586,6 +585,7 @@ int WeaponSpecs::getMaxRate(int type)
 	}
 }
 
+// Get Power Step
 int WeaponSpecs::getStepPower(int type)
 {
 	switch (type)
@@ -616,6 +616,7 @@ int WeaponSpecs::getStepPower(int type)
 	}
 }
 
+// Get Range Step
 int WeaponSpecs::getStepRange(int type)
 {
 	switch (type)
@@ -646,6 +647,7 @@ int WeaponSpecs::getStepRange(int type)
 	}
 }
 
+// Get rate step
 int WeaponSpecs::getStepRate(int type)
 {
 	switch (type)
@@ -676,7 +678,7 @@ int WeaponSpecs::getStepRate(int type)
 	}
 }
 
-
+// Get counter
 int WeaponSpecs::getCounter(int type)
 {
 	switch (type)
@@ -690,11 +692,11 @@ int WeaponSpecs::getCounter(int type)
 				 break;
 				
 		case 2:  // Cannon
-				 return ++canonCounter;
+				 return ++cannonCounter;
 				 break;
 				
 		case 3:  // Missile
-				 return ++missleCounter;
+				 return ++missileCounter;
 				 break;
 				
 		case 4:  // Laser

@@ -19,6 +19,7 @@
 */
  
 #include <mxml.h>
+#include <ogc/conf.h>
 
 #include "General.h"
 #include "Settings.h"
@@ -41,8 +42,27 @@ Settings::Settings()
    fourthChar='A';
    fifthChar='A';
    sixthChar='A';
-	
-	//CONF_GetNickName;
+
+   char ValidNick[] = "AAAAAA"; // 6 characters + the trailing NULL (game limit)
+   unsigned char NickName[22];  // Name stored on the Wii, size is 0x16 bytes
+   CONF_GetNickName(NickName);
+   char *UpperCaseNick = strupr((char *)NickName); // Convert to uppercase (game limit)
+ 
+   unsigned char c, d;
+   for(c=0, d=0; c<sizeof(ValidNick)-1; d++) {
+      if((UpperCaseNick[d] >= 0x41 && UpperCaseNick[d] <= 0x5A) ||
+         (UpperCaseNick[d] >= 0x30 && UpperCaseNick[d] <= 0x39)) {
+         // Accept only chars used in the font (uppercase letters + numbers)
+         ValidNick[c++] = UpperCaseNick[d];
+      }
+   }
+
+   firstChar=ValidNick[0];
+   secondChar=ValidNick[1];
+   thirdChar=ValidNick[2]; 
+   fourthChar=ValidNick[3];
+   fifthChar=ValidNick[4];
+   sixthChar=ValidNick[5];
 	
    musicVolume = 5;
    effectVolume = 9;

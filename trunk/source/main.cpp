@@ -21,22 +21,21 @@
 **  ==============
 **
 **  WISHLIST:
-**  - Improve weapon graphics including fire effect.
-**  - Improve base graphics
 **  - Multi language support.
 **  - Dragable game info panels.
-**  - Point weapon to enemy.
 **  
-**  14-01-2010 Version 0.92
+**  15-01-2010 Version 0.92
 **  GUI:
 **  - Added 5 animated weapons. Thanks Applicant!
 **  - Improve enemy animated sprite frame sequence.
-**  - Improve Help3, Help4 and level select screen.
+**  - Improve help and level select screens.
 **  Core:
-**  - Weapon now fires on strongest enemy in range.
+**  - Weapons now fire on strongest enemy in range.
 **  - Increase bonus money when wave is cleared.
 **  - Increase initial weapon power.
+**  - Decrease weapon prices.
 **  - Added weapon sell functionality with minus button.
+**  - User initials are now default based on Wii nickname.
 **  - Bugfix: Monsters can not be shooted before launch.
 **  - Build game with devkitPPC r19 compiler.
 **
@@ -46,7 +45,7 @@
 **  - Added game setting screen.
 **  - Added intro screen 3.
 **  - Improve winter theme sprites.
-**  - Improve first help screen.
+**  - Improve help screens.
 **  - Improve main menu screen.
 **  - Lots of other small GUI changes.
 **  Core:
@@ -79,7 +78,7 @@
 **  - Optimised enemy images.
 **  Core:
 **  - Adapt game parameters to make game play better.
-**	 - Increase start money depending on game level.
+**  - Increase start money depending on game level.
 **  - Enemy walk speed is now a randomized value. 
 **  - Map id information is added to webservice call.
 **  - Only scores above 20.000 points are send to webservice.
@@ -134,7 +133,7 @@
 **  18-12-2009 Version 0.45
 **  - Beta release for testers.
 **  GUI:
-**	 - Added game map 4, 5 and 6.
+**  - Added game map 4, 5 and 6.
 **  - Show when weapon upgrade is not possible anymore!
 **  - Added reload bar move weapon.
 **  - Added remaining energy bar below the base.
@@ -199,8 +198,12 @@
 **  - Build game with devkitPPC r19 compiler.
 **
 **  29-11-2009 Version 0.20
+**  GUI:
+**  - Created intro screen.
+**  - Created main menu screen.
+**  - Created two game maps.
+**  Core:
 **  - Added four WiiMote controllers support
-**  - Added two game maps
 **  - Added functionality to load a map from a xml file.
 **  - Ported my GRRLIB freeType extention to work with GRRLIB 4.1.1
 **  - Ported trace library from c to C++
@@ -211,6 +214,7 @@
 **  - Build game with devkitPPC r19 compiler.
 **
 **  21-11-2009 Version 0.10 
+**  Core:
 **  - Started programming in C++.
 **  - Finding free graphics for game.
 **  - Setup basic directory structure for new project.
