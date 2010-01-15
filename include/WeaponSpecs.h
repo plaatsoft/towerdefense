@@ -44,8 +44,8 @@ class WeaponSpecs
 	// Weapon build counter;
 	int gunCounter;
 	int rifleCounter;
-	int canonCounter;
-	int missleCounter;
+	int cannonCounter;
+	int missileCounter;
 	int laserCounter;
 	int nukeCounter;
 	
@@ -59,10 +59,10 @@ class WeaponSpecs
 		
 	// Getters
 	
-	// Return Weapon Image (16x4 animation of 32x32 pixels)
+	// Return Weapon Image (16x4 sprites)
 	GRRLIB_texImg * getImage(int type);
 	
-	// Return Weapon Image (32x32 pixels) per Type		
+	// Return Weapon Image (1 sprite) 		
 	GRRLIB_texImg * getImageSpecial(int type);
 
 	const char *getName(int type);

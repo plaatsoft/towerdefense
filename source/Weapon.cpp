@@ -152,7 +152,7 @@ void Weapon::playFireSound(void)
 					sound->effect(SOUND_CANON);	
 					break;
 					
-		case 3: 	// Missle
+		case 3: 	// Missile
 					sound->effect(SOUND_MISSLE);	
 					break;
 								
@@ -171,89 +171,91 @@ void Weapon::playFireSound(void)
 // and selected correct weapon sprite frame.
 int Weapon::calculateAngle(int id)
 {
+	const char *s_fn="Weapon::calculateAngle";
+
+	trace->event(s_fn,0,"enter [%d]", id);
 	if (monsters[id]!=NULL)
 	{
 		int x1= (x*32)+16;
 		int y1= (y*32)+16;
+		trace->event(s_fn,0,"Weapon x=%d y=%d", x1, y1);
 		int x2= monsters[id]->getX()+16;
 		int y2= monsters[id]->getY()+16;
+		trace->event(s_fn,0,"Enemy x=%d y=%d", x2, y2);
 		
-		double a_x = x2 - x1;
-		double a_y = y2 - y1;
-
-		//double b_x = 1.0;
-		//double b_y = 0.0;
-
-		double angle1 = atan2(a_x,a_y);
-		//double angle1 = acos((a_x*b_x+a_y*b_y)/sqrt(a_x*a_x+a_y*a_y));
-		int angle2 = ( 2* angle1 * 180 ) / 3.14159265F;
-		
+		double angle1 = atan2((y2 - y1),(x2 - x1));
+		int angle2 = round(( angle1 * 180.0 ) / M_PI);
+		if (angle2<0) angle2=360+angle2;
+		angle2=360-angle2;
+		trace->event(s_fn,0,"Angle=%d", angle2);
+	
 		if  ( ((angle2>350) && (angle2<=360)) ||
 			   ((angle2>0) && (angle2<=12)) ) 
 		{
-			angle=8;
-		}
-		if ((angle2>12) && (angle2<=34))
+			angle=4; 
+		} 
+		else if ((angle2>12) && (angle2<=34))
 		{
-			angle=7;
+			angle=5; 
 		}
-		if ((angle2>34) && (angle2<=56))
+		else if ((angle2>34) && (angle2<=56))
 		{
 			angle=6;
 		}
-		if ((angle2>56) && (angle2<=78))
+		else if ((angle2>56) && (angle2<=78))
 		{
-			angle=5;
+			angle=7;
 		}
-		if ((angle2>78) && (angle2<=100))
+		else if ((angle2>78) && (angle2<=100))
 		{
-			angle=4;
+			angle=8;
 		}
-		if ((angle2>100) && (angle2<=126))
-		{
-			angle=3;
-		}
-		if ((angle2>127) && (angle2<=144))
-		{
-			angle=2;
-		}
-		if ((angle2>144) && (angle2<=166))
-		{
-			angle=1;
-		}
-		if ((angle2>166) && (angle2<=188))
-		{
-			angle=0;
-		}
-		if ((angle2>188) && (angle2<=210))
-		{
-			angle=15;
-		}
-		if ((angle2>210) && (angle2<=232))
-		{
-			angle=14;
-		}
-		if ((angle2>232) && (angle2<=254))
-		{
-			angle=13;
-		}
-		if ((angle2>254) && (angle2<=276))
-		{
-			angle=12;
-		}
-		if ((angle2>276) && (angle2<=298))
-		{
-			angle=11;
-		}
-		if ((angle2>298) && (angle2<=320))
-		{
-			angle=10;
-		}
-		if ((angle2>320) && (angle2<=350))
+		else if ((angle2>100) && (angle2<=122))
 		{
 			angle=9;
 		}
+		else if ((angle2>122) && (angle2<=144))
+		{
+			angle=10;
+		}
+		else if ((angle2>144) && (angle2<=166))
+		{
+			angle=11;
+		}
+		else if ((angle2>166) && (angle2<=188))
+		{
+			angle=12;
+		}
+		else if ((angle2>188) && (angle2<=210))
+		{
+			angle=13;
+		}
+		else if ((angle2>210) && (angle2<=232))
+		{
+			angle=14;
+		}
+		else if ((angle2>232) && (angle2<=254))
+		{
+			angle=15;
+		}
+		else if ((angle2>254) && (angle2<=276))
+		{
+			angle=0;
+		}
+		else if ((angle2>276) && (angle2<=298))
+		{
+			angle=1;
+		}
+		else if ((angle2>298) && (angle2<=320))
+		{
+			angle=2;
+		}
+		else if ((angle2>320) && (angle2<=350))
+		{
+			angle=3;
+		}
 	}
+	trace->event(s_fn,0,"leave [angle=%d]", angle);
 	return angle;
 }
 
