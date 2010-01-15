@@ -29,11 +29,11 @@
 **  
 **  14-01-2010 Version 0.92
 **  GUI:
-**  - Added 3 animated weapons. Thanks Applicant!
+**  - Added 5 animated weapons. Thanks Applicant!
 **  - Improve enemy animated sprite frame sequence.
 **  - Improve Help3, Help4 and level select screen.
 **  Core:
-**  - Weapon fires on strongest enemy in range.
+**  - Weapon now fires on strongest enemy in range.
 **  - Increase bonus money when wave is cleared.
 **  - Increase initial weapon power.
 **  - Added weapon sell functionality with minus button.

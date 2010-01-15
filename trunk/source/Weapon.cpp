@@ -49,7 +49,7 @@ Weapon::Weapon()
    x=0;
    y=0;
    
-	angle=6;
+	angle=4;
    
 	delay=0.0;
    selected=false;
@@ -167,91 +167,92 @@ void Weapon::playFireSound(void)
 	trace->event(s_fn,0,"leave");
 }
 
-
+// Calculate angle between weapon and enemies 
+// and selected correct weapon sprite frame.
 int Weapon::calculateAngle(int id)
 {
 	if (monsters[id]!=NULL)
 	{
-		int x1= monsters[id]->getX();
-		int y1= monsters[id]->getY();
-		int x2= x*32;
-		int y2= y*32;
+		int x1= (x*32)+16;
+		int y1= (y*32)+16;
+		int x2= monsters[id]->getX()+16;
+		int y2= monsters[id]->getY()+16;
 		
 		double a_x = x2 - x1;
 		double a_y = y2 - y1;
 
-		double b_x = 1.0;
-		double b_y = 0.0;
+		//double b_x = 1.0;
+		//double b_y = 0.0;
 
 		double angle1 = atan2(a_x,a_y);
 		//double angle1 = acos((a_x*b_x+a_y*b_y)/sqrt(a_x*a_x+a_y*a_y));
 		int angle2 = ( 2* angle1 * 180 ) / 3.14159265F;
 		
-		if ((angle2>0) && (angle2<=22))
+		if  ( ((angle2>350) && (angle2<=360)) ||
+			   ((angle2>0) && (angle2<=12)) ) 
 		{
 			angle=8;
 		}
-		if ((angle2>22) && (angle2<=44))
+		if ((angle2>12) && (angle2<=34))
 		{
 			angle=7;
 		}
-		if ((angle2>44) && (angle2<=66))
+		if ((angle2>34) && (angle2<=56))
 		{
 			angle=6;
 		}
-		if ((angle2>66) && (angle2<=88))
+		if ((angle2>56) && (angle2<=78))
 		{
 			angle=5;
 		}
-		if ((angle2>88) && (angle2<=110))
+		if ((angle2>78) && (angle2<=100))
 		{
 			angle=4;
 		}
-		if ((angle2>110) && (angle2<=136))
+		if ((angle2>100) && (angle2<=126))
 		{
 			angle=3;
 		}
-		if ((angle2>137) && (angle2<=154))
+		if ((angle2>127) && (angle2<=144))
 		{
 			angle=2;
 		}
-		if ((angle2>154) && (angle2<=176))
+		if ((angle2>144) && (angle2<=166))
 		{
 			angle=1;
 		}
-		if ((angle2>176) && (angle2<=198))
+		if ((angle2>166) && (angle2<=188))
 		{
 			angle=0;
 		}
-		if ((angle2>198) && (angle2<=220))
+		if ((angle2>188) && (angle2<=210))
 		{
 			angle=15;
 		}
-		if ((angle2>220) && (angle2<=242))
+		if ((angle2>210) && (angle2<=232))
 		{
 			angle=14;
 		}
-		if ((angle2>242) && (angle2<=264))
+		if ((angle2>232) && (angle2<=254))
 		{
 			angle=13;
 		}
-		if ((angle2>264) && (angle2<=286))
+		if ((angle2>254) && (angle2<=276))
 		{
 			angle=12;
 		}
-		if ((angle2>286) && (angle2<=308))
+		if ((angle2>276) && (angle2<=298))
 		{
 			angle=11;
 		}
-		if ((angle2>308) && (angle2<=330))
+		if ((angle2>298) && (angle2<=320))
 		{
 			angle=10;
 		}
-		if ((angle2>330) && (angle2<=360))
+		if ((angle2>320) && (angle2<=350))
 		{
 			angle=9;
 		}
-		
 	}
 	return angle;
 }
@@ -266,26 +267,30 @@ int Weapon::getFrame()
 	}
 		
 	// Frame sequence available
-	if (frameDelay>2)
+	if (frameDelay>3)
 	{
 		if (fireDelay>0)
 		{
 			// Fire sprite sequece 
 			switch (game.frameCounter)
 			{
-				case 0:  frame=15+angle;
+				case 0:  // prepare fire sprite
+							frame=15+angle;
 							game.frameCounter++;
 							break;
 					  
-				case 1:  frame=31+angle;
+				case 1:  // fire 1 sprite
+							frame=31+angle;
 							game.frameCounter++;
 							break;
 						
-				case 2:  frame=47+angle;
+				case 2:  // fire 2 sprite
+							frame=47+angle;
 							game.frameCounter++;
 							break;
 							
-				case 3:  frame=angle;
+				case 3:  // idle sprite
+							frame=angle;
 							break;
 			}
 		}
