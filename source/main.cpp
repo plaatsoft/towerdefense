@@ -24,11 +24,12 @@
 **  - Multi language support.
 **  - Dragable game info panels.
 **  
-**  15-01-2010 Version 0.92
+**  16-01-2010 Version 0.92
 **  GUI:
-**  - Added 5 animated weapons. Thanks Applicant!
+**  - Added 6 animated weapons. Thanks Applicant!
 **  - Improve enemy animated sprite frame sequence.
 **  - Improve help and level select screens.
+**  - Lots of other small changes.
 **  Core:
 **  - Weapons now fire on strongest enemy in range.
 **  - Increase bonus money when wave is cleared.
@@ -47,7 +48,7 @@
 **  - Improve winter theme sprites.
 **  - Improve help screens.
 **  - Improve main menu screen.
-**  - Lots of other small GUI changes.
+**  - Lots of other small changes.
 **  Core:
 **  - Less start money.
 **  - Enemy minimum / maximum speed depend on wave nr.
@@ -2623,7 +2624,10 @@ void drawScreen(void)
 			}
 			else
 			{
-				if (game.frameDelay==5)
+				game.frame=2;
+				
+				// Animated 
+				/*if (game.frameDelay==5)
 				{
 					switch (game.frameCounter)
 					{
@@ -2648,7 +2652,7 @@ void drawScreen(void)
 				else
 				{
 					game.frameDelay++;
-				}
+				}*/
 			}
 			
 			// Draw	some enemies
@@ -3203,8 +3207,12 @@ void drawScreen(void)
 
 			ypos+=25;	  
 			drawText(60+xoffset, ypos, fontParagraph, "B");
-			drawText(180+xoffset, ypos, fontParagraph, "Build new weapon" ); 
+			drawText(180+xoffset, ypos, fontParagraph, "Buy new weapon" ); 
 
+			ypos+=25;	  
+			drawText(60+xoffset, ypos, fontParagraph, "-");
+			drawText(180+xoffset, ypos, fontParagraph, "Sell selected weapon" ); 
+			
 			ypos+=25;	  
 			drawText(60+xoffset, ypos, fontParagraph, "<");
 			drawText(180+xoffset, ypos, fontParagraph, "Select previous weapon type" ); 
@@ -3224,10 +3232,6 @@ void drawScreen(void)
 			ypos+=25;	  
 			drawText(60+xoffset, ypos, fontParagraph, "+");
 			drawText(180+xoffset, ypos, fontParagraph, "Make screenshot" ); 		
-
-			ypos+=25;	  
-			drawText(60+xoffset, ypos, fontParagraph, "-");
-			drawText(180+xoffset, ypos, fontParagraph, "Sell selected weapon" ); 	
 			
 			ypos+=25;	  
 			drawText(60+xoffset, ypos, fontParagraph, "Home");
@@ -3301,7 +3305,7 @@ void drawScreen(void)
 					}
 					
 					// Check if next frame must be selected
-					if (game.frameDelay>7) 
+					if (game.frameDelay>14) 
 					{
 						game.frameDelay=0;
 						game.frameCounter++;
@@ -3354,7 +3358,7 @@ void drawScreen(void)
 		case stateHelp4:
 	   {	  
 	      // Draw background
-			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
+			GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR4 );
 		 
 			// Draw buttons
 	      drawButtons(); 
@@ -3369,7 +3373,7 @@ void drawScreen(void)
 			int xpos=90;
 		  	
 			// Draw some roads
-			GRRLIB_Rectangle(xpos, ypos, 32, 280, GRRLIB_GRAY, 1);
+			/*GRRLIB_Rectangle(xpos, ypos, 32, 280, GRRLIB_GRAY, 1);
 			GRRLIB_Line(xpos+3, ypos, xpos+3, ypos+280, GRRLIB_WHITESMOKE);
 			GRRLIB_Line(xpos+5, ypos, xpos+5, ypos+280, GRRLIB_WHITESMOKE);
 			GRRLIB_Line(xpos+32-3, ypos, xpos+32-3, ypos+280, GRRLIB_WHITESMOKE);
@@ -3391,7 +3395,7 @@ void drawScreen(void)
 			GRRLIB_Line(xpos+360+3, ypos, xpos+360+3, ypos+280, GRRLIB_WHITESMOKE);
 			GRRLIB_Line(xpos+360+5, ypos, xpos+360+5, ypos+280, GRRLIB_WHITESMOKE);
 			GRRLIB_Line(xpos+360+32-3, ypos, xpos+360+32-3, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+360+32-5, ypos, xpos+360+32-5, ypos+280, GRRLIB_WHITESMOKE);
+			GRRLIB_Line(xpos+360+32-5, ypos, xpos+360+32-5, ypos+280, GRRLIB_WHITESMOKE);*/
 		
 	
 			for (int i=0; i<25; i++)
@@ -4215,8 +4219,8 @@ void processEvent()
 				}
 				
 				// Get Bonus score and Bonus cash
-				game.score+=(game.wave*250);
-				game.cash+=(game.wave*250);
+				game.score+=(game.wave*225); // 200
+				game.cash+=(game.wave*225); // 200
 
 				// Show WAVE text on screen
 				game.alfa=MAX_ALFA;
