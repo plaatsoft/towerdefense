@@ -36,20 +36,13 @@ Settings::Settings()
    const char *s_fn="Settings::Settings";
    trace->event(s_fn,0,"enter");
    
-   firstChar='A';
-   secondChar='A';
-   thirdChar='A'; 
-   fourthChar='A';
-   fifthChar='A';
-   sixthChar='A';
-
    char ValidNick[] = "AAAAAA"; // 6 characters + the trailing NULL (game limit)
    unsigned char NickName[22];  // Name stored on the Wii, size is 0x16 bytes
    CONF_GetNickName(NickName);
    char *UpperCaseNick = strupr((char *)NickName); // Convert to uppercase (game limit)
  
    unsigned char c, d;
-   for(c=0, d=0; c<sizeof(ValidNick)-1; d++) {
+   for(c=0, d=0; c<sizeof(ValidNick)-1 && d<sizeof(NickName)-1; d++) {
       if((UpperCaseNick[d] >= 0x41 && UpperCaseNick[d] <= 0x5A) ||
          (UpperCaseNick[d] >= 0x30 && UpperCaseNick[d] <= 0x39)) {
          // Accept only chars used in the font (uppercase letters + numbers)

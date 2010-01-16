@@ -34,15 +34,15 @@
 #define RIFLE_PRICE 				200
 #define CANNON_PRICE 			500
 #define MISSILE_PRICE 			1000
-#define LASER_PRICE 				2000  // 4000
-#define NUKE_PRICE 				4000  // 6000
+#define LASER_PRICE 				3000  // 4000
+#define NUKE_PRICE 				5000  // 6000
 
 #define GUN_UPGRADE_PRICE  	10
 #define RIFLE_UPGRADE_PRICE 	25
 #define CANNON_UPGRADE_PRICE 	50
-#define LASER_UPGRADE_PRICE 	100
-#define MISSILE_UPGRADE_PRICE 250
-#define NUKE_UPGRADE_PRICE  	500
+#define MISSILE_UPGRADE_PRICE 100
+#define LASER_UPGRADE_PRICE 	300
+#define NUKE_UPGRADE_PRICE  	600
 
 #define GUN_MIN_POWER 			2
 #define RIFLE_MIN_POWER 		10
@@ -72,8 +72,8 @@
 #define LASER_STEP_RANGE 		6
 #define NUKE_STEP_RANGE 		7
 
-#define GUN_MIN_RATE 			10
-#define RIFLE_MIN_RATE  		10
+#define GUN_MIN_RATE 			12
+#define RIFLE_MIN_RATE  		11
 #define CANNON_MIN_RATE  		10
 #define MISSILE_MIN_RATE  		9
 #define LASER_MIN_RATE  		8
