@@ -24,6 +24,10 @@
 **  - Multi language support.
 **  - Dragable game info panels.
 **  
+**  17-02-2010 Version 0.93
+**  GUI:
+**  - Bugfix: Weapon fire sequence was 22 degree misaligned.
+**
 **  16-01-2010 Version 0.92
 **  GUI:
 **  - Added 6 animated weapons. Thanks Applicant!
