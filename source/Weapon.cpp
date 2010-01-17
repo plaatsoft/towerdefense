@@ -277,17 +277,17 @@ int Weapon::getFrame()
 			switch (game.frameCounter)
 			{
 				case 0:  // prepare fire sprite
-							frame=15+angle;
+							frame=angle+(16*1);
 							game.frameCounter++;
 							break;
 					  
 				case 1:  // fire 1 sprite
-							frame=31+angle;
+							frame=angle+(16*2);
 							game.frameCounter++;
 							break;
 						
 				case 2:  // fire 2 sprite
-							frame=47+angle;
+							frame=angle+(16*3);
 							game.frameCounter++;
 							break;
 							
