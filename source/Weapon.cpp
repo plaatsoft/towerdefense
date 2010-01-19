@@ -441,6 +441,13 @@ int Weapon::upgradeRate(void)
 		game.cash-=ratePrice;
 		totalPrice+=ratePrice;
 		ratePrice=ratePrice*2;
+
+		// Update weapon reload delay sequence, if needed!
+		if (delay>rate)
+		{
+			delay=rate;
+		}
+		
 		sound->effect(SOUND_UPGRADE);
 	}
 		

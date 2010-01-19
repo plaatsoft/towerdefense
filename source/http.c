@@ -16,19 +16,6 @@
 **  You should have received a copy of the GNU General Public License
 **  along with this program; if not, write to the Free Software
 **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**
-**  History:
-**   20-11-2008  Start programming
-**   30-11-2008  Added google analysic http request
-**   07-12-2008  Added user_var parameter in google analysic http request
-**   30-12-2008  Added store highscore on internet.
-**   06-01-2009  Google analysic function improved.
-**   15-01-2009  Added http chunked frame support.
-**   21-01-2009  Create one unique cookie during startup.
-**   26-01-2009  Increase internal buffersize to 8kB.
-**   15-01-2009  Added extra debug statements
-**   15-11-2009  Added extra //trace->events remove key functionality in score game result request.
-**   18-11-2009  Added fourth HTTP request set for fetching today highScore.
 */
 
 #include <stdio.h>

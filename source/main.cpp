@@ -25,7 +25,9 @@
 **  - Dragable game info panels.
 **  
 **  17-02-2010 Version 0.93
+**  - Maintenance release
 **  GUI:
+**  - Bugfix: Weapon reload delay is now working fine in all situations.
 **  - Bugfix: Weapon fire sequence was 22 degree misaligned.
 **
 **  16-01-2010 Version 0.92
@@ -219,7 +221,6 @@
 **  - Build game with devkitPPC r19 compiler.
 **
 **  21-11-2009 Version 0.10 
-**  Core:
 **  - Started programming in C++.
 **  - Finding free graphics for game.
 **  - Setup basic directory structure for new project.
