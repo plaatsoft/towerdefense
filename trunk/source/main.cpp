@@ -485,6 +485,9 @@ Button    	 *buttons[MAX_BUTTONS];
 // Destroy METHODES
 // -----------------------------------
 
+/**
+ * destroy all weapons in memory.
+ */
 void destroyWeapons(void)
 {
 	const char *s_fn="destroyWeapons";
@@ -793,15 +796,12 @@ void initImages(void)
 	trace->event(s_fn,0,"leave [void]");
 }
 
-/*
-** InitMonster.
-** 
-** @input:    
-**    special  false   Place monster in selected grid
-**             true    Place monsters in random available grids   
-** @return:
-**    void
-*/
+/**
+ * Create new monster
+ * @param special 
+ *	(true)  Place monster in random grid 
+ *	(false) Place monster in selected grid
+ */
 void initMonsters(bool special)
 {
 	const char *s_fn="initMonsters";
@@ -857,7 +857,9 @@ void initMonsters(bool special)
 	trace->event(s_fn,0,"leave [void]");
 }
 
-// Init Pointers
+/**
+ * Init WiiMore pointers. 
+ */
 void initPointers(void)
 {
    const char *s_fn="initPointers";
@@ -898,7 +900,10 @@ void initPointers(void)
    trace->event(s_fn,0,"leave [void]");
 }
 
-// Init Grids
+/**
+ * Init Grid 
+ * @param level Level index.
+ */
 void initGrids(int level)
 {
    const char *s_fn="initGrids";

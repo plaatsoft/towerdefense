@@ -23,7 +23,20 @@
 
 #include "GRRLIB.h"
 
-
+/**
+ * Button class
+ * @param x The x-coordinate of the button.
+ * @param y The y-coordinate of the button.
+ * @param imageNormal image for not no focus situation.
+ * @param imageFocus image for focus situation.
+ * @param y The y-coordinate of the button.
+ * @param width The width of the button.
+ * @param height The height of the button.
+ * @param label The label name of the button.
+ * @param focus The indication that the button is in focus of WiiMote pointer.
+ * @param rumble The rumble array contain a countdown timer for each WiiMote.
+ * @param index The index contain a unique number for debugging.
+ */
 class Button
 {
   private:
