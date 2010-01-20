@@ -36,6 +36,10 @@ extern Pointer *pointers[MAX_POINTERS];
 // Constructor
 // ------------------------------
 
+/**
+ * Constructor
+ * Init all button values with default values.
+ */
 Button::Button()
 {
 	const char *s_fn="Button::Button";
@@ -59,6 +63,10 @@ Button::Button()
 // Destructor
 // ------------------------------
 
+/**
+ * Destructor
+ * Clean up all allocated memory
+ */
 Button::~Button()
 {
    const char *s_fn="Button::~Button";
@@ -73,6 +81,9 @@ Button::~Button()
 // Others
 // ------------------------------
 
+/**
+ * Draw Button on screen.
+ */
 void Button::draw()
 {
 	focus=false;
@@ -112,6 +123,10 @@ void Button::draw()
 	}
 }
 
+/**
+ * Draw Button text on screen.
+ * @param offset The text offset in pixels.
+ */
 void Button::text(int offset)
 {	
 	if (focus)
@@ -124,6 +139,12 @@ void Button::text(int offset)
 	}
 }
 
+/**
+ * Detect if button is selected
+ * @param x1 The WiiMote pointer x position.
+ * @param y1 The WiiMote pointer y position.
+ * @param clickEffect The wanted click sound effect (true=on, false=off)
+ */
 bool Button::onSelect(int x1, int y1, bool clickEffect)
 {
    const char *s_fn="Button::onSelect";
@@ -151,7 +172,11 @@ bool Button::onSelect(int x1, int y1, bool clickEffect)
 // ------------------------------
 // Setters
 // ------------------------------
-		
+
+/**
+ * Set x postion.
+ * @param x1 The X position of the button.
+ */		
 void Button::setX(int x1)
 {
 	const char *s_fn="Button::setX";
@@ -163,6 +188,10 @@ void Button::setX(int x1)
 	}
 }
 
+/**
+ * Set y postion.
+ * @param y1 The Y position of the button.
+ */
 void Button::setY(int y1)
 {
 	const char *s_fn="Button::setY";
@@ -174,6 +203,10 @@ void Button::setY(int y1)
 	}
 }
 
+/**
+ * Set index of button.
+ * @param index1 The index of the button.
+ */
 void Button::setIndex(int index1)
 {
 	const char *s_fn="Button::setIndex";
@@ -182,16 +215,28 @@ void Button::setIndex(int index1)
     index=index1;
 }
 
+/**
+ * Set label of button.
+ * @param label1 The text label of the button.
+ */
 void Button::setLabel(const char *label1)
 {	
     strcpy(label,label1);
 }
 
+/**
+ * Set color of the button.
+ * @param color1 The color of the button in RGB format.
+ */
 void Button::setColor(u32 color1)
 {	
     color=color1;
 }
 
+/**
+ * Set normal button image.
+ * @param imageNormal1 The no focus image.
+ */
 void Button::setImageNormal(GRRLIB_texImg *imageNormal1)
 {
 	imageNormal=imageNormal1;
@@ -199,6 +244,10 @@ void Button::setImageNormal(GRRLIB_texImg *imageNormal1)
 	width=imageNormal->w;
 }
 
+/**
+ * Set focus button image.
+ * @param imageFocus1 The focus image.
+ */
 void Button::setImageFocus(GRRLIB_texImg *imageFocus1)
 {	
 	imageFocus=imageFocus1;
@@ -208,11 +257,19 @@ void Button::setImageFocus(GRRLIB_texImg *imageFocus1)
 // Getters
 // ------------------------------
 
+/**
+ * Get X position of button.
+ * @return The current X position of the button.
+ */
 int Button::getX(void)
 {
     return x;
 }
 
+/**
+ * Get Y position of button.
+ * @return The current Y position of the button.
+ */
 int Button::getY(void)
 {
     return y;
