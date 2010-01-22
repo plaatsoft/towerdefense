@@ -111,15 +111,16 @@ export OFILES	:=	$(addsuffix .o,$(BINFILES)) \
 #---------------------------------------------------------------------------------
 # build a list of include paths
 #---------------------------------------------------------------------------------
-export INCLUDE	:=	$(foreach dir,$(INCLUDES), -iquote $(CURDIR)/$(dir)) \
-					$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
-					-I$(CURDIR)/$(BUILD) \
-					-I$(LIBOGC_INC) \
+
+export INCLUDE	:=	-I$(LIBOGC_INC) \
 					-I$(LIBJPEG_INC) \
 					-I$(LIBPNG_INC) \
 					-I$(LIBXML_INC) \
 					-I$(FREETYPE_INC) \
-					-I$(GRRLIB_INC)
+               -I$(GRRLIB_INC) \
+               $(foreach dir,$(INCLUDES), -iquote $(CURDIR)/$(dir)) \
+					$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
+					-I$(CURDIR)/$(BUILD)
 
 #---------------------------------------------------------------------------------
 # build a list of library paths

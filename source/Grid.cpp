@@ -246,6 +246,9 @@ bool Grid::loadGrid(const char* filename)
 
 void Grid::draw(int xOffset, int yOffset, float size)
 {
+   float size1=(32.0/size);
+	float size2=(1.0/size);
+	
    // Parse grid show correct images 
    for (int y=0; y<MAX_GRID_Y; y++)
    {	
@@ -257,140 +260,140 @@ void Grid::draw(int xOffset, int yOffset, float size)
 				case '0': 
 					// Start point - Draw Grass image
 					GRRLIB_DrawImg( 
-						(x*(32/size))+xOffset, 
-						(y*(32/size))+yOffset, 
-						imageGeneral1, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+						(x*size1)+xOffset, 
+						(y*size1)+yOffset, 
+						imageGeneral1, 0, size2, size2, IMAGE_COLOR );
 					break;
 					
 				case '~':
 					// Draw water image 
 					GRRLIB_DrawImg( 
-						(x*(32/size))+xOffset, 
-						(y*(32/size))+yOffset, 
-						imageGeneral2, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+						(x*size1)+xOffset, 
+						(y*size1)+yOffset, 
+						imageGeneral2, 0, size2, size2, IMAGE_COLOR );
 					break;
 	
 				case 205:
 				case '1':
 					// Draw basic road
 					GRRLIB_DrawImg( 
-						(x*(32/size))+(32/size)+xOffset, 
-						(y*(32/size))+yOffset, 
-						imageRoad4, 90, (1.0/size), (1.0/size), IMAGE_COLOR );
+						(x*size1)+size1+xOffset, 
+						(y*size1)+yOffset, 
+						imageRoad4, 90, size2, size2, IMAGE_COLOR );
 					break;	
 
 				case 186:
 				case '2':
 					// Draw basic road
 					GRRLIB_DrawImg( 
-						(x*(32/size))+xOffset, 
-						(y*(32/size))+yOffset, 
-						imageRoad4, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+						(x*size1)+xOffset, 
+						(y*size1)+yOffset, 
+						imageRoad4, 0, size2, size2, IMAGE_COLOR );
 					break;	
 					
 				case 188:	
 				case '3':
 					// Draw angle road
 					GRRLIB_DrawImg( 
-						(x*(32/size))+xOffset, 
-						(y*(32/size))+yOffset, 
-						imageRoad3, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+						(x*size1)+xOffset, 
+						(y*size1)+yOffset, 
+						imageRoad3, 0, size2, size2, IMAGE_COLOR );
 					break;	
 
 				case 200:
 				case '4':
 					// Draw angle road
 					GRRLIB_DrawImg( 
-						(x*(32/size))+(32/size)+xOffset, 
-						(y*(32/size))+yOffset, 
-						imageRoad3, 90, (1.0/size), (1.0/size), IMAGE_COLOR );
+						(x*size1)+size1+xOffset, 
+						(y*size1)+yOffset, 
+						imageRoad3, 90, size2, size2, IMAGE_COLOR );
 					break;	
 					
 				case 201:
 				case '5':
 					// Draw angle road
 					GRRLIB_DrawImg( 
-						(x*(32/size))+(32/size)+xOffset, 
-						(y*(32/size))+(32/size)+yOffset,
-						imageRoad3, 180, (1.0/size), (1.0/size), IMAGE_COLOR );
+						(x*size1)+size1+xOffset, 
+						(y*size1)+size1+yOffset,
+						imageRoad3, 180, size2, size2, IMAGE_COLOR );
 					break;	
 				
 				case 187:
 				case '6':
 					// Draw angle road
 					GRRLIB_DrawImg( 
-						(x*(32/size))+xOffset, 
-						(y*(32/size))+(32/size)+yOffset, 
-						imageRoad3, 270, (1.0/size), (1.0/size), IMAGE_COLOR );
+						(x*size1)+xOffset, 
+						(y*size1)+size1+yOffset, 
+						imageRoad3, 270, size2, size2, IMAGE_COLOR );
 					break;	
 			
 				case 206:
 				case '7':
 					// Draw Cross road
 					GRRLIB_DrawImg( 
-						(x*(32/size))+xOffset, 
-						(y*(32/size))+yOffset, 
-						imageRoad2, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+						(x*size1)+xOffset, 
+						(y*size1)+yOffset, 
+						imageRoad2, 0, size2, size2, IMAGE_COLOR );
 					break;	
 			
 				case 204:
 				case '8':
 					// Draw T-section road
 					GRRLIB_DrawImg( 
-						(x*(32/size))+xOffset, 
-						(y*(32/size))+yOffset, 
-						imageRoad1, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+						(x*size1)+xOffset, 
+						(y*size1)+yOffset, 
+						imageRoad1, 0, size2, size2, IMAGE_COLOR );
 					break;	
 
 				case 203:
 				case '9':
 					// Draw T-section road
 					GRRLIB_DrawImg( 
-						(x*(32/size))+xOffset, 
-						(y*(32/size))+yOffset, 
-						imageRoad1, 90, (1.0/size), (1.0/size), IMAGE_COLOR );
+						(x*size1)+xOffset, 
+						(y*size1)+yOffset, 
+						imageRoad1, 90, size2, size2, IMAGE_COLOR );
 					break;
 
 				case 185:
 				case 'A':
 					// Draw T-section road
 					GRRLIB_DrawImg( 
-						(x*(32/size))+(32/size)+xOffset, 
-						(y*(32/size))+(32/size)+yOffset,
-						imageRoad1, 180, (1.0/size), (1.0/size), IMAGE_COLOR );
+						(x*size1)+size1+xOffset, 
+						(y*size1)+size1+yOffset,
+						imageRoad1, 180, size2, size2, IMAGE_COLOR );
 					break;
 
 				case 202:
 				case 'B':
 					// Draw T-section road
 					GRRLIB_DrawImg( 
-						(x*(32/size))+xOffset,
-						(y*(32/size))+yOffset,
-						imageRoad1, 270, (1.0/size), (1.0/size), IMAGE_COLOR );
+						(x*size1)+xOffset,
+						(y*size1)+yOffset,
+						imageRoad1, 270, size2, size2, IMAGE_COLOR );
 					break;
 	
 				case '=':
 					// Draw bridge image
 					GRRLIB_DrawImg( 
-						(x*(32/size))+xOffset, 
-						(y*(32/size))+yOffset,
-						imageRoad5, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+						(x*size1)+xOffset, 
+						(y*size1)+yOffset,
+						imageRoad5, 0, size2, size2, IMAGE_COLOR );
 					break;
 
 				case 'H':
 					// Draw bridge image
 					GRRLIB_DrawImg( 
-						(x*(32/size))+(32/size)+xOffset, 
-						(y*(32/size))+yOffset, 
-						imageRoad5, 90, (1.0/size), (1.0/size), IMAGE_COLOR );
+						(x*size1)+size1+xOffset, 
+						(y*size1)+yOffset, 
+						imageRoad5, 90, size2, size2, IMAGE_COLOR );
 					break;
 					
 				case '#':
 					// end (base) point - Draw grass image
 					GRRLIB_DrawImg( 
-						(x*(32/size))+xOffset, 
-						(y*(32/size))+yOffset, 
-						imageGeneral1, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+						(x*size1)+xOffset, 
+						(y*size1)+yOffset, 
+						imageGeneral1, 0, size2, size2, IMAGE_COLOR );
 					
 					// Store Base Position for later use!
 					baseX=x;
@@ -402,9 +405,9 @@ void Grid::draw(int xOffset, int yOffset, float size)
 	
 	// Draw base
 	GRRLIB_DrawImg( 
-			(baseX*(32/size))-(16/size)+xOffset,
-			(baseY*(32/size))+(5/size)+yOffset, 
-			imageBase, 0, (1.0/size), (1.0/size), IMAGE_COLOR );
+			(baseX*size1)-(16/size)+xOffset,
+			(baseY*size1)+(5/size)+yOffset, 
+			imageBase, 0, size2, size2, IMAGE_COLOR );
 				
 	// Draw remaining base energy bar
 	if (size==1)

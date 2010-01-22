@@ -22,7 +22,7 @@
 #define GRID_H
 
 #include "GRRLIB.h"
-
+ 
 typedef struct
 {
 	int filename;

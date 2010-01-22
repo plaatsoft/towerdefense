@@ -129,41 +129,6 @@ int Weapon::findNearestToBase(void)
 	return id;
 }
 
-
-int Weapon::findNearestToWeapon(void)
-{
-	const char *s_fn="Weapon::findNearestToWeapon";
- 
-   int id=-1;
-	float distance2=0;
-	trace->event(s_fn,0,"enter");
-	
-	for (int i=0; i<MAX_MONSTERS; i++)
-	{			
-		if ((monsters[i]!=NULL) && (monsters[i]->getState()==stateEnemyMoving))
-		{
-			float distance= 
-				sqrt( ( (monsters[i]->getX()-(x*32)) * 
-							(monsters[i]->getX()-(x*32)) ) + 
-					   ( (monsters[i]->getY()-(y*32)) * 
-						  (monsters[i]->getY()-(y*32)) ) );
-			
-			if (distance<=range)
-			{			  		
-				if (distance2 < distance)
-				{
-					id=i;
-					trace->event(s_fn,0,"Monster [%d] distance=%3.0f in range", id, distance);
-				}
-			}
-		}
-	}
-	
-	trace->event(s_fn,0,"leave [id=%d]", id);
-	return id;
-}
-
-
 int Weapon::findHighestEnergy(void)
 {
    const char *s_fn="Weapon::findHighestEnergy";
@@ -248,10 +213,6 @@ int Weapon::findMonster(void)
 					id=findNearestToBase();
 					break;
 	
-		case FIRE_MODE_NEAREST_TO_WEAPON:
-					id=findNearestToWeapon();
-					break;
-   
 		case FIRE_MODE_HIGHEST_ENERGY:
 					id=findHighestEnergy();
 					break;
