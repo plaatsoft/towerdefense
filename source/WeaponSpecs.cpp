@@ -22,6 +22,7 @@
 
 #include "General.h" 
 #include "WeaponSpecs.h" 
+#include "Weapon.h" 
 #include "Trace.h" 
 
 // ------------------------------
@@ -85,6 +86,20 @@
 #define MISSILE_STEP_RATE  	1
 #define LASER_STEP_RATE  		1
 #define NUKE_STEP_RATE  		1
+
+#define GUN_FIRE_MODE   		FIRE_MODE_NEAREST_TO_WEAPON
+#define RIFLE_FIRE_MODE			FIRE_MODE_NEAREST_TO_BASE
+#define CANNON_FIRE_MODE		FIRE_MODE_HIGHEST_ENERGY
+#define MISSILE_FIRE_MODE		FIRE_MODE_HIGHEST_ENERGY
+#define LASER_FIRE_MODE			FIRE_MODE_FASTEST
+#define NUKE_FIRE_MODE			FIRE_MODE_FASTEST
+
+#define GUN_FIRE_MODE_NAME  	  "Nearest to weapon" 		
+#define RIFLE_FIRE_MODE_NAME	  "Nearest to base"
+#define CANNON_FIRE_MODE_NAME	  "Highest energy"
+#define MISSILE_FIRE_MODE_NAME  "Highest energy"
+#define LASER_FIRE_MODE_NAME    "Fastest"
+#define NUKE_FIRE_MODE_NAME     "Fastest"
 
 // ------------------------------
 // Extern variables
@@ -705,6 +720,70 @@ int WeaponSpecs::getCounter(int type)
 				
 		default: // Nuke
 				 return ++nukeCounter;
+				 break;
+	}
+}
+
+
+// Return Weapon FireMode
+int WeaponSpecs::getFireMode(int type)
+{
+	switch (type)
+	{
+		case 0:  // Gun
+				 return GUN_FIRE_MODE;
+				 break;
+				
+		case 1:  // Rifle
+				 return RIFLE_FIRE_MODE;
+				 break;
+				
+		case 2:  // Cannon
+				 return CANNON_FIRE_MODE;
+				 break;
+				
+		case 3:  // Missile
+				 return MISSILE_FIRE_MODE;
+				 break;
+				
+		case 4:  // Laser
+				 return LASER_FIRE_MODE;
+				 break;
+				
+		default: // Nuke
+				 return NUKE_FIRE_MODE;
+				 break;
+	}
+}
+
+
+// Return Weapon FireModeName
+const char *WeaponSpecs::getFireModeName(int type)
+{
+	switch (type)
+	{
+		case 0:  // Gun
+				 return GUN_FIRE_MODE_NAME;
+				 break;
+				
+		case 1:  // Rifle
+				 return RIFLE_FIRE_MODE_NAME;
+				 break;
+				
+		case 2:  // Cannon
+				 return CANNON_FIRE_MODE_NAME;
+				 break;
+				
+		case 3:  // Missile
+				 return MISSILE_FIRE_MODE_NAME;
+				 break;
+				
+		case 4:  // Laser
+				 return LASER_FIRE_MODE_NAME;
+				 break;
+				
+		default: // Nuke
+				 return NUKE_FIRE_MODE_NAME;
 				 break;
 	}
 }

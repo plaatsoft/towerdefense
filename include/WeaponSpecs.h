@@ -82,9 +82,9 @@ class WeaponSpecs
 	int getStepRate(int type);
 	
 	int getCounter(int type);
+	
+	int getFireMode(int type);
+	const char *getFireModeName(int type);
 };
 
 #endif
-
-
-
