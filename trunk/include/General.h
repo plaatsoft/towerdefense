@@ -177,7 +177,6 @@ enum
 	stateMainMenu=4,
 	stateLevelMenu=5,
 	stateMapSelectMenu=6,
-	
 	stateGame=7,
 	stateGameOver=8,
 	stateQuitGame=9,
@@ -195,7 +194,8 @@ enum
 	stateReleaseNotes=18,
 	stateSoundSettings=19,
 	stateGameSettings=20,
-	stateQuit=21
+	stateDonate=21,
+	stateQuit=22
 };
 
 // Event machine events

@@ -341,7 +341,14 @@ void Pointer::buttonA(int x, int y)
 			
 				// Reset Wii
 				SYS_ResetSystem(SYS_RESTART,0,0);		   
-			}					
+			}	
+
+			if ((buttons[9]!=NULL) && (buttons[9]->onSelect(x,y,true)))
+			{
+				// Donate button	      
+				game.stateMachine=stateDonate;
+			}
+				
 		}
 		break;
    
@@ -475,6 +482,17 @@ void Pointer::buttonA(int x, int y)
 		break;
 		
 		case stateHelp4:
+		{
+			// Check if button is pressed on screen
+			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
+			{
+				// Main Menu button	 
+				game.stateMachine=stateMainMenu;	     
+			}
+		}
+		break;
+		
+		case stateDonate:
 		{
 			// Check if button is pressed on screen
 			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))

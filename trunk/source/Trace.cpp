@@ -90,11 +90,8 @@ char * Trace::getDate()
 {
   struct tm *now = NULL;
   time_t time_value = 0;
-  static char buf[ 128 ] ;
-  
-  // Clear memory  
-  memset(buf, sizeof(buf), 0x00);
-  
+  static char buf[ 20 ] ;
+   
   /* Get time value */
   time_value = time(NULL);          
   
@@ -114,12 +111,12 @@ int Trace::event( const char *functionName, int threadNr, const char *event, ...
 {
    int returnValue=0;
    char buf[ MAX_LEN ];
+
+   if (!traceOn) return -1;
    
    // Clear memory  
    memset(buf, MAX_LEN, 0x00);
-   
-   if (!traceOn) return -1;
-   
+      
    // Expend event string
    va_list list;
    va_start(list, event );

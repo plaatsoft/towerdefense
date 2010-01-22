@@ -32,11 +32,11 @@
 #define UPGRADE_STEPS			5
 	
 #define GUN_PRICE 				100
-#define RIFLE_PRICE 				200
+#define RIFLE_PRICE 				250
 #define CANNON_PRICE 			500
 #define MISSILE_PRICE 			1000
-#define LASER_PRICE 				3000  // 4000
-#define NUKE_PRICE 				5000  // 6000
+#define LASER_PRICE 				3000
+#define NUKE_PRICE 				6000 
 
 #define GUN_UPGRADE_PRICE  	10
 #define RIFLE_UPGRADE_PRICE 	25
@@ -49,36 +49,36 @@
 #define RIFLE_MIN_POWER 		10
 #define CANNON_MIN_POWER 		20
 #define MISSILE_MIN_POWER		40
-#define LASER_MIN_POWER 		60
-#define NUKE_MIN_POWER 			80
+#define LASER_MIN_POWER 		25
+#define NUKE_MIN_POWER 			200
 
 #define GUN_STEP_POWER  		1
 #define RIFLE_STEP_POWER  		2
 #define CANNON_STEP_POWER  	3
-#define MISSILE_STEP_POWER 	4
-#define LASER_STEP_POWER 		8
+#define MISSILE_STEP_POWER 	5
+#define LASER_STEP_POWER 		5
 #define NUKE_STEP_POWER 		10	
 
 #define GUN_MIN_RANGE 			40
 #define RIFLE_MIN_RANGE 		45
 #define CANNON_MIN_RANGE 		50
-#define MISSILE_MIN_RANGE 		55
+#define MISSILE_MIN_RANGE 		70
 #define LASER_MIN_RANGE 		60
-#define NUKE_MIN_RANGE 			65
+#define NUKE_MIN_RANGE 			50
 
 #define GUN_STEP_RANGE  		5
 #define RIFLE_STEP_RANGE  		5
 #define CANNON_STEP_RANGE  	5
-#define MISSILE_STEP_RANGE 	6
-#define LASER_STEP_RANGE 		6
-#define NUKE_STEP_RANGE 		7
+#define MISSILE_STEP_RANGE 	7
+#define LASER_STEP_RANGE 		7
+#define NUKE_STEP_RANGE 		5
 
 #define GUN_MIN_RATE 			12
 #define RIFLE_MIN_RATE  		11
 #define CANNON_MIN_RATE  		10
-#define MISSILE_MIN_RATE  		9
-#define LASER_MIN_RATE  		8
-#define NUKE_MIN_RATE  			7
+#define MISSILE_MIN_RATE  		8
+#define LASER_MIN_RATE  		7
+#define NUKE_MIN_RATE  			9
 
 #define GUN_STEP_RATE   		1
 #define RIFLE_STEP_RATE   		1
@@ -87,19 +87,19 @@
 #define LASER_STEP_RATE  		1
 #define NUKE_STEP_RATE  		1
 
-#define GUN_FIRE_MODE   		FIRE_MODE_NEAREST_TO_WEAPON
+#define GUN_FIRE_MODE   		FIRE_MODE_NEAREST_TO_BASE
 #define RIFLE_FIRE_MODE			FIRE_MODE_NEAREST_TO_BASE
 #define CANNON_FIRE_MODE		FIRE_MODE_HIGHEST_ENERGY
 #define MISSILE_FIRE_MODE		FIRE_MODE_HIGHEST_ENERGY
 #define LASER_FIRE_MODE			FIRE_MODE_FASTEST
 #define NUKE_FIRE_MODE			FIRE_MODE_FASTEST
 
-#define GUN_FIRE_MODE_NAME  	  "Nearest to weapon" 		
+#define GUN_FIRE_MODE_NAME  	  "Nearest to base" 		
 #define RIFLE_FIRE_MODE_NAME	  "Nearest to base"
 #define CANNON_FIRE_MODE_NAME	  "Highest energy"
 #define MISSILE_FIRE_MODE_NAME  "Highest energy"
-#define LASER_FIRE_MODE_NAME    "Fastest"
-#define NUKE_FIRE_MODE_NAME     "Fastest"
+#define LASER_FIRE_MODE_NAME    "Fastest Enemy"
+#define NUKE_FIRE_MODE_NAME     "Fastest Enemy"
 
 // ------------------------------
 // Extern variables

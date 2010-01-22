@@ -24,14 +24,19 @@
 **  - Multi language support.
 **  - Dragable game info panels.
 **  
-**  22-02-2010 Version 0.93
-**  - Maintenance release
+**  22-01-2010 Version 0.93
 **  GUI:
-**  - Add more information on help3 screen.
-**  - Bugfix: Weapon reload delay is now working fine in all situations.
-**  - Bugfix: Weapon fire sequence was 22 degree misaligned.
+**  - Added weapon fire mode information on weapon help screen.
+**  - Improve weapon reload delay initialisation.
+**  - Added donate screen.
+**  - Bugfix: Weapon fire sprites were 22 degree misaligned. 
 **  Core:
-**  - Add four weapon fire modes.
+**  - Introduce different weapon fire modes.
+**	   - Fire at enemy in range nearest to base (Gun / Rifle)
+**    - Fire at enemy in range with highest energy level (Cannon / Missile)
+**    - Fire at fastest enemy in range (Laser / Nuke)
+**  - Rebalance weapon specifications. Mix features more!
+**  - Optimised some draw methods for beter performance. Thanks Crayon.
 **
 **  16-01-2010 Version 0.92
 **  GUI:
@@ -377,6 +382,10 @@ extern int      pic10length;
 // Background2 Image
 extern const unsigned char     pic11data[];
 extern int      pic11length;
+
+// Background3 Image
+extern const unsigned char     pic12data[];
+extern int      pic12length;
 
 // Bar Image
 extern const unsigned char     pic14data[];
@@ -1132,7 +1141,18 @@ void initButtons(void)
 			buttons[6]->setLabel("Game Settings");	
 			buttons[6]->setColor(IMAGE_COLOR);
 			buttons[6]->setIndex(5);
-								
+			
+			// Donate Button 
+			ypos+=40;
+			buttons[9]=new Button();
+			buttons[9]->setX(440);
+			buttons[9]->setY(ypos);
+			buttons[9]->setImageNormal(images.button2);
+			buttons[9]->setImageFocus(images.buttonFocus2);
+			buttons[9]->setLabel("Donate");	
+			buttons[9]->setColor(IMAGE_COLOR);
+			buttons[9]->setIndex(5);
+					
 			// Exit HBC Button 
 			ypos=400;
 			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=38;
@@ -1457,6 +1477,24 @@ void initButtons(void)
 		}
 		break;
 
+		case stateDonate:
+		{
+		   int ypos=460;
+			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos-=20;
+			
+			// Main Menu Button
+			buttons[0]=new Button();
+			buttons[0]->setX(240);
+			buttons[0]->setY(ypos);
+			buttons[0]->setImageNormal(images.button2);
+			buttons[0]->setImageFocus(images.buttonFocus2);
+			buttons[0]->setLabel("Main Menu");	
+			buttons[0]->setColor(IMAGE_COLOR);
+			buttons[0]->setIndex(0);
+		}
+		break;
+		
+		
 		case stateReleaseNotes:
 		{
 		   int ypos=460;
@@ -3280,16 +3318,16 @@ void drawScreen(void)
 			// Show title
 			drawText(170, ypos, fontTitle, "Weapons");
 			
-			int xoffset=50;
+			int xoffset=30;
 	
          ypos+=100;
 			drawText(10+xoffset, ypos,  fontParagraph, "Icon");
 			drawText(60+xoffset, ypos,  fontParagraph, "Type");
-			drawText(135+xoffset, ypos, fontParagraph, "Price");
-			drawText(220+xoffset, ypos, fontParagraph, "Power");
-			drawText(320+xoffset, ypos, fontParagraph, "Range");
-			drawText(420+xoffset, ypos, fontParagraph, "Rate");
-			drawText(520+xoffset, ypos, fontParagraph, "FireMode");
+			drawText(125+xoffset, ypos, fontParagraph, "Price");
+			drawText(195+xoffset, ypos, fontParagraph, "Power");
+			drawText(280+xoffset, ypos, fontParagraph, "Range");
+			drawText(365+xoffset, ypos, fontParagraph, "Rate");
+			drawText(455+xoffset, ypos, fontParagraph, "Fire Mode");
 		
 			ypos+=10;
 			for (int i=0; i<6; i++)
@@ -3339,20 +3377,19 @@ void drawScreen(void)
 				drawText(60+xoffset, ypos, fontNormal, 
 					weaponSpecs->getName(i));
 					
-				drawText(135+xoffset, ypos, fontNormal, "$%d",
+				drawText(125+xoffset, ypos, fontNormal, "$%d",
 					weaponSpecs->getPrice(i));
 					
-				drawText(220+xoffset, ypos, fontNormal, "%03d-%03d",
+				drawText(195+xoffset, ypos, fontNormal, "%03d-%03d",
 					weaponSpecs->getMinPower(i), weaponSpecs->getMaxPower(i));
 					
-				drawText(320+xoffset, ypos, fontNormal, "%03d-%03d",
+				drawText(280+xoffset, ypos, fontNormal, "%03d-%03d",
 					weaponSpecs->getMinRange(i), weaponSpecs->getMaxRange(i));
 					
-				drawText(420+xoffset, ypos, fontNormal, "%03d-%03d",
+				drawText(365+xoffset, ypos, fontNormal, "%03d-%03d",
 					weaponSpecs->getMinRate(i), weaponSpecs->getMaxRate(i));
 					
-				drawText(520+xoffset, ypos, fontNormal, 
-					weaponSpecs->getFireModeName(i));
+				drawText(455+xoffset, ypos, fontNormal, weaponSpecs->getFireModeName(i));
   			}
 		  
 		   ypos=420;
@@ -3746,6 +3783,51 @@ void drawScreen(void)
 
 			ypos+=170;
 			drawText(65, ypos, fontParagraph, "Classic Enemies");
+
+			// Draw Button Text labels
+			drawButtonsText(0);	
+
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+		  
+			// Draw text layer on top of background.
+			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
+	   }
+	   break;
+		
+		case stateDonate:
+	   {         	
+			// Draw background
+			GRRLIB_DrawImg(0,0,images.background1, 0, 1.0, 1.0, IMAGE_COLOR2 );
+
+			// Draw buttons
+	      drawButtons(); 
+		  
+	      // Init text layer	  
+         GRRLIB_initTexture();
+
+			// Draw Title	
+			drawText(0, ypos, fontTitle, "Donate");
+			ypos+=100;
+			
+			drawText(0, ypos, fontParagraph, "If you enjoy this game please send me a");
+			ypos+=25;
+		   drawText(0, ypos, fontParagraph, "small donation. You can make a donation ");
+			ypos+=25;
+		   drawText(0, ypos, fontParagraph, "online with your credit card, or paypal account.");
+			ypos+=25;
+		   drawText(0, ypos, fontParagraph, "Your credit card will be processed by PayPal, a");
+			ypos+=25;
+		   drawText(0, ypos, fontParagraph, "trusted name in secure online transactions.");
+			ypos+=65;
+		   drawText(0, ypos, fontParagraph, "Please visit http://www.plaatsoft.nl");			
+			ypos+=25;
+		   drawText(0, ypos, fontParagraph, "Click on the donate link and follow the instructions.");	
+			ypos+=65;
+			drawText(0, ypos, fontParagraph, "Many thanks for your support!");
 
 			// Draw Button Text labels
 			drawButtonsText(0);	
@@ -4565,6 +4647,16 @@ void processStateMachine()
 			initButtons();
 		}
 		break;
+		
+		case stateDonate:
+		{
+			trace->event(s_fn,0,"stateMachine=stateDonate");
+			
+			// Init buttons
+			initButtons();
+		}
+		break;
+		
 	}
   
 	// Store state
