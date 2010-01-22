@@ -24,11 +24,14 @@
 **  - Multi language support.
 **  - Dragable game info panels.
 **  
-**  17-02-2010 Version 0.93
+**  22-02-2010 Version 0.93
 **  - Maintenance release
 **  GUI:
+**  - Add more information on help3 screen.
 **  - Bugfix: Weapon reload delay is now working fine in all situations.
 **  - Bugfix: Weapon fire sequence was 22 degree misaligned.
+**  Core:
+**  - Add four weapon fire modes.
 **
 **  16-01-2010 Version 0.92
 **  GUI:
@@ -1011,7 +1014,9 @@ void initWeapon(int x, int y, int id, int type)
 	weapons[id]->setY(y);
 	weapons[id]->setSelected(true);
 	weapons[id]->setIndex(id);
+	
 	weapons[id]->setType(type);
+	weapons[id]->setFireMode(weaponSpecs->getFireMode(type));
 	weapons[id]->setImage(weaponSpecs->getImage(type));
 	
 	weapons[id]->setPower(weaponSpecs->getMinPower(type));
@@ -3278,12 +3283,13 @@ void drawScreen(void)
 			int xoffset=50;
 	
          ypos+=100;
-			drawText(30+xoffset, ypos,  fontParagraph, "Icon");
-			drawText(80+xoffset, ypos,  fontParagraph, "Type");
-			drawText(155+xoffset, ypos, fontParagraph, "Price");
-			drawText(240+xoffset, ypos, fontParagraph, "Power");
-			drawText(340+xoffset, ypos, fontParagraph, "Range");
-			drawText(440+xoffset, ypos, fontParagraph, "Rate");
+			drawText(10+xoffset, ypos,  fontParagraph, "Icon");
+			drawText(60+xoffset, ypos,  fontParagraph, "Type");
+			drawText(135+xoffset, ypos, fontParagraph, "Price");
+			drawText(220+xoffset, ypos, fontParagraph, "Power");
+			drawText(320+xoffset, ypos, fontParagraph, "Range");
+			drawText(420+xoffset, ypos, fontParagraph, "Rate");
+			drawText(520+xoffset, ypos, fontParagraph, "FireMode");
 		
 			ypos+=10;
 			for (int i=0; i<6; i++)
@@ -3327,23 +3333,26 @@ void drawScreen(void)
 					}
 				}
 		
-				GRRLIB_DrawTile(30+xoffset,ypos, 
+				GRRLIB_DrawTile(10+xoffset,ypos, 
 					weaponSpecs->getImage(i), 0, 1, 1, IMAGE_COLOR, game.frame );
 					
-				drawText(80+xoffset, ypos, fontNormal, 
+				drawText(60+xoffset, ypos, fontNormal, 
 					weaponSpecs->getName(i));
 					
-				drawText(155+xoffset, ypos, fontNormal, "$%d",
+				drawText(135+xoffset, ypos, fontNormal, "$%d",
 					weaponSpecs->getPrice(i));
 					
-				drawText(240+xoffset, ypos, fontNormal, "%03d-%03d",
+				drawText(220+xoffset, ypos, fontNormal, "%03d-%03d",
 					weaponSpecs->getMinPower(i), weaponSpecs->getMaxPower(i));
 					
-				drawText(340+xoffset, ypos, fontNormal, "%03d-%03d",
+				drawText(320+xoffset, ypos, fontNormal, "%03d-%03d",
 					weaponSpecs->getMinRange(i), weaponSpecs->getMaxRange(i));
 					
-				drawText(440+xoffset, ypos, fontNormal, "%03d-%03d",
+				drawText(420+xoffset, ypos, fontNormal, "%03d-%03d",
 					weaponSpecs->getMinRate(i), weaponSpecs->getMaxRate(i));
+					
+				drawText(520+xoffset, ypos, fontNormal, 
+					weaponSpecs->getFireModeName(i));
   			}
 		  
 		   ypos=420;

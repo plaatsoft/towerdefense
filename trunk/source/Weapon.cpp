@@ -56,6 +56,8 @@ Weapon::Weapon()
    index=0;
    
    fireDelay=0;
+	fireMode=FIRE_MODE_NEAREST_TO_BASE;
+	
    monsterX=0;
    monsterY=0;
    
@@ -97,10 +99,74 @@ Weapon::~Weapon()
 // private methods
 // ------------------------------
 
-// Find monster in range with the highest energy level
-int Weapon::findMonster(void)
+int Weapon::findNearestToBase(void)
 {
-	const char *s_fn="Weapon::findMonster";
+   const char *s_fn="Weapon::findHighestEnergy";
+ 
+   int id=-1;
+	trace->event(s_fn,0,"enter");
+	
+	for (int i=0; i<MAX_MONSTERS; i++)
+	{			
+		if ((monsters[i]!=NULL) && (monsters[i]->getState()==stateEnemyMoving))
+		{
+			float distance= 
+				sqrt( ( (monsters[i]->getX()-(x*32)) * 
+							(monsters[i]->getX()-(x*32)) ) + 
+					   ( (monsters[i]->getY()-(y*32)) * 
+						  (monsters[i]->getY()-(y*32)) ) );
+			
+			if (distance<=range)
+			{			  		
+				id=i;
+				trace->event(s_fn,0,"Monster [%d] in range", id);			
+				break;
+			}
+		}
+	}
+	
+	trace->event(s_fn,0,"leave [id=%d]", id);
+	return id;
+}
+
+
+int Weapon::findNearestToWeapon(void)
+{
+	const char *s_fn="Weapon::findNearestToWeapon";
+ 
+   int id=-1;
+	float distance2=0;
+	trace->event(s_fn,0,"enter");
+	
+	for (int i=0; i<MAX_MONSTERS; i++)
+	{			
+		if ((monsters[i]!=NULL) && (monsters[i]->getState()==stateEnemyMoving))
+		{
+			float distance= 
+				sqrt( ( (monsters[i]->getX()-(x*32)) * 
+							(monsters[i]->getX()-(x*32)) ) + 
+					   ( (monsters[i]->getY()-(y*32)) * 
+						  (monsters[i]->getY()-(y*32)) ) );
+			
+			if (distance<=range)
+			{			  		
+				if (distance2 < distance)
+				{
+					id=i;
+					trace->event(s_fn,0,"Monster [%d] distance=%3.0f in range", id, distance);
+				}
+			}
+		}
+	}
+	
+	trace->event(s_fn,0,"leave [id=%d]", id);
+	return id;
+}
+
+
+int Weapon::findHighestEnergy(void)
+{
+   const char *s_fn="Weapon::findHighestEnergy";
  
    int id=-1;
 	int energy=0;
@@ -126,6 +192,73 @@ int Weapon::findMonster(void)
 				}
 			}
 		}
+	}
+	
+	trace->event(s_fn,0,"leave [id=%d]", id);
+	return id;
+}
+
+
+int Weapon::findFasters(void)
+{
+   const char *s_fn="Weapon::findFasters";
+ 
+   int id=-1;
+	int step=0;
+	trace->event(s_fn,0,"enter");
+	
+	for (int i=0; i<MAX_MONSTERS; i++)
+	{			
+		if ((monsters[i]!=NULL) && (monsters[i]->getState()==stateEnemyMoving))
+		{
+			float distance= 
+				sqrt( ( (monsters[i]->getX()-(x*32)) * 
+							(monsters[i]->getX()-(x*32)) ) + 
+					   ( (monsters[i]->getY()-(y*32)) * 
+						  (monsters[i]->getY()-(y*32)) ) );
+			
+			if (distance<=range)
+			{			  		
+				if (step < monsters[i]->getStep())
+				{
+					id=i;
+					step=monsters[i]->getStep();
+					trace->event(s_fn,0,"Monster [%d] step=%d in range", id, step);
+				}
+			}
+		}
+	}
+	
+	trace->event(s_fn,0,"leave [id=%d]", id);
+	return id;
+}
+
+
+// Find monster in range with the highest energy level
+int Weapon::findMonster(void)
+{
+   int id=-1;
+	
+	const char *s_fn="Weapon::findMonster";
+	trace->event(s_fn,0,"enter");
+	
+	switch (fireMode)
+	{
+		case FIRE_MODE_NEAREST_TO_BASE:
+					id=findNearestToBase();
+					break;
+	
+		case FIRE_MODE_NEAREST_TO_WEAPON:
+					id=findNearestToWeapon();
+					break;
+   
+		case FIRE_MODE_HIGHEST_ENERGY:
+					id=findHighestEnergy();
+					break;
+	
+		case FIRE_MODE_FASTEST:
+					id=findFasters();
+					break;
 	}
 	
 	trace->event(s_fn,0,"leave [id=%d]", id);
@@ -623,6 +756,11 @@ void Weapon::setTotalPrice(int totalPrice1)
 	totalPrice=totalPrice1;
 }
 
+void Weapon::setFireMode(int fireMode1)
+{
+	fireMode=fireMode1;
+}
+
 // ------------------------------
 // Getters 
 // ------------------------------
@@ -705,6 +843,11 @@ int Weapon::getMaxRate(void)
 int Weapon::getTotalPrice(void)
 {
 	return totalPrice;
+}
+
+int Weapon::getFireMode(void)
+{
+	return fireMode;
 }
 	
 // ------------------------------

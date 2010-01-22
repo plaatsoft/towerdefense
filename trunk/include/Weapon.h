@@ -27,6 +27,14 @@
 #include "Trace.h"  
 #include "Pointer.h" 
 
+enum
+{
+   FIRE_MODE_NEAREST_TO_BASE=0,
+	FIRE_MODE_NEAREST_TO_WEAPON=1,
+   FIRE_MODE_HIGHEST_ENERGY=2, 
+	FIRE_MODE_FASTEST=3
+};
+
 class Weapon
 {
   private:
@@ -44,6 +52,8 @@ class Weapon
    int   totalPrice;
 	
 	int fireDelay;
+	int fireMode;
+	
 	int monsterX;
 	int monsterY;
 	
@@ -69,7 +79,12 @@ class Weapon
 	int frameDelay;
 	
 	// private methodes
-	int  findMonster(void);
+	int findNearestToBase(void);
+	int findNearestToWeapon(void);
+	int findHighestEnergy(void);
+	int findFasters(void);
+	int findMonster(void);
+	
 	void playFireSound(void);
 	int  getFrame(void);
 	int  calculateAngle(int id);
@@ -97,6 +112,7 @@ class Weapon
 	void setIndex(int index);
 	void setType(int type);
 	void setName(const char *name, ...);
+	void setFireMode(int mode);
 	
 	void setPower(int power);	
 	void setRange(int range);
@@ -123,6 +139,7 @@ class Weapon
 	
 	const char *getName(void);
 	int getTotalPrice(void);
+	int getFireMode(void);
 	
 	int getPowerPrice(void);
 	int getRangePrice(void);
