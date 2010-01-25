@@ -24,6 +24,12 @@
 **  - Multi language support.
 **  - Dragable game info panels.
 **  
+**  25-01-2019 Version 0.94
+**  GUI:
+**  Core:
+**  - Improve inline source code documentation 
+**    Use Doxygen (windows tool) to extract information
+**
 **  22-01-2010 Version 0.93
 **  GUI:
 **  - Added weapon fire mode information on weapon help screen.

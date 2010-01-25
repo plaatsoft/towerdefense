@@ -74,6 +74,11 @@ HighScore::~HighScore()
 // Others
 // ------------------------------
 
+/**
+ * load highscore xml file form sdcard.
+ *
+ * @param filename   The filename of the setting file.
+ */
 void HighScore::load(const char *filename)
 {
 	const char *s_fn="HighScore::load";
@@ -173,6 +178,11 @@ void HighScore::load(const char *filename)
    trace->event(s_fn,0,"leave [void]");
 }
 
+/**
+ * save highscore to xml file.
+ *
+ * @param filename   The filename of the setting file.
+ */
 void HighScore::save( const char *filename)
 {
 	const char *s_fn="HighScore::save";
@@ -236,7 +246,14 @@ void HighScore::save( const char *filename)
 // Setters
 // ------------------------------
 
-// Insert new score on the ready place in the list.
+/**
+ * Insert new score on the ready place in the list.
+ *
+ * @param name   The players name.
+ * @param wave   The wave level.
+ * @param map    The map id.
+ * @param score  The score.
+ */
 void HighScore::setScore(const char *name, int wave, int map, int score)
 {
 	const char *s_fn="HighScore::setScore";
@@ -282,32 +299,72 @@ void HighScore::setScore(const char *name, int wave, int map, int score)
 // ------------------------------
 // Getters
 // ------------------------------
-	
+
+/**
+ * Get the name of highscore entry X
+ *
+ * @param index   The range index [0..99]
+ *
+ * @return The name of the player
+ */
 char* HighScore::getName(int index)
 {
    return scores[index].name;
 }
 
+/**
+ * Get the date of highscore entry X
+ *
+ * @param index   The range index [0..99]
+ *
+ * @return The entry date
+ */
 time_t* HighScore::getDate(int index)
 {
 	return &scores[index].localTime;
 }
 
+/**
+ * Get the score of highscore entry X
+ *
+ * @param index   The range index [0..99]
+ *
+ * @return The score of the selected entry
+ */
 int HighScore::getScore(int index)
 {
 	return scores[index].score;
 }
 
+/**
+ * Get the wave of highscore entry X
+ *
+ * @param index   The range index [0..99]
+ *
+ * @return The wave id of the selected entry
+ */
 int HighScore::getWave(int index)
 {
 	return scores[index].wave;
 }
 
+/**
+ * Get the map id of highscore entry X
+ *
+ * @param index    The range index [0..99]
+ *
+ * @return The map id of the selected entry
+ */
 int HighScore::getMap(int index)
 {
 	return scores[index].map;
 }
 
+/**
+ * Get the amount of score entries in the highscore array
+ *
+ * @return amount. The amount of score entries
+ */
 int HighScore::getAmount(void)
 {
 	int amount=0;
