@@ -160,6 +160,10 @@ extern int      pic511length;
 // Constructor 
 // ------------------------------
 
+/**
+ * Constructor
+ * Init all properties with default values.
+ */
 WeaponSpecs::WeaponSpecs()
 {
    const char *s_fn="WeaponSpecs::WeaponSpecs";
@@ -210,6 +214,10 @@ WeaponSpecs::WeaponSpecs()
 // Destructor
 // ------------------------------
 
+/**
+ * Destructor
+ * Clean up all allocated memory
+ */
 WeaponSpecs::~WeaponSpecs()
 {
    const char *s_fn="WeaponSpecs::~WeaponSpecs";

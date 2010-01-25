@@ -41,6 +41,10 @@ extern Monster *monsters[MAX_MONSTERS];
 // Constructor 
 // ------------------------------
 
+/**
+ * Constructor
+ * Init all properties with default values.
+ */
 Weapon::Weapon()
 {
    const char *s_fn="Weapon::Weapon";
@@ -85,6 +89,10 @@ Weapon::Weapon()
 // Destructor
 // ------------------------------
 
+/**
+ * Destructor
+ * Clean up all allocated memory
+ */
 Weapon::~Weapon()
 {
    const char *s_fn="Weapon::~Weapon";

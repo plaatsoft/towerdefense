@@ -43,6 +43,10 @@ extern GXRModeObj *rmode;
 // Constructor 
 // ------------------------------
 
+/**
+ * Constructor
+ * Init all properties with default values.
+ */
 Monster::Monster()
 {
    const char *s_fn="Monster::Monster";
@@ -80,6 +84,10 @@ Monster::Monster()
 // Destructor
 // ------------------------------
 
+/**
+ * Destructor
+ * Clean up all allocated memory
+ */
 Monster::~Monster()
 {
    const char *s_fn="Monster::~Monster";

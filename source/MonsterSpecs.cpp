@@ -237,7 +237,10 @@ extern int      pic175length;
 // Constructor 
 // ------------------------------
 
-// Load all monster images
+/**
+ * Constructor
+ * Init all properties with default values.
+ */
 MonsterSpecs::MonsterSpecs()
 {
    const char *s_fn="MonsterSpecs::MonsterSpecs";
@@ -403,8 +406,10 @@ MonsterSpecs::MonsterSpecs()
 // Destructor
 // ------------------------------
 
-
-// Release all monster images
+/**
+ * Destructor
+ * Clean up all allocated memory
+ */
 MonsterSpecs::~MonsterSpecs()
 {
    const char *s_fn="MonsterSpecs::~MonsterSpecs";

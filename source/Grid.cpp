@@ -34,6 +34,10 @@ extern Game  game;
 // Constructor
 // ------------------------------
 
+/**
+ * Constructor
+ * Init all grif values with default values.
+ */
 Grid::Grid()
 {
 	const char *s_fn="Grid::Grid";
@@ -68,6 +72,10 @@ Grid::Grid()
 // Destructor
 // ------------------------------
 
+/**
+ * Destructor
+ * Clean up all allocated memory
+ */
 Grid::~Grid()
 {
 	const char *s_fn="Grid::~Grid";
@@ -91,6 +99,9 @@ Grid::~Grid()
 // Others
 // ------------------------------
 
+/**
+ * parseGrid the load xml file.
+ */
 void Grid::parseGrid(void)
 {
 	const char *s_fn="Grid::parseGrid";
@@ -174,6 +185,11 @@ void Grid::parseGrid(void)
 	trace->event(s_fn,0,"leave [maxLocations=%d]",maxLocations);
 }
 
+/**
+ * loadImage file from sdcard
+ *
+ * @param filename. The filename of the image including path.
+ */
 GRRLIB_texImg * Grid::loadImage(const char *filename)
 {
    const char *s_fn="Grid::loadImage";
@@ -199,6 +215,11 @@ GRRLIB_texImg * Grid::loadImage(const char *filename)
 	return NULL;
 }
 
+/**
+ * loadGrid the load xml file.
+ *
+ * @param filname. The filename of the grid in xml format
+ */
 bool Grid::loadGrid(const char* filename)
 {
    const char *s_fn="Grid::initGrid";
@@ -244,6 +265,13 @@ bool Grid::loadGrid(const char* filename)
 	return error;
 }
 
+/**
+ * draw. Draw grid on screen.
+ *
+ * @param xOffset The xoffset of the grid
+ * @param yOffset The yoffset of the grid
+ * @param size. This size (default value is 1 for normal size) 
+ */
 void Grid::draw(int xOffset, int yOffset, float size)
 {
    float size1=(32.0/size);
@@ -418,7 +446,11 @@ void Grid::draw(int xOffset, int yOffset, float size)
 	}
 }
 	
-// Load grid map and parse it for monster movement.
+/**
+ * Load grid map and parse it for monster movement.
+ *
+ * @param directory The directory were the map.xml is located
+ */
 void Grid::create(const char* directory)
 {
 	const char *s_fn="Grid::render";
@@ -458,8 +490,10 @@ void Grid::create(const char* directory)
 	 
 	trace->event(s_fn,0,"leave [void]");  
 }
-			
-// Init Build grid with original build information.
+
+/**
+ * Init Build grid with original build information.
+ */
 void Grid::initBuild(void)
 {
    const char *s_fn="Grid::initBuild";
@@ -509,6 +543,11 @@ void Grid::initBuild(void)
 // Setters
 // ------------------------------
 
+/**
+ * setIndex value.
+ *
+ * @param index1. This index value
+ */
 void Grid::setIndex(int index1)
 {
 	const char *s_fn="Grid::setIndex";
@@ -517,6 +556,12 @@ void Grid::setIndex(int index1)
    index = index1;	
 }
 
+/**
+ * setBuild build value in grid. Now nothing else can be build here
+ *
+ * @param x. This x value 
+ * @param y. This y value 
+ */
 void Grid::setBuild(int x, int y)
 {
 	const char *s_fn="Grid::setBuild";
@@ -525,6 +570,12 @@ void Grid::setBuild(int x, int y)
 	gridBuild[y][x]='F';
 }
 
+/**
+ * setUnBuild. unbuild value in grid. Now something else can be build here
+ *
+ * @param x. This x value 
+ * @param y. This y value 
+ */
 void Grid::setUnBuild(int x, int y)
 {
 	const char *s_fn="Grid::setUnBuild";
@@ -537,6 +588,13 @@ void Grid::setUnBuild(int x, int y)
 // Getters
 // ------------------------------
 
+/**
+ * getLocationX. Get the x position form the walking plan.
+ *
+ * @param pos. The pos value
+ *
+ * @return x. The x position
+ */
 int Grid::getLocationX(int pos)
 {
     if (pos<maxLocations)
@@ -546,6 +604,13 @@ int Grid::getLocationX(int pos)
 	return -1;
 }
 
+/**
+ * getLocationY. Get the y position form the walking plan.
+ *
+ * @param pos. The pos value
+ *
+ * @return y. The y position
+ */
 int Grid::getLocationY(int pos)
 {
     if (pos<maxLocations)
@@ -555,11 +620,24 @@ int Grid::getLocationY(int pos)
 	return -1;
 }
 
+/**
+ * getMaxLocations. Return how many steps are in the grid walking plan.
+ *
+ * @return maXLocations. The maxLocations 
+ */
 int Grid::getMaxLocations(void)
 {
    return maxLocations;
 }
 
+/**
+ * isBuild. Return if grid position is build.
+ *
+ * @param x. The x position
+ * @param y. The y position.
+ *
+ * @return boolean (true=build) of (false==not build) 
+ */
 bool Grid::isBuild(int x, int y)
 {
 	return (gridBuild[y][x]!='0');

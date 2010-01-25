@@ -51,6 +51,10 @@ extern 	Trace *trace;
 // Constructor
 // ------------------------------
 
+/**
+ * Constructor
+ * Init all properties with default values.
+ */
 Matrix::Matrix()
 {
 	const char *s_fn="Matrix::Matrix";
@@ -71,6 +75,10 @@ Matrix::Matrix()
 // Destructor
 // -------------------------------
 
+/**
+ * Destructor
+ * Clean up all allocated memory
+ */
 Matrix::~Matrix()
 {
 	const char *s_fn="Matrix::~Matrix";

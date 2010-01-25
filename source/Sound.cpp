@@ -52,6 +52,10 @@ extern 	Trace *trace;
 // Constructor 
 // ------------------------------
 
+/**
+ * Constructor
+ * Init all properties with default values.
+ */
 Sound::Sound()
 {
    const char *s_fn="Sound::Sound";
@@ -72,6 +76,10 @@ Sound::Sound()
 // Destructor
 // ------------------------------
 
+/**
+ * Destructor
+ * Clean up all allocated memory
+ */
 Sound::~Sound()
 {
   const char *s_fn="Sound::~Sound";

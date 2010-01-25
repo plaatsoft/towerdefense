@@ -42,6 +42,10 @@ extern WeaponSpecs *weaponSpecs;
 // Constructor 
 // ------------------------------
 
+/**
+ * Constructor
+ * Init all properties with default values.
+ */
 Pointer::Pointer(void)
 {
    const char *s_fn="Pointer::Pointer";
@@ -67,6 +71,10 @@ Pointer::Pointer(void)
 // Destructor
 // ------------------------------
 
+/**
+ * Destructor
+ * Clean up all allocated memory
+ */
 Pointer::~Pointer(void)
 {
   const char *s_fn="Pointer::~Pointer";
