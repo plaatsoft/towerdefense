@@ -38,6 +38,10 @@ bool traceOn = false;
 // Constructor
 // ------------------------------
 
+/**
+ * Constructor
+ * Init all properties with default values.
+ */
 Trace::Trace()
 {
 	fp=NULL;
@@ -47,6 +51,10 @@ Trace::Trace()
 // Destructor
 // ------------------------------
 
+/**
+ * Destructor
+ * Clean up all allocated memory
+ */
 Trace::~Trace()
 {
   close();

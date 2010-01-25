@@ -4716,7 +4716,7 @@ int main(void)
 		// Render screen
 		GRRLIB_Render();
 		
-		// Process event
+		// Process event machine
 		processEvent();
 		
 		// Process state machine

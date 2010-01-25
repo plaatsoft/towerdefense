@@ -31,6 +31,10 @@ extern Trace *trace;
 // Constructor 
 // ------------------------------
 
+/**
+ * Constructor
+ * Init all properties with default values.
+ */
 Settings::Settings()
 {
    const char *s_fn="Settings::Settings";
@@ -68,6 +72,10 @@ Settings::Settings()
 // Destructor
 // ------------------------------
 
+/**
+ * Destructor
+ * Clean up all allocated memory
+ */
 Settings::~Settings()
 {
 	const char *s_fn="Settings::~Settings";

@@ -31,6 +31,10 @@ extern Trace *trace;
 // Constructor 
 // ------------------------------
 
+/**
+ * Constructor
+ * Init all properties with default values.
+ */
 HighScore::HighScore()
 {
 	const char *s_fn="HighScore::HighScore";
@@ -52,12 +56,16 @@ HighScore::HighScore()
 // Destructor
 // ------------------------------
 
+/**
+ * Destructor
+ * Clean up all allocated memory
+ */
 HighScore::~HighScore()
 {
 	const char *s_fn="HighScore::~HighScore";
 	trace->event(s_fn,0,"enter");
   
-    trace->event(s_fn,0,"HighScore destroyed");
+   trace->event(s_fn,0,"HighScore destroyed");
 	
 	trace->event(s_fn,0,"leave [void]");
 }

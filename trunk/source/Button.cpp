@@ -38,7 +38,7 @@ extern Pointer *pointers[MAX_POINTERS];
 
 /**
  * Constructor
- * Init all button values with default values.
+ * Init all properties with default values.
  */
 Button::Button()
 {
