@@ -40,7 +40,7 @@
 class Button
 {
   private:
-	int x;
+	int x;							
 	int y;	
 	GRRLIB_texImg *imageNormal;
 	GRRLIB_texImg *imageFocus;

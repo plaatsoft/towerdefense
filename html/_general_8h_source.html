@@ -248,70 +248,44 @@
 <a name="l00254"></a>00254 
 <a name="l00255"></a><a class="code" href="struct_game.html">00255</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>
 <a name="l00256"></a>00256 {
-<a name="l00260"></a><a class="code" href="struct_game.html#a96e10cdddd1bea7a06be5a33071b157a">00260</a>         <span class="keywordtype">int</span> stateMachine;
-<a name="l00261"></a>00261         
-<a name="l00265"></a><a class="code" href="struct_game.html#a76ec2a7977cde1f8e884392026692907">00265</a>         <span class="keywordtype">int</span> prevStateMachine;
-<a name="l00266"></a>00266         
-<a name="l00270"></a><a class="code" href="struct_game.html#acafe4c229c051e50e7e55ba9ce3e5893">00270</a>         <span class="keywordtype">int</span> event;
-<a name="l00271"></a>00271         
-<a name="l00275"></a><a class="code" href="struct_game.html#ae3e337f7660a1dbaee0777252f7ce6f5">00275</a>         <span class="keywordtype">int</span> prevEvent;
-<a name="l00276"></a>00276         
-<a name="l00280"></a><a class="code" href="struct_game.html#a9adf2386cefa4339a5ba9a4bd5298fc8">00280</a>         <span class="keywordtype">int</span> maxTodayHighScore;
-<a name="l00281"></a>00281 
-<a name="l00285"></a><a class="code" href="struct_game.html#a4d91eb06a82581f439ec3f9d2b4e4233">00285</a>         <span class="keywordtype">int</span> maxGlobalHighScore;
-<a name="l00286"></a>00286 
-<a name="l00290"></a><a class="code" href="struct_game.html#a1112cb48badbada129ab86542e4436f1">00290</a>         <span class="keywordtype">int</span> selectedMap; 
-<a name="l00291"></a>00291 
-<a name="l00295"></a><a class="code" href="struct_game.html#a350ebd145ae9327187c81ce425183b8a">00295</a>         <span class="keywordtype">int</span> monsterInBase;      
-<a name="l00296"></a>00296 
-<a name="l00300"></a><a class="code" href="struct_game.html#aa4c92022e69cc0e0caae194aef6a9343">00300</a>         <span class="keywordtype">int</span> selectedWeapon;     
-<a name="l00301"></a>00301         
-<a name="l00305"></a><a class="code" href="struct_game.html#a83d287ec8954b14d038edad807ee6503">00305</a>         <span class="keywordtype">bool</span> selectedNewWeapon;
-<a name="l00306"></a>00306         
-<a name="l00310"></a><a class="code" href="struct_game.html#acf4d33ee4cff36f69b924471174dcb11">00310</a>         <span class="keywordtype">int</span> level;
-<a name="l00311"></a>00311                 
-<a name="l00315"></a><a class="code" href="struct_game.html#a119653b54e00ac57c17b2e6d8c35fc57">00315</a>         <span class="keywordtype">int</span> panelXOffset;
-<a name="l00316"></a>00316 
-<a name="l00320"></a><a class="code" href="struct_game.html#a6a2a2e7cd6086acec86b710b311c9637">00320</a>         <span class="keywordtype">int</span> panelYOffset;
-<a name="l00321"></a>00321         
-<a name="l00325"></a><a class="code" href="struct_game.html#aef160b7437d94056f1dc59646cd5b87d">00325</a>         <span class="keywordtype">int</span> score;
-<a name="l00326"></a>00326         
-<a name="l00330"></a><a class="code" href="struct_game.html#a6c7edcaba5ab774e43e2de66dbb6f9d2">00330</a>         <span class="keywordtype">int</span> cash;
-<a name="l00331"></a>00331 
-<a name="l00335"></a><a class="code" href="struct_game.html#a05b298baa5d10b97c81240a52890aee5">00335</a>         <span class="keywordtype">int</span> wave;
-<a name="l00336"></a>00336         
-<a name="l00340"></a><a class="code" href="struct_game.html#aba65ff4ee6c2557f45c49bded2f2a2ea">00340</a>         <span class="keywordtype">int</span> weaponType;
-<a name="l00341"></a>00341         
-<a name="l00345"></a><a class="code" href="struct_game.html#a61b4285e629959d47d1c19a5f34a606b">00345</a>         <span class="keywordtype">int</span> waveCountDown;
-<a name="l00346"></a>00346         
-<a name="l00350"></a><a class="code" href="struct_game.html#a3dc1a3e1bd40321c88eca240b880070e">00350</a>         <span class="keywordtype">int</span> alfa;
-<a name="l00351"></a>00351 
-<a name="l00355"></a><a class="code" href="struct_game.html#a63177970cacb40efba67ce501ea89210">00355</a>         <span class="keywordtype">int</span> angle;
-<a name="l00356"></a>00356         
-<a name="l00360"></a><a class="code" href="struct_game.html#a7bbce2c7450610bda61793f7dd12ceed">00360</a>         <span class="keywordtype">int</span> <a class="code" href="structlocation.html">location</a>;
-<a name="l00361"></a>00361         
-<a name="l00365"></a><a class="code" href="struct_game.html#aa6ea9b07932df851a61fa72bd01761fe">00365</a>         <span class="keywordtype">float</span> size;
-<a name="l00366"></a>00366         
-<a name="l00370"></a><a class="code" href="struct_game.html#ad4efbeeb0c0e073855f8063d1cc6e75b">00370</a>         <span class="keywordtype">float</span> wave1;
-<a name="l00371"></a>00371         
-<a name="l00375"></a><a class="code" href="struct_game.html#aa4795baf3433bc86d3d9ffad47e3097d">00375</a>         <span class="keywordtype">float</span> wave2;
-<a name="l00376"></a>00376         
-<a name="l00380"></a><a class="code" href="struct_game.html#aa640fa82ed1bb246316ba651c74b0220">00380</a>         <span class="keywordtype">int</span> scrollIndex;
-<a name="l00381"></a>00381         
-<a name="l00385"></a><a class="code" href="struct_game.html#a423f226982e21941f55fd3d632bd810c">00385</a>         <span class="keywordtype">int</span> frameCounter;
-<a name="l00386"></a>00386         
-<a name="l00390"></a><a class="code" href="struct_game.html#a2064d16c49632c5426219fae4734331c">00390</a>         <span class="keywordtype">int</span> frameDelay;
-<a name="l00391"></a>00391         
-<a name="l00395"></a><a class="code" href="struct_game.html#ad30f972f2e6e3e5ecab0dee38ae6cdb8">00395</a>         <span class="keywordtype">int</span> frame;
-<a name="l00396"></a>00396 }
-<a name="l00397"></a>00397 <a class="code" href="struct_game.html">Game</a>;
-<a name="l00398"></a>00398 
-<a name="l00399"></a>00399 <span class="preprocessor">#endif</span>
-<a name="l00400"></a>00400 <span class="preprocessor"></span>
-<a name="l00401"></a>00401 <span class="comment">// -----------------------------------------------------------</span>
-<a name="l00402"></a>00402 <span class="comment">// The End</span>
-<a name="l00403"></a>00403 <span class="comment">// -----------------------------------------------------------</span>
-<a name="l00404"></a>00404  
+<a name="l00257"></a>00257         
+<a name="l00258"></a><a class="code" href="struct_game.html#a96e10cdddd1bea7a06be5a33071b157a">00258</a>         <span class="keywordtype">int</span> stateMachine;                       
+<a name="l00259"></a><a class="code" href="struct_game.html#a76ec2a7977cde1f8e884392026692907">00259</a>         <span class="keywordtype">int</span> prevStateMachine;   
+<a name="l00261"></a><a class="code" href="struct_game.html#acafe4c229c051e50e7e55ba9ce3e5893">00261</a>         <span class="keywordtype">int</span> event;                                      
+<a name="l00262"></a><a class="code" href="struct_game.html#ae3e337f7660a1dbaee0777252f7ce6f5">00262</a>         <span class="keywordtype">int</span> prevEvent;                          
+<a name="l00264"></a><a class="code" href="struct_game.html#a9adf2386cefa4339a5ba9a4bd5298fc8">00264</a>         <span class="keywordtype">int</span> maxTodayHighScore;  
+<a name="l00265"></a><a class="code" href="struct_game.html#a4d91eb06a82581f439ec3f9d2b4e4233">00265</a>         <span class="keywordtype">int</span> maxGlobalHighScore; 
+<a name="l00267"></a><a class="code" href="struct_game.html#a1112cb48badbada129ab86542e4436f1">00267</a>         <span class="keywordtype">int</span> selectedMap;                        
+<a name="l00268"></a><a class="code" href="struct_game.html#a350ebd145ae9327187c81ce425183b8a">00268</a>         <span class="keywordtype">int</span> monsterInBase;              
+<a name="l00269"></a><a class="code" href="struct_game.html#aa4c92022e69cc0e0caae194aef6a9343">00269</a>         <span class="keywordtype">int</span> selectedWeapon;             
+<a name="l00270"></a><a class="code" href="struct_game.html#a83d287ec8954b14d038edad807ee6503">00270</a>         <span class="keywordtype">bool</span> selectedNewWeapon; 
+<a name="l00271"></a><a class="code" href="struct_game.html#acf4d33ee4cff36f69b924471174dcb11">00271</a>         <span class="keywordtype">int</span> level;                                      
+<a name="l00273"></a><a class="code" href="struct_game.html#a119653b54e00ac57c17b2e6d8c35fc57">00273</a>         <span class="keywordtype">int</span> panelXOffset;                       
+<a name="l00274"></a><a class="code" href="struct_game.html#a6a2a2e7cd6086acec86b710b311c9637">00274</a>         <span class="keywordtype">int</span> panelYOffset;                       
+<a name="l00275"></a><a class="code" href="struct_game.html#aef160b7437d94056f1dc59646cd5b87d">00275</a>         <span class="keywordtype">int</span> score;                                      
+<a name="l00276"></a><a class="code" href="struct_game.html#a6c7edcaba5ab774e43e2de66dbb6f9d2">00276</a>         <span class="keywordtype">int</span> cash;                                       
+<a name="l00277"></a><a class="code" href="struct_game.html#a05b298baa5d10b97c81240a52890aee5">00277</a>         <span class="keywordtype">int</span> wave;                                       
+<a name="l00278"></a><a class="code" href="struct_game.html#aba65ff4ee6c2557f45c49bded2f2a2ea">00278</a>         <span class="keywordtype">int</span> weaponType;                 
+<a name="l00279"></a><a class="code" href="struct_game.html#a61b4285e629959d47d1c19a5f34a606b">00279</a>         <span class="keywordtype">int</span> waveCountDown;              
+<a name="l00281"></a><a class="code" href="struct_game.html#a3dc1a3e1bd40321c88eca240b880070e">00281</a>         <span class="keywordtype">int</span> alfa;                                       
+<a name="l00282"></a><a class="code" href="struct_game.html#a63177970cacb40efba67ce501ea89210">00282</a>         <span class="keywordtype">int</span> angle;                                      
+<a name="l00283"></a><a class="code" href="struct_game.html#a7bbce2c7450610bda61793f7dd12ceed">00283</a>         <span class="keywordtype">int</span> <a class="code" href="structlocation.html">location</a>;                           
+<a name="l00284"></a><a class="code" href="struct_game.html#aa6ea9b07932df851a61fa72bd01761fe">00284</a>         <span class="keywordtype">float</span> size;                                     
+<a name="l00285"></a><a class="code" href="struct_game.html#ad4efbeeb0c0e073855f8063d1cc6e75b">00285</a>         <span class="keywordtype">float</span> wave1;                            
+<a name="l00286"></a><a class="code" href="struct_game.html#aa4795baf3433bc86d3d9ffad47e3097d">00286</a>         <span class="keywordtype">float</span> wave2;                            
+<a name="l00287"></a><a class="code" href="struct_game.html#aa640fa82ed1bb246316ba651c74b0220">00287</a>         <span class="keywordtype">int</span> scrollIndex;                        
+<a name="l00289"></a><a class="code" href="struct_game.html#a423f226982e21941f55fd3d632bd810c">00289</a>         <span class="keywordtype">int</span> frameCounter;                       
+<a name="l00290"></a><a class="code" href="struct_game.html#a2064d16c49632c5426219fae4734331c">00290</a>         <span class="keywordtype">int</span> frameDelay;                 
+<a name="l00291"></a><a class="code" href="struct_game.html#ad30f972f2e6e3e5ecab0dee38ae6cdb8">00291</a>         <span class="keywordtype">int</span> frame;                                      
+<a name="l00292"></a>00292 }
+<a name="l00293"></a>00293 <a class="code" href="struct_game.html">Game</a>;
+<a name="l00294"></a>00294 
+<a name="l00295"></a>00295 <span class="preprocessor">#endif</span>
+<a name="l00296"></a>00296 <span class="preprocessor"></span>
+<a name="l00297"></a>00297 <span class="comment">// -----------------------------------------------------------</span>
+<a name="l00298"></a>00298 <span class="comment">// The End</span>
+<a name="l00299"></a>00299 <span class="comment">// -----------------------------------------------------------</span>
+<a name="l00300"></a>00300  
 </pre></div></div>
 <hr size="1"/><address style="text-align: right;"><small>Generated by&nbsp;
 <a href="http://www.doxygen.org/index.html">
