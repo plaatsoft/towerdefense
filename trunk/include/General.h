@@ -254,145 +254,41 @@ enum
 
 typedef struct 
 {
-	/**
-    * State Machine status
-	 */
-	int stateMachine;
 	
-	/**
-    * Previous State Machine status
-	 */
-	int prevStateMachine;
+	int stateMachine;			/**< State Machine status */
+	int prevStateMachine;	/**< Previous State Machine status */
 	
-	/**
-    * Current event state
-	 */
-	int event;
+	int event; 					/**< Current event state */
+	int prevEvent;				/**< Previous event state */
 	
-	/**
-    * Previous event state
-	 */
-	int prevEvent;
+	int maxTodayHighScore;	/**< maximum Today highscore entries [0..40] */	
+	int maxGlobalHighScore;	/**< maximum Global highscore entries [0..40] */
 	
-	/**
-    * maximum Today highscore entries [0..40]
-	 */	
-	int maxTodayHighScore;
-
-	/**
-    * maximum Global highscore entries [0..40]
-	 */
-	int maxGlobalHighScore;
-
-	/**
-    * game select Map id
-	 */	
-	int selectedMap; 
-
-	/**
-    * game monsters in base.
-	 */
-	int monsterInBase;	
-
-	/**
-    * game selected weapon id 
-	 */
-	int selectedWeapon;	
-	
-	/**
-    * game selected new weapon (draging mode).
-	 */
-	bool selectedNewWeapon;
-	
-	/**
-    * Game level mode (easy, medium, hard)
-	 */
-	int level;
+	int selectedMap; 			/**< game select Map id */	
+	int monsterInBase;		/**< game monsters in base. */
+	int selectedWeapon;		/**< game selected weapon id */
+	bool selectedNewWeapon;	/**< game selected new weapon (draging mode). */
+	int level; 					/**< Game level mode (easy, medium, hard) */
 		
-	/**
-    * game panel X offset
-	 */
-	int panelXOffset;
+	int panelXOffset;			/**< game panel X offset */
+	int panelYOffset;			/**< game panel Y offset */
+	int score;					/**< game score */
+	int cash;					/**< game cash */
+	int wave;					/**< game wave number */
+	int weaponType;			/**< game weapon type */
+	int waveCountDown;		/**< game wave count down counter */
+	
+	int alfa;					/**< general graphical image alfa value [0..255] */
+	int angle;					/**< general graphical image angle value [0..360] */
+	int location;				/**< general graphical location counter */
+	float size;					/**< general graphical size [0..1] */	
+	float wave1;				/**< general graphical wave1 counter */
+	float wave2;				/**< general graphical wave2 counter */
+	int scrollIndex;			/**< general graphical scrollbar index counter */
 
-	/**
-    * game panel Y offset
-	 */
-	int panelYOffset;
-	
-	/**
-    * game score
-	 */
-	int score;
-	
-	/**
-    * game cash
-	 */
-	int cash;
-
-	/**
-    * game wave number
-	 */	
-	int wave;
-	
-	/**
-    * game weapon type 
-	 */
-	int weaponType;
-	
-	/**
-    * game wave count down counter
-	 */
-	int waveCountDown;
-	
-	/**
-    * general graphical image alfa value [0..255]
-	 */
-	int alfa;
-
-	/**
-    * general graphical image angle value [0..360]
-	 */
-	int angle;
-	
-	/**
-    * general graphical location counter 
-	 */
-	int location;
-	
-	/**
-    * general graphical size [0..1] 
-	 */	
-	float size;
-	
-	/**
-    * general graphical wave1 counter 
-	 */
-	float wave1;
-	
-	/**
-    * general graphical wave2 counter 
-	 */
-	float wave2;
-	
-	/**
-    * general graphical scrollbar index counter 
-	 */
-	int scrollIndex;
-	
-	/**
-    * general FPS frame counter 
-	 */
-	int frameCounter;
-	
-	/**
-    * general sprite animation frame delay counter 
-	 */
-	int frameDelay;
-	
-	/**
-    * general sprite active frame index
-	 */
-	int frame;
+	int frameCounter;			/**< general FPS frame counter */
+	int frameDelay;			/**< general sprite animation frame delay counter */
+	int frame;					/**< general sprite active frame index */
 }
 Game;
 
