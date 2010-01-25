@@ -1,22 +1,33 @@
-/*  
-**  Created by wplaat (www.plaatsoft.nl)
-**
-**  Copyright (C) 2009-2010
-**  =======================
-**
-**  This program is free software; you can redistribute it and/or modify
-**  it under the terms of the GNU General Public License as published by
-**  the Free Software Foundation, version 2.
-**
-**  This program is distributed in the hope that it will be useful,
-**  but WITHOUT ANY WARRANTY; without even the implied warranty of
-**  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-**  GNU General Public License for more details.
-**
-**  You should have received a copy of the GNU General Public License
-**  along with this program; if not, write to the Free Software
-**  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-*/
+/**
+ * @mainpage Wii TowerDefense Documentation
+ * Welcome to the TowerDefense documentation.
+ *
+ * @section Introduction
+ * WiiTowerDefense is a 2D classic game for the Nintedo Wii.
+ *
+ * @section Links
+ * Website: http://www.plaatsoft.nl\n
+ * Code: http://code.google.com/p/wiitowerdefense\n
+ *
+ * @section Credits
+ * Documentation  : wplaat\n
+ *
+ * @section Licence
+ * Copyright (c) 2009-2010 Plaatsoft
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, version 2.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 #ifndef GENERAL_H
 #define GENERAL_H
@@ -243,46 +254,144 @@ enum
 
 typedef struct 
 {
-	// State Machine status
+	/**
+    * State Machine status
+	 */
 	int stateMachine;
+	
+	/**
+    * Previous State Machine status
+	 */
 	int prevStateMachine;
 	
-	// Events
+	/**
+    * Current event state
+	 */
 	int event;
+	
+	/**
+    * Previous event state
+	 */
 	int prevEvent;
-		
-	// Highscore markers
+	
+	/**
+    * maximum Today highscore entries [0..40]
+	 */	
 	int maxTodayHighScore;
+
+	/**
+    * maximum Global highscore entries [0..40]
+	 */
 	int maxGlobalHighScore;
 
-	// Game variables
-	char name[MAX_LEN];	
+	/**
+    * game select Map id
+	 */	
 	int selectedMap; 
+
+	/**
+    * game monsters in base.
+	 */
 	int monsterInBase;	
+
+	/**
+    * game selected weapon id 
+	 */
 	int selectedWeapon;	
+	
+	/**
+    * game selected new weapon (draging mode).
+	 */
 	bool selectedNewWeapon;
-	int mode;
+	
+	/**
+    * Game level mode (easy, medium, hard)
+	 */
 	int level;
 		
-	// game panel variables
+	/**
+    * game panel X offset
+	 */
 	int panelXOffset;
+
+	/**
+    * game panel Y offset
+	 */
 	int panelYOffset;
+	
+	/**
+    * game score
+	 */
 	int score;
-	int cash;	
+	
+	/**
+    * game cash
+	 */
+	int cash;
+
+	/**
+    * game wave number
+	 */	
 	int wave;
+	
+	/**
+    * game weapon type 
+	 */
 	int weaponType;
+	
+	/**
+    * game wave count down counter
+	 */
 	int waveCountDown;
 	
-	// Variables for graphical animations
+	/**
+    * general graphical image alfa value [0..255]
+	 */
 	int alfa;
+
+	/**
+    * general graphical image angle value [0..360]
+	 */
 	int angle;
+	
+	/**
+    * general graphical location counter 
+	 */
 	int location;
+	
+	/**
+    * general graphical size [0..1] 
+	 */	
 	float size;
+	
+	/**
+    * general graphical wave1 counter 
+	 */
 	float wave1;
+	
+	/**
+    * general graphical wave2 counter 
+	 */
 	float wave2;
+	
+	/**
+    * general graphical scrollbar index counter 
+	 */
 	int scrollIndex;
+	
+	/**
+    * general FPS frame counter 
+	 */
 	int frameCounter;
+	
+	/**
+    * general sprite animation frame delay counter 
+	 */
 	int frameDelay;
+	
+	/**
+    * general sprite active frame index
+	 */
 	int frame;
 }
 Game;

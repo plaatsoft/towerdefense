@@ -36,7 +36,7 @@ extern Game  game;
 
 /**
  * Constructor
- * Init all grif values with default values.
+ * Init all values with default values.
  */
 Grid::Grid()
 {
@@ -188,7 +188,7 @@ void Grid::parseGrid(void)
 /**
  * loadImage file from sdcard
  *
- * @param filename. The filename of the image including path.
+ * @param filename The filename of the image including path.
  */
 GRRLIB_texImg * Grid::loadImage(const char *filename)
 {
@@ -218,7 +218,7 @@ GRRLIB_texImg * Grid::loadImage(const char *filename)
 /**
  * loadGrid the load xml file.
  *
- * @param filname. The filename of the grid in xml format
+ * @param filename The filename of the grid in xml format
  */
 bool Grid::loadGrid(const char* filename)
 {
@@ -268,9 +268,9 @@ bool Grid::loadGrid(const char* filename)
 /**
  * draw. Draw grid on screen.
  *
- * @param xOffset The xoffset of the grid
- * @param yOffset The yoffset of the grid
- * @param size. This size (default value is 1 for normal size) 
+ * @param xOffset  The xoffset of the grid
+ * @param yOffset  The yoffset of the grid
+ * @param size     This size (default value is 1 for normal size) 
  */
 void Grid::draw(int xOffset, int yOffset, float size)
 {
@@ -449,7 +449,7 @@ void Grid::draw(int xOffset, int yOffset, float size)
 /**
  * Load grid map and parse it for monster movement.
  *
- * @param directory The directory were the map.xml is located
+ * @param directory   The directory were the map.xml is located
  */
 void Grid::create(const char* directory)
 {
@@ -546,7 +546,7 @@ void Grid::initBuild(void)
 /**
  * setIndex value.
  *
- * @param index1. This index value
+ * @param index1  This index value
  */
 void Grid::setIndex(int index1)
 {
@@ -559,8 +559,8 @@ void Grid::setIndex(int index1)
 /**
  * setBuild build value in grid. Now nothing else can be build here
  *
- * @param x. This x value 
- * @param y. This y value 
+ * @param x   The x value 
+ * @param y   The y value 
  */
 void Grid::setBuild(int x, int y)
 {
@@ -573,8 +573,8 @@ void Grid::setBuild(int x, int y)
 /**
  * setUnBuild. unbuild value in grid. Now something else can be build here
  *
- * @param x. This x value 
- * @param y. This y value 
+ * @param x   The x value 
+ * @param y   The y value 
  */
 void Grid::setUnBuild(int x, int y)
 {
@@ -591,9 +591,9 @@ void Grid::setUnBuild(int x, int y)
 /**
  * getLocationX. Get the x position form the walking plan.
  *
- * @param pos. The pos value
+ * @param pos   The pos value
  *
- * @return x. The x position
+ * @return The x position
  */
 int Grid::getLocationX(int pos)
 {
@@ -607,9 +607,9 @@ int Grid::getLocationX(int pos)
 /**
  * getLocationY. Get the y position form the walking plan.
  *
- * @param pos. The pos value
+ * @param pos   The pos value
  *
- * @return y. The y position
+ * @return The y position
  */
 int Grid::getLocationY(int pos)
 {
@@ -633,8 +633,8 @@ int Grid::getMaxLocations(void)
 /**
  * isBuild. Return if grid position is build.
  *
- * @param x. The x position
- * @param y. The y position.
+ * @param x   The x position.
+ * @param y   The y position.
  *
  * @return boolean (true=build) of (false==not build) 
  */
