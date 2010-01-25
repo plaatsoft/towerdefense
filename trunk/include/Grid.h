@@ -22,36 +22,44 @@
 #define GRID_H
 
 #include "GRRLIB.h"
- 
-typedef struct
-{
-	int filename;
-	bool road;
-	int angle;
-	GRRLIB_texImg *image;
-}
-GridMeta;
 
 typedef struct 
 {
-	int x;
-	int y;
+	int x;						/**< x 	The x position */
+	int y;						/**< y 	The y position */
 }
 location;
 
+/**
+ * Grid class
+ * @param locationList 		The monster walk pad arry .
+ * @param gridData 			The raw grid data array.
+ * @param gridBuild			The build data array.
+ * @param maxLocations		The location steps in grid.
+ * @param baseX				The baseX location in the grid.
+ * @param baseY				The baseY location in the grid.
+ * @param index				The index number of this grid.
+ * @param imageRoad1			The image of road1 element.
+ * @param imageRoad2			The image of road2 element.
+ * @param imageRoad3			The image of road3 element.
+ * @param imageRoad4			The image of road4 element.
+ * @param imageRoad5			The image of road5 element.
+ * @param imageBase			The image of Base element.
+ * @param imageGeneral1		The image of roadGeneral1 (Bridge) element.
+ * @param imageGeneral2		The image of roadGeneral2 (Water) element.
+ */
+ 
 class Grid
 {
   private:
-	GridMeta gridMeta;
 	location locationList[MAX_GRID_Y*MAX_GRID_X];
-	char gridData[MAX_GRID_Y][MAX_GRID_X];
+	char gridData[MAX_GRID_Y][MAX_GRID_X];	
 	char gridBuild[MAX_GRID_Y][MAX_GRID_X];
-	int maxLines;
 	int maxLocations;
 	int baseX;
 	int baseY;
-
    int index;
+	
 	GRRLIB_texImg *imageRoad1;
 	GRRLIB_texImg *imageRoad2;
 	GRRLIB_texImg *imageRoad3;

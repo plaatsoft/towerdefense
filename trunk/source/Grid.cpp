@@ -231,7 +231,7 @@ bool Grid::loadGrid(const char* filename)
    const char  *pointer;
    bool error=false;
 	
-   maxLines=0;
+   int maxLines=0;
    
    /* Load our xml file! */
    fp = fopen(filename, "r");
