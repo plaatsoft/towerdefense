@@ -36,7 +36,7 @@ class Trace
 	int open(const char *filename);
 	int event( const char *functionName, int threadNr, const char *event, ...);
 	int eventRaw( char character);
-	int close();
+	void close();
 };
 
 #endif

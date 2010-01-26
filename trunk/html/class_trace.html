@@ -33,7 +33,7 @@
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_trace.html#a85a93fcdd0c9974af85cb7c9f5104caf">open</a> (const char *filename)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_trace.html#ab68cc26058c613a778e8b595144a228c">event</a> (const char *functionName, int threadNr, const char *event,...)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_trace.html#a3e901ebb289f3242c29b0efa48205ecc">eventRaw</a> (char character)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_trace.html#a5473d8320e5f61ac1ce834594d251ee9">close</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_trace.html#a5ae591df94fc66ccb85cbb6565368bca">close</a> ()</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="adb723362c45cc0c3de9801707bbc3d70"></a><!-- doxytag: member="Trace::Trace" ref="adb723362c45cc0c3de9801707bbc3d70" args="()" -->
@@ -73,12 +73,12 @@
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a5473d8320e5f61ac1ce834594d251ee9"></a><!-- doxytag: member="Trace::close" ref="a5473d8320e5f61ac1ce834594d251ee9" args="()" -->
+<a class="anchor" id="a5ae591df94fc66ccb85cbb6565368bca"></a><!-- doxytag: member="Trace::close" ref="a5ae591df94fc66ccb85cbb6565368bca" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int close </td>
+          <td class="memname">void close </td>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
@@ -87,6 +87,7 @@
       </table>
 </div>
 <div class="memdoc">
+<p>Close trace file </p>
 
 </div>
 </div>
@@ -126,6 +127,17 @@
       </table>
 </div>
 <div class="memdoc">
+<p>Log trace event to trace file</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>functionName</em>&nbsp;</td><td>The function name </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>threadNr</em>&nbsp;</td><td>The threadnr [0=main thread, 1=network thread] </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>event</em>&nbsp;</td><td>The event description </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>...</em>&nbsp;</td><td>Other parameters</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>error code [0 ok, -1 error] </dd></dl>
 
 </div>
 </div>
@@ -144,6 +156,14 @@
       </table>
 </div>
 <div class="memdoc">
+<p>log raw (hex) character to trace file</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>character</em>&nbsp;</td><td>The raw data character.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>error code [0=ok, -1=error] </dd></dl>
 
 </div>
 </div>
@@ -162,6 +182,14 @@
       </table>
 </div>
 <div class="memdoc">
+<p>Open trace file.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>filename</em>&nbsp;</td><td>The trace filename</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>error code [0 ok, -1 error] </dd></dl>
 
 </div>
 </div>

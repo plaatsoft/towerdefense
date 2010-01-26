@@ -81,7 +81,7 @@ class Weapon
 	int findNearestToBase(void);
 	int findNearestToWeapon(void);
 	int findHighestEnergy(void);
-	int findFasters(void);
+	int findFastest(void);
 	int findMonster(void);
 	
 	void playFireSound(void);
@@ -95,13 +95,12 @@ class Weapon
 
 	// public methodes
 	void draw(void);
-	void fire(void);
 	void move(void);
 	bool onSelect(int x, int y);
 	
-	int  upgradePower(void);
-	int  upgradeRange(void);
-	int  upgradeRate(void);
+	void upgradePower(void);
+	void upgradeRange(void);
+	void upgradeRate(void);
 	
 	// Setters
 	void setX(int x);

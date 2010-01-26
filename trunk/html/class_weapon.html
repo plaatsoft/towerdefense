@@ -31,12 +31,11 @@
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weapon.html#afe4874b2488339a7acc59f019b3eb493">Weapon</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weapon.html#a40a8dc12bbf9d9ebee1091f27dcfafaa">~Weapon</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weapon.html#ad2e97e7b54d0bf35e406b91fbdd2f256">draw</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weapon.html#a69acea772ef3272e8c44a27c730ceb0b">fire</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weapon.html#a84b28b3bfeddbd1835e7b35aec2ba667">move</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weapon.html#a10864d3209971be992aa1e86d668b23c">onSelect</a> (int x, int y)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weapon.html#ac4db8a9385e70118bd45dd546ce203f2">upgradePower</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weapon.html#a6eab8f6d7d007b6b68dd3edf2cee36b5">upgradeRange</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weapon.html#afcd04c2b4262b1c182255f71cf1ac4dd">upgradeRate</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weapon.html#a18f4b98ea264670fb17bd8ab1163c3df">upgradePower</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weapon.html#aebada09e4a484eccd7053de77711a9fe">upgradeRange</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weapon.html#ac4a8234aec506a254521613e33837a9c">upgradeRate</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weapon.html#add2578ea6b65ad27a905a6d2048748bb">setX</a> (int x)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weapon.html#adea78a9ff1234e75627dda61d972213b">setY</a> (int y)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weapon.html#a2c54c2b12ae9540592b9649d63e02c8e">setImage</a> (<a class="el" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> *<a class="el" href="structimage.html">image</a>)</td></tr>
@@ -129,24 +128,7 @@
       </table>
 </div>
 <div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a69acea772ef3272e8c44a27c730ceb0b"></a><!-- doxytag: member="Weapon::fire" ref="a69acea772ef3272e8c44a27c730ceb0b" args="(void)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void fire </td>
-          <td>(</td>
-          <td class="paramtype">void&nbsp;</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>draw weapon on screen </p>
 
 </div>
 </div>
@@ -471,6 +453,7 @@
       </table>
 </div>
 <div class="memdoc">
+<p>Move (fire) weapon </p>
 
 </div>
 </div>
@@ -482,13 +465,13 @@
           <td class="memname">bool onSelect </td>
           <td>(</td>
           <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>x</em>, </td>
+          <td class="paramname"> <em>x1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>y</em></td><td>&nbsp;</td>
+          <td class="paramname"> <em>y1</em></td><td>&nbsp;</td>
         </tr>
         <tr>
           <td></td>
@@ -498,6 +481,15 @@
       </table>
 </div>
 <div class="memdoc">
+<p>check if weapon is selected by WiiMote pointer</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>x1</em>&nbsp;</td><td>The x location of pointer. </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>y1</em>&nbsp;</td><td>The y location of pointer.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>weapon selected! </dd></dl>
 
 </div>
 </div>
@@ -888,12 +880,12 @@
 
 </div>
 </div>
-<a class="anchor" id="ac4db8a9385e70118bd45dd546ce203f2"></a><!-- doxytag: member="Weapon::upgradePower" ref="ac4db8a9385e70118bd45dd546ce203f2" args="(void)" -->
+<a class="anchor" id="a18f4b98ea264670fb17bd8ab1163c3df"></a><!-- doxytag: member="Weapon::upgradePower" ref="a18f4b98ea264670fb17bd8ab1163c3df" args="(void)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int upgradePower </td>
+          <td class="memname">void upgradePower </td>
           <td>(</td>
           <td class="paramtype">void&nbsp;</td>
           <td class="paramname"></td>
@@ -903,15 +895,16 @@
       </table>
 </div>
 <div class="memdoc">
+<p>upgrade power of weapon </p>
 
 </div>
 </div>
-<a class="anchor" id="a6eab8f6d7d007b6b68dd3edf2cee36b5"></a><!-- doxytag: member="Weapon::upgradeRange" ref="a6eab8f6d7d007b6b68dd3edf2cee36b5" args="(void)" -->
+<a class="anchor" id="aebada09e4a484eccd7053de77711a9fe"></a><!-- doxytag: member="Weapon::upgradeRange" ref="aebada09e4a484eccd7053de77711a9fe" args="(void)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int upgradeRange </td>
+          <td class="memname">void upgradeRange </td>
           <td>(</td>
           <td class="paramtype">void&nbsp;</td>
           <td class="paramname"></td>
@@ -921,15 +914,16 @@
       </table>
 </div>
 <div class="memdoc">
+<p>upgrade range of weapon </p>
 
 </div>
 </div>
-<a class="anchor" id="afcd04c2b4262b1c182255f71cf1ac4dd"></a><!-- doxytag: member="Weapon::upgradeRate" ref="afcd04c2b4262b1c182255f71cf1ac4dd" args="(void)" -->
+<a class="anchor" id="ac4a8234aec506a254521613e33837a9c"></a><!-- doxytag: member="Weapon::upgradeRate" ref="ac4a8234aec506a254521613e33837a9c" args="(void)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int upgradeRate </td>
+          <td class="memname">void upgradeRate </td>
           <td>(</td>
           <td class="paramtype">void&nbsp;</td>
           <td class="paramname"></td>
@@ -939,6 +933,7 @@
       </table>
 </div>
 <div class="memdoc">
+<p>upgrade rate of weapon </p>
 
 </div>
 </div>

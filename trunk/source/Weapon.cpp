@@ -107,6 +107,11 @@ Weapon::~Weapon()
 // private methods
 // ------------------------------
 
+/**
+ * find nearest enemy to base in range 
+ *
+ * @return id [-1 if no enemy is found].
+ */
 int Weapon::findNearestToBase(void)
 {
    const char *s_fn="Weapon::findHighestEnergy";
@@ -137,6 +142,11 @@ int Weapon::findNearestToBase(void)
 	return id;
 }
 
+/**
+ * find highest enery enemy in range 
+ *
+ * @return id [-1 if no enemy is found].
+ */
 int Weapon::findHighestEnergy(void)
 {
    const char *s_fn="Weapon::findHighestEnergy";
@@ -171,8 +181,12 @@ int Weapon::findHighestEnergy(void)
 	return id;
 }
 
-
-int Weapon::findFasters(void)
+/**
+ * find fastest enemy in range 
+ *
+ * @return id [-1 if no enemy is found].
+ */
+int Weapon::findFastest(void)
 {
    const char *s_fn="Weapon::findFasters";
  
@@ -206,8 +220,11 @@ int Weapon::findFasters(void)
 	return id;
 }
 
-
-// Find monster in range with the highest energy level
+/**
+ * find enemy in range depending on weapon type 
+ *
+ * @return id [-1 if no enemy is found].
+ */
 int Weapon::findMonster(void)
 {
    int id=-1;
@@ -226,7 +243,7 @@ int Weapon::findMonster(void)
 					break;
 	
 		case FIRE_MODE_FASTEST:
-					id=findFasters();
+					id=findFastest();
 					break;
 	}
 	
@@ -234,7 +251,9 @@ int Weapon::findMonster(void)
 	return id;
 }
 
-// Play fire sound 
+/**
+ * Play fire sound 
+ */
 void Weapon::playFireSound(void)
 {
 	const char *s_fn="Weapon::playFireSound";
@@ -269,8 +288,14 @@ void Weapon::playFireSound(void)
 	trace->event(s_fn,0,"leave");
 }
 
-// Calculate angle between weapon and enemies 
-// and selected correct weapon sprite frame.
+/**
+ * Calculate angle between weapon and enemies 
+ * and selected correct weapon sprite frame.
+ *
+ * @param id	The id of the enemy 
+ *
+ * @return angle between weapon and enemy.
+ */
 int Weapon::calculateAngle(int id)
 {
 	const char *s_fn="Weapon::calculateAngle";
@@ -361,7 +386,11 @@ int Weapon::calculateAngle(int id)
 	return angle;
 }
 
-// Get weapon sprite frame 
+/**
+ * Get weapon sprite frame 
+ *
+ * @return weapon sprite start frame
+ */
 int Weapon::getFrame()
 {	
 	if (image->h==32) 
@@ -414,7 +443,10 @@ int Weapon::getFrame()
 // ------------------------------
 // public methods
 // ------------------------------
-	
+
+/**
+ * draw weapon on screen
+ */
 void Weapon::draw()
 {
 	// Draw weapon range circle
@@ -437,7 +469,10 @@ void Weapon::draw()
 	GRRLIB_Rectangle((x*32)+5, (y*32)+28, 20, 4, GRRLIB_BLACK, 0);
 	GRRLIB_Rectangle((x*32)+6, (y*32)+29, proc, 2, GRRLIB_RED, 1);
 }
-				
+
+/** 
+ * Move (fire) weapon 
+ */			
 void Weapon::move(void)
 {
    const char *s_fn="Weapon::move";
@@ -492,7 +527,10 @@ void Weapon::move(void)
 	}
 }
 
-int Weapon::upgradePower(void)
+/** 
+ * upgrade power of weapon
+ */
+void Weapon::upgradePower(void)
 {
 	const char *s_fn="Weapon::upgradePower";
 	trace->event(s_fn,0,"enter");
@@ -507,11 +545,13 @@ int Weapon::upgradePower(void)
 		sound->effect(SOUND_UPGRADE);
 	}
 	
-	trace->event(s_fn,0,"leave [0]");
-	return 0;
+	trace->event(s_fn,0,"leave");
 }
 
-int Weapon::upgradeRange(void)
+/** 
+ * upgrade range of weapon
+ */
+void Weapon::upgradeRange(void)
 {
 	const char *s_fn="Weapon::upgradeRange";
 	trace->event(s_fn,0,"enter");
@@ -526,12 +566,13 @@ int Weapon::upgradeRange(void)
 		sound->effect(SOUND_UPGRADE);
 	}
 	
-	trace->event(s_fn,0,"leave [0]");
-	return 0;
+	trace->event(s_fn,0,"leave");
 }
 
-
-int Weapon::upgradeRate(void)
+/** 
+ * upgrade rate of weapon
+ */
+void Weapon::upgradeRate(void)
 {
 	const char *s_fn="Weapon::upgradeRate";
 	trace->event(s_fn,0,"enter");
@@ -553,11 +594,17 @@ int Weapon::upgradeRate(void)
 		sound->effect(SOUND_UPGRADE);
 	}
 		
-	trace->event(s_fn,0,"leave [0]");
-	return 0;
+	trace->event(s_fn,0,"leave");
 }
 
-
+/** 
+ * check if weapon is selected by WiiMote pointer
+ *
+ * @param x1 	The x location of pointer.
+ * @param y1	The y location of pointer.
+ *
+ * @return weapon selected!
+ */
 bool Weapon::onSelect(int x1, int y1)
 {   
 	const char *s_fn="Weapon::onSelect";
