@@ -18,6 +18,11 @@
 **  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+/*
+ * This class contain all nessary game matrix parameters.
+ * Which this parameters the game play can be easy adapted.
+ */
+ 
 #include <stdio.h>
 #include <gccore.h>
 #include <ogcsys.h>
@@ -46,7 +51,7 @@
 #define MAX_AMOUNT_OF_ENEMIES_IN_WAVE  90
 
 extern 	Trace *trace;
-
+ 
 // ------------------------------
 // Constructor
 // ------------------------------
@@ -91,6 +96,9 @@ Matrix::~Matrix()
 // Methode
 // ------------------------------
 
+/**
+ * Calculate game matrix parameters.
+ */
 void Matrix::calculateMatrix(void)
 {
 	const char *s_fn="Matrix::calculateMatrix";
@@ -206,7 +214,10 @@ void Matrix::calculateMatrix(void)
 // Getters
 // ------------------------------
 
-// Calculate how much monster will be in a wave
+/**
+ * Get how much enemies will be in a wave
+ * @return amount of enemies
+ */
 int Matrix::getEnemyAmount( void )
 {	
 	const char *s_fn="Matrix::getEnemyAmount";
@@ -216,7 +227,10 @@ int Matrix::getEnemyAmount( void )
 	return enemiesInWave;
 }
 
-// Get enemy step size
+/**
+ * Get enemy step size
+ * @return enemy step size
+ */
 int Matrix::getEnemyStep( void )
 {	
 	const char *s_fn="Matrix::getEnemyStep";
@@ -228,7 +242,10 @@ int Matrix::getEnemyStep( void )
 	return step;
 }
 
-// Get enemy delay between monsters
+/**
+ * Get enemy delay between monsters
+ * @return enemy delay value
+ */
 int Matrix::getEnemyDelay( void )
 {	
 	const char *s_fn="Matrix::getEnemyDelay";
@@ -238,7 +255,10 @@ int Matrix::getEnemyDelay( void )
 	return enemyDelay;
 }
 
-// Calculate delay between two wave.
+/** 
+ * Calculate delay between two wave.
+ * @return delay between two waves
+ */
 int Matrix::getWaveDelay( void )
 {	
    const char *s_fn="Matrix::getWaveDelay";
@@ -248,7 +268,10 @@ int Matrix::getWaveDelay( void )
 	return waveDelay;
 }
 
-// Calculate how much monster will be in a wave
+/**
+ * Calculate how much monster will be in a wave
+ * @return amount of start cash
+ */
 int Matrix::getStartCash( void )
 {
 	const char *s_fn="Matrix::getStartCash";
@@ -276,7 +299,10 @@ int Matrix::getStartCash( void )
 // Setters
 // ------------------------------
 
-// Set wave value
+/** 
+ * Set wave value 
+ * @param wave1 	Set wave1 value.
+ */
 void Matrix::setWave( int wave1 )
 {
 	const char *s_fn="Matrix::setWave";
@@ -286,7 +312,10 @@ void Matrix::setWave( int wave1 )
 	calculateMatrix();
 }
 
-// Set wave value
+/**
+ * Set level
+ * @param level1	The selected level [easy, medium, hard]
+ */
 void Matrix::setLevel( int level1 )
 {
    const char *s_fn="Matrix::setLevel";
