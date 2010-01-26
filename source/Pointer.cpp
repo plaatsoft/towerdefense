@@ -92,7 +92,12 @@ Pointer::~Pointer(void)
 // Others
 // ------------------------------
 
-// Get Next of Previous letter or number.
+/**
+ * Get Next of Previous letter or number.
+ * @param letter 	The letter
+ * @param up		The next letter (true) previous letter (false)
+ * @return letter 
+ */
 char Pointer::getLetter(char letter, bool up)
 {
 	if (up)
@@ -109,6 +114,9 @@ char Pointer::getLetter(char letter, bool up)
 	}
 }
 
+/**
+ * Process button1x action
+ */
 void Pointer::button1x(void)
 {
    if (!selected1)
@@ -120,6 +128,9 @@ void Pointer::button1x(void)
    }        
 }
 
+/**
+ * Process button2y action
+ */
 void Pointer::button2y(void)
 {
    if (!selected2)
@@ -131,6 +142,10 @@ void Pointer::button2y(void)
    }
 }
 
+/**
+ * Process button plus action
+ * @param index	The index identify with action must be executed.
+ */
 void Pointer::buttonPlus(int index)
 {
 	const char *s_fn="Pointer::buttonPlus";
@@ -183,7 +198,10 @@ void Pointer::buttonPlus(int index)
    trace->event(s_fn,0,"leave");
 }
 
-
+/**
+ * Process button minus action
+ * @param index	The index identify with action must be executed.
+ */
 void Pointer::buttonMinus(int index)
 {
 	const char *s_fn="Pointer::buttonMinus";
@@ -237,7 +255,11 @@ void Pointer::buttonMinus(int index)
 	trace->event(s_fn,0,"leave");
 }
 
-
+/**
+ * Process button scroll action
+ * @param x	The x location of the pointer.
+ * @param y	The y location of the pointer.
+ */
 void Pointer::buttonScroll(int x,int y )
 { 
 	switch (game.stateMachine)
@@ -259,6 +281,11 @@ void Pointer::buttonScroll(int x,int y )
 	}
 }
 
+/**
+ * Process button A action
+ * @param x	The x location of the pointer.
+ * @param y	The y location of the pointer.
+ */
 void Pointer::buttonA(int x, int y)
 {
 	const char *s_fn="Pointer::buttonA";
@@ -560,10 +587,14 @@ void Pointer::buttonA(int x, int y)
 			// Check if button is pressed on screen
 			if ((buttons[0]!=NULL) && (buttons[0]->onSelect(x,y,true)))
 			{
-				// Main Menu button	 
+				// Main Menu button.
 				game.stateMachine=stateMainMenu;	
+				
+				// Store new values in setting object.
 				settings->setMusicVolume(sound->getMusicVolume());
 				settings->setEffectVolume(sound->getEffectVolume());
+				
+				// Store settings to file.
 				settings->save(SETTING_FILENAME); 
 			}
 			
@@ -830,6 +861,9 @@ void Pointer::buttonA(int x, int y)
 	trace->event(s_fn,0,"leave");
 }
 
+/**
+ * Process pointer (WiiMotes) events
+ */
 void Pointer::action(void)
 {
 	const char *s_fn="Pointer::action";
@@ -1018,6 +1052,9 @@ void Pointer::action(void)
 	}
 }
 
+/**
+ * Draw pointer image on screen
+ */
 void Pointer::draw(void)
 {   	
 	if (game.selectedNewWeapon)
@@ -1037,6 +1074,10 @@ void Pointer::draw(void)
 // Setters 
 // ------------------------------
 
+/**
+ * Set pointer index
+ * @param index1	The unique index number of the pointer.
+ */
 void Pointer::setIndex(int index1)
 {
    const char *s_fn="Pointer::setIndex";
@@ -1045,6 +1086,10 @@ void Pointer::setIndex(int index1)
    index = index1;
 }
 
+/**
+ * Set pointer x location
+ * @param x1		The x position of the pointer.
+ */
 void Pointer::setX(int x1)
 {
    const char *s_fn="Pointer::setX";
@@ -1056,6 +1101,10 @@ void Pointer::setX(int x1)
    }
 }
 
+/**
+ * Set pointer Y location
+ * @param y1		The y position of the pointer.
+ */
 void Pointer::setY(int y1)
 {
    const char *s_fn="Pointer::setY";
@@ -1067,6 +1116,10 @@ void Pointer::setY(int y1)
    }
 }
 
+/**
+ * Set pointer angle
+ * @param angle1	The angle of the pointer.
+ */
 void Pointer::setAngle(int angle1)
 {
    const char *s_fn="Pointer::setAngle";
@@ -1078,6 +1131,10 @@ void Pointer::setAngle(int angle1)
    }
 } 
 
+/**
+ * Set pointer iamge
+ * @param image1	The image of the pointer.
+ */
 void Pointer::setImage(GRRLIB_texImg *image1)
 {
    const char *s_fn="Pointer::setImage";
@@ -1086,11 +1143,19 @@ void Pointer::setImage(GRRLIB_texImg *image1)
    image = image1;
 }
 
+/**
+ * Set pointer rumble counter
+ * @param rumble1 	The rumble counter of the pointer.
+ */
 void Pointer::setRumble(int rumble1)
 {
    rumble=rumble1;
 }
 
+/**
+ * Set pointer color
+ * @param color1	The color of the pointer.
+ */
 void Pointer::setColor(int color1)
 {   
    color=color1;
@@ -1100,21 +1165,37 @@ void Pointer::setColor(int color1)
 // Getters
 // ------------------------------
 
+/** 
+ * Get pointer x value
+ * @return x position
+ */
 int Pointer::getX(void)
 {
 	return x;
 }
 
+/** 
+ * Get pointer y value
+ * @return y position
+ */
 int Pointer::getY(void)
 {
 	return y;
 }
 	
+/** 
+ * Get pointer xOffset value
+ * @return xOffset position
+ */
 int Pointer::getXOffset(void)
 {
 	return xOffset;
 }
 
+/** 
+ * Get pointer yOffset value
+ * @return yOffset position
+ */
 int Pointer::getYOffset(void)
 {
 	return yOffset;

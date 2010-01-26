@@ -64,7 +64,13 @@ Trace::~Trace()
 // Methods
 // ------------------------------
 
-// Open trace file
+/**
+ * Open trace file.
+ *
+ * @param filename		The trace filename
+ *
+ * @return error code [0 ok, -1 error]
+ */
 int Trace::open(const char *filename)
 {
    int returnValue=0;
@@ -79,21 +85,23 @@ int Trace::open(const char *filename)
    return returnValue;
 }
 
-
-// Close trace file
-int Trace::close()
+/**
+ * Close trace file
+ */
+ 
+void Trace::close()
 {
-   int returnValue=0;
-   
    if (fp!=NULL)
    {
        fclose(fp);
    }	
-   return returnValue;
 }
 
-
-// Create trace timestamp
+/**
+ * Create trace timestamp
+ *
+ * @return timestamp in dutch format
+ */
 char * Trace::getDate()
 {
   struct tm *now = NULL;
@@ -114,7 +122,16 @@ char * Trace::getDate()
   return buf;
 }
 
-// Save trace event in trace file
+/**
+ * Log trace event to trace file
+ *
+ * @param functionName	The function name
+ * @param threadNr		The threadnr [0=main thread, 1=network thread]
+ * @param event			The event description
+ * @param ...				Other parameters
+ *
+ * @return error code [0 ok, -1 error]
+ */
 int Trace::event( const char *functionName, int threadNr, const char *event, ...)
 {
    int returnValue=0;
@@ -140,8 +157,13 @@ int Trace::event( const char *functionName, int threadNr, const char *event, ...
    return returnValue;
 }
 
-
-// Save trace event in trace file
+/**
+ * log raw (hex) character to trace file
+ *
+ * @param character 	The raw data character.
+ *
+ * @return error code [0=ok, -1=error]
+ */
 int Trace::eventRaw( char character)
 {
    int returnValue=0;

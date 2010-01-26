@@ -97,6 +97,9 @@ Sound::~Sound()
 // Others
 // ------------------------------
  
+ /**
+  * Start playing selected sound track
+  */
 void Sound::play(void)
 {
 	const char *s_fn="Sound::play";
@@ -151,7 +154,11 @@ void Sound::play(void)
     
 	trace->event(s_fn,0,"leave [void]");
 }
-	
+
+/**
+ * Play Sound effect
+ * @param type		The selected sound effect
+ */
 void Sound::effect(int type)
 {
 	switch(type)
@@ -242,7 +249,10 @@ void Sound::effect(int type)
 // Setters
 // ------------------------------
 
-
+/** 
+ * Set music volume
+ * @param volume 		The music volume
+ */
 void Sound::setMusicVolume(int volume)
 {
 	const char *s_fn="Sound::setMusicVolume";
@@ -255,7 +265,10 @@ void Sound::setMusicVolume(int volume)
 	}
 }
 
-
+/** 
+ * Set effect volume
+ * @param volume 		The effect volume
+ */
 void Sound::setEffectVolume(int volume)
 {	
 	const char *s_fn="Sound::setEffectVolume";
@@ -267,7 +280,10 @@ void Sound::setEffectVolume(int volume)
 	}
 }
 
-
+/** 
+ * Set music track
+ * @param track 		Set the music track [0..9]
+ */
 void Sound::setMusicTrack(int track)
 {
 	const char *s_fn="Sound::setMusicTrack";
@@ -297,16 +313,28 @@ void Sound::setMusicTrack(int track)
 // Getters
 // ------------------------------
 
+/** 
+ * Get music volume
+ * @return The music volume
+ */
 int Sound::getMusicVolume()
 {
 	return musicVolume;
 }
 
+/** 
+ * Get effect volume
+ * @return The effect volume
+ */
 int Sound::getEffectVolume()
 {
 	return effectVolume;
 }
 
+/** 
+ * Get current music track number 
+ * @return The music track
+ */
 int Sound::getMusicTrack()
 {
 	return musicTrack;
