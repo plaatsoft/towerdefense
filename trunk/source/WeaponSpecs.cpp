@@ -247,6 +247,9 @@ WeaponSpecs::~WeaponSpecs()
 // Others
 // ------------------------------
 
+/**
+ * reset weapon counters
+ */
 void WeaponSpecs::resetCounter(void)
 {
    const char *s_fn="WeaponSpecs::resetCounter";
@@ -266,7 +269,9 @@ void WeaponSpecs::resetCounter(void)
 // Getters
 // ------------------------------
 
-// Return Weapon Image (with 16x4 frames) per Type		
+/**
+ * Return Weapon Image (with 16x4 frames) per Type		
+ */
 GRRLIB_texImg * WeaponSpecs::getImage(int type)
 {
 	switch (type)
@@ -297,7 +302,9 @@ GRRLIB_texImg * WeaponSpecs::getImage(int type)
 	}
 }
 
-// Return Weapon Image (1 frame) per Type		
+/**
+ * Return Weapon Image (1 frame) per Type		
+ */
 GRRLIB_texImg * WeaponSpecs::getImageSpecial(int type)
 {
 	switch (type)

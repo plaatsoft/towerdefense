@@ -281,16 +281,13 @@
 // PROTOTYPES
 // -----------------------------------------------------------
 
-static u8 calculateFrameRate();
+static u8 calculateFrameRate(void);
 void checkGameOver(void);
 void checkNextWave(void);
 void checkPointer(void);
 void checkDeadMonsters(void);
 void moveMonsters(void);
 void moveWeapons(void);
-GRRLIB_texImg *getNewWeaponImage(int type);
-int  getWeaponPrice(int type);
-const char *getWeaponName(int type);
 
 // -----------------------------------------------------------
 // TYPEDEF
@@ -343,14 +340,17 @@ image images;
 
 typedef struct
 {
-   time_t dt;
-   char   score[MAX_LEN];
-   char   name[MAX_LEN];
-   char   location[MAX_LEN];
+   time_t dt;							/**< Time stamp of entry */
+   char   score[MAX_LEN];			/**< Score */
+   char   name[MAX_LEN];			/**< Player nickname */
+   char   location[MAX_LEN];		/**< Location (Country - City) */
 }
 topscore;
 
+/** topscore contains today highscore list [0..40] */
 topscore todayHighScore[MAX_TODAY_HIGHSCORE+1];
+
+/** topscore contains global highscore list [0..40] */
 topscore globalHighScore[MAX_GLOBAL_HIGHSCORE+1];
 
 // -----------------------------------------------------------
@@ -485,26 +485,26 @@ u32          *frameBuffer[1] 	= {NULL};
 GXRModeObj   *rmode 				= NULL;
 Mtx          GXmodelView2D;
 
-Game 			 game;
-Trace     	 *trace;
-Settings  	 *settings;
-HighScore 	 *highScore;
-Sound      	 *sound;
-WeaponSpecs  *weaponSpecs;
-MonsterSpecs *monsterSpecs;
-Matrix		 *matrix;
-Grid      	 *grids[MAX_GRIDS];
-Monster   	 *monsters[MAX_MONSTERS];
-Pointer   	 *pointers[MAX_POINTERS];
-Weapon    	 *weapons[MAX_WEAPONS];
-Button    	 *buttons[MAX_BUTTONS];
+Game 			 game;							/**< Game paramters */
+Trace     	 *trace;							/**< Trace object */
+Settings  	 *settings;						/**< Settings object */
+HighScore 	 *highScore;					/**< Highscore object */
+Sound      	 *sound;							/**< Sound object */
+WeaponSpecs  *weaponSpecs;					/**< WeaponSpecs object */
+MonsterSpecs *monsterSpecs;				/**< MonsterSpecs object */
+Matrix		 *matrix;						/**< Matrix object */
+Grid      	 *grids[MAX_GRIDS];			/**< Grid array */
+Monster   	 *monsters[MAX_MONSTERS];	/**< Monster array */
+Pointer   	 *pointers[MAX_POINTERS];	/**< Pointer array */
+Weapon    	 *weapons[MAX_WEAPONS];		/**< Weapon array */
+Button    	 *buttons[MAX_BUTTONS];		/**< Button array */
 
 // -----------------------------------
 // Destroy METHODES
 // -----------------------------------
 
 /**
- * destroy all weapons in memory.
+ * destroy all weapons objects.
  */
 void destroyWeapons(void)
 {
@@ -524,6 +524,9 @@ void destroyWeapons(void)
 	trace->event(s_fn,0,"leave");
 }
 
+/**
+ * destroy all button objects.
+ */
 void destroyButtons(void)
 {
 	const char *s_fn="destroyButtons";
@@ -541,7 +544,10 @@ void destroyButtons(void)
 	trace->event(s_fn,0,"leave");
 }
 
-void destroyMonsters()
+/**
+ * destroy all monsters objects.
+ */
+void destroyMonsters(void)
 {
 	const char *s_fn="clearMonsters";
 	trace->event(s_fn,0,"enter");
@@ -558,6 +564,9 @@ void destroyMonsters()
 	trace->event(s_fn,0,"leave");
 }
 
+/**
+ * destroy weaponsspecs object.
+ */
 void destroyMonsterSpecs(void)
 {
 	const char *s_fn="destroyMonsterSpecs";
@@ -573,6 +582,9 @@ void destroyMonsterSpecs(void)
 	trace->event(s_fn,0,"leave");
 }
 
+/**
+ * destroy all grid matrix in memory.
+ */
 void destroyMatrix(void)
 {
 	const char *s_fn="destroyMatrx";
@@ -588,6 +600,9 @@ void destroyMatrix(void)
 	trace->event(s_fn,0,"leave");
 }
 
+/**
+ * destroy all pointers objects.
+ */
 void destroyPointers(void)
 {
 	const char *s_fn="destroyPointers";
@@ -606,6 +621,9 @@ void destroyPointers(void)
 	trace->event(s_fn,0,"leave");
 }
 
+/**
+ * destroy all grids objects.
+ */
 void destroyGrids(void)
 {
 	const char *s_fn="destroyGrids";
@@ -624,6 +642,9 @@ void destroyGrids(void)
 	trace->event(s_fn,0,"leave");
 }
 
+/**
+ * destroy sound object.
+ */
 void destroySound(void)
 {
 	const char *s_fn="destroySound";
@@ -638,6 +659,9 @@ void destroySound(void)
 	trace->event(s_fn,0,"leave");
 }
 
+/**
+ * destroy local highscore object.
+ */
 void destroyHighScore(void)
 {
 	const char *s_fn="destroyHighScore";
@@ -653,6 +677,9 @@ void destroyHighScore(void)
 	trace->event(s_fn,0,"leave");
 }
 
+/**
+ * destroy setting object.
+ */
 void destroySettings(void)
 {
 	const char *s_fn="destroySettings";
@@ -668,6 +695,9 @@ void destroySettings(void)
 	trace->event(s_fn,0,"leave");
 }
 
+/**
+ * destroy weaponSpec object.
+ */
 void destroyWeaponSpecs(void)
 {
 	const char *s_fn="destroyWeaponSpecs";
@@ -683,6 +713,9 @@ void destroyWeaponSpecs(void)
 	trace->event(s_fn,0,"leave");
 }
 
+/**
+ * destroy trace object.
+ */
 void destroyTrace(void)
 {	
 	// Destroy Trace
@@ -693,6 +726,9 @@ void destroyTrace(void)
 	}
 }
 
+/**
+ * destroy all images in memory.
+ */
 void destroyImages(void)
 {
    const char *s_fn="destroyImages";
@@ -733,6 +769,9 @@ void destroyImages(void)
 // INIT METHODES
 // -----------------------------------
 
+/**
+ * Initialise today highscore.
+ */
 void initTodayHighScore(void)
 {
 	const char *s_fn="initTodayHighScore";
@@ -749,6 +788,9 @@ void initTodayHighScore(void)
 	trace->event(s_fn,0,"leave [void]");
 }
 
+/**
+ * Initialise global highscore.
+ */
 void initGlobalHighScore(void)
 {
 	const char *s_fn="initGlobalHighScore";	
@@ -766,6 +808,9 @@ void initGlobalHighScore(void)
 	trace->event(s_fn,0,"leave [void]");
 }
 
+/**
+ * Initialise images.
+ */
 void initImages(void)
 {
 	const char *s_fn="initImages";
@@ -876,7 +921,7 @@ void initMonsters(bool special)
 }
 
 /**
- * Init WiiMore pointers. 
+ * Initialise WiiMote pointers.
  */
 void initPointers(void)
 {
@@ -1017,8 +1062,13 @@ void initGrids(int level)
 	trace->event(s_fn,0,"leave [void]");
 }
 
-
-// Init new weapon with correct game parameters
+/**
+ * Initialise new weapon with correct game parameters
+ * @param x 	The x location.
+ * @param y 	The y location.
+ * @param id	The uniquec id number
+ * @param type	The weapon type [0..5].	  
+ */
 void initWeapon(int x, int y, int id, int type)
 {
 	const char *s_fn="initWeapon";
@@ -1056,7 +1106,9 @@ void initWeapon(int x, int y, int id, int type)
 	trace->event(s_fn,0,"leave");
 }
 
-// Init screen buttons
+/**
+ * Init screen buttons
+ */
 void initButtons(void)
 {
 	const char *s_fn="initButtons";
@@ -1906,7 +1958,9 @@ void initButtons(void)
 	trace->event(s_fn,0,"leave [void]");
 }
 
-// Init Network Module
+/**
+ * Init Network Module
+ */
 void initNetwork(void)
 { 
    const char *s_fn="initNetwork";
@@ -1935,7 +1989,10 @@ void initNetwork(void)
    trace->event(s_fn,0,"leave [void]");
 }
 
-// Init game parameters
+/** 
+  * Init game parameters
+  * @param wave	The wave number
+  */
 void initGame(int wave)
 {	
 	// Init game variables
@@ -1974,7 +2031,9 @@ void initGame(int wave)
 	game.event=eventLaunch;
 }		
 
-// Init application parameters
+/** 
+ * Init application parameters
+ */
 void initApplication(void)
 {
 	const char *s_fn="initApplication";
@@ -2038,8 +2097,10 @@ void initApplication(void)
 // DRAW METHODES
 // -----------------------------------
 
-// Draw grid on screen
-void drawGrid()
+/**
+ * Draw grid on screen
+ */
+void drawGrid(void)
 {
 	if ((game.selectedMap!=-1) && (grids[game.selectedMap]!=NULL))
 	{
@@ -2047,7 +2108,9 @@ void drawGrid()
 	}				
 }
 
-// Draw pointers on screen
+/** 
+ * Draw pointers on screen
+ */
 void drawPointers(void)
 {
    for( int i=0; i<MAX_POINTERS; i++ ) 
@@ -2111,7 +2174,9 @@ void drawMonsters(bool special)
 	}
 }
 
-// Draw monsters Text on screen
+/** 
+ * Draw monsters Text on screen
+ */
 void drawMonstersText(void)
 {
    for( int i=0; i<MAX_MONSTERS; i++ ) 
@@ -2123,7 +2188,9 @@ void drawMonstersText(void)
    }
 }
 
-// Draw weapons on screen
+/** 
+ * Draw weapons on screen
+ */
 void drawWeapons(void)
 {
 	for( int i=0; i<MAX_WEAPONS; i++ ) 
@@ -2135,8 +2202,10 @@ void drawWeapons(void)
 	}
 }
 
-// Draw buttons on screen
-void drawButtons()
+/** 
+ * Draw buttons on screen
+ */
+void drawButtons(void)
 {
 	for( int i=0; i<MAX_BUTTONS; i++ ) 
 	{
@@ -2147,7 +2216,9 @@ void drawButtons()
 	}
 }
 
-// Draw buttons Text on screen
+/** 
+ * Draw buttons Text on screen
+ */
 void drawButtonsText(int offset)
 {
 	for( int i=0; i<MAX_BUTTONS; i++ ) 
@@ -2159,7 +2230,15 @@ void drawButtonsText(int offset)
 	}
 }
 
-// Draw text on screen
+/** 
+ * Draw text on screen
+ * @param x		The x location of the text.
+ * @param y		The y location of the text.
+ * @param type	The font type.
+ * @param text The text
+ * @param ...	Optional parameters
+ *
+ */
 void drawText(int x, int y, int type, const char *text, ...)
 {
 	char buf[MAX_LEN];
@@ -2231,7 +2310,9 @@ void drawText(int x, int y, int type, const char *text, ...)
 	}
 }
 
-// Draw game panel1
+/** 
+ * Draw game panel1
+ */
 void drawPanel1(void)
 {
 	int xpos = game.panelXOffset;
@@ -2241,7 +2322,9 @@ void drawPanel1(void)
 	GRRLIB_Rectangle(xpos, ypos, 100, 90, GRRLIB_BLACK_TRANS, 1);
 }
 
-// Draw game panel2
+/** 
+ * Draw game panel2
+ */
 void drawPanel2(void)
 {
 	int xpos = game.panelXOffset;
@@ -2251,7 +2334,9 @@ void drawPanel2(void)
 	GRRLIB_Rectangle(xpos, ypos, 100, 70, GRRLIB_BLACK_TRANS, 1);
 }
 
-// Draw game panel3
+/** 
+ * Draw game panel3
+ */
 void drawPanel3(void)
 {
 	int xpos = game.panelXOffset;
@@ -2261,7 +2346,9 @@ void drawPanel3(void)
 	GRRLIB_Rectangle(xpos, ypos, 100, 210, GRRLIB_BLACK_TRANS, 1);
 }
 
-// Draw game panel4
+/** 
+ * Draw game panel4
+ */
 void drawPanel4(void)
 {
 	int xpos = game.panelXOffset;
@@ -2271,7 +2358,9 @@ void drawPanel4(void)
 	GRRLIB_Rectangle(xpos, ypos, 100, 67, GRRLIB_BLACK_TRANS, 1);
 }
 				
-// Draw wave text panel on screen
+/** 
+  * Draw wave text panel on screen
+  */
 void drawPanelText1(void)
 {
 	char tmp[MAX_LEN];
@@ -2294,7 +2383,9 @@ void drawPanelText1(void)
 }
 
 
-// Draw score/cash text panel on screen
+/** 
+ * Draw score/cash text panel on screen
+ */
 void drawPanelText2(void)
 {
 	int xpos = game.panelXOffset;
@@ -2316,7 +2407,9 @@ void drawPanelText2(void)
 }
 
 
-// Draw Weapon upgrade/build text game panel on screen
+/**
+ * Draw Weapon upgrade/build text game panel on screen
+ */
 void drawPanelText3(void)
 {
 	int xpos = game.panelXOffset;
@@ -2401,7 +2494,9 @@ void drawPanelText3(void)
 	}
 }
 
-// Draw Weapon information
+/**
+ * Draw Weapon information
+ */
 void drawPanelText4(void)
 {	
 	int xpos = game.panelXOffset;
@@ -2465,7 +2560,9 @@ void drawPanelText4(void)
 	}
 }
 
-// draw screens
+/**
+ * draw screens
+ */
 void drawScreen(void)
 { 	   	
 	char tmp[MAX_LEN];
@@ -3855,6 +3952,9 @@ void drawScreen(void)
 // SUPPORT METHODES
 // -----------------------------------
 
+/**
+ * Enemy monsters stop moving (pause mode)
+ */
 void stopMonsters(void)
 {
 	for (int i=0; i<MAX_MONSTERS; i++)
@@ -3866,6 +3966,9 @@ void stopMonsters(void)
 	}
 }
 
+/**
+ * Enemy monster start moving again (continue mode)
+ */
 void startMonsters(void)
 {
 	for (int i=0; i<MAX_MONSTERS; i++)
@@ -3877,6 +3980,10 @@ void startMonsters(void)
 	}
 }
 
+/**
+ * Parse today higshcore received my network thread
+ * @param buffer	The buffer contain the raw xml message with contain the highscore.
+ */
 void loadTodayHighScore(char *buffer)
 {
    const char *s_fn="loadTodayHighScore";
@@ -3931,6 +4038,10 @@ void loadTodayHighScore(char *buffer)
     trace->event(s_fn,0,"leave [void]");
 }
 
+/**
+ * Parse global higshcore received my network thread
+ * @param buffer	The buffer contain the raw xml message with contain the highscore.
+ */
 void loadGlobalHighScore(char *buffer)
 {
     const char *s_fn="loadGlobalHighScore";
@@ -3985,7 +4096,9 @@ void loadGlobalHighScore(char *buffer)
     trace->event(s_fn,0,"leave [void]");
 }
 		
-// Move monsters on screen
+/**
+ * Move monsters on screen
+ */
 void moveMonsters(void)
 {
 	for( int i=0; i<MAX_MONSTERS; i++ ) 
@@ -3997,7 +4110,9 @@ void moveMonsters(void)
 	}
 }
 
-// Move weapons on screen
+/** 
+ * Move weapons on screen
+ */
 void moveWeapons(void)
 {
 	for( int i=0; i<MAX_WEAPONS; i++ ) 
@@ -4009,6 +4124,9 @@ void moveWeapons(void)
 	}
 }
 
+/**
+ * Check for pointer image change
+ */
 void checkPointer(void)
 {
 	if (game.selectedNewWeapon)
@@ -4043,7 +4161,9 @@ void checkPointer(void)
 	}
 }
 
-// Check if game is over!
+/**
+ * Check if game is over!
+ */
 void checkGameOver(void)
 {
 	if (game.monsterInBase>=MAX_MONSTER_IN_BASE)
@@ -4054,7 +4174,9 @@ void checkGameOver(void)
 	}
 }
 
-// Check enemy is real dead, if soo, destroy object
+/** 
+ * Check enemy is real dead, if soo, destroy object
+ */
 void checkDeadMonsters(void)
 {
 	for (int i=0;i<MAX_MONSTERS;i++)
@@ -4066,12 +4188,15 @@ void checkDeadMonsters(void)
 		}
 	}
 }
-	
+
+/**
+ * Check if enemy wave must be launched. 
+ */
 void checkNextWave(void)
 {		
 	if (--game.waveCountDown>0)
 	{
-		// Check if there are any monster left. If not start next wave
+		// Check if there are any monster left in wave. If not start next wave
 		for (int i=0;i<MAX_MONSTERS;i++)
 		{
 			if (monsters[i]!=NULL)
@@ -4089,7 +4214,9 @@ void checkNextWave(void)
 	}
 }
 	
-// Calculate Video Frame Rate (Indication how game engine performs)
+/**
+ * Calculate Video Frame Rate (Indication how game engine performs)
+ */
 static u8 calculateFrameRate(void) 
 {
     static u8 frameCount = 0;
@@ -4106,8 +4233,10 @@ static u8 calculateFrameRate(void)
     return FPS;
 }	
 
-// Proces event changes
-void processEvent()
+/**
+ * Proces event changes
+ */
+void processEvent(void)
 {
 	const char *s_fn="processEvent";
 	    
@@ -4422,8 +4551,10 @@ void processEvent()
 }
 
 
-// Process state Machine change
-void processStateMachine()
+/**
+ * Process state Machine change
+ */
+void processStateMachine(void)
 {
 	const char *s_fn="processStateMachine";
 	
@@ -4673,6 +4804,9 @@ void processStateMachine()
 // main
 // -----------------------------------
 
+/**
+ * Start point of game.
+ */
 int main(void)
 {
    const char *s_fn="main";

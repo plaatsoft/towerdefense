@@ -478,7 +478,11 @@ MonsterSpecs::~MonsterSpecs()
 // Getters
 // ------------------------------
 
-// Return Monster Image per Type		
+/**
+ * Return Monster Image per Type		
+ * @param type		The type of the monsters
+ * @return monster image 
+ */
 GRRLIB_texImg * MonsterSpecs::getImage(int type)
 {
 	if (settings->getClassicSprites())
@@ -545,7 +549,11 @@ GRRLIB_texImg * MonsterSpecs::getImage(int type)
 	}
 }
 
-// Return energy level per monster type		
+/**
+ * Return energy level per monster type		
+ * @param type		The type of the monster 
+ * @return The monster energy level
+ */
 int MonsterSpecs::getEnergy(int type)
 {
 	switch (type)
@@ -577,3 +585,7 @@ int MonsterSpecs::getEnergy(int type)
 		default: return 400;		
 	}
 }
+
+// ------------------------------
+// The end
+// ------------------------------
