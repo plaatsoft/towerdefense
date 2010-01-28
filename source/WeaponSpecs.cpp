@@ -335,7 +335,13 @@ GRRLIB_texImg * WeaponSpecs::getImageSpecial(int type)
 	}
 }
 
-// Return Weapon Name
+/**
+ * Get Weapon Name
+ *
+ * @param type		The weapon type.
+ *
+ * @return The weapon name
+ */
 const char *WeaponSpecs::getName(int type)
 {
 	switch (type)
@@ -366,7 +372,13 @@ const char *WeaponSpecs::getName(int type)
 	}
 }
 
-// Return Weapon price per type
+/**
+ * Get Weapon Price
+ *
+ * @param type		The weapon type.
+ *
+ * @return The weapon price
+ */
 int WeaponSpecs::getPrice(int type)
 {
 	switch (type)
@@ -397,7 +409,13 @@ int WeaponSpecs::getPrice(int type)
 	}
 }
 
-// Get Upgrade Price
+/**
+ * Get Weapon start upgrade price
+ *
+ * @param type		The weapon type.
+ *
+ * @return The weapon start upgrade price
+ */
 int WeaponSpecs::getUpgradePrice(int type)
 {
 	switch (type)
@@ -428,7 +446,13 @@ int WeaponSpecs::getUpgradePrice(int type)
 	}
 }
 
-// Return min Power per type
+/**
+ * Get Weapon minimum power value
+ *
+ * @param type		The weapon type.
+ *
+ * @return The minimum power value.
+ */
 int WeaponSpecs::getMinPower(int type)
 {
 	switch (type)
@@ -459,7 +483,13 @@ int WeaponSpecs::getMinPower(int type)
 	}
 }
 
-// Return min Power per type
+/**
+ * Get Weapon minimum range value
+ *
+ * @param type		The weapon type.
+ *
+ * @return The minimum range value.
+ */
 int WeaponSpecs::getMinRange(int type)
 {
 	switch (type)
@@ -490,7 +520,13 @@ int WeaponSpecs::getMinRange(int type)
 	}
 }
 
-// Return min rate per type
+/**
+ * Get Weapon minimum rate value
+ *
+ * @param type		The weapon type.
+ *
+ * @return The minimum rate value.
+ */
 int WeaponSpecs::getMinRate(int type)
 {
 	switch (type)
@@ -521,7 +557,13 @@ int WeaponSpecs::getMinRate(int type)
 	}
 }
 
-// Return Max Power per type
+/**
+ * Get Weapon maximum power value
+ *
+ * @param type		The weapon type.
+ *
+ * @return The maximum power value.
+ */
 int WeaponSpecs::getMaxPower(int type)
 {
 	switch (type)
@@ -553,7 +595,13 @@ int WeaponSpecs::getMaxPower(int type)
 }
 
 
-// Return Max Power per type
+/**
+ * Get Weapon maximum range value
+ *
+ * @param type		The weapon type.
+ *
+ * @return The maximum range value.
+ */
 int WeaponSpecs::getMaxRange(int type)
 {
 	switch (type)
@@ -584,7 +632,13 @@ int WeaponSpecs::getMaxRange(int type)
 	}
 }
 
-// Return Max rate per type
+/**
+ * Get Weapon maximum rate value
+ *
+ * @param type		The weapon type.
+ *
+ * @return The maximum rate value.
+ */
 int WeaponSpecs::getMaxRate(int type)
 {
 	switch (type)
@@ -615,7 +669,13 @@ int WeaponSpecs::getMaxRate(int type)
 	}
 }
 
-// Get Power Step
+/**
+ * Get Weapon power step value
+ *
+ * @param type		The weapon type.
+ *
+ * @return The power step value.
+ */
 int WeaponSpecs::getStepPower(int type)
 {
 	switch (type)
@@ -646,7 +706,13 @@ int WeaponSpecs::getStepPower(int type)
 	}
 }
 
-// Get Range Step
+/**
+ * Get Weapon range step value
+ *
+ * @param type		The weapon type.
+ *
+ * @return The range step value.
+ */
 int WeaponSpecs::getStepRange(int type)
 {
 	switch (type)
@@ -677,7 +743,13 @@ int WeaponSpecs::getStepRange(int type)
 	}
 }
 
-// Get rate step
+/**
+ * Get Weapon rate step value
+ *
+ * @param type		The weapon type.
+ *
+ * @return The rate step value.
+ */
 int WeaponSpecs::getStepRate(int type)
 {
 	switch (type)
@@ -708,7 +780,13 @@ int WeaponSpecs::getStepRate(int type)
 	}
 }
 
-// Get counter
+/**
+ * Get Weapon unique id
+ *
+ * @param type		The weapon type.
+ *
+ * @return unique id
+ */
 int WeaponSpecs::getCounter(int type)
 {
 	switch (type)
@@ -740,7 +818,13 @@ int WeaponSpecs::getCounter(int type)
 }
 
 
-// Return Weapon FireMode
+/**
+ * Get Weapon fire mode 
+ *
+ * @param type		The weapon type.
+ *
+ * @return fire mode
+ */
 int WeaponSpecs::getFireMode(int type)
 {
 	switch (type)
@@ -772,7 +856,13 @@ int WeaponSpecs::getFireMode(int type)
 }
 
 
-// Return Weapon FireModeName
+/**
+ * Get Weapon fire mode name 
+ *
+ * @param type		The weapon type.
+ *
+ * @return The fire mode name
+ */
 const char *WeaponSpecs::getFireModeName(int type)
 {
 	switch (type)

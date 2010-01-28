@@ -90,6 +90,11 @@ Settings::~Settings()
 // Others
 // ------------------------------
 	
+/**
+ * Load settings of file
+ *
+ * @param filename	The filename including complete directory path.
+ */
 void Settings::load(const char *filename)
 {
     const char *s_fn="Settings::load";
@@ -170,6 +175,11 @@ void Settings::load(const char *filename)
 	trace->event(s_fn,0,"leave [void]");
 }
 
+/**
+ * Save setting to file
+ *
+ * @param filename	The setting filename including complete directory path
+ */
 void Settings::save( const char *filename)
 {
     const char *s_fn="Settings::save";
@@ -249,6 +259,11 @@ void Settings::save( const char *filename)
 // Setters
 // ------------------------------
 	
+/**
+ * Set first character of player nickname.
+ *
+ * @param letter 	The character.
+ */
 void Settings::setFirstChar(char letter)
 {
 	const char *s_fn="Settings::setFirstChar";
@@ -257,6 +272,11 @@ void Settings::setFirstChar(char letter)
 	firstChar=letter;
 }
 
+/**
+ * Set second character of player nickname.
+ *
+ * @param letter 	The character.
+ */
 void Settings::setSecondChar(char letter)
 {
 	const char *s_fn="Settings::setSecondChar";
@@ -265,6 +285,11 @@ void Settings::setSecondChar(char letter)
 	secondChar=letter;
 }
 
+/**
+ * Set third character of player nickname.
+ *
+ * @param letter 	The character.
+ */
 void Settings::setThirdChar(char letter)
 {
 	const char *s_fn="Settings::setThirdChar";
@@ -273,6 +298,11 @@ void Settings::setThirdChar(char letter)
 	thirdChar=letter;
 }
 
+/**
+ * Set fourth character of player nickname.
+ *
+ * @param letter 	The character.
+ */
 void Settings::setFourthChar(char letter)
 {
 	const char *s_fn="Settings::setFourthChar";
@@ -281,6 +311,11 @@ void Settings::setFourthChar(char letter)
 	fourthChar=letter;
 }
 
+/**
+ * Set fifth character of player nickname.
+ *
+ * @param letter 	The character.
+ */
 void Settings::setFifthChar(char letter)
 {
 	const char *s_fn="Settings::setFifthChar";
@@ -289,6 +324,11 @@ void Settings::setFifthChar(char letter)
 	fifthChar=letter;
 }
 
+/**
+ * Set sixth character of player nickname.
+ *
+ * @param letter 	The character.
+ */
 void Settings::setSixthChar(char letter)
 {
 	const char *s_fn="Settings::setSixthChar";
@@ -297,6 +337,11 @@ void Settings::setSixthChar(char letter)
 	sixthChar=letter;
 }
 
+/**
+ * Set music volume.
+ *
+ * @param volume 	The music volume value [0..128].
+ */
 void Settings::setMusicVolume(int volume)
 {
 	const char *s_fn="Settings::setMusicVolume";
@@ -305,6 +350,11 @@ void Settings::setMusicVolume(int volume)
 	musicVolume=volume;
 }
 
+/**
+ * Set effect volume.
+ *
+ * @param volume 	The effect volume value [0..128].
+ */
 void Settings::setEffectVolume(int volume)
 {
 	const char *s_fn="Settings::setEffectVolume";
@@ -313,6 +363,11 @@ void Settings::setEffectVolume(int volume)
 	effectVolume=volume;
 }
 
+/**
+ * Set class sprite mode.
+ *
+ * @param enabled 	True, classic sprites. False, animated sprites.
+ */
 void Settings::setClassicSprites(bool enabled)
 {
    const char *s_fn="Settings::setClassicSprites";
@@ -325,46 +380,91 @@ void Settings::setClassicSprites(bool enabled)
 // Getters
 // ------------------------------
 
+/**
+ * Get first character of player nickname.
+ *
+ * @return character
+ */
 char Settings::getFirstChar(void)
 {
 	return firstChar;
 }
 
+/**
+ * Get second character of player nickname.
+ *
+ * @return character
+ */
 char Settings::getSecondChar(void)
 {
 	return secondChar;
 }
 
+/**
+ * Get third character of player nickname.
+ *
+ * @return character
+ */
 char Settings::getThirdChar(void)
 {
 	return thirdChar;
 };
 
+/**
+ * Get fourth character of player nickname.
+ *
+ * @return character
+ */
 char Settings::getFourthChar(void)
 {
 	return fourthChar;
 };
 
+/**
+ * Get fifth character of player nickname.
+ *
+ * @return character
+ */
 char Settings::getFifthChar(void)
 {
 	return fifthChar;
 };
 
+/**
+ * Get sixth character of player nickname.
+ *
+ * @return character
+ */
 char Settings::getSixthChar(void)
 {
 	return sixthChar;
 };
 
+/**
+ * Get music volume
+ *
+ * @return volume [0..128]
+ */
 int Settings::getMusicVolume(void)
 {
 	return musicVolume;
 }
 
+/**
+ * Get effect volume
+ *
+ * @return volume [0..128]
+ */
 int Settings::getEffectVolume(void)
 {
 	return effectVolume;
 }
 
+/**
+ * Get classic sprite
+ *
+ * @return classic sprite mode [true | false]
+ */
 bool Settings::getClassicSprites(void)
 {
 	return classicSprites;	

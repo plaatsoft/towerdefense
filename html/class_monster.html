@@ -109,7 +109,7 @@
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&nbsp;</td>
-          <td class="paramname"> <em>size</em></td><td>&nbsp;</td>
+          <td class="paramname"> <em>size1</em></td><td>&nbsp;</td>
         </tr>
         <tr>
           <td></td>
@@ -119,6 +119,15 @@
       </table>
 </div>
 <div class="memdoc">
+<p>Draw <a class="el" href="class_monster.html">Monster</a> on screen</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>xOffset</em>&nbsp;</td><td>The xOffset of the monster. </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>yOffset</em>&nbsp;</td><td>The yOffset of the monster. </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>size1</em>&nbsp;</td><td>The size of the monster image. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -137,6 +146,8 @@
       </table>
 </div>
 <div class="memdoc">
+<p>Get alfa position</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>alfa </dd></dl>
 
 </div>
 </div>
@@ -155,6 +166,8 @@
       </table>
 </div>
 <div class="memdoc">
+<p>Get energy level of monster</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>energy level </dd></dl>
 
 </div>
 </div>
@@ -173,6 +186,8 @@
       </table>
 </div>
 <div class="memdoc">
+<p>Get grid of monster</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>grid id </dd></dl>
 
 </div>
 </div>
@@ -191,6 +206,8 @@
       </table>
 </div>
 <div class="memdoc">
+<p>Get unique index number of monster</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>index number </dd></dl>
 
 </div>
 </div>
@@ -227,6 +244,8 @@
       </table>
 </div>
 <div class="memdoc">
+<p>Get state of monster</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>monster state </dd></dl>
 
 </div>
 </div>
@@ -245,6 +264,8 @@
       </table>
 </div>
 <div class="memdoc">
+<p>Get step size of monster</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>step size </dd></dl>
 
 </div>
 </div>
@@ -263,6 +284,8 @@
       </table>
 </div>
 <div class="memdoc">
+<p>Get x position</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>X location. </dd></dl>
 
 </div>
 </div>
@@ -281,6 +304,8 @@
       </table>
 </div>
 <div class="memdoc">
+<p>Get Y position</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>y location. </dd></dl>
 
 </div>
 </div>
@@ -299,6 +324,7 @@
       </table>
 </div>
 <div class="memdoc">
+<p>Move <a class="el" href="class_monster.html">Monster</a> </p>
 
 </div>
 </div>
@@ -310,13 +336,20 @@
           <td class="memname">void setDelay </td>
           <td>(</td>
           <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>delay</em></td>
+          <td class="paramname"> <em>delay1</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Set start delay</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>delay1</em>&nbsp;</td><td>The start delay of the monster. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -328,13 +361,20 @@
           <td class="memname">void setEnergy </td>
           <td>(</td>
           <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>energy</em></td>
+          <td class="paramname"> <em>energy1</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Set start energy level</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>energy1</em>&nbsp;</td><td>The start energy level of the monster. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -346,13 +386,20 @@
           <td class="memname">void setGrid </td>
           <td>(</td>
           <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>grid</em></td>
+          <td class="paramname"> <em>grid1</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Set grid and start position of monster</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>grid1</em>&nbsp;</td><td>The grid were the monster walks </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -364,13 +411,20 @@
           <td class="memname">void setImage </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> *&nbsp;</td>
-          <td class="paramname"> <em>image</em></td>
+          <td class="paramname"> <em>image1</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Set <a class="el" href="class_monster.html">Monster</a> image</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>image1</em>&nbsp;</td><td>The monster sprite image </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -382,13 +436,20 @@
           <td class="memname">void setIndex </td>
           <td>(</td>
           <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>index</em></td>
+          <td class="paramname"> <em>index1</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Set index</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>index1</em>&nbsp;</td><td>The index of the monster. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -407,6 +468,13 @@
       </table>
 </div>
 <div class="memdoc">
+<p>Set move event</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>enabled</em>&nbsp;</td><td>True monster start walking, false monster freece. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -418,13 +486,20 @@
           <td class="memname">void setState </td>
           <td>(</td>
           <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>state</em></td>
+          <td class="paramname"> <em>state1</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Set start state1</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>state1</em>&nbsp;</td><td>The state of the monster. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -436,13 +511,20 @@
           <td class="memname">void setStep </td>
           <td>(</td>
           <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>step</em></td>
+          <td class="paramname"> <em>step1</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Set step size</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>step1</em>&nbsp;</td><td>The Step size </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -461,6 +543,7 @@
       </table>
 </div>
 <div class="memdoc">
+<p>Draw <a class="el" href="class_monster.html">Monster</a> text on screen </p>
 
 </div>
 </div>

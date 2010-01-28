@@ -102,11 +102,17 @@ Monster::~Monster()
 // Others
 // ------------------------------
 	
-//n1 	e1 	s1 	w1
-//n2 	e2 	s2 	w2
-//n3 	e3 	s3 	w3
-//d1 	d2 	d3 	d4 
-
+/**
+ * Get sprite frame
+ *
+ * Sprite png format:
+ * n1 	e1 	s1 	w1
+ * n2 	e2 	s2 	w2
+ * n3 	e3 	s3 	w3
+ * d1 	d2 	d3 	d4 
+ *
+ * @return sprite frame
+ */
 int Monster::getFrame(void)
 {	
 	if (height==32) 
@@ -256,7 +262,13 @@ int Monster::getFrame(void)
 	return frame;
 }
 
-// Draw Monster on screen
+/**
+ * Draw Monster on screen
+ * 
+ * @param xOffset		The xOffset of the monster.
+ * @param yOffset		The yOffset of the monster.
+ * @param size1		The size of the monster image.
+ */
 void Monster::draw(int xOffset, int yOffset, float size1)
 {
 	if ( (state==stateEnemyMoving) || 
@@ -268,7 +280,9 @@ void Monster::draw(int xOffset, int yOffset, float size1)
 	}
 }
 
-// Draw Monster text on screen
+/**
+ * Draw Monster text on screen
+ */
 void Monster::text(void)
 {
    char tmp[5];
@@ -282,7 +296,9 @@ void Monster::text(void)
 	}
 }
 
-// Move Monster
+/**
+ * Move Monster
+ */
 void Monster::move(void)
 {  	
 	const char *s_fn="Monster::move";
@@ -375,6 +391,11 @@ void Monster::move(void)
 // Setters 
 // ------------------------------
 
+/**
+ * Set Monster image
+ * 
+ * @param image1		The monster sprite image
+ */
 void Monster::setImage(GRRLIB_texImg *image1)
 {   
    image = image1;
@@ -382,6 +403,11 @@ void Monster::setImage(GRRLIB_texImg *image1)
    width=image->w;
 }
 
+/** 
+ * Set step size
+ *
+ * @param step1	The Step size
+ */
 void Monster::setStep(int step1)
 {
    const char *s_fn="Monster::setStep";
@@ -390,6 +416,11 @@ void Monster::setStep(int step1)
    step=step1;
 }
 
+/** 
+ * Set start delay
+ *
+ * @param delay1	The start delay of the monster.
+ */
 void Monster::setDelay(int delay1)
 { 
 	const char *s_fn="Monster::setDelay";
@@ -398,11 +429,21 @@ void Monster::setDelay(int delay1)
 	delay=delay1;
 }
 
+/** 
+ * Set start energy level
+ *
+ * @param energy1	The start energy level of the monster.
+ */
 void Monster::setEnergy(int energy1)
 {	
 	energy=energy1;
 }
 
+/** 
+ * Set index
+ *
+ * @param index1	The index of the monster.
+ */
 void Monster::setIndex(int index1)
 {
 	const char *s_fn="Monster::setIndex";
@@ -411,6 +452,11 @@ void Monster::setIndex(int index1)
 	index=index1;
 }
 
+/** 
+ * Set grid and start position of monster
+ *
+ * @param grid1	The grid were the monster walks
+ */
 void Monster::setGrid(int grid1)
 {
 	const char *s_fn="Monster::setGrid";
@@ -429,12 +475,22 @@ void Monster::setGrid(int grid1)
    pos++;
 }
 
+/** 
+ * Set start state1 
+ *
+ * @param state1	The state of the monster.
+ */
 void Monster::setState(int state1)
 {
 	prevState=state;
 	state=state1;
 }
 
+/** 
+ * Set move event
+ *
+ * @param enabled 	True monster start walking, false monster freece.
+ */
 void Monster::setMove(bool enabled)
 {
 	if (enabled)
@@ -457,41 +513,81 @@ void Monster::setMove(bool enabled)
 // Getters 
 // ------------------------------
 
+/** 
+ * Get x position
+ *
+ * @return X location.
+ */
 int Monster::getX()
 {
 	return x;
 }
 
+/** 
+ * Get Y position
+ *
+ * @return y location.
+ */
 int Monster::getY()
 {
 	return y;
 }
 		
+/** 
+ * Get alfa position
+ *
+ * @return alfa 
+ */
 int Monster::getAlfa(void)
 {
    return alfa;
 }
 
+/** 
+ * Get step size of monster
+ *
+ * @return step size
+ */
 int Monster::getStep(void)
 {
    return step;
 }
 
+/** 
+ * Get energy level of monster
+ *
+ * @return energy level
+ */
 int Monster::getEnergy(void)
 {
    return energy;
 }
 
+/** 
+ * Get grid of monster
+ *
+ * @return grid id
+ */
 int Monster::getGrid(void)
 {
    return grid;
 }
 
+/** 
+ * Get unique index number of monster
+ *
+ * @return index number
+ */
 int Monster::getIndex(void)
 {
 	return index;
 }
 
+/** 
+ * Get state of monster
+ *
+ * @return monster state
+ */
 int Monster::getState(void)
 {
 	return state;
