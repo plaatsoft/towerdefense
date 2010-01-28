@@ -626,6 +626,11 @@ bool Weapon::onSelect(int x1, int y1)
 // Setters 
 // ------------------------------
 
+/**
+ * Set weapon x grid position
+ *
+ * @param x1	The x grid position
+ */
 void Weapon::setX(int x1)
 {
 	const char *s_fn="Weapon::setX";
@@ -634,6 +639,11 @@ void Weapon::setX(int x1)
 	x = x1;
 }
 
+/**
+ * Set weapon y grid position
+ *
+ * @param y1	The y grid position
+ */
 void Weapon::setY(int y1)
 {
    const char *s_fn="Weapon::setY";
@@ -642,11 +652,21 @@ void Weapon::setY(int y1)
    y = y1;
 }
 				
+/**
+ * Set weapon image
+ *
+ * @param image1	The image 
+ */
 void Weapon::setImage(GRRLIB_texImg *image1)
 {   
    image = image1;
 }
 
+/**
+ * Set weapon power
+ *
+ * @param power1	The power
+ */
 void Weapon::setPower(int power1)
 {
    const char *s_fn="Weapon::setPower";
@@ -655,14 +675,24 @@ void Weapon::setPower(int power1)
    power=power1;
 }
 
+/**
+ * Set weapon range
+ *
+ * @param range1	The range
+ */
 void Weapon::setRange(int range1)
 {
    const char *s_fn="Weapon::setRange";
    trace->event(s_fn,0,"%d",range1);
    
    range=range1;
- }
+}
 
+/**
+ * Set weapon rate
+ *
+ * @param rate1	The rate
+ */
 void Weapon::setRate(int rate1)
 {
    const char *s_fn="Weapon::setRate";
@@ -672,7 +702,11 @@ void Weapon::setRate(int rate1)
    delay=rate;
 }
 
-
+/**
+ * Set weapon maximum power
+ *
+ * @param maxPower1	The maximum power
+ */
 void Weapon::setMaxPower(int maxPower1)
 {
    const char *s_fn="Weapon::setmaxPower";
@@ -681,14 +715,24 @@ void Weapon::setMaxPower(int maxPower1)
    maxPower=maxPower1;
 }
 
+/**
+ * Set weapon maximum range
+ *
+ * @param maxRange1	The maximum range
+ */
 void Weapon::setMaxRange(int maxRange1)
 {
    const char *s_fn="Weapon::setMaxRange";
    trace->event(s_fn,0,"%d",maxRange1); 
    
    maxRange=maxRange1;
- }
+}
 
+/**
+ * Set weapon maximum rate
+ *
+ * @param maxRate1	The maximum rate
+ */
 void Weapon::setMaxRate(int maxRate1)
 {
    const char *s_fn="Weapon::setMaxRate";
@@ -697,6 +741,11 @@ void Weapon::setMaxRate(int maxRate1)
    maxRate=maxRate1*AVERAGE_FPS;
 }
 
+/**
+ * Set weapon power price
+ *
+ * @param price	The power price.
+ */
 void Weapon::setPowerPrice(int price)
 {
    const char *s_fn="Weapon::setPowerPrice";
@@ -705,6 +754,11 @@ void Weapon::setPowerPrice(int price)
    powerPrice=price;
 }
 
+/**
+ * Set weapon range price
+ *
+ * @param price	The range price.
+ */
 void Weapon::setRangePrice(int price)
 {
 	const char *s_fn="Weapon::setRangePrice";
@@ -713,6 +767,11 @@ void Weapon::setRangePrice(int price)
 	rangePrice=price;
 }
 
+/**
+ * Set weapon rate price
+ *
+ * @param price	The rate price.
+ */
 void Weapon::setRatePrice(int price)
 {
 	const char *s_fn="Weapon::setRatePrice";
@@ -721,6 +780,11 @@ void Weapon::setRatePrice(int price)
 	ratePrice=price;
 }
 
+/**
+ * Set weapon index
+ *
+ * @param index1	The unique index
+ */
 void Weapon::setIndex(int index1)
 {
 	const char *s_fn="Weapon::setIndex";
@@ -729,31 +793,62 @@ void Weapon::setIndex(int index1)
 	index=index1;
 }
 
+/**
+ * Set weapon selected
+ *
+ * @param selected1	True weapon seleced (show range), false not selected
+ */
 void Weapon::setSelected(bool selected1)
 {
 	selected=selected1;
 }
 
+/**
+ * Set weapon type
+ *
+ * @param type1	The weapon type.
+ */
 void Weapon::setType(int type1)
 {
 	type=type1;
 }
 
+/**
+ * Set weapon power step size
+ *
+ * @param step1	The weapon power step size.
+ */
 void Weapon::setPowerStep(int step1)
 {
 	powerStep=step1;
 }
 
+/**
+ * Set weapon range step size
+ *
+ * @param step1	The weapon range step size.
+ */
 void Weapon::setRangeStep(int step1)
 {
 	rangeStep=step1;
 }
 
+/**
+ * Set weapon rate step size
+ *
+ * @param step1	The weapon rate step size.
+ */
 void Weapon::setRateStep(int step1)
 {
 	rateStep=step1;
 }
 
+/**
+ * Set weapon name
+ *
+ * @param name1	The weapon name
+ * @param ...		Optional parameters
+ */
 void Weapon::setName(const char *name1, ...)
 {
 	char buf[MAX_LEN];
@@ -767,100 +862,195 @@ void Weapon::setName(const char *name1, ...)
 	strcpy(name,buf);
 }
 
+/**
+ * Set weapon total price. This information is needed for the sale action.
+ *
+ * @param totalPrice1	The weapon total price
+ */
 void Weapon::setTotalPrice(int totalPrice1)
 {
 	totalPrice=totalPrice1;
 }
 
-void Weapon::setFireMode(int fireMode1)
+/**
+ * Set weapon fire mode.
+ *
+ * @param mode		The weapon fire mode. 
+ */
+void Weapon::setFireMode(int mode)
 {
-	fireMode=fireMode1;
+	fireMode=mode;
 }
 
 // ------------------------------
 // Getters 
 // ------------------------------
 
+/** 
+ * Get X grid position
+ *
+ * @return x grid position.
+ */
 int Weapon::getX(void)
 {
 	return x;
 }
 
+/** 
+ * Get Y grid position
+ *
+ * @return y grid position.
+ */
 int Weapon::getY(void)
 {
 	return y;
 }
 
+/** 
+ * Get current upgrade power price
+ *
+ * @return current power price.
+ */
 int Weapon::getPowerPrice(void)
 {
 	return powerPrice;
 }
 
+/** 
+ * Get current upgrade range price
+ *
+ * @return current range price.
+ */
 int Weapon::getRangePrice(void)
 {
 	return rangePrice;
 }
 
+/** 
+ * Get current upgrade rate price
+ *
+ * @return current rate price.
+ */
 int Weapon::getRatePrice(void)
 {
 	return ratePrice;
 }
 
+/** 
+ * Get weapon name
+ *
+ * @return weapon name.
+ */
 const char *Weapon::getName(void)
 {
 	return name;
 }
-	
+
+/**
+ * Is power ungradeble?
+ *
+ * @return true or false
+ */
 bool Weapon::isPowerUpgradeble(void)
 {
 	return power<maxPower;
 }
 
+/**
+ * Is range ungradeble?
+ *
+ * @return true or false
+ */
 bool Weapon::isRangeUpgradeble(void)
 {
 	return range<maxRange;
 }
 
+/**
+ * Is rate ungradeble?
+ *
+ * @return true or false
+ */
 bool Weapon::isRateUpgradeble(void)
 {
 	return rate>maxRate;
 }
 
+/**
+ * Get current power
+ *
+ * @return power level
+ */
 int Weapon::getPower(void)
 {
 	return power;
 }
 
+/**
+ * Get current range
+ *
+ * @return range level
+ */
 int Weapon::getRange(void)
 {
 	return range;
 }
 
+/**
+ * Get current rate
+ *
+ * @return rate level
+ */
 int Weapon::getRate(void)
 {
 	return (rate/AVERAGE_FPS);
 }
 
+/**
+ * Get maximum power
+ *
+ * @return maximum power level
+ */
 int Weapon::getMaxPower(void)
 {
 	return maxPower;
 }
 
+/**
+ * Get maximum range
+ *
+ * @return maximum range level
+ */
 int Weapon::getMaxRange(void)
 {
 	return maxRange;
 }
 
+/**
+ * Get maximum rate
+ *
+ * @return maximum rate level
+ */
 int Weapon::getMaxRate(void)
 {
 	return (maxRate/AVERAGE_FPS);
 }
 
+/**
+ * Get total price
+ *
+ * @return total price
+ */
 int Weapon::getTotalPrice(void)
 {
 	return totalPrice;
 }
 
+/**
+ * Get fire mode
+ *
+ * @return fire mode 
+ */
 int Weapon::getFireMode(void)
 {
 	return fireMode;
