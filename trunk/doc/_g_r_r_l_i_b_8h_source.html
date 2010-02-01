@@ -23,7 +23,7 @@
     </ul>
   </div>
 <h1>inc/GRRLIB.h</h1><a href="_g_r_r_l_i_b_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*------------------------------------------------------------------------------</span>
-<a name="l00002"></a>00002 <span class="comment">Copyright (c) 2009 The GRRLIB Team</span>
+<a name="l00002"></a>00002 <span class="comment">Copyright (c) 2010 The GRRLIB Team</span>
 <a name="l00003"></a>00003 <span class="comment"></span>
 <a name="l00004"></a>00004 <span class="comment">Permission is hereby granted, free of charge, to any person obtaining a copy</span>
 <a name="l00005"></a>00005 <span class="comment">of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
@@ -47,171 +47,176 @@
 <a name="l00028"></a>00028 <span class="preprocessor">#ifndef __GRRLIB_H__</span>
 <a name="l00029"></a>00029 <span class="preprocessor"></span><span class="preprocessor">#define __GRRLIB_H__</span>
 <a name="l00030"></a>00030 <span class="preprocessor"></span>
-<a name="l00034"></a><a class="code" href="_g_r_r_l_i_b_8h.html#ad36e97f844e145cd811f40ee306eb11f">00034</a> <span class="preprocessor">#define GRRLIB_VER_STRING &quot;4.2.0&quot;</span>
+<a name="l00034"></a><a class="code" href="_g_r_r_l_i_b_8h.html#ad36e97f844e145cd811f40ee306eb11f">00034</a> <span class="preprocessor">#define GRRLIB_VER_STRING &quot;4.2.1 BETA&quot;</span>
 <a name="l00035"></a>00035 <span class="preprocessor"></span>
 <a name="l00036"></a>00036 <span class="comment">//==============================================================================</span>
 <a name="l00037"></a>00037 <span class="comment">// Includes</span>
 <a name="l00038"></a>00038 <span class="comment">//==============================================================================</span>
 <a name="l00039"></a>00039 <span class="preprocessor">#include &lt;gccore.h&gt;</span>
-<a name="l00040"></a>00040 <span class="comment">//==============================================================================</span>
-<a name="l00041"></a>00041 
-<a name="l00042"></a>00042 <span class="comment">//==============================================================================</span>
-<a name="l00043"></a>00043 <span class="comment">// C++ header</span>
+<a name="l00040"></a>00040 <span class="preprocessor">#include &lt;ft2build.h&gt;</span>
+<a name="l00041"></a>00041 <span class="preprocessor">#include FT_FREETYPE_H</span>
+<a name="l00042"></a>00042 <span class="preprocessor"></span><span class="comment">//==============================================================================</span>
+<a name="l00043"></a>00043 
 <a name="l00044"></a>00044 <span class="comment">//==============================================================================</span>
-<a name="l00045"></a>00045 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00046"></a>00046 <span class="preprocessor"></span>   <span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
-<a name="l00047"></a>00047 <span class="preprocessor">#endif </span><span class="comment">/* __cplusplus */</span>
-<a name="l00048"></a>00048 
-<a name="l00049"></a>00049 <span class="comment">//==============================================================================</span>
-<a name="l00050"></a>00050 <span class="comment">// Extra standard declarations</span>
+<a name="l00045"></a>00045 <span class="comment">// C++ header</span>
+<a name="l00046"></a>00046 <span class="comment">//==============================================================================</span>
+<a name="l00047"></a>00047 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00048"></a>00048 <span class="preprocessor"></span>   <span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
+<a name="l00049"></a>00049 <span class="preprocessor">#endif </span><span class="comment">/* __cplusplus */</span>
+<a name="l00050"></a>00050 
 <a name="l00051"></a>00051 <span class="comment">//==============================================================================</span>
-<a name="l00052"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">00052</a> <span class="keyword">typedef</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>  <a class="code" href="_g_r_r_l_i_b_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a>;
-<a name="l00053"></a>00053 
-<a name="l00054"></a>00054 <span class="comment">//==============================================================================</span>
-<a name="l00055"></a>00055 <span class="comment">// Primitive colour macros</span>
+<a name="l00052"></a>00052 <span class="comment">// Extra standard declarations</span>
+<a name="l00053"></a>00053 <span class="comment">//==============================================================================</span>
+<a name="l00054"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">00054</a> <span class="keyword">typedef</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>  <a class="code" href="_g_r_r_l_i_b_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a>;
+<a name="l00055"></a>00055 
 <a name="l00056"></a>00056 <span class="comment">//==============================================================================</span>
-<a name="l00057"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a2cde25567f177a6cd9191d536764235e">00057</a> <span class="preprocessor">#define R(c)  (((c) &gt;&gt;24) &amp;0xFF)  </span>
-<a name="l00058"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a7cc73638f4849985153257c89a69ee94">00058</a> <span class="preprocessor">#define G(c)  (((c) &gt;&gt;16) &amp;0xFF)  </span>
-<a name="l00059"></a><a class="code" href="_g_r_r_l_i_b_8h.html#adddcd4b5f23e5e290c31b64cd8c8efaa">00059</a> <span class="preprocessor">#define B(c)  (((c) &gt;&gt; 8) &amp;0xFF)  </span>
-<a name="l00060"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a96aca57a76bd8537a24bb11ab44ef8d9">00060</a> <span class="preprocessor">#define A(c)  ( (c)       &amp;0xFF)  </span>
-<a name="l00065"></a><a class="code" href="_g_r_r_l_i_b_8h.html#aba32782053c6a2b01e3706d632d77895">00065</a> <span class="preprocessor">#define RGBA(r,g,b,a) ( (u32)( ( ((u32)(r))        &lt;&lt;24) |  \</span>
-<a name="l00066"></a>00066 <span class="preprocessor">                               ((((u32)(g)) &amp;0xFF) &lt;&lt;16) |  \</span>
-<a name="l00067"></a>00067 <span class="preprocessor">                               ((((u32)(b)) &amp;0xFF) &lt;&lt; 8) |  \</span>
-<a name="l00068"></a>00068 <span class="preprocessor">                               ( ((u32)(a)) &amp;0xFF      ) ) )</span>
-<a name="l00069"></a>00069 <span class="preprocessor"></span>
-<a name="l00070"></a>00070 <span class="comment">//==============================================================================</span>
-<a name="l00071"></a>00071 <span class="comment">// typedefs, enumerators &amp; structs</span>
+<a name="l00057"></a>00057 <span class="comment">// Primitive colour macros</span>
+<a name="l00058"></a>00058 <span class="comment">//==============================================================================</span>
+<a name="l00059"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a2cde25567f177a6cd9191d536764235e">00059</a> <span class="preprocessor">#define R(c)  (((c) &gt;&gt;24) &amp;0xFF)  </span>
+<a name="l00060"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a7cc73638f4849985153257c89a69ee94">00060</a> <span class="preprocessor">#define G(c)  (((c) &gt;&gt;16) &amp;0xFF)  </span>
+<a name="l00061"></a><a class="code" href="_g_r_r_l_i_b_8h.html#adddcd4b5f23e5e290c31b64cd8c8efaa">00061</a> <span class="preprocessor">#define B(c)  (((c) &gt;&gt; 8) &amp;0xFF)  </span>
+<a name="l00062"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a96aca57a76bd8537a24bb11ab44ef8d9">00062</a> <span class="preprocessor">#define A(c)  ( (c)       &amp;0xFF)  </span>
+<a name="l00067"></a><a class="code" href="_g_r_r_l_i_b_8h.html#aba32782053c6a2b01e3706d632d77895">00067</a> <span class="preprocessor">#define RGBA(r,g,b,a) ( (u32)( ( ((u32)(r))        &lt;&lt;24) |  \</span>
+<a name="l00068"></a>00068 <span class="preprocessor">                               ((((u32)(g)) &amp;0xFF) &lt;&lt;16) |  \</span>
+<a name="l00069"></a>00069 <span class="preprocessor">                               ((((u32)(b)) &amp;0xFF) &lt;&lt; 8) |  \</span>
+<a name="l00070"></a>00070 <span class="preprocessor">                               ( ((u32)(a)) &amp;0xFF      ) ) )</span>
+<a name="l00071"></a>00071 <span class="preprocessor"></span>
 <a name="l00072"></a>00072 <span class="comment">//==============================================================================</span>
-<a name="l00076"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692">00076</a> <span class="comment"></span><span class="keyword">typedef</span>  <span class="keyword">enum</span> <a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692">GRRLIB_blendMode</a> {
-<a name="l00077"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692aeded8fce060bcb04b096c17cea237c23">00077</a>     <a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692aeded8fce060bcb04b096c17cea237c23">GRRLIB_BLEND_ALPHA</a>  = 0,    
-<a name="l00078"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692ad4f0554f7bfc19410c4fedaeab1a10fd">00078</a>     <a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692ad4f0554f7bfc19410c4fedaeab1a10fd">GRRLIB_BLEND_ADD</a>    = 1,    
-<a name="l00079"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692ad026c10937b34f2e3e5dd462f528ef00">00079</a>     <a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692ad026c10937b34f2e3e5dd462f528ef00">GRRLIB_BLEND_SCREEN</a> = 2,    
-<a name="l00080"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692a4a7b1a0e143ad522128a7c8f5f7dc7fb">00080</a>     <a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692a4a7b1a0e143ad522128a7c8f5f7dc7fb">GRRLIB_BLEND_MULTI</a>  = 3,    
-<a name="l00081"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692ab3aacba447b6cee253fc713e45ab49fd">00081</a>     <a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692ab3aacba447b6cee253fc713e45ab49fd">GRRLIB_BLEND_INV</a>    = 4,    
-<a name="l00082"></a>00082 } <a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692">GRRLIB_blendMode</a>;
-<a name="l00083"></a>00083 
-<a name="l00084"></a><a class="code" href="_g_r_r_l_i_b_8h.html#aa1595302fa27df7d3e5913865659ca71">00084</a> <span class="preprocessor">#define GRRLIB_BLEND_NONE   (GRRLIB_BLEND_ALPHA)    </span>
-<a name="l00085"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a4da19aad1f8a920283a84a3af7d7e34a">00085</a> <span class="preprocessor">#define GRRLIB_BLEND_LIGHT  (GRRLIB_BLEND_ADD)      </span>
-<a name="l00086"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a2308b6e9df5946957149bfa693c6a93e">00086</a> <span class="preprocessor">#define GRRLIB_BLEND_SHADE  (GRRLIB_BLEND_MULTI)    </span>
-<a name="l00088"></a>00088 <span class="preprocessor">//------------------------------------------------------------------------------</span>
-<a name="l00089"></a>00089 <span class="preprocessor"></span>
-<a name="l00092"></a><a class="code" href="struct_g_r_r_l_i_b__draw_settings.html">00092</a> <span class="keyword">typedef</span>  <span class="keyword">struct </span><a class="code" href="struct_g_r_r_l_i_b__draw_settings.html">GRRLIB_drawSettings</a> {
-<a name="l00093"></a><a class="code" href="struct_g_r_r_l_i_b__draw_settings.html#a0511a787f97e723bc74c4b5b89ddfdad">00093</a>     <span class="keywordtype">bool</span>              <a class="code" href="struct_g_r_r_l_i_b__draw_settings.html#a0511a787f97e723bc74c4b5b89ddfdad">antialias</a>;    
-<a name="l00094"></a><a class="code" href="struct_g_r_r_l_i_b__draw_settings.html#abe73f4ef80e558d21151b8097439a0fa">00094</a>     <a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692">GRRLIB_blendMode</a>  <a class="code" href="struct_g_r_r_l_i_b__draw_settings.html#abe73f4ef80e558d21151b8097439a0fa">blend</a>;        
-<a name="l00095"></a>00095 } <a class="code" href="struct_g_r_r_l_i_b__draw_settings.html">GRRLIB_drawSettings</a>;
-<a name="l00096"></a>00096 
-<a name="l00097"></a>00097 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00101"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html">00101</a> <span class="comment"></span><span class="keyword">typedef</span>  <span class="keyword">struct </span><a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> {
-<a name="l00102"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#afdeff54db9a334718662b709641fdfe1">00102</a>     uint   <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#afdeff54db9a334718662b709641fdfe1">w</a>;           
-<a name="l00103"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a0cf902ed91cf35330b639ab2ec1038dc">00103</a>     uint   <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a0cf902ed91cf35330b639ab2ec1038dc">h</a>;           
-<a name="l00104"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#aeabe01fe64ab978062a145d723201aaf">00104</a>     <span class="keywordtype">int</span>    <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#aeabe01fe64ab978062a145d723201aaf">handlex</a>;     
-<a name="l00105"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#ac46115747734d99869a5ae8a6e26f590">00105</a>     <span class="keywordtype">int</span>    <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#ac46115747734d99869a5ae8a6e26f590">handley</a>;     
-<a name="l00106"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a1f1b2cd64720fe490801ccf4c5af3318">00106</a>     <span class="keywordtype">int</span>    <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a1f1b2cd64720fe490801ccf4c5af3318">offsetx</a>;     
-<a name="l00107"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a1e4f9e08319378a51518c10a7f9315c4">00107</a>     <span class="keywordtype">int</span>    <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a1e4f9e08319378a51518c10a7f9315c4">offsety</a>;     
-<a name="l00109"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#afc6d24924b4d32b4eea655863163f49a">00109</a>     <span class="keywordtype">bool</span>   <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#afc6d24924b4d32b4eea655863163f49a">tiledtex</a>;    
-<a name="l00110"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#aeab68752681aed82ee78001e43dd61cd">00110</a>     uint   <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#aeab68752681aed82ee78001e43dd61cd">tilew</a>;       
-<a name="l00111"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a717ea3bab2ed7a6b655f21f8108e2942">00111</a>     uint   <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a717ea3bab2ed7a6b655f21f8108e2942">tileh</a>;       
-<a name="l00112"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a5b0dddbfef7a947399c671a9006ffcd6">00112</a>     uint   <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a5b0dddbfef7a947399c671a9006ffcd6">nbtilew</a>;     
-<a name="l00113"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a7e719e304bd1dcfeed8c9ba5c1bd0695">00113</a>     uint   <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a7e719e304bd1dcfeed8c9ba5c1bd0695">nbtileh</a>;     
-<a name="l00114"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a9da3c04771766d85142eb786f072086b">00114</a>     uint   <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a9da3c04771766d85142eb786f072086b">tilestart</a>;   
-<a name="l00115"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a89846626665e4077edd8fb83ecaf4b8c">00115</a>     f32    <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a89846626665e4077edd8fb83ecaf4b8c">ofnormaltexx</a>;
-<a name="l00116"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a750ee88d4bdc2c0fabf27124951044b6">00116</a>     f32    <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a750ee88d4bdc2c0fabf27124951044b6">ofnormaltexy</a>;
-<a name="l00118"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a735984d41155bc1032e09bece8f8d66d">00118</a>     <span class="keywordtype">void</span>  *<a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a735984d41155bc1032e09bece8f8d66d">data</a>;        
-<a name="l00119"></a>00119 } <a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a>;
-<a name="l00120"></a>00120 
-<a name="l00121"></a>00121 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00125"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html">00125</a> <span class="comment"></span><span class="keyword">typedef</span>  <span class="keyword">struct </span><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html">GRRLIB_bytemapChar</a> {
-<a name="l00126"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#afd2728d2416f8e0565d6d4842c6ce818">00126</a>     u8  <a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#afd2728d2416f8e0565d6d4842c6ce818">character</a>;      
-<a name="l00127"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a2c1d87ba049f447519d1a92e6550f822">00127</a>     u8  <a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a2c1d87ba049f447519d1a92e6550f822">width</a>;          
-<a name="l00128"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#ac3f221619d1bd1d6f1d46727f0c913a2">00128</a>     u8  <a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#ac3f221619d1bd1d6f1d46727f0c913a2">height</a>;         
-<a name="l00129"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a86979216677e53eab88a6f972804ea18">00129</a>     s8  <a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a86979216677e53eab88a6f972804ea18">relx</a>;           
-<a name="l00130"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a3859c6fa880002245f1343b424555245">00130</a>     s8  <a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a3859c6fa880002245f1343b424555245">rely</a>;           
-<a name="l00131"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a8f3b7e1679518b07394e7c5acb2b7d9a">00131</a>     u8  <a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a8f3b7e1679518b07394e7c5acb2b7d9a">kerning</a>;        
-<a name="l00132"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a40767ad71451f60885c01f28dd2a4b47">00132</a>     u8  *<a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a40767ad71451f60885c01f28dd2a4b47">data</a>;          
-<a name="l00133"></a>00133 } <a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html">GRRLIB_bytemapChar</a>;
-<a name="l00134"></a>00134 
-<a name="l00135"></a>00135 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00139"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html">00139</a> <span class="comment"></span><span class="keyword">typedef</span>  <span class="keyword">struct </span><a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html">GRRLIB_bytemapFont</a> {
-<a name="l00140"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#a5ac083a645d964373f022d03df4849c8">00140</a>         <span class="keywordtype">char</span>  *<a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#a5ac083a645d964373f022d03df4849c8">name</a>;                
-<a name="l00141"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#a2c7c01c6eca69b2fc9d0267ca8228853">00141</a>         u32   *<a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#a2c7c01c6eca69b2fc9d0267ca8228853">palette</a>;             
-<a name="l00142"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#ae859dcb34b5b3dafa769120b2302130f">00142</a>         u16   <a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#ae859dcb34b5b3dafa769120b2302130f">nbChar</a>;               
-<a name="l00143"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#ab0e86ae6d36a2d67e39cafafed1fdf7f">00143</a>         u8    <a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#ab0e86ae6d36a2d67e39cafafed1fdf7f">version</a>;              
-<a name="l00144"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#ac793001b64a49cc9cf9b55a4d03e73d7">00144</a>         s8    <a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#ac793001b64a49cc9cf9b55a4d03e73d7">tracking</a>;             
-<a name="l00146"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#ae8990a9f05e4aa3d65f7010bdbe70139">00146</a>         <a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html">GRRLIB_bytemapChar</a>  *<a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#ae8990a9f05e4aa3d65f7010bdbe70139">charDef</a>;   
-<a name="l00147"></a>00147     }
-<a name="l00148"></a>00148 <a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html">GRRLIB_bytemapFont</a>;
-<a name="l00149"></a>00149 
-<a name="l00150"></a>00150 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00154"></a><a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html">00154</a> <span class="comment"></span><span class="keyword">typedef</span>  <span class="keyword">struct </span><a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html">tagBITMAPFILEHEADER</a> {
-<a name="l00155"></a><a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a7b7385e0c9786752f6f7071939a8c86e">00155</a>     u16 <a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a7b7385e0c9786752f6f7071939a8c86e">bfType</a>;             
-<a name="l00156"></a><a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a58593dbe4ec2d0b5bc611a4a0ce03825">00156</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a58593dbe4ec2d0b5bc611a4a0ce03825">bfSize</a>;             
-<a name="l00157"></a><a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a30df952d6027abd3a1c2331580449e15">00157</a>     u16 <a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a30df952d6027abd3a1c2331580449e15">bfReserved1</a>;        
-<a name="l00158"></a><a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a0f8327019a0fbf620e0917058b91643c">00158</a>     u16 <a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a0f8327019a0fbf620e0917058b91643c">bfReserved2</a>;        
-<a name="l00159"></a><a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a9e7c0d050dbc139a7b8ee01ea9a11a6c">00159</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a9e7c0d050dbc139a7b8ee01ea9a11a6c">bfOffBits</a>;          
-<a name="l00160"></a>00160 } <a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html">BITMAPFILEHEADER</a>;
-<a name="l00164"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html">00164</a> <span class="keyword">typedef</span>  <span class="keyword">struct </span><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html">tagBITMAPINFOHEADER</a> {
-<a name="l00165"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a1b78050d0cd224e09cb64ee24c233f0e">00165</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a1b78050d0cd224e09cb64ee24c233f0e">biSize</a>;             
-<a name="l00166"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a9569247e6f42cc6485d83eb8fb257b12">00166</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a9569247e6f42cc6485d83eb8fb257b12">biWidth</a>;            
-<a name="l00167"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#afac6b505f1482b5bd0608ffe3342b1e7">00167</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#afac6b505f1482b5bd0608ffe3342b1e7">biHeight</a>;           
-<a name="l00168"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a16da97c998ffb81d059ef4bfe5dc6b70">00168</a>     u16 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a16da97c998ffb81d059ef4bfe5dc6b70">biPlanes</a>;           
-<a name="l00169"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#afcd4196ceb776989cb923371771babc4">00169</a>     u16 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#afcd4196ceb776989cb923371771babc4">biBitCount</a>;         
-<a name="l00170"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#ac136b267e2b61e6eac698988cc1d037d">00170</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#ac136b267e2b61e6eac698988cc1d037d">biCompression</a>;      
-<a name="l00171"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a53d2254d0e1760ab670d24f9a10de0e4">00171</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a53d2254d0e1760ab670d24f9a10de0e4">biSizeImage</a>;        
-<a name="l00172"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a00c0e4657836996248a1221bb6b58ae1">00172</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a00c0e4657836996248a1221bb6b58ae1">biXPelsPerMeter</a>;    
-<a name="l00173"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#aaf57b227c9b7fb5c07351faf3a8c3813">00173</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#aaf57b227c9b7fb5c07351faf3a8c3813">biYPelsPerMeter</a>;    
-<a name="l00174"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a0e09a13d3e76e73a91458a1b0dfb78eb">00174</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a0e09a13d3e76e73a91458a1b0dfb78eb">biClrUsed</a>;          
-<a name="l00175"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a8540abc4a384e6716637f4c4ba1e3c74">00175</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a8540abc4a384e6716637f4c4ba1e3c74">biClrImportant</a>;     
-<a name="l00176"></a>00176 } <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html">BITMAPINFOHEADER</a>;
-<a name="l00182"></a><a class="code" href="structtag_r_g_b_q_u_a_d.html">00182</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structtag_r_g_b_q_u_a_d.html">tagRGBQUAD</a> {
-<a name="l00183"></a><a class="code" href="structtag_r_g_b_q_u_a_d.html#a27b62b6dd4d86fad1fd38c75da1a67f0">00183</a>     u8 <a class="code" href="structtag_r_g_b_q_u_a_d.html#a27b62b6dd4d86fad1fd38c75da1a67f0">rgbBlue</a>;             
-<a name="l00184"></a><a class="code" href="structtag_r_g_b_q_u_a_d.html#a1c427481d93d22728a0a7c81eee2c8d5">00184</a>     u8 <a class="code" href="structtag_r_g_b_q_u_a_d.html#a1c427481d93d22728a0a7c81eee2c8d5">rgbGreen</a>;            
-<a name="l00185"></a><a class="code" href="structtag_r_g_b_q_u_a_d.html#a16c1e5348253dff92174f65b5bd8a5fc">00185</a>     u8 <a class="code" href="structtag_r_g_b_q_u_a_d.html#a16c1e5348253dff92174f65b5bd8a5fc">rgbRed</a>;              
-<a name="l00186"></a><a class="code" href="structtag_r_g_b_q_u_a_d.html#a23062277f4cf94e3c04ebfc7ed2b7e2c">00186</a>     u8 <a class="code" href="structtag_r_g_b_q_u_a_d.html#a23062277f4cf94e3c04ebfc7ed2b7e2c">rgbReserved</a>;         
-<a name="l00187"></a>00187 } <a class="code" href="structtag_r_g_b_q_u_a_d.html">RGBQUAD</a>;
-<a name="l00188"></a>00188 
-<a name="l00189"></a>00189 <span class="comment">//==============================================================================</span>
-<a name="l00190"></a>00190 <span class="comment">// Allow general access to screen and frame information</span>
-<a name="l00191"></a>00191 <span class="comment">//==============================================================================</span>
-<a name="l00192"></a>00192 <span class="preprocessor">#if defined __GRRLIB_CORE__</span>
-<a name="l00193"></a>00193 <span class="preprocessor"></span><span class="preprocessor"># define GRR_EXTERN</span>
-<a name="l00194"></a>00194 <span class="preprocessor"></span><span class="preprocessor"># define GRR_INIT(v)     = v</span>
-<a name="l00195"></a>00195 <span class="preprocessor"></span><span class="preprocessor"># define GRR_INITS(...)  = { __VA_ARGS__ }</span>
-<a name="l00196"></a>00196 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00197"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a065dde42220d3d8e638f5f9e1993e44f">00197</a> <span class="preprocessor"></span><span class="preprocessor"># define GRR_EXTERN      extern</span>
-<a name="l00198"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a11bc269e562078ae863744e6f121d246">00198</a> <span class="preprocessor"></span><span class="preprocessor"># define GRR_INIT(v)</span>
-<a name="l00199"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a96c64b43f483cefce8f2b58d282538d4">00199</a> <span class="preprocessor"></span><span class="preprocessor"># define GRR_INITS(...)</span>
-<a name="l00200"></a>00200 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00201"></a>00201 <span class="preprocessor"></span>
-<a name="l00202"></a><a class="code" href="_monster_8cpp.html#af6cd231ed45c21c8a0c0ab76bb73897d">00202</a> <a class="code" href="_g_r_r_l_i_b_8h.html#a065dde42220d3d8e638f5f9e1993e44f">GRR_EXTERN</a>  GXRModeObj  *<a class="code" href="_g_r_r_l_i_b_8h.html#a10c3414080fff8aeaccb0b1584d51edc">rmode</a>;
-<a name="l00203"></a>00203 <a class="code" href="_g_r_r_l_i_b_8h.html#a065dde42220d3d8e638f5f9e1993e44f">GRR_EXTERN</a>  <span class="keywordtype">void</span>        *xfb[2]  <a class="code" href="_g_r_r_l_i_b_8h.html#a96c64b43f483cefce8f2b58d282538d4">GRR_INITS</a>(NULL, NULL);
-<a name="l00204"></a>00204 <a class="code" href="_g_r_r_l_i_b_8h.html#a065dde42220d3d8e638f5f9e1993e44f">GRR_EXTERN</a>  u32         fb       <a class="code" href="_g_r_r_l_i_b_8h.html#a11bc269e562078ae863744e6f121d246">GRR_INIT</a>(0);
-<a name="l00205"></a>00205 <span class="comment">//==============================================================================</span>
-<a name="l00206"></a>00206 <span class="comment">// procedure and function prototypes</span>
-<a name="l00207"></a>00207 <span class="comment">// Inline function handling - http://www.greenend.org.uk/rjk/2003/03/inline.html</span>
-<a name="l00208"></a>00208 <span class="comment">//==============================================================================</span>
-<a name="l00209"></a>00209 <span class="preprocessor">#include &quot;grrlib/GRRLIB__lib.h&quot;</span>
-<a name="l00210"></a>00210 
-<a name="l00211"></a>00211 <span class="preprocessor">#if defined __GRRLIB_CORE__</span>
-<a name="l00212"></a>00212 <span class="preprocessor"></span><span class="preprocessor">#  define INLINE</span>
-<a name="l00213"></a>00213 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00214"></a>00214 <span class="preprocessor"></span><span class="preprocessor"># if __GNUC__ &amp;&amp; !__GNUC_STDC_INLINE__</span>
-<a name="l00215"></a>00215 <span class="preprocessor"></span><span class="preprocessor">#  define INLINE static inline</span>
-<a name="l00216"></a>00216 <span class="preprocessor"></span><span class="preprocessor"># else</span>
-<a name="l00217"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a2eb6f9e0395b47b8d5e3eeae4fe0c116">00217</a> <span class="preprocessor"></span><span class="preprocessor">#  define INLINE inline</span>
-<a name="l00218"></a>00218 <span class="preprocessor"></span><span class="preprocessor"># endif</span>
-<a name="l00219"></a>00219 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00220"></a>00220 <span class="preprocessor"></span><span class="preprocessor">#include &quot;grrlib/GRRLIB__inline.h&quot;</span>
-<a name="l00221"></a>00221 
-<a name="l00222"></a>00222 <span class="comment">//==============================================================================</span>
-<a name="l00223"></a>00223 <span class="comment">// C++ footer</span>
-<a name="l00224"></a>00224 <span class="comment">//==============================================================================</span>
-<a name="l00225"></a>00225 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00226"></a>00226 <span class="preprocessor"></span>   }
-<a name="l00227"></a>00227 <span class="preprocessor">#endif </span><span class="comment">/* __cplusplus */</span>
-<a name="l00228"></a>00228 
-<a name="l00229"></a>00229 <span class="preprocessor">#endif // __GRRLIB_H__</span>
-<a name="l00230"></a>00230 <span class="preprocessor"></span>
+<a name="l00073"></a>00073 <span class="comment">// typedefs, enumerators &amp; structs</span>
+<a name="l00074"></a>00074 <span class="comment">//==============================================================================</span>
+<a name="l00078"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692">00078</a> <span class="comment"></span><span class="keyword">typedef</span>  <span class="keyword">enum</span> <a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692">GRRLIB_blendMode</a> {
+<a name="l00079"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692aeded8fce060bcb04b096c17cea237c23">00079</a>     <a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692aeded8fce060bcb04b096c17cea237c23">GRRLIB_BLEND_ALPHA</a>  = 0,    
+<a name="l00080"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692ad4f0554f7bfc19410c4fedaeab1a10fd">00080</a>     <a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692ad4f0554f7bfc19410c4fedaeab1a10fd">GRRLIB_BLEND_ADD</a>    = 1,    
+<a name="l00081"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692ad026c10937b34f2e3e5dd462f528ef00">00081</a>     <a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692ad026c10937b34f2e3e5dd462f528ef00">GRRLIB_BLEND_SCREEN</a> = 2,    
+<a name="l00082"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692a4a7b1a0e143ad522128a7c8f5f7dc7fb">00082</a>     <a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692a4a7b1a0e143ad522128a7c8f5f7dc7fb">GRRLIB_BLEND_MULTI</a>  = 3,    
+<a name="l00083"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692ab3aacba447b6cee253fc713e45ab49fd">00083</a>     <a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692ab3aacba447b6cee253fc713e45ab49fd">GRRLIB_BLEND_INV</a>    = 4,    
+<a name="l00084"></a>00084 } <a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692">GRRLIB_blendMode</a>;
+<a name="l00085"></a>00085 
+<a name="l00086"></a><a class="code" href="_g_r_r_l_i_b_8h.html#aa1595302fa27df7d3e5913865659ca71">00086</a> <span class="preprocessor">#define GRRLIB_BLEND_NONE   (GRRLIB_BLEND_ALPHA)    </span>
+<a name="l00087"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a4da19aad1f8a920283a84a3af7d7e34a">00087</a> <span class="preprocessor">#define GRRLIB_BLEND_LIGHT  (GRRLIB_BLEND_ADD)      </span>
+<a name="l00088"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a2308b6e9df5946957149bfa693c6a93e">00088</a> <span class="preprocessor">#define GRRLIB_BLEND_SHADE  (GRRLIB_BLEND_MULTI)    </span>
+<a name="l00090"></a>00090 <span class="preprocessor">//------------------------------------------------------------------------------</span>
+<a name="l00091"></a>00091 <span class="preprocessor"></span>
+<a name="l00094"></a><a class="code" href="struct_g_r_r_l_i_b__draw_settings.html">00094</a> <span class="keyword">typedef</span>  <span class="keyword">struct </span><a class="code" href="struct_g_r_r_l_i_b__draw_settings.html">GRRLIB_drawSettings</a> {
+<a name="l00095"></a><a class="code" href="struct_g_r_r_l_i_b__draw_settings.html#a0511a787f97e723bc74c4b5b89ddfdad">00095</a>     <span class="keywordtype">bool</span>              <a class="code" href="struct_g_r_r_l_i_b__draw_settings.html#a0511a787f97e723bc74c4b5b89ddfdad">antialias</a>;    
+<a name="l00096"></a><a class="code" href="struct_g_r_r_l_i_b__draw_settings.html#abe73f4ef80e558d21151b8097439a0fa">00096</a>     <a class="code" href="_g_r_r_l_i_b_8h.html#a84c65877bb197763cda6669c473be692">GRRLIB_blendMode</a>  <a class="code" href="struct_g_r_r_l_i_b__draw_settings.html#abe73f4ef80e558d21151b8097439a0fa">blend</a>;        
+<a name="l00097"></a>00097 } <a class="code" href="struct_g_r_r_l_i_b__draw_settings.html">GRRLIB_drawSettings</a>;
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00103"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html">00103</a> <span class="comment"></span><span class="keyword">typedef</span>  <span class="keyword">struct </span><a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> {
+<a name="l00104"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#afdeff54db9a334718662b709641fdfe1">00104</a>     uint   <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#afdeff54db9a334718662b709641fdfe1">w</a>;           
+<a name="l00105"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a0cf902ed91cf35330b639ab2ec1038dc">00105</a>     uint   <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a0cf902ed91cf35330b639ab2ec1038dc">h</a>;           
+<a name="l00106"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#aeabe01fe64ab978062a145d723201aaf">00106</a>     <span class="keywordtype">int</span>    <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#aeabe01fe64ab978062a145d723201aaf">handlex</a>;     
+<a name="l00107"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#ac46115747734d99869a5ae8a6e26f590">00107</a>     <span class="keywordtype">int</span>    <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#ac46115747734d99869a5ae8a6e26f590">handley</a>;     
+<a name="l00108"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a1f1b2cd64720fe490801ccf4c5af3318">00108</a>     <span class="keywordtype">int</span>    <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a1f1b2cd64720fe490801ccf4c5af3318">offsetx</a>;     
+<a name="l00109"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a1e4f9e08319378a51518c10a7f9315c4">00109</a>     <span class="keywordtype">int</span>    <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a1e4f9e08319378a51518c10a7f9315c4">offsety</a>;     
+<a name="l00111"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#afc6d24924b4d32b4eea655863163f49a">00111</a>     <span class="keywordtype">bool</span>   <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#afc6d24924b4d32b4eea655863163f49a">tiledtex</a>;    
+<a name="l00112"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#aeab68752681aed82ee78001e43dd61cd">00112</a>     uint   <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#aeab68752681aed82ee78001e43dd61cd">tilew</a>;       
+<a name="l00113"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a717ea3bab2ed7a6b655f21f8108e2942">00113</a>     uint   <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a717ea3bab2ed7a6b655f21f8108e2942">tileh</a>;       
+<a name="l00114"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a5b0dddbfef7a947399c671a9006ffcd6">00114</a>     uint   <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a5b0dddbfef7a947399c671a9006ffcd6">nbtilew</a>;     
+<a name="l00115"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a7e719e304bd1dcfeed8c9ba5c1bd0695">00115</a>     uint   <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a7e719e304bd1dcfeed8c9ba5c1bd0695">nbtileh</a>;     
+<a name="l00116"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a9da3c04771766d85142eb786f072086b">00116</a>     uint   <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a9da3c04771766d85142eb786f072086b">tilestart</a>;   
+<a name="l00117"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a89846626665e4077edd8fb83ecaf4b8c">00117</a>     f32    <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a89846626665e4077edd8fb83ecaf4b8c">ofnormaltexx</a>;
+<a name="l00118"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a750ee88d4bdc2c0fabf27124951044b6">00118</a>     f32    <a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a750ee88d4bdc2c0fabf27124951044b6">ofnormaltexy</a>;
+<a name="l00120"></a><a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a735984d41155bc1032e09bece8f8d66d">00120</a>     <span class="keywordtype">void</span>  *<a class="code" href="struct_g_r_r_l_i_b__tex_img.html#a735984d41155bc1032e09bece8f8d66d">data</a>;        
+<a name="l00121"></a>00121 } <a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a>;
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00127"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html">00127</a> <span class="comment"></span><span class="keyword">typedef</span>  <span class="keyword">struct </span><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html">GRRLIB_bytemapChar</a> {
+<a name="l00128"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#afd2728d2416f8e0565d6d4842c6ce818">00128</a>     u8  <a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#afd2728d2416f8e0565d6d4842c6ce818">character</a>;      
+<a name="l00129"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a2c1d87ba049f447519d1a92e6550f822">00129</a>     u8  <a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a2c1d87ba049f447519d1a92e6550f822">width</a>;          
+<a name="l00130"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#ac3f221619d1bd1d6f1d46727f0c913a2">00130</a>     u8  <a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#ac3f221619d1bd1d6f1d46727f0c913a2">height</a>;         
+<a name="l00131"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a86979216677e53eab88a6f972804ea18">00131</a>     s8  <a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a86979216677e53eab88a6f972804ea18">relx</a>;           
+<a name="l00132"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a3859c6fa880002245f1343b424555245">00132</a>     s8  <a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a3859c6fa880002245f1343b424555245">rely</a>;           
+<a name="l00133"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a8f3b7e1679518b07394e7c5acb2b7d9a">00133</a>     u8  <a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a8f3b7e1679518b07394e7c5acb2b7d9a">kerning</a>;        
+<a name="l00134"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a40767ad71451f60885c01f28dd2a4b47">00134</a>     u8  *<a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html#a40767ad71451f60885c01f28dd2a4b47">data</a>;          
+<a name="l00135"></a>00135 } <a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html">GRRLIB_bytemapChar</a>;
+<a name="l00136"></a>00136 
+<a name="l00137"></a>00137 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00141"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html">00141</a> <span class="comment"></span><span class="keyword">typedef</span>  <span class="keyword">struct </span><a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html">GRRLIB_bytemapFont</a> {
+<a name="l00142"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#a5ac083a645d964373f022d03df4849c8">00142</a>     <span class="keywordtype">char</span>  *<a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#a5ac083a645d964373f022d03df4849c8">name</a>;                
+<a name="l00143"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#a2c7c01c6eca69b2fc9d0267ca8228853">00143</a>     u32   *<a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#a2c7c01c6eca69b2fc9d0267ca8228853">palette</a>;             
+<a name="l00144"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#ae859dcb34b5b3dafa769120b2302130f">00144</a>     u16   <a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#ae859dcb34b5b3dafa769120b2302130f">nbChar</a>;               
+<a name="l00145"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#ab0e86ae6d36a2d67e39cafafed1fdf7f">00145</a>     u8    <a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#ab0e86ae6d36a2d67e39cafafed1fdf7f">version</a>;              
+<a name="l00146"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#ac793001b64a49cc9cf9b55a4d03e73d7">00146</a>     s8    <a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#ac793001b64a49cc9cf9b55a4d03e73d7">tracking</a>;             
+<a name="l00148"></a><a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#ae8990a9f05e4aa3d65f7010bdbe70139">00148</a>     <a class="code" href="struct_g_r_r_l_i_b__bytemap_char.html">GRRLIB_bytemapChar</a>  *<a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html#ae8990a9f05e4aa3d65f7010bdbe70139">charDef</a>;   
+<a name="l00149"></a>00149 } <a class="code" href="struct_g_r_r_l_i_b__bytemap_font.html">GRRLIB_bytemapFont</a>;
+<a name="l00150"></a>00150 
+<a name="l00151"></a>00151 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00155"></a><a class="code" href="struct_g_r_r_l_i_b___font.html">00155</a> <span class="comment"></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_g_r_r_l_i_b___font.html">GRRLIB_Font</a> {
+<a name="l00156"></a><a class="code" href="struct_g_r_r_l_i_b___font.html#aa8301da67cd3f6aca160cac906ecac1a">00156</a>     FT_Face <a class="code" href="struct_g_r_r_l_i_b___font.html#aa8301da67cd3f6aca160cac906ecac1a">face</a>;       
+<a name="l00157"></a><a class="code" href="struct_g_r_r_l_i_b___font.html#a15f8d367da2866c17163d9dc32909342">00157</a>     FT_Bool <a class="code" href="struct_g_r_r_l_i_b___font.html#a15f8d367da2866c17163d9dc32909342">kerning</a>;    
+<a name="l00158"></a>00158 } <a class="code" href="struct_g_r_r_l_i_b___font.html">GRRLIB_ttfFont</a>;
+<a name="l00159"></a>00159 
+<a name="l00160"></a>00160 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00164"></a><a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html">00164</a> <span class="comment"></span><span class="keyword">typedef</span>  <span class="keyword">struct </span><a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html">tagBITMAPFILEHEADER</a> {
+<a name="l00165"></a><a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a7b7385e0c9786752f6f7071939a8c86e">00165</a>     u16 <a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a7b7385e0c9786752f6f7071939a8c86e">bfType</a>;             
+<a name="l00166"></a><a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a58593dbe4ec2d0b5bc611a4a0ce03825">00166</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a58593dbe4ec2d0b5bc611a4a0ce03825">bfSize</a>;             
+<a name="l00167"></a><a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a30df952d6027abd3a1c2331580449e15">00167</a>     u16 <a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a30df952d6027abd3a1c2331580449e15">bfReserved1</a>;        
+<a name="l00168"></a><a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a0f8327019a0fbf620e0917058b91643c">00168</a>     u16 <a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a0f8327019a0fbf620e0917058b91643c">bfReserved2</a>;        
+<a name="l00169"></a><a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a9e7c0d050dbc139a7b8ee01ea9a11a6c">00169</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html#a9e7c0d050dbc139a7b8ee01ea9a11a6c">bfOffBits</a>;          
+<a name="l00170"></a>00170 } <a class="code" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html">BITMAPFILEHEADER</a>;
+<a name="l00174"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html">00174</a> <span class="keyword">typedef</span>  <span class="keyword">struct </span><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html">tagBITMAPINFOHEADER</a> {
+<a name="l00175"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a1b78050d0cd224e09cb64ee24c233f0e">00175</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a1b78050d0cd224e09cb64ee24c233f0e">biSize</a>;             
+<a name="l00176"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a9569247e6f42cc6485d83eb8fb257b12">00176</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a9569247e6f42cc6485d83eb8fb257b12">biWidth</a>;            
+<a name="l00177"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#afac6b505f1482b5bd0608ffe3342b1e7">00177</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#afac6b505f1482b5bd0608ffe3342b1e7">biHeight</a>;           
+<a name="l00178"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a16da97c998ffb81d059ef4bfe5dc6b70">00178</a>     u16 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a16da97c998ffb81d059ef4bfe5dc6b70">biPlanes</a>;           
+<a name="l00179"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#afcd4196ceb776989cb923371771babc4">00179</a>     u16 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#afcd4196ceb776989cb923371771babc4">biBitCount</a>;         
+<a name="l00180"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#ac136b267e2b61e6eac698988cc1d037d">00180</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#ac136b267e2b61e6eac698988cc1d037d">biCompression</a>;      
+<a name="l00181"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a53d2254d0e1760ab670d24f9a10de0e4">00181</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a53d2254d0e1760ab670d24f9a10de0e4">biSizeImage</a>;        
+<a name="l00182"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a00c0e4657836996248a1221bb6b58ae1">00182</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a00c0e4657836996248a1221bb6b58ae1">biXPelsPerMeter</a>;    
+<a name="l00183"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#aaf57b227c9b7fb5c07351faf3a8c3813">00183</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#aaf57b227c9b7fb5c07351faf3a8c3813">biYPelsPerMeter</a>;    
+<a name="l00184"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a0e09a13d3e76e73a91458a1b0dfb78eb">00184</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a0e09a13d3e76e73a91458a1b0dfb78eb">biClrUsed</a>;          
+<a name="l00185"></a><a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a8540abc4a384e6716637f4c4ba1e3c74">00185</a>     u32 <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html#a8540abc4a384e6716637f4c4ba1e3c74">biClrImportant</a>;     
+<a name="l00186"></a>00186 } <a class="code" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html">BITMAPINFOHEADER</a>;
+<a name="l00192"></a><a class="code" href="structtag_r_g_b_q_u_a_d.html">00192</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structtag_r_g_b_q_u_a_d.html">tagRGBQUAD</a> {
+<a name="l00193"></a><a class="code" href="structtag_r_g_b_q_u_a_d.html#a27b62b6dd4d86fad1fd38c75da1a67f0">00193</a>     u8 <a class="code" href="structtag_r_g_b_q_u_a_d.html#a27b62b6dd4d86fad1fd38c75da1a67f0">rgbBlue</a>;             
+<a name="l00194"></a><a class="code" href="structtag_r_g_b_q_u_a_d.html#a1c427481d93d22728a0a7c81eee2c8d5">00194</a>     u8 <a class="code" href="structtag_r_g_b_q_u_a_d.html#a1c427481d93d22728a0a7c81eee2c8d5">rgbGreen</a>;            
+<a name="l00195"></a><a class="code" href="structtag_r_g_b_q_u_a_d.html#a16c1e5348253dff92174f65b5bd8a5fc">00195</a>     u8 <a class="code" href="structtag_r_g_b_q_u_a_d.html#a16c1e5348253dff92174f65b5bd8a5fc">rgbRed</a>;              
+<a name="l00196"></a><a class="code" href="structtag_r_g_b_q_u_a_d.html#a23062277f4cf94e3c04ebfc7ed2b7e2c">00196</a>     u8 <a class="code" href="structtag_r_g_b_q_u_a_d.html#a23062277f4cf94e3c04ebfc7ed2b7e2c">rgbReserved</a>;         
+<a name="l00197"></a>00197 } <a class="code" href="structtag_r_g_b_q_u_a_d.html">RGBQUAD</a>;
+<a name="l00198"></a>00198 
+<a name="l00199"></a>00199 <span class="comment">//==============================================================================</span>
+<a name="l00200"></a>00200 <span class="comment">// Allow general access to screen and frame information</span>
+<a name="l00201"></a>00201 <span class="comment">//==============================================================================</span>
+<a name="l00202"></a>00202 <span class="preprocessor">#if defined __GRRLIB_CORE__</span>
+<a name="l00203"></a>00203 <span class="preprocessor"></span><span class="preprocessor"># define GRR_EXTERN</span>
+<a name="l00204"></a>00204 <span class="preprocessor"></span><span class="preprocessor"># define GRR_INIT(v)     = v</span>
+<a name="l00205"></a>00205 <span class="preprocessor"></span><span class="preprocessor"># define GRR_INITS(...)  = { __VA_ARGS__ }</span>
+<a name="l00206"></a>00206 <span class="preprocessor"></span><span class="preprocessor">#else</span>
+<a name="l00207"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a065dde42220d3d8e638f5f9e1993e44f">00207</a> <span class="preprocessor"></span><span class="preprocessor"># define GRR_EXTERN      extern</span>
+<a name="l00208"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a11bc269e562078ae863744e6f121d246">00208</a> <span class="preprocessor"></span><span class="preprocessor"># define GRR_INIT(v)</span>
+<a name="l00209"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a96c64b43f483cefce8f2b58d282538d4">00209</a> <span class="preprocessor"></span><span class="preprocessor"># define GRR_INITS(...)</span>
+<a name="l00210"></a>00210 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00211"></a>00211 <span class="preprocessor"></span>
+<a name="l00212"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a10c3414080fff8aeaccb0b1584d51edc">00212</a> <a class="code" href="_g_r_r_l_i_b_8h.html#a065dde42220d3d8e638f5f9e1993e44f">GRR_EXTERN</a>  GXRModeObj  *<a class="code" href="http_8c.html#af6cd231ed45c21c8a0c0ab76bb73897d">rmode</a>;
+<a name="l00213"></a>00213 <a class="code" href="_g_r_r_l_i_b_8h.html#a065dde42220d3d8e638f5f9e1993e44f">GRR_EXTERN</a>  <span class="keywordtype">void</span>        *xfb[2]  <a class="code" href="_g_r_r_l_i_b_8h.html#a96c64b43f483cefce8f2b58d282538d4">GRR_INITS</a>(NULL, NULL);
+<a name="l00214"></a>00214 <a class="code" href="_g_r_r_l_i_b_8h.html#a065dde42220d3d8e638f5f9e1993e44f">GRR_EXTERN</a>  u32         fb       <a class="code" href="_g_r_r_l_i_b_8h.html#a11bc269e562078ae863744e6f121d246">GRR_INIT</a>(0);
+<a name="l00215"></a>00215 <span class="comment">//==============================================================================</span>
+<a name="l00216"></a>00216 <span class="comment">// procedure and function prototypes</span>
+<a name="l00217"></a>00217 <span class="comment">// Inline function handling - http://www.greenend.org.uk/rjk/2003/03/inline.html</span>
+<a name="l00218"></a>00218 <span class="comment">//==============================================================================</span>
+<a name="l00219"></a>00219 <span class="preprocessor">#include &quot;grrlib/GRRLIB__lib.h&quot;</span>
+<a name="l00220"></a>00220 
+<a name="l00221"></a>00221 <span class="preprocessor">#if defined __GRRLIB_CORE__</span>
+<a name="l00222"></a>00222 <span class="preprocessor"></span><span class="preprocessor">#  define INLINE</span>
+<a name="l00223"></a>00223 <span class="preprocessor"></span><span class="preprocessor">#else</span>
+<a name="l00224"></a>00224 <span class="preprocessor"></span><span class="preprocessor"># if __GNUC__ &amp;&amp; !__GNUC_STDC_INLINE__</span>
+<a name="l00225"></a>00225 <span class="preprocessor"></span><span class="preprocessor">#  define INLINE static inline</span>
+<a name="l00226"></a>00226 <span class="preprocessor"></span><span class="preprocessor"># else</span>
+<a name="l00227"></a><a class="code" href="_g_r_r_l_i_b_8h.html#a2eb6f9e0395b47b8d5e3eeae4fe0c116">00227</a> <span class="preprocessor"></span><span class="preprocessor">#  define INLINE inline</span>
+<a name="l00228"></a>00228 <span class="preprocessor"></span><span class="preprocessor"># endif</span>
+<a name="l00229"></a>00229 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00230"></a>00230 <span class="preprocessor"></span><span class="preprocessor">#include &quot;grrlib/GRRLIB__inline.h&quot;</span>
 <a name="l00231"></a>00231 
+<a name="l00232"></a>00232 <span class="comment">//==============================================================================</span>
+<a name="l00233"></a>00233 <span class="comment">// C++ footer</span>
+<a name="l00234"></a>00234 <span class="comment">//==============================================================================</span>
+<a name="l00235"></a>00235 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00236"></a>00236 <span class="preprocessor"></span>   }
+<a name="l00237"></a>00237 <span class="preprocessor">#endif </span><span class="comment">/* __cplusplus */</span>
+<a name="l00238"></a>00238 
+<a name="l00239"></a>00239 <span class="preprocessor">#endif // __GRRLIB_H__</span>
 </pre></div></div>
 <hr size="1"/><address style="text-align: right;"><small>Generated by&nbsp;
 <a href="http://www.doxygen.org/index.html">

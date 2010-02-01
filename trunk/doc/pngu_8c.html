@@ -26,7 +26,6 @@
 <div class="contents">
 <h1>src/pngu.c File Reference</h1><code>#include &lt;stdio.h&gt;</code><br/>
 <code>#include &lt;malloc.h&gt;</code><br/>
-<code>#include &lt;ogc/gx.h&gt;</code><br/>
 <code>#include &quot;<a class="el" href="pngu_8h_source.html">pngu.h</a>&quot;</code><br/>
 <code>#include &quot;png.h&quot;</code><br/>
 <table border="0" cellpadding="0" cellspacing="0">
@@ -35,6 +34,8 @@
 <tr><td colspan="2"><h2>Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="pngu_8c.html#ab4feb494c0b360ab705f12c6641d7a04">PNGU_SOURCE_BUFFER</a>&nbsp;&nbsp;&nbsp;1</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="pngu_8c.html#a971e69bb42328001372743fd7cb93ef6">PNGU_SOURCE_DEVICE</a>&nbsp;&nbsp;&nbsp;2</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="pngu_8c.html#ac346d7520aea3d094c93c2a7670ec274">_SHIFTL</a>(v, s, w)&nbsp;&nbsp;&nbsp;((<a class="el" href="pngu_8h.html#a1a0b55bc4503f87abc0d18154bc68874">PNGU_u32</a>) (((<a class="el" href="pngu_8h.html#a1a0b55bc4503f87abc0d18154bc68874">PNGU_u32</a>)(v) &amp; ((0x01 &lt;&lt; (w)) - 1)) &lt;&lt; (s)))</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="pngu_8c.html#a388456eaf6a19ee30d318ef193e8d64d">_SHIFTR</a>(v, s, w)&nbsp;&nbsp;&nbsp;((<a class="el" href="pngu_8h.html#a1a0b55bc4503f87abc0d18154bc68874">PNGU_u32</a>)(((<a class="el" href="pngu_8h.html#a1a0b55bc4503f87abc0d18154bc68874">PNGU_u32</a>)(v) &gt;&gt; (s)) &amp; ((0x01 &lt;&lt; (w)) - 1)))</td></tr>
 <tr><td colspan="2"><h2>Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="pngu_8c.html#a3a12e3ae65a7ffd28ccd0a1473d6f4aa">pngu_info</a> (<a class="el" href="struct___i_m_g_c_t_x.html">IMGCTX</a> ctx)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="pngu_8c.html#aa2f96f225bd715033eb4aa481f45b500">pngu_decode</a> (<a class="el" href="struct___i_m_g_c_t_x.html">IMGCTX</a> ctx, <a class="el" href="pngu_8h.html#a1a0b55bc4503f87abc0d18154bc68874">PNGU_u32</a> width, <a class="el" href="pngu_8h.html#a1a0b55bc4503f87abc0d18154bc68874">PNGU_u32</a> height, <a class="el" href="pngu_8h.html#a1a0b55bc4503f87abc0d18154bc68874">PNGU_u32</a> stripAlpha)</td></tr>
@@ -61,6 +62,62 @@
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="pngu_8c.html#ad656f399c1ba77ffc3c803c364f5722f">PNGU_YCbYCr_TO_RGB8</a> (<a class="el" href="pngu_8h.html#a1a0b55bc4503f87abc0d18154bc68874">PNGU_u32</a> ycbycr, <a class="el" href="pngu_8h.html#a575662a1901431f5938b6238ead71d19">PNGU_u8</a> *r1, <a class="el" href="pngu_8h.html#a575662a1901431f5938b6238ead71d19">PNGU_u8</a> *g1, <a class="el" href="pngu_8h.html#a575662a1901431f5938b6238ead71d19">PNGU_u8</a> *b1, <a class="el" href="pngu_8h.html#a575662a1901431f5938b6238ead71d19">PNGU_u8</a> *r2, <a class="el" href="pngu_8h.html#a575662a1901431f5938b6238ead71d19">PNGU_u8</a> *g2, <a class="el" href="pngu_8h.html#a575662a1901431f5938b6238ead71d19">PNGU_u8</a> *b2)</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
+<a class="anchor" id="ac346d7520aea3d094c93c2a7670ec274"></a><!-- doxytag: member="pngu.c::_SHIFTL" ref="ac346d7520aea3d094c93c2a7670ec274" args="(v, s, w)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _SHIFTL</td>
+          <td>(</td>
+          <td class="paramtype">v, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">s, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">w&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;((<a class="el" href="pngu_8h.html#a1a0b55bc4503f87abc0d18154bc68874">PNGU_u32</a>) (((<a class="el" href="pngu_8h.html#a1a0b55bc4503f87abc0d18154bc68874">PNGU_u32</a>)(v) &amp; ((0x01 &lt;&lt; (w)) - 1)) &lt;&lt; (s)))</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a388456eaf6a19ee30d318ef193e8d64d"></a><!-- doxytag: member="pngu.c::_SHIFTR" ref="a388456eaf6a19ee30d318ef193e8d64d" args="(v, s, w)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _SHIFTR</td>
+          <td>(</td>
+          <td class="paramtype">v, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">s, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">w&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;((<a class="el" href="pngu_8h.html#a1a0b55bc4503f87abc0d18154bc68874">PNGU_u32</a>)(((<a class="el" href="pngu_8h.html#a1a0b55bc4503f87abc0d18154bc68874">PNGU_u32</a>)(v) &gt;&gt; (s)) &amp; ((0x01 &lt;&lt; (w)) - 1)))</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ab4feb494c0b360ab705f12c6641d7a04"></a><!-- doxytag: member="pngu.c::PNGU_SOURCE_BUFFER" ref="ab4feb494c0b360ab705f12c6641d7a04" args="" -->
 <div class="memitem">
 <div class="memproto">

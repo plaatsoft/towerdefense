@@ -25,6 +25,7 @@
 </div>
 <div class="contents">
 <h1>inc/GRRLIB.h File Reference</h1><code>#include &lt;gccore.h&gt;</code><br/>
+<code>#include &lt;ft2build.h&gt;</code><br/>
 <code>#include &quot;grrlib/GRRLIB__lib.h&quot;</code><br/>
 <code>#include &quot;grrlib/GRRLIB__inline.h&quot;</code><br/>
 
@@ -35,11 +36,12 @@
 <tr><td class="memItemLeft" align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_g_r_r_l_i_b__bytemap_char.html">GRRLIB_bytemapChar</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_g_r_r_l_i_b__bytemap_font.html">GRRLIB_bytemapFont</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_g_r_r_l_i_b___font.html">GRRLIB_Font</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html">tagBITMAPFILEHEADER</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html">tagBITMAPINFOHEADER</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtag_r_g_b_q_u_a_d.html">tagRGBQUAD</a></td></tr>
 <tr><td colspan="2"><h2>Defines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_r_r_l_i_b_8h.html#ad36e97f844e145cd811f40ee306eb11f">GRRLIB_VER_STRING</a>&nbsp;&nbsp;&nbsp;&quot;4.2.0&quot;</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_r_r_l_i_b_8h.html#ad36e97f844e145cd811f40ee306eb11f">GRRLIB_VER_STRING</a>&nbsp;&nbsp;&nbsp;&quot;4.2.1 BETA&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_r_r_l_i_b_8h.html#a2cde25567f177a6cd9191d536764235e">R</a>(c)&nbsp;&nbsp;&nbsp;(((c) &gt;&gt;24) &amp;0xFF)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_r_r_l_i_b_8h.html#a7cc73638f4849985153257c89a69ee94">G</a>(c)&nbsp;&nbsp;&nbsp;(((c) &gt;&gt;16) &amp;0xFF)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_r_r_l_i_b_8h.html#adddcd4b5f23e5e290c31b64cd8c8efaa">B</a>(c)&nbsp;&nbsp;&nbsp;(((c) &gt;&gt; 8) &amp;0xFF)</td></tr>
@@ -54,6 +56,7 @@
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_r_r_l_i_b_8h.html#a2eb6f9e0395b47b8d5e3eeae4fe0c116">INLINE</a>&nbsp;&nbsp;&nbsp;inline</td></tr>
 <tr><td colspan="2"><h2>Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef unsigned int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_r_r_l_i_b_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct_g_r_r_l_i_b___font.html">GRRLIB_Font</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_r_r_l_i_b_8h.html#a499180deb21d989a9a41df654e2f037f">GRRLIB_ttfFont</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structtag_b_i_t_m_a_p_f_i_l_e_h_e_a_d_e_r.html">tagBITMAPFILEHEADER</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_r_r_l_i_b_8h.html#a38b6ed7c3c145c657e13b5d5053833cf">BITMAPFILEHEADER</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structtag_b_i_t_m_a_p_i_n_f_o_h_e_a_d_e_r.html">tagBITMAPINFOHEADER</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_r_r_l_i_b_8h.html#a5334657d9ccd03e5f7681d8172c7b73c">BITMAPINFOHEADER</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structtag_r_g_b_q_u_a_d.html">tagRGBQUAD</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_r_r_l_i_b_8h.html#a2b5290bfab12743335a843900be5deeb">RGBQUAD</a></td></tr>
@@ -229,7 +232,7 @@
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define GRRLIB_VER_STRING&nbsp;&nbsp;&nbsp;&quot;4.2.0&quot;</td>
+          <td class="memname">#define GRRLIB_VER_STRING&nbsp;&nbsp;&nbsp;&quot;4.2.1 BETA&quot;</td>
         </tr>
       </table>
 </div>
@@ -334,6 +337,20 @@
 </div>
 <div class="memdoc">
 <p>This structure contains information about the dimensions and color format of a device-independent bitmap (DIB). </p>
+
+</div>
+</div>
+<a class="anchor" id="a499180deb21d989a9a41df654e2f037f"></a><!-- doxytag: member="GRRLIB.h::GRRLIB_ttfFont" ref="a499180deb21d989a9a41df654e2f037f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct_g_r_r_l_i_b___font.html">GRRLIB_Font</a>  <a class="el" href="struct_g_r_r_l_i_b___font.html">GRRLIB_ttfFont</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Structure to hold the TTF information. </p>
 
 </div>
 </div>
@@ -450,11 +467,12 @@
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">GRR_EXTERN GXRModeObj* <a class="el" href="_monster_8cpp.html#af6cd231ed45c21c8a0c0ab76bb73897d">rmode</a></td>
+          <td class="memname">GRR_EXTERN GXRModeObj* <a class="el" href="_g_r_r_l_i_b_8h.html#a10c3414080fff8aeaccb0b1584d51edc">rmode</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Video settings buffer </p>
 
 </div>
 </div>

@@ -70,10 +70,10 @@
 <a name="l00046"></a>00046 };
 <a name="l00047"></a>00047 
 <a name="l00048"></a>00048 <span class="comment">// Init tcp layer</span>
-<a name="l00049"></a>00049 <span class="keywordtype">void</span> <a class="code" href="http_8h.html#adc6ab5375a0430f9029b1acf8beea86a">tcp_init_layer</a>(<span class="keywordtype">void</span>);
+<a name="l00049"></a>00049 <span class="keywordtype">void</span> <a class="code" href="http_8c.html#adc6ab5375a0430f9029b1acf8beea86a">tcp_init_layer</a>(<span class="keywordtype">void</span>);
 <a name="l00050"></a>00050 
 <a name="l00051"></a>00051 <span class="comment">// Start HTTP thread</span>
-<a name="l00052"></a>00052 <span class="keywordtype">int</span> <a class="code" href="http_8h.html#a3435835ebd07c6b2be352bf6512ff662">tcp_start_thread</a>(   <span class="keyword">const</span> <span class="keywordtype">char</span> *name,  <span class="keyword">const</span> <span class="keywordtype">char</span> *version, 
+<a name="l00052"></a>00052 <span class="keywordtype">int</span> <a class="code" href="http_8c.html#a3435835ebd07c6b2be352bf6512ff662">tcp_start_thread</a>(   <span class="keyword">const</span> <span class="keywordtype">char</span> *name,  <span class="keyword">const</span> <span class="keywordtype">char</span> *version, 
 <a name="l00053"></a>00053                                                 <span class="keyword">const</span> <span class="keywordtype">char</span> *id1,   <span class="keyword">const</span> <span class="keywordtype">char</span> *url1, 
 <a name="l00054"></a>00054                                                 <span class="keyword">const</span> <span class="keywordtype">char</span> *id2,   <span class="keyword">const</span> <span class="keywordtype">char</span> *url2, 
 <a name="l00055"></a>00055                                                 <span class="keyword">const</span> <span class="keywordtype">char</span> *id3,   <span class="keyword">const</span> <span class="keywordtype">char</span> *url3, 
@@ -82,28 +82,28 @@
 <a name="l00058"></a>00058                                                 <span class="keyword">const</span> <span class="keywordtype">char</span> *userData3);
 <a name="l00059"></a>00059                                                 
 <a name="l00060"></a>00060 <span class="comment">// Stop HTTP thread</span>
-<a name="l00061"></a>00061 <span class="keywordtype">int</span> <a class="code" href="http_8h.html#a90f7746a7966b104809f7678c771d308">tcp_stop_thread</a>(<span class="keywordtype">void</span>);
+<a name="l00061"></a>00061 <span class="keywordtype">int</span> <a class="code" href="http_8c.html#a90f7746a7966b104809f7678c771d308">tcp_stop_thread</a>(<span class="keywordtype">void</span>);
 <a name="l00062"></a>00062 
 <a name="l00063"></a>00063 <span class="comment">// Fetch current thread state (String)</span>
-<a name="l00064"></a>00064 <span class="keywordtype">char</span> *<a class="code" href="http_8h.html#a613a9538226f41d63a0197ff8571ee63">tcp_get_state</a>(<span class="keywordtype">void</span>);
+<a name="l00064"></a>00064 <span class="keywordtype">char</span> *<a class="code" href="http_8c.html#a613a9538226f41d63a0197ff8571ee63">tcp_get_state</a>(<span class="keywordtype">void</span>);
 <a name="l00065"></a>00065 
 <a name="l00066"></a>00066 <span class="comment">// Feth current thread state (int)</span>
-<a name="l00067"></a>00067 <span class="keywordtype">int</span> <a class="code" href="http_8h.html#af98bb5939a033fadac6209111e8ca8fc">tcp_get_state_nr</a>(<span class="keywordtype">void</span>);
+<a name="l00067"></a>00067 <span class="keywordtype">int</span> <a class="code" href="http_8c.html#af98bb5939a033fadac6209111e8ca8fc">tcp_get_state_nr</a>(<span class="keywordtype">void</span>);
 <a name="l00068"></a>00068 
 <a name="l00069"></a>00069 <span class="comment">// Set current thread state (int)</span>
-<a name="l00070"></a>00070 <span class="keywordtype">int</span> <a class="code" href="http_8h.html#ad646ca9cdd5a3f7aec2275cf9de47586">tcp_set_state</a>(<span class="keywordtype">int</span> state, <span class="keywordtype">char</span> *userData3);
+<a name="l00070"></a>00070 <span class="keywordtype">int</span> <a class="code" href="http_8c.html#ad646ca9cdd5a3f7aec2275cf9de47586">tcp_set_state</a>(<span class="keywordtype">int</span> state, <span class="keywordtype">char</span> *userData3);
 <a name="l00071"></a>00071 
 <a name="l00072"></a>00072 <span class="comment">// Get version (String format)</span>
-<a name="l00073"></a>00073 <span class="keywordtype">char</span> *<a class="code" href="http_8h.html#a3cc8b9b801f51d1a9898d9ae01477194">tcp_get_version</a>(<span class="keywordtype">void</span>);
+<a name="l00073"></a>00073 <span class="keywordtype">char</span> *<a class="code" href="http_8c.html#a3cc8b9b801f51d1a9898d9ae01477194">tcp_get_version</a>(<span class="keywordtype">void</span>);
 <a name="l00074"></a>00074 
 <a name="l00075"></a>00075 <span class="comment">// Get releasenotes (HTML format)</span>
-<a name="l00076"></a>00076 <span class="keywordtype">char</span> *<a class="code" href="http_8h.html#a0bb1bff64761f953b50700e93d4330ca">tcp_get_releasenote</a>(<span class="keywordtype">void</span>);
+<a name="l00076"></a>00076 <span class="keywordtype">char</span> *<a class="code" href="http_8c.html#a0bb1bff64761f953b50700e93d4330ca">tcp_get_releasenote</a>(<span class="keywordtype">void</span>);
 <a name="l00077"></a>00077 
 <a name="l00078"></a>00078 <span class="comment">// Get today highscore (XML format)</span>
-<a name="l00079"></a>00079 <span class="keywordtype">char</span> *<a class="code" href="http_8h.html#a8084644b07744e943b18f5cbc0f7e835">tcp_get_today_highscore</a>(<span class="keywordtype">void</span>);
+<a name="l00079"></a>00079 <span class="keywordtype">char</span> *<a class="code" href="http_8c.html#a8084644b07744e943b18f5cbc0f7e835">tcp_get_today_highscore</a>(<span class="keywordtype">void</span>);
 <a name="l00080"></a>00080 
 <a name="l00081"></a>00081 <span class="comment">// Get global highscore (XML format)</span>
-<a name="l00082"></a>00082 <span class="keywordtype">char</span> *<a class="code" href="http_8h.html#ae9a666c288ebcdf878d547b5d07c4f88">tcp_get_global_highscore</a>(<span class="keywordtype">void</span>);
+<a name="l00082"></a>00082 <span class="keywordtype">char</span> *<a class="code" href="http_8c.html#ae9a666c288ebcdf878d547b5d07c4f88">tcp_get_global_highscore</a>(<span class="keywordtype">void</span>);
 <a name="l00083"></a>00083 
 <a name="l00084"></a>00084 <span class="preprocessor">#ifdef __cplusplus</span>
 <a name="l00085"></a>00085 <span class="preprocessor"></span>   }
