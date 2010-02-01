@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-Copyright (c) 2009 The GRRLIB Team
+Copyright (c) 2010 The GRRLIB Team
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +28,7 @@ THE SOFTWARE.
 
 #define __GRRLIB_CORE__
 #include <grrlib.h>
+#include "grrlib/GRRLIB_ttf.h"
 
 #define DEFAULT_FIFO_SIZE (256 * 1024) /**< GX fifo buffer size. */
 
@@ -50,14 +51,14 @@ int  GRRLIB_Init (void) {
     s8 error_code = 0;
 
     // Ensure this function is only ever called once
-    if (is_setup)  return 0 ;
+    if (is_setup)  return 0;
 
     // Initialise the video subsystem
     VIDEO_Init();
     VIDEO_SetBlack(true);  // Disable video output during initialisation
 
     // Grab a pointer to the video mode attributes
-    if ( !(rmode = VIDEO_GetPreferredMode(NULL)) )  return -1 ;
+    if ( !(rmode = VIDEO_GetPreferredMode(NULL)) )  return -1;
 
     // Video Mode Correction
     switch (rmode->viTVMode) {
@@ -80,26 +81,26 @@ int  GRRLIB_Init (void) {
     VIDEO_Configure(rmode);
 
     // Get some memory to use for a "double buffered" frame buffer
-    if ( !(xfb[0] = MEM_K0_TO_K1(SYS_AllocateFramebuffer(rmode))) )  return -1 ;
-    if ( !(xfb[1] = MEM_K0_TO_K1(SYS_AllocateFramebuffer(rmode))) )  return -1 ;
+    if ( !(xfb[0] = MEM_K0_TO_K1(SYS_AllocateFramebuffer(rmode))) )  return -1;
+    if ( !(xfb[1] = MEM_K0_TO_K1(SYS_AllocateFramebuffer(rmode))) )  return -1;
 
     VIDEO_SetNextFramebuffer(xfb[fb]);  // Choose a frame buffer to start with
 
     VIDEO_Flush();                      // flush the frame to the TV
     VIDEO_WaitVSync();                  // Wait for the TV to finish updating
     // If the TV image is interlaced it takes two passes to display the image
-    if (rmode->viTVMode & VI_NON_INTERLACE)  VIDEO_WaitVSync() ;
+    if (rmode->viTVMode & VI_NON_INTERLACE)  VIDEO_WaitVSync();
 
     // The FIFO is the buffer the CPU uses to send commands to the GPU
-    if ( !(gp_fifo = memalign(32, DEFAULT_FIFO_SIZE)) )  return -1 ;
+    if ( !(gp_fifo = memalign(32, DEFAULT_FIFO_SIZE)) )  return -1;
     memset(gp_fifo, 0, DEFAULT_FIFO_SIZE);
     GX_Init(gp_fifo, DEFAULT_FIFO_SIZE);
 
     // Clear the background to opaque black and clears the z-buffer
     GX_SetCopyClear((GXColor){ 0, 0, 0, 0 }, GX_MAX_Z24);
 
-    if (rmode->aa)  GX_SetPixelFmt(GX_PF_RGB565_Z16, GX_ZC_LINEAR) ;  // Set 16 bit RGB565
-    else            GX_SetPixelFmt(GX_PF_RGB8_Z24  , GX_ZC_LINEAR) ;  // Set 24 bit Z24
+    if (rmode->aa)  GX_SetPixelFmt(GX_PF_RGB565_Z16, GX_ZC_LINEAR);  // Set 16 bit RGB565
+    else            GX_SetPixelFmt(GX_PF_RGB8_Z24  , GX_ZC_LINEAR);  // Set 24 bit Z24
 
     // Other GX setup
     yscale    = GX_GetYScaleFactor(rmode->efbHeight, rmode->xfbHeight);
@@ -161,20 +162,22 @@ int  GRRLIB_Init (void) {
     // Initialise the filing system
     if (!fatInitDefault())  error_code = -2;
 
+    // Initialise TTF
+    if (GRRLIB_InitTTF())  error_code = -3;
+
     VIDEO_SetBlack(false);  // Enable video output
     return error_code;
 }
 
 /**
  * Call this before exiting your application.
+ * Ensure this function is only ever called once
+ * and only if the setup function has been called.
  */
 void  GRRLIB_Exit (void) {
-
-    // Ensure this function is only ever called once
-    // ...and only if the setup function has been called
     static  bool  done = false;
-    if (done || !is_setup)  return ;
-    else                    done = true ;
+    if (done || !is_setup)  return;
+    else                    done = true;
 
     // Allow write access to the full screen
     GX_SetClipMode( GX_CLIP_DISABLE );
@@ -193,4 +196,7 @@ void  GRRLIB_Exit (void) {
     if (xfb[0]  != NULL) {  free(MEM_K1_TO_K0(xfb[0]));  xfb[0]  = NULL;  }
     if (xfb[1]  != NULL) {  free(MEM_K1_TO_K0(xfb[1]));  xfb[1]  = NULL;  }
     if (gp_fifo != NULL) {  free(gp_fifo);               gp_fifo = NULL;  }
+
+    // Done with TTF
+    GRRLIB_ExitTTF();
 }

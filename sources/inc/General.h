@@ -3,7 +3,7 @@
  * Welcome to the TowerDefense documentation.
  *
  * @section Introduction
- * WiiTowerDefense is a 2D classic game for the Nintedo Wii.
+ * WiiTowerDefense is a 2D classic game for the Nintendo Wii.
  *
  * @section Links
  * Website: http://www.plaatsoft.nl\n
@@ -14,12 +14,15 @@
  *  
  * @section ReleaseNotes
  *
- * 28-01-2010 Version 0.94
+ * 01-02-2010 Version 0.94
  * GUI:
  * - Improve video initialization.
+ * - Optimised all draw methods for beter FPS performance. Thanks Crayon.
  * Core:
- * - Improve inline source code documentation 
- * - Use Doxygen (windows tool) to this extract information
+ * - Improve inline source code documentation (javadoc style)
+ * - Use Doxygen (windows tool) to extract this information.
+ * - Use GrrLib 4.2.1 BETA library (Now native FreeType support available)
+ * - Build game with devkitPPC r19 compiler.
  * 
  * 22-01-2010 Version 0.93
  * GUI:
@@ -33,7 +36,7 @@
  * - Fire at enemy in range with highest energy level (Cannon + Missile)
  * - Fire at fastest enemy in range (Laser + Nuke)
  * - Rebalance weapon specifications. Mix features more!
- * - Optimised some draw methods for beter performance. Thanks Crayon.
+ * - Build game with devkitPPC r19 compiler.
  *
  * 16-01-2010 Version 0.92
  * GUI:

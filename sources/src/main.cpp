@@ -19,7 +19,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
  */
 
 #include <stdio.h>
@@ -261,23 +260,23 @@ extern int      pic606length;
 extern const unsigned char     pic607data[];
 extern int      pic607length;
 
-u32          *frameBuffer[1] 	= {NULL};
-GXRModeObj   *rmode 				= NULL;
-Mtx          GXmodelView2D;
+u32          *frameBuffer[1] 	= {NULL};	/**< Video memory buffer */
+GXRModeObj   *rmode 				= NULL;		/**< Video settings buffer */
+Mtx          GXmodelView2D;					/**< Video mode = 2D */
 
-Game 			 game;							/**< Game paramters */
-Trace     	 *trace;							/**< Trace object */
-Settings  	 *settings;						/**< Settings object */
-HighScore 	 *highScore;					/**< Highscore object */
-Sound      	 *sound;							/**< Sound object */
-WeaponSpecs  *weaponSpecs;					/**< WeaponSpecs object */
-MonsterSpecs *monsterSpecs;				/**< MonsterSpecs object */
-Matrix		 *matrix;						/**< Matrix object */
-Grid      	 *grids[MAX_GRIDS];			/**< Grid array */
-Monster   	 *monsters[MAX_MONSTERS];	/**< Monster array */
-Pointer   	 *pointers[MAX_POINTERS];	/**< Pointer array */
-Weapon    	 *weapons[MAX_WEAPONS];		/**< Weapon array */
-Button    	 *buttons[MAX_BUTTONS];		/**< Button array */
+Game 			 game;								/**< Game paramters */
+Trace     	 *trace;								/**< Trace object */
+Settings  	 *settings;							/**< Settings object */
+HighScore 	 *highScore;						/**< Highscore object */
+Sound      	 *sound;								/**< Sound object */
+WeaponSpecs  *weaponSpecs;						/**< WeaponSpecs object */
+MonsterSpecs *monsterSpecs;					/**< MonsterSpecs object */
+Matrix		 *matrix;							/**< Matrix object */
+Grid      	 *grids[MAX_GRIDS];				/**< Grid array */
+Monster   	 *monsters[MAX_MONSTERS];		/**< Monster array */
+Pointer   	 *pointers[MAX_POINTERS];		/**< Pointer array */
+Weapon    	 *weapons[MAX_WEAPONS];			/**< Weapon array */
+Button    	 *buttons[MAX_BUTTONS];			/**< Button array */
 
 // -----------------------------------
 // Destroy METHODES

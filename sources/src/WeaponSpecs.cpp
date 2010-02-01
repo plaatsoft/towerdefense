@@ -1,6 +1,6 @@
 /** 
  *  @file 
- *  @brief The file contains the WeapomSpecs class
+ *  @brief The file contains the WeaponSpecs class
  * 
  *  Created by wplaat (www.plaatsoft.nl)
  *
