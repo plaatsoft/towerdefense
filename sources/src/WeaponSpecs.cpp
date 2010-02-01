@@ -39,7 +39,7 @@
 #define CANNON_PRICE 			500
 #define MISSILE_PRICE 			1000
 #define LASER_PRICE 				3000
-#define NUKE_PRICE 				6000 
+#define NUKE_PRICE 				5500 
 
 #define GUN_UPGRADE_PRICE  	10
 #define RIFLE_UPGRADE_PRICE 	25
@@ -92,17 +92,17 @@
 
 #define GUN_FIRE_MODE   		FIRE_MODE_NEAREST_TO_BASE
 #define RIFLE_FIRE_MODE			FIRE_MODE_NEAREST_TO_BASE
-#define CANNON_FIRE_MODE		FIRE_MODE_HIGHEST_ENERGY
+#define CANNON_FIRE_MODE		FIRE_MODE_FASTEST 
 #define MISSILE_FIRE_MODE		FIRE_MODE_HIGHEST_ENERGY
 #define LASER_FIRE_MODE			FIRE_MODE_FASTEST
-#define NUKE_FIRE_MODE			FIRE_MODE_FASTEST
+#define NUKE_FIRE_MODE			FIRE_MODE_HIGHEST_ENERGY
 
 #define GUN_FIRE_MODE_NAME  	  "Nearest to base" 		
 #define RIFLE_FIRE_MODE_NAME	  "Nearest to base"
-#define CANNON_FIRE_MODE_NAME	  "Highest energy"
+#define CANNON_FIRE_MODE_NAME	  "Fastest Enemy"
 #define MISSILE_FIRE_MODE_NAME  "Highest energy"
 #define LASER_FIRE_MODE_NAME    "Fastest Enemy"
-#define NUKE_FIRE_MODE_NAME     "Fastest Enemy"
+#define NUKE_FIRE_MODE_NAME     "Highest energy"
 
 // ------------------------------
 // Extern variables
