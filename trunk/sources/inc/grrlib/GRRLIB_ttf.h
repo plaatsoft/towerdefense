@@ -20,40 +20,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ------------------------------------------------------------------------------*/
 
-/**
- * @file GRRLIB_fbComplex.h
- * Inline functions for complex (N-point) shape drawing.
- */
-
-/**
- * Draw an array of points.
- * @param v Array containing the points.
- * @param color The color of the points in RGBA format.
- * @param n Number of points in the vector array.
- */
-INLINE
-void  GRRLIB_NPlot (const guVector v[], const u32 color[], const long n) {
-    GRRLIB_GXEngine(v, color, n, GX_POINTS);
-}
-
-/**
- * Draw a polygon.
- * @param v The vector containing the coordinates of the polygon.
- * @param color The color of the filled polygon in RGBA format.
- * @param n Number of points in the vector.
- */
-INLINE
-void  GRRLIB_NGone (const guVector v[], const u32 color[], const long n) {
-    GRRLIB_GXEngine(v, color, n, GX_LINESTRIP);
-}
-
-/**
- * Draw a filled polygon.
- * @param v The vector containing the coordinates of the polygon.
- * @param color The color of the filled polygon in RGBA format.
- * @param n Number of points in the vector.
- */
-INLINE
-void  GRRLIB_NGoneFilled (const guVector v[], const u32 color[], const long n) {
-    GRRLIB_GXEngine(v, color, n, GX_TRIANGLEFAN);
-}
+int GRRLIB_InitTTF();
+void GRRLIB_ExitTTF();

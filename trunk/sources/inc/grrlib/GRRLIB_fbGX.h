@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-Copyright (c) 2009 The GRRLIB Team
+Copyright (c) 2010 The GRRLIB Team
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ void  GRRLIB_GXEngine (const guVector v[], const u32 color[], const long n,
 
     GX_Begin(fmt, GX_VTXFMT0, n);
     for (i = 0; i < n; i++) {
-        GX_Position3f32(v[i].x, v[i].y,  v[i].z);
+        GX_Position3f32(v[i].x, v[i].y, v[i].z);
         GX_Color1u32(color[i]);
     }
     GX_End();

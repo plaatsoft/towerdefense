@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-Copyright (c) 2009 The GRRLIB Team
+Copyright (c) 2010 The GRRLIB Team
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -85,5 +85,5 @@ bool  GRRLIB_RectOnRect (const int rect1x, const int rect1y,
     return GRRLIB_PtInRect(rect1x, rect1y, rect1w, rect1h, rect2x, rect2y) ||
            GRRLIB_PtInRect(rect1x, rect1y, rect1w, rect1h, rect2x+rect2w, rect2y) ||
            GRRLIB_PtInRect(rect1x, rect1y, rect1w, rect1h, rect2x+rect2w, rect2y+rect2h) ||
-           GRRLIB_PtInRect(rect1x, rect1y, rect1w, rect1h, rect2x, rect2y+rect2h) ;
+           GRRLIB_PtInRect(rect1x, rect1y, rect1w, rect1h, rect2x, rect2y+rect2h);
 }

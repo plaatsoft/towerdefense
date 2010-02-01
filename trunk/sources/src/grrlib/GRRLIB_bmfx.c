@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-Copyright (c) 2009 The GRRLIB Team
+Copyright (c) 2010 The GRRLIB Team
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -231,11 +231,11 @@ void  GRRLIB_BMFX_Pixelate (const GRRLIB_texImg *texsrc,
     for (x = 0; x < texsrc->w - 1 - factor; x += factor) {
         for (y = 0; y < texsrc->h - 1 - factor; y +=factor) {
             rgb = GRRLIB_GetPixelFromtexImg(x, y, texsrc);
-                for (xx = x; xx < x + factor; xx++) {
-                    for (yy = y; yy < y + factor; yy++) {
-                        GRRLIB_SetPixelTotexImg(xx, yy, texdest, rgb);
-                    }
+            for (xx = x; xx < x + factor; xx++) {
+                for (yy = y; yy < y + factor; yy++) {
+                    GRRLIB_SetPixelTotexImg(xx, yy, texdest, rgb);
                 }
+            }
         }
     }
 }
