@@ -34,6 +34,7 @@ extern Game    game;
 extern Trace   *trace;
 extern Sound   *sound;
 extern Pointer *pointers[MAX_POINTERS];
+extern GRRLIB_ttfFont *myFont;
 
 // ------------------------------
 // Constructor
@@ -134,11 +135,11 @@ void Button::text(int offset)
 {	
 	if (focus)
 	{
-		GRRLIB_Printf2(x+35+offset, y+3, label, 16, GRRLIB_BLUE); 
+		GRRLIB_PrintfTTF(x+35+offset, y+3, myFont, label, 16, GRRLIB_YELLOW); 
 	}
 	else
-	{
-		GRRLIB_Printf2(x+35+offset, y+3, label, 16, GRRLIB_WHITESMOKE); 	
+	{	
+		GRRLIB_PrintfTTF(x+35+offset, y+3, myFont, label, 16, GRRLIB_WHITESMOKE); 
 	}
 }
 

@@ -17,10 +17,13 @@
  * 01-02-2010 Version 0.94
  * GUI:
  * - Improve video initialization.
- * - Optimised all draw methods for beter FPS performance. Thanks Crayon.
+ * - Overall FPS has improved 50 procent. Thanks Crayon.
+ * - Lots of other small GUI changes. 
  * Core:
- * - Improve inline source code documentation (javadoc style)
- * - Use Doxygen (windows tool) to extract this information.
+ * - Mixed the weapon fire mode a little bit more!
+ * - Nuke is 500 dollar cheaper!
+ * - Added inline source code remarks in javadoc style.
+ * - Use Doxygen (windows tool) to create HTML source code documentation.
  * - Use GrrLib 4.2.1 BETA library (Now native FreeType support available)
  * - Build game with devkitPPC r19 compiler.
  * 

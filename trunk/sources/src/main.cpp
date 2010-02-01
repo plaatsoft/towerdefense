@@ -55,6 +55,7 @@
 #include "Grid.h"
 #include "Matrix.h"
 #include "http.h"
+#include "font_ttf.h" 
 
 // -----------------------------------------------------------
 // PROTOTYPES
@@ -277,6 +278,8 @@ Monster   	 *monsters[MAX_MONSTERS];		/**< Monster array */
 Pointer   	 *pointers[MAX_POINTERS];		/**< Pointer array */
 Weapon    	 *weapons[MAX_WEAPONS];			/**< Weapon array */
 Button    	 *buttons[MAX_BUTTONS];			/**< Button array */
+
+GRRLIB_ttfFont *myFont; 
 
 // -----------------------------------
 // Destroy METHODES
@@ -2033,56 +2036,56 @@ void drawText(int x, int y, int type, const char *text, ...)
 		switch (type)
 		{  	
 			case fontWelcome: 
-				GRRLIB_Printf2(x, y, buf, 40, GRRLIB_WHITESMOKE); 
+				GRRLIB_PrintfTTF(x, y, myFont, buf, 40, GRRLIB_WHITESMOKE); 
 				break;
  
 			case fontTitle: 
 				if (x==0) x=320-((strlen(buf)*34)/2);  
-				GRRLIB_Printf2(x, y, buf, 72, GRRLIB_WHITESMOKE); 
+				GRRLIB_PrintfTTF(x, y, myFont, buf, 72, GRRLIB_WHITESMOKE); 
 				break;
   	   
 			case fontSubTitle:
-				if (x==0) x=320-((strlen(buf)*20)/2);
-				GRRLIB_Printf2(x, y, buf, 30, GRRLIB_WHITESMOKE);          
+				if (x==0) x=320-((strlen(buf)*20)/2);        
+				GRRLIB_PrintfTTF(x, y, myFont, buf, 30, GRRLIB_WHITESMOKE); 
 				break;
 	   
-			case fontPanel:
-				GRRLIB_Printf2(x, y, buf, 14, GRRLIB_WHITESMOKE);          
+			case fontPanel:         
+				GRRLIB_PrintfTTF(x, y, myFont, buf, 14, GRRLIB_WHITESMOKE); 
 				break;
 	   	   
 			case fontParagraph:
-				if (x==0) x=320-((strlen(buf)*10)/2);	   
-				GRRLIB_Printf2(x, y, buf, 24, GRRLIB_WHITESMOKE);            
+				if (x==0) x=320-((strlen(buf)*10)/2);	             
+				GRRLIB_PrintfTTF(x, y, myFont, buf, 24, GRRLIB_WHITESMOKE); 
 				break;
 	   	   
 			case fontNormal:
-				if (x==0) x=320-((strlen(buf)*7)/2);
-				GRRLIB_Printf2(x, y, buf, 18, GRRLIB_WHITESMOKE);            
+				if (x==0) x=320-((strlen(buf)*7)/2);           
+				GRRLIB_PrintfTTF(x, y, myFont, buf, 18, GRRLIB_WHITESMOKE); 
 				break;
 	         
 			case fontNew:
 				if (x==0) x=320-((strlen(buf)*8)/2);	   
-				GRRLIB_Printf2(x, y, buf, 22, GRRLIB_WHITESMOKE);
+				GRRLIB_PrintfTTF(x, y, myFont, buf, 22, GRRLIB_WHITESMOKE); 
 				break;
 	   
 			case fontSmall:
-				if (x==0) x=320-((strlen(buf)*10)/2);
-				GRRLIB_Printf2(x, y, buf, 10, GRRLIB_WHITESMOKE);            
+				if (x==0) x=320-((strlen(buf)*10)/2); 
+			   GRRLIB_PrintfTTF(x, y, myFont, buf, 10, GRRLIB_WHITESMOKE);          
 				break;
 	   
 			case fontButton:
 				if (strlen(buf)==1)
-				{
-					GRRLIB_Printf2(x+35, y, buf, 24, GRRLIB_WHITESMOKE);            
+				{           
+					GRRLIB_PrintfTTF(x+35, y, myFont, buf, 24, GRRLIB_WHITESMOKE); 
 				}
 				else
-				{
-					GRRLIB_Printf2(x+20, y, buf, 24, GRRLIB_WHITESMOKE);    
+				{  
+					GRRLIB_PrintfTTF(x+20, y, myFont, buf, 24, GRRLIB_WHITESMOKE); 
 				}		   
 				break;
 				
 			case fontBanner:
-				GRRLIB_Printf2(x, y, buf, 80, GRRLIB_RED);
+				GRRLIB_PrintfTTF(x, y, myFont, buf, 80, GRRLIB_RED); 
 				break;
 			
 		}
@@ -2360,9 +2363,6 @@ void drawScreen(void)
 		   GRRLIB_DrawImg(320, (rmode->xfbHeight/2), 
 				images.logo1, 0, game.size, game.size, IMAGE_COLOR );
 		   if (game.size<=MAX_SIZE) game.size+=0.05;
-
-			// Init text layer	  
-         GRRLIB_initTexture();	
 		  
 			drawText(0, ypos, fontParagraph,  "Created by wplaat"  );
 			ypos+=20;
@@ -2380,9 +2380,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }	   
 	   break;
 	   
@@ -2405,9 +2402,6 @@ void drawScreen(void)
 			game.wave2+=0.02;
          game.wave1=game.wave2;
 		  
-			// Init text layer	  
-         GRRLIB_initTexture();	
-		  
 			ypos+=320;
 			drawText(0, ypos, fontParagraph,  "Please visit my website for more information." );
 			ypos+=40;
@@ -2418,9 +2412,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }	   
 	   break;
 	   	   
@@ -2433,9 +2424,6 @@ void drawScreen(void)
 
 		   // Let the logo's slided in the screen
 			if (game.location<640) game.location+=4;
-			
-			// Init text layer	  
-         GRRLIB_initTexture();	
 			
 			drawText(95, ypos, fontParagraph,  "Some more Wii games developed by PlaatSoft" );
 
@@ -2472,9 +2460,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }	   
 	   break;
 		
@@ -2487,9 +2472,6 @@ void drawScreen(void)
 		  
 			// Draw Buttons
 			drawButtons();
-			
-			// Init text layer	  
-         GRRLIB_initTexture();
 		  
 			drawText(20, ypos, fontWelcome, "%s v%s", PROGRAM_NAME, PROGRAM_VERSION );
 			ypos+=40;
@@ -2498,7 +2480,7 @@ void drawScreen(void)
 			version=tcp_get_version();
          if ( (version!=NULL) && (strlen(version)>0) && (strcmp(version,PROGRAM_VERSION)!=0) )
          {    
-				ypos+=255;
+				ypos+=280;
 	         drawText(20, ypos, fontNew, "New version [v%s] is available.",version);
 				 	
 				ypos+=20;	 			 
@@ -2513,9 +2495,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 		
@@ -2560,34 +2539,6 @@ void drawScreen(void)
 			else
 			{
 				game.frame=2;
-				
-				// Animated 
-				/*if (game.frameDelay==5)
-				{
-					switch (game.frameCounter)
-					{
-						case 0:  game.frame=2;
-									game.frameCounter++;
-									break;
-				  
-						case 1:  game.frame=6;
-									game.frameCounter++;
-									break;
-					
-						case 2:  game.frame=2;
-									game.frameCounter++;
-									break;
-						
-						case 3:  game.frame=10;
-									game.frameCounter=0;
-									break;
-					}
-					game.frameDelay=0;
-				}
-				else
-				{
-					game.frameDelay++;
-				}*/
 			}
 			
 			// Draw	some enemies
@@ -2621,9 +2572,6 @@ void drawScreen(void)
 			// Draw Buttons
 			drawButtons();
 		  		  
-			// Init text layer	  
-         GRRLIB_initTexture();
-
 			// Draw title
 			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos=10; else ypos=25;
 	      drawText(130, ypos, fontTitle, "Level Select");	
@@ -2636,9 +2584,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 		
@@ -2674,9 +2619,6 @@ void drawScreen(void)
 			// cleanup dead monsters
 			checkDeadMonsters();
 		  
-			// Init text layer	  
-         GRRLIB_initTexture();
-
 			// Draw title
 			if (rmode->xfbHeight==MAX_VERT_PIXELS) ypos=10; else ypos=25;
 	      drawText(120, ypos, fontTitle, "Choose Map");	
@@ -2689,9 +2631,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 	
@@ -2717,9 +2656,6 @@ void drawScreen(void)
 			checkNextWave();
 		   checkGameOver();
 			
-			// Init text layer	  
-         GRRLIB_initTexture();
-		  
 			// Show Next Wave text
 			if (game.alfa>0)
 			{
@@ -2737,9 +2673,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 				
@@ -2755,9 +2688,6 @@ void drawScreen(void)
 			// Draw Transparent Box
 			GRRLIB_Rectangle(210, 210, 220, 100, GRRLIB_BLACK_TRANS, 1);
 			 
-			// Init text layer	  
-         GRRLIB_initTexture();
- 
 			// Draw text elements
 			drawMonstersText();
 			drawPanelText2();
@@ -2767,9 +2697,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 		
@@ -2784,9 +2711,6 @@ void drawScreen(void)
 	
 			// Draw Transparent Box
 			GRRLIB_Rectangle(210, 210, 220, 100, GRRLIB_BLACK_TRANS, 1);
-	
-			// Init text layer
-         GRRLIB_initTexture();
  
 			// Draw Text elements
 			drawMonstersText();
@@ -2797,9 +2721,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 		
@@ -2836,10 +2757,7 @@ void drawScreen(void)
 		  		  
 			// Draw buttons
 	      drawButtons(); 
-		  
-			// Init text layer	  
-         GRRLIB_initTexture();
- 
+		   
 	      // Draw title
 	      drawText(80, ypos, fontTitle, "Local High Score");	
 
@@ -2881,9 +2799,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }
 	   break;
 
@@ -2903,9 +2818,6 @@ void drawScreen(void)
 				startEntry=(((float) game.maxTodayHighScore-15.0)/30.0)*(float)game.scrollIndex;
 				endEntry=startEntry+15;
 			}
-		  
-         // Init text layer	  
-         GRRLIB_initTexture();
 		   
          // Draw background
          GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
@@ -2972,9 +2884,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }
 	   break;
 	   
@@ -2994,10 +2903,7 @@ void drawScreen(void)
 				startEntry=(((float) game.maxGlobalHighScore-15.0)/30.0)*(float)game.scrollIndex;
 				endEntry=startEntry+15;
 			}
-		  
-         // Init text layer	  
-         GRRLIB_initTexture();
-		   
+		  		   
          // Draw background
          GRRLIB_DrawImg(0,0, images.background1, 0, 1, 1, IMAGE_COLOR2 );
 	      	     	
@@ -3063,9 +2969,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }
 	   break;
 
@@ -3076,9 +2979,6 @@ void drawScreen(void)
 		 
 			// Draw buttons
 	      drawButtons(); 
-
-			// Init text layer
-			GRRLIB_initTexture();
  
 			// Show title
 			drawText(0, ypos, fontTitle, "Help");
@@ -3110,9 +3010,6 @@ void drawScreen(void)
 	
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 		
@@ -3123,10 +3020,7 @@ void drawScreen(void)
 			 
 			// Draw buttons
 	      drawButtons(); 
-		  
-			// Init text layer	  
-         GRRLIB_initTexture();
- 
+		   
 			// Show title
 			drawText(0, ypos, fontTitle, "WiiMote Control");
 		  
@@ -3180,9 +3074,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 
@@ -3193,10 +3084,7 @@ void drawScreen(void)
 			 
 			// Draw buttons
 	      drawButtons(); 
-		  
-			// Init text layer	  
-         GRRLIB_initTexture();
- 
+		   
 			// Show title
 			drawText(170, ypos, fontTitle, "Weapons");
 			
@@ -3245,7 +3133,7 @@ void drawScreen(void)
 					{
 						game.frameDelay=0;
 						game.frameCounter++;
-						if (game.frameCounter>3) game.frameCounter=0;
+						if (game.frameCounter>6) game.frameCounter=0;
 					}
 					else
 					{
@@ -3287,9 +3175,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 		
@@ -3301,41 +3186,12 @@ void drawScreen(void)
 			// Draw buttons
 	      drawButtons(); 
 		  		
-			// Init text layer	  
-         GRRLIB_initTexture();
- 
 		   // Show title
 			drawText(185, ypos, fontTitle, "Enemies");
         
 			ypos=120;
 			int xpos=90;
 		  	
-			// Draw some roads
-			/*GRRLIB_Rectangle(xpos, ypos, 32, 280, GRRLIB_GRAY, 1);
-			GRRLIB_Line(xpos+3, ypos, xpos+3, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+5, ypos, xpos+5, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+32-3, ypos, xpos+32-3, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+32-5, ypos, xpos+32-5, ypos+280, GRRLIB_WHITESMOKE);
-
-			GRRLIB_Rectangle(xpos+120, ypos, 32, 280, GRRLIB_GRAY, 1);
-			GRRLIB_Line(xpos+120+3, ypos, xpos+120+3, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+120+5, ypos, xpos+120+5, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+120+32-3, ypos, xpos+120+32-3, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+120+32-5, ypos, xpos+120+32-5, ypos+280, GRRLIB_WHITESMOKE);
-						
-			GRRLIB_Rectangle(xpos+240, ypos,32, 280, GRRLIB_GRAY, 1);
-			GRRLIB_Line(xpos+240+3, ypos, xpos+240+3, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+240+5, ypos, xpos+240+5, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+240+32-3, ypos, xpos+240+32-3, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+240+32-5, ypos, xpos+240+32-5, ypos+280, GRRLIB_WHITESMOKE);
-		
-			GRRLIB_Rectangle(xpos+360, ypos,32, 280, GRRLIB_GRAY, 1);
-			GRRLIB_Line(xpos+360+3, ypos, xpos+360+3, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+360+5, ypos, xpos+360+5, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+360+32-3, ypos, xpos+360+32-3, ypos+280, GRRLIB_WHITESMOKE);
-			GRRLIB_Line(xpos+360+32-5, ypos, xpos+360+32-5, ypos+280, GRRLIB_WHITESMOKE);*/
-		
-	
 			for (int i=0; i<25; i++)
 			{
 				// Calculate frame of enemy animation
@@ -3346,7 +3202,7 @@ void drawScreen(void)
 				}
 				else
 				{
-					if (game.frameDelay>74)
+					if (game.frameDelay>144)
 					{
 						switch (game.frameCounter)
 						{
@@ -3402,9 +3258,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 		}
 		break;
 		  
@@ -3415,9 +3268,6 @@ void drawScreen(void)
 		  
 			// Draw buttons
 	      drawButtons(); 
-		  
-			// Init text layer	  
-         GRRLIB_initTexture();
 		  
 			// Show title
 			drawText(220, ypos, fontTitle, "Credits");
@@ -3433,7 +3283,7 @@ void drawScreen(void)
   	      ypos+=20;
 	      drawText(0, ypos, fontNormal, "wplaat");
 			ypos+=20;
-	      drawText(0, ypos, fontNormal, "MLtm and shang64");
+	      drawText(0, ypos, fontNormal, "MLtm, shang64 and Crayon");
 			ypos+=20;
 	      drawText(0, ypos, fontNormal, "Appliciant (Thanks for the great animated sprites)");
 		  
@@ -3465,9 +3315,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }
 	   break;
 	   
@@ -3509,9 +3356,6 @@ void drawScreen(void)
 
 			// Draw buttons
 	      drawButtons(); 
-		  
-	      // Init text layer	  
-         GRRLIB_initTexture();
 		  
          // Draw scrollbar
 			int y=SCROLLBAR_Y_MIN;
@@ -3564,9 +3408,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }
 	   break;
 	   
@@ -3585,9 +3426,6 @@ void drawScreen(void)
 			// Draw buttons
 	      drawButtons(); 
 		  		  
-			// Init text layer	  
-         GRRLIB_initTexture();
-  	
 			// Show title
 			drawText(100, ypos, fontTitle, "Sound Settings");
         
@@ -3621,9 +3459,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }
 	   break;
 	   
@@ -3638,9 +3473,6 @@ void drawScreen(void)
 			// Draw buttons
 	      drawButtons(); 
 		  
-	      // Init text layer	  
-         GRRLIB_initTexture();
-
 			// Draw Title	
 			drawText(100, ypos, fontTitle, "Game Settings");
 			ypos+=90;
@@ -3674,9 +3506,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }
 	   break;
 		
@@ -3688,9 +3517,6 @@ void drawScreen(void)
 			// Draw buttons
 	      drawButtons(); 
 		  
-	      // Init text layer	  
-         GRRLIB_initTexture();
-
 			// Draw Title	
 			drawText(0, ypos, fontTitle, "Donate");
 			ypos+=100;
@@ -3719,9 +3545,6 @@ void drawScreen(void)
 			
 			// Show FPS information on screen.
 			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
-		  
-			// Draw text layer on top of background.
-			GRRLIB_DrawImg(0, 0, GRRLIB_GetTexture(), 0, 1.0, 1.0, IMAGE_COLOR);
 	   }
 	   break;
 	}
@@ -4612,13 +4435,13 @@ int main(void)
 
 	// Init Game variables and objects
 	initApplication();
-		
-	// Init FreeType font engine
-	GRRLIB_InitFreetype();
 			  			
    // Init GRRLib graphics library
    GRRLIB_Init();
         	
+	// Init FreeType font 
+	myFont = GRRLIB_LoadTTF(font_ttf, font_ttf_size); 
+			
 	// Make screen black
 	GRRLIB_FillScreen(0x000000FF);
    GRRLIB_Render();

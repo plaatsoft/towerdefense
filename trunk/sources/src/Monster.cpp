@@ -41,6 +41,7 @@ extern Trace *trace;
 extern Grid *grids[MAX_GRIDS];
 extern Sound *sound;
 extern GXRModeObj *rmode;
+extern GRRLIB_ttfFont *myFont;
 
 // ------------------------------
 // Constructor 
@@ -145,7 +146,7 @@ int Monster::getFrame(void)
 	
 	if (state==stateEnemyMoving)
 	{
-		frameCounter=3;
+		frameCounter=6;
 	
 		if (moveUp)
 		{
@@ -238,7 +239,7 @@ int Monster::getFrame(void)
 	
 	if (state==stateEnemyDying)
 	{
-		frameCounter=3;
+		frameCounter=6;
 	
 		switch (frameStep)
 		{
@@ -295,7 +296,7 @@ void Monster::text(void)
 		  (state==stateEnemyDying) )
 	{
 		sprintf(tmp, "%2.0f", energy);
-		GRRLIB_Printf2(x+8, y-14, tmp, 12, 0x000000); 
+		GRRLIB_PrintfTTF(x+8, y-14, myFont, tmp, 12, 0x00000000); 
 	}
 }
 
