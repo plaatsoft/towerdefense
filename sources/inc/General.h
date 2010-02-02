@@ -14,10 +14,10 @@
  *  
  * @section ReleaseNotes
  *
- * 01-02-2010 Version 0.94
+ * 02-02-2010 Version 0.94
  * GUI:
  * - Improve video initialization.
- * - Overall FPS has improved 50 procent. Thanks Crayon.
+ * - Overall FPS has improved 50 percent. Thanks Crayon.
  * - Lots of other small GUI changes. 
  * Core:
  * - Mixed the weapon fire mode a little bit more!
@@ -158,7 +158,8 @@
  * - Rendering realtime grid examples on map select screen.
  * - Added help screen two and three.
  * - Added "Quit Game" screen. 
- * - Placing weapons under the information panel is not allowed anymore.**  - Added today and global Highscore screen.
+ * - Placing weapons under the information panel is not allowed anymore.
+ * - Added today and global Highscore screen.
  * - Added release notes screen.
  * - Added dynamic weapon placement on the gameboard
  * - Added Release Notes screen.
@@ -263,7 +264,7 @@
 
 #define PROGRAM_NAME	   		"TowerDefense"
 #define PROGRAM_VERSION     	"0.94"
-#define RELEASE_DATE        	"01-02-2010" 
+#define RELEASE_DATE        	"02-02-2010" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"

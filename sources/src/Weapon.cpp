@@ -403,7 +403,7 @@ int Weapon::getFrame()
 	}
 		
 	// Frame sequence available
-	if (frameDelay>3)
+	if (frameDelay>6)
 	{
 		if (fireDelay>0)
 		{
