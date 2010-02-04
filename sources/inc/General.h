@@ -12,6 +12,9 @@
  * @section Credits
  * Documentation: wplaat\n
  *  
+ * @section WishList
+ * - Added dragable game information panels
+ * 
  * @section ReleaseNotes
  *
  * 02-02-2010 Version 0.94
@@ -242,7 +245,7 @@
  *  - Use devkitPPC r19 as C++ compiler.
  *
  * @section Licence
- * Copyright (c) 2009-2010 Plaatsoft
+ * Copyright (c) 2008-2010 Plaatsoft
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
