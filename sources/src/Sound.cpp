@@ -1,11 +1,9 @@
 /** 
  *  @file 
- *  @brief The file contains the Sound class
- * 
- *  Created by wplaat (www.plaatsoft.nl)
+ *  @brief The file contain the Sound class methodes
+ *  @author wplaat
  *
- *  Copyright (C) 2009-2010
- *  =======================
+ *  Copyright (C) 2008-2010 PlaatSoft
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

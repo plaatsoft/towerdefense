@@ -1,4 +1,8 @@
 /**
+ * @file 
+ * @brief The file contain the general game constants
+ * @author wplaat
+ *
  * @mainpage Wii TowerDefense Documentation
  * Welcome to the TowerDefense documentation.
  *
@@ -16,8 +20,7 @@
  * - Added dragable game information panels
  * 
  * @section ReleaseNotes
- *
- * 02-02-2010 Version 0.94
+ * 05-02-2010 Version 0.94
  * - GUI:
  *  - Improve video initialization.
  *  - Overall FPS has improved 50 percent. Thanks Crayon.
@@ -25,6 +28,7 @@
  * - Core:
  *  - Mixed the weapon fire mode a little bit more!
  *  - Nuke is 500 dollar cheaper!
+ *  - Increase http buffer size to 10Kb.
  *  - Added inline source code remarks in javadoc style.
  *  - Use Doxygen (windows tool) to create HTML source code documentation.
  *  - Use GrrLib 4.2.1 BETA library (Now native FreeType support available).
@@ -270,7 +274,7 @@
 
 #define PROGRAM_NAME	   		"TowerDefense"
 #define PROGRAM_VERSION     	"0.94"
-#define RELEASE_DATE        	"02-02-2010" 
+#define RELEASE_DATE        	"05-02-2010" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"

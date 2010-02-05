@@ -1,11 +1,9 @@
 /** 
  *  @file 
- *  @brief The file contains the main class
+ *  @brief The file contain the main class methodes
+ *  @author wplaat
  *
- *  TowerDefense for Wii - Created by wplaat (www.plaatsoft.nl)
- *
- *  Copyright (C) 2009-2010
- *  =======================
+ *  Copyright (C) 2008-2010 PlaatSoft
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
