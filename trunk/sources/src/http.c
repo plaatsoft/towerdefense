@@ -1,11 +1,9 @@
 /** 
  *  @file 
- *  @brief The file contains the HTTP (network) class
+ *  @brief The file contain the http (network) class methodes
+ *  @author wplaat
  *
- *  Created by wplaat (www.plaatsoft.nl)
- *
- *  Copyright (C) 2009-2010
- *  =======================
+ *  Copyright (C) 2008-2010 PlaatSoft
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -47,9 +45,9 @@
 #define TCP_BLOCK_RECV_TIMEOUT  4000
 #define TCP_BLOCK_SEND_TIMEOUT  4000
 #define HTTP_TIMEOUT            300000
-#define MAX_LEN        			256
+#define MAX_LEN        			  256
 #define NUM_THREADS             1
-#define MAX_BUFFER_SIZE		    8192
+#define MAX_BUFFER_SIZE		     10240
 
 // -----------------------------------------------------------
 // ENUMS
