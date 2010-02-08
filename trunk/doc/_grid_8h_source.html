@@ -12,14 +12,14 @@
   <div class="tabs">
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&nbsp;Structures</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
   <div class="tabs">
     <ul>
       <li><a href="files.html"><span>File&nbsp;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
+      <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
 <h1>inc/Grid.h</h1><a href="_grid_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
@@ -30,8 +30,8 @@
 <a name="l00026"></a>00026 
 <a name="l00027"></a><a class="code" href="structlocation.html">00027</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>
 <a name="l00028"></a>00028 {
-<a name="l00029"></a><a class="code" href="structlocation.html#a6150e0515f7202e2fb518f7206ed97dc">00029</a>         <span class="keywordtype">int</span> x;                                          
-<a name="l00030"></a><a class="code" href="structlocation.html#a0a2f84ed7838f07779ae24c5a9086d33">00030</a>         <span class="keywordtype">int</span> y;                                          
+<a name="l00029"></a><a class="code" href="structlocation.html#aacd18b2506c49d221cfc37b2119e3c3c">00029</a>         <span class="keywordtype">int</span> x;                                          
+<a name="l00030"></a><a class="code" href="structlocation.html#ad7197d1981d4ea5d8b36041473cac815">00030</a>         <span class="keywordtype">int</span> y;                                          
 <a name="l00031"></a>00031 }
 <a name="l00032"></a>00032 <a class="code" href="structlocation.html">location</a>;
 <a name="l00033"></a>00033 
@@ -61,24 +61,24 @@
 <a name="l00076"></a>00076         
 <a name="l00077"></a>00077   <span class="keyword">public</span>:
 <a name="l00078"></a>00078         <span class="comment">// Constructor &amp; Destructor</span>
-<a name="l00079"></a>00079         <a class="code" href="class_grid.html#a0a335d0339fe70071fcdf4cd5b1c7b5f">Grid</a>();
-<a name="l00080"></a>00080         <a class="code" href="class_grid.html#a16d42516a2abe71deb47c2f4b2796074">~Grid</a>();
+<a name="l00079"></a>00079         <a class="code" href="class_grid.html#a4ac9ff4f63552b4c61ff90fcb35ad66c">Grid</a>();
+<a name="l00080"></a>00080         <a class="code" href="class_grid.html#a3661d0a7f998caaaf8627d7a67072116">~Grid</a>();
 <a name="l00081"></a>00081 
 <a name="l00082"></a>00082         <span class="comment">// Other</span>
-<a name="l00083"></a>00083         <span class="keywordtype">void</span> <a class="code" href="class_grid.html#a36bd53507603b15acfaf7510c304fd09">draw</a>(<span class="keywordtype">int</span> xOffset, <span class="keywordtype">int</span> yOffset, <span class="keywordtype">float</span> size);
-<a name="l00084"></a>00084         <span class="keywordtype">void</span> <a class="code" href="class_grid.html#a568491323659ced74d6cce3b2775ef32">create</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* directory);
-<a name="l00085"></a>00085         <span class="keywordtype">void</span> <a class="code" href="class_grid.html#a047de089c5698c0195f4f6007be22794">initBuild</a>(<span class="keywordtype">void</span>);
+<a name="l00083"></a>00083         <span class="keywordtype">void</span> <a class="code" href="class_grid.html#a3596317e9de9f38cf9b7abf60378d2ea">draw</a>(<span class="keywordtype">int</span> xOffset, <span class="keywordtype">int</span> yOffset, <span class="keywordtype">float</span> size);
+<a name="l00084"></a>00084         <span class="keywordtype">void</span> <a class="code" href="class_grid.html#a5ab255c4674fdff46ebd5f928b49beff">create</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* directory);
+<a name="l00085"></a>00085         <span class="keywordtype">void</span> <a class="code" href="class_grid.html#a1643a523125d2e6e47c6202da0c02812">initBuild</a>(<span class="keywordtype">void</span>);
 <a name="l00086"></a>00086         
 <a name="l00087"></a>00087         <span class="comment">// Setters</span>
-<a name="l00088"></a>00088         <span class="keywordtype">void</span> <a class="code" href="class_grid.html#a827a169a334b6412704ef441bad0ea72">setBuild</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
-<a name="l00089"></a>00089         <span class="keywordtype">void</span> <a class="code" href="class_grid.html#aee066eb45e60fec12fadef6c48cf383a">setUnBuild</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
-<a name="l00090"></a>00090         <span class="keywordtype">void</span> <a class="code" href="class_grid.html#a51bf01aa187406a993ec500928067dbe">setIndex</a>(<span class="keywordtype">int</span> index);
+<a name="l00088"></a>00088         <span class="keywordtype">void</span> <a class="code" href="class_grid.html#abc8295bc2736fefd4f2bcb77bc281722">setBuild</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
+<a name="l00089"></a>00089         <span class="keywordtype">void</span> <a class="code" href="class_grid.html#ae3482a2e3ebc0bce868931464042a777">setUnBuild</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
+<a name="l00090"></a>00090         <span class="keywordtype">void</span> <a class="code" href="class_grid.html#ad38841ddf2c680ebd624301573f6dec5">setIndex</a>(<span class="keywordtype">int</span> index);
 <a name="l00091"></a>00091         
 <a name="l00092"></a>00092         <span class="comment">// Getters</span>
-<a name="l00093"></a>00093         <span class="keywordtype">bool</span> <a class="code" href="class_grid.html#ab360230c9a1a66919c9b8c588b441f2b">isBuild</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
-<a name="l00094"></a>00094         <span class="keywordtype">int</span> <a class="code" href="class_grid.html#af7dc7aa8fa6137611b2447c8e59276da">getLocationX</a>(<span class="keywordtype">int</span> pos);
-<a name="l00095"></a>00095         <span class="keywordtype">int</span> <a class="code" href="class_grid.html#ac974ef040ed517e5656cc92ca55a8d2d">getLocationY</a>(<span class="keywordtype">int</span> pos);
-<a name="l00096"></a>00096         <span class="keywordtype">int</span> <a class="code" href="class_grid.html#a68a0f2e207cc627603ede45f64d4e271">getMaxLocations</a>(<span class="keywordtype">void</span>);
+<a name="l00093"></a>00093         <span class="keywordtype">bool</span> <a class="code" href="class_grid.html#a63d6381a7ebede92a300351989a0723e">isBuild</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
+<a name="l00094"></a>00094         <span class="keywordtype">int</span> <a class="code" href="class_grid.html#abdfe230e8d6fe9eea6f96b9d35f02dd9">getLocationX</a>(<span class="keywordtype">int</span> pos);
+<a name="l00095"></a>00095         <span class="keywordtype">int</span> <a class="code" href="class_grid.html#aa65bfc1396438bc0f91f9fdce88b4fc1">getLocationY</a>(<span class="keywordtype">int</span> pos);
+<a name="l00096"></a>00096         <span class="keywordtype">int</span> <a class="code" href="class_grid.html#af7d3278f038afb783aad271f0f0d6d13">getMaxLocations</a>(<span class="keywordtype">void</span>);
 <a name="l00097"></a>00097 };
 <a name="l00098"></a>00098 
 <a name="l00099"></a>00099 <span class="preprocessor">#endif</span>

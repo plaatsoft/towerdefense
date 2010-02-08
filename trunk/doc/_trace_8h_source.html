@@ -12,14 +12,14 @@
   <div class="tabs">
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&nbsp;Structures</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
   <div class="tabs">
     <ul>
       <li><a href="files.html"><span>File&nbsp;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
+      <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
 <h1>inc/Trace.h</h1><a href="_trace_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
@@ -34,14 +34,14 @@
 <a name="l00030"></a>00030 
 <a name="l00031"></a>00031   <span class="keyword">public</span>:
 <a name="l00032"></a>00032         <span class="comment">// Constructor &amp; Destructor</span>
-<a name="l00033"></a>00033         <a class="code" href="class_trace.html#adb723362c45cc0c3de9801707bbc3d70">Trace</a>();
-<a name="l00034"></a>00034         <a class="code" href="class_trace.html#aaa705be9a3c16665ee9c94ec27bd2321">~Trace</a>();
+<a name="l00033"></a>00033         <a class="code" href="class_trace.html#aafef8ed744b967d133c34c8a813f7fc5">Trace</a>();
+<a name="l00034"></a>00034         <a class="code" href="class_trace.html#a39492ecec74969a4905ec5fcf026dc09">~Trace</a>();
 <a name="l00035"></a>00035         
 <a name="l00036"></a>00036         <span class="comment">// Methodes</span>
-<a name="l00037"></a>00037         <span class="keywordtype">int</span> <a class="code" href="class_trace.html#a85a93fcdd0c9974af85cb7c9f5104caf">open</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *filename);
-<a name="l00038"></a>00038         <span class="keywordtype">int</span> <a class="code" href="class_trace.html#ab68cc26058c613a778e8b595144a228c">event</a>( <span class="keyword">const</span> <span class="keywordtype">char</span> *functionName, <span class="keywordtype">int</span> threadNr, <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="class_trace.html#ab68cc26058c613a778e8b595144a228c">event</a>, ...);
-<a name="l00039"></a>00039         <span class="keywordtype">int</span> <a class="code" href="class_trace.html#a3e901ebb289f3242c29b0efa48205ecc">eventRaw</a>( <span class="keywordtype">char</span> character);
-<a name="l00040"></a>00040         <span class="keywordtype">void</span> <a class="code" href="class_trace.html#a5ae591df94fc66ccb85cbb6565368bca">close</a>();
+<a name="l00037"></a>00037         <span class="keywordtype">int</span> <a class="code" href="class_trace.html#a51f4dcf9d801000cdc6e636aa4738e56">open</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *filename);
+<a name="l00038"></a>00038         <span class="keywordtype">int</span> <a class="code" href="class_trace.html#aa26a250738c31d9dffce69c13f210133">event</a>( <span class="keyword">const</span> <span class="keywordtype">char</span> *functionName, <span class="keywordtype">int</span> threadNr, <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="class_trace.html#aa26a250738c31d9dffce69c13f210133">event</a>, ...);
+<a name="l00039"></a>00039         <span class="keywordtype">int</span> <a class="code" href="class_trace.html#ab6a08b275b6b14e2625f4dc4a07447ea">eventRaw</a>( <span class="keywordtype">char</span> character);
+<a name="l00040"></a>00040         <span class="keywordtype">void</span> <a class="code" href="class_trace.html#a9bf75a5fc74d8c27def04b2d088d72a6">close</a>();
 <a name="l00041"></a>00041 };
 <a name="l00042"></a>00042 
 <a name="l00043"></a>00043 <span class="preprocessor">#endif</span>

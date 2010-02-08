@@ -12,14 +12,14 @@
   <div class="tabs">
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&nbsp;Structures</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
   <div class="tabs">
     <ul>
       <li><a href="files.html"><span>File&nbsp;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
+      <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
 <h1>inc/Sound.h</h1><a href="_sound_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
@@ -55,22 +55,22 @@
 <a name="l00051"></a>00051         
 <a name="l00052"></a>00052   <span class="keyword">public</span>:
 <a name="l00053"></a>00053         <span class="comment">// Constructor &amp; Destructor</span>
-<a name="l00054"></a>00054         <a class="code" href="class_sound.html#a7c39ebee7567d73c6eab8a1ac04c3396">Sound</a>();
-<a name="l00055"></a>00055         <a class="code" href="class_sound.html#ac34f0a5b7e2e11c053df62714aff04fa">~Sound</a>();
+<a name="l00054"></a>00054         <a class="code" href="class_sound.html#a539c205cdf06fe2c621fd77c37bcfac9">Sound</a>();
+<a name="l00055"></a>00055         <a class="code" href="class_sound.html#a0907389078bf740be2a5763366ad3376">~Sound</a>();
 <a name="l00056"></a>00056 
 <a name="l00057"></a>00057         <span class="comment">// Methodes</span>
-<a name="l00058"></a>00058         <span class="keywordtype">void</span> <a class="code" href="class_sound.html#abdfb298c4eb2fba465cab1235f1c3723">play</a>(<span class="keywordtype">void</span>);
-<a name="l00059"></a>00059         <span class="keywordtype">void</span> <a class="code" href="class_sound.html#a28fc860506771a09cc1feb5bf62bbbbc">effect</a>(<span class="keywordtype">int</span> type);
+<a name="l00058"></a>00058         <span class="keywordtype">void</span> <a class="code" href="class_sound.html#a05d014b2e3338bacda066815b21c473e">play</a>(<span class="keywordtype">void</span>);
+<a name="l00059"></a>00059         <span class="keywordtype">void</span> <a class="code" href="class_sound.html#af7c28ba7411d37b50b495cec7a726b18">effect</a>(<span class="keywordtype">int</span> type);
 <a name="l00060"></a>00060 
 <a name="l00061"></a>00061         <span class="comment">// Setters      </span>
-<a name="l00062"></a>00062         <span class="keywordtype">void</span> <a class="code" href="class_sound.html#ae351a6c7c79eb5cea03e910966bc37e3">setMusicVolume</a>(<span class="keywordtype">int</span> volume);
-<a name="l00063"></a>00063         <span class="keywordtype">void</span> <a class="code" href="class_sound.html#adfb9204f67904ea3df3c302459e3e28b">setEffectVolume</a>(<span class="keywordtype">int</span> volume);
-<a name="l00064"></a>00064         <span class="keywordtype">void</span> <a class="code" href="class_sound.html#a607ebaed741680be5082db6ab57c9e27">setMusicTrack</a>(<span class="keywordtype">int</span> track);
+<a name="l00062"></a>00062         <span class="keywordtype">void</span> <a class="code" href="class_sound.html#a4db842bd6d09afb23f29e286c4fec952">setMusicVolume</a>(<span class="keywordtype">int</span> volume);
+<a name="l00063"></a>00063         <span class="keywordtype">void</span> <a class="code" href="class_sound.html#a5f51c8393215ac02196116684dadeb2d">setEffectVolume</a>(<span class="keywordtype">int</span> volume);
+<a name="l00064"></a>00064         <span class="keywordtype">void</span> <a class="code" href="class_sound.html#aeb74c6de91914c99ac9b28b583b9b49f">setMusicTrack</a>(<span class="keywordtype">int</span> track);
 <a name="l00065"></a>00065                 
 <a name="l00066"></a>00066         <span class="comment">// Getters</span>
-<a name="l00067"></a>00067         <span class="keywordtype">int</span> <a class="code" href="class_sound.html#a802e9d2c09d7637c47658a24c750ed09">getMusicVolume</a>(<span class="keywordtype">void</span>);
-<a name="l00068"></a>00068         <span class="keywordtype">int</span> <a class="code" href="class_sound.html#a2deb8df39b6610f2000423189b63aafc">getEffectVolume</a>(<span class="keywordtype">void</span>);
-<a name="l00069"></a>00069         <span class="keywordtype">int</span> <a class="code" href="class_sound.html#ac0655cf4e48dc76cbf1e1996c4ed8b1e">getMusicTrack</a>(<span class="keywordtype">void</span>);
+<a name="l00067"></a>00067         <span class="keywordtype">int</span> <a class="code" href="class_sound.html#a4c84e352e1ae82fa04634ba738caf471">getMusicVolume</a>(<span class="keywordtype">void</span>);
+<a name="l00068"></a>00068         <span class="keywordtype">int</span> <a class="code" href="class_sound.html#ab0e4838b98816162974ef96356c6d2f1">getEffectVolume</a>(<span class="keywordtype">void</span>);
+<a name="l00069"></a>00069         <span class="keywordtype">int</span> <a class="code" href="class_sound.html#a84ab6015414573eab10770385a46d4c4">getMusicTrack</a>(<span class="keywordtype">void</span>);
 <a name="l00070"></a>00070 };
 <a name="l00071"></a>00071 
 <a name="l00072"></a>00072 <span class="preprocessor">#endif</span>

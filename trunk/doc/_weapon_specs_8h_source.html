@@ -12,14 +12,14 @@
   <div class="tabs">
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&nbsp;Structures</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
   <div class="tabs">
     <ul>
       <li><a href="files.html"><span>File&nbsp;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
+      <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
 <h1>inc/WeaponSpecs.h</h1><a href="_weapon_specs_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
@@ -56,40 +56,40 @@
 <a name="l00052"></a>00052         
 <a name="l00053"></a>00053   <span class="keyword">public</span>:
 <a name="l00054"></a>00054         <span class="comment">// Constructor &amp; Destructor</span>
-<a name="l00055"></a>00055         <a class="code" href="class_weapon_specs.html#a222424e3fc4cbe82e4f7009a085c31e6">WeaponSpecs</a>();
-<a name="l00056"></a>00056         <a class="code" href="class_weapon_specs.html#a5de54a3d8668bf239d1b0baf56c20a3e">~WeaponSpecs</a>();
+<a name="l00055"></a>00055         <a class="code" href="class_weapon_specs.html#ab5b6d1cbf5ab02f77bd7acd9573bbe46">WeaponSpecs</a>();
+<a name="l00056"></a>00056         <a class="code" href="class_weapon_specs.html#a9c071acdbb3fb99ddfa5e6ad2551a526">~WeaponSpecs</a>();
 <a name="l00057"></a>00057         
 <a name="l00058"></a>00058         <span class="comment">// Other</span>
-<a name="l00059"></a>00059         <span class="keywordtype">void</span> <a class="code" href="class_weapon_specs.html#a29991e5dbd3021df8a2bb408ca80be3e">resetCounter</a>(<span class="keywordtype">void</span>);
+<a name="l00059"></a>00059         <span class="keywordtype">void</span> <a class="code" href="class_weapon_specs.html#ad0c3392dcf8409cb1824b3d23af654a4">resetCounter</a>(<span class="keywordtype">void</span>);
 <a name="l00060"></a>00060                 
 <a name="l00061"></a>00061         <span class="comment">// Getters</span>
 <a name="l00062"></a>00062         
 <a name="l00063"></a>00063         <span class="comment">// Return Weapon Image (16x4 sprites)</span>
-<a name="l00064"></a>00064         <a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> * <a class="code" href="class_weapon_specs.html#acf1aa6a54adc6648f444b273a11c1102">getImage</a>(<span class="keywordtype">int</span> type);
+<a name="l00064"></a>00064         <a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> * <a class="code" href="class_weapon_specs.html#a36250cab19e9c7fa9b1cd4e48d2c6e9d">getImage</a>(<span class="keywordtype">int</span> type);
 <a name="l00065"></a>00065         
 <a name="l00066"></a>00066         <span class="comment">// Return Weapon Image (1 sprite)               </span>
-<a name="l00067"></a>00067         <a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> * <a class="code" href="class_weapon_specs.html#a065665b4294c35afe3b06e9eac1d1c3e">getImageSpecial</a>(<span class="keywordtype">int</span> type);
+<a name="l00067"></a>00067         <a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> * <a class="code" href="class_weapon_specs.html#a54b0cafe987ce3d5f410829fb418250b">getImageSpecial</a>(<span class="keywordtype">int</span> type);
 <a name="l00068"></a>00068 
-<a name="l00069"></a>00069         <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="class_weapon_specs.html#aa9cb7638ccc4692a299990722ff04e4c">getName</a>(<span class="keywordtype">int</span> type);
-<a name="l00070"></a>00070         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#af4a83ac2a0ef97b9bbe83db296af38ec">getPrice</a>(<span class="keywordtype">int</span> type);
-<a name="l00071"></a>00071         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#a837beba0c0595bc883f66fcee362b1d3">getUpgradePrice</a>(<span class="keywordtype">int</span> type);
+<a name="l00069"></a>00069         <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="class_weapon_specs.html#a908a1a9c495da03cd2756f468caef6bc">getName</a>(<span class="keywordtype">int</span> type);
+<a name="l00070"></a>00070         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#a730ced232042c6e669fb70f44bee6911">getPrice</a>(<span class="keywordtype">int</span> type);
+<a name="l00071"></a>00071         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#a1a9b6983f1372c4c88940426e8e9bf71">getUpgradePrice</a>(<span class="keywordtype">int</span> type);
 <a name="l00072"></a>00072         
-<a name="l00073"></a>00073         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#a0574e92310e05dd4d0f649e0c3a4000e">getMinPower</a>(<span class="keywordtype">int</span> type);
-<a name="l00074"></a>00074         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#acc922fe4057b2894cc8b0d9d80925007">getMinRange</a>(<span class="keywordtype">int</span> type);
-<a name="l00075"></a>00075         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#a2823931378ab98b231e656dbc3aecef4">getMinRate</a>(<span class="keywordtype">int</span> type);
+<a name="l00073"></a>00073         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#a0d213f4d20ef03fd6ac25894f97570fc">getMinPower</a>(<span class="keywordtype">int</span> type);
+<a name="l00074"></a>00074         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#a4188ebdf7a956b1b2fc2a7f62ee471c6">getMinRange</a>(<span class="keywordtype">int</span> type);
+<a name="l00075"></a>00075         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#a8723c2eef872d506e62932296ca92dda">getMinRate</a>(<span class="keywordtype">int</span> type);
 <a name="l00076"></a>00076         
-<a name="l00077"></a>00077         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#a22b29f566ea138bf6479e5fe8ca52cb8">getMaxPower</a>(<span class="keywordtype">int</span> type);
-<a name="l00078"></a>00078         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#a7586d8ff98494af2b5f250da0ddcaac6">getMaxRange</a>(<span class="keywordtype">int</span> type);
-<a name="l00079"></a>00079         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#ad0556ee86c06bb590dac2962322045d5">getMaxRate</a>(<span class="keywordtype">int</span> type);
+<a name="l00077"></a>00077         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#ab6ccd5fe4d7033e04b6bf02fd5809cb5">getMaxPower</a>(<span class="keywordtype">int</span> type);
+<a name="l00078"></a>00078         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#afa585c6d6e6c78465ecca4d7f0ee2108">getMaxRange</a>(<span class="keywordtype">int</span> type);
+<a name="l00079"></a>00079         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#a39d419a8b737f46fcae669018cfe1be7">getMaxRate</a>(<span class="keywordtype">int</span> type);
 <a name="l00080"></a>00080         
-<a name="l00081"></a>00081         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#ae9509077bf60023d64773a23464cc913">getStepPower</a>(<span class="keywordtype">int</span> type);
-<a name="l00082"></a>00082         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#ab19112c8dac2d0cf0fa74276f77190d6">getStepRange</a>(<span class="keywordtype">int</span> type);
-<a name="l00083"></a>00083         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#aeb3c7e8534b80fcb0284addf936620d1">getStepRate</a>(<span class="keywordtype">int</span> type);
+<a name="l00081"></a>00081         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#aad4f57cc09288683f6f3d557b6adeff0">getStepPower</a>(<span class="keywordtype">int</span> type);
+<a name="l00082"></a>00082         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#aed11366708ed3dfd923a30f9f3c91f97">getStepRange</a>(<span class="keywordtype">int</span> type);
+<a name="l00083"></a>00083         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#a54c25a0ae5dc92f65edf8c787fbb0b32">getStepRate</a>(<span class="keywordtype">int</span> type);
 <a name="l00084"></a>00084         
-<a name="l00085"></a>00085         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#ab40183ea47aa869c96c1c6d217d3089c">getCounter</a>(<span class="keywordtype">int</span> type);
+<a name="l00085"></a>00085         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#a62f2c778d8d979baf01d06c2c38868e6">getCounter</a>(<span class="keywordtype">int</span> type);
 <a name="l00086"></a>00086         
-<a name="l00087"></a>00087         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#af4fc6279478fab7942afee15580ad113">getFireMode</a>(<span class="keywordtype">int</span> type);
-<a name="l00088"></a>00088         <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="class_weapon_specs.html#ab969d5dd30171d526f22834363e16a98">getFireModeName</a>(<span class="keywordtype">int</span> type);
+<a name="l00087"></a>00087         <span class="keywordtype">int</span> <a class="code" href="class_weapon_specs.html#a86f98ae07b3b53fb0c3c0423a0c7c958">getFireMode</a>(<span class="keywordtype">int</span> type);
+<a name="l00088"></a>00088         <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="class_weapon_specs.html#aa24baa8cf328887d38225506ff2c3507">getFireModeName</a>(<span class="keywordtype">int</span> type);
 <a name="l00089"></a>00089 };
 <a name="l00090"></a>00090 
 <a name="l00091"></a>00091 <span class="preprocessor">#endif</span>

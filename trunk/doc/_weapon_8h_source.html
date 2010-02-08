@@ -12,14 +12,14 @@
   <div class="tabs">
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&nbsp;Structures</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
   <div class="tabs">
     <ul>
       <li><a href="files.html"><span>File&nbsp;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
+      <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
 <h1>inc/Weapon.h</h1><a href="_weapon_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
@@ -95,70 +95,70 @@
 <a name="l00091"></a>00091         
 <a name="l00092"></a>00092   <span class="keyword">public</span>:
 <a name="l00093"></a>00093         <span class="comment">// Constructor &amp; Destructor</span>
-<a name="l00094"></a>00094         <a class="code" href="class_weapon.html#afe4874b2488339a7acc59f019b3eb493">Weapon</a>();
-<a name="l00095"></a>00095         <a class="code" href="class_weapon.html#a40a8dc12bbf9d9ebee1091f27dcfafaa">~Weapon</a>();
+<a name="l00094"></a>00094         <a class="code" href="class_weapon.html#a42dbc46dd70319a24763992c4ebbd396">Weapon</a>();
+<a name="l00095"></a>00095         <a class="code" href="class_weapon.html#a420e7ba3d2017e6de3e93eb579cfd3fa">~Weapon</a>();
 <a name="l00096"></a>00096 
 <a name="l00097"></a>00097         <span class="comment">// public methodes</span>
-<a name="l00098"></a>00098         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#ad2e97e7b54d0bf35e406b91fbdd2f256">draw</a>(<span class="keywordtype">void</span>);
-<a name="l00099"></a>00099         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a84b28b3bfeddbd1835e7b35aec2ba667">move</a>(<span class="keywordtype">void</span>);
-<a name="l00100"></a>00100         <span class="keywordtype">bool</span> <a class="code" href="class_weapon.html#a10864d3209971be992aa1e86d668b23c">onSelect</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
+<a name="l00098"></a>00098         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a7dca1b82277d2e52a4de3e0249fbfbd4">draw</a>(<span class="keywordtype">void</span>);
+<a name="l00099"></a>00099         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a5fe3dac096c0b81687ea675b6839c62d">move</a>(<span class="keywordtype">void</span>);
+<a name="l00100"></a>00100         <span class="keywordtype">bool</span> <a class="code" href="class_weapon.html#af86597b3e5a886870c724025ba8a1b21">onSelect</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
 <a name="l00101"></a>00101         
-<a name="l00102"></a>00102         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a18f4b98ea264670fb17bd8ab1163c3df">upgradePower</a>(<span class="keywordtype">void</span>);
-<a name="l00103"></a>00103         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#aebada09e4a484eccd7053de77711a9fe">upgradeRange</a>(<span class="keywordtype">void</span>);
-<a name="l00104"></a>00104         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#ac4a8234aec506a254521613e33837a9c">upgradeRate</a>(<span class="keywordtype">void</span>);
+<a name="l00102"></a>00102         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a8a8c558eaeddc97b7030a52d8b516229">upgradePower</a>(<span class="keywordtype">void</span>);
+<a name="l00103"></a>00103         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a53ff01d79a2e4664e6c20dc1fa416b3a">upgradeRange</a>(<span class="keywordtype">void</span>);
+<a name="l00104"></a>00104         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#ac94f58af26fa6eb1d459aee4f4512baf">upgradeRate</a>(<span class="keywordtype">void</span>);
 <a name="l00105"></a>00105         
 <a name="l00106"></a>00106         <span class="comment">// Setters</span>
-<a name="l00107"></a>00107         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#add2578ea6b65ad27a905a6d2048748bb">setX</a>(<span class="keywordtype">int</span> x);
-<a name="l00108"></a>00108         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#adea78a9ff1234e75627dda61d972213b">setY</a>(<span class="keywordtype">int</span> y);
-<a name="l00109"></a>00109         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a2c54c2b12ae9540592b9649d63e02c8e">setImage</a>(<a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> *<a class="code" href="structimage.html">image</a>);
-<a name="l00110"></a>00110         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#ad42accd39af295a957386c68dac3dcae">setSelected</a>(<span class="keywordtype">bool</span> selected);
-<a name="l00111"></a>00111         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a51bf01aa187406a993ec500928067dbe">setIndex</a>(<span class="keywordtype">int</span> index);
-<a name="l00112"></a>00112         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#afd28262b8520203989617fd36f68695c">setType</a>(<span class="keywordtype">int</span> type);
-<a name="l00113"></a>00113         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a54447e005333bc760e6b23ee278a38a0">setName</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, ...);
-<a name="l00114"></a>00114         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a9e57acf28a73c85e88f7107c29dc6a48">setFireMode</a>(<span class="keywordtype">int</span> mode);
+<a name="l00107"></a>00107         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a3468b62af61ba1b3ffcfdd01fb45dacb">setX</a>(<span class="keywordtype">int</span> x);
+<a name="l00108"></a>00108         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#ac72393c6c3b1f3d17c2d6f8c78c984d7">setY</a>(<span class="keywordtype">int</span> y);
+<a name="l00109"></a>00109         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#ae124ae3b8e6631ada3da4cebf4f21368">setImage</a>(<a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> *<a class="code" href="structimage.html">image</a>);
+<a name="l00110"></a>00110         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a12feb98ee92ced620e603b25a67d41a0">setSelected</a>(<span class="keywordtype">bool</span> selected);
+<a name="l00111"></a>00111         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a708aedbbe5b382e2cfc81ecd0c61c505">setIndex</a>(<span class="keywordtype">int</span> index);
+<a name="l00112"></a>00112         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a9b3ae032da4a3a5139eb8cdc69a0280a">setType</a>(<span class="keywordtype">int</span> type);
+<a name="l00113"></a>00113         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a76cca53af9ee35cc0e36438a8715a636">setName</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, ...);
+<a name="l00114"></a>00114         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a3aa7ee4e80b59d0d7b24aefbaa0a83a2">setFireMode</a>(<span class="keywordtype">int</span> mode);
 <a name="l00115"></a>00115         
-<a name="l00116"></a>00116         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#aca52e23964d6360c733d9e4c591d1aa4">setPower</a>(<span class="keywordtype">int</span> power);       
-<a name="l00117"></a>00117         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#ab37c212ad09cf53ef40ab1ba93c30b6c">setRange</a>(<span class="keywordtype">int</span> range);
-<a name="l00118"></a>00118         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a4259b293fcc02a2a26ca989971538b45">setRate</a>(<span class="keywordtype">int</span> rate);
+<a name="l00116"></a>00116         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#aa4f6432413dbddbf63f69c3ab30a2244">setPower</a>(<span class="keywordtype">int</span> power);       
+<a name="l00117"></a>00117         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a9227da33ba03135c9df353a91a7b0013">setRange</a>(<span class="keywordtype">int</span> range);
+<a name="l00118"></a>00118         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#ab2004ff792ee389bb3a59f1c0255ecae">setRate</a>(<span class="keywordtype">int</span> rate);
 <a name="l00119"></a>00119         
-<a name="l00120"></a>00120         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a14480b2e2b6f0fdb9a61c3777da69fb6">setMaxPower</a>(<span class="keywordtype">int</span> maxPower); 
-<a name="l00121"></a>00121         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a424f5275e341f1838dfccd0526b447c0">setMaxRange</a>(<span class="keywordtype">int</span> maxRange);
-<a name="l00122"></a>00122         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#accff95d2897e42c6ac4b61b817f25324">setMaxRate</a>(<span class="keywordtype">int</span> maxRate);
+<a name="l00120"></a>00120         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#ab6c374c1606d97b55d6232a91af46548">setMaxPower</a>(<span class="keywordtype">int</span> maxPower); 
+<a name="l00121"></a>00121         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#afc982b818d77184ea7c0efa46a40e07e">setMaxRange</a>(<span class="keywordtype">int</span> maxRange);
+<a name="l00122"></a>00122         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a067c4619e38283d78d1a07cf1be8ffb6">setMaxRate</a>(<span class="keywordtype">int</span> maxRate);
 <a name="l00123"></a>00123         
-<a name="l00124"></a>00124         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#ab860c22b923d08548067d666e2944321">setPowerPrice</a>(<span class="keywordtype">int</span> price);
-<a name="l00125"></a>00125    <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a8940b7788d744a49fcfe26d0e256fe08">setRangePrice</a>(<span class="keywordtype">int</span> price);
-<a name="l00126"></a>00126    <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a33ddc975d2223e440a3ce06e2111f11c">setRatePrice</a>(<span class="keywordtype">int</span> price);
+<a name="l00124"></a>00124         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a67bd3905ffc61c517a698204b5fe3898">setPowerPrice</a>(<span class="keywordtype">int</span> price);
+<a name="l00125"></a>00125    <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#abacd5a6d4ab91e16ed3bebb41d4ca192">setRangePrice</a>(<span class="keywordtype">int</span> price);
+<a name="l00126"></a>00126    <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#abc02632e23c82a7d2b81bef14a952d29">setRatePrice</a>(<span class="keywordtype">int</span> price);
 <a name="l00127"></a>00127         
-<a name="l00128"></a>00128         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a14f34815c5ab68c5632c543afdac1c38">setPowerStep</a>(<span class="keywordtype">int</span> step);
-<a name="l00129"></a>00129    <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a92921b4ab47f386b70eaf43953966b85">setRangeStep</a>(<span class="keywordtype">int</span> step);
-<a name="l00130"></a>00130    <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a93b9a19c38a15f4edce0b3ad14516b97">setRateStep</a>(<span class="keywordtype">int</span> step);
+<a name="l00128"></a>00128         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a042313e5a0b8b8c481351e44ed2339fb">setPowerStep</a>(<span class="keywordtype">int</span> step);
+<a name="l00129"></a>00129    <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#ab86e6999ed44dab405815f0645c8e634">setRangeStep</a>(<span class="keywordtype">int</span> step);
+<a name="l00130"></a>00130    <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#ad0c09c3a830c9bf01d16754e6bd6d614">setRateStep</a>(<span class="keywordtype">int</span> step);
 <a name="l00131"></a>00131         
-<a name="l00132"></a>00132         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a9505c8f17d341444d22f29769d8b6858">setTotalPrice</a>(<span class="keywordtype">int</span> totalPrice);
+<a name="l00132"></a>00132         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a3dfa50266b3c3ec3190483046e795a44">setTotalPrice</a>(<span class="keywordtype">int</span> totalPrice);
 <a name="l00133"></a>00133 
 <a name="l00134"></a>00134         <span class="comment">// Getters</span>
 <a name="l00135"></a>00135         
-<a name="l00136"></a>00136         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#a36582fb7be99d0edbce72566fac17e83">getX</a>(<span class="keywordtype">void</span>);
-<a name="l00137"></a>00137         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#aadc90276800d54cea9bccebc02c5cff6">getY</a>(<span class="keywordtype">void</span>);
+<a name="l00136"></a>00136         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#a83d245c8ef1424b508362fc7743bb8e7">getX</a>(<span class="keywordtype">void</span>);
+<a name="l00137"></a>00137         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#ad32de5b92421e4132f16d72d86d118bb">getY</a>(<span class="keywordtype">void</span>);
 <a name="l00138"></a>00138         
-<a name="l00139"></a>00139         <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="class_weapon.html#a82ef23a1d6c0aa6c4232c1555d3ffc2e">getName</a>(<span class="keywordtype">void</span>);
-<a name="l00140"></a>00140         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#a7f91843f7bc6eded6148a7579f4cd86f">getTotalPrice</a>(<span class="keywordtype">void</span>);
-<a name="l00141"></a>00141         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#a0faa5622bd84dc52352e1ade1cd8f5ff">getFireMode</a>(<span class="keywordtype">void</span>);
+<a name="l00139"></a>00139         <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="class_weapon.html#a20a117aff196b57d06f66c44c0e59c75">getName</a>(<span class="keywordtype">void</span>);
+<a name="l00140"></a>00140         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#a08b0641fd86cbe9333f189ab0da80319">getTotalPrice</a>(<span class="keywordtype">void</span>);
+<a name="l00141"></a>00141         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#ab82af9b1617c580e4e334c0f0dcbd705">getFireMode</a>(<span class="keywordtype">void</span>);
 <a name="l00142"></a>00142         
-<a name="l00143"></a>00143         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#aca8b4084a6907f817edb133db2105e61">getPowerPrice</a>(<span class="keywordtype">void</span>);
-<a name="l00144"></a>00144         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#a48e9d1d73c174268b3f8bcef8daf1d5e">getRangePrice</a>(<span class="keywordtype">void</span>);
-<a name="l00145"></a>00145         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#acefd63a86f035c203462bb416c3137e5">getRatePrice</a>(<span class="keywordtype">void</span>);
+<a name="l00143"></a>00143         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#ab56e3c8a5d6703b53ee5fa8e621f1ed5">getPowerPrice</a>(<span class="keywordtype">void</span>);
+<a name="l00144"></a>00144         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#a65a5ae50e2ca88a3112b4964f11f6526">getRangePrice</a>(<span class="keywordtype">void</span>);
+<a name="l00145"></a>00145         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#ab44143042e46865cf965b6a0d0b98bb5">getRatePrice</a>(<span class="keywordtype">void</span>);
 <a name="l00146"></a>00146         
-<a name="l00147"></a>00147         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#a51b2b724b49487e2d7586da2612fb556">getPower</a>(<span class="keywordtype">void</span>);     
-<a name="l00148"></a>00148         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#a5068dbbd020061ff928b652b476745fa">getRange</a>(<span class="keywordtype">void</span>);
-<a name="l00149"></a>00149         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#a687e17d4bee19480c768b365afd73c72">getRate</a>(<span class="keywordtype">void</span>);
+<a name="l00147"></a>00147         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#af473364ad13d870a8efe5505478cf911">getPower</a>(<span class="keywordtype">void</span>);     
+<a name="l00148"></a>00148         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#a9affed345c51f303820589982d3a4385">getRange</a>(<span class="keywordtype">void</span>);
+<a name="l00149"></a>00149         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#a4a29c35f03e3db4e62716569f4a11dd2">getRate</a>(<span class="keywordtype">void</span>);
 <a name="l00150"></a>00150         
-<a name="l00151"></a>00151         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#ac4208483bec0c0fa8ead4a2433adbf12">getMaxPower</a>(<span class="keywordtype">void</span>);  
-<a name="l00152"></a>00152         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#a2c8fccb49f1b6b9231f8f5e89643ac9c">getMaxRange</a>(<span class="keywordtype">void</span>);
-<a name="l00153"></a>00153         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#aa34cc34674b7f8e54b6b70892bdbf56d">getMaxRate</a>(<span class="keywordtype">void</span>);
+<a name="l00151"></a>00151         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#a63b6be9514565b937fbb397df4f3810c">getMaxPower</a>(<span class="keywordtype">void</span>);  
+<a name="l00152"></a>00152         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#a4c4c8b87d03b2e28ed88d4b469ff6d36">getMaxRange</a>(<span class="keywordtype">void</span>);
+<a name="l00153"></a>00153         <span class="keywordtype">int</span> <a class="code" href="class_weapon.html#a494f40bb5ad7a47c97b3e35fbc24b8c2">getMaxRate</a>(<span class="keywordtype">void</span>);
 <a name="l00154"></a>00154         
-<a name="l00155"></a>00155         <span class="keywordtype">bool</span> <a class="code" href="class_weapon.html#a1d32832ebed10f3a9f3eeb221e50df69">isPowerUpgradeble</a>(<span class="keywordtype">void</span>);
-<a name="l00156"></a>00156         <span class="keywordtype">bool</span> <a class="code" href="class_weapon.html#a730c195f61e2800d9f83735a32f89a11">isRangeUpgradeble</a>(<span class="keywordtype">void</span>);
-<a name="l00157"></a>00157         <span class="keywordtype">bool</span> <a class="code" href="class_weapon.html#a745e0a815a41d0af565fd45bfd106fee">isRateUpgradeble</a>(<span class="keywordtype">void</span>);
+<a name="l00155"></a>00155         <span class="keywordtype">bool</span> <a class="code" href="class_weapon.html#a82b874ffcfc5d008636a3ced33b7f00b">isPowerUpgradeble</a>(<span class="keywordtype">void</span>);
+<a name="l00156"></a>00156         <span class="keywordtype">bool</span> <a class="code" href="class_weapon.html#ac0aa4b4a7491cf57445b4aeba799171e">isRangeUpgradeble</a>(<span class="keywordtype">void</span>);
+<a name="l00157"></a>00157         <span class="keywordtype">bool</span> <a class="code" href="class_weapon.html#acac541492349e075a3bac96a18e068b8">isRateUpgradeble</a>(<span class="keywordtype">void</span>);
 <a name="l00158"></a>00158 };
 <a name="l00159"></a>00159 
 <a name="l00160"></a>00160 <span class="preprocessor">#endif</span>

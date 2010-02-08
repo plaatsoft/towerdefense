@@ -12,14 +12,14 @@
   <div class="tabs">
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&nbsp;Structures</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
   <div class="tabs">
     <ul>
       <li><a href="files.html"><span>File&nbsp;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
+      <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
 <h1>inc/pngu.h</h1><a href="pngu_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/********************************************************************************************</span>
@@ -67,21 +67,21 @@
 <a name="l00043"></a>00043 
 <a name="l00044"></a><a class="code" href="struct_p_n_g_u_c_o_l_o_r.html">00044</a> <span class="keyword">typedef</span> <span class="keyword">struct</span>
 <a name="l00045"></a>00045 {
-<a name="l00046"></a><a class="code" href="struct_p_n_g_u_c_o_l_o_r.html#a51d2a06a06eb2f66bd945c4c97afecd2">00046</a>         PNGU_u8 r;
-<a name="l00047"></a><a class="code" href="struct_p_n_g_u_c_o_l_o_r.html#a899450b3a8fc5027cd899727df97220b">00047</a>         PNGU_u8 g;
-<a name="l00048"></a><a class="code" href="struct_p_n_g_u_c_o_l_o_r.html#a2140e2f1e69e7852b92441054dfa0383">00048</a>         PNGU_u8 b;
+<a name="l00046"></a><a class="code" href="struct_p_n_g_u_c_o_l_o_r.html#a9bdd17994681a6bd27483ffa08f07f00">00046</a>         PNGU_u8 r;
+<a name="l00047"></a><a class="code" href="struct_p_n_g_u_c_o_l_o_r.html#acd73e6a8f605dd180562110249c9cef1">00047</a>         PNGU_u8 g;
+<a name="l00048"></a><a class="code" href="struct_p_n_g_u_c_o_l_o_r.html#aaa523d5a79e33b2963c200781bac316d">00048</a>         PNGU_u8 b;
 <a name="l00049"></a>00049 } <a class="code" href="struct_p_n_g_u_c_o_l_o_r.html">PNGUCOLOR</a>;
 <a name="l00050"></a>00050 
 <a name="l00051"></a><a class="code" href="struct_p_n_g_u_p_r_o_p.html">00051</a> <span class="keyword">typedef</span> <span class="keyword">struct</span>
 <a name="l00052"></a>00052 {
-<a name="l00053"></a><a class="code" href="struct_p_n_g_u_p_r_o_p.html#a0aa91889883d4b4775b737f24b03bd66">00053</a>         PNGU_u32 imgWidth; <span class="comment">// In pixels</span>
-<a name="l00054"></a><a class="code" href="struct_p_n_g_u_p_r_o_p.html#a003cb9dd7f0350382298cc93872a8ece">00054</a>         PNGU_u32 imgHeight; <span class="comment">// In pixels</span>
-<a name="l00055"></a><a class="code" href="struct_p_n_g_u_p_r_o_p.html#ae8a5133e1136dbfdd70654a142104ccb">00055</a>         PNGU_u32 imgBitDepth; <span class="comment">// In bitx</span>
-<a name="l00056"></a><a class="code" href="struct_p_n_g_u_p_r_o_p.html#a9300b6cdbd158af021a310e3d32a1658">00056</a>         PNGU_u32 imgColorType; <span class="comment">// PNGU_COLOR_TYPE_*</span>
-<a name="l00057"></a><a class="code" href="struct_p_n_g_u_p_r_o_p.html#af0958666b6c56f78d750c169fc5f375c">00057</a>         PNGU_u32 validBckgrnd; <span class="comment">// Non zero if there is a background color</span>
-<a name="l00058"></a><a class="code" href="struct_p_n_g_u_p_r_o_p.html#ac0062b2d5a72d0fd087aebe2c188a8b0">00058</a>         <a class="code" href="struct_p_n_g_u_c_o_l_o_r.html">PNGUCOLOR</a> bckgrnd; <span class="comment">// Backgroun color</span>
-<a name="l00059"></a><a class="code" href="struct_p_n_g_u_p_r_o_p.html#ab35abc6d5d7ce63a5cbaae7cb6b3afd6">00059</a>         PNGU_u32 numTrans; <span class="comment">// Number of transparent colors</span>
-<a name="l00060"></a><a class="code" href="struct_p_n_g_u_p_r_o_p.html#ad491e8eadaf580690340b2cb8aadc8b1">00060</a>         <a class="code" href="struct_p_n_g_u_c_o_l_o_r.html">PNGUCOLOR</a> *trans; <span class="comment">// Transparent colors</span>
+<a name="l00053"></a><a class="code" href="struct_p_n_g_u_p_r_o_p.html#aff2b428ef8cf7f5c4ba5b7a5e7b39bdf">00053</a>         PNGU_u32 imgWidth; <span class="comment">// In pixels</span>
+<a name="l00054"></a><a class="code" href="struct_p_n_g_u_p_r_o_p.html#a88d8571455583510180948553817b742">00054</a>         PNGU_u32 imgHeight; <span class="comment">// In pixels</span>
+<a name="l00055"></a><a class="code" href="struct_p_n_g_u_p_r_o_p.html#a816d486d8f85046f646f87cf4af96599">00055</a>         PNGU_u32 imgBitDepth; <span class="comment">// In bitx</span>
+<a name="l00056"></a><a class="code" href="struct_p_n_g_u_p_r_o_p.html#ac2a83a516475d0d06f0e5df750f2224f">00056</a>         PNGU_u32 imgColorType; <span class="comment">// PNGU_COLOR_TYPE_*</span>
+<a name="l00057"></a><a class="code" href="struct_p_n_g_u_p_r_o_p.html#a2371695c9ef7ae16aa613fc48d338bbd">00057</a>         PNGU_u32 validBckgrnd; <span class="comment">// Non zero if there is a background color</span>
+<a name="l00058"></a><a class="code" href="struct_p_n_g_u_p_r_o_p.html#a84ac6a0cde5d05575077d60caa53fe57">00058</a>         <a class="code" href="struct_p_n_g_u_c_o_l_o_r.html">PNGUCOLOR</a> bckgrnd; <span class="comment">// Backgroun color</span>
+<a name="l00059"></a><a class="code" href="struct_p_n_g_u_p_r_o_p.html#aef5c57e9ec792f02eecfbd06fe3397a4">00059</a>         PNGU_u32 numTrans; <span class="comment">// Number of transparent colors</span>
+<a name="l00060"></a><a class="code" href="struct_p_n_g_u_p_r_o_p.html#a1635aac44d241f159f10b504b28b62b0">00060</a>         <a class="code" href="struct_p_n_g_u_c_o_l_o_r.html">PNGUCOLOR</a> *trans; <span class="comment">// Transparent colors</span>
 <a name="l00061"></a>00061 } <a class="code" href="struct_p_n_g_u_p_r_o_p.html">PNGUPROP</a>;
 <a name="l00062"></a>00062 
 <a name="l00063"></a>00063 <span class="comment">// Image context, always initialize with SelectImageFrom* and free with ReleaseImageContext</span>
@@ -113,10 +113,10 @@
 <a name="l00089"></a>00089 <span class="comment">****************************************************************************/</span>
 <a name="l00090"></a>00090 
 <a name="l00091"></a>00091 <span class="comment">// Selects a PNG file, previosly loaded into a buffer, and creates an image context for subsequent procesing.</span>
-<a name="l00092"></a>00092 IMGCTX <a class="code" href="pngu_8c.html#a8d9ec5ac0361ec447b85e29860744bb8">PNGU_SelectImageFromBuffer</a> (<span class="keyword">const</span> <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a368f7094dc38acca20612bbb392552f4">buffer</a>);
+<a name="l00092"></a>00092 IMGCTX <a class="code" href="pngu_8c.html#a8d9ec5ac0361ec447b85e29860744bb8">PNGU_SelectImageFromBuffer</a> (<span class="keyword">const</span> <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a131c0a2fadef806a419c98010b095eb7">buffer</a>);
 <a name="l00093"></a>00093 
 <a name="l00094"></a>00094 <span class="comment">// Selects a PNG file, from any devoptab device, and creates an image context for subsequent procesing.</span>
-<a name="l00095"></a>00095 IMGCTX <a class="code" href="pngu_8c.html#a879590240942198d807720290c728e1f">PNGU_SelectImageFromDevice</a> (<span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="struct___i_m_g_c_t_x.html#aeac90097f29f7529968697163cea5c18">filename</a>);
+<a name="l00095"></a>00095 IMGCTX <a class="code" href="pngu_8c.html#a879590240942198d807720290c728e1f">PNGU_SelectImageFromDevice</a> (<span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="struct___i_m_g_c_t_x.html#ac03c97336c8b159070fb8aa6115f8ea0">filename</a>);
 <a name="l00096"></a>00096 
 <a name="l00097"></a>00097 <span class="comment">// Frees resources associated with an image context. Always call this function when you no longer need the IMGCTX.</span>
 <a name="l00098"></a>00098 <span class="keywordtype">void</span> <a class="code" href="pngu_8c.html#a1d3c1bbde327d7da4c7234f7a4651232">PNGU_ReleaseImageContext</a> (IMGCTX ctx);
@@ -136,7 +136,7 @@
 <a name="l00112"></a>00112 
 <a name="l00113"></a>00113 <span class="comment">// Expands selected image into an YCbYCr buffer. You need to specify context, image dimensions, </span>
 <a name="l00114"></a>00114 <span class="comment">// destination address and stride in pixels (stride = buffer width - image width).</span>
-<a name="l00115"></a>00115 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#a7c9d230223a28ee6658c1777fd918e0b">PNGU_DecodeToYCbYCr</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a368f7094dc38acca20612bbb392552f4">buffer</a>, PNGU_u32 stride);
+<a name="l00115"></a>00115 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#a7c9d230223a28ee6658c1777fd918e0b">PNGU_DecodeToYCbYCr</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a131c0a2fadef806a419c98010b095eb7">buffer</a>, PNGU_u32 stride);
 <a name="l00116"></a>00116 
 <a name="l00117"></a>00117 <span class="comment">// Macro for decoding an image inside a buffer at given coordinates.</span>
 <a name="l00118"></a><a class="code" href="pngu_8h.html#a04f355e969ff951a560383eb874201c0">00118</a> <span class="preprocessor">#define PNGU_DECODE_TO_COORDS_YCbYCr(ctx,coordX,coordY,imgWidth,imgHeight,bufferWidth,bufferHeight,buffer)      \</span>
@@ -146,7 +146,7 @@
 <a name="l00122"></a>00122 <span class="preprocessor"></span>
 <a name="l00123"></a>00123 <span class="comment">// Expands selected image into a linear RGB565 buffer. You need to specify context, image dimensions, </span>
 <a name="l00124"></a>00124 <span class="comment">// destination address and stride in pixels (stride = buffer width - image width).</span>
-<a name="l00125"></a>00125 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#a12cb78b5948101e8bb8382cf75e32c9b">PNGU_DecodeToRGB565</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a368f7094dc38acca20612bbb392552f4">buffer</a>, PNGU_u32 stride);
+<a name="l00125"></a>00125 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#a12cb78b5948101e8bb8382cf75e32c9b">PNGU_DecodeToRGB565</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a131c0a2fadef806a419c98010b095eb7">buffer</a>, PNGU_u32 stride);
 <a name="l00126"></a>00126 
 <a name="l00127"></a>00127 <span class="comment">// Macro for decoding an image inside a buffer at given coordinates.</span>
 <a name="l00128"></a><a class="code" href="pngu_8h.html#ae8d44aa2171c5eb7527b7f4d31e745d8">00128</a> <span class="preprocessor">#define PNGU_DECODE_TO_COORDS_RGB565(ctx,coordX,coordY,imgWidth,imgHeight,bufferWidth,bufferHeight,buffer)      \</span>
@@ -157,7 +157,7 @@
 <a name="l00133"></a>00133 <span class="comment">// Expands selected image into a linear RGBA8 buffer. You need to specify context, image dimensions, </span>
 <a name="l00134"></a>00134 <span class="comment">// destination address, stride in pixels and default alpha value, which is used if the source image </span>
 <a name="l00135"></a>00135 <span class="comment">// doesn&#39;t have an alpha channel.</span>
-<a name="l00136"></a>00136 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#a20a3577c489233cffab341008136d265">PNGU_DecodeToRGBA8</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a368f7094dc38acca20612bbb392552f4">buffer</a>, PNGU_u32 stride, PNGU_u8 default_alpha);
+<a name="l00136"></a>00136 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#a20a3577c489233cffab341008136d265">PNGU_DecodeToRGBA8</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a131c0a2fadef806a419c98010b095eb7">buffer</a>, PNGU_u32 stride, PNGU_u8 default_alpha);
 <a name="l00137"></a>00137 
 <a name="l00138"></a>00138 <span class="comment">// Macro for decoding an image inside a buffer at given coordinates.</span>
 <a name="l00139"></a><a class="code" href="pngu_8h.html#a21ccca92f5abec10fdf9a3439f56bf2c">00139</a> <span class="preprocessor">#define PNGU_DECODE_TO_COORDS_RGBA8(ctx,coordX,coordY,imgWidth,imgHeight,default_alpha,bufferWidth,bufferHeight,buffer) \</span>
@@ -167,22 +167,22 @@
 <a name="l00143"></a>00143 <span class="preprocessor"></span>
 <a name="l00144"></a>00144 <span class="comment">// Expands selected image into a 4x4 tiled RGB565 buffer. You need to specify context, image dimensions</span>
 <a name="l00145"></a>00145 <span class="comment">// and destination address.</span>
-<a name="l00146"></a>00146 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#ad1eacbbb449f3bfef1afeafb3f70b3bd">PNGU_DecodeTo4x4RGB565</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a368f7094dc38acca20612bbb392552f4">buffer</a>);
+<a name="l00146"></a>00146 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#ad1eacbbb449f3bfef1afeafb3f70b3bd">PNGU_DecodeTo4x4RGB565</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a131c0a2fadef806a419c98010b095eb7">buffer</a>);
 <a name="l00147"></a>00147 
 <a name="l00148"></a>00148 <span class="comment">// Expands selected image into a 4x4 tiled RGB5A3 buffer. You need to specify context, image dimensions,</span>
 <a name="l00149"></a>00149 <span class="comment">// destination address and default alpha value, which is used if the source image doesn&#39;t have an alpha channel.</span>
-<a name="l00150"></a>00150 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#a52df1b9aa4d2a806b2c34ca8fcd3865f">PNGU_DecodeTo4x4RGB5A3</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a368f7094dc38acca20612bbb392552f4">buffer</a>, PNGU_u8 default_alpha);
+<a name="l00150"></a>00150 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#a52df1b9aa4d2a806b2c34ca8fcd3865f">PNGU_DecodeTo4x4RGB5A3</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a131c0a2fadef806a419c98010b095eb7">buffer</a>, PNGU_u8 default_alpha);
 <a name="l00151"></a>00151 
 <a name="l00152"></a>00152 <span class="comment">// Expands selected image into a 4x4 tiled RGBA8 buffer. You need to specify context, image dimensions,</span>
 <a name="l00153"></a>00153 <span class="comment">// destination address and default alpha value, which is used if the source image doesn&#39;t have an alpha channel.</span>
-<a name="l00154"></a>00154 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#a23c5c1c50cc3a7dcb9a020f12855b70d">PNGU_DecodeTo4x4RGBA8</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a368f7094dc38acca20612bbb392552f4">buffer</a>, PNGU_u8 default_alpha);
+<a name="l00154"></a>00154 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#a23c5c1c50cc3a7dcb9a020f12855b70d">PNGU_DecodeTo4x4RGBA8</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a131c0a2fadef806a419c98010b095eb7">buffer</a>, PNGU_u8 default_alpha);
 <a name="l00155"></a>00155 
 <a name="l00156"></a>00156 <span class="comment">// Encodes an YCbYCr image in PNG format and stores it in the selected device or memory buffer. You need to </span>
 <a name="l00157"></a>00157 <span class="comment">// specify context, image dimensions, destination address and stride in pixels (stride = buffer width - image width).</span>
-<a name="l00158"></a>00158 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#a4a7f91e558b5a0da015d3c0dc8d3e180">PNGU_EncodeFromYCbYCr</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a368f7094dc38acca20612bbb392552f4">buffer</a>, PNGU_u32 stride);
+<a name="l00158"></a>00158 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#a4a7f91e558b5a0da015d3c0dc8d3e180">PNGU_EncodeFromYCbYCr</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a131c0a2fadef806a419c98010b095eb7">buffer</a>, PNGU_u32 stride);
 <a name="l00159"></a>00159 
-<a name="l00160"></a>00160 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#abd3197bee1351e7cc193d77b01b98a86">PNGU_EncodeFromRGB</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a368f7094dc38acca20612bbb392552f4">buffer</a>, PNGU_u32 stride);
-<a name="l00161"></a>00161 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#afa85c38f771bb598a6b527801c396161">PNGU_EncodeFromGXTexture</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a368f7094dc38acca20612bbb392552f4">buffer</a>, PNGU_u32 stride);
+<a name="l00160"></a>00160 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#abd3197bee1351e7cc193d77b01b98a86">PNGU_EncodeFromRGB</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a131c0a2fadef806a419c98010b095eb7">buffer</a>, PNGU_u32 stride);
+<a name="l00161"></a>00161 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#afa85c38f771bb598a6b527801c396161">PNGU_EncodeFromGXTexture</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, <span class="keywordtype">void</span> *<a class="code" href="struct___i_m_g_c_t_x.html#a131c0a2fadef806a419c98010b095eb7">buffer</a>, PNGU_u32 stride);
 <a name="l00162"></a>00162 <span class="keywordtype">int</span> <a class="code" href="pngu_8c.html#a7bde9eb0c860710bf8f299c501adf8af">PNGU_EncodeFromEFB</a> (IMGCTX ctx, PNGU_u32 width, PNGU_u32 height, PNGU_u32 stride);
 <a name="l00163"></a>00163 
 <a name="l00164"></a>00164 <span class="comment">// Macro for encoding an image stored into an YCbYCr buffer at given coordinates.</span>
