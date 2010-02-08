@@ -12,14 +12,14 @@
   <div class="tabs">
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&nbsp;Structures</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
   <div class="tabs">
     <ul>
       <li><a href="files.html"><span>File&nbsp;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
+      <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
 <h1>inc/Monster.h</h1><a href="_monster_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
@@ -73,34 +73,34 @@
 <a name="l00069"></a>00069         
 <a name="l00070"></a>00070   <span class="keyword">public</span>:
 <a name="l00071"></a>00071         <span class="comment">// Constructor &amp; Destructor</span>
-<a name="l00072"></a>00072         <a class="code" href="class_monster.html#afb0e9c59e3a3a81ebeac54ac8d4f1698">Monster</a>();
-<a name="l00073"></a>00073         <a class="code" href="class_monster.html#ae606a71388e4e319768f03808fc52e7b">~Monster</a>();
+<a name="l00072"></a>00072         <a class="code" href="class_monster.html#a3dfc253fbec8331d42ac13c20bf9425f">Monster</a>();
+<a name="l00073"></a>00073         <a class="code" href="class_monster.html#a21619ba1759b910cd2fd50d858aab338">~Monster</a>();
 <a name="l00074"></a>00074 
 <a name="l00075"></a>00075         <span class="comment">// Other</span>
-<a name="l00076"></a>00076         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#a36bd53507603b15acfaf7510c304fd09">draw</a>(<span class="keywordtype">int</span> xOffset, <span class="keywordtype">int</span> yOffset, <span class="keywordtype">float</span> size);
-<a name="l00077"></a>00077         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#af3ee6a08e468e8356968e9331a836bcc">text</a>(<span class="keywordtype">void</span>);
-<a name="l00078"></a>00078         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#a84b28b3bfeddbd1835e7b35aec2ba667">move</a>(<span class="keywordtype">void</span>);
+<a name="l00076"></a>00076         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#af56da9899e05f9afb7a3e2bf7e8a585c">draw</a>(<span class="keywordtype">int</span> xOffset, <span class="keywordtype">int</span> yOffset, <span class="keywordtype">float</span> size);
+<a name="l00077"></a>00077         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#a6b6b406420f3c8e649238371b89698a9">text</a>(<span class="keywordtype">void</span>);
+<a name="l00078"></a>00078         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#a816dea7bda1d944a70441842e5ab8582">move</a>(<span class="keywordtype">void</span>);
 <a name="l00079"></a>00079         
 <a name="l00080"></a>00080         <span class="comment">// Setters</span>
-<a name="l00081"></a>00081         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#a2c54c2b12ae9540592b9649d63e02c8e">setImage</a>(<a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> *<a class="code" href="structimage.html">image</a>);    
-<a name="l00082"></a>00082         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#ac2245b3fc324d4833014a1b061eb059e">setStep</a>(<span class="keywordtype">int</span> step);
-<a name="l00083"></a>00083         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#a511f425b438de1dfc7952baa3422e055">setDelay</a>(<span class="keywordtype">int</span> delay);
-<a name="l00084"></a>00084         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#a8e9cb0d986c94ba85755006981cf0094">setEnergy</a>(<span class="keywordtype">int</span> energy);
-<a name="l00085"></a>00085         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#a51bf01aa187406a993ec500928067dbe">setIndex</a>(<span class="keywordtype">int</span> index);
-<a name="l00086"></a>00086         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#aff509ca067d806032ad4620059745c40">setGrid</a>(<span class="keywordtype">int</span> grid); 
-<a name="l00087"></a>00087         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#a33386bc8fed4c8c2b03f63867377d162">setState</a>(<span class="keywordtype">int</span> state);
-<a name="l00088"></a>00088         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#a0c5f78be811fcfaaaa9a25e3badf70c7">setMove</a>(<span class="keywordtype">bool</span> enabled);
+<a name="l00081"></a>00081         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#a8620aeac8e8e72ffd4d04c4caf1827ed">setImage</a>(<a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> *<a class="code" href="structimage.html">image</a>);    
+<a name="l00082"></a>00082         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#abbecc4ec934e9c3caeb581f02bc4323c">setStep</a>(<span class="keywordtype">int</span> step);
+<a name="l00083"></a>00083         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#a238c3659586376d840f724b999f8b41c">setDelay</a>(<span class="keywordtype">int</span> delay);
+<a name="l00084"></a>00084         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#a6df5f592a0f2b92da4080f366815cfb2">setEnergy</a>(<span class="keywordtype">int</span> energy);
+<a name="l00085"></a>00085         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#aa78ef3ba50b6c91c1a8afe037d64a204">setIndex</a>(<span class="keywordtype">int</span> index);
+<a name="l00086"></a>00086         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#a70458f062700853d125465bc3c3ed228">setGrid</a>(<span class="keywordtype">int</span> grid); 
+<a name="l00087"></a>00087         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#a13e9d1abb9887fdc161818ef8455cf24">setState</a>(<span class="keywordtype">int</span> state);
+<a name="l00088"></a>00088         <span class="keywordtype">void</span> <a class="code" href="class_monster.html#a788b7e351da1bc1819be797399f2aa8c">setMove</a>(<span class="keywordtype">bool</span> enabled);
 <a name="l00089"></a>00089 
 <a name="l00090"></a>00090         <span class="comment">// Getters</span>
-<a name="l00091"></a>00091         <span class="keywordtype">int</span> <a class="code" href="class_monster.html#a36582fb7be99d0edbce72566fac17e83">getX</a>(<span class="keywordtype">void</span>);
-<a name="l00092"></a>00092         <span class="keywordtype">int</span> <a class="code" href="class_monster.html#aadc90276800d54cea9bccebc02c5cff6">getY</a>(<span class="keywordtype">void</span>);
-<a name="l00093"></a>00093         <span class="keywordtype">int</span> <a class="code" href="class_monster.html#a07d71b9f2f086bd585f82710c3dd2f38">getAlfa</a>(<span class="keywordtype">void</span>);
-<a name="l00094"></a>00094         <span class="keywordtype">float</span> <a class="code" href="class_monster.html#a1e1b3eaeeb3245c137978d76474f5fe7">getSize</a>(<span class="keywordtype">void</span>);
-<a name="l00095"></a>00095         <span class="keywordtype">int</span> <a class="code" href="class_monster.html#a361d46bbfc62cf89d91687169bf533e0">getStep</a>(<span class="keywordtype">void</span>);
-<a name="l00096"></a>00096         <span class="keywordtype">int</span> <a class="code" href="class_monster.html#aa2b4272ff6e99a9c7edc6fbc93320bb2">getEnergy</a>(<span class="keywordtype">void</span>);
-<a name="l00097"></a>00097         <span class="keywordtype">int</span> <a class="code" href="class_monster.html#a1a83795b4194feefe712a0328bc0558d">getGrid</a>(<span class="keywordtype">void</span>);
-<a name="l00098"></a>00098         <span class="keywordtype">int</span> <a class="code" href="class_monster.html#a2885d0bdb47fbb640bd2012dfc2596de">getIndex</a>(<span class="keywordtype">void</span>);
-<a name="l00099"></a>00099         <span class="keywordtype">int</span> <a class="code" href="class_monster.html#afc0b4325b7cabe49f623d5e44aaa37d7">getState</a>(<span class="keywordtype">void</span>);
+<a name="l00091"></a>00091         <span class="keywordtype">int</span> <a class="code" href="class_monster.html#a986888e0967b6ada8509d1693e9310c1">getX</a>(<span class="keywordtype">void</span>);
+<a name="l00092"></a>00092         <span class="keywordtype">int</span> <a class="code" href="class_monster.html#a6b0c676ee35020cdf7e81a45f241f638">getY</a>(<span class="keywordtype">void</span>);
+<a name="l00093"></a>00093         <span class="keywordtype">int</span> <a class="code" href="class_monster.html#a015407b864f4018476e36c35fb1fb308">getAlfa</a>(<span class="keywordtype">void</span>);
+<a name="l00094"></a>00094         <span class="keywordtype">float</span> <a class="code" href="class_monster.html#a9c6d9c5b33187de65a90cccb4bf6f5bd">getSize</a>(<span class="keywordtype">void</span>);
+<a name="l00095"></a>00095         <span class="keywordtype">int</span> <a class="code" href="class_monster.html#a031ba5fa073e2fa72d93740ca30d2bf6">getStep</a>(<span class="keywordtype">void</span>);
+<a name="l00096"></a>00096         <span class="keywordtype">int</span> <a class="code" href="class_monster.html#a421b5873fd96dbfccb17e06170db8d6c">getEnergy</a>(<span class="keywordtype">void</span>);
+<a name="l00097"></a>00097         <span class="keywordtype">int</span> <a class="code" href="class_monster.html#a9fa9b53f0cb347a64d22b3e24e19a247">getGrid</a>(<span class="keywordtype">void</span>);
+<a name="l00098"></a>00098         <span class="keywordtype">int</span> <a class="code" href="class_monster.html#a7e77f7a5451dda657d6eb58195d81f12">getIndex</a>(<span class="keywordtype">void</span>);
+<a name="l00099"></a>00099         <span class="keywordtype">int</span> <a class="code" href="class_monster.html#a75d44ab38e35746fc1d497028b1fcb85">getState</a>(<span class="keywordtype">void</span>);
 <a name="l00100"></a>00100 };
 <a name="l00101"></a>00101 
 <a name="l00102"></a>00102 <span class="preprocessor">#endif</span>
