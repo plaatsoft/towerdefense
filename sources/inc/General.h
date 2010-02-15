@@ -21,7 +21,7 @@
  * - Added dragable game information panels
  * 
  * @section ReleaseNotes
- * 05-02-2010 Version 0.94
+ * <b>05-02-2010 Version 0.94</b>
  * - GUI:
  *  - Improve video initialization.
  *  - Overall FPS has improved 50 percent. Thanks Crayon.
@@ -35,7 +35,7 @@
  *  - Use GrrLib 4.2.1 BETA library (Now native FreeType support available).
  *  - Build game with devkitPPC r19 compiler.
  * 
- * 22-01-2010 Version 0.93
+ * <b>22-01-2010 Version 0.93</b>
  * - GUI:
  *  - Added weapon fire mode information on weapon help screen.
  *  - Improve weapon reload delay initialisation.
@@ -49,7 +49,7 @@
  *  - Rebalance weapon specifications. Mix features more!
  *  - Build game with devkitPPC r19 compiler.
  *
- * 16-01-2010 Version 0.92
+ * <b>16-01-2010 Version 0.92</b>
  * - GUI:
  *  - Added 6 animated weapons. Thanks Applicant!
  *  - Improve enemy animated sprite frame sequence.
@@ -65,7 +65,7 @@
  *  - Bugfix: Monsters can not be shooted before launch.
  *  - Build game with devkitPPC r19 compiler.
  *
- * 09-01-2010 Version 0.91
+ * <b>09-01-2010 Version 0.91</b>
  * - GUI:
  *  - Added 25 animated enemy sprites. Thanks Applicant!
  *  - Added game setting screen.
@@ -82,7 +82,7 @@
  *  - Decrease weapons effective range.
  *  - Build game with devkitPPC r19 compiler.
  *
- * 02-01-2010 Version 0.90
+ * <b>02-01-2010 Version 0.90</b>
  * - GUI:
  *  - Improve background images.
  *  - Remove some english typos.
@@ -94,7 +94,7 @@
  *  - Enable left and right button for faster weapon type selection.
  *  - Build game with devkitPPC r19 compiler.
  *
- * 30-12-2009 Version 0.80
+ * <b>30-12-2009 Version 0.80</b>
  * - GUI:
  *  - Added map id column to local highscore screen.
  *  - Improve background images.
@@ -111,7 +111,7 @@
  *  - Store the best 100 entries in the local highscore.
  *  - Build game with devkitPPC r19 compiler.
  *
- * 27-12-2009 Version 0.70
+ * <b>27-12-2009 Version 0.70</b>
  * - GUI:
  *  - Added "Easy, Medium, Hard" level select screen.
  *  - Added six medium level and six hard level maps.
@@ -124,7 +124,7 @@
  *  - Increase enemy walk speed after each 20 waves. 
  *  - Build game with devkitPPC r19 compiler.
  *
- * 24-12-2009 Version 0.60
+ * <b>24-12-2009 Version 0.60</b>
  * - GUI:
  *  - Update credit screen. 
  *  - Improve game information panel design.
@@ -140,7 +140,7 @@
  *  - BugfiX: The rumble is now working for all the four WiiMotes. 
  *  - Build game with devkitPPC r19 compiler.
  *  
- * 20-12-2009 Version 0.50
+ * <b>20-12-2009 Version 0.50</b>
  * - General:
  *  - First official release for the Wii Homebrew Scene.
  *  - Process most of the comments of the Beta testers.
@@ -157,7 +157,7 @@
  *  - Use GRRLib v4.2.0 as graphic engine.
  *  - Build game with devkitPPC r19 compiler.
  *
- * 18-12-2009 Version 0.45
+ * <b>18-12-2009 Version 0.45</b>
  * - General:
  *  - Beta release for testers.
  * - GUI:
@@ -187,7 +187,7 @@
  *  - Added Google analistics network calls.
  *  - Build game with devkitPPC r19 compiler.
  *
- * 13-12-2009 Version 0.40
+ * <b>13-12-2009 Version 0.40</b>
  * - GUI:
  *  - Added music & effect control screen.
  *  - Added wave launch button on game board.
@@ -210,7 +210,7 @@
  *  - Added functionality to make screenshots (Press + button).
  *  - Build game with devkitPPC r19 compiler.
  *
- * 06-12-2009 Version 0.30
+ * <b>06-12-2009 Version 0.30</b>
  * - GUI:
  *  - Added third game map.
  *  - Added water and bridge map component.
@@ -225,7 +225,7 @@
  *  - Use libogc 1.8.1 library as Wii interface engine.
  *  - Build game with devkitPPC r19 compiler.
  *
- * 29-11-2009 Version 0.20
+ * <b>29-11-2009 Version 0.20</b>
  * - GUI:
  *  - Created intro screen.
  *  - Created main menu screen.
@@ -241,7 +241,7 @@
  *  - Use libogc v1.8.0 library as Wii interface engine.
  *  - Build game with devkitPPC r19 compiler.
  *
- * 21-11-2009 Version 0.10 
+ * <b>21-11-2009 Version 0.10</b>
  * - General:
  *  - Started programming in C++.
  *  - Finding free graphics for game.
