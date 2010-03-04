@@ -30,9 +30,10 @@
  *  - Mixed the weapon fire mode a little bit more!
  *  - Nuke is 500 dollar cheaper!
  *  - Increase http buffer size to 10Kb.
+ *  - Use GrrLib 4.2.1 BETA library (Now native FreeType support available).
+ * - General:
  *  - Added inline source code remarks in javadoc style.
  *  - Use Doxygen (windows tool) to create HTML source code documentation.
- *  - Use GrrLib 4.2.1 BETA library (Now native FreeType support available).
  *  - Build game with devkitPPC r19 compiler.
  * 
  * <b>22-01-2010 Version 0.93</b>
@@ -47,6 +48,7 @@
  *  - Fire at enemy in range with highest energy level (Cannon + Missile).
  *  - Fire at fastest enemy in range (Laser + Nuke).
  *  - Rebalance weapon specifications. Mix features more!
+ * - General:
  *  - Build game with devkitPPC r19 compiler.
  *
  * <b>16-01-2010 Version 0.92</b>
@@ -63,6 +65,7 @@
  *  - Added weapon sell functionality with minus button.
  *  - User initials are now default based on Wii nickname.
  *  - Bugfix: Monsters can not be shooted before launch.
+ * - General:
  *  - Build game with devkitPPC r19 compiler.
  *
  * <b>09-01-2010 Version 0.91</b>
@@ -80,6 +83,7 @@
  *  - Increase weapon prices.
  *  - Increase maximum concurrent monsters in action.
  *  - Decrease weapons effective range.
+ * - General:
  *  - Build game with devkitPPC r19 compiler.
  *
  * <b>02-01-2010 Version 0.90</b>
@@ -92,6 +96,7 @@
  *  - Improve first music track.
  *  - Enable B button for faster building. 
  *  - Enable left and right button for faster weapon type selection.
+ * - General:
  *  - Build game with devkitPPC r19 compiler.
  *
  * <b>30-12-2009 Version 0.80</b>
@@ -109,6 +114,7 @@
  *  - Map id information is added to webservice call.
  *  - Only scores above 20.000 points are send to webservice.
  *  - Store the best 100 entries in the local highscore.
+ * - General:
  *  - Build game with devkitPPC r19 compiler.
  *
  * <b>27-12-2009 Version 0.70</b>
@@ -122,6 +128,7 @@
  *  - Adapted enemy specifications (enemies are less powerfull).
  *  - Adapted six easy maps to be more easy. 
  *  - Increase enemy walk speed after each 20 waves. 
+ * - General:
  *  - Build game with devkitPPC r19 compiler.
  *
  * <b>24-12-2009 Version 0.60</b>
@@ -138,12 +145,10 @@
  *  - Only allow to build weapons on land (not bridges or road).
  *  - Not allowed anymore to stack weapons on same place.
  *  - BugfiX: The rumble is now working for all the four WiiMotes. 
+ * - General:
  *  - Build game with devkitPPC r19 compiler.
  *  
  * <b>20-12-2009 Version 0.50</b>
- * - General:
- *  - First official release for the Wii Homebrew Scene.
- *  - Process most of the comments of the Beta testers.
  * - GUI:
  *  - Improve "Game Over" screen. 
  *  - Improve game information panel on screen. 
@@ -155,11 +160,12 @@
  *  - Balance sound effect volume.
  *  - Improve weapons upgrade ranges.
  *  - Use GRRLib v4.2.0 as graphic engine.
+ * - General:
+ *  - First official release for the Wii Homebrew Scene.
+ *  - Process most of the comments of the Beta testers.
  *  - Build game with devkitPPC r19 compiler.
  *
  * <b>18-12-2009 Version 0.45</b>
- * - General:
- *  - Beta release for testers.
  * - GUI:
  *  - Added game map 4, 5 and 6.
  *  - Show when weapon upgrade is not possible anymore!
@@ -185,6 +191,8 @@
  *  - Fetch Global and today highscore from internet.
  *  - Added functionality to store game score on internet.
  *  - Added Google analistics network calls.
+ * - General:
+ *  - Beta release for testers.
  *  - Build game with devkitPPC r19 compiler.
  *
  * <b>13-12-2009 Version 0.40</b>
@@ -208,6 +216,7 @@
  *  - Added functionality to load/save local highscore from/to SD card.
  *  - Added functionality to load/save game settings from/to SD card.
  *  - Added functionality to make screenshots (Press + button).
+ * - General:
  *  - Build game with devkitPPC r19 compiler.
  *
  * <b>06-12-2009 Version 0.30</b>
@@ -223,6 +232,7 @@
  *  - Added state machine functionality.
  *  - Align monster movement on grid.
  *  - Use libogc 1.8.1 library as Wii interface engine.
+ * - General:
  *  - Build game with devkitPPC r19 compiler.
  *
  * <b>29-11-2009 Version 0.20</b>
@@ -239,6 +249,7 @@
  *  - Use libfat v1.0.6 as disk access engine.
  *  - Use libmxml v2.6 library as xml engine.
  *  - Use libogc v1.8.0 library as Wii interface engine.
+ * - General:
  *  - Build game with devkitPPC r19 compiler.
  *
  * <b>21-11-2009 Version 0.10</b>
