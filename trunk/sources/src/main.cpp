@@ -4417,8 +4417,8 @@ int main(void)
 	// Init wiimote layer
    WPAD_Init();
 	
-	// Wiimote is shutdown after 60 seconds of innactivity.
-   WPAD_SetIdleTimeout(60); 
+	// Wiimote is shutdown after 300 seconds of innactivity.
+   WPAD_SetIdleTimeout(300); 
    WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
   
 	// Obtain the preferred video mode from the system
