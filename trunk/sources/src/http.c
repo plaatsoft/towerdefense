@@ -773,7 +773,7 @@ extern bool http_request(char *url, const u32 max_size)
     //trace->event(s_fn,1,"enter"); 
  		
         int linecount;
-		boolean chunked=false;
+		bool chunked=false;
 		int emptycount=0;
 		
         if (!http_split_url(&http_host, &http_path, url)) return false;
