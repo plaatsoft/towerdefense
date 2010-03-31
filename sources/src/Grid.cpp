@@ -110,7 +110,7 @@ void Grid::parseGrid(void)
    
 	int x,y;
 	char temp[MAX_GRID_Y][MAX_GRID_X];
-	boolean ready=false;
+	bool ready=false;
 	maxLocations=0;
    
 	// Make copy of grid data and store start position

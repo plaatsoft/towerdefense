@@ -152,7 +152,7 @@ bool Button::onSelect(int x1, int y1, bool clickEffect)
    const char *s_fn="Button::onSelect";
    trace->event(s_fn,0,"enter [x=%d|y=%d]",x1,y1);
 
-   boolean selected=false;
+   bool selected=false;
    if ( (x1>=(x-3)) && (x1<=(x+width+3)) && (y1>=(y-3) && (y1<=(y+height+3))) )
    {      
 	  trace->event(s_fn,0,"Selected");
