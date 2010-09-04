@@ -27,8 +27,8 @@
 // -----------------------------------------------------------
 
 #define PROGRAM_NAME	   		"TowerDefense"
-#define PROGRAM_VERSION     	"0.95"
-#define RELEASE_DATE        	"31-03-2010" 
+#define PROGRAM_VERSION     	"0.98"
+#define RELEASE_DATE        	"04-09-2010" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -307,6 +307,19 @@ Game;
  * - Added dragable game information panels
  * 
  * @section ReleaseNotes
+ * <b>04-09-2010 Version 0.96</b>
+ * - GUI:
+ *  - Update menu screen information.
+ * - Core:
+ *  - Use GRRLIB 4.3.0 as graphical engine.
+ *  - libpng was updated to version 1.4.2
+ *  - libjpeg was updated to version 8b
+ *  - zlib was updated to version 1.2.5
+ *  - FreeType was updated to 2.3.12
+ * - General:
+ *  - Maintenance release.
+ *  - Build game with devkitPPC r21 compiler.
+ *
  * <b>31-03-2010 Version 0.95</b>
  * - GUI:
  *  - Update menu screen information.
@@ -556,7 +569,7 @@ Game;
  *  - Finding free graphics for game.
  *  - Setup basic directory structure for new project.
  *  - Store source code in Google code SVN repository.
- *  - Use devkitPPC r19 as C++ compiler.
+ *  - Build game with devkitPPC r19 compiler.
  *
  * @section Licence
  * Copyright (c) 2008-2010 Plaatsoft
