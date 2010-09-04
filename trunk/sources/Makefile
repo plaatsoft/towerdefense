@@ -3,8 +3,8 @@
 # Template makefile
 #---------------------------------------------------------------------------------
 
-export GRRLIB_INC   := ../lib/jpeg/include
-export GRRLIB_LIB   := ../lib/jpeg/lib/wii
+export GRRLIB_INC   := ../lib/grrlib/include
+export GRRLIB_LIB   := ../lib/grrlib/lib/wii
 
 export JPEG_INC     := ../lib/jpeg/include
 export JPEG_LIB     := ../lib/jpeg/lib/wii
@@ -15,8 +15,8 @@ export PNG_LIB	     := ../lib/png/lib/wii
 export PNGU_INC	  := ../lib/pngu/include
 export PNGU_LIB	  := ../lib/pngu/lib/wii
 
-export ZLIB_INC	  := ../lib/pngu/include
-export ZLIB_LIB	  := ../lib/pngu/lib/wii
+export ZLIB_INC	  := ../lib/zlib/include
+export ZLIB_LIB	  := ../lib/zlib/lib/wii
 
 export FREETYPE_INC := ../lib/freetype/include
 export FREETYPE_LIB := ../lib/freetype/lib/wii

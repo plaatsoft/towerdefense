@@ -182,7 +182,7 @@ GRR_EXTERN  u32         fb       GRR_INIT(0);
 // procedure and function prototypes
 // Inline function handling - http://www.greenend.org.uk/rjk/2003/03/inline.html
 //==============================================================================
-#include "grrlib/GRRLIB__lib.h"
+#include "GRRLIB__lib.h"
 
 #if defined __GRRLIB_CORE__
 #  define INLINE
@@ -193,7 +193,7 @@ GRR_EXTERN  u32         fb       GRR_INIT(0);
 #  define INLINE inline
 # endif
 #endif
-#include "grrlib/GRRLIB__inline.h"
+#include "GRRLIB__inline.h"
 
 //==============================================================================
 // C++ footer
