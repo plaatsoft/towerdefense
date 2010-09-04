@@ -4440,10 +4440,16 @@ int main(void)
 	// Init FreeType font 
 	myFont = GRRLIB_LoadTTF(font_ttf, font_ttf_size); 
 			
-	// Make screen black
-	GRRLIB_FillScreen(0x000000FF);
+   // To have a cool effect anti-aliasing is turned on
+   GRRLIB_Settings.antialias = true;
+
+   // Black background
+   GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
+	 
    GRRLIB_Render();
 
+   // Seed the random-number generator with current time so that
+   // the numbers will be different every time we run.
    srand(time(NULL));
 	
 	// Repeat forever
@@ -4464,7 +4470,8 @@ int main(void)
 		// Process state machine
 		processStateMachine();
 	}
-		  
+
+	GRRLIB_FreeTTF(myFont);
 	GRRLIB_Exit();
 	
 	// Stop network thread
