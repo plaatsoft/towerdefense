@@ -1,7 +1,7 @@
 
 /* pngpriv.h - private declarations for use inside libpng
  *
- * libpng version 1.4.0 - January 3, 2010
+ * libpng version 1.4.2 - May 6, 2010
  * For conditions of distribution and use, see copyright notice in png.h
  * Copyright (c) 1998-2010 Glenn Randers-Pehrson
  * (Version 0.96 Copyright (c) 1996, 1997 Andreas Dilger)
@@ -106,7 +106,7 @@
 #define PNG_SHIFT               0x0008
 #define PNG_SWAP_BYTES          0x0010
 #define PNG_INVERT_MONO         0x0020
-#define PNG_DITHER              0x0040
+#define PNG_QUANTIZE            0x0040 /* formerly PNG_DITHER */
 #define PNG_BACKGROUND          0x0080
 #define PNG_BACKGROUND_EXPAND   0x0100
                           /*    0x0200 unused */
@@ -351,8 +351,8 @@ PNG_EXTERN void png_write_IEND PNGARG((png_structp png_ptr));
 PNG_EXTERN void png_write_gAMA PNGARG((png_structp png_ptr, double file_gamma));
 #endif
 #ifdef PNG_FIXED_POINT_SUPPORTED
-PNG_EXTERN void png_write_gAMA_fixed PNGARG((png_structp png_ptr, png_fixed_point
-    file_gamma));
+PNG_EXTERN void png_write_gAMA_fixed PNGARG((png_structp png_ptr,
+    png_fixed_point file_gamma));
 #endif
 #endif
 
@@ -556,7 +556,8 @@ PNG_EXTERN void png_do_strip_filler PNGARG((png_row_infop row_info,
 PNG_EXTERN void png_do_swap PNGARG((png_row_infop row_info, png_bytep row));
 #endif
 
-#if defined(PNG_READ_PACKSWAP_SUPPORTED) || defined(PNG_WRITE_PACKSWAP_SUPPORTED)
+#if defined(PNG_READ_PACKSWAP_SUPPORTED) || \
+    defined(PNG_WRITE_PACKSWAP_SUPPORTED)
 PNG_EXTERN void png_do_packswap PNGARG((png_row_infop row_info, png_bytep row));
 #endif
 
@@ -587,9 +588,9 @@ PNG_EXTERN void png_do_invert PNGARG((png_row_infop row_info, png_bytep row));
 PNG_EXTERN void png_do_chop PNGARG((png_row_infop row_info, png_bytep row));
 #endif
 
-#ifdef PNG_READ_DITHER_SUPPORTED
-PNG_EXTERN void png_do_dither PNGARG((png_row_infop row_info,
-   png_bytep row, png_bytep palette_lookup, png_bytep dither_lookup));
+#ifdef PNG_READ_QUANTIZE_SUPPORTED
+PNG_EXTERN void png_do_quantize PNGARG((png_row_infop row_info,
+   png_bytep row, png_bytep palette_lookup, png_bytep quantize_lookup));
 
 #  ifdef PNG_CORRECT_PALETTE_SUPPORTED
 PNG_EXTERN void png_correct_palette PNGARG((png_structp png_ptr,

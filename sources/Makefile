@@ -3,19 +3,26 @@
 # Template makefile
 #---------------------------------------------------------------------------------
 
-export LIBJPEG_INC  := ../lib/jpeg/include
-export LIBJPEG_LIB  := ../lib/jpeg/lib/wii
+export GRRLIB_INC   := ../lib/jpeg/include
+export GRRLIB_LIB   := ../lib/jpeg/lib/wii
 
-export LIBPNG_INC	  := ../lib/png/include
-export LIBPNG_LIB	  := ../lib/png/lib/wii
+export JPEG_INC     := ../lib/jpeg/include
+export JPEG_LIB     := ../lib/jpeg/lib/wii
 
-export LIBXML_INC	  := ../lib/mxml/include
-export LIBXML_LIB	  := ../lib/mxml/lib
+export PNG_INC	     := ../lib/png/include
+export PNG_LIB	     := ../lib/png/lib/wii
+
+export PNGU_INC	  := ../lib/pngu/include
+export PNGU_LIB	  := ../lib/pngu/lib/wii
+
+export ZLIB_INC	  := ../lib/pngu/include
+export ZLIB_LIB	  := ../lib/pngu/lib/wii
 
 export FREETYPE_INC := ../lib/freetype/include
 export FREETYPE_LIB := ../lib/freetype/lib/wii
 
-export GRRLIB_INC :=	../inc
+export XML_INC	     := ../lib/mxml/include
+export XML_LIB	     := ../lib/mxml/lib/wii
 
 .SUFFIXES:
 #---------------------------------------------------------------------------------
@@ -33,36 +40,30 @@ include $(DEVKITPPC)/wii_rules
 #---------------------------------------------------------------------------------
 TARGET	:=	boot
 BUILD		:=	build
-SOURCES	:=	src src/grrlib
+SOURCES	:=	src
 IMAGES	:=	images
 DATA		:=	snd
 FONT		:=	font
 XML  		:=	xml
 INCLUDES	:= inc
 
-
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-
 CFLAGS		= -g -O2 -Wall $(MACHDEP) $(INCLUDE)
 CXXFLAGS	=	$(CFLAGS)
-
-#LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map
 LDFLAGS	=	-g $(MACHDEP) -mrvl -Wl,-Map,$(notdir $@).map
-
 
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS	:=  -lfreetype -lpng -lz -lmodplay -lfat -lmxml -lwiiuse -lbte -lasnd -logc -lwiiuse -ljpeg -lm
+LIBS	:=  -lgrrlib -lfreetype -lfat -ljpeg -lpngu -lpng -lz -lmodplay -lmxml -lwiiuse -lbte -lasnd -logc -lm
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
 #---------------------------------------------------------------------------------
 LIBDIRS	:= 
-
 
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
@@ -86,10 +87,10 @@ export DEPSDIR	:=	$(CURDIR)/$(BUILD)
 # automatically build a list of object files for our project
 #---------------------------------------------------------------------------------
 CFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
-CPPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
+CPPFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
 sFILES		:=	$(foreach dir,$(IMAGES),$(notdir $(wildcard $(dir)/*.s)))
 SFILES		:=	$(foreach dir,$(IMAGES),$(notdir $(wildcard $(dir)/*.S)))
-BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.*)))
+BINFILES		:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.*)))
 FONTFILES	:=	$(foreach dir,$(FONT),$(notdir $(wildcard $(dir)/*.*)))
 sXMLFILES	:=	$(foreach dir,$(XML),$(notdir $(wildcard $(dir)/*.s)))
 SXMLFILES	:=	$(foreach dir,$(XML),$(notdir $(wildcard $(dir)/*.S)))
@@ -114,9 +115,11 @@ export OFILES	:=	$(addsuffix .o,$(BINFILES)) \
 #---------------------------------------------------------------------------------
 
 export INCLUDE	:=	-I$(LIBOGC_INC) \
-					-I$(LIBJPEG_INC) \
-					-I$(LIBPNG_INC) \
-					-I$(LIBXML_INC) \
+					-I$(JPEG_INC) \
+					-I$(PNG_INC) \
+					-I$(PNGU_INC) \
+					-I$(ZLIB_INC) \
+					-I$(XML_INC) \
 					-I$(FREETYPE_INC) \
                -I$(GRRLIB_INC) \
                $(foreach dir,$(INCLUDES), -iquote $(CURDIR)/$(dir)) \
@@ -128,10 +131,13 @@ export INCLUDE	:=	-I$(LIBOGC_INC) \
 #---------------------------------------------------------------------------------
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS), -L$(dir)/lib) \
 					-L$(LIBOGC_LIB) \
-					-L$(LIBJPEG_LIB) \
-					-L$(LIBPNG_LIB) \
-					-L$(LIBXML_LIB) \
-					-L$(FREETYPE_LIB)
+					-L$(JPEG_LIB) \
+					-L$(PNG_LIB) \
+					-L$(PNGU_LIB) \
+					-L$(ZLIB_LIB) \
+					-L$(XML_LIB) \
+					-L$(FREETYPE_LIB) \
+					-L$(GRRLIB_LIB) 
 
 export OUTPUT	:=	$(CURDIR)/$(TARGET)
 .PHONY: $(BUILD) clean

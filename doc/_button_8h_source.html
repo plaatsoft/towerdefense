@@ -26,15 +26,15 @@
 <a name="l00022"></a>00022 <span class="preprocessor">#ifndef BUTTON_H</span>
 <a name="l00023"></a>00023 <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_H</span>
 <a name="l00024"></a>00024 <span class="preprocessor"></span>
-<a name="l00025"></a>00025 <span class="preprocessor">#include &quot;<a class="code" href="_g_r_r_l_i_b_8h.html">GRRLIB.h</a>&quot;</span>
+<a name="l00025"></a>00025 <span class="preprocessor">#include &quot;GRRLIB.h&quot;</span>
 <a name="l00026"></a>00026 
 <a name="l00041"></a><a class="code" href="class_button.html">00041</a> <span class="keyword">class </span><a class="code" href="class_button.html">Button</a>
 <a name="l00042"></a>00042 {
 <a name="l00043"></a>00043   <span class="keyword">private</span>:
 <a name="l00044"></a>00044         <span class="keywordtype">int</span> x;                                                  
 <a name="l00045"></a>00045         <span class="keywordtype">int</span> y;  
-<a name="l00046"></a>00046         <a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> *imageNormal;
-<a name="l00047"></a>00047         <a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> *imageFocus;
+<a name="l00046"></a>00046         GRRLIB_texImg *imageNormal;
+<a name="l00047"></a>00047         GRRLIB_texImg *imageFocus;
 <a name="l00048"></a>00048         <span class="keywordtype">int</span> height;
 <a name="l00049"></a>00049         <span class="keywordtype">int</span> width;
 <a name="l00050"></a>00050         <span class="keywordtype">char</span> label[100];
@@ -57,8 +57,8 @@
 <a name="l00067"></a>00067         <span class="keywordtype">void</span> <a class="code" href="class_button.html#a13885bbc23c27f4f2981ca85c4e4f884">setX</a>(<span class="keywordtype">int</span> x);
 <a name="l00068"></a>00068         <span class="keywordtype">void</span> <a class="code" href="class_button.html#a6bfb7ce41fe3bcd78c53dca4dc1d7d39">setY</a>(<span class="keywordtype">int</span> y);
 <a name="l00069"></a>00069         <span class="keywordtype">void</span> <a class="code" href="class_button.html#a5c737f72a2345685d5cbb95a2303a16c">setLabel</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *label);
-<a name="l00070"></a>00070         <span class="keywordtype">void</span> <a class="code" href="class_button.html#a7f43f65503943764f30f6e1a861c7192">setImageNormal</a>(<a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> *imageNormal);
-<a name="l00071"></a>00071         <span class="keywordtype">void</span> <a class="code" href="class_button.html#a8a30301077861643adc1423b3fa2ca84">setImageFocus</a>(<a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> *imageFocus);
+<a name="l00070"></a>00070         <span class="keywordtype">void</span> <a class="code" href="class_button.html#a7f43f65503943764f30f6e1a861c7192">setImageNormal</a>(GRRLIB_texImg *imageNormal);
+<a name="l00071"></a>00071         <span class="keywordtype">void</span> <a class="code" href="class_button.html#a8a30301077861643adc1423b3fa2ca84">setImageFocus</a>(GRRLIB_texImg *imageFocus);
 <a name="l00072"></a>00072         <span class="keywordtype">void</span> <a class="code" href="class_button.html#ad2c586f6f124af70dbd54fd86990e42f">setColor</a>(u32 color);
 <a name="l00073"></a>00073         <span class="keywordtype">void</span> <a class="code" href="class_button.html#a1decce655aec0f1766e9abff9f260328">setIndex</a>(<span class="keywordtype">int</span> index);
 <a name="l00074"></a>00074         

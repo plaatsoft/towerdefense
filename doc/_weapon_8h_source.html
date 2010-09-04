@@ -27,7 +27,7 @@
 <a name="l00023"></a>00023 <span class="preprocessor"></span><span class="preprocessor">#define WEAPON_H</span>
 <a name="l00024"></a>00024 <span class="preprocessor"></span>
 <a name="l00025"></a>00025 <span class="preprocessor">#include &quot;<a class="code" href="_general_8h.html" title="The file contain the general game constants.">General.h</a>&quot;</span>
-<a name="l00026"></a>00026 <span class="preprocessor">#include &quot;<a class="code" href="_g_r_r_l_i_b_8h.html">GRRLIB.h</a>&quot;</span>
+<a name="l00026"></a>00026 <span class="preprocessor">#include &quot;GRRLIB.h&quot;</span>
 <a name="l00027"></a>00027 <span class="preprocessor">#include &quot;<a class="code" href="_monster_8h.html" title="The file contain the Monster class.">Monster.h</a>&quot;</span>
 <a name="l00028"></a>00028 <span class="preprocessor">#include &quot;<a class="code" href="_trace_8h.html" title="The file contain the Trace class.">Trace.h</a>&quot;</span>  
 <a name="l00029"></a>00029 <span class="preprocessor">#include &quot;<a class="code" href="_pointer_8h.html" title="The file contain the Pointer class.">Pointer.h</a>&quot;</span> 
@@ -48,7 +48,7 @@
 <a name="l00044"></a>00044         <span class="keywordtype">int</span>   angle;
 <a name="l00045"></a>00045         <span class="keywordtype">int</span>   targetAngle;
 <a name="l00046"></a>00046         
-<a name="l00047"></a>00047         <a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> *<a class="code" href="structimage.html">image</a>;
+<a name="l00047"></a>00047         GRRLIB_texImg *<a class="code" href="structimage.html">image</a>;
 <a name="l00048"></a>00048         <span class="keywordtype">float</span> delay;
 <a name="l00049"></a>00049         <span class="keywordtype">int</span>   index;
 <a name="l00050"></a>00050         <span class="keywordtype">int</span>   type;
@@ -110,7 +110,7 @@
 <a name="l00106"></a>00106         <span class="comment">// Setters</span>
 <a name="l00107"></a>00107         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a3468b62af61ba1b3ffcfdd01fb45dacb">setX</a>(<span class="keywordtype">int</span> x);
 <a name="l00108"></a>00108         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#ac72393c6c3b1f3d17c2d6f8c78c984d7">setY</a>(<span class="keywordtype">int</span> y);
-<a name="l00109"></a>00109         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#ae124ae3b8e6631ada3da4cebf4f21368">setImage</a>(<a class="code" href="struct_g_r_r_l_i_b__tex_img.html">GRRLIB_texImg</a> *<a class="code" href="structimage.html">image</a>);
+<a name="l00109"></a>00109         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#ae124ae3b8e6631ada3da4cebf4f21368">setImage</a>(GRRLIB_texImg *<a class="code" href="structimage.html">image</a>);
 <a name="l00110"></a>00110         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a12feb98ee92ced620e603b25a67d41a0">setSelected</a>(<span class="keywordtype">bool</span> selected);
 <a name="l00111"></a>00111         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a708aedbbe5b382e2cfc81ecd0c61c505">setIndex</a>(<span class="keywordtype">int</span> index);
 <a name="l00112"></a>00112         <span class="keywordtype">void</span> <a class="code" href="class_weapon.html#a9b3ae032da4a3a5139eb8cdc69a0280a">setType</a>(<span class="keywordtype">int</span> type);
