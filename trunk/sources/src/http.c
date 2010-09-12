@@ -70,7 +70,6 @@ http_res;
 
 lwp_t threads[NUM_THREADS];
 mutex_t mutexcheck;
-mutex_t mutexversion;
 bool do_tcp_treat;
 
 char *appl_host; 
@@ -1009,11 +1008,8 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
   
    //int tid = (int)threadid;
 
-   LWP_MutexLock (mutexcheck);
    while(do_tcp_treat)
    {
-      LWP_MutexUnlock(mutexcheck);
-	  
 	  switch (tcp_state)
 	  {
 	    // Init ethernet DHCP network
@@ -1058,7 +1054,6 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 	         http_get_result(&http_status, &outbuf, &outlen);   	 			
 			 tmp=http_findToken(outbuf, outlen, appl_token);		 
 			 
-			 LWP_MutexLock(mutexversion);
 			 if (tmp!=NULL) 
 			 {
 			     strncpy(appl_new_version, tmp, sizeof(tmp));	 	 
@@ -1068,7 +1063,6 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 			 {
 			     //trace->event(s_fn,1, "version=<none>");  
 			 }
-			 LWP_MutexUnlock(mutexversion);
 			 
 	         free(outbuf);			 
 			 tcp_state=TCP_REQUEST1b;
@@ -1367,9 +1361,9 @@ char * http_findToken(u8 *buffer, int bufsize, char *token)
 		}		
         break;			
       }	  
-      LWP_MutexLock(mutexcheck);
    }
-   LWP_MutexUnlock(mutexcheck);
+   
+   LWP_MutexDestroy(mutexcheck);
    //LWP_SuspendThread(tid);
    
    //trace->event(s_fn, 1,"leave [0]"); 
@@ -1392,120 +1386,153 @@ void tcp_clear_memory(void)
 // INTERFACE API
 // -----------------------------------------------------------
 
-int tcp_get_state_nr(void)
-{
-   return tcp_state;
+int tcp_get_state_nr(void) {
+
+   int value;
+   
+   LWP_MutexLock(mutexcheck);   
+   value = tcp_state;   
+   LWP_MutexUnlock (mutexcheck);
+   
+   return value;   
 }
 
-char *tcp_get_state(void)
-{
+char *tcp_get_state(void) {
+
+   static char appl_state[MAX_LEN];
+	
+   LWP_MutexLock(mutexcheck);
+             
    switch (tcp_state)
    {
      case TCP_INIT: 
-	        return "INIT";
+	        strcpy(appl_state,"INIT");
             break;
 					
 	 case TCP_REQUEST1a:
-	        return "REQUEST_1A";
+	        strcpy(appl_state,"REQUEST_1A");
             break;
 	 
 	 case TCP_REQUEST1b:
-	        return "REQUEST_1B";
+	        strcpy(appl_state, "REQUEST_1B");
             break;
 	 
 	 case TCP_REQUEST2a:
-	        return "REQUEST_2A";
+	        strcpy(appl_state, "REQUEST_2A");
             break;
 	 
 	 case TCP_REQUEST2b:
-	        return "REQUEST_2B";
+	        strcpy(appl_state, "REQUEST_2B");
             break;	 
 			
 	 case TCP_REQUEST3a:
-	 	    return "REQUEST_3A";
+	 	    strcpy(appl_state, "REQUEST_3A");
             break;
 			
 	 case TCP_REQUEST3b:
-	        return "REQUEST_3B";
+	        strcpy(appl_state, "REQUEST_3B");
             break;
 	 	 
 	 case TCP_REQUEST4a:
-	 	    return "REQUEST_4A";
+	 	    strcpy(appl_state, "REQUEST_4A");
             break;
 			
 	 case TCP_REQUEST4b:
-	        return "REQUEST_4B";
+	        strcpy(appl_state, "REQUEST_4B");
             break;
 			
 	 case TCP_ERROR:
-	        return "ERROR";
+	        strcpy(appl_state, "ERROR");
             break;
 	 
 	 case TCP_RETRY:
-	        return "RETRY";
+	        strcpy(appl_state, "RETRY");
             break;
 	 
 	 case TCP_IDLE:
-	        return "IDLE";
+	        strcpy(appl_state, "IDLE");
             break;
 	 
 	 case TCP_END:
-	        return "END";
+	        strcpy(appl_state, "END");
             break;
 	 
-	 default: return "UNKNOWN";
+	 default: strcpy(appl_state, "UNKNOWN");
 	          break;
-   }
+   }   
+   LWP_MutexUnlock (mutexcheck);
+   return appl_state;
 }
 
-int tcp_set_state(int state, char *userData3)
-{
-   //char *s_fn="tcp_set_state";
-   //trace->event(s_fn,1,"enter [state=%d]",state); 
+int tcp_set_state(int state, char *userData3) {
+
+    LWP_MutexLock(mutexcheck);
 	
-   LWP_MutexLock(mutexversion);
-   if (tcp_state==TCP_IDLE)
-   {
-      //trace->event(s_fn,1,"Update state!"); 
-	  
-      strcpy(appl_userData3, userData3);
-      tcp_state=state;
-   }
-   LWP_MutexUnlock(mutexversion);
-   //trace->event(s_fn,1,"leave [state=%d]",state); 
-   return state;
+	if (tcp_state==TCP_IDLE)
+	{
+		strcpy(appl_userData3, userData3);
+		tcp_state=state;
+	}
+   
+	LWP_MutexUnlock(mutexcheck);
+
+	return state;
 }
 
 char *tcp_get_version(void)
 {
-   LWP_MutexLock(mutexversion);
-   return appl_new_version;
-   LWP_MutexUnlock(mutexversion);
+   static char value[MAX_LEN];
+   
+   LWP_MutexLock(mutexcheck);
+   
+   strcpy(value,appl_new_version);
+   
+   LWP_MutexUnlock(mutexcheck);
+   
+   return value;
 }
 
 char *tcp_get_releasenote(void)
 {
-   LWP_MutexLock(mutexversion);  
-   return appl_release_notes;
-   LWP_MutexUnlock(mutexversion);
+   static char value[MAX_BUFFER_SIZE];
+
+   LWP_MutexLock(mutexcheck);
+   
+   strcpy(value,appl_release_notes);
+   
+   LWP_MutexUnlock(mutexcheck);
+   
+   return value;
 }
 
 char *tcp_get_global_highscore(void)
 {
-   LWP_MutexLock(mutexversion);  
-   return appl_global_highscore;
-   LWP_MutexUnlock(mutexversion);
+   static char value[MAX_BUFFER_SIZE];
+
+   LWP_MutexLock(mutexcheck);
+   
+   strcpy(value,appl_global_highscore);
+   
+   LWP_MutexUnlock(mutexcheck);
+   
+   return value;
 }
 
 char *tcp_get_today_highscore(void)
 {
-   LWP_MutexLock(mutexversion);  
-   return appl_today_highscore;
-   LWP_MutexUnlock(mutexversion);
+   static char value[MAX_BUFFER_SIZE];
+
+   LWP_MutexLock(mutexcheck);
+   
+   strcpy(value,appl_today_highscore);
+   
+   LWP_MutexUnlock(mutexcheck);
+   
+   return value;
 }
 
 void tcp_init_layer(void)
-{
+{	
 	tcp_clear_memory();
 
 	memset(appl_new_version,0x00,sizeof(appl_new_version));
@@ -1544,6 +1571,8 @@ int tcp_start_thread(const char *name, const char *version,
 	//char *s_fn="tcp_start_thread";
 	//trace->event(s_fn,1,"enter"); 
 
+	LWP_MutexInit(&mutexcheck, false);
+
     do_tcp_treat = true;
 
 	strcpy(appl_name, name);
@@ -1579,6 +1608,7 @@ int tcp_start_thread(const char *name, const char *version,
     }
 	
 	//trace->event(s_fn,1,"leave [%d]",rc); 
+	
 	return rc;
 }
 	
@@ -1587,9 +1617,9 @@ int tcp_stop_thread(void)
    //char *s_fn="tcp_stop_thread";
    //trace->event(s_fn,1,"enter"); 
 
-   LWP_MutexLock (mutexcheck);
+   LWP_MutexLock(mutexcheck);
    do_tcp_treat = false;
-   LWP_MutexUnlock (mutexcheck);
+   LWP_MutexUnlock(mutexcheck);
    
    //trace->event(s_fn,1,"leave [0]"); 
    return 0;
