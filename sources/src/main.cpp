@@ -4428,32 +4428,32 @@ int main(void)
 	// Set up the video registers with the chosen mode
 	VIDEO_Configure(rmode);
 	
-   // Init Fat File system
-   fatInitDefault();
+    // Init Fat File system
+    fatInitDefault();
 
 	// Init Game variables and objects
 	initApplication();
 			  			
-   // Init GRRLib graphics library
-   GRRLIB_Init();
+    // Init GRRLib graphics library
+    GRRLIB_Init();
         	
 	// Init FreeType font 
 	myFont = GRRLIB_LoadTTF(font_ttf, font_ttf_size); 
 			
-   // To have a cool effect anti-aliasing is turned on
-   GRRLIB_Settings.antialias = true;
+    // To have a cool effect anti-aliasing is turned on
+    GRRLIB_Settings.antialias = true;
 
-   // Black background
-   GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
+    // Black background
+    GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
 	 
-   GRRLIB_Render();
+    GRRLIB_Render();
 
-   // Seed the random-number generator with current time so that
-   // the numbers will be different every time we run.
-   srand(time(NULL));
+    // Seed the random-number generator with current time so that
+    // the numbers will be different every time we run.
+    srand(time(NULL));
 	
 	// Repeat forever
-   while( game.stateMachine!=stateQuit )
+    while( game.stateMachine!=stateQuit )
 	{			
 		// draw Screen
 		drawScreen();
