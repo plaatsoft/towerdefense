@@ -2,6 +2,7 @@
  *  @file 
  *  @brief The file contain the main class methodes
  *  @author wplaat
+ * @note Tab size of source code is two
  *
  *  Copyright (C) 2008-2010 PlaatSoft
  *

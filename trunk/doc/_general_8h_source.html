@@ -23,269 +23,269 @@
     </ul>
   </div>
 <h1>inc/General.h</h1><a href="_general_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
-<a name="l00022"></a>00022 <span class="preprocessor">#ifndef GENERAL_H</span>
-<a name="l00023"></a>00023 <span class="preprocessor"></span><span class="preprocessor">#define GENERAL_H</span>
-<a name="l00024"></a>00024 <span class="preprocessor"></span>
-<a name="l00025"></a>00025 <span class="comment">// -----------------------------------------------------------</span>
-<a name="l00026"></a>00026 <span class="comment">// Defines</span>
+<a name="l00024"></a>00024 <span class="preprocessor">#ifndef GENERAL_H</span>
+<a name="l00025"></a>00025 <span class="preprocessor"></span><span class="preprocessor">#define GENERAL_H</span>
+<a name="l00026"></a>00026 <span class="preprocessor"></span>
 <a name="l00027"></a>00027 <span class="comment">// -----------------------------------------------------------</span>
-<a name="l00028"></a>00028 
-<a name="l00029"></a><a class="code" href="_general_8h.html#a3b6a35b8be8405a9db72cc5dea97954b">00029</a> <span class="preprocessor">#define PROGRAM_NAME                    &quot;TowerDefense&quot;</span>
-<a name="l00030"></a><a class="code" href="_general_8h.html#a2f10abd650e471fae2d7e8c63d41206a">00030</a> <span class="preprocessor"></span><span class="preprocessor">#define PROGRAM_VERSION         &quot;0.96&quot;</span>
-<a name="l00031"></a><a class="code" href="_general_8h.html#a31ff09ed82c4144659f8d0a2d3f24f5a">00031</a> <span class="preprocessor"></span><span class="preprocessor">#define RELEASE_DATE            &quot;11-09-2010&quot; </span>
-<a name="l00032"></a>00032 <span class="preprocessor"></span>
-<a name="l00033"></a>00033 <span class="comment">// Check latest available version </span>
-<a name="l00034"></a><a class="code" href="_general_8h.html#a0736b8738ebadda8656e5a0812dc50ec">00034</a> <span class="preprocessor">#define URL1                    &quot;http://www.plaatsoft.nl/service/releasenotes5.html&quot;</span>
-<a name="l00035"></a><a class="code" href="_general_8h.html#ae9e0e1185f86f6ae7aa50b109fc423cc">00035</a> <span class="preprocessor"></span><span class="preprocessor">#define ID1                                             &quot;UA-6887062-1&quot;</span>
-<a name="l00036"></a>00036 <span class="preprocessor"></span>
-<a name="l00037"></a>00037 <span class="comment">// Fetch Release notes</span>
-<a name="l00038"></a><a class="code" href="_general_8h.html#aa00bcb008a4e4b02063df4fd20c94c0c">00038</a> <span class="preprocessor">#define URL2                    &quot;http://www.plaatsoft.nl/service/releasenotes5.html&quot;</span>
-<a name="l00039"></a><a class="code" href="_general_8h.html#abbb71547df5cc7788a2312ede1c4f9f9">00039</a> <span class="preprocessor"></span><span class="preprocessor">#define ID2                                             &quot;UA-6887062-1&quot;</span>
-<a name="l00040"></a>00040 <span class="preprocessor"></span>
-<a name="l00041"></a>00041 <span class="comment">// Set Get Today HighScore</span>
-<a name="l00042"></a><a class="code" href="_general_8h.html#a1cf7d67abf2054ea7543de7956e88722">00042</a> <span class="preprocessor">#define URL3                    &quot;http://www.plaatsoft.nl/service/score_set_today.php&quot;</span>
-<a name="l00043"></a><a class="code" href="_general_8h.html#a74e834603283d49c89509493d77dc85d">00043</a> <span class="preprocessor"></span><span class="preprocessor">#define ID3                                             &quot;UA-6887062-1&quot;</span>
-<a name="l00044"></a>00044 <span class="preprocessor"></span>
-<a name="l00045"></a>00045 <span class="comment">// Set Get Global HighScore</span>
-<a name="l00046"></a><a class="code" href="_general_8h.html#abb42eab9497452ffc8711874700464e7">00046</a> <span class="preprocessor">#define URL4                    &quot;http://www.plaatsoft.nl/service/score_set_global.php&quot;</span>
-<a name="l00047"></a><a class="code" href="_general_8h.html#a22888eb5d90caae4a6c80f67f717bcff">00047</a> <span class="preprocessor"></span><span class="preprocessor">#define ID4                                             &quot;UA-6887062-1&quot;</span>
-<a name="l00048"></a>00048 <span class="preprocessor"></span>
-<a name="l00049"></a><a class="code" href="_general_8h.html#a3d733815a706c87007f7bc4b9b525e46">00049</a> <span class="preprocessor">#define URL_TOKEN               &quot; Version &quot;</span>
-<a name="l00050"></a><a class="code" href="_general_8h.html#ac49aab7d0fa08fb266c162065109fe86">00050</a> <span class="preprocessor"></span><span class="preprocessor">#define HIGHSCORE_FILENAME      &quot;sd:/apps/TowerDefense/highscore.xml&quot;</span>
-<a name="l00051"></a><a class="code" href="_general_8h.html#adb0e2ea22dd63a9c1665e9c594f9e17a">00051</a> <span class="preprocessor"></span><span class="preprocessor">#define SETTING_FILENAME        &quot;sd:/apps/TowerDefense/settings.xml&quot;</span>
-<a name="l00052"></a><a class="code" href="_general_8h.html#a719d83d2157aa80a4f8d9f67cdee0495">00052</a> <span class="preprocessor"></span><span class="preprocessor">#define TRACE_FILENAME          &quot;sd:/apps/TowerDefense/TowerDefense.trc&quot;</span>
-<a name="l00053"></a><a class="code" href="_general_8h.html#a1c27f7476a2015e455d415ab086d62e6">00053</a> <span class="preprocessor"></span><span class="preprocessor">#define GAME_DIRECTORY          &quot;sd:/apps/TowerDefense/&quot;</span>
-<a name="l00054"></a>00054 <span class="preprocessor"></span>
-<a name="l00055"></a>00055 <span class="comment">// Easy Maps</span>
-<a name="l00056"></a><a class="code" href="_general_8h.html#a85c25d6a7086dde5d295eeb7c42f2a0b">00056</a> <span class="preprocessor">#define GRID1_DIRECTORY                 &quot;sd:/apps/TowerDefense/map01&quot;</span>
-<a name="l00057"></a><a class="code" href="_general_8h.html#a4517e449b91d0ab9d1c9e277ef94e710">00057</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID2_DIRECTORY                 &quot;sd:/apps/TowerDefense/map02&quot;</span>
-<a name="l00058"></a><a class="code" href="_general_8h.html#ac828acabd6dee89587ed0dd4783495d4">00058</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID3_DIRECTORY                 &quot;sd:/apps/TowerDefense/map03&quot;</span>
-<a name="l00059"></a><a class="code" href="_general_8h.html#a551fcca89e4b80853d45127f45caa1f1">00059</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID4_DIRECTORY                 &quot;sd:/apps/TowerDefense/map04&quot;</span>
-<a name="l00060"></a><a class="code" href="_general_8h.html#a9caa7f850068fa36a3a7bd2227d79734">00060</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID5_DIRECTORY                 &quot;sd:/apps/TowerDefense/map05&quot;</span>
-<a name="l00061"></a><a class="code" href="_general_8h.html#aaca0829149547cc8b89a67d24714f676">00061</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID6_DIRECTORY                 &quot;sd:/apps/TowerDefense/map06&quot;</span>
-<a name="l00062"></a>00062 <span class="preprocessor"></span>
-<a name="l00063"></a>00063 <span class="comment">// Medium Maps</span>
-<a name="l00064"></a><a class="code" href="_general_8h.html#a02773e8a6d18f08af1c2adadaa8b09bb">00064</a> <span class="preprocessor">#define GRID7_DIRECTORY                 &quot;sd:/apps/TowerDefense/map07&quot;</span>
-<a name="l00065"></a><a class="code" href="_general_8h.html#a1bdc28df692d4e454c6c1b0e02045fac">00065</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID8_DIRECTORY                 &quot;sd:/apps/TowerDefense/map08&quot;</span>
-<a name="l00066"></a><a class="code" href="_general_8h.html#a39b72fddf448e75fea978614728d0456">00066</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID9_DIRECTORY                 &quot;sd:/apps/TowerDefense/map09&quot;</span>
-<a name="l00067"></a><a class="code" href="_general_8h.html#a58f3ac69745a1ce22fcb27241c30c715">00067</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID10_DIRECTORY        &quot;sd:/apps/TowerDefense/map10&quot;</span>
-<a name="l00068"></a><a class="code" href="_general_8h.html#ac7d66c785ce4e3665bc0c781420159ca">00068</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID11_DIRECTORY        &quot;sd:/apps/TowerDefense/map11&quot;</span>
-<a name="l00069"></a><a class="code" href="_general_8h.html#af8b1a267952c5dea1b80fdedbf0dd75f">00069</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID12_DIRECTORY        &quot;sd:/apps/TowerDefense/map12&quot;</span>
-<a name="l00070"></a>00070 <span class="preprocessor"></span>
-<a name="l00071"></a>00071 <span class="comment">// Hard Maps</span>
-<a name="l00072"></a><a class="code" href="_general_8h.html#aaf16e8bb96fbf2a73b30369bbac51c33">00072</a> <span class="preprocessor">#define GRID13_DIRECTORY                &quot;sd:/apps/TowerDefense/map13&quot;</span>
-<a name="l00073"></a><a class="code" href="_general_8h.html#a9d531030a5c35f49a37e435d72881621">00073</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID14_DIRECTORY        &quot;sd:/apps/TowerDefense/map14&quot;</span>
-<a name="l00074"></a><a class="code" href="_general_8h.html#ab6308a91df2f830e6fbacab40ee90431">00074</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID15_DIRECTORY        &quot;sd:/apps/TowerDefense/map15&quot;</span>
-<a name="l00075"></a><a class="code" href="_general_8h.html#ad66bbc839cd4147c769718079ee92bd9">00075</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID16_DIRECTORY        &quot;sd:/apps/TowerDefense/map16&quot;</span>
-<a name="l00076"></a><a class="code" href="_general_8h.html#a034688cc1fb4f4228110977eb87fcf04">00076</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID17_DIRECTORY        &quot;sd:/apps/TowerDefense/map17&quot;</span>
-<a name="l00077"></a><a class="code" href="_general_8h.html#ae6f0afe51ea068f69a511fd71c05e9f1">00077</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID18_DIRECTORY        &quot;sd:/apps/TowerDefense/map18&quot;</span>
-<a name="l00078"></a>00078 <span class="preprocessor"></span>
-<a name="l00079"></a><a class="code" href="_general_8h.html#a6e840c10bb1476d2056c769de138afe9">00079</a> <span class="preprocessor">#define WSP_POINTER_X           200</span>
-<a name="l00080"></a><a class="code" href="_general_8h.html#ab3c24204bee23bd48fdfe7dc79f2539b">00080</a> <span class="preprocessor"></span><span class="preprocessor">#define WSP_POINTER_Y           250</span>
-<a name="l00081"></a>00081 <span class="preprocessor"></span>
-<a name="l00082"></a><a class="code" href="_general_8h.html#a8b4a80b329fca227f6cd378f2f7040d0">00082</a> <span class="preprocessor">#define GRRLIB_WHITESMOKE       0xFFFFFFFF</span>
-<a name="l00083"></a><a class="code" href="_general_8h.html#af3ead29c20f9900dbbc285cfa1030d3e">00083</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_WHITE_TRANS      0xFFFFFF44</span>
-<a name="l00084"></a><a class="code" href="_general_8h.html#af80b302637a594ef848a42d9c5c99305">00084</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_LIGHTRED         0x3333FFFF</span>
-<a name="l00085"></a><a class="code" href="_general_8h.html#a4c37575f3ec2ef8f8138d993e9fb2520">00085</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_BLACK                    0x000000FF</span>
-<a name="l00086"></a><a class="code" href="_general_8h.html#a623aba1de1d5244738fb7ba16ea4753c">00086</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_BLACK_TRANS              0x00000044</span>
-<a name="l00087"></a><a class="code" href="_general_8h.html#ad426b8efe456b1c9043938e16ec302ac">00087</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_BLACK_TRANS_2    0x000000AA</span>
-<a name="l00088"></a><a class="code" href="_general_8h.html#a27e834523518bce4392f25aabb0d76df">00088</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_MAROON                   0x800000FF</span>
-<a name="l00089"></a><a class="code" href="_general_8h.html#a7fbd32df5b4f4913eea8b3abef3b2a8e">00089</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_GREEN                    0x008000FF</span>
-<a name="l00090"></a><a class="code" href="_general_8h.html#a875a497e134d993884c286894a066d92">00090</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_OLIVE                    0x808000FF</span>
-<a name="l00091"></a><a class="code" href="_general_8h.html#adb521602e5f2d08d595a5c788e8a5d38">00091</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_NAVY                     0x000080FF</span>
-<a name="l00092"></a><a class="code" href="_general_8h.html#a0b5666010e66bb54f44979d3ec89527a">00092</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_PURPLE                   0x800080FF</span>
-<a name="l00093"></a><a class="code" href="_general_8h.html#a24cbed40d802e4601888276c520d0c50">00093</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_TEAL                     0x008080FF</span>
-<a name="l00094"></a><a class="code" href="_general_8h.html#a964c29d2c1365446e1bc2fd856ffe499">00094</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_GRAY                     0x808080FF</span>
-<a name="l00095"></a><a class="code" href="_general_8h.html#aa7c8a093cc0488bd7105797787c37773">00095</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_SILVER                   0xC0C0C0FF</span>
-<a name="l00096"></a><a class="code" href="_general_8h.html#af38e0fe28ee0f497a1af51b9202e1b94">00096</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_RED                      0xFF0000FF</span>
-<a name="l00097"></a><a class="code" href="_general_8h.html#af8b5c6b4b5e240b585b4a315effae0c4">00097</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_LIME                     0x00FF00FF</span>
-<a name="l00098"></a><a class="code" href="_general_8h.html#a0276991875cef7c38e14e7e5731a7527">00098</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_YELLOW                   0xFFFF00FF</span>
-<a name="l00099"></a><a class="code" href="_general_8h.html#a5fc045e89a81459fdc78cddf07ac3b41">00099</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_BLUE                     0x0000FFFF</span>
-<a name="l00100"></a><a class="code" href="_general_8h.html#aaf3e458d51236e4167da8d66bd775dbf">00100</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_FUCHSIA                  0xFF00FFFF</span>
-<a name="l00101"></a><a class="code" href="_general_8h.html#a79be88e247383c607564acc1c07d5910">00101</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_AQUA                     0x00FFFFFF</span>
-<a name="l00102"></a><a class="code" href="_general_8h.html#aef8646b7b506687972add69f8acc9bfd">00102</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_WHITE                    0xFFFFFFFF</span>
-<a name="l00103"></a>00103 <span class="preprocessor"></span>
-<a name="l00104"></a><a class="code" href="_general_8h.html#abdabf21e14e75184c7213715f7cfc5aa">00104</a> <span class="preprocessor">#define IMAGE_COLOR                             0xFFFFFFFF</span>
-<a name="l00105"></a><a class="code" href="_general_8h.html#a28e9d376f072b7d59e78716f7affdf12">00105</a> <span class="preprocessor"></span><span class="preprocessor">#define IMAGE_COLOR1            0xEEEEEEEE</span>
-<a name="l00106"></a><a class="code" href="_general_8h.html#a4d37cfbb23ae75625bf763bcf55eba40">00106</a> <span class="preprocessor"></span><span class="preprocessor">#define IMAGE_COLOR2            0xDDDDDDDD</span>
-<a name="l00107"></a><a class="code" href="_general_8h.html#a02153467bea6412c860152294ae5e765">00107</a> <span class="preprocessor"></span><span class="preprocessor">#define IMAGE_COLOR3            0x44444444</span>
-<a name="l00108"></a><a class="code" href="_general_8h.html#af61fdf82767dcfebcc0bf94b28dbcbc4">00108</a> <span class="preprocessor"></span><span class="preprocessor">#define IMAGE_COLOR4            0xAAAAAAAA</span>
-<a name="l00109"></a>00109 <span class="preprocessor"></span>
-<a name="l00110"></a><a class="code" href="_general_8h.html#a838e999b4f3e9dd96f3719e9b36229f1">00110</a> <span class="preprocessor">#define MAX_WEAPONS                             200</span>
-<a name="l00111"></a><a class="code" href="_general_8h.html#a66b9ef6d40f3b297ca107a30fb2f1d57">00111</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_MONSTERS                            300</span>
-<a name="l00112"></a><a class="code" href="_general_8h.html#a8bb0c7f312bb8665c3377a061dae552c">00112</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_BUTTONS             15</span>
-<a name="l00113"></a><a class="code" href="_general_8h.html#ac507ef396a03f08c9f7c83c2732ec284">00113</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_POINTERS            4</span>
-<a name="l00114"></a><a class="code" href="_general_8h.html#a67ec5de4c5a6ee9baf250b558d58d69b">00114</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_LOCAL_HIGHSCORE     100</span>
-<a name="l00115"></a><a class="code" href="_general_8h.html#a6a216e9dce354a499ed000ea708e672d">00115</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_TODAY_HIGHSCORE     50</span>
-<a name="l00116"></a><a class="code" href="_general_8h.html#ac9d80a4201bd7f27272c83f511cb149f">00116</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_GLOBAL_HIGHSCORE    50</span>
-<a name="l00117"></a><a class="code" href="_general_8h.html#afad3aadf1645aabf53eea7d30a839411">00117</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_SETTINGS                            9</span>
-<a name="l00118"></a><a class="code" href="_general_8h.html#ad7bb86e4702cda6c2ee77073ce99aee3">00118</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_WEAPON_TYPE       6</span>
-<a name="l00119"></a><a class="code" href="_general_8h.html#a9b55fe7508befad3e9203c07dfc35da8">00119</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_GRIDS                               6</span>
-<a name="l00120"></a><a class="code" href="_general_8h.html#aa279b4db260c0fec446635e8f6c7c780">00120</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_MONSTER_IN_BASE   10</span>
-<a name="l00121"></a>00121 <span class="preprocessor"></span>
-<a name="l00122"></a><a class="code" href="_general_8h.html#afd4692faaf0a94a3c059b975e1fbce3e">00122</a> <span class="preprocessor">#define MAX_SOUND_VOLUME                10</span>
-<a name="l00123"></a><a class="code" href="_general_8h.html#a8b65c9c2fffc53924a0b64fa46ad5f88">00123</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_MUSIC_TRACK         9</span>
-<a name="l00124"></a>00124 <span class="preprocessor"></span>
-<a name="l00125"></a><a class="code" href="_general_8h.html#abb075b990a09b23dea1c20427e918926">00125</a> <span class="preprocessor">#define MAX_RUMBLE                              1</span>
-<a name="l00126"></a><a class="code" href="_general_8h.html#a6b117dde689377388c011a79a6fffa04">00126</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_HORZ_PIXELS                 640</span>
-<a name="l00127"></a><a class="code" href="_general_8h.html#a2ac36622131a734ac4073809d0334b8b">00127</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_VERT_PIXELS                 480</span>
-<a name="l00128"></a><a class="code" href="_general_8h.html#aabf4f709c8199e41cf279c77112345fe">00128</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_LEN                         256</span>
-<a name="l00129"></a><a class="code" href="_general_8h.html#af3c82099d63a2d91d68bd62d954059c7">00129</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_ANGLE                                       360</span>
-<a name="l00130"></a><a class="code" href="_general_8h.html#aa31b64f0758f87155d3881d835628f79">00130</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_ALFA                                        255</span>
-<a name="l00131"></a><a class="code" href="_general_8h.html#a0592dba56693fad79136250c11e5a7fe">00131</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_SIZE                                        1</span>
-<a name="l00132"></a>00132 <span class="preprocessor"></span>
-<a name="l00133"></a><a class="code" href="_general_8h.html#a07e2b531c72985b064c431c05dfbc5fc">00133</a> <span class="preprocessor">#define MAX_LINES                               200</span>
-<a name="l00134"></a><a class="code" href="_general_8h.html#ad4d796b98c583d49e83adabd74a63bf6">00134</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_BUFFER_SIZE                 8192</span>
-<a name="l00135"></a><a class="code" href="_general_8h.html#aba01d8e6a3ad637d4cb02df7541ba33e">00135</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_IDLE_TIME           10</span>
-<a name="l00136"></a>00136 <span class="preprocessor"></span>
-<a name="l00137"></a><a class="code" href="_general_8h.html#a068abada0220fa638a95765060b13374">00137</a> <span class="preprocessor">#define MAX_GRID_X                              20</span>
-<a name="l00138"></a><a class="code" href="_general_8h.html#af18a7e97a75b05b7b2241933a088a278">00138</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_GRID_Y                              17</span>
-<a name="l00139"></a>00139 <span class="preprocessor"></span>
-<a name="l00140"></a><a class="code" href="_general_8h.html#a0d7d5a6be10888d08b4a0bcef141e4b4">00140</a> <span class="preprocessor">#define IR_X_OFFSET             40</span>
-<a name="l00141"></a><a class="code" href="_general_8h.html#a87da8ad623431bcb50d5300211bf2626">00141</a> <span class="preprocessor"></span><span class="preprocessor">#define IR_Y_OFFSET             40</span>
-<a name="l00142"></a>00142 <span class="preprocessor"></span>
-<a name="l00143"></a><a class="code" href="_general_8h.html#a468c3c0b4e9ba26bf26b2f19d50c7a55">00143</a> <span class="preprocessor">#define SCROLLBAR_x             600</span>
-<a name="l00144"></a><a class="code" href="_general_8h.html#a55b99362c734b49cae2bb2a6594f9df2">00144</a> <span class="preprocessor"></span><span class="preprocessor">#define SCROLLBAR_Y_MIN                 150</span>
-<a name="l00145"></a><a class="code" href="_general_8h.html#aa6eaf9ce1f66d439191bd3e11874b931">00145</a> <span class="preprocessor"></span><span class="preprocessor">#define SCROLLBAR_Y_MAX         334</span>
-<a name="l00146"></a>00146 <span class="preprocessor"></span>
-<a name="l00147"></a><a class="code" href="_general_8h.html#aa7ba9d90445238b561ed6bbb570348ec">00147</a> <span class="preprocessor">#define MUSIC_MULTIPLER                 5</span>
-<a name="l00148"></a><a class="code" href="_general_8h.html#a7530bcac1f6d76241a0b46a02dbdbe61">00148</a> <span class="preprocessor"></span><span class="preprocessor">#define EFFECT_MULTIPLER                20</span>
-<a name="l00149"></a>00149 <span class="preprocessor"></span>
-<a name="l00150"></a><a class="code" href="_general_8h.html#a5bc7b1ba19f9746b24344cda60853cf9">00150</a> <span class="preprocessor">#define AVERAGE_FPS                             25</span>
+<a name="l00028"></a>00028 <span class="comment">// Defines</span>
+<a name="l00029"></a>00029 <span class="comment">// -----------------------------------------------------------</span>
+<a name="l00030"></a>00030 
+<a name="l00031"></a><a class="code" href="_general_8h.html#a3b6a35b8be8405a9db72cc5dea97954b">00031</a> <span class="preprocessor">#define PROGRAM_NAME                            &quot;TowerDefense&quot;</span>
+<a name="l00032"></a><a class="code" href="_general_8h.html#a2f10abd650e471fae2d7e8c63d41206a">00032</a> <span class="preprocessor"></span><span class="preprocessor">#define PROGRAM_VERSION         &quot;0.97&quot;</span>
+<a name="l00033"></a><a class="code" href="_general_8h.html#a31ff09ed82c4144659f8d0a2d3f24f5a">00033</a> <span class="preprocessor"></span><span class="preprocessor">#define RELEASE_DATE            &quot;13-09-2010&quot; </span>
+<a name="l00034"></a>00034 <span class="preprocessor"></span>
+<a name="l00035"></a>00035 <span class="comment">// Check latest available version </span>
+<a name="l00036"></a><a class="code" href="_general_8h.html#a0736b8738ebadda8656e5a0812dc50ec">00036</a> <span class="preprocessor">#define URL1                    &quot;http://www.plaatsoft.nl/service/releasenotes5.html&quot;</span>
+<a name="l00037"></a><a class="code" href="_general_8h.html#ae9e0e1185f86f6ae7aa50b109fc423cc">00037</a> <span class="preprocessor"></span><span class="preprocessor">#define ID1                                                     &quot;UA-6887062-1&quot;</span>
+<a name="l00038"></a>00038 <span class="preprocessor"></span>
+<a name="l00039"></a>00039 <span class="comment">// Fetch Release notes</span>
+<a name="l00040"></a><a class="code" href="_general_8h.html#aa00bcb008a4e4b02063df4fd20c94c0c">00040</a> <span class="preprocessor">#define URL2                    &quot;http://www.plaatsoft.nl/service/releasenotes5.html&quot;</span>
+<a name="l00041"></a><a class="code" href="_general_8h.html#abbb71547df5cc7788a2312ede1c4f9f9">00041</a> <span class="preprocessor"></span><span class="preprocessor">#define ID2                                                                     &quot;UA-6887062-1&quot;</span>
+<a name="l00042"></a>00042 <span class="preprocessor"></span>
+<a name="l00043"></a>00043 <span class="comment">// Set Get Today HighScore</span>
+<a name="l00044"></a><a class="code" href="_general_8h.html#a1cf7d67abf2054ea7543de7956e88722">00044</a> <span class="preprocessor">#define URL3                    &quot;http://www.plaatsoft.nl/service/score_set_today.php&quot;</span>
+<a name="l00045"></a><a class="code" href="_general_8h.html#a74e834603283d49c89509493d77dc85d">00045</a> <span class="preprocessor"></span><span class="preprocessor">#define ID3                                                             &quot;UA-6887062-1&quot;</span>
+<a name="l00046"></a>00046 <span class="preprocessor"></span>
+<a name="l00047"></a>00047 <span class="comment">// Set Get Global HighScore</span>
+<a name="l00048"></a><a class="code" href="_general_8h.html#abb42eab9497452ffc8711874700464e7">00048</a> <span class="preprocessor">#define URL4                    &quot;http://www.plaatsoft.nl/service/score_set_global.php&quot;</span>
+<a name="l00049"></a><a class="code" href="_general_8h.html#a22888eb5d90caae4a6c80f67f717bcff">00049</a> <span class="preprocessor"></span><span class="preprocessor">#define ID4                                                             &quot;UA-6887062-1&quot;</span>
+<a name="l00050"></a>00050 <span class="preprocessor"></span>
+<a name="l00051"></a><a class="code" href="_general_8h.html#a3d733815a706c87007f7bc4b9b525e46">00051</a> <span class="preprocessor">#define URL_TOKEN               &quot; Version &quot;</span>
+<a name="l00052"></a><a class="code" href="_general_8h.html#ac49aab7d0fa08fb266c162065109fe86">00052</a> <span class="preprocessor"></span><span class="preprocessor">#define HIGHSCORE_FILENAME      &quot;sd:/apps/TowerDefense/highscore.xml&quot;</span>
+<a name="l00053"></a><a class="code" href="_general_8h.html#adb0e2ea22dd63a9c1665e9c594f9e17a">00053</a> <span class="preprocessor"></span><span class="preprocessor">#define SETTING_FILENAME        &quot;sd:/apps/TowerDefense/settings.xml&quot;</span>
+<a name="l00054"></a><a class="code" href="_general_8h.html#a719d83d2157aa80a4f8d9f67cdee0495">00054</a> <span class="preprocessor"></span><span class="preprocessor">#define TRACE_FILENAME          &quot;sd:/apps/TowerDefense/TowerDefense.trc&quot;</span>
+<a name="l00055"></a><a class="code" href="_general_8h.html#a1c27f7476a2015e455d415ab086d62e6">00055</a> <span class="preprocessor"></span><span class="preprocessor">#define GAME_DIRECTORY          &quot;sd:/apps/TowerDefense/&quot;</span>
+<a name="l00056"></a>00056 <span class="preprocessor"></span>
+<a name="l00057"></a>00057 <span class="comment">// Easy Maps</span>
+<a name="l00058"></a><a class="code" href="_general_8h.html#a85c25d6a7086dde5d295eeb7c42f2a0b">00058</a> <span class="preprocessor">#define GRID1_DIRECTORY                         &quot;sd:/apps/TowerDefense/map01&quot;</span>
+<a name="l00059"></a><a class="code" href="_general_8h.html#a4517e449b91d0ab9d1c9e277ef94e710">00059</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID2_DIRECTORY                         &quot;sd:/apps/TowerDefense/map02&quot;</span>
+<a name="l00060"></a><a class="code" href="_general_8h.html#ac828acabd6dee89587ed0dd4783495d4">00060</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID3_DIRECTORY           &quot;sd:/apps/TowerDefense/map03&quot;</span>
+<a name="l00061"></a><a class="code" href="_general_8h.html#a551fcca89e4b80853d45127f45caa1f1">00061</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID4_DIRECTORY           &quot;sd:/apps/TowerDefense/map04&quot;</span>
+<a name="l00062"></a><a class="code" href="_general_8h.html#a9caa7f850068fa36a3a7bd2227d79734">00062</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID5_DIRECTORY           &quot;sd:/apps/TowerDefense/map05&quot;</span>
+<a name="l00063"></a><a class="code" href="_general_8h.html#aaca0829149547cc8b89a67d24714f676">00063</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID6_DIRECTORY           &quot;sd:/apps/TowerDefense/map06&quot;</span>
+<a name="l00064"></a>00064 <span class="preprocessor"></span>
+<a name="l00065"></a>00065 <span class="comment">// Medium Maps</span>
+<a name="l00066"></a><a class="code" href="_general_8h.html#a02773e8a6d18f08af1c2adadaa8b09bb">00066</a> <span class="preprocessor">#define GRID7_DIRECTORY           &quot;sd:/apps/TowerDefense/map07&quot;</span>
+<a name="l00067"></a><a class="code" href="_general_8h.html#a1bdc28df692d4e454c6c1b0e02045fac">00067</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID8_DIRECTORY           &quot;sd:/apps/TowerDefense/map08&quot;</span>
+<a name="l00068"></a><a class="code" href="_general_8h.html#a39b72fddf448e75fea978614728d0456">00068</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID9_DIRECTORY           &quot;sd:/apps/TowerDefense/map09&quot;</span>
+<a name="l00069"></a><a class="code" href="_general_8h.html#a58f3ac69745a1ce22fcb27241c30c715">00069</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID10_DIRECTORY                &quot;sd:/apps/TowerDefense/map10&quot;</span>
+<a name="l00070"></a><a class="code" href="_general_8h.html#ac7d66c785ce4e3665bc0c781420159ca">00070</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID11_DIRECTORY                &quot;sd:/apps/TowerDefense/map11&quot;</span>
+<a name="l00071"></a><a class="code" href="_general_8h.html#af8b1a267952c5dea1b80fdedbf0dd75f">00071</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID12_DIRECTORY                &quot;sd:/apps/TowerDefense/map12&quot;</span>
+<a name="l00072"></a>00072 <span class="preprocessor"></span>
+<a name="l00073"></a>00073 <span class="comment">// Hard Maps</span>
+<a name="l00074"></a><a class="code" href="_general_8h.html#aaf16e8bb96fbf2a73b30369bbac51c33">00074</a> <span class="preprocessor">#define GRID13_DIRECTORY                        &quot;sd:/apps/TowerDefense/map13&quot;</span>
+<a name="l00075"></a><a class="code" href="_general_8h.html#a9d531030a5c35f49a37e435d72881621">00075</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID14_DIRECTORY                &quot;sd:/apps/TowerDefense/map14&quot;</span>
+<a name="l00076"></a><a class="code" href="_general_8h.html#ab6308a91df2f830e6fbacab40ee90431">00076</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID15_DIRECTORY                &quot;sd:/apps/TowerDefense/map15&quot;</span>
+<a name="l00077"></a><a class="code" href="_general_8h.html#ad66bbc839cd4147c769718079ee92bd9">00077</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID16_DIRECTORY                &quot;sd:/apps/TowerDefense/map16&quot;</span>
+<a name="l00078"></a><a class="code" href="_general_8h.html#a034688cc1fb4f4228110977eb87fcf04">00078</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID17_DIRECTORY                &quot;sd:/apps/TowerDefense/map17&quot;</span>
+<a name="l00079"></a><a class="code" href="_general_8h.html#ae6f0afe51ea068f69a511fd71c05e9f1">00079</a> <span class="preprocessor"></span><span class="preprocessor">#define GRID18_DIRECTORY                &quot;sd:/apps/TowerDefense/map18&quot;</span>
+<a name="l00080"></a>00080 <span class="preprocessor"></span>
+<a name="l00081"></a><a class="code" href="_general_8h.html#a6e840c10bb1476d2056c769de138afe9">00081</a> <span class="preprocessor">#define WSP_POINTER_X                   200</span>
+<a name="l00082"></a><a class="code" href="_general_8h.html#ab3c24204bee23bd48fdfe7dc79f2539b">00082</a> <span class="preprocessor"></span><span class="preprocessor">#define WSP_POINTER_Y                   250</span>
+<a name="l00083"></a>00083 <span class="preprocessor"></span>
+<a name="l00084"></a><a class="code" href="_general_8h.html#a8b4a80b329fca227f6cd378f2f7040d0">00084</a> <span class="preprocessor">#define GRRLIB_WHITESMOKE       0xFFFFFFFF</span>
+<a name="l00085"></a><a class="code" href="_general_8h.html#af3ead29c20f9900dbbc285cfa1030d3e">00085</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_WHITE_TRANS      0xFFFFFF44</span>
+<a name="l00086"></a><a class="code" href="_general_8h.html#af80b302637a594ef848a42d9c5c99305">00086</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_LIGHTRED         0x3333FFFF</span>
+<a name="l00087"></a><a class="code" href="_general_8h.html#a4c37575f3ec2ef8f8138d993e9fb2520">00087</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_BLACK                                    0x000000FF</span>
+<a name="l00088"></a><a class="code" href="_general_8h.html#a623aba1de1d5244738fb7ba16ea4753c">00088</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_BLACK_TRANS              0x00000044</span>
+<a name="l00089"></a><a class="code" href="_general_8h.html#ad426b8efe456b1c9043938e16ec302ac">00089</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_BLACK_TRANS_2    0x000000AA</span>
+<a name="l00090"></a><a class="code" href="_general_8h.html#a27e834523518bce4392f25aabb0d76df">00090</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_MAROON                           0x800000FF</span>
+<a name="l00091"></a><a class="code" href="_general_8h.html#a7fbd32df5b4f4913eea8b3abef3b2a8e">00091</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_GREEN                            0x008000FF</span>
+<a name="l00092"></a><a class="code" href="_general_8h.html#a875a497e134d993884c286894a066d92">00092</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_OLIVE                            0x808000FF</span>
+<a name="l00093"></a><a class="code" href="_general_8h.html#adb521602e5f2d08d595a5c788e8a5d38">00093</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_NAVY                             0x000080FF</span>
+<a name="l00094"></a><a class="code" href="_general_8h.html#a0b5666010e66bb54f44979d3ec89527a">00094</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_PURPLE                           0x800080FF</span>
+<a name="l00095"></a><a class="code" href="_general_8h.html#a24cbed40d802e4601888276c520d0c50">00095</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_TEAL                             0x008080FF</span>
+<a name="l00096"></a><a class="code" href="_general_8h.html#a964c29d2c1365446e1bc2fd856ffe499">00096</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_GRAY                             0x808080FF</span>
+<a name="l00097"></a><a class="code" href="_general_8h.html#aa7c8a093cc0488bd7105797787c37773">00097</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_SILVER                           0xC0C0C0FF</span>
+<a name="l00098"></a><a class="code" href="_general_8h.html#af38e0fe28ee0f497a1af51b9202e1b94">00098</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_RED                              0xFF0000FF</span>
+<a name="l00099"></a><a class="code" href="_general_8h.html#af8b5c6b4b5e240b585b4a315effae0c4">00099</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_LIME                             0x00FF00FF</span>
+<a name="l00100"></a><a class="code" href="_general_8h.html#a0276991875cef7c38e14e7e5731a7527">00100</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_YELLOW                           0xFFFF00FF</span>
+<a name="l00101"></a><a class="code" href="_general_8h.html#a5fc045e89a81459fdc78cddf07ac3b41">00101</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_BLUE                             0x0000FFFF</span>
+<a name="l00102"></a><a class="code" href="_general_8h.html#aaf3e458d51236e4167da8d66bd775dbf">00102</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_FUCHSIA                          0xFF00FFFF</span>
+<a name="l00103"></a><a class="code" href="_general_8h.html#a79be88e247383c607564acc1c07d5910">00103</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_AQUA                             0x00FFFFFF</span>
+<a name="l00104"></a><a class="code" href="_general_8h.html#aef8646b7b506687972add69f8acc9bfd">00104</a> <span class="preprocessor"></span><span class="preprocessor">#define GRRLIB_WHITE                            0xFFFFFFFF</span>
+<a name="l00105"></a>00105 <span class="preprocessor"></span>
+<a name="l00106"></a><a class="code" href="_general_8h.html#abdabf21e14e75184c7213715f7cfc5aa">00106</a> <span class="preprocessor">#define IMAGE_COLOR                                             0xFFFFFFFF</span>
+<a name="l00107"></a><a class="code" href="_general_8h.html#a28e9d376f072b7d59e78716f7affdf12">00107</a> <span class="preprocessor"></span><span class="preprocessor">#define IMAGE_COLOR1            0xEEEEEEEE</span>
+<a name="l00108"></a><a class="code" href="_general_8h.html#a4d37cfbb23ae75625bf763bcf55eba40">00108</a> <span class="preprocessor"></span><span class="preprocessor">#define IMAGE_COLOR2            0xDDDDDDDD</span>
+<a name="l00109"></a><a class="code" href="_general_8h.html#a02153467bea6412c860152294ae5e765">00109</a> <span class="preprocessor"></span><span class="preprocessor">#define IMAGE_COLOR3            0x44444444</span>
+<a name="l00110"></a><a class="code" href="_general_8h.html#af61fdf82767dcfebcc0bf94b28dbcbc4">00110</a> <span class="preprocessor"></span><span class="preprocessor">#define IMAGE_COLOR4            0xAAAAAAAA</span>
+<a name="l00111"></a>00111 <span class="preprocessor"></span>
+<a name="l00112"></a><a class="code" href="_general_8h.html#a838e999b4f3e9dd96f3719e9b36229f1">00112</a> <span class="preprocessor">#define MAX_WEAPONS                                             200</span>
+<a name="l00113"></a><a class="code" href="_general_8h.html#a66b9ef6d40f3b297ca107a30fb2f1d57">00113</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_MONSTERS                                    300</span>
+<a name="l00114"></a><a class="code" href="_general_8h.html#a8bb0c7f312bb8665c3377a061dae552c">00114</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_BUTTONS             15</span>
+<a name="l00115"></a><a class="code" href="_general_8h.html#ac507ef396a03f08c9f7c83c2732ec284">00115</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_POINTERS            4</span>
+<a name="l00116"></a><a class="code" href="_general_8h.html#a67ec5de4c5a6ee9baf250b558d58d69b">00116</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_LOCAL_HIGHSCORE     100</span>
+<a name="l00117"></a><a class="code" href="_general_8h.html#a6a216e9dce354a499ed000ea708e672d">00117</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_TODAY_HIGHSCORE             50</span>
+<a name="l00118"></a><a class="code" href="_general_8h.html#ac9d80a4201bd7f27272c83f511cb149f">00118</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_GLOBAL_HIGHSCORE    50</span>
+<a name="l00119"></a><a class="code" href="_general_8h.html#afad3aadf1645aabf53eea7d30a839411">00119</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_SETTINGS                                    9</span>
+<a name="l00120"></a><a class="code" href="_general_8h.html#ad7bb86e4702cda6c2ee77073ce99aee3">00120</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_WEAPON_TYPE       6</span>
+<a name="l00121"></a><a class="code" href="_general_8h.html#a9b55fe7508befad3e9203c07dfc35da8">00121</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_GRIDS                                               6</span>
+<a name="l00122"></a><a class="code" href="_general_8h.html#aa279b4db260c0fec446635e8f6c7c780">00122</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_MONSTER_IN_BASE   10</span>
+<a name="l00123"></a>00123 <span class="preprocessor"></span>
+<a name="l00124"></a><a class="code" href="_general_8h.html#afd4692faaf0a94a3c059b975e1fbce3e">00124</a> <span class="preprocessor">#define MAX_SOUND_VOLUME                        10</span>
+<a name="l00125"></a><a class="code" href="_general_8h.html#a8b65c9c2fffc53924a0b64fa46ad5f88">00125</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_MUSIC_TRACK         9</span>
+<a name="l00126"></a>00126 <span class="preprocessor"></span>
+<a name="l00127"></a><a class="code" href="_general_8h.html#abb075b990a09b23dea1c20427e918926">00127</a> <span class="preprocessor">#define MAX_RUMBLE                                              1</span>
+<a name="l00128"></a><a class="code" href="_general_8h.html#a6b117dde689377388c011a79a6fffa04">00128</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_HORZ_PIXELS                         640</span>
+<a name="l00129"></a><a class="code" href="_general_8h.html#a2ac36622131a734ac4073809d0334b8b">00129</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_VERT_PIXELS                         480</span>
+<a name="l00130"></a><a class="code" href="_general_8h.html#aabf4f709c8199e41cf279c77112345fe">00130</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_LEN                                         256</span>
+<a name="l00131"></a><a class="code" href="_general_8h.html#af3c82099d63a2d91d68bd62d954059c7">00131</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_ANGLE                                                       360</span>
+<a name="l00132"></a><a class="code" href="_general_8h.html#aa31b64f0758f87155d3881d835628f79">00132</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_ALFA                                                        255</span>
+<a name="l00133"></a><a class="code" href="_general_8h.html#a0592dba56693fad79136250c11e5a7fe">00133</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_SIZE                                                        1</span>
+<a name="l00134"></a>00134 <span class="preprocessor"></span>
+<a name="l00135"></a><a class="code" href="_general_8h.html#a07e2b531c72985b064c431c05dfbc5fc">00135</a> <span class="preprocessor">#define MAX_LINES                                       200</span>
+<a name="l00136"></a><a class="code" href="_general_8h.html#ad4d796b98c583d49e83adabd74a63bf6">00136</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_BUFFER_SIZE                         8192</span>
+<a name="l00137"></a><a class="code" href="_general_8h.html#aba01d8e6a3ad637d4cb02df7541ba33e">00137</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_IDLE_TIME                   10</span>
+<a name="l00138"></a>00138 <span class="preprocessor"></span>
+<a name="l00139"></a><a class="code" href="_general_8h.html#a068abada0220fa638a95765060b13374">00139</a> <span class="preprocessor">#define MAX_GRID_X                                              20</span>
+<a name="l00140"></a><a class="code" href="_general_8h.html#af18a7e97a75b05b7b2241933a088a278">00140</a> <span class="preprocessor"></span><span class="preprocessor">#define MAX_GRID_Y                                              17</span>
+<a name="l00141"></a>00141 <span class="preprocessor"></span>
+<a name="l00142"></a><a class="code" href="_general_8h.html#a0d7d5a6be10888d08b4a0bcef141e4b4">00142</a> <span class="preprocessor">#define IR_X_OFFSET             40</span>
+<a name="l00143"></a><a class="code" href="_general_8h.html#a87da8ad623431bcb50d5300211bf2626">00143</a> <span class="preprocessor"></span><span class="preprocessor">#define IR_Y_OFFSET             40</span>
+<a name="l00144"></a>00144 <span class="preprocessor"></span>
+<a name="l00145"></a><a class="code" href="_general_8h.html#a468c3c0b4e9ba26bf26b2f19d50c7a55">00145</a> <span class="preprocessor">#define SCROLLBAR_x             600</span>
+<a name="l00146"></a><a class="code" href="_general_8h.html#a55b99362c734b49cae2bb2a6594f9df2">00146</a> <span class="preprocessor"></span><span class="preprocessor">#define SCROLLBAR_Y_MIN                         150</span>
+<a name="l00147"></a><a class="code" href="_general_8h.html#aa6eaf9ce1f66d439191bd3e11874b931">00147</a> <span class="preprocessor"></span><span class="preprocessor">#define SCROLLBAR_Y_MAX         334</span>
+<a name="l00148"></a>00148 <span class="preprocessor"></span>
+<a name="l00149"></a><a class="code" href="_general_8h.html#aa7ba9d90445238b561ed6bbb570348ec">00149</a> <span class="preprocessor">#define MUSIC_MULTIPLER                         5</span>
+<a name="l00150"></a><a class="code" href="_general_8h.html#a7530bcac1f6d76241a0b46a02dbdbe61">00150</a> <span class="preprocessor"></span><span class="preprocessor">#define EFFECT_MULTIPLER                        20</span>
 <a name="l00151"></a>00151 <span class="preprocessor"></span>
-<a name="l00152"></a><a class="code" href="_general_8h.html#a9cd67f3be58dbc886c0def221160536b">00152</a> <span class="preprocessor">#define BUTTON_A                (WPAD_BUTTON_A     | WPAD_CLASSIC_BUTTON_A)</span>
-<a name="l00153"></a><a class="code" href="_general_8h.html#a94a5d8e6a479582220c135a95b935948">00153</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_B                (WPAD_BUTTON_B     | WPAD_CLASSIC_BUTTON_B)</span>
-<a name="l00154"></a><a class="code" href="_general_8h.html#a81168c5db87b27121105436cbb623d5d">00154</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_HOME             (WPAD_BUTTON_HOME  | WPAD_CLASSIC_BUTTON_HOME)</span>
-<a name="l00155"></a><a class="code" href="_general_8h.html#af58f5adf2c4e479e30f2efaa24e38324">00155</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_1                (WPAD_BUTTON_1     | WPAD_CLASSIC_BUTTON_X)</span>
-<a name="l00156"></a><a class="code" href="_general_8h.html#a46acb6114f87027ec8fa196c02ea7d81">00156</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_2                (WPAD_BUTTON_2     | WPAD_CLASSIC_BUTTON_Y)</span>
-<a name="l00157"></a>00157 <span class="preprocessor"></span>
-<a name="l00158"></a><a class="code" href="_general_8h.html#a7639b378d6f757175ed0f9e8552e6cea">00158</a> <span class="preprocessor">#define BUTTON_UP               (WPAD_BUTTON_UP    | WPAD_CLASSIC_BUTTON_UP)</span>
-<a name="l00159"></a><a class="code" href="_general_8h.html#a7e8516b8781963aa69154f9fc67b658a">00159</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_DOWN             (WPAD_BUTTON_DOWN  | WPAD_CLASSIC_BUTTON_DOWN)</span>
-<a name="l00160"></a><a class="code" href="_general_8h.html#ad08344c00ddb49531348245d0c82987f">00160</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_LEFT             (WPAD_BUTTON_LEFT  | WPAD_CLASSIC_BUTTON_LEFT)</span>
-<a name="l00161"></a><a class="code" href="_general_8h.html#a4cebcc5780890f5f5fbca9d072ea9652">00161</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_RIGHT            (WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT)</span>
-<a name="l00162"></a><a class="code" href="_general_8h.html#a5d0d1070633b6bda8da7517a430438c1">00162</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_PLUS             (WPAD_BUTTON_PLUS  | WPAD_CLASSIC_BUTTON_PLUS)</span>
-<a name="l00163"></a><a class="code" href="_general_8h.html#aa768e06995d40f593d187d15c278286f">00163</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_MINUS            (WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS)</span>
-<a name="l00164"></a>00164 <span class="preprocessor"></span>
-<a name="l00165"></a>00165 <span class="comment">// -----------------------------------------------------------</span>
-<a name="l00166"></a>00166 <span class="comment">// ENUMS</span>
+<a name="l00152"></a><a class="code" href="_general_8h.html#a5bc7b1ba19f9746b24344cda60853cf9">00152</a> <span class="preprocessor">#define AVERAGE_FPS                                             40</span>
+<a name="l00153"></a>00153 <span class="preprocessor"></span>
+<a name="l00154"></a><a class="code" href="_general_8h.html#a9cd67f3be58dbc886c0def221160536b">00154</a> <span class="preprocessor">#define BUTTON_A                        (WPAD_BUTTON_A     | WPAD_CLASSIC_BUTTON_A)</span>
+<a name="l00155"></a><a class="code" href="_general_8h.html#a94a5d8e6a479582220c135a95b935948">00155</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_B                        (WPAD_BUTTON_B     | WPAD_CLASSIC_BUTTON_B)</span>
+<a name="l00156"></a><a class="code" href="_general_8h.html#a81168c5db87b27121105436cbb623d5d">00156</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_HOME             (WPAD_BUTTON_HOME  | WPAD_CLASSIC_BUTTON_HOME)</span>
+<a name="l00157"></a><a class="code" href="_general_8h.html#af58f5adf2c4e479e30f2efaa24e38324">00157</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_1                (WPAD_BUTTON_1     | WPAD_CLASSIC_BUTTON_X)</span>
+<a name="l00158"></a><a class="code" href="_general_8h.html#a46acb6114f87027ec8fa196c02ea7d81">00158</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_2                (WPAD_BUTTON_2     | WPAD_CLASSIC_BUTTON_Y)</span>
+<a name="l00159"></a>00159 <span class="preprocessor"></span>
+<a name="l00160"></a><a class="code" href="_general_8h.html#a7639b378d6f757175ed0f9e8552e6cea">00160</a> <span class="preprocessor">#define BUTTON_UP               (WPAD_BUTTON_UP    | WPAD_CLASSIC_BUTTON_UP)</span>
+<a name="l00161"></a><a class="code" href="_general_8h.html#a7e8516b8781963aa69154f9fc67b658a">00161</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_DOWN             (WPAD_BUTTON_DOWN  | WPAD_CLASSIC_BUTTON_DOWN)</span>
+<a name="l00162"></a><a class="code" href="_general_8h.html#ad08344c00ddb49531348245d0c82987f">00162</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_LEFT             (WPAD_BUTTON_LEFT  | WPAD_CLASSIC_BUTTON_LEFT)</span>
+<a name="l00163"></a><a class="code" href="_general_8h.html#a4cebcc5780890f5f5fbca9d072ea9652">00163</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_RIGHT            (WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT)</span>
+<a name="l00164"></a><a class="code" href="_general_8h.html#a5d0d1070633b6bda8da7517a430438c1">00164</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_PLUS             (WPAD_BUTTON_PLUS  | WPAD_CLASSIC_BUTTON_PLUS)</span>
+<a name="l00165"></a><a class="code" href="_general_8h.html#aa768e06995d40f593d187d15c278286f">00165</a> <span class="preprocessor"></span><span class="preprocessor">#define BUTTON_MINUS            (WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS)</span>
+<a name="l00166"></a>00166 <span class="preprocessor"></span>
 <a name="l00167"></a>00167 <span class="comment">// -----------------------------------------------------------</span>
-<a name="l00168"></a>00168 
-<a name="l00169"></a>00169 <span class="comment">// State machine states</span>
-<a name="l00170"></a>00170 <span class="keyword">enum</span>
-<a name="l00171"></a>00171 {
-<a name="l00172"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55badda81b3ed70da91c871d0e0ec7ace2f9">00172</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55badda81b3ed70da91c871d0e0ec7ace2f9">stateNone</a>=0,
-<a name="l00173"></a>00173         
-<a name="l00174"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5dd80eb8ddd729b49f342417b6245173">00174</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5dd80eb8ddd729b49f342417b6245173">stateIntro1</a>=1,   
-<a name="l00175"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba83007276e73248cadba6e4af8c717b8e">00175</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba83007276e73248cadba6e4af8c717b8e">stateIntro2</a>=2, 
-<a name="l00176"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba40bc475a4d18491a56f57e54d88d8e24">00176</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba40bc475a4d18491a56f57e54d88d8e24">stateIntro3</a>=3,
-<a name="l00177"></a>00177         
-<a name="l00178"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba9ddc237b464721d89cf6f4cf76abf992">00178</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba9ddc237b464721d89cf6f4cf76abf992">stateMainMenu</a>=4,
-<a name="l00179"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bae93eb5ffbbac7382a3330f486b59c626">00179</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bae93eb5ffbbac7382a3330f486b59c626">stateLevelMenu</a>=5,
-<a name="l00180"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba39ebb7e51756e2d450feee33a6eb98dd">00180</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba39ebb7e51756e2d450feee33a6eb98dd">stateMapSelectMenu</a>=6,
-<a name="l00181"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bae9aef8653634d165f927cf19c25fba0b">00181</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bae9aef8653634d165f927cf19c25fba0b">stateGame</a>=7,
-<a name="l00182"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba8eead6cfcd13b5729a3144dfbd49d387">00182</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba8eead6cfcd13b5729a3144dfbd49d387">stateGameOver</a>=8,
-<a name="l00183"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba7a63b73b083e62b54f6a2a801c26eb90">00183</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba7a63b73b083e62b54f6a2a801c26eb90">stateQuitGame</a>=9,
-<a name="l00184"></a>00184         
-<a name="l00185"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bab44f5fcbc44cc2f17425fb395e37e3f7">00185</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bab44f5fcbc44cc2f17425fb395e37e3f7">stateLocalHighScore</a>=10,
-<a name="l00186"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba055a587f907cf401a889a98690591eeb">00186</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba055a587f907cf401a889a98690591eeb">stateTodayHighScore</a>=11,
-<a name="l00187"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba2b6e75cd74a13d26438f67787a43d875">00187</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba2b6e75cd74a13d26438f67787a43d875">stateGlobalHighScore</a>=12,
-<a name="l00188"></a>00188         
-<a name="l00189"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba9cbc7895bb2717f4fc9aa765e8eecb13">00189</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba9cbc7895bb2717f4fc9aa765e8eecb13">stateHelp1</a>=13,
-<a name="l00190"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba3413868ae523097af376ef50a818fbdf">00190</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba3413868ae523097af376ef50a818fbdf">stateHelp2</a>=14,
-<a name="l00191"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bac217a63861ae8d5f58aebda35e7e0145">00191</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bac217a63861ae8d5f58aebda35e7e0145">stateHelp3</a>=15,
-<a name="l00192"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba324e6380372b0e7529402abb981d7fc1">00192</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba324e6380372b0e7529402abb981d7fc1">stateHelp4</a>=16,
-<a name="l00193"></a>00193         
-<a name="l00194"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba12bd4f31776eca89e768d7757e603556">00194</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba12bd4f31776eca89e768d7757e603556">stateCredits</a>=17,
-<a name="l00195"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba1d3114fa4b1058b88a1c0f2048903eb8">00195</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba1d3114fa4b1058b88a1c0f2048903eb8">stateReleaseNotes</a>=18,
-<a name="l00196"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5f46c0bc4264d04c6f9b84abcd44d036">00196</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5f46c0bc4264d04c6f9b84abcd44d036">stateSoundSettings</a>=19,
-<a name="l00197"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bad3683e81964c610f43177aa6ed0d5cf5">00197</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bad3683e81964c610f43177aa6ed0d5cf5">stateGameSettings</a>=20,
-<a name="l00198"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bae77cf65205eef7061a1909264e6f03a4">00198</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bae77cf65205eef7061a1909264e6f03a4">stateDonate</a>=21,
-<a name="l00199"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bacd1108f0d71935e35fb838e17144ed31">00199</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bacd1108f0d71935e35fb838e17144ed31">stateQuit</a>=22
-<a name="l00200"></a>00200 };
-<a name="l00201"></a>00201 
-<a name="l00202"></a>00202 <span class="comment">// Event machine events</span>
-<a name="l00203"></a>00203 <span class="keyword">enum</span>
-<a name="l00204"></a>00204 {
-<a name="l00205"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ae1f6b42730291855f399813ebce52a18">00205</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ae1f6b42730291855f399813ebce52a18">eventNone</a>=0,
-<a name="l00206"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ad4774fd5b539f263071a3aa382155c9a">00206</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ad4774fd5b539f263071a3aa382155c9a">eventLaunch</a>=1,  
-<a name="l00207"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a06b7ec4b6332c56adb463864b79afb22">00207</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a06b7ec4b6332c56adb463864b79afb22">eventSaveHighScore</a>=2,
-<a name="l00208"></a>00208         
-<a name="l00209"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7afedfdbe7a19665b79fba26a12b545481">00209</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7afedfdbe7a19665b79fba26a12b545481">eventWeaponPowerUpgrade</a>=3,
-<a name="l00210"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a7174a63041531900dc2412077fcc5e3e">00210</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a7174a63041531900dc2412077fcc5e3e">eventWeaponRangeUpgrade</a>=4,
-<a name="l00211"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ab3a741c359cda48768e5132825ab8499">00211</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ab3a741c359cda48768e5132825ab8499">eventWeaponRateUpgrade</a>=5,
-<a name="l00212"></a>00212         
-<a name="l00213"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a1bbe081a261bb6f33450838d1bf9317a">00213</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a1bbe081a261bb6f33450838d1bf9317a">eventWeaponNext</a>=6,
-<a name="l00214"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a1c49b0e2d4bdbefdf4707728b542cef0">00214</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a1c49b0e2d4bdbefdf4707728b542cef0">eventWeaponPrevious</a>=7,
-<a name="l00215"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ae9e392bae414335175dd1a8a327fe11d">00215</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ae9e392bae414335175dd1a8a327fe11d">eventWeaponSelected</a>=8,
-<a name="l00216"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a4aa3870d7c8cb8656b9745748c5b623d">00216</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a4aa3870d7c8cb8656b9745748c5b623d">eventweaponDeployed</a>=9,
-<a name="l00217"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ace3a8d2937bba46ef3fa49b55b0ed2c6">00217</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ace3a8d2937bba46ef3fa49b55b0ed2c6">eventWeaponSell</a>=10,
-<a name="l00218"></a>00218         
-<a name="l00219"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ae6718158e7b19b99fe468a8e80443522">00219</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ae6718158e7b19b99fe468a8e80443522">eventInitEasyLevels</a>=11,
-<a name="l00220"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a9a895190bdf74ba80e2c74d7d8246bbb">00220</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a9a895190bdf74ba80e2c74d7d8246bbb">eventInitMediumLevels</a>=12,
-<a name="l00221"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ab6dde04ce48bd43036c90f434ac3c481">00221</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ab6dde04ce48bd43036c90f434ac3c481">eventInitHardLevels</a>=13
-<a name="l00222"></a>00222 };
-<a name="l00223"></a>00223 
-<a name="l00224"></a>00224 <span class="keyword">enum</span>
-<a name="l00225"></a>00225 {
-<a name="l00226"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a41a32ae9ca29d421144ff38f82270b15">00226</a>    <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a41a32ae9ca29d421144ff38f82270b15">fontTitle</a>=0,
-<a name="l00227"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a53459a5704f07d19c875d6ff3074af4b">00227</a>    <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a53459a5704f07d19c875d6ff3074af4b">fontSubTitle</a>=1,
-<a name="l00228"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a442f4479e790fb340320d6954ac23cfc">00228</a>         <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a442f4479e790fb340320d6954ac23cfc">fontPanel</a>=2,
-<a name="l00229"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a7152a36afe4a5035051cad4001565663">00229</a>    <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a7152a36afe4a5035051cad4001565663">fontParagraph</a>=3,
-<a name="l00230"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a5fbdfe29b4de2d3dd5b38ac4a15af3f3">00230</a>    <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a5fbdfe29b4de2d3dd5b38ac4a15af3f3">fontNew</a>=4,
-<a name="l00231"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a638309ec10f05ea4caacf5e955d259f9">00231</a>    <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a638309ec10f05ea4caacf5e955d259f9">fontNormal</a>=5,
-<a name="l00232"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5ae0ecac8ea406567f496af8c7c5c15d12">00232</a>    <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5ae0ecac8ea406567f496af8c7c5c15d12">fontSmall</a>=6,
-<a name="l00233"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a534d80d2378613ea14903c897a1e114d">00233</a>    <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a534d80d2378613ea14903c897a1e114d">fontButton</a>=7,
-<a name="l00234"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a65b8d1becf79a1c9776692d3e7566ced">00234</a>    <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a65b8d1becf79a1c9776692d3e7566ced">fontWelcome</a>=8,
-<a name="l00235"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5ae85b59bacab70a31f6ecf062ebfe4bdf">00235</a>         <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5ae85b59bacab70a31f6ecf062ebfe4bdf">fontBanner</a>=9
-<a name="l00236"></a>00236 };
-<a name="l00237"></a>00237 
-<a name="l00238"></a>00238 <span class="keyword">enum</span>
-<a name="l00239"></a>00239 {
-<a name="l00240"></a><a class="code" href="_general_8h.html#abc6126af1d45847bc59afa0aa3216b04a91fc9aed17b386a9ed076d587f932486">00240</a>    <a class="code" href="_general_8h.html#abc6126af1d45847bc59afa0aa3216b04a91fc9aed17b386a9ed076d587f932486">gameEasy</a>=0,
-<a name="l00241"></a><a class="code" href="_general_8h.html#abc6126af1d45847bc59afa0aa3216b04aba43986d5a6147c1781b53c14b5d6bd5">00241</a>         <a class="code" href="_general_8h.html#abc6126af1d45847bc59afa0aa3216b04aba43986d5a6147c1781b53c14b5d6bd5">gameMedium</a>=1,
-<a name="l00242"></a><a class="code" href="_general_8h.html#abc6126af1d45847bc59afa0aa3216b04a7b07f8f7566f4fc3f55bbf12e4ddfdf8">00242</a>    <a class="code" href="_general_8h.html#abc6126af1d45847bc59afa0aa3216b04a7b07f8f7566f4fc3f55bbf12e4ddfdf8">gameHard</a>=2
-<a name="l00243"></a>00243 };
-<a name="l00244"></a>00244 
-<a name="l00245"></a><a class="code" href="struct_game.html">00245</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>
-<a name="l00246"></a>00246 {
-<a name="l00247"></a>00247         
-<a name="l00248"></a><a class="code" href="struct_game.html#af11ed6f7847dba3c2431ad8cdc0a4846">00248</a>         <span class="keywordtype">int</span> stateMachine;                       
-<a name="l00249"></a><a class="code" href="struct_game.html#ae64adcb36dbeb48aac138b5b2d051965">00249</a>         <span class="keywordtype">int</span> prevStateMachine;   
-<a name="l00251"></a><a class="code" href="struct_game.html#a89277bbf155cdd199401791bc5e91ecd">00251</a>         <span class="keywordtype">int</span> event;                                      
-<a name="l00252"></a><a class="code" href="struct_game.html#afe30c8b36667aed6a043387c79065f15">00252</a>         <span class="keywordtype">int</span> prevEvent;                          
-<a name="l00254"></a><a class="code" href="struct_game.html#adc6716392902a644a4646f3fc0eba2ff">00254</a>         <span class="keywordtype">int</span> maxTodayHighScore;  
-<a name="l00255"></a><a class="code" href="struct_game.html#a69089a18f458532fe3ef1737738f44db">00255</a>         <span class="keywordtype">int</span> maxGlobalHighScore; 
-<a name="l00257"></a><a class="code" href="struct_game.html#a9fd3a4f070443b710da09413beb50474">00257</a>         <span class="keywordtype">int</span> selectedMap;                        
-<a name="l00258"></a><a class="code" href="struct_game.html#a8b323cdc34baf65bd5e91a39fe0992f4">00258</a>         <span class="keywordtype">int</span> monsterInBase;              
-<a name="l00259"></a><a class="code" href="struct_game.html#a12839aa2f1512634c19bc0e7303868f0">00259</a>         <span class="keywordtype">int</span> selectedWeapon;             
-<a name="l00260"></a><a class="code" href="struct_game.html#af8658669224e388d0462031435a2cf84">00260</a>         <span class="keywordtype">bool</span> selectedNewWeapon; 
-<a name="l00261"></a><a class="code" href="struct_game.html#abe14118bc7cb70c342636c2b2a15554b">00261</a>         <span class="keywordtype">int</span> level;                                      
-<a name="l00263"></a><a class="code" href="struct_game.html#ace16b788a0a639e31206cf6bee211128">00263</a>         <span class="keywordtype">int</span> panelXOffset;                       
-<a name="l00264"></a><a class="code" href="struct_game.html#a22efe380839089dda64f5399e5f2f417">00264</a>         <span class="keywordtype">int</span> panelYOffset;                       
-<a name="l00265"></a><a class="code" href="struct_game.html#afaf9404196df9968103d5b0d0ad08139">00265</a>         <span class="keywordtype">int</span> score;                                      
-<a name="l00266"></a><a class="code" href="struct_game.html#a77e15bea5af45b4bc2118aad57a979f5">00266</a>         <span class="keywordtype">int</span> cash;                                       
-<a name="l00267"></a><a class="code" href="struct_game.html#acf2f285294fa7afaaecc38b9900dfa05">00267</a>         <span class="keywordtype">int</span> wave;                                       
-<a name="l00268"></a><a class="code" href="struct_game.html#af04179466fe7d2ff230a4e5d47d78868">00268</a>         <span class="keywordtype">int</span> weaponType;                 
-<a name="l00269"></a><a class="code" href="struct_game.html#a28ce514eeb18da131051a5cc302cbdb3">00269</a>         <span class="keywordtype">int</span> waveCountDown;              
-<a name="l00271"></a><a class="code" href="struct_game.html#a1798d01f118c60763252dd3e58fe0dee">00271</a>         <span class="keywordtype">int</span> alfa;                                       
-<a name="l00272"></a><a class="code" href="struct_game.html#a1226984f1950b2c032a7a525ebdddef3">00272</a>         <span class="keywordtype">int</span> angle;                                      
-<a name="l00273"></a><a class="code" href="struct_game.html#aa6934659591a93fdbdc949715a5b1a78">00273</a>         <span class="keywordtype">int</span> <a class="code" href="structlocation.html">location</a>;                           
-<a name="l00274"></a><a class="code" href="struct_game.html#a79f221eb67f2c01df64f829e35adfdd0">00274</a>         <span class="keywordtype">float</span> size;                                     
-<a name="l00275"></a><a class="code" href="struct_game.html#a75fcafd2489abc007788dde387c62a1f">00275</a>         <span class="keywordtype">float</span> wave1;                            
-<a name="l00276"></a><a class="code" href="struct_game.html#a4432c7e51f8d44518bb964b15a462280">00276</a>         <span class="keywordtype">float</span> wave2;                            
-<a name="l00277"></a><a class="code" href="struct_game.html#a60ec5830bc7838aa8bb39f65f9e52b15">00277</a>         <span class="keywordtype">int</span> scrollIndex;                        
-<a name="l00279"></a><a class="code" href="struct_game.html#ac489dcd8d1b9d2bba24a7261303eb5cc">00279</a>         <span class="keywordtype">int</span> frameCounter;                       
-<a name="l00280"></a><a class="code" href="struct_game.html#a57b1ff7ca0dabafbf59df1c64f00558a">00280</a>         <span class="keywordtype">int</span> frameDelay;                 
-<a name="l00281"></a><a class="code" href="struct_game.html#a52fde0301dd0e7870bb06b343f3a9208">00281</a>         <span class="keywordtype">int</span> frame;                                      
-<a name="l00282"></a>00282 }
-<a name="l00283"></a>00283 <a class="code" href="struct_game.html">Game</a>;
-<a name="l00284"></a>00284 
-<a name="l00285"></a>00285 <span class="preprocessor">#endif</span>
-<a name="l00286"></a>00286 <span class="preprocessor"></span>
-<a name="l00287"></a>00287 <span class="comment">// -----------------------------------------------------------</span>
-<a name="l00288"></a>00288 <span class="comment">// The End</span>
+<a name="l00168"></a>00168 <span class="comment">// ENUMS</span>
+<a name="l00169"></a>00169 <span class="comment">// -----------------------------------------------------------</span>
+<a name="l00170"></a>00170 
+<a name="l00171"></a>00171 <span class="comment">// State machine states</span>
+<a name="l00172"></a>00172 <span class="keyword">enum</span>
+<a name="l00173"></a>00173 {
+<a name="l00174"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55badda81b3ed70da91c871d0e0ec7ace2f9">00174</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55badda81b3ed70da91c871d0e0ec7ace2f9">stateNone</a>=0,
+<a name="l00175"></a>00175         
+<a name="l00176"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5dd80eb8ddd729b49f342417b6245173">00176</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5dd80eb8ddd729b49f342417b6245173">stateIntro1</a>=1,   
+<a name="l00177"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba83007276e73248cadba6e4af8c717b8e">00177</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba83007276e73248cadba6e4af8c717b8e">stateIntro2</a>=2, 
+<a name="l00178"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba40bc475a4d18491a56f57e54d88d8e24">00178</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba40bc475a4d18491a56f57e54d88d8e24">stateIntro3</a>=3,
+<a name="l00179"></a>00179         
+<a name="l00180"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba9ddc237b464721d89cf6f4cf76abf992">00180</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba9ddc237b464721d89cf6f4cf76abf992">stateMainMenu</a>=4,
+<a name="l00181"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bae93eb5ffbbac7382a3330f486b59c626">00181</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bae93eb5ffbbac7382a3330f486b59c626">stateLevelMenu</a>=5,
+<a name="l00182"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba39ebb7e51756e2d450feee33a6eb98dd">00182</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba39ebb7e51756e2d450feee33a6eb98dd">stateMapSelectMenu</a>=6,
+<a name="l00183"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bae9aef8653634d165f927cf19c25fba0b">00183</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bae9aef8653634d165f927cf19c25fba0b">stateGame</a>=7,
+<a name="l00184"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba8eead6cfcd13b5729a3144dfbd49d387">00184</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba8eead6cfcd13b5729a3144dfbd49d387">stateGameOver</a>=8,
+<a name="l00185"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba7a63b73b083e62b54f6a2a801c26eb90">00185</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba7a63b73b083e62b54f6a2a801c26eb90">stateQuitGame</a>=9,
+<a name="l00186"></a>00186         
+<a name="l00187"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bab44f5fcbc44cc2f17425fb395e37e3f7">00187</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bab44f5fcbc44cc2f17425fb395e37e3f7">stateLocalHighScore</a>=10,
+<a name="l00188"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba055a587f907cf401a889a98690591eeb">00188</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba055a587f907cf401a889a98690591eeb">stateTodayHighScore</a>=11,
+<a name="l00189"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba2b6e75cd74a13d26438f67787a43d875">00189</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba2b6e75cd74a13d26438f67787a43d875">stateGlobalHighScore</a>=12,
+<a name="l00190"></a>00190         
+<a name="l00191"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba9cbc7895bb2717f4fc9aa765e8eecb13">00191</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba9cbc7895bb2717f4fc9aa765e8eecb13">stateHelp1</a>=13,
+<a name="l00192"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba3413868ae523097af376ef50a818fbdf">00192</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba3413868ae523097af376ef50a818fbdf">stateHelp2</a>=14,
+<a name="l00193"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bac217a63861ae8d5f58aebda35e7e0145">00193</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bac217a63861ae8d5f58aebda35e7e0145">stateHelp3</a>=15,
+<a name="l00194"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba324e6380372b0e7529402abb981d7fc1">00194</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba324e6380372b0e7529402abb981d7fc1">stateHelp4</a>=16,
+<a name="l00195"></a>00195         
+<a name="l00196"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba12bd4f31776eca89e768d7757e603556">00196</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba12bd4f31776eca89e768d7757e603556">stateCredits</a>=17,
+<a name="l00197"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba1d3114fa4b1058b88a1c0f2048903eb8">00197</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba1d3114fa4b1058b88a1c0f2048903eb8">stateReleaseNotes</a>=18,
+<a name="l00198"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5f46c0bc4264d04c6f9b84abcd44d036">00198</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5f46c0bc4264d04c6f9b84abcd44d036">stateSoundSettings</a>=19,
+<a name="l00199"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bad3683e81964c610f43177aa6ed0d5cf5">00199</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bad3683e81964c610f43177aa6ed0d5cf5">stateGameSettings</a>=20,
+<a name="l00200"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bae77cf65205eef7061a1909264e6f03a4">00200</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bae77cf65205eef7061a1909264e6f03a4">stateDonate</a>=21,
+<a name="l00201"></a><a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bacd1108f0d71935e35fb838e17144ed31">00201</a>         <a class="code" href="_general_8h.html#a06fc87d81c62e9abb8790b6e5713c55bacd1108f0d71935e35fb838e17144ed31">stateQuit</a>=22
+<a name="l00202"></a>00202 };
+<a name="l00203"></a>00203 
+<a name="l00204"></a>00204 <span class="comment">// Event machine events</span>
+<a name="l00205"></a>00205 <span class="keyword">enum</span>
+<a name="l00206"></a>00206 {
+<a name="l00207"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ae1f6b42730291855f399813ebce52a18">00207</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ae1f6b42730291855f399813ebce52a18">eventNone</a>=0,
+<a name="l00208"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ad4774fd5b539f263071a3aa382155c9a">00208</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ad4774fd5b539f263071a3aa382155c9a">eventLaunch</a>=1,  
+<a name="l00209"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a06b7ec4b6332c56adb463864b79afb22">00209</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a06b7ec4b6332c56adb463864b79afb22">eventSaveHighScore</a>=2,
+<a name="l00210"></a>00210         
+<a name="l00211"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7afedfdbe7a19665b79fba26a12b545481">00211</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7afedfdbe7a19665b79fba26a12b545481">eventWeaponPowerUpgrade</a>=3,
+<a name="l00212"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a7174a63041531900dc2412077fcc5e3e">00212</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a7174a63041531900dc2412077fcc5e3e">eventWeaponRangeUpgrade</a>=4,
+<a name="l00213"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ab3a741c359cda48768e5132825ab8499">00213</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ab3a741c359cda48768e5132825ab8499">eventWeaponRateUpgrade</a>=5,
+<a name="l00214"></a>00214         
+<a name="l00215"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a1bbe081a261bb6f33450838d1bf9317a">00215</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a1bbe081a261bb6f33450838d1bf9317a">eventWeaponNext</a>=6,
+<a name="l00216"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a1c49b0e2d4bdbefdf4707728b542cef0">00216</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a1c49b0e2d4bdbefdf4707728b542cef0">eventWeaponPrevious</a>=7,
+<a name="l00217"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ae9e392bae414335175dd1a8a327fe11d">00217</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ae9e392bae414335175dd1a8a327fe11d">eventWeaponSelected</a>=8,
+<a name="l00218"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a4aa3870d7c8cb8656b9745748c5b623d">00218</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a4aa3870d7c8cb8656b9745748c5b623d">eventweaponDeployed</a>=9,
+<a name="l00219"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ace3a8d2937bba46ef3fa49b55b0ed2c6">00219</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ace3a8d2937bba46ef3fa49b55b0ed2c6">eventWeaponSell</a>=10,
+<a name="l00220"></a>00220         
+<a name="l00221"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ae6718158e7b19b99fe468a8e80443522">00221</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ae6718158e7b19b99fe468a8e80443522">eventInitEasyLevels</a>=11,
+<a name="l00222"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a9a895190bdf74ba80e2c74d7d8246bbb">00222</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a9a895190bdf74ba80e2c74d7d8246bbb">eventInitMediumLevels</a>=12,
+<a name="l00223"></a><a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ab6dde04ce48bd43036c90f434ac3c481">00223</a>         <a class="code" href="_general_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ab6dde04ce48bd43036c90f434ac3c481">eventInitHardLevels</a>=13
+<a name="l00224"></a>00224 };
+<a name="l00225"></a>00225 
+<a name="l00226"></a>00226 <span class="keyword">enum</span>
+<a name="l00227"></a>00227 {
+<a name="l00228"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a41a32ae9ca29d421144ff38f82270b15">00228</a>    <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a41a32ae9ca29d421144ff38f82270b15">fontTitle</a>=0,
+<a name="l00229"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a53459a5704f07d19c875d6ff3074af4b">00229</a>    <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a53459a5704f07d19c875d6ff3074af4b">fontSubTitle</a>=1,
+<a name="l00230"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a442f4479e790fb340320d6954ac23cfc">00230</a>         <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a442f4479e790fb340320d6954ac23cfc">fontPanel</a>=2,
+<a name="l00231"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a7152a36afe4a5035051cad4001565663">00231</a>    <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a7152a36afe4a5035051cad4001565663">fontParagraph</a>=3,
+<a name="l00232"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a5fbdfe29b4de2d3dd5b38ac4a15af3f3">00232</a>    <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a5fbdfe29b4de2d3dd5b38ac4a15af3f3">fontNew</a>=4,
+<a name="l00233"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a638309ec10f05ea4caacf5e955d259f9">00233</a>    <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a638309ec10f05ea4caacf5e955d259f9">fontNormal</a>=5,
+<a name="l00234"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5ae0ecac8ea406567f496af8c7c5c15d12">00234</a>    <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5ae0ecac8ea406567f496af8c7c5c15d12">fontSmall</a>=6,
+<a name="l00235"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a534d80d2378613ea14903c897a1e114d">00235</a>    <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a534d80d2378613ea14903c897a1e114d">fontButton</a>=7,
+<a name="l00236"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a65b8d1becf79a1c9776692d3e7566ced">00236</a>    <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5a65b8d1becf79a1c9776692d3e7566ced">fontWelcome</a>=8,
+<a name="l00237"></a><a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5ae85b59bacab70a31f6ecf062ebfe4bdf">00237</a>         <a class="code" href="_general_8h.html#a99fb83031ce9923c84392b4e92f956b5ae85b59bacab70a31f6ecf062ebfe4bdf">fontBanner</a>=9
+<a name="l00238"></a>00238 };
+<a name="l00239"></a>00239 
+<a name="l00240"></a>00240 <span class="keyword">enum</span>
+<a name="l00241"></a>00241 {
+<a name="l00242"></a><a class="code" href="_general_8h.html#abc6126af1d45847bc59afa0aa3216b04a91fc9aed17b386a9ed076d587f932486">00242</a>    <a class="code" href="_general_8h.html#abc6126af1d45847bc59afa0aa3216b04a91fc9aed17b386a9ed076d587f932486">gameEasy</a>=0,
+<a name="l00243"></a><a class="code" href="_general_8h.html#abc6126af1d45847bc59afa0aa3216b04aba43986d5a6147c1781b53c14b5d6bd5">00243</a>         <a class="code" href="_general_8h.html#abc6126af1d45847bc59afa0aa3216b04aba43986d5a6147c1781b53c14b5d6bd5">gameMedium</a>=1,
+<a name="l00244"></a><a class="code" href="_general_8h.html#abc6126af1d45847bc59afa0aa3216b04a7b07f8f7566f4fc3f55bbf12e4ddfdf8">00244</a>    <a class="code" href="_general_8h.html#abc6126af1d45847bc59afa0aa3216b04a7b07f8f7566f4fc3f55bbf12e4ddfdf8">gameHard</a>=2
+<a name="l00245"></a>00245 };
+<a name="l00246"></a>00246 
+<a name="l00247"></a><a class="code" href="struct_game.html">00247</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>
+<a name="l00248"></a>00248 {
+<a name="l00249"></a>00249         
+<a name="l00250"></a><a class="code" href="struct_game.html#af11ed6f7847dba3c2431ad8cdc0a4846">00250</a>         <span class="keywordtype">int</span> stateMachine;                       
+<a name="l00251"></a><a class="code" href="struct_game.html#ae64adcb36dbeb48aac138b5b2d051965">00251</a>         <span class="keywordtype">int</span> prevStateMachine;   
+<a name="l00253"></a><a class="code" href="struct_game.html#a89277bbf155cdd199401791bc5e91ecd">00253</a>         <span class="keywordtype">int</span> event;                                              
+<a name="l00254"></a><a class="code" href="struct_game.html#afe30c8b36667aed6a043387c79065f15">00254</a>         <span class="keywordtype">int</span> prevEvent;                          
+<a name="l00256"></a><a class="code" href="struct_game.html#adc6716392902a644a4646f3fc0eba2ff">00256</a>         <span class="keywordtype">int</span> maxTodayHighScore;  
+<a name="l00257"></a><a class="code" href="struct_game.html#a69089a18f458532fe3ef1737738f44db">00257</a>         <span class="keywordtype">int</span> maxGlobalHighScore; 
+<a name="l00259"></a><a class="code" href="struct_game.html#a9fd3a4f070443b710da09413beb50474">00259</a>         <span class="keywordtype">int</span> selectedMap;                        
+<a name="l00260"></a><a class="code" href="struct_game.html#a8b323cdc34baf65bd5e91a39fe0992f4">00260</a>         <span class="keywordtype">int</span> monsterInBase;              
+<a name="l00261"></a><a class="code" href="struct_game.html#a12839aa2f1512634c19bc0e7303868f0">00261</a>         <span class="keywordtype">int</span> selectedWeapon;             
+<a name="l00262"></a><a class="code" href="struct_game.html#af8658669224e388d0462031435a2cf84">00262</a>         <span class="keywordtype">bool</span> selectedNewWeapon; 
+<a name="l00263"></a><a class="code" href="struct_game.html#abe14118bc7cb70c342636c2b2a15554b">00263</a>         <span class="keywordtype">int</span> level;                                      
+<a name="l00265"></a><a class="code" href="struct_game.html#ace16b788a0a639e31206cf6bee211128">00265</a>         <span class="keywordtype">int</span> panelXOffset;                       
+<a name="l00266"></a><a class="code" href="struct_game.html#a22efe380839089dda64f5399e5f2f417">00266</a>         <span class="keywordtype">int</span> panelYOffset;                       
+<a name="l00267"></a><a class="code" href="struct_game.html#afaf9404196df9968103d5b0d0ad08139">00267</a>         <span class="keywordtype">int</span> score;                                      
+<a name="l00268"></a><a class="code" href="struct_game.html#a77e15bea5af45b4bc2118aad57a979f5">00268</a>         <span class="keywordtype">int</span> cash;                                       
+<a name="l00269"></a><a class="code" href="struct_game.html#acf2f285294fa7afaaecc38b9900dfa05">00269</a>         <span class="keywordtype">int</span> wave;                                       
+<a name="l00270"></a><a class="code" href="struct_game.html#af04179466fe7d2ff230a4e5d47d78868">00270</a>         <span class="keywordtype">int</span> weaponType;                 
+<a name="l00271"></a><a class="code" href="struct_game.html#a28ce514eeb18da131051a5cc302cbdb3">00271</a>         <span class="keywordtype">int</span> waveCountDown;              
+<a name="l00273"></a><a class="code" href="struct_game.html#a1798d01f118c60763252dd3e58fe0dee">00273</a>         <span class="keywordtype">int</span> alfa;                                       
+<a name="l00274"></a><a class="code" href="struct_game.html#a1226984f1950b2c032a7a525ebdddef3">00274</a>         <span class="keywordtype">int</span> angle;                                      
+<a name="l00275"></a><a class="code" href="struct_game.html#aa6934659591a93fdbdc949715a5b1a78">00275</a>         <span class="keywordtype">int</span> <a class="code" href="structlocation.html">location</a>;                           
+<a name="l00276"></a><a class="code" href="struct_game.html#a79f221eb67f2c01df64f829e35adfdd0">00276</a>         <span class="keywordtype">float</span> size;                                     
+<a name="l00277"></a><a class="code" href="struct_game.html#a75fcafd2489abc007788dde387c62a1f">00277</a>         <span class="keywordtype">float</span> wave1;                            
+<a name="l00278"></a><a class="code" href="struct_game.html#a4432c7e51f8d44518bb964b15a462280">00278</a>         <span class="keywordtype">float</span> wave2;                            
+<a name="l00279"></a><a class="code" href="struct_game.html#a60ec5830bc7838aa8bb39f65f9e52b15">00279</a>         <span class="keywordtype">int</span> scrollIndex;                        
+<a name="l00281"></a><a class="code" href="struct_game.html#ac489dcd8d1b9d2bba24a7261303eb5cc">00281</a>         <span class="keywordtype">int</span> frameCounter;                       
+<a name="l00282"></a><a class="code" href="struct_game.html#a57b1ff7ca0dabafbf59df1c64f00558a">00282</a>         <span class="keywordtype">int</span> frameDelay;                 
+<a name="l00283"></a><a class="code" href="struct_game.html#a52fde0301dd0e7870bb06b343f3a9208">00283</a>         <span class="keywordtype">int</span> frame;                                      
+<a name="l00284"></a>00284 }
+<a name="l00285"></a>00285 <a class="code" href="struct_game.html">Game</a>;
+<a name="l00286"></a>00286 
+<a name="l00287"></a>00287 <span class="preprocessor">#endif</span>
+<a name="l00288"></a>00288 <span class="preprocessor"></span>
 <a name="l00289"></a>00289 <span class="comment">// -----------------------------------------------------------</span>
-<a name="l00290"></a>00290  
+<a name="l00290"></a>00290 <span class="comment">// The End</span>
+<a name="l00291"></a>00291 <span class="comment">// -----------------------------------------------------------</span>
+<a name="l00292"></a>00292  
 </pre></div></div>
 <hr size="1"/><address style="text-align: right;"><small>Generated by&nbsp;
 <a href="http://www.doxygen.org/index.html">
