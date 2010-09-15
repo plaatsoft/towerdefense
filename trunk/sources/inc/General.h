@@ -139,8 +139,8 @@
 #define MAX_GRID_X 						20
 #define MAX_GRID_Y 						17
 
-#define IR_X_OFFSET         	40
-#define IR_Y_OFFSET         	40
+#define IR_X_OFFSET         	48
+#define IR_Y_OFFSET         	48
 
 #define SCROLLBAR_x         	600
 #define SCROLLBAR_Y_MIN				150
@@ -309,6 +309,14 @@ Game;
  * - Added dragable game information panels
  * 
  * @section ReleaseNotes
+ * <b>(Coming release) Version 0.97</b>
+ * - GUI:
+ *  - Improve deployment Wiimote cursor position.
+ * - Core:
+ * - General:
+ *  - Correct include files.
+ *  - Build game with devkitPPC r21 compiler.
+ * 
  * <b>13-09-2010 Version 0.97</b>
  * - GUI:
  *  - Update menu screen information.

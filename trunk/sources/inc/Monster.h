@@ -22,7 +22,7 @@
 #ifndef MONSTER_H
 #define MONSTER_H
 
-#include "GRRLIB.h"
+#include "grrlib.h"
 
 enum
 {

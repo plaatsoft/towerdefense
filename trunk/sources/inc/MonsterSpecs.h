@@ -22,7 +22,7 @@
 #ifndef MONSTERSPECS_H
 #define MONSTERSPECS_H
 
-#include "GRRLIB.h" 
+#include "grrlib.h" 
 
 class MonsterSpecs
 {

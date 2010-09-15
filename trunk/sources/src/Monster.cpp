@@ -24,7 +24,7 @@
 #include <string.h>
 
 #include "General.h"
-#include "GRRLIB.h"
+#include "grrlib.h"
 #include "Monster.h"
 #include "Trace.h"  
 #include "Grid.h"  

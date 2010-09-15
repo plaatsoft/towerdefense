@@ -22,7 +22,7 @@
 #ifndef WEAPONSPECS_H
 #define WEAPONSPECS_H
 
-#include "GRRLIB.h" 
+#include "grrlib.h" 
 
 class WeaponSpecs
 {

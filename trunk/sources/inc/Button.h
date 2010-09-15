@@ -22,7 +22,7 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "GRRLIB.h"
+#include "grrlib.h"
 
 /**
  * Button class
