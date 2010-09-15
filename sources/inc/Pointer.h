@@ -24,7 +24,7 @@
 
 #include <wiiuse/wpad.h>
 
-#include "GRRLIB.h"
+#include "grrlib.h"
 
 class Pointer
 {

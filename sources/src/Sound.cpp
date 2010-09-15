@@ -20,7 +20,7 @@
  */
 
 #include "General.h"
-#include "GRRLIB.h"
+#include "grrlib.h"
 #include "Settings.h"
 #include "Sound.h"
 #include "Trace.h"

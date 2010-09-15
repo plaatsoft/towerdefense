@@ -22,7 +22,7 @@
 #include <wiiuse/wpad.h>
 
 #include "General.h"
-#include "GRRLIB.h"
+#include "grrlib.h"
 #include "Button.h"
 #include "Trace.h"
 #include "Sound.h" 

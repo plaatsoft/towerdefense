@@ -23,7 +23,7 @@
 #define WEAPON_H
 
 #include "General.h"
-#include "GRRLIB.h"
+#include "grrlib.h"
 #include "Monster.h"
 #include "Trace.h"  
 #include "Pointer.h" 

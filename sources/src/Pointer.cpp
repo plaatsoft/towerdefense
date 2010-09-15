@@ -22,7 +22,7 @@
 #include <mxml.h>
 
 #include "General.h"
-#include "GRRLIB.h"
+#include "grrlib.h"
 #include "Pointer.h"
 #include "Settings.h"
 #include "Trace.h"
@@ -1040,14 +1040,14 @@ void Pointer::action(void)
 		}
 	}
 	
-	if (rumble>0) 
-	{
+	if (rumble>0) {
+	
 		// Enable rumble
 		rumble--;
 		WPAD_Rumble(index,1); 
-	}
-	else 
-	{
+		
+	}	else 	{
+	
 		// Disable rumble
 		WPAD_Rumble(index,0);
 	}
@@ -1058,16 +1058,21 @@ void Pointer::action(void)
  */
 void Pointer::draw(void)
 {   	
-	if (game.selectedNewWeapon)
-	{
-		int x1=x/32;
-		int y1=y/32;
-		GRRLIB_DrawImg( x1*32, y1*32, image, angle, 1.0, 1.0, color );	
-   }
-	else
-	{
+	if (game.selectedNewWeapon) {
+	
+		int x1=xOffset/32;
+		int y1=yOffset/32;
+		
 		// Draw Pointer on screen
-		GRRLIB_DrawImg( x, y, image, angle, 1.0, 1.0, color );		
+		GRRLIB_DrawImg( x1*32, y1*32, image, angle, 1.0, 1.0, color );	
+		
+  } else {
+	
+		int x1=xOffset-(int)(image->w)/2;
+		int y1=yOffset-(int)(image->h)/2;
+		
+		// Draw Pointer on screen
+		GRRLIB_DrawImg( x1, y1, image, angle, 1.0, 1.0, color );		
 	}
 }
 

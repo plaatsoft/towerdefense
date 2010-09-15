@@ -2,7 +2,7 @@
  *  @file 
  *  @brief The file contain the main class methodes
  *  @author wplaat
- * @note Tab size of source code is two
+ *  @note Tab size of source code is two
  *
  *  Copyright (C) 2008-2010 PlaatSoft
  *
@@ -39,7 +39,7 @@
 #include <sys/dir.h>
 #include <ogc/lwp_watchdog.h>	
 
-#include "GRRLIB.h"
+#include "grrlib.h"
 #include "General.h"
 #include "Trace.h"
 #include "Settings.h"
@@ -3735,8 +3735,8 @@ void checkPointer(void)
 	   // Draw pointer image
 		if (pointers[0]!=NULL)
 		{ 
-		   int x1=(float) pointers[0]->getX()/32.0;
-			int y1=(float) pointers[0]->getY()/32.0;
+		   int x1=(float) pointers[0]->getXOffset()/32.0;
+			int y1=(float) pointers[0]->getYOffset()/32.0;
 			
 			if ( (game.selectedMap!=-1) && 
 				  (grids[game.selectedMap]!=NULL) &&
@@ -3895,8 +3895,8 @@ void processEvent(void)
 			pointers[0]->setImage(images.pointer1);
 			pointers[0]->setColor(IMAGE_COLOR);
 				
-			int x1=(float) pointers[0]->getX()/32.0;
-			int y1=(float) pointers[0]->getY()/32.0;
+			int x1=(float) pointers[0]->getXOffset()/32.0;
+			int y1=(float) pointers[0]->getYOffset()/32.0;
 				
 			if ( (game.cash>=weaponSpecs->getPrice(game.weaponType)) &&
 				  (game.selectedMap!=-1) &&
