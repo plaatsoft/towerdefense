@@ -309,7 +309,7 @@ Game;
  * - Added dragable game information panels
  * 
  * @section ReleaseNotes
- * <b>(Coming release) Version 0.97</b>
+ * <b>(Coming release) Version 0.98</b>
  * - GUI:
  *  - Improve deployment Wiimote cursor position.
  * - Core:
