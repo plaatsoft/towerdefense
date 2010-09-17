@@ -30,7 +30,7 @@
 #include <time.h>
 
 #include "General.h"
-#include "trace.h"
+#include "Trace.h"
 
 // Enable / Disable trace file functionality
 bool traceOn = false;
