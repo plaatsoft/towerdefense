@@ -315,6 +315,13 @@ void Pointer::buttonA(int x, int y)
 		case stateIntro3:
 		{
 			// if A button is pressed continue to main menu
+			game.stateMachine=stateIntro4;
+		}
+		break;
+		
+		case stateIntro4:
+		{
+			// if A button is pressed continue to main menu
 			game.stateMachine=stateMainMenu;
 		}
 		break;

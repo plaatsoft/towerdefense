@@ -78,6 +78,7 @@ typedef struct
   GRRLIB_texImg *intro1;
   GRRLIB_texImg *intro2;
   GRRLIB_texImg *intro3;
+  GRRLIB_texImg *intro4;
   
   GRRLIB_texImg *soundicon;
   
@@ -259,6 +260,10 @@ extern int      pic606length;
 // Button4Focus Image
 extern const unsigned char     pic607data[];
 extern int      pic607length;
+
+// Intro4 Image
+extern const unsigned char     pic1000data[];
+extern int      pic1000length;
 
 u32          *frameBuffer[1] 	= {NULL};	/**< Video memory buffer */
 GXRModeObj   *rmode 				= NULL;		/**< Video settings buffer */
@@ -524,6 +529,7 @@ void destroyImages(void)
 		
    GRRLIB_FreeTexture(images.background1);
    GRRLIB_FreeTexture(images.background2);
+	GRRLIB_FreeTexture(images.intro4);
    
    GRRLIB_FreeTexture(images.bar);
    GRRLIB_FreeTexture(images.barCursor);
@@ -611,7 +617,8 @@ void initImages(void)
    
 	images.background1=GRRLIB_LoadTexture( pic10data );
 	images.background2=GRRLIB_LoadTexture( pic11data );
-   
+   images.intro4=GRRLIB_LoadTexture( pic1000data );
+	
 	images.bar=GRRLIB_LoadTexture( pic14data );
 	images.barCursor=GRRLIB_LoadTexture( pic15data );
 	
@@ -2462,6 +2469,29 @@ void drawScreen(void)
 	   }	   
 	   break;
 		
+		case stateIntro4:
+	   { 
+	      int ypos=185;
+			
+			// Draw background
+			GRRLIB_DrawImg(0,0, images.intro4, 0, 1, 1, IMAGE_COLOR );
+
+			drawText(150, ypos, fontWelcome,  "WarQuest is available" );
+			ypos+=45;
+			drawText(0, ypos, fontParagraph,  "visit" );
+			ypos+=35;
+			drawText(0, ypos, fontParagraph,  "http://www.plaatsoft.nl/warquest" );
+			ypos+=35;
+			drawText(0, ypos, fontParagraph,  "and enter the battle zone!" );
+			
+			// Draw network thread status on screen
+			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
+			
+			// Show FPS information on screen.
+			drawText(20, rmode->xfbHeight-28, fontSmall, "%d fps", calculateFrameRate());
+	   }	   
+	   break;
+		
 		case stateMainMenu:
 		{
 			char *version=NULL;
@@ -4189,6 +4219,12 @@ void processStateMachine(void)
 		{
 			trace->event(s_fn,0,"stateMachine=stateIntro3");
 			game.location=0;
+		}
+		break;
+		
+		case stateIntro4:
+		{
+			trace->event(s_fn,0,"stateMachine=stateIntro4");
 		}
 		break;
 		
