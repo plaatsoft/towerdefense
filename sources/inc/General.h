@@ -28,25 +28,25 @@
 // Defines
 // -----------------------------------------------------------
 
-#define PROGRAM_NAME	   			"TowerDefense"
-#define PROGRAM_VERSION     	"0.97"
-#define RELEASE_DATE        	"13-09-2010" 
+#define PROGRAM_NAME	   		"TowerDefense"
+#define PROGRAM_VERSION     	"0.98"
+#define RELEASE_DATE        	"16-03-2011" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
-#define ID1			        			"UA-6887062-1"
+#define ID1			        		"UA-6887062-1"
 
 // Fetch Release notes
 #define URL2                	"http://www.plaatsoft.nl/service/releasenotes5.html"
-#define ID2				   	 				"UA-6887062-1"
+#define ID2				   	 	"UA-6887062-1"
 
 // Set Get Today HighScore
 #define URL3                	"http://www.plaatsoft.nl/service/score_set_today.php"
-#define ID3				    				"UA-6887062-1"
+#define ID3				    		"UA-6887062-1"
 
 // Set Get Global HighScore
 #define URL4                	"http://www.plaatsoft.nl/service/score_set_global.php"
-#define ID4				    				"UA-6887062-1"
+#define ID4				    		"UA-6887062-1"
 
 #define URL_TOKEN           	" Version "
 #define HIGHSCORE_FILENAME  	"sd:/apps/TowerDefense/highscore.xml"
@@ -55,104 +55,104 @@
 #define GAME_DIRECTORY      	"sd:/apps/TowerDefense/"
 
 // Easy Maps
-#define GRID1_DIRECTORY				"sd:/apps/TowerDefense/map01"
-#define GRID2_DIRECTORY				"sd:/apps/TowerDefense/map02"
-#define GRID3_DIRECTORY   	  "sd:/apps/TowerDefense/map03"
-#define GRID4_DIRECTORY   	  "sd:/apps/TowerDefense/map04"
-#define GRID5_DIRECTORY   	  "sd:/apps/TowerDefense/map05"
-#define GRID6_DIRECTORY   	  "sd:/apps/TowerDefense/map06"
+#define GRID1_DIRECTORY			"sd:/apps/TowerDefense/map01"
+#define GRID2_DIRECTORY			"sd:/apps/TowerDefense/map02"
+#define GRID3_DIRECTORY   	  	"sd:/apps/TowerDefense/map03"
+#define GRID4_DIRECTORY   	  	"sd:/apps/TowerDefense/map04"
+#define GRID5_DIRECTORY   	  	"sd:/apps/TowerDefense/map05"
+#define GRID6_DIRECTORY   	  	"sd:/apps/TowerDefense/map06"
 
 // Medium Maps
-#define GRID7_DIRECTORY   	  "sd:/apps/TowerDefense/map07"
-#define GRID8_DIRECTORY   	  "sd:/apps/TowerDefense/map08"
-#define GRID9_DIRECTORY   	  "sd:/apps/TowerDefense/map09"
-#define GRID10_DIRECTORY   		"sd:/apps/TowerDefense/map10"
-#define GRID11_DIRECTORY   		"sd:/apps/TowerDefense/map11"
-#define GRID12_DIRECTORY   		"sd:/apps/TowerDefense/map12"
+#define GRID7_DIRECTORY   	  	"sd:/apps/TowerDefense/map07"
+#define GRID8_DIRECTORY   	  	"sd:/apps/TowerDefense/map08"
+#define GRID9_DIRECTORY   	  	"sd:/apps/TowerDefense/map09"
+#define GRID10_DIRECTORY   	"sd:/apps/TowerDefense/map10"
+#define GRID11_DIRECTORY   	"sd:/apps/TowerDefense/map11"
+#define GRID12_DIRECTORY   	"sd:/apps/TowerDefense/map12"
 
 // Hard Maps
-#define GRID13_DIRECTORY			"sd:/apps/TowerDefense/map13"
-#define GRID14_DIRECTORY   		"sd:/apps/TowerDefense/map14"
-#define GRID15_DIRECTORY   		"sd:/apps/TowerDefense/map15"
-#define GRID16_DIRECTORY   		"sd:/apps/TowerDefense/map16"
-#define GRID17_DIRECTORY   		"sd:/apps/TowerDefense/map17"
-#define GRID18_DIRECTORY   		"sd:/apps/TowerDefense/map18"
+#define GRID13_DIRECTORY		"sd:/apps/TowerDefense/map13"
+#define GRID14_DIRECTORY   	"sd:/apps/TowerDefense/map14"
+#define GRID15_DIRECTORY   	"sd:/apps/TowerDefense/map15"
+#define GRID16_DIRECTORY   	"sd:/apps/TowerDefense/map16"
+#define GRID17_DIRECTORY   	"sd:/apps/TowerDefense/map17"
+#define GRID18_DIRECTORY   	"sd:/apps/TowerDefense/map18"
 
-#define WSP_POINTER_X      		200
-#define WSP_POINTER_Y      		250
+#define WSP_POINTER_X      	200
+#define WSP_POINTER_Y      	250
 
 #define GRRLIB_WHITESMOKE   	0xFFFFFFFF
 #define GRRLIB_WHITE_TRANS   	0xFFFFFF44
 #define GRRLIB_LIGHTRED     	0x3333FFFF
-#define GRRLIB_BLACK 					0x000000FF
+#define GRRLIB_BLACK 			0x000000FF
 #define GRRLIB_BLACK_TRANS		0x00000044
 #define GRRLIB_BLACK_TRANS_2	0x000000AA
-#define GRRLIB_MAROON  				0x800000FF
-#define GRRLIB_GREEN   				0x008000FF
-#define GRRLIB_OLIVE   				0x808000FF
-#define GRRLIB_NAVY    				0x000080FF
-#define GRRLIB_PURPLE  				0x800080FF
-#define GRRLIB_TEAL    				0x008080FF
-#define GRRLIB_GRAY    				0x808080FF
-#define GRRLIB_SILVER  				0xC0C0C0FF
-#define GRRLIB_RED     				0xFF0000FF
-#define GRRLIB_LIME    				0x00FF00FF
-#define GRRLIB_YELLOW  				0xFFFF00FF
-#define GRRLIB_BLUE    				0x0000FFFF
-#define GRRLIB_FUCHSIA 				0xFF00FFFF
-#define GRRLIB_AQUA    				0x00FFFFFF
-#define GRRLIB_WHITE   				0xFFFFFFFF
+#define GRRLIB_MAROON  			0x800000FF
+#define GRRLIB_GREEN   			0x008000FF
+#define GRRLIB_OLIVE   			0x808000FF
+#define GRRLIB_NAVY    			0x000080FF
+#define GRRLIB_PURPLE  			0x800080FF
+#define GRRLIB_TEAL    			0x008080FF
+#define GRRLIB_GRAY    			0x808080FF
+#define GRRLIB_SILVER  			0xC0C0C0FF
+#define GRRLIB_RED     			0xFF0000FF
+#define GRRLIB_LIME    			0x00FF00FF
+#define GRRLIB_YELLOW  			0xFFFF00FF
+#define GRRLIB_BLUE    			0x0000FFFF
+#define GRRLIB_FUCHSIA 			0xFF00FFFF
+#define GRRLIB_AQUA    			0x00FFFFFF
+#define GRRLIB_WHITE   			0xFFFFFFFF
 
-#define IMAGE_COLOR						0xFFFFFFFF
+#define IMAGE_COLOR				0xFFFFFFFF
 #define IMAGE_COLOR1        	0xEEEEEEEE
 #define IMAGE_COLOR2        	0xDDDDDDDD
 #define IMAGE_COLOR3        	0x44444444
 #define IMAGE_COLOR4        	0xAAAAAAAA
 
-#define MAX_WEAPONS						200
-#define MAX_MONSTERS					300
+#define MAX_WEAPONS				200
+#define MAX_MONSTERS				300
 #define MAX_BUTTONS         	15
 #define MAX_POINTERS         	4
 #define MAX_LOCAL_HIGHSCORE 	100
-#define MAX_TODAY_HIGHSCORE		50
+#define MAX_TODAY_HIGHSCORE	50
 #define MAX_GLOBAL_HIGHSCORE	50
-#define MAX_SETTINGS					9
+#define MAX_SETTINGS				9
 #define MAX_WEAPON_TYPE       6
-#define MAX_GRIDS  						6
+#define MAX_GRIDS  				6
 #define MAX_MONSTER_IN_BASE   10
 
-#define MAX_SOUND_VOLUME			10
+#define MAX_SOUND_VOLUME		10
 #define MAX_MUSIC_TRACK     	9
 
-#define MAX_RUMBLE						1
-#define MAX_HORZ_PIXELS				640
-#define MAX_VERT_PIXELS				480
-#define MAX_LEN			    			256
-#define MAX_ANGLE							360
-#define MAX_ALFA							255
-#define MAX_SIZE							1
+#define MAX_RUMBLE				1
+#define MAX_HORZ_PIXELS			640
+#define MAX_VERT_PIXELS			480
+#define MAX_LEN			    	256
+#define MAX_ANGLE					360
+#define MAX_ALFA					255
+#define MAX_SIZE					1
 
-#define MAX_LINES		    			200
-#define MAX_BUFFER_SIZE				8192
-#define MAX_IDLE_TIME	    		10
+#define MAX_LINES		    		200
+#define MAX_BUFFER_SIZE			8192
+#define MAX_IDLE_TIME	    	10
 
-#define MAX_GRID_X 						20
-#define MAX_GRID_Y 						17
+#define MAX_GRID_X 				20
+#define MAX_GRID_Y 				17
 
 #define IR_X_OFFSET         	48
 #define IR_Y_OFFSET         	48
 
 #define SCROLLBAR_x         	600
-#define SCROLLBAR_Y_MIN				150
+#define SCROLLBAR_Y_MIN			150
 #define SCROLLBAR_Y_MAX     	334
 
-#define MUSIC_MULTIPLER				5
-#define EFFECT_MULTIPLER			20
+#define MUSIC_MULTIPLER			5
+#define EFFECT_MULTIPLER		20
 
-#define AVERAGE_FPS						40
+#define AVERAGE_FPS				40
 
-#define BUTTON_A           		(WPAD_BUTTON_A     | WPAD_CLASSIC_BUTTON_A)
-#define BUTTON_B           		(WPAD_BUTTON_B     | WPAD_CLASSIC_BUTTON_B)
+#define BUTTON_A           	(WPAD_BUTTON_A     | WPAD_CLASSIC_BUTTON_A)
+#define BUTTON_B           	(WPAD_BUTTON_B     | WPAD_CLASSIC_BUTTON_B)
 #define BUTTON_HOME         	(WPAD_BUTTON_HOME  | WPAD_CLASSIC_BUTTON_HOME)
 #define BUTTON_1            	(WPAD_BUTTON_1     | WPAD_CLASSIC_BUTTON_X)
 #define BUTTON_2            	(WPAD_BUTTON_2     | WPAD_CLASSIC_BUTTON_Y)
@@ -176,29 +176,30 @@ enum
 	stateIntro1=1,   
 	stateIntro2=2, 
 	stateIntro3=3,
+	stateIntro4=4,
 	
-	stateMainMenu=4,
-	stateLevelMenu=5,
-	stateMapSelectMenu=6,
-	stateGame=7,
-	stateGameOver=8,
-	stateQuitGame=9,
+	stateMainMenu=5,
+	stateLevelMenu=6,
+	stateMapSelectMenu=7,
+	stateGame=8,
+	stateGameOver=9,
+	stateQuitGame=10,
 	
-	stateLocalHighScore=10,
-	stateTodayHighScore=11,
-	stateGlobalHighScore=12,
+	stateLocalHighScore=11,
+	stateTodayHighScore=12,
+	stateGlobalHighScore=13,
 	
-	stateHelp1=13,
-	stateHelp2=14,
-	stateHelp3=15,
-	stateHelp4=16,
+	stateHelp1=14,
+	stateHelp2=15,
+	stateHelp3=16,
+	stateHelp4=17,
 	
-	stateCredits=17,
-	stateReleaseNotes=18,
-	stateSoundSettings=19,
-	stateGameSettings=20,
-	stateDonate=21,
-	stateQuit=22
+	stateCredits=18,
+	stateReleaseNotes=19,
+	stateSoundSettings=20,
+	stateGameSettings=21,
+	stateDonate=22,
+	stateQuit=23
 };
 
 // Event machine events
@@ -309,10 +310,13 @@ Game;
  * - Added dragable game information panels
  * 
  * @section ReleaseNotes
- * <b>(Coming release) Version 0.98</b>
+ * <b>16-03-2011 Version 0.98</b>
  * - GUI:
+ *  - Update menu screen information.
  *  - Improve deployment Wiimote cursor position.
+ *  - Added WarQuest intro screen.
  * - Core:
+ *  - Some performance tuning.
  * - General:
  *  - Correct include files.
  *  - Build game with devkitPPC r21 compiler.
