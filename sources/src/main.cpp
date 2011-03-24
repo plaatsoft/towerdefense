@@ -2480,10 +2480,11 @@ void drawScreen(void)
 			ypos+=45;
 			drawText(0, ypos, fontParagraph,  "visit" );
 			ypos+=35;
-			drawText(0, ypos, fontParagraph,  "http://www.plaatsoft.nl/warquest" );
 			ypos+=35;
-			drawText(0, ypos, fontParagraph,  "and enter the battle zone!" );
-			
+			drawText(200, ypos, fontParagraph,  "http://www.warquest.nl" );
+			ypos+=35;
+			drawText(190, ypos, fontParagraph,  "and enter the battle zone!" );
+						
 			// Draw network thread status on screen
 			drawText(20, rmode->xfbHeight-38, fontSmall, "Network: %s",tcp_get_state());
 			

@@ -30,7 +30,7 @@
 
 #define PROGRAM_NAME	   		"TowerDefense"
 #define PROGRAM_VERSION     	"0.98"
-#define RELEASE_DATE        	"16-03-2011" 
+#define RELEASE_DATE        	"24-03-2011" 
 
 // Check latest available version 
 #define URL1                	"http://www.plaatsoft.nl/service/releasenotes5.html"
@@ -310,7 +310,8 @@ Game;
  * - Added dragable game information panels
  * 
  * @section ReleaseNotes
- * <b>16-03-2011 Version 0.98</b>
+ *
+ * <b>24-03-2011 Version 0.98</b>
  * - GUI:
  *  - Update menu screen information.
  *  - Improve deployment Wiimote cursor position.
