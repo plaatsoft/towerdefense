@@ -293,7 +293,6 @@ Game;
  
 /**
  * @mainpage Wii TowerDefense Documentation
- * @image html TowerDefense.png
  * Welcome to the TowerDefense documentation.
  *
  * @section Introduction
